@@ -10,7 +10,7 @@ const require = createRequire(import.meta.url);
 const pnpmPackagePath = require.resolve('pnpm');
 const pnpmPackage = JSON.parse(readFileSync(pnpmPackagePath, 'utf8'));
 const pnpmCli = resolve(dirname(pnpmPackagePath), pnpmPackage.bin.pnpm);
-const projectName = `venue-platform-phase0-${process.pid}`;
+const projectName = `venue-platform-phase1-${process.pid}`;
 const marker = randomUUID();
 const composeArguments = ['compose', '--project-name', projectName, '--profile', 'test'];
 
@@ -49,7 +49,7 @@ function pnpm(args, environment) {
 }
 
 function logStep(step, message) {
-  process.stdout.write(`\n[${step}/5] ${message}\n`);
+  process.stdout.write(`\n[${step}/7] ${message}\n`);
 }
 
 try {
@@ -57,7 +57,7 @@ try {
   run('docker', ['compose', 'version'], { capture: true });
 } catch (error) {
   const message = error instanceof Error ? error.message : String(error);
-  process.stderr.write(`Phase 0 container verification cannot start: ${message}\n`);
+  process.stderr.write(`Phase 1 container verification cannot start: ${message}\n`);
   process.exit(1);
 }
 
@@ -76,7 +76,13 @@ try {
   logStep(3, 'Running the real database integration test');
   pnpm(['test:db'], testDatabaseEnvironment);
 
-  logStep(4, 'Verifying development data survives container replacement');
+  logStep(4, 'Building the internal workspace packages required by the API');
+  pnpm(['packages:build']);
+
+  logStep(5, 'Running the real Phase 1 API integration suite');
+  pnpm(['--filter', '@venue/api', 'test:integration'], testDatabaseEnvironment);
+
+  logStep(6, 'Verifying development data survives container replacement');
   compose(
     'exec',
     '--no-TTY',
@@ -89,10 +95,10 @@ try {
     '--dbname',
     'venue_development',
     '--command',
-    `DROP SCHEMA IF EXISTS phase0_container_verification CASCADE;
-     CREATE SCHEMA phase0_container_verification;
-     CREATE TABLE phase0_container_verification.persistence_probe (marker uuid PRIMARY KEY);
-     INSERT INTO phase0_container_verification.persistence_probe (marker) VALUES ('${marker}');`,
+    `DROP SCHEMA IF EXISTS phase1_container_verification CASCADE;
+     CREATE SCHEMA phase1_container_verification;
+     CREATE TABLE phase1_container_verification.persistence_probe (marker uuid PRIMARY KEY);
+     INSERT INTO phase1_container_verification.persistence_probe (marker) VALUES ('${marker}');`,
   );
   compose('stop', 'postgres');
   compose('rm', '--force', 'postgres');
@@ -113,7 +119,7 @@ try {
       '--dbname',
       'venue_development',
       '--command',
-      `SELECT marker FROM phase0_container_verification.persistence_probe WHERE marker = '${marker}';`,
+      `SELECT marker FROM phase1_container_verification.persistence_probe WHERE marker = '${marker}';`,
     ],
     { capture: true },
   );
@@ -134,22 +140,22 @@ try {
     '--dbname',
     'venue_development',
     '--command',
-    'DROP SCHEMA phase0_container_verification CASCADE;',
+    'DROP SCHEMA phase1_container_verification CASCADE;',
   );
 
-  logStep(5, 'Building the web, API, and worker application images');
+  logStep(7, 'Building the web, API, and worker application images');
   for (const application of ['web', 'api', 'worker']) {
     docker(
       'build',
       '--file',
       `apps/${application}/Dockerfile`,
       '--tag',
-      `venue-${application}:phase0-verification`,
+      `venue-${application}:phase1-verification`,
       '.',
     );
   }
 
-  process.stdout.write('\nPhase 0 container verification passed.\n');
+  process.stdout.write('\nPhase 1 container verification passed.\n');
 } finally {
   run('docker', [...composeArguments, 'down', '--volumes', '--remove-orphans'], {
     allowFailure: true,

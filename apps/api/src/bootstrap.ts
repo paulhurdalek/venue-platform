@@ -2,21 +2,23 @@ import {
   ConsoleLogger,
   type INestApplication,
   type LogLevel,
-  UnprocessableEntityException,
-  ValidationPipe,
   VersioningType,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule, type OpenAPIObject } from '@nestjs/swagger';
 import { API_GLOBAL_PREFIX, API_VERSION } from '@venue/shared';
+import { toNodeHandler } from 'better-auth/node';
+import express, { type Express } from 'express';
 import helmet from 'helmet';
 
 import { AppModule } from './app.module.js';
+import { AuthService } from './auth/auth.service.js';
 import { AllExceptionsFilter } from './common/http/all-exceptions.filter.js';
+import { createDtoValidationPipe } from './common/http/dto-validation.pipe.js';
 
 export async function createApiApplication(): Promise<INestApplication> {
-  const application = await NestFactory.create(AppModule, { bufferLogs: true });
+  const application = await NestFactory.create(AppModule, { bufferLogs: true, bodyParser: false });
   configureApiApplication(application);
   return application;
 }
@@ -37,27 +39,22 @@ export function configureApiApplication(application: INestApplication): void {
   application.use(helmet());
   application.enableCors({
     origin: origins,
-    credentials: false,
+    credentials: true,
     methods: ['GET', 'HEAD', 'OPTIONS', 'POST', 'PUT', 'PATCH', 'DELETE'],
   });
+
+  const expressApplication = application.getHttpAdapter().getInstance() as Express;
+  const authService = application.get(AuthService);
+  expressApplication.all('/api/auth/*splat', toNodeHandler(authService.auth));
+  application.use(express.json({ limit: '128kb' }));
+  application.use(express.urlencoded({ extended: false, limit: '128kb' }));
+
   application.setGlobalPrefix(API_GLOBAL_PREFIX);
   application.enableVersioning({
     type: VersioningType.URI,
     defaultVersion: API_VERSION,
   });
-  application.useGlobalPipes(
-    new ValidationPipe({
-      forbidNonWhitelisted: true,
-      transform: true,
-      whitelist: true,
-      exceptionFactory: (errors) =>
-        new UnprocessableEntityException({
-          code: 'VALIDATION_ERROR',
-          message: 'Request validation failed',
-          details: { fields: errors.map((error) => error.property) },
-        }),
-    }),
-  );
+  application.useGlobalPipes(createDtoValidationPipe());
   application.useGlobalFilters(new AllExceptionsFilter());
   application.enableShutdownHooks();
 }
@@ -72,7 +69,7 @@ function logLevelsFrom(minimumLevel: LogLevel): LogLevel[] {
 export function createOpenApiDocument(application: INestApplication): OpenAPIObject {
   const options = new DocumentBuilder()
     .setTitle('Venue Platform API')
-    .setDescription('Technical Phase 0 API foundation')
+    .setDescription('Phase 1 organization, location and authorization API')
     .setVersion('1.0.0')
     .build();
 

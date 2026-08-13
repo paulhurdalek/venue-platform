@@ -4,6 +4,265 @@
  */
 
 export interface paths {
+    "/api/v1/setup/bootstrap": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Validate a one-time bootstrap token */
+        get: operations["SetupController_validate_v1"];
+        put?: never;
+        /** Complete the one-time first installation */
+        post: operations["SetupController_complete_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/session": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Return the current user and all organization memberships */
+        get: operations["SessionController_context_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["OrganizationController_list_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["OrganizationController_get_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["OrganizationController_update_v1"];
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/locations": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["OrganizationController_locations_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/locations/{locationId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["OrganizationController_location_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["OrganizationController_updateLocation_v1"];
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/members": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["OrganizationController_members_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/members/{membershipId}/status": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["OrganizationController_updateMembershipStatus_v1"];
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/members/{membershipId}/roles": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put: operations["OrganizationController_assignRoles_v1"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/members/{membershipId}/location-scope": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put: operations["OrganizationController_assignLocationScope_v1"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/roles": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["OrganizationController_roles_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/invitations": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["OrganizationController_invitations_v1"];
+        put?: never;
+        post: operations["OrganizationController_createInvitation_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/invitations/{invitationId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete: operations["OrganizationController_revokeInvitation_v1"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/audit": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["OrganizationController_audit_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/invitations/validate": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["InvitationAcceptanceController_validate_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/invitations/accept": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["InvitationAcceptanceController_accept_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/health": {
         parameters: {
             query?: never;
@@ -25,6 +284,236 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        BootstrapTokenQueryDto: {
+            token: string;
+        };
+        BootstrapStatusDto: {
+            /** @enum {string} */
+            status: "VALID" | "INVALID" | "EXPIRED" | "USED" | "UNAVAILABLE";
+            /** Format: date-time */
+            expiresAt?: string;
+        };
+        CompleteBootstrapDto: {
+            administratorName: string;
+            email: string;
+            password: string;
+            passwordConfirmation: string;
+            organizationName: string;
+            locationName: string;
+            timezone: string;
+            token: string;
+        };
+        CompleteBootstrapResultDto: {
+            /** Format: uuid */
+            userId: string;
+            /** Format: uuid */
+            organizationId: string;
+            /** Format: uuid */
+            locationId: string;
+        };
+        PermissionDto: {
+            /** Format: uuid */
+            id: string;
+            key: string;
+            description: string;
+        };
+        RoleDto: {
+            /** Format: uuid */
+            id: string;
+            key: string;
+            name: string;
+            permissions: components["schemas"]["PermissionDto"][];
+        };
+        MembershipDto: {
+            /** Format: uuid */
+            id: string;
+            /** Format: uuid */
+            organizationId: string;
+            organizationName: string;
+            /** Format: uuid */
+            userId: string;
+            name: string;
+            email: string;
+            /** @enum {string} */
+            status: "ACTIVE" | "SUSPENDED";
+            /** @enum {string} */
+            locationScope: "ALL" | "SELECTED";
+            locationIds: string[];
+            roles: components["schemas"]["RoleDto"][];
+            version: number;
+        };
+        SessionContextDto: {
+            /** Format: uuid */
+            userId: string;
+            name: string;
+            email: string;
+            memberships: components["schemas"]["MembershipDto"][];
+        };
+        AuditQueryDto: {
+            /** @default 50 */
+            limit: number;
+        };
+        OrganizationDto: {
+            /** Format: uuid */
+            id: string;
+            name: string;
+            legalName?: string | null;
+            email?: string | null;
+            phone?: string | null;
+            /** @enum {string} */
+            status: "ACTIVE" | "ARCHIVED";
+            version: number;
+            /** Format: date-time */
+            createdAt: string;
+            /** Format: date-time */
+            updatedAt: string;
+        };
+        UpdateOrganizationDto: {
+            version: number;
+            name?: string;
+            legalName?: string | null;
+            email?: string | null;
+            phone?: string | null;
+        };
+        LocationDto: {
+            /** Format: uuid */
+            id: string;
+            /** Format: uuid */
+            organizationId: string;
+            name: string;
+            timezone: string;
+            capacity?: number | null;
+            addressLine1?: string | null;
+            addressLine2?: string | null;
+            postalCode?: string | null;
+            city?: string | null;
+            state?: string | null;
+            countryCode?: string | null;
+            contactEmail?: string | null;
+            contactPhone?: string | null;
+            /** @enum {string} */
+            status: "ACTIVE" | "ARCHIVED";
+            version: number;
+            /** Format: date-time */
+            createdAt: string;
+            /** Format: date-time */
+            updatedAt: string;
+        };
+        UpdateLocationDto: {
+            version: number;
+            name?: string;
+            timezone?: string;
+            capacity?: number | null;
+            addressLine1?: string | null;
+            addressLine2?: string | null;
+            postalCode?: string | null;
+            city?: string | null;
+            state?: string | null;
+            countryCode?: string | null;
+            contactEmail?: string | null;
+            contactPhone?: string | null;
+        };
+        UpdateMembershipStatusDto: {
+            /** @enum {string} */
+            status: "ACTIVE" | "SUSPENDED";
+            version: number;
+        };
+        AssignRolesDto: {
+            roleIds: string[];
+            version: number;
+        };
+        AssignLocationScopeDto: {
+            /** @enum {string} */
+            scope: "ALL" | "SELECTED";
+            locationIds: string[];
+            version: number;
+        };
+        InvitationDto: {
+            /** Format: uuid */
+            id: string;
+            email: string;
+            /** @enum {string} */
+            status: "PENDING" | "ACCEPTED" | "REVOKED" | "EXPIRED";
+            /** Format: date-time */
+            expiresAt: string;
+            /** Format: date-time */
+            acceptedAt?: string | null;
+            /** Format: date-time */
+            revokedAt?: string | null;
+            /** @enum {string} */
+            locationScope: "ALL" | "SELECTED";
+            locationIds: string[];
+            roles: components["schemas"]["RoleDto"][];
+            /** Format: date-time */
+            createdAt: string;
+        };
+        CreateInvitationDto: {
+            email: string;
+            roleIds: string[];
+            /** @enum {string} */
+            locationScope: "ALL" | "SELECTED";
+            locationIds: string[];
+        };
+        CreatedInvitationDto: {
+            /** Format: uuid */
+            id: string;
+            email: string;
+            /** @enum {string} */
+            status: "PENDING" | "ACCEPTED" | "REVOKED" | "EXPIRED";
+            /** Format: date-time */
+            expiresAt: string;
+            /** Format: date-time */
+            acceptedAt?: string | null;
+            /** Format: date-time */
+            revokedAt?: string | null;
+            /** @enum {string} */
+            locationScope: "ALL" | "SELECTED";
+            locationIds: string[];
+            roles: components["schemas"]["RoleDto"][];
+            /** Format: date-time */
+            createdAt: string;
+            /** @description Only returned once. The token is never persisted in raw form. */
+            invitationLink: string;
+        };
+        AuditEntryDto: {
+            /** Format: uuid */
+            id: string;
+            action: string;
+            targetType: string;
+            /** Format: uuid */
+            targetId?: string | null;
+            metadata: {
+                [key: string]: unknown;
+            };
+            /** Format: date-time */
+            createdAt: string;
+            actorName?: string | null;
+        };
+        TokenQueryDto: {
+            token: string;
+        };
+        InvitationValidationDto: {
+            /** @enum {string} */
+            status: "VALID" | "INVALID" | "EXPIRED" | "REVOKED" | "USED";
+            email?: string;
+            organizationName?: string;
+            existingUser?: boolean;
+            /** Format: date-time */
+            expiresAt?: string;
+        };
+        AcceptInvitationDto: {
+            token: string;
+            name?: string;
+            password?: string;
+            passwordConfirmation?: string;
+        };
+        AcceptInvitationResultDto: {
+            /** Format: uuid */
+            organizationId: string;
+            /** Format: uuid */
+            membershipId: string;
+            createdUser: boolean;
+        };
         ServiceHealthDto: {
             /** @enum {string} */
             status: "up" | "down";
@@ -62,6 +551,458 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
+    SetupController_validate_v1: {
+        parameters: {
+            query: {
+                token: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BootstrapStatusDto"];
+                };
+            };
+        };
+    };
+    SetupController_complete_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CompleteBootstrapDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CompleteBootstrapResultDto"];
+                };
+            };
+        };
+    };
+    SessionController_context_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SessionContextDto"];
+                };
+            };
+        };
+    };
+    OrganizationController_list_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["OrganizationDto"][];
+                };
+            };
+        };
+    };
+    OrganizationController_get_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["OrganizationDto"];
+                };
+            };
+        };
+    };
+    OrganizationController_update_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateOrganizationDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["OrganizationDto"];
+                };
+            };
+        };
+    };
+    OrganizationController_locations_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["LocationDto"][];
+                };
+            };
+        };
+    };
+    OrganizationController_location_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                locationId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["LocationDto"];
+                };
+            };
+        };
+    };
+    OrganizationController_updateLocation_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                locationId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateLocationDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["LocationDto"];
+                };
+            };
+        };
+    };
+    OrganizationController_members_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MembershipDto"][];
+                };
+            };
+        };
+    };
+    OrganizationController_updateMembershipStatus_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                membershipId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateMembershipStatusDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MembershipDto"];
+                };
+            };
+        };
+    };
+    OrganizationController_assignRoles_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                membershipId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["AssignRolesDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MembershipDto"];
+                };
+            };
+        };
+    };
+    OrganizationController_assignLocationScope_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                membershipId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["AssignLocationScopeDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MembershipDto"];
+                };
+            };
+        };
+    };
+    OrganizationController_roles_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RoleDto"][];
+                };
+            };
+        };
+    };
+    OrganizationController_invitations_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["InvitationDto"][];
+                };
+            };
+        };
+    };
+    OrganizationController_createInvitation_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateInvitationDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CreatedInvitationDto"];
+                };
+            };
+        };
+    };
+    OrganizationController_revokeInvitation_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                invitationId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["InvitationDto"];
+                };
+            };
+        };
+    };
+    OrganizationController_audit_v1: {
+        parameters: {
+            query?: {
+                limit?: number;
+            };
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AuditEntryDto"][];
+                };
+            };
+        };
+    };
+    InvitationAcceptanceController_validate_v1: {
+        parameters: {
+            query: {
+                token: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["InvitationValidationDto"];
+                };
+            };
+        };
+    };
+    InvitationAcceptanceController_accept_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["AcceptInvitationDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AcceptInvitationResultDto"];
+                };
+            };
+        };
+    };
     HealthController_get_v1: {
         parameters: {
             query?: never;

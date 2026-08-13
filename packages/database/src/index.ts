@@ -1,4 +1,5 @@
 import { PrismaPg } from '@prisma/adapter-pg';
+import { Pool, type PoolConfig } from 'pg';
 
 import { PrismaClient, type Prisma } from './generated/prisma/client.js';
 
@@ -7,7 +8,12 @@ export { Prisma, PrismaClient } from './generated/prisma/client.js';
 export type DatabaseClient = PrismaClient;
 
 export function createDatabaseClient(databaseUrl: string): DatabaseClient {
-  const adapter = new PrismaPg({ connectionString: databaseUrl });
+  const poolConfiguration: PoolConfig & { pipeline: boolean } = {
+    connectionString: databaseUrl,
+    pipeline: true,
+  };
+  const pool = new Pool(poolConfiguration);
+  const adapter = new PrismaPg(pool, { disposeExternalPool: true });
   return new PrismaClient({ adapter });
 }
 

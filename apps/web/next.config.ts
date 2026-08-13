@@ -17,6 +17,14 @@ const nextConfig: NextConfig = {
   outputFileTracingRoot: path.join(directory, '../..'),
   poweredByHeader: false,
   reactStrictMode: true,
+  logging: {
+    incomingRequests: false,
+    browserToTerminal: 'error',
+  },
+  async rewrites() {
+    const apiBaseUrl = process.env.API_BASE_URL ?? 'http://localhost:3001';
+    return [{ source: '/api/:path*', destination: `${apiBaseUrl}/api/:path*` }];
+  },
   async headers() {
     return [
       {

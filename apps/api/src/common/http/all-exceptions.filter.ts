@@ -29,10 +29,11 @@ export class AllExceptionsFilter implements ExceptionFilter {
     const knownResponse = this.readKnownResponse(exception);
 
     if (status >= HttpStatus.INTERNAL_SERVER_ERROR) {
-      this.logger.error(
-        'Unhandled request error',
-        exception instanceof Error ? exception.stack : undefined,
-      );
+      this.logger.error({
+        event: 'request.unhandled_error',
+        requestId,
+        errorType: exception instanceof Error ? exception.constructor.name : 'UnknownError',
+      });
     }
 
     response.status(status).json({

@@ -1,42 +1,34 @@
 # Database and migration conventions
 
-PostgreSQL is the system of record. Prisma Migrate is the only authoritative schema-change path.
-The development and test databases are separate server instances and use distinct credentials,
-ports, and database names in Compose.
+PostgreSQL is the system of record. Prisma Migrate is the only schema-change path. Automated and
+production environments run only `prisma migrate deploy`; `prisma db push` and Better Auth runtime
+schema generation are forbidden.
+
+## Phase 1 migration
+
+`20260813000200_phase_1_auth_org` is applied after the unchanged Phase 0 migration. It creates:
+
+- Better Auth user, account, session, verification, and database rate-limit tables;
+- bootstrap tokens, organizations, locations, memberships, permissions, and roles;
+- organization-keyed role, membership, Location, and invitation mapping tables;
+- invitations and append-only audit records;
+- UUID defaults, unique keys, tenant-aware indexes, check constraints, restrictive business
+  foreign keys, and an audit update/delete prevention trigger.
+
+All new IDs use PostgreSQL `gen_random_uuid()`. Better Auth is configured with its supported
+`advanced.database.generateId: "uuid"` option so runtime-created identity rows follow the same
+convention. Business associations do not cascade on delete. Composite foreign keys prevent a role,
+membership, Location, or invitation mapping from crossing its `organization_id` boundary.
+
+Mutable organization, Location, and membership rows have positive integer versions. Updates use
+`WHERE id = ? AND organization_id = ? AND version = ?` and atomically increment the version; zero
+updated rows become HTTP 409.
 
 ## Workflow
 
 1. Change `packages/database/prisma/schema.prisma`.
-2. Run `pnpm db:migrate:dev` against the development database.
-3. Inspect the generated SQL. Rename the migration meaningfully when needed.
-4. Run `pnpm db:migrate:deploy` and the database tests.
-5. Commit the schema and migration together.
-
-Automated and production environments run only `prisma migrate deploy`. `prisma db push` is never
-used. Applied migration files are immutable; corrections are new migrations.
-
-## Phase 0 migration
-
-`20260813000100_phase_0_foundation` enables PostgreSQL `pgcrypto` for future UUID generation. It
-creates no business table and makes no organization, tenant, or location modeling decision.
-
-## Data conventions for later phases
-
-- **Identifiers:** UUID v4 unless a domain has a reviewed reason for another identifier. Generate
-  IDs in PostgreSQL or the domain boundary, never from a sequential public counter.
-- **Timestamps:** use `timestamptz`, store instants in UTC, expose ISO 8601, and convert only at UI
-  boundaries. Standard records use `createdAt` and `updatedAt`.
-- **Decimals:** use PostgreSQL `numeric` with an explicitly chosen precision and scale. JavaScript
-  floating-point numbers are forbidden for persisted money or rates.
-- **Currencies:** store an ISO 4217 uppercase currency code beside monetary values. Do not assume a
-  platform-wide default currency.
-- **Archiving:** prefer a nullable `archivedAt` timestamp when history must remain visible. Hard
-  deletion requires an explicit lifecycle rule; soft deletion is not applied universally.
-- **Optimistic concurrency:** mutable aggregates use an integer `version`, checked and incremented
-  atomically by the repository. A failed expected-version condition is a conflict, not a retryable
-  success.
-- **Tenancy:** future tenant-owned rows carry an explicit tenant/organization key and tenant-aware
-  indexes. The precise model is a Phase 1 decision.
-
-Use `PrismaService.transaction` in API application use cases or `withTransaction` in non-Nest
-code. Domain code remains unaware of Prisma transaction types.
+2. Generate a migration against the Phase 0 development state.
+3. Review and, where required, add PostgreSQL checks and indexes.
+4. Run `pnpm db:migrate:deploy` on a fresh isolated PostgreSQL database.
+5. Run `pnpm test:db` and `pnpm test:integration` with `TEST_DATABASE_URL`.
+6. Commit schema and migration together; never edit a migration after deployment.
