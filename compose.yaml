@@ -1,0 +1,39 @@
+name: venue-platform
+
+services:
+  postgres:
+    image: postgres:18.4-bookworm
+    environment:
+      POSTGRES_DB: venue_development
+      POSTGRES_PASSWORD: venue_local_only
+      POSTGRES_USER: venue
+    ports:
+      - '5432:5432'
+    volumes:
+      - venue_postgres_data:/var/lib/postgresql
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U venue -d venue_development']
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    restart: unless-stopped
+
+  postgres-test:
+    image: postgres:18.4-bookworm
+    profiles: ['test']
+    environment:
+      POSTGRES_DB: venue_test
+      POSTGRES_PASSWORD: venue_test_local_only
+      POSTGRES_USER: venue
+    ports:
+      - '5433:5432'
+    tmpfs:
+      - /var/lib/postgresql
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U venue -d venue_test']
+      interval: 2s
+      timeout: 3s
+      retries: 15
+
+volumes:
+  venue_postgres_data:

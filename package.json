@@ -1,0 +1,52 @@
+{
+  "name": "venue-platform",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Phase 0 foundation for the venue booking platform",
+  "packageManager": "pnpm@11.21.0",
+  "engines": {
+    "node": ">=24.0.0 <25"
+  },
+  "scripts": {
+    "predev": "pnpm packages:build && pnpm api:generate",
+    "dev": "pnpm --parallel --filter @venue/web --filter @venue/api --filter @venue/worker dev",
+    "build": "pnpm api:generate && pnpm -r --if-present build",
+    "typecheck": "pnpm api:generate && pnpm -r --if-present typecheck",
+    "lint": "eslint . --max-warnings=0",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "pnpm api:generate && pnpm -r --if-present test",
+    "test:unit": "pnpm --filter @venue/api test:unit && pnpm --filter @venue/worker test:unit",
+    "test:integration": "pnpm --filter @venue/api test:integration",
+    "test:db": "node scripts/require-test-database.mjs && pnpm --filter @venue/database test:db",
+    "test:containers": "node scripts/verify-containers.mjs",
+    "test:e2e": "pnpm api:generate && node scripts/run-e2e.mjs",
+    "verify": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm test && pnpm build",
+    "packages:build": "pnpm --filter @venue/shared --filter @venue/configuration --filter @venue/database build",
+    "api:spec": "pnpm packages:build && cross-env NODE_ENV=test DATABASE_URL=postgresql://venue:venue@localhost:5432/venue_test tsx --tsconfig apps/api/tsconfig.json apps/api/src/openapi/generate.ts",
+    "api:client": "openapi-typescript packages/api-client/openapi/openapi.json -o packages/api-client/src/generated/schema.ts && pnpm --filter @venue/api-client build",
+    "api:generate": "pnpm api:spec && pnpm api:client",
+    "db:generate": "pnpm --filter @venue/database prisma:generate",
+    "db:migrate:dev": "pnpm --filter @venue/database prisma:migrate:dev",
+    "db:migrate:deploy": "pnpm --filter @venue/database prisma:migrate:deploy",
+    "db:migrate:test": "dotenv -e .env.test -- pnpm db:migrate:deploy",
+    "db:status": "pnpm --filter @venue/database prisma:status",
+    "security:audit": "pnpm audit --prod --audit-level high"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@playwright/test": "1.62.1",
+    "@types/node": "24.13.3",
+    "cross-env": "10.1.0",
+    "dotenv-cli": "11.0.0",
+    "eslint": "10.8.1",
+    "globals": "17.11.0",
+    "openapi-typescript": "7.13.0",
+    "pnpm": "11.21.0",
+    "prettier": "3.9.6",
+    "tsx": "4.23.12",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.67.0",
+    "vitest": "4.1.10"
+  }
+}

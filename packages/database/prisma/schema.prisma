@@ -1,0 +1,11 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// Phase 0 intentionally contains no business models. Schema changes are made
+// exclusively through reviewed Prisma migrations.

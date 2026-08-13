@@ -1,0 +1,9 @@
+.next
+dist
+coverage
+node_modules
+packages/api-client/src/generated
+packages/api-client/openapi/openapi.json
+packages/database/src/generated
+apps/web/next-env.d.ts
+pnpm-lock.yaml

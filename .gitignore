@@ -1,0 +1,29 @@
+# Dependencies and package-manager state
+node_modules/
+.pnpm-store/
+
+# Builds and generated runtime output
+dist/
+.next/
+coverage/
+playwright-report/
+test-results/
+*.tsbuildinfo
+
+# Environment files (examples remain tracked)
+.env
+.env.*
+!.env.example
+!.env.test.example
+!**/.env.example
+
+# Prisma and local data
+*.db
+*.db-journal
+
+# Logs and editor/OS files
+*.log
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
