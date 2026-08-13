@@ -2,6 +2,22 @@
 
 Date: 2026-08-13
 
+## GitHub Actions maintenance correction
+
+Both CI jobs now use `actions/checkout@v7` and the consolidated `pnpm/setup@v2` action with
+pnpm `11.21.0`, Node.js `24.18.0`, pnpm caching enabled, and automatic installation disabled. The
+existing explicit `pnpm install --frozen-lockfile` steps and all subsequent quality and container
+checks remain unchanged. No application code, domain model, or migration changed.
+
+Checks rerun for this maintenance correction:
+
+- YAML parsing and exact assertions for both jobs: passed.
+- Workflow equivalence assertion for every existing `run` step: passed.
+- `pnpm format:check`: passed.
+- `pnpm verify`: passed, including ESLint, TypeScript, unit/API integration tests, generation, and
+  all workspace production builds. The database test remained skipped because the local environment
+  did not provide `TEST_DATABASE_URL`.
+
 ## PostgreSQL 18 volume correction
 
 The development volume and test tmpfs in `compose.yaml` now both mount at
