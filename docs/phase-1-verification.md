@@ -32,7 +32,9 @@ incoming-request logs are disabled, so bootstrap and invitation tokens do not en
 
 Docker is not installed on this workstation, so `pnpm test:containers` and the three Docker image
 builds could not be executed locally. The script has been upgraded to run Phase 1 DB and API
-integration before persistence and image checks. The unchanged Dockerfiles passed the workspace
+integration before persistence and image checks. It now explicitly runs `pnpm packages:build`
+immediately before the API integration suite, so a fresh installation does not depend on
+pre-existing workspace `dist` directories. The unchanged Dockerfiles passed the workspace
 production builds; GitHub CI remains the authoritative container gate.
 
 Subject to that environment-only container gate, the branch is ready for review and GitHub CI.

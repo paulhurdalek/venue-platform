@@ -49,7 +49,7 @@ function pnpm(args, environment) {
 }
 
 function logStep(step, message) {
-  process.stdout.write(`\n[${step}/6] ${message}\n`);
+  process.stdout.write(`\n[${step}/7] ${message}\n`);
 }
 
 try {
@@ -76,10 +76,13 @@ try {
   logStep(3, 'Running the real database integration test');
   pnpm(['test:db'], testDatabaseEnvironment);
 
-  logStep(4, 'Running the real Phase 1 API integration suite');
+  logStep(4, 'Building the internal workspace packages required by the API');
+  pnpm(['packages:build']);
+
+  logStep(5, 'Running the real Phase 1 API integration suite');
   pnpm(['--filter', '@venue/api', 'test:integration'], testDatabaseEnvironment);
 
-  logStep(5, 'Verifying development data survives container replacement');
+  logStep(6, 'Verifying development data survives container replacement');
   compose(
     'exec',
     '--no-TTY',
@@ -140,7 +143,7 @@ try {
     'DROP SCHEMA phase1_container_verification CASCADE;',
   );
 
-  logStep(6, 'Building the web, API, and worker application images');
+  logStep(7, 'Building the web, API, and worker application images');
   for (const application of ['web', 'api', 'worker']) {
     docker(
       'build',
