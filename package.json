@@ -2,7 +2,7 @@
   "name": "venue-platform",
   "version": "0.0.0",
   "private": true,
-  "description": "Phase 0 foundation for the venue booking platform",
+  "description": "Phase 1 identity and tenant foundation for the venue booking platform",
   "packageManager": "pnpm@11.21.0",
   "engines": {
     "node": ">=24.0.0 <25"
@@ -31,6 +31,7 @@
     "db:migrate:deploy": "pnpm --filter @venue/database prisma:migrate:deploy",
     "db:migrate:test": "dotenv -e .env.test -- pnpm db:migrate:deploy",
     "db:status": "pnpm --filter @venue/database prisma:status",
+    "bootstrap:create": "pnpm packages:build && tsx --tsconfig apps/api/tsconfig.json apps/api/src/setup/create-bootstrap.cli.ts",
     "security:audit": "pnpm audit --prod --audit-level high"
   },
   "devDependencies": {

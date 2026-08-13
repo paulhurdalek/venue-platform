@@ -1,32 +1,43 @@
-# Security baseline and dependency review
+# Phase 1 security model
 
-## Implemented controls
+## Identity and sessions
 
-- Environment files and local data are ignored; example files contain no production credentials.
-- Zod validates configuration without echoing rejected values.
-- Helmet provides baseline HTTP headers; the web adds framing, MIME, referrer, and permissions
-  restrictions.
-- CORS allows configured exact origins, disallows credentials, and restricts methods.
-- The global exception filter suppresses stack traces and internal error details in responses.
-- Swagger UI cannot be mounted in production, regardless of its environment flag.
-- Containers use pinned runtime images, multi-stage builds, and unprivileged runtime users.
-- GitHub Actions receives read-only repository contents permission.
+Better Auth 1.6.25 owns email/password verification, password hashing, session creation, cookies,
+and current-session revocation. Sessions are opaque database records; the browser receives an
+HTTP-only `SameSite=Lax` cookie, with `Secure` forced in production. No public JWT is the primary
+browser session. The handler is mounted before Express body parsers at `/api/auth/*`.
 
-Authentication and authorization are intentionally deferred. The API must not be exposed to
-untrusted networks before Phase 1 supplies the reviewed identity boundary or an external gateway
-provides equivalent protection.
+Public sign-up is disabled in Better Auth itself. Users can be created only by the server-side
+Better Auth API while consuming a valid bootstrap or invitation token in the same database
+transaction. There is no registration page.
+
+Exact trusted origins are shared by Better Auth and credentialed CORS. Helmet, payload size limits,
+DTO allowlisting, origin/CSRF checks, generic sign-in errors, and database rate limits protect the
+HTTP boundary. The exception filter returns the stable error envelope without stack traces.
+
+## Tokens and secrets
+
+Bootstrap and invitation tokens are 256-bit random base64url strings. Only SHA-256 hashes are
+stored. Tokens expire, are consumed atomically, and are never written to logs or audit metadata.
+The raw value appears only in its one-time URL. Passwords and session tokens are likewise excluded
+from application logs and audit entries.
+
+Environment validation rejects missing/weak production secrets and enforces an exact public web
+origin. Supported secret rotation accepts a current and optional previous Better Auth secret.
+
+## Authorization and tenant isolation
+
+Authentication and authorization are independent. Better Auth identifies the user; the central
+access guard then requires an active membership in the path organization, a concrete permission,
+and—on Location endpoints—the Location scope. Suspension is checked from PostgreSQL on every
+request, so it invalidates organization access immediately without waiting for session expiry.
+
+Every business query includes `organization_id`. Organization-owned mapping tables carry the same
+key and use composite foreign keys. Foreign and nonexistent tenant resources both return 404. UI
+visibility is convenience only; negative API tests prove backend enforcement.
 
 ## Dependency checks
 
-Run `pnpm security:audit` after every dependency update and in CI. High or critical production
-findings block delivery. Record accepted exceptions here with the package, advisory, exposure,
-mitigation, owner, and expiry date; there are no accepted exceptions at Phase 0 creation.
-
-The Phase 0 audit on 2026-08-13 initially found vulnerable transitive dependencies in the then
-current Next.js and NestJS Swagger lines. Updating to Next.js 16.3.0 and `@nestjs/swagger` 11.4.6
-removed all but the latter's exact `js-yaml` 5.2.1 pin. The workspace override raises that patch to
-5.2.3 until upstream does so. The repeated production audit reports no known vulnerabilities and
-the peer-dependency check reports no conflicts.
-
-Image scanning belongs in the deployment platform once one is selected. No cloud-specific scanner
-is introduced in Phase 0.
+`pnpm security:audit` blocks high/critical production advisories. `pnpm install --frozen-lockfile`
+is the peer and lockfile consistency check. There are no accepted Phase 1 vulnerability exceptions.
+Container image scanning remains a deployment-platform responsibility.

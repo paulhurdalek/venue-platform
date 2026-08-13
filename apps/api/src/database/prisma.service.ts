@@ -27,6 +27,10 @@ export class PrismaService implements OnModuleInit, OnModuleDestroy {
     await this.client.$queryRaw`SELECT 1`;
   }
 
+  get database(): DatabaseClient {
+    return this.client;
+  }
+
   async transaction<T>(operation: (transaction: TransactionClient) => Promise<T>): Promise<T> {
     return withTransaction(this.client, operation);
   }

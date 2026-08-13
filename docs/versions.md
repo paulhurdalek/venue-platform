@@ -15,6 +15,8 @@ dependency graphs.
 | NestJS Swagger                      | 11.4.6        |
 | Prisma CLI/client/adapter           | 7.9.1         |
 | PostgreSQL container                | 18.4-bookworm |
+| Better Auth / Prisma adapter        | 1.6.25        |
+| Express                             | 5.1.0         |
 | `pg` driver                         | 8.23.0        |
 | OpenAPI TypeScript                  | 7.13.0        |
 | OpenAPI Fetch                       | 0.17.0        |

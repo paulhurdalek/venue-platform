@@ -17,4 +17,93 @@ import * as Prisma from './internal/prismaNamespaceBrowser.js'
 export { Prisma }
 export * as $Enums from './enums.js'
 export * from './enums.js';
-
+/**
+ * Model User
+ * 
+ */
+export type User = Prisma.UserModel
+/**
+ * Model Session
+ * 
+ */
+export type Session = Prisma.SessionModel
+/**
+ * Model Account
+ * 
+ */
+export type Account = Prisma.AccountModel
+/**
+ * Model Verification
+ * 
+ */
+export type Verification = Prisma.VerificationModel
+/**
+ * Model RateLimit
+ * 
+ */
+export type RateLimit = Prisma.RateLimitModel
+/**
+ * Model BootstrapToken
+ * 
+ */
+export type BootstrapToken = Prisma.BootstrapTokenModel
+/**
+ * Model Organization
+ * 
+ */
+export type Organization = Prisma.OrganizationModel
+/**
+ * Model Location
+ * 
+ */
+export type Location = Prisma.LocationModel
+/**
+ * Model Membership
+ * 
+ */
+export type Membership = Prisma.MembershipModel
+/**
+ * Model Permission
+ * 
+ */
+export type Permission = Prisma.PermissionModel
+/**
+ * Model Role
+ * 
+ */
+export type Role = Prisma.RoleModel
+/**
+ * Model RolePermission
+ * 
+ */
+export type RolePermission = Prisma.RolePermissionModel
+/**
+ * Model MembershipRole
+ * 
+ */
+export type MembershipRole = Prisma.MembershipRoleModel
+/**
+ * Model MembershipLocation
+ * 
+ */
+export type MembershipLocation = Prisma.MembershipLocationModel
+/**
+ * Model Invitation
+ * 
+ */
+export type Invitation = Prisma.InvitationModel
+/**
+ * Model InvitationRole
+ * 
+ */
+export type InvitationRole = Prisma.InvitationRoleModel
+/**
+ * Model InvitationLocation
+ * 
+ */
+export type InvitationLocation = Prisma.InvitationLocationModel
+/**
+ * Model AuditLog
+ * 
+ */
+export type AuditLog = Prisma.AuditLogModel

@@ -1,6 +1,743 @@
 {
   "openapi": "3.0.0",
   "paths": {
+    "/api/v1/setup/bootstrap": {
+      "get": {
+        "operationId": "SetupController_validate_v1",
+        "parameters": [
+          {
+            "name": "token",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "minLength": 20,
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BootstrapStatusDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Validate a one-time bootstrap token",
+        "tags": [
+          "setup"
+        ]
+      },
+      "post": {
+        "operationId": "SetupController_complete_v1",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CompleteBootstrapDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompleteBootstrapResultDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Complete the one-time first installation",
+        "tags": [
+          "setup"
+        ]
+      }
+    },
+    "/api/v1/session": {
+      "get": {
+        "operationId": "SessionController_context_v1",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SessionContextDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Return the current user and all organization memberships",
+        "tags": [
+          "session"
+        ]
+      }
+    },
+    "/api/v1/organizations": {
+      "get": {
+        "operationId": "OrganizationController_list_v1",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/OrganizationDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "organizations"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}": {
+      "get": {
+        "operationId": "OrganizationController_get_v1",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrganizationDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "organizations"
+        ]
+      },
+      "patch": {
+        "operationId": "OrganizationController_update_v1",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateOrganizationDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrganizationDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "organizations"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/locations": {
+      "get": {
+        "operationId": "OrganizationController_locations_v1",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LocationDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "organizations"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/locations/{locationId}": {
+      "get": {
+        "operationId": "OrganizationController_location_v1",
+        "parameters": [
+          {
+            "name": "locationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LocationDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "organizations"
+        ]
+      },
+      "patch": {
+        "operationId": "OrganizationController_updateLocation_v1",
+        "parameters": [
+          {
+            "name": "locationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateLocationDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LocationDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "organizations"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/members": {
+      "get": {
+        "operationId": "OrganizationController_members_v1",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MembershipDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "organizations"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/members/{membershipId}/status": {
+      "patch": {
+        "operationId": "OrganizationController_updateMembershipStatus_v1",
+        "parameters": [
+          {
+            "name": "membershipId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateMembershipStatusDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MembershipDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "organizations"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/members/{membershipId}/roles": {
+      "put": {
+        "operationId": "OrganizationController_assignRoles_v1",
+        "parameters": [
+          {
+            "name": "membershipId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssignRolesDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MembershipDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "organizations"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/members/{membershipId}/location-scope": {
+      "put": {
+        "operationId": "OrganizationController_assignLocationScope_v1",
+        "parameters": [
+          {
+            "name": "membershipId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssignLocationScopeDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MembershipDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "organizations"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/roles": {
+      "get": {
+        "operationId": "OrganizationController_roles_v1",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RoleDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "organizations"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/invitations": {
+      "get": {
+        "operationId": "OrganizationController_invitations_v1",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/InvitationDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "organizations"
+        ]
+      },
+      "post": {
+        "operationId": "OrganizationController_createInvitation_v1",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateInvitationDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreatedInvitationDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "organizations"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/invitations/{invitationId}": {
+      "delete": {
+        "operationId": "OrganizationController_revokeInvitation_v1",
+        "parameters": [
+          {
+            "name": "invitationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvitationDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "organizations"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/audit": {
+      "get": {
+        "operationId": "OrganizationController_audit_v1",
+        "parameters": [
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "maximum": 100,
+              "type": "number"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AuditEntryDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "organizations"
+        ]
+      }
+    },
+    "/api/v1/invitations/validate": {
+      "get": {
+        "operationId": "InvitationAcceptanceController_validate_v1",
+        "parameters": [
+          {
+            "name": "token",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "minLength": 20,
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvitationValidationDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "invitations"
+        ]
+      }
+    },
+    "/api/v1/invitations/accept": {
+      "post": {
+        "operationId": "InvitationAcceptanceController_accept_v1",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AcceptInvitationDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AcceptInvitationResultDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "invitations"
+        ]
+      }
+    },
     "/api/v1/health": {
       "get": {
         "operationId": "HealthController_get_v1",
@@ -36,7 +773,7 @@
   },
   "info": {
     "title": "Venue Platform API",
-    "description": "Technical Phase 0 API foundation",
+    "description": "Phase 1 organization, location and authorization API",
     "version": "1.0.0",
     "contact": {}
   },
@@ -44,6 +781,831 @@
   "servers": [],
   "components": {
     "schemas": {
+      "BootstrapTokenQueryDto": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "token"
+        ]
+      },
+      "BootstrapStatusDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "VALID",
+              "INVALID",
+              "EXPIRED",
+              "USED",
+              "UNAVAILABLE"
+            ]
+          },
+          "expiresAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "CompleteBootstrapDto": {
+        "type": "object",
+        "properties": {
+          "administratorName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "passwordConfirmation": {
+            "type": "string"
+          },
+          "organizationName": {
+            "type": "string"
+          },
+          "locationName": {
+            "type": "string"
+          },
+          "timezone": {
+            "type": "string"
+          },
+          "token": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "administratorName",
+          "email",
+          "password",
+          "passwordConfirmation",
+          "organizationName",
+          "locationName",
+          "timezone",
+          "token"
+        ]
+      },
+      "CompleteBootstrapResultDto": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "organizationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "locationId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "required": [
+          "userId",
+          "organizationId",
+          "locationId"
+        ]
+      },
+      "PermissionDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "key": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "key",
+          "description"
+        ]
+      },
+      "RoleDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "key": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "permissions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PermissionDto"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "key",
+          "name",
+          "permissions"
+        ]
+      },
+      "MembershipDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "organizationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "organizationName": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "SUSPENDED"
+            ]
+          },
+          "locationScope": {
+            "type": "string",
+            "enum": [
+              "ALL",
+              "SELECTED"
+            ]
+          },
+          "locationIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RoleDto"
+            }
+          },
+          "version": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "organizationId",
+          "organizationName",
+          "userId",
+          "name",
+          "email",
+          "status",
+          "locationScope",
+          "locationIds",
+          "roles",
+          "version"
+        ]
+      },
+      "SessionContextDto": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "memberships": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MembershipDto"
+            }
+          }
+        },
+        "required": [
+          "userId",
+          "name",
+          "email",
+          "memberships"
+        ]
+      },
+      "AuditQueryDto": {
+        "type": "object",
+        "properties": {
+          "limit": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 100,
+            "default": 50
+          }
+        }
+      },
+      "OrganizationDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "legalName": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "phone": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "ARCHIVED"
+            ]
+          },
+          "version": {
+            "type": "number"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "status",
+          "version",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "UpdateOrganizationDto": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "legalName": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "phone": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "version"
+        ]
+      },
+      "LocationDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "organizationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "timezone": {
+            "type": "string"
+          },
+          "capacity": {
+            "type": "number",
+            "nullable": true
+          },
+          "addressLine1": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressLine2": {
+            "type": "string",
+            "nullable": true
+          },
+          "postalCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "city": {
+            "type": "string",
+            "nullable": true
+          },
+          "state": {
+            "type": "string",
+            "nullable": true
+          },
+          "countryCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "contactEmail": {
+            "type": "string",
+            "nullable": true
+          },
+          "contactPhone": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "ARCHIVED"
+            ]
+          },
+          "version": {
+            "type": "number"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "id",
+          "organizationId",
+          "name",
+          "timezone",
+          "status",
+          "version",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "UpdateLocationDto": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "timezone": {
+            "type": "string"
+          },
+          "capacity": {
+            "type": "number",
+            "nullable": true
+          },
+          "addressLine1": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressLine2": {
+            "type": "string",
+            "nullable": true
+          },
+          "postalCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "city": {
+            "type": "string",
+            "nullable": true
+          },
+          "state": {
+            "type": "string",
+            "nullable": true
+          },
+          "countryCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "contactEmail": {
+            "type": "string",
+            "nullable": true
+          },
+          "contactPhone": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "version"
+        ]
+      },
+      "UpdateMembershipStatusDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "SUSPENDED"
+            ]
+          },
+          "version": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "status",
+          "version"
+        ]
+      },
+      "AssignRolesDto": {
+        "type": "object",
+        "properties": {
+          "roleIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "version": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "roleIds",
+          "version"
+        ]
+      },
+      "AssignLocationScopeDto": {
+        "type": "object",
+        "properties": {
+          "scope": {
+            "type": "string",
+            "enum": [
+              "ALL",
+              "SELECTED"
+            ]
+          },
+          "locationIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "version": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "scope",
+          "locationIds",
+          "version"
+        ]
+      },
+      "InvitationDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "email": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "PENDING",
+              "ACCEPTED",
+              "REVOKED",
+              "EXPIRED"
+            ]
+          },
+          "expiresAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "acceptedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "revokedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "locationScope": {
+            "type": "string",
+            "enum": [
+              "ALL",
+              "SELECTED"
+            ]
+          },
+          "locationIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RoleDto"
+            }
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "id",
+          "email",
+          "status",
+          "expiresAt",
+          "locationScope",
+          "locationIds",
+          "roles",
+          "createdAt"
+        ]
+      },
+      "CreateInvitationDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "roleIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "locationScope": {
+            "type": "string",
+            "enum": [
+              "ALL",
+              "SELECTED"
+            ]
+          },
+          "locationIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        },
+        "required": [
+          "email",
+          "roleIds",
+          "locationScope",
+          "locationIds"
+        ]
+      },
+      "CreatedInvitationDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "email": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "PENDING",
+              "ACCEPTED",
+              "REVOKED",
+              "EXPIRED"
+            ]
+          },
+          "expiresAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "acceptedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "revokedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "locationScope": {
+            "type": "string",
+            "enum": [
+              "ALL",
+              "SELECTED"
+            ]
+          },
+          "locationIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RoleDto"
+            }
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "invitationLink": {
+            "type": "string",
+            "description": "Only returned once. The token is never persisted in raw form."
+          }
+        },
+        "required": [
+          "id",
+          "email",
+          "status",
+          "expiresAt",
+          "locationScope",
+          "locationIds",
+          "roles",
+          "createdAt",
+          "invitationLink"
+        ]
+      },
+      "AuditEntryDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "action": {
+            "type": "string"
+          },
+          "targetType": {
+            "type": "string"
+          },
+          "targetId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "actorName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "id",
+          "action",
+          "targetType",
+          "metadata",
+          "createdAt"
+        ]
+      },
+      "TokenQueryDto": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "token"
+        ]
+      },
+      "InvitationValidationDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "VALID",
+              "INVALID",
+              "EXPIRED",
+              "REVOKED",
+              "USED"
+            ]
+          },
+          "email": {
+            "type": "string"
+          },
+          "organizationName": {
+            "type": "string"
+          },
+          "existingUser": {
+            "type": "boolean"
+          },
+          "expiresAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "AcceptInvitationDto": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "passwordConfirmation": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "token"
+        ]
+      },
+      "AcceptInvitationResultDto": {
+        "type": "object",
+        "properties": {
+          "organizationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "membershipId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "createdUser": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "organizationId",
+          "membershipId",
+          "createdUser"
+        ]
+      },
       "ServiceHealthDto": {
         "type": "object",
         "properties": {

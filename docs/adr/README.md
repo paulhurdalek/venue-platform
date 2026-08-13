@@ -6,6 +6,7 @@
 - [ADR 0004: PostgreSQL and Prisma](0004-postgresql-prisma.md)
 - [ADR 0005: REST and OpenAPI](0005-rest-openapi.md)
 - [ADR 0006: Separate worker without a queue in Phase 0](0006-worker-without-queue.md)
+- [ADR 0007: Better Auth in the NestJS/Express API](0007-better-auth-nest-express.md)
 
 Status terms are `accepted`, `superseded`, and `deprecated`. A changed decision gets a new ADR
 that links to and supersedes the old record.

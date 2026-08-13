@@ -1,69 +1,29 @@
-import { createVenueApiClient } from '@venue/api-client';
+import { redirect } from 'next/navigation';
 
-import { webEnvironment } from '../src/config';
+import { ApiResponseError, getSessionContext } from '../src/api/server';
 
 export const dynamic = 'force-dynamic';
 
-async function readApiStatus(): Promise<'verbunden' | 'nicht erreichbar'> {
-  try {
-    const client = createVenueApiClient({ baseUrl: webEnvironment.API_BASE_URL });
-    const { data, error } = await client.GET('/api/v1/health', {
-      signal: AbortSignal.timeout(1500),
-    });
-
-    return data && !error ? 'verbunden' : 'nicht erreichbar';
-  } catch {
-    return 'nicht erreichbar';
-  }
-}
-
 export default async function HomePage() {
-  const apiStatus = await readApiStatus();
-  const isConnected = apiStatus === 'verbunden';
-
-  return (
-    <main id="main-content">
-      <section className="hero" aria-labelledby="page-title">
-        <p className="eyebrow">Systemstatus</p>
-        <h1 id="page-title">Die Projektgrundlage ist eingerichtet.</h1>
-        <p className="intro">
-          Web, API, Worker und Datenbank sind als getrennte, gemeinsam versionierte Bausteine
-          vorbereitet. Fachliche Funktionen folgen erst in den nächsten Phasen.
-        </p>
-        <div className="status-line" role="status">
-          <span className={isConnected ? 'status-dot status-dot--up' : 'status-dot'} />
-          API {apiStatus}
-        </div>
-      </section>
-
-      <section className="foundation" aria-labelledby="foundation-title">
-        <div className="section-heading">
-          <p className="eyebrow">Technische Bausteine</p>
-          <h2 id="foundation-title">Bereit für kontrolliertes Wachstum</h2>
-        </div>
-        <div className="card-grid">
-          <article className="card">
-            <span className="card-index">01</span>
-            <h3>Web</h3>
-            <p>Barrierearme Next.js-Anwendung mit klarer Server-Grenze.</p>
-          </article>
-          <article className="card">
-            <span className="card-index">02</span>
-            <h3>API</h3>
-            <p>Versionierte NestJS-REST-API mit OpenAPI-Vertrag.</p>
-          </article>
-          <article className="card">
-            <span className="card-index">03</span>
-            <h3>Worker</h3>
-            <p>Eigenständig startbarer Prozess für spätere Hintergrundarbeit.</p>
-          </article>
-          <article className="card">
-            <span className="card-index">04</span>
-            <h3>Datenbank</h3>
-            <p>PostgreSQL mit kontrollierten, versionierten Prisma-Migrationen.</p>
-          </article>
-        </div>
-      </section>
-    </main>
-  );
+  try {
+    const context = await getSessionContext();
+    const active = context.memberships.filter((membership) => membership.status === 'ACTIVE');
+    if (active.length === 1) redirect(`/o/${active[0]!.organizationId}`);
+    if (active.length > 1) redirect('/organizations');
+    return (
+      <main className="public-shell" id="main-content">
+        <section className="state-card">
+          <p className="eyebrow">Kein aktiver Zugang</p>
+          <h1>Derzeit ist keine aktive Organisation verfügbar.</h1>
+          <p>
+            Eine gesperrte Mitgliedschaft kann nur durch eine berechtigte Verwaltung reaktiviert
+            werden.
+          </p>
+        </section>
+      </main>
+    );
+  } catch (error) {
+    if (error instanceof ApiResponseError && error.status === 401) redirect('/sign-in');
+    throw error;
+  }
 }

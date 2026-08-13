@@ -4,6 +4,7 @@ import request from 'supertest';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 
 import { AppModule } from '../app.module.js';
+import { AuthService } from '../auth/auth.service.js';
 import { configureApiApplication } from '../bootstrap.js';
 import { PrismaService } from '../database/prisma.service.js';
 
@@ -18,10 +19,12 @@ describe('GET /api/v1/health', () => {
 
     const module = await Test.createTestingModule({ imports: [AppModule] })
       .overrideProvider(PrismaService)
-      .useValue({ ping: async () => undefined })
+      .useValue({ database: {}, ping: async () => undefined })
+      .overrideProvider(AuthService)
+      .useValue({ auth: { handler: async () => new Response(null, { status: 404 }) } })
       .compile();
 
-    application = module.createNestApplication();
+    application = module.createNestApplication({ bodyParser: false });
     configureApiApplication(application);
     await application.init();
   });

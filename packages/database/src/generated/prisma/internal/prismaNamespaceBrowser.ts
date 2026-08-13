@@ -51,7 +51,24 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
-
+  User: 'User',
+  Session: 'Session',
+  Account: 'Account',
+  Verification: 'Verification',
+  RateLimit: 'RateLimit',
+  BootstrapToken: 'BootstrapToken',
+  Organization: 'Organization',
+  Location: 'Location',
+  Membership: 'Membership',
+  Permission: 'Permission',
+  Role: 'Role',
+  RolePermission: 'RolePermission',
+  MembershipRole: 'MembershipRole',
+  MembershipLocation: 'MembershipLocation',
+  Invitation: 'Invitation',
+  InvitationRole: 'InvitationRole',
+  InvitationLocation: 'InvitationLocation',
+  AuditLog: 'AuditLog'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -68,4 +85,287 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 } as const)
 
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
+
+
+export const UserScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  emailVerified: 'emailVerified',
+  image: 'image',
+  role: 'role',
+  banned: 'banned',
+  banReason: 'banReason',
+  banExpires: 'banExpires',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const SessionScalarFieldEnum = {
+  id: 'id',
+  expiresAt: 'expiresAt',
+  token: 'token',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  ipAddress: 'ipAddress',
+  userAgent: 'userAgent',
+  userId: 'userId',
+  impersonatedBy: 'impersonatedBy'
+} as const
+
+export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum]
+
+
+export const AccountScalarFieldEnum = {
+  id: 'id',
+  accountId: 'accountId',
+  providerId: 'providerId',
+  userId: 'userId',
+  accessToken: 'accessToken',
+  refreshToken: 'refreshToken',
+  idToken: 'idToken',
+  accessTokenExpiresAt: 'accessTokenExpiresAt',
+  refreshTokenExpiresAt: 'refreshTokenExpiresAt',
+  scope: 'scope',
+  password: 'password',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AccountScalarFieldEnum = (typeof AccountScalarFieldEnum)[keyof typeof AccountScalarFieldEnum]
+
+
+export const VerificationScalarFieldEnum = {
+  id: 'id',
+  identifier: 'identifier',
+  value: 'value',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type VerificationScalarFieldEnum = (typeof VerificationScalarFieldEnum)[keyof typeof VerificationScalarFieldEnum]
+
+
+export const RateLimitScalarFieldEnum = {
+  key: 'key',
+  count: 'count',
+  lastRequest: 'lastRequest'
+} as const
+
+export type RateLimitScalarFieldEnum = (typeof RateLimitScalarFieldEnum)[keyof typeof RateLimitScalarFieldEnum]
+
+
+export const BootstrapTokenScalarFieldEnum = {
+  id: 'id',
+  tokenHash: 'tokenHash',
+  expiresAt: 'expiresAt',
+  consumedAt: 'consumedAt',
+  consumedByUserId: 'consumedByUserId',
+  createdAt: 'createdAt'
+} as const
+
+export type BootstrapTokenScalarFieldEnum = (typeof BootstrapTokenScalarFieldEnum)[keyof typeof BootstrapTokenScalarFieldEnum]
+
+
+export const OrganizationScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  legalName: 'legalName',
+  email: 'email',
+  phone: 'phone',
+  status: 'status',
+  version: 'version',
+  archivedAt: 'archivedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type OrganizationScalarFieldEnum = (typeof OrganizationScalarFieldEnum)[keyof typeof OrganizationScalarFieldEnum]
+
+
+export const LocationScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  name: 'name',
+  timezone: 'timezone',
+  capacity: 'capacity',
+  addressLine1: 'addressLine1',
+  addressLine2: 'addressLine2',
+  postalCode: 'postalCode',
+  city: 'city',
+  state: 'state',
+  countryCode: 'countryCode',
+  contactEmail: 'contactEmail',
+  contactPhone: 'contactPhone',
+  status: 'status',
+  version: 'version',
+  archivedAt: 'archivedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type LocationScalarFieldEnum = (typeof LocationScalarFieldEnum)[keyof typeof LocationScalarFieldEnum]
+
+
+export const MembershipScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  userId: 'userId',
+  status: 'status',
+  locationScope: 'locationScope',
+  version: 'version',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MembershipScalarFieldEnum = (typeof MembershipScalarFieldEnum)[keyof typeof MembershipScalarFieldEnum]
+
+
+export const PermissionScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  description: 'description'
+} as const
+
+export type PermissionScalarFieldEnum = (typeof PermissionScalarFieldEnum)[keyof typeof PermissionScalarFieldEnum]
+
+
+export const RoleScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  key: 'key',
+  name: 'name',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RoleScalarFieldEnum = (typeof RoleScalarFieldEnum)[keyof typeof RoleScalarFieldEnum]
+
+
+export const RolePermissionScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  roleId: 'roleId',
+  permissionId: 'permissionId'
+} as const
+
+export type RolePermissionScalarFieldEnum = (typeof RolePermissionScalarFieldEnum)[keyof typeof RolePermissionScalarFieldEnum]
+
+
+export const MembershipRoleScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  membershipId: 'membershipId',
+  roleId: 'roleId'
+} as const
+
+export type MembershipRoleScalarFieldEnum = (typeof MembershipRoleScalarFieldEnum)[keyof typeof MembershipRoleScalarFieldEnum]
+
+
+export const MembershipLocationScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  membershipId: 'membershipId',
+  locationId: 'locationId'
+} as const
+
+export type MembershipLocationScalarFieldEnum = (typeof MembershipLocationScalarFieldEnum)[keyof typeof MembershipLocationScalarFieldEnum]
+
+
+export const InvitationScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  email: 'email',
+  inviterMembershipId: 'inviterMembershipId',
+  tokenHash: 'tokenHash',
+  status: 'status',
+  expiresAt: 'expiresAt',
+  acceptedAt: 'acceptedAt',
+  revokedAt: 'revokedAt',
+  acceptedByUserId: 'acceptedByUserId',
+  locationScope: 'locationScope',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type InvitationScalarFieldEnum = (typeof InvitationScalarFieldEnum)[keyof typeof InvitationScalarFieldEnum]
+
+
+export const InvitationRoleScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  invitationId: 'invitationId',
+  roleId: 'roleId'
+} as const
+
+export type InvitationRoleScalarFieldEnum = (typeof InvitationRoleScalarFieldEnum)[keyof typeof InvitationRoleScalarFieldEnum]
+
+
+export const InvitationLocationScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  invitationId: 'invitationId',
+  locationId: 'locationId'
+} as const
+
+export type InvitationLocationScalarFieldEnum = (typeof InvitationLocationScalarFieldEnum)[keyof typeof InvitationLocationScalarFieldEnum]
+
+
+export const AuditLogScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  actorUserId: 'actorUserId',
+  actorMembershipId: 'actorMembershipId',
+  action: 'action',
+  targetType: 'targetType',
+  targetId: 'targetId',
+  metadata: 'metadata',
+  createdAt: 'createdAt'
+} as const
+
+export type AuditLogScalarFieldEnum = (typeof AuditLogScalarFieldEnum)[keyof typeof AuditLogScalarFieldEnum]
+
+
+export const SortOrder = {
+  asc: 'asc',
+  desc: 'desc'
+} as const
+
+export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+export const JsonNullValueInput = {
+  JsonNull: JsonNull
+} as const
+
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
+
+
+export const QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
+} as const
+
+export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+export const NullsOrder = {
+  first: 'first',
+  last: 'last'
+} as const
+
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+export const JsonNullValueFilter = {
+  DbNull: DbNull,
+  JsonNull: JsonNull,
+  AnyNull: AnyNull
+} as const
+
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 

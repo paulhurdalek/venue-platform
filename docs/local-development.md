@@ -17,6 +17,7 @@ corepack enable
 pnpm install --frozen-lockfile
 docker compose up -d postgres
 pnpm db:migrate:deploy
+pnpm bootstrap:create
 pnpm dev
 ```
 
@@ -25,6 +26,9 @@ The development endpoints are:
 - Web: `http://localhost:3000`
 - API health: `http://localhost:3001/api/v1/health`
 - Swagger UI: `http://localhost:3001/api/docs` only if `SWAGGER_UI_ENABLED=true`
+
+Open the one-time URL printed by `pnpm bootstrap:create`. Generate it only after migrations are
+applied. The raw token is intentionally not recoverable from PostgreSQL.
 
 `pnpm dev` rebuilds required packages and regenerated API bindings before starting all three
 applications. The worker reports `worker.ready` only after its database check succeeds. `Ctrl+C`
@@ -61,6 +65,7 @@ cp .env.test.example .env.test
 docker compose --profile test up -d postgres-test
 pnpm db:migrate:test
 dotenv -e .env.test -- pnpm test:db
+dotenv -e .env.test -- pnpm test:integration
 pnpm exec playwright install chromium  # once per developer machine
 pnpm test:e2e
 pnpm security:audit

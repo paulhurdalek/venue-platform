@@ -7,5 +7,333 @@ datasource db {
   provider = "postgresql"
 }
 
-// Phase 0 intentionally contains no business models. Schema changes are made
-// exclusively through reviewed Prisma migrations.
+enum EntityStatus {
+  ACTIVE
+  ARCHIVED
+}
+
+enum MembershipStatus {
+  ACTIVE
+  SUSPENDED
+}
+
+enum LocationScope {
+  ALL
+  SELECTED
+}
+
+enum InvitationStatus {
+  PENDING
+  ACCEPTED
+  REVOKED
+}
+
+model User {
+  id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name          String
+  email         String    @unique
+  emailVerified Boolean   @default(false) @map("email_verified")
+  image         String?
+  role          String?
+  banned        Boolean   @default(false)
+  banReason     String?   @map("ban_reason")
+  banExpires    DateTime? @map("ban_expires")
+  createdAt     DateTime  @default(now()) @map("created_at")
+  updatedAt     DateTime  @updatedAt @map("updated_at")
+
+  sessions                Session[]
+  accounts                Account[]
+  memberships             Membership[]
+  acceptedInvitations     Invitation[]     @relation("InvitationAcceptedBy")
+  consumedBootstrapTokens BootstrapToken[]
+  auditEntries            AuditLog[]       @relation("AuditActorUser")
+
+  @@map("auth_user")
+}
+
+model Session {
+  id             String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  expiresAt      DateTime @map("expires_at")
+  token          String   @unique
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+  ipAddress      String?  @map("ip_address")
+  userAgent      String?  @map("user_agent")
+  userId         String   @map("user_id") @db.Uuid
+  impersonatedBy String?  @map("impersonated_by")
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([expiresAt])
+  @@map("auth_session")
+}
+
+model Account {
+  id                    String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  accountId             String    @map("account_id")
+  providerId            String    @map("provider_id")
+  userId                String    @map("user_id") @db.Uuid
+  accessToken           String?   @map("access_token")
+  refreshToken          String?   @map("refresh_token")
+  idToken               String?   @map("id_token")
+  accessTokenExpiresAt  DateTime? @map("access_token_expires_at")
+  refreshTokenExpiresAt DateTime? @map("refresh_token_expires_at")
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now()) @map("created_at")
+  updatedAt             DateTime  @updatedAt @map("updated_at")
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([providerId, accountId])
+  @@index([userId])
+  @@map("auth_account")
+}
+
+model Verification {
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  identifier String
+  value      String
+  expiresAt  DateTime @map("expires_at")
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+
+  @@index([identifier])
+  @@index([expiresAt])
+  @@map("auth_verification")
+}
+
+model RateLimit {
+  key         String @id
+  count       Int
+  lastRequest BigInt @map("last_request")
+
+  @@map("auth_rate_limit")
+}
+
+model BootstrapToken {
+  id               String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  tokenHash        String    @unique @map("token_hash") @db.Char(64)
+  expiresAt        DateTime  @map("expires_at")
+  consumedAt       DateTime? @map("consumed_at")
+  consumedByUserId String?   @map("consumed_by_user_id") @db.Uuid
+  createdAt        DateTime  @default(now()) @map("created_at")
+  consumedByUser   User?     @relation(fields: [consumedByUserId], references: [id], onDelete: Restrict)
+
+  @@index([expiresAt])
+  @@map("bootstrap_token")
+}
+
+model Organization {
+  id           String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name         String
+  legalName    String?      @map("legal_name")
+  email        String?
+  phone        String?
+  status       EntityStatus @default(ACTIVE)
+  version      Int          @default(1)
+  archivedAt   DateTime?    @map("archived_at")
+  createdAt    DateTime     @default(now()) @map("created_at")
+  updatedAt    DateTime     @updatedAt @map("updated_at")
+  locations    Location[]
+  memberships  Membership[]
+  roles        Role[]
+  invitations  Invitation[]
+  auditEntries AuditLog[]
+
+  @@index([status])
+  @@map("organization")
+}
+
+model Location {
+  id              String               @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId  String               @map("organization_id") @db.Uuid
+  name            String
+  timezone        String
+  capacity        Int?
+  addressLine1    String?              @map("address_line_1")
+  addressLine2    String?              @map("address_line_2")
+  postalCode      String?              @map("postal_code")
+  city            String?
+  state           String?
+  countryCode     String?              @map("country_code") @db.Char(2)
+  contactEmail    String?              @map("contact_email")
+  contactPhone    String?              @map("contact_phone")
+  status          EntityStatus         @default(ACTIVE)
+  version         Int                  @default(1)
+  archivedAt      DateTime?            @map("archived_at")
+  createdAt       DateTime             @default(now()) @map("created_at")
+  updatedAt       DateTime             @updatedAt @map("updated_at")
+  organization    Organization         @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  membershipLinks MembershipLocation[]
+  invitationLinks InvitationLocation[]
+
+  @@unique([id, organizationId])
+  @@index([organizationId, status])
+  @@map("location")
+}
+
+model Membership {
+  id              String               @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId  String               @map("organization_id") @db.Uuid
+  userId          String               @map("user_id") @db.Uuid
+  status          MembershipStatus     @default(ACTIVE)
+  locationScope   LocationScope        @default(ALL) @map("location_scope")
+  version         Int                  @default(1)
+  createdAt       DateTime             @default(now()) @map("created_at")
+  updatedAt       DateTime             @updatedAt @map("updated_at")
+  organization    Organization         @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  user            User                 @relation(fields: [userId], references: [id], onDelete: Restrict)
+  roles           MembershipRole[]
+  locations       MembershipLocation[]
+  sentInvitations Invitation[]         @relation("InvitationInviter")
+  auditEntries    AuditLog[]           @relation("AuditActorMembership")
+
+  @@unique([organizationId, userId])
+  @@unique([id, organizationId])
+  @@index([organizationId, status])
+  @@index([userId, status])
+  @@map("membership")
+}
+
+model Permission {
+  id          String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  key         String           @unique
+  description String
+  roles       RolePermission[]
+
+  @@map("permission")
+}
+
+model Role {
+  id             String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId String           @map("organization_id") @db.Uuid
+  key            String
+  name           String
+  createdAt      DateTime         @default(now()) @map("created_at")
+  updatedAt      DateTime         @updatedAt @map("updated_at")
+  organization   Organization     @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  permissions    RolePermission[]
+  memberships    MembershipRole[]
+  invitations    InvitationRole[]
+
+  @@unique([organizationId, key])
+  @@unique([id, organizationId])
+  @@index([organizationId])
+  @@map("role")
+}
+
+model RolePermission {
+  id             String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId String     @map("organization_id") @db.Uuid
+  roleId         String     @map("role_id") @db.Uuid
+  permissionId   String     @map("permission_id") @db.Uuid
+  role           Role       @relation(fields: [roleId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  permission     Permission @relation(fields: [permissionId], references: [id], onDelete: Restrict)
+
+  @@unique([roleId, permissionId])
+  @@index([organizationId])
+  @@index([permissionId])
+  @@map("role_permission")
+}
+
+model MembershipRole {
+  id             String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId String     @map("organization_id") @db.Uuid
+  membershipId   String     @map("membership_id") @db.Uuid
+  roleId         String     @map("role_id") @db.Uuid
+  membership     Membership @relation(fields: [membershipId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  role           Role       @relation(fields: [roleId, organizationId], references: [id, organizationId], onDelete: Restrict)
+
+  @@unique([membershipId, roleId])
+  @@index([organizationId])
+  @@index([roleId])
+  @@map("membership_role")
+}
+
+model MembershipLocation {
+  id             String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId String     @map("organization_id") @db.Uuid
+  membershipId   String     @map("membership_id") @db.Uuid
+  locationId     String     @map("location_id") @db.Uuid
+  membership     Membership @relation(fields: [membershipId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  location       Location   @relation(fields: [locationId, organizationId], references: [id, organizationId], onDelete: Restrict)
+
+  @@unique([membershipId, locationId])
+  @@index([organizationId])
+  @@index([locationId])
+  @@map("membership_location")
+}
+
+model Invitation {
+  id                  String               @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId      String               @map("organization_id") @db.Uuid
+  email               String
+  inviterMembershipId String               @map("inviter_membership_id") @db.Uuid
+  tokenHash           String               @unique @map("token_hash") @db.Char(64)
+  status              InvitationStatus     @default(PENDING)
+  expiresAt           DateTime             @map("expires_at")
+  acceptedAt          DateTime?            @map("accepted_at")
+  revokedAt           DateTime?            @map("revoked_at")
+  acceptedByUserId    String?              @map("accepted_by_user_id") @db.Uuid
+  locationScope       LocationScope        @default(ALL) @map("location_scope")
+  createdAt           DateTime             @default(now()) @map("created_at")
+  updatedAt           DateTime             @updatedAt @map("updated_at")
+  organization        Organization         @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  inviterMembership   Membership           @relation("InvitationInviter", fields: [inviterMembershipId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  acceptedByUser      User?                @relation("InvitationAcceptedBy", fields: [acceptedByUserId], references: [id], onDelete: Restrict)
+  roles               InvitationRole[]
+  locations           InvitationLocation[]
+
+  @@unique([id, organizationId])
+  @@index([organizationId, status])
+  @@index([email, status])
+  @@index([expiresAt])
+  @@map("invitation")
+}
+
+model InvitationRole {
+  id             String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId String     @map("organization_id") @db.Uuid
+  invitationId   String     @map("invitation_id") @db.Uuid
+  roleId         String     @map("role_id") @db.Uuid
+  invitation     Invitation @relation(fields: [invitationId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  role           Role       @relation(fields: [roleId, organizationId], references: [id, organizationId], onDelete: Restrict)
+
+  @@unique([invitationId, roleId])
+  @@index([organizationId])
+  @@index([roleId])
+  @@map("invitation_role")
+}
+
+model InvitationLocation {
+  id             String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId String     @map("organization_id") @db.Uuid
+  invitationId   String     @map("invitation_id") @db.Uuid
+  locationId     String     @map("location_id") @db.Uuid
+  invitation     Invitation @relation(fields: [invitationId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  location       Location   @relation(fields: [locationId, organizationId], references: [id, organizationId], onDelete: Restrict)
+
+  @@unique([invitationId, locationId])
+  @@index([organizationId])
+  @@index([locationId])
+  @@map("invitation_location")
+}
+
+model AuditLog {
+  id                String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId    String?       @map("organization_id") @db.Uuid
+  actorUserId       String?       @map("actor_user_id") @db.Uuid
+  actorMembershipId String?       @map("actor_membership_id") @db.Uuid
+  action            String
+  targetType        String        @map("target_type")
+  targetId          String?       @map("target_id") @db.Uuid
+  metadata          Json          @default("{}")
+  createdAt         DateTime      @default(now()) @map("created_at")
+  organization      Organization? @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  actorUser         User?         @relation("AuditActorUser", fields: [actorUserId], references: [id], onDelete: Restrict)
+  actorMembership   Membership?   @relation("AuditActorMembership", fields: [actorMembershipId, organizationId], references: [id, organizationId], onDelete: Restrict)
+
+  @@index([organizationId, createdAt])
+  @@index([actorUserId])
+  @@map("audit_log")
+}
