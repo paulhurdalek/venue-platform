@@ -53,8 +53,21 @@ test('bootstrap, administration, invitation, authorization and logout', async ({
   await page.getByRole('link', { name: 'Location', exact: true }).click();
   await expect(page.getByRole('heading', { name: 'Location' })).toBeVisible();
   await page.getByLabel('Kapazität').fill('600');
+  const countryCode = page.getByLabel('Ländercode');
+  await expect(countryCode).toHaveAttribute('pattern', '[A-Za-z]{2}');
+  await countryCode.fill('49');
+  await page.getByRole('button', { name: 'Änderungen speichern' }).click();
+  await expect(
+    page.getByText('Der Ländercode muss aus zwei Buchstaben bestehen, zum Beispiel DE.'),
+  ).toBeVisible();
+  await expect(countryCode).toBeFocused();
+
+  await countryCode.fill('de');
+  await expect(countryCode).toHaveValue('DE');
   await page.getByRole('button', { name: 'Änderungen speichern' }).click();
   await expect(page.getByText('Die Locationdaten wurden gespeichert.')).toBeVisible();
+  await page.reload();
+  await expect(page.getByLabel('Ländercode')).toHaveValue('DE');
 
   await page.getByRole('link', { name: 'Team', exact: true }).click();
   await page.getByLabel('E-Mail-Adresse').fill(invitedEmail);

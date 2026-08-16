@@ -9,7 +9,7 @@ import {
   IsOptional,
   IsString,
   IsUUID,
-  Length,
+  Matches,
   Max,
   MaxLength,
   Min,
@@ -113,11 +113,18 @@ export class UpdateLocationDto {
   @IsString()
   @MaxLength(120)
   state?: string | null;
-  @ApiPropertyOptional({ type: String, nullable: true })
+  @ApiPropertyOptional({
+    type: String,
+    nullable: true,
+    minLength: 2,
+    maxLength: 2,
+    pattern: '^[A-Z]{2}$',
+    example: 'DE',
+  })
   @Transform(({ value }) => (typeof value === 'string' ? value.trim().toUpperCase() : value))
   @IsOptional()
   @IsString()
-  @Length(2, 2)
+  @Matches(/^[A-Z]{2}$/)
   countryCode?: string | null;
   @ApiPropertyOptional({ type: String, nullable: true }) @IsOptional() @IsEmail() contactEmail?:
     string | null;

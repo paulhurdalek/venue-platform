@@ -1226,7 +1226,11 @@
           },
           "countryCode": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "minLength": 2,
+            "maxLength": 2,
+            "pattern": "^[A-Z]{2}$",
+            "example": "DE"
           },
           "contactEmail": {
             "type": "string",
