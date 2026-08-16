@@ -409,6 +409,7 @@ export interface components {
             postalCode?: string | null;
             city?: string | null;
             state?: string | null;
+            /** @example DE */
             countryCode?: string | null;
             contactEmail?: string | null;
             contactPhone?: string | null;

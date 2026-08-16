@@ -10,6 +10,19 @@ import { FormMessage } from '../../../../components/form-message';
 
 type Location = components['schemas']['LocationDto'];
 
+const countryCodeValidationMessage =
+  'Der Ländercode muss aus zwei Buchstaben bestehen, zum Beispiel DE.';
+
+function isCountryCodeValidationError(error: unknown): boolean {
+  if (!error || typeof error !== 'object') return false;
+  const candidate = error as { code?: unknown; details?: { fields?: unknown } };
+  return (
+    candidate.code === 'VALIDATION_ERROR' &&
+    Array.isArray(candidate.details?.fields) &&
+    candidate.details.fields.includes('countryCode')
+  );
+}
+
 export function LocationForm({ location }: { location: Location }) {
   const router = useRouter();
   const [message, setMessage] = useState<string>();
@@ -17,11 +30,17 @@ export function LocationForm({ location }: { location: Location }) {
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setPending(true);
     setMessage(undefined);
     const form = new FormData(event.currentTarget);
     const nullable = (name: string) => String(form.get(name) ?? '').trim() || null;
     const capacity = nullable('capacity');
+    const countryCode = nullable('countryCode')?.toUpperCase() ?? null;
+    if (countryCode !== null && !/^[A-Z]{2}$/.test(countryCode)) {
+      setMessage(countryCodeValidationMessage);
+      return;
+    }
+
+    setPending(true);
     const client = createBrowserApiClient();
     const { data, error } = await client.PATCH(
       '/api/v1/organizations/{organizationId}/locations/{locationId}',
@@ -40,14 +59,18 @@ export function LocationForm({ location }: { location: Location }) {
           postalCode: nullable('postalCode'),
           city: nullable('city'),
           state: nullable('state'),
-          countryCode: nullable('countryCode'),
+          countryCode,
           contactEmail: nullable('contactEmail'),
           contactPhone: nullable('contactPhone'),
         },
       },
     );
     if (!data || error) {
-      setMessage(apiErrorMessage(error, 'Die Locationdaten konnten nicht gespeichert werden.'));
+      setMessage(
+        isCountryCodeValidationError(error)
+          ? countryCodeValidationMessage
+          : apiErrorMessage(error, 'Die Locationdaten konnten nicht gespeichert werden.'),
+      );
       setPending(false);
       return;
     }
@@ -107,7 +130,14 @@ export function LocationForm({ location }: { location: Location }) {
           maxLength={2}
           minLength={2}
           name="countryCode"
+          onInput={(event) => {
+            event.currentTarget.value = event.currentTarget.value.toUpperCase();
+            if (event.currentTarget.validity.valid) setMessage(undefined);
+          }}
+          onInvalid={() => setMessage(countryCodeValidationMessage)}
+          pattern="[A-Za-z]{2}"
           placeholder="DE"
+          title={countryCodeValidationMessage}
         />
       </label>
       <label>

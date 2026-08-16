@@ -145,7 +145,7 @@ describeWithDatabase('Phase 1 PostgreSQL and API integration', () => {
     expect(session.body.memberships).toHaveLength(1);
   });
 
-  it('updates organization and location data and rejects stale versions', async () => {
+  it('updates organization data and rejects stale versions', async () => {
     const organization = await administratorAgent.get(`/api/v1/organizations/${organizationId}`);
     expect(organization.status).toBe(200);
     const initialVersion = organization.body.version as number;
@@ -161,20 +161,51 @@ describeWithDatabase('Phase 1 PostgreSQL and API integration', () => {
     expect(stale.status).toBe(409);
     expect(stale.body.code).toBe('VERSION_CONFLICT');
 
-    const location = await administratorAgent.get(
-      `/api/v1/organizations/${organizationId}/locations/${locationId}`,
-    );
-    const locationUpdate = await administratorAgent
-      .patch(`/api/v1/organizations/${organizationId}/locations/${locationId}`)
-      .send({ version: location.body.version, capacity: 450, countryCode: 'de' });
-    expect(locationUpdate.status).toBe(200);
-    expect(locationUpdate.body).toMatchObject({ capacity: 450, countryCode: 'DE' });
-
     secondLocationId = (
       await prisma.database.location.create({
         data: { organizationId, name: 'Restricted Annex', timezone: 'Europe/Berlin' },
       })
     ).id;
+  });
+
+  it('normalizes a lowercase Location country code before persistence', async () => {
+    const location = await administratorAgent.get(
+      `/api/v1/organizations/${organizationId}/locations/${locationId}`,
+    );
+    const response = await administratorAgent
+      .patch(`/api/v1/organizations/${organizationId}/locations/${locationId}`)
+      .send({ version: location.body.version, capacity: 450, countryCode: 'de' });
+
+    expect(response.status).toBe(200);
+    expect(response.body).toMatchObject({ capacity: 450, countryCode: 'DE' });
+    await expect(
+      prisma.database.location.findUniqueOrThrow({ where: { id: locationId } }),
+    ).resolves.toMatchObject({ countryCode: 'DE' });
+  });
+
+  it('rejects a numeric Location country code without changing the Location', async () => {
+    const before = await administratorAgent.get(
+      `/api/v1/organizations/${organizationId}/locations/${locationId}`,
+    );
+    const response = await administratorAgent
+      .patch(`/api/v1/organizations/${organizationId}/locations/${locationId}`)
+      .send({ version: before.body.version, countryCode: '49' });
+
+    expect(response.status).toBe(422);
+    expect(response.body).toMatchObject({
+      code: 'VALIDATION_ERROR',
+      details: { fields: expect.arrayContaining(['countryCode']) },
+    });
+
+    const after = await administratorAgent.get(
+      `/api/v1/organizations/${organizationId}/locations/${locationId}`,
+    );
+    expect(after.status).toBe(200);
+    expect(after.body).toMatchObject({
+      version: before.body.version,
+      capacity: before.body.capacity,
+      countryCode: before.body.countryCode,
+    });
   });
 
   it('enforces concrete permissions and selected location scope for an invited user', async () => {
