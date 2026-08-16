@@ -11,6 +11,7 @@ import type { Prisma, TransactionClient } from '@venue/database';
 import type { Request } from 'express';
 
 import { AuthService } from '../auth/auth.service.js';
+import { AuditWriter } from '../audit/audit-writer.service.js';
 import { PrismaService } from '../database/prisma.service.js';
 import { AccessService } from '../security/access.service.js';
 import type { AccessContext } from '../security/access.types.js';
@@ -73,6 +74,8 @@ export class PlatformService {
     private readonly auth: AuthService,
     @Inject(ConfigService)
     private readonly config: ConfigService,
+    @Inject(AuditWriter)
+    private readonly auditWriter: AuditWriter,
   ) {}
 
   async sessionContext(request: Request): Promise<SessionContextDto> {
@@ -134,7 +137,7 @@ export class PlatformService {
       const organization = await transaction.organization.findUniqueOrThrow({
         where: { id: access.organizationId },
       });
-      await this.audit(
+      await this.auditWriter.append(
         transaction,
         access,
         'organization.updated',
@@ -218,11 +221,18 @@ export class PlatformService {
       });
       this.assertUpdated(result.count);
       const location = await transaction.location.findUniqueOrThrow({ where: { id: locationId } });
-      await this.audit(transaction, access, 'location.updated', 'location', locationId, {
-        changedFields,
-        previousVersion: version,
-        newVersion: location.version,
-      });
+      await this.auditWriter.append(
+        transaction,
+        access,
+        'location.updated',
+        'location',
+        locationId,
+        {
+          changedFields,
+          previousVersion: version,
+          newVersion: location.version,
+        },
+      );
       return this.mapLocation(location);
     });
   }
@@ -258,7 +268,7 @@ export class PlatformService {
         data: { status: input.status, version: { increment: 1 } },
       });
       this.assertUpdated(result.count);
-      await this.audit(
+      await this.auditWriter.append(
         transaction,
         access,
         input.status === 'ACTIVE' ? 'membership.reactivated' : 'membership.suspended',
@@ -305,7 +315,7 @@ export class PlatformService {
           roleId,
         })),
       });
-      await this.audit(
+      await this.auditWriter.append(
         transaction,
         access,
         'membership.roles_updated',
@@ -355,7 +365,7 @@ export class PlatformService {
           })),
         });
       }
-      await this.audit(
+      await this.auditWriter.append(
         transaction,
         access,
         'membership.location_access_updated',
@@ -434,13 +444,19 @@ export class PlatformService {
         where: { id: baseInvitation.id },
         include: invitationInclude,
       });
-      await this.audit(transaction, access, 'invitation.created', 'invitation', created.id, {
-        email: created.email,
-        expiresAt: created.expiresAt.toISOString(),
-        roleIds,
-        locationScope: created.locationScope,
-        locationIds,
-      });
+      await this.auditWriter.append(
+        transaction,
+        access,
+        'invitation.created',
+        'invitation',
+        created.id,
+        {
+          expiresAt: created.expiresAt.toISOString(),
+          roleIds,
+          locationScope: created.locationScope,
+          locationIds,
+        },
+      );
       return created;
     });
 
@@ -469,9 +485,14 @@ export class PlatformService {
         where: { id: invitationId },
         data: { status: 'REVOKED', revokedAt: new Date() },
       });
-      await this.audit(transaction, access, 'invitation.revoked', 'invitation', invitationId, {
-        email: invitation!.email,
-      });
+      await this.auditWriter.append(
+        transaction,
+        access,
+        'invitation.revoked',
+        'invitation',
+        invitationId,
+        {},
+      );
       return this.mapInvitation(
         await transaction.invitation.findUniqueOrThrow({
           where: { id: invitationId },
@@ -607,7 +628,7 @@ export class PlatformService {
           action: 'invitation.accepted',
           targetType: 'invitation',
           targetId: invitation!.id,
-          metadata: { email: invitation!.email, createdUser },
+          metadata: { createdUser },
         },
       });
       return {
@@ -667,27 +688,6 @@ export class PlatformService {
         message: 'Mindestens eine aktive Administratormitgliedschaft ist erforderlich',
       });
     }
-  }
-
-  private async audit(
-    transaction: TransactionClient,
-    access: AccessContext,
-    action: string,
-    targetType: string,
-    targetId: string,
-    metadata: Prisma.InputJsonObject,
-  ): Promise<void> {
-    await transaction.auditLog.create({
-      data: {
-        organizationId: access.organizationId,
-        actorUserId: access.user.id,
-        actorMembershipId: access.membershipId,
-        action,
-        targetType,
-        targetId,
-        metadata,
-      },
-    });
   }
 
   private mapOrganization(organization: {

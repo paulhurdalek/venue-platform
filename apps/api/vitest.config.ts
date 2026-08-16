@@ -12,6 +12,7 @@ process.env.SWAGGER_UI_ENABLED ??= 'false';
 
 export default defineConfig({
   test: {
+    fileParallelism: false,
     restoreMocks: true,
   },
 });

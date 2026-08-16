@@ -414,7 +414,17 @@ export const ModelName = {
   Invitation: 'Invitation',
   InvitationRole: 'InvitationRole',
   InvitationLocation: 'InvitationLocation',
-  AuditLog: 'AuditLog'
+  AuditLog: 'AuditLog',
+  Artist: 'Artist',
+  Contact: 'Contact',
+  ContactRole: 'ContactRole',
+  ArtistContact: 'ArtistContact',
+  ArtistContactRole: 'ArtistContactRole',
+  BusinessPartner: 'BusinessPartner',
+  BusinessPartnerRole: 'BusinessPartnerRole',
+  BusinessPartnerRoleAssignment: 'BusinessPartnerRoleAssignment',
+  BusinessPartnerContact: 'BusinessPartnerContact',
+  BusinessPartnerContactRole: 'BusinessPartnerContactRole'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -430,7 +440,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "session" | "account" | "verification" | "rateLimit" | "bootstrapToken" | "organization" | "location" | "membership" | "permission" | "role" | "rolePermission" | "membershipRole" | "membershipLocation" | "invitation" | "invitationRole" | "invitationLocation" | "auditLog"
+    modelProps: "user" | "session" | "account" | "verification" | "rateLimit" | "bootstrapToken" | "organization" | "location" | "membership" | "permission" | "role" | "rolePermission" | "membershipRole" | "membershipLocation" | "invitation" | "invitationRole" | "invitationLocation" | "auditLog" | "artist" | "contact" | "contactRole" | "artistContact" | "artistContactRole" | "businessPartner" | "businessPartnerRole" | "businessPartnerRoleAssignment" | "businessPartnerContact" | "businessPartnerContactRole"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1766,6 +1776,746 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Artist: {
+      payload: Prisma.$ArtistPayload<ExtArgs>
+      fields: Prisma.ArtistFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ArtistFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArtistPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ArtistFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArtistPayload>
+        }
+        findFirst: {
+          args: Prisma.ArtistFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArtistPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ArtistFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArtistPayload>
+        }
+        findMany: {
+          args: Prisma.ArtistFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArtistPayload>[]
+        }
+        create: {
+          args: Prisma.ArtistCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArtistPayload>
+        }
+        createMany: {
+          args: Prisma.ArtistCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ArtistCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArtistPayload>[]
+        }
+        delete: {
+          args: Prisma.ArtistDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArtistPayload>
+        }
+        update: {
+          args: Prisma.ArtistUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArtistPayload>
+        }
+        deleteMany: {
+          args: Prisma.ArtistDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ArtistUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ArtistUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArtistPayload>[]
+        }
+        upsert: {
+          args: Prisma.ArtistUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArtistPayload>
+        }
+        aggregate: {
+          args: Prisma.ArtistAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateArtist>
+        }
+        groupBy: {
+          args: Prisma.ArtistGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ArtistGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ArtistCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ArtistCountAggregateOutputType> | number
+        }
+      }
+    }
+    Contact: {
+      payload: Prisma.$ContactPayload<ExtArgs>
+      fields: Prisma.ContactFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ContactFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ContactFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactPayload>
+        }
+        findFirst: {
+          args: Prisma.ContactFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ContactFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactPayload>
+        }
+        findMany: {
+          args: Prisma.ContactFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactPayload>[]
+        }
+        create: {
+          args: Prisma.ContactCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactPayload>
+        }
+        createMany: {
+          args: Prisma.ContactCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ContactCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactPayload>[]
+        }
+        delete: {
+          args: Prisma.ContactDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactPayload>
+        }
+        update: {
+          args: Prisma.ContactUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactPayload>
+        }
+        deleteMany: {
+          args: Prisma.ContactDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ContactUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ContactUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactPayload>[]
+        }
+        upsert: {
+          args: Prisma.ContactUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactPayload>
+        }
+        aggregate: {
+          args: Prisma.ContactAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateContact>
+        }
+        groupBy: {
+          args: Prisma.ContactGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ContactGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ContactCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ContactCountAggregateOutputType> | number
+        }
+      }
+    }
+    ContactRole: {
+      payload: Prisma.$ContactRolePayload<ExtArgs>
+      fields: Prisma.ContactRoleFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ContactRoleFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactRolePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ContactRoleFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactRolePayload>
+        }
+        findFirst: {
+          args: Prisma.ContactRoleFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactRolePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ContactRoleFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactRolePayload>
+        }
+        findMany: {
+          args: Prisma.ContactRoleFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactRolePayload>[]
+        }
+        create: {
+          args: Prisma.ContactRoleCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactRolePayload>
+        }
+        createMany: {
+          args: Prisma.ContactRoleCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ContactRoleCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactRolePayload>[]
+        }
+        delete: {
+          args: Prisma.ContactRoleDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactRolePayload>
+        }
+        update: {
+          args: Prisma.ContactRoleUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactRolePayload>
+        }
+        deleteMany: {
+          args: Prisma.ContactRoleDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ContactRoleUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ContactRoleUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactRolePayload>[]
+        }
+        upsert: {
+          args: Prisma.ContactRoleUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactRolePayload>
+        }
+        aggregate: {
+          args: Prisma.ContactRoleAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateContactRole>
+        }
+        groupBy: {
+          args: Prisma.ContactRoleGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ContactRoleGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ContactRoleCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ContactRoleCountAggregateOutputType> | number
+        }
+      }
+    }
+    ArtistContact: {
+      payload: Prisma.$ArtistContactPayload<ExtArgs>
+      fields: Prisma.ArtistContactFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ArtistContactFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArtistContactPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ArtistContactFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArtistContactPayload>
+        }
+        findFirst: {
+          args: Prisma.ArtistContactFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArtistContactPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ArtistContactFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArtistContactPayload>
+        }
+        findMany: {
+          args: Prisma.ArtistContactFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArtistContactPayload>[]
+        }
+        create: {
+          args: Prisma.ArtistContactCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArtistContactPayload>
+        }
+        createMany: {
+          args: Prisma.ArtistContactCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ArtistContactCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArtistContactPayload>[]
+        }
+        delete: {
+          args: Prisma.ArtistContactDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArtistContactPayload>
+        }
+        update: {
+          args: Prisma.ArtistContactUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArtistContactPayload>
+        }
+        deleteMany: {
+          args: Prisma.ArtistContactDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ArtistContactUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ArtistContactUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArtistContactPayload>[]
+        }
+        upsert: {
+          args: Prisma.ArtistContactUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArtistContactPayload>
+        }
+        aggregate: {
+          args: Prisma.ArtistContactAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateArtistContact>
+        }
+        groupBy: {
+          args: Prisma.ArtistContactGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ArtistContactGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ArtistContactCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ArtistContactCountAggregateOutputType> | number
+        }
+      }
+    }
+    ArtistContactRole: {
+      payload: Prisma.$ArtistContactRolePayload<ExtArgs>
+      fields: Prisma.ArtistContactRoleFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ArtistContactRoleFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArtistContactRolePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ArtistContactRoleFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArtistContactRolePayload>
+        }
+        findFirst: {
+          args: Prisma.ArtistContactRoleFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArtistContactRolePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ArtistContactRoleFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArtistContactRolePayload>
+        }
+        findMany: {
+          args: Prisma.ArtistContactRoleFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArtistContactRolePayload>[]
+        }
+        create: {
+          args: Prisma.ArtistContactRoleCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArtistContactRolePayload>
+        }
+        createMany: {
+          args: Prisma.ArtistContactRoleCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ArtistContactRoleCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArtistContactRolePayload>[]
+        }
+        delete: {
+          args: Prisma.ArtistContactRoleDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArtistContactRolePayload>
+        }
+        update: {
+          args: Prisma.ArtistContactRoleUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArtistContactRolePayload>
+        }
+        deleteMany: {
+          args: Prisma.ArtistContactRoleDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ArtistContactRoleUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ArtistContactRoleUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArtistContactRolePayload>[]
+        }
+        upsert: {
+          args: Prisma.ArtistContactRoleUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArtistContactRolePayload>
+        }
+        aggregate: {
+          args: Prisma.ArtistContactRoleAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateArtistContactRole>
+        }
+        groupBy: {
+          args: Prisma.ArtistContactRoleGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ArtistContactRoleGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ArtistContactRoleCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ArtistContactRoleCountAggregateOutputType> | number
+        }
+      }
+    }
+    BusinessPartner: {
+      payload: Prisma.$BusinessPartnerPayload<ExtArgs>
+      fields: Prisma.BusinessPartnerFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BusinessPartnerFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessPartnerPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BusinessPartnerFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessPartnerPayload>
+        }
+        findFirst: {
+          args: Prisma.BusinessPartnerFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessPartnerPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BusinessPartnerFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessPartnerPayload>
+        }
+        findMany: {
+          args: Prisma.BusinessPartnerFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessPartnerPayload>[]
+        }
+        create: {
+          args: Prisma.BusinessPartnerCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessPartnerPayload>
+        }
+        createMany: {
+          args: Prisma.BusinessPartnerCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.BusinessPartnerCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessPartnerPayload>[]
+        }
+        delete: {
+          args: Prisma.BusinessPartnerDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessPartnerPayload>
+        }
+        update: {
+          args: Prisma.BusinessPartnerUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessPartnerPayload>
+        }
+        deleteMany: {
+          args: Prisma.BusinessPartnerDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BusinessPartnerUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.BusinessPartnerUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessPartnerPayload>[]
+        }
+        upsert: {
+          args: Prisma.BusinessPartnerUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessPartnerPayload>
+        }
+        aggregate: {
+          args: Prisma.BusinessPartnerAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBusinessPartner>
+        }
+        groupBy: {
+          args: Prisma.BusinessPartnerGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BusinessPartnerGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BusinessPartnerCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BusinessPartnerCountAggregateOutputType> | number
+        }
+      }
+    }
+    BusinessPartnerRole: {
+      payload: Prisma.$BusinessPartnerRolePayload<ExtArgs>
+      fields: Prisma.BusinessPartnerRoleFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BusinessPartnerRoleFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessPartnerRolePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BusinessPartnerRoleFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessPartnerRolePayload>
+        }
+        findFirst: {
+          args: Prisma.BusinessPartnerRoleFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessPartnerRolePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BusinessPartnerRoleFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessPartnerRolePayload>
+        }
+        findMany: {
+          args: Prisma.BusinessPartnerRoleFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessPartnerRolePayload>[]
+        }
+        create: {
+          args: Prisma.BusinessPartnerRoleCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessPartnerRolePayload>
+        }
+        createMany: {
+          args: Prisma.BusinessPartnerRoleCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.BusinessPartnerRoleCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessPartnerRolePayload>[]
+        }
+        delete: {
+          args: Prisma.BusinessPartnerRoleDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessPartnerRolePayload>
+        }
+        update: {
+          args: Prisma.BusinessPartnerRoleUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessPartnerRolePayload>
+        }
+        deleteMany: {
+          args: Prisma.BusinessPartnerRoleDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BusinessPartnerRoleUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.BusinessPartnerRoleUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessPartnerRolePayload>[]
+        }
+        upsert: {
+          args: Prisma.BusinessPartnerRoleUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessPartnerRolePayload>
+        }
+        aggregate: {
+          args: Prisma.BusinessPartnerRoleAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBusinessPartnerRole>
+        }
+        groupBy: {
+          args: Prisma.BusinessPartnerRoleGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BusinessPartnerRoleGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BusinessPartnerRoleCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BusinessPartnerRoleCountAggregateOutputType> | number
+        }
+      }
+    }
+    BusinessPartnerRoleAssignment: {
+      payload: Prisma.$BusinessPartnerRoleAssignmentPayload<ExtArgs>
+      fields: Prisma.BusinessPartnerRoleAssignmentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BusinessPartnerRoleAssignmentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessPartnerRoleAssignmentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BusinessPartnerRoleAssignmentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessPartnerRoleAssignmentPayload>
+        }
+        findFirst: {
+          args: Prisma.BusinessPartnerRoleAssignmentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessPartnerRoleAssignmentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BusinessPartnerRoleAssignmentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessPartnerRoleAssignmentPayload>
+        }
+        findMany: {
+          args: Prisma.BusinessPartnerRoleAssignmentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessPartnerRoleAssignmentPayload>[]
+        }
+        create: {
+          args: Prisma.BusinessPartnerRoleAssignmentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessPartnerRoleAssignmentPayload>
+        }
+        createMany: {
+          args: Prisma.BusinessPartnerRoleAssignmentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.BusinessPartnerRoleAssignmentCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessPartnerRoleAssignmentPayload>[]
+        }
+        delete: {
+          args: Prisma.BusinessPartnerRoleAssignmentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessPartnerRoleAssignmentPayload>
+        }
+        update: {
+          args: Prisma.BusinessPartnerRoleAssignmentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessPartnerRoleAssignmentPayload>
+        }
+        deleteMany: {
+          args: Prisma.BusinessPartnerRoleAssignmentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BusinessPartnerRoleAssignmentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.BusinessPartnerRoleAssignmentUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessPartnerRoleAssignmentPayload>[]
+        }
+        upsert: {
+          args: Prisma.BusinessPartnerRoleAssignmentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessPartnerRoleAssignmentPayload>
+        }
+        aggregate: {
+          args: Prisma.BusinessPartnerRoleAssignmentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBusinessPartnerRoleAssignment>
+        }
+        groupBy: {
+          args: Prisma.BusinessPartnerRoleAssignmentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BusinessPartnerRoleAssignmentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BusinessPartnerRoleAssignmentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BusinessPartnerRoleAssignmentCountAggregateOutputType> | number
+        }
+      }
+    }
+    BusinessPartnerContact: {
+      payload: Prisma.$BusinessPartnerContactPayload<ExtArgs>
+      fields: Prisma.BusinessPartnerContactFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BusinessPartnerContactFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessPartnerContactPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BusinessPartnerContactFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessPartnerContactPayload>
+        }
+        findFirst: {
+          args: Prisma.BusinessPartnerContactFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessPartnerContactPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BusinessPartnerContactFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessPartnerContactPayload>
+        }
+        findMany: {
+          args: Prisma.BusinessPartnerContactFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessPartnerContactPayload>[]
+        }
+        create: {
+          args: Prisma.BusinessPartnerContactCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessPartnerContactPayload>
+        }
+        createMany: {
+          args: Prisma.BusinessPartnerContactCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.BusinessPartnerContactCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessPartnerContactPayload>[]
+        }
+        delete: {
+          args: Prisma.BusinessPartnerContactDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessPartnerContactPayload>
+        }
+        update: {
+          args: Prisma.BusinessPartnerContactUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessPartnerContactPayload>
+        }
+        deleteMany: {
+          args: Prisma.BusinessPartnerContactDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BusinessPartnerContactUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.BusinessPartnerContactUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessPartnerContactPayload>[]
+        }
+        upsert: {
+          args: Prisma.BusinessPartnerContactUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessPartnerContactPayload>
+        }
+        aggregate: {
+          args: Prisma.BusinessPartnerContactAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBusinessPartnerContact>
+        }
+        groupBy: {
+          args: Prisma.BusinessPartnerContactGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BusinessPartnerContactGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BusinessPartnerContactCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BusinessPartnerContactCountAggregateOutputType> | number
+        }
+      }
+    }
+    BusinessPartnerContactRole: {
+      payload: Prisma.$BusinessPartnerContactRolePayload<ExtArgs>
+      fields: Prisma.BusinessPartnerContactRoleFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BusinessPartnerContactRoleFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessPartnerContactRolePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BusinessPartnerContactRoleFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessPartnerContactRolePayload>
+        }
+        findFirst: {
+          args: Prisma.BusinessPartnerContactRoleFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessPartnerContactRolePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BusinessPartnerContactRoleFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessPartnerContactRolePayload>
+        }
+        findMany: {
+          args: Prisma.BusinessPartnerContactRoleFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessPartnerContactRolePayload>[]
+        }
+        create: {
+          args: Prisma.BusinessPartnerContactRoleCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessPartnerContactRolePayload>
+        }
+        createMany: {
+          args: Prisma.BusinessPartnerContactRoleCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.BusinessPartnerContactRoleCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessPartnerContactRolePayload>[]
+        }
+        delete: {
+          args: Prisma.BusinessPartnerContactRoleDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessPartnerContactRolePayload>
+        }
+        update: {
+          args: Prisma.BusinessPartnerContactRoleUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessPartnerContactRolePayload>
+        }
+        deleteMany: {
+          args: Prisma.BusinessPartnerContactRoleDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BusinessPartnerContactRoleUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.BusinessPartnerContactRoleUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessPartnerContactRolePayload>[]
+        }
+        upsert: {
+          args: Prisma.BusinessPartnerContactRoleUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessPartnerContactRolePayload>
+        }
+        aggregate: {
+          args: Prisma.BusinessPartnerContactRoleAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBusinessPartnerContactRole>
+        }
+        groupBy: {
+          args: Prisma.BusinessPartnerContactRoleGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BusinessPartnerContactRoleGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BusinessPartnerContactRoleCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BusinessPartnerContactRoleCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -2046,6 +2796,158 @@ export const AuditLogScalarFieldEnum = {
 } as const
 
 export type AuditLogScalarFieldEnum = (typeof AuditLogScalarFieldEnum)[keyof typeof AuditLogScalarFieldEnum]
+
+
+export const ArtistScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  stageName: 'stageName',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  addressLine1: 'addressLine1',
+  addressLine2: 'addressLine2',
+  postalCode: 'postalCode',
+  city: 'city',
+  state: 'state',
+  countryCode: 'countryCode',
+  email: 'email',
+  phone: 'phone',
+  instagram: 'instagram',
+  website: 'website',
+  notes: 'notes',
+  status: 'status',
+  version: 'version',
+  archivedAt: 'archivedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ArtistScalarFieldEnum = (typeof ArtistScalarFieldEnum)[keyof typeof ArtistScalarFieldEnum]
+
+
+export const ContactScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  label: 'label',
+  email: 'email',
+  phone: 'phone',
+  mobile: 'mobile',
+  notes: 'notes',
+  status: 'status',
+  version: 'version',
+  archivedAt: 'archivedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ContactScalarFieldEnum = (typeof ContactScalarFieldEnum)[keyof typeof ContactScalarFieldEnum]
+
+
+export const ContactRoleScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  name: 'name'
+} as const
+
+export type ContactRoleScalarFieldEnum = (typeof ContactRoleScalarFieldEnum)[keyof typeof ContactRoleScalarFieldEnum]
+
+
+export const ArtistContactScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  artistId: 'artistId',
+  contactId: 'contactId',
+  version: 'version',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ArtistContactScalarFieldEnum = (typeof ArtistContactScalarFieldEnum)[keyof typeof ArtistContactScalarFieldEnum]
+
+
+export const ArtistContactRoleScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  artistContactId: 'artistContactId',
+  roleId: 'roleId'
+} as const
+
+export type ArtistContactRoleScalarFieldEnum = (typeof ArtistContactRoleScalarFieldEnum)[keyof typeof ArtistContactRoleScalarFieldEnum]
+
+
+export const BusinessPartnerScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  companyName: 'companyName',
+  addressLine1: 'addressLine1',
+  addressLine2: 'addressLine2',
+  postalCode: 'postalCode',
+  city: 'city',
+  state: 'state',
+  countryCode: 'countryCode',
+  billingAddressLine1: 'billingAddressLine1',
+  billingAddressLine2: 'billingAddressLine2',
+  billingPostalCode: 'billingPostalCode',
+  billingCity: 'billingCity',
+  billingState: 'billingState',
+  billingCountryCode: 'billingCountryCode',
+  vatId: 'vatId',
+  email: 'email',
+  phone: 'phone',
+  website: 'website',
+  notes: 'notes',
+  status: 'status',
+  version: 'version',
+  archivedAt: 'archivedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BusinessPartnerScalarFieldEnum = (typeof BusinessPartnerScalarFieldEnum)[keyof typeof BusinessPartnerScalarFieldEnum]
+
+
+export const BusinessPartnerRoleScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  name: 'name'
+} as const
+
+export type BusinessPartnerRoleScalarFieldEnum = (typeof BusinessPartnerRoleScalarFieldEnum)[keyof typeof BusinessPartnerRoleScalarFieldEnum]
+
+
+export const BusinessPartnerRoleAssignmentScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  businessPartnerId: 'businessPartnerId',
+  roleId: 'roleId'
+} as const
+
+export type BusinessPartnerRoleAssignmentScalarFieldEnum = (typeof BusinessPartnerRoleAssignmentScalarFieldEnum)[keyof typeof BusinessPartnerRoleAssignmentScalarFieldEnum]
+
+
+export const BusinessPartnerContactScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  businessPartnerId: 'businessPartnerId',
+  contactId: 'contactId',
+  version: 'version',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BusinessPartnerContactScalarFieldEnum = (typeof BusinessPartnerContactScalarFieldEnum)[keyof typeof BusinessPartnerContactScalarFieldEnum]
+
+
+export const BusinessPartnerContactRoleScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  businessPartnerContactId: 'businessPartnerContactId',
+  roleId: 'roleId'
+} as const
+
+export type BusinessPartnerContactRoleScalarFieldEnum = (typeof BusinessPartnerContactRoleScalarFieldEnum)[keyof typeof BusinessPartnerContactRoleScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -2409,6 +3311,16 @@ export type GlobalOmitConfig = {
   invitationRole?: Prisma.InvitationRoleOmit
   invitationLocation?: Prisma.InvitationLocationOmit
   auditLog?: Prisma.AuditLogOmit
+  artist?: Prisma.ArtistOmit
+  contact?: Prisma.ContactOmit
+  contactRole?: Prisma.ContactRoleOmit
+  artistContact?: Prisma.ArtistContactOmit
+  artistContactRole?: Prisma.ArtistContactRoleOmit
+  businessPartner?: Prisma.BusinessPartnerOmit
+  businessPartnerRole?: Prisma.BusinessPartnerRoleOmit
+  businessPartnerRoleAssignment?: Prisma.BusinessPartnerRoleAssignmentOmit
+  businessPartnerContact?: Prisma.BusinessPartnerContactOmit
+  businessPartnerContactRole?: Prisma.BusinessPartnerContactRoleOmit
 }
 
 /* Types for Logging */

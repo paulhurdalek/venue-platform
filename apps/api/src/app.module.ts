@@ -3,8 +3,10 @@ import { ConfigModule } from '@nestjs/config';
 import { apiEnvironmentSchema, parseEnvironment } from '@venue/configuration';
 
 import { AuthModule } from './auth/auth.module.js';
+import { AuditModule } from './audit/audit.module.js';
 import { DatabaseModule } from './database/database.module.js';
 import { HealthModule } from './health/health.module.js';
+import { MasterDataModule } from './master-data/master-data.module.js';
 import { SecurityModule } from './security/security.module.js';
 import { SetupModule } from './setup/setup.module.js';
 import { PlatformModule } from './platform/platform.module.js';
@@ -19,9 +21,11 @@ import { PlatformModule } from './platform/platform.module.js';
     }),
     DatabaseModule,
     AuthModule,
+    AuditModule,
     SecurityModule,
     SetupModule,
     PlatformModule,
+    MasterDataModule,
     HealthModule,
   ],
 })

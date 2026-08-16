@@ -69,7 +69,7 @@ function logLevelsFrom(minimumLevel: LogLevel): LogLevel[] {
 export function createOpenApiDocument(application: INestApplication): OpenAPIObject {
   const options = new DocumentBuilder()
     .setTitle('Venue Platform API')
-    .setDescription('Phase 1 organization, location and authorization API')
+    .setDescription('Venue Platform organization, authorization and master-data API')
     .setVersion('1.0.0')
     .build();
 

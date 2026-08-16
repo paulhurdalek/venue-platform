@@ -15,7 +15,7 @@ const tsxCli = rootRequire.resolve('tsx/cli');
 
 const databaseUrl = process.env.TEST_DATABASE_URL ?? process.env.DATABASE_URL;
 if (!databaseUrl?.startsWith('postgresql://')) {
-  throw new Error('TEST_DATABASE_URL is required for Phase 1 browser tests.');
+  throw new Error('TEST_DATABASE_URL is required for browser tests.');
 }
 
 const runtimeEnvironment = {
@@ -182,7 +182,10 @@ async function cleanDatabase(connectionString) {
   try {
     await database.$executeRawUnsafe(`
       TRUNCATE TABLE
-        "audit_log", "invitation_location", "invitation_role", "invitation",
+        "business_partner_contact_role", "business_partner_contact",
+        "business_partner_role_assignment", "artist_contact_role", "artist_contact",
+        "business_partner", "artist", "contact", "audit_log",
+        "invitation_location", "invitation_role", "invitation",
         "membership_location", "membership_role", "role_permission", "role", "permission",
         "membership", "location", "organization", "bootstrap_token", "auth_rate_limit",
         "auth_verification", "auth_session", "auth_account", "auth_user"

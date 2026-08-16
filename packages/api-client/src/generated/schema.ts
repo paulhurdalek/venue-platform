@@ -263,6 +263,294 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/organizations/{organizationId}/artists": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["MasterDataController_listArtists_v1"];
+        put?: never;
+        post: operations["MasterDataController_createArtist_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/artists/{artistId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["MasterDataController_artist_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["MasterDataController_updateArtist_v1"];
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/artists/{artistId}/status": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["MasterDataController_setArtistStatus_v1"];
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/artists/{artistId}/contacts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["MasterDataController_linkArtistContact_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/artists/{artistId}/contacts/{associationId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete: operations["MasterDataController_unlinkArtistContact_v1"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/artists/{artistId}/contacts/{associationId}/roles": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put: operations["MasterDataController_setArtistContactRoles_v1"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/contacts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["MasterDataController_listContacts_v1"];
+        put?: never;
+        post: operations["MasterDataController_createContact_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/contacts/{contactId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["MasterDataController_contact_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["MasterDataController_updateContact_v1"];
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/contacts/{contactId}/status": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["MasterDataController_setContactStatus_v1"];
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/business-partners": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["MasterDataController_listBusinessPartners_v1"];
+        put?: never;
+        post: operations["MasterDataController_createBusinessPartner_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/business-partners/{businessPartnerId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["MasterDataController_businessPartner_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["MasterDataController_updateBusinessPartner_v1"];
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/business-partners/{businessPartnerId}/status": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["MasterDataController_setBusinessPartnerStatus_v1"];
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/business-partners/{businessPartnerId}/roles": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put: operations["MasterDataController_setBusinessPartnerRoles_v1"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/business-partners/{businessPartnerId}/contacts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["MasterDataController_linkBusinessPartnerContact_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/business-partners/{businessPartnerId}/contacts/{associationId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete: operations["MasterDataController_unlinkBusinessPartnerContact_v1"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/business-partners/{businessPartnerId}/contacts/{associationId}/roles": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put: operations["MasterDataController_setBusinessPartnerContactRoles_v1"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/contact-roles": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["MasterDataController_contactRoles_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/business-partner-roles": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["MasterDataController_businessPartnerRoles_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/health": {
         parameters: {
             query?: never;
@@ -514,6 +802,262 @@ export interface components {
             /** Format: uuid */
             membershipId: string;
             createdUser: boolean;
+        };
+        ContactSummaryDto: {
+            /** Format: uuid */
+            id: string;
+            firstName?: string | null;
+            lastName?: string | null;
+            label?: string | null;
+            email?: string | null;
+            phone?: string | null;
+            mobile?: string | null;
+            /** @enum {string} */
+            status: "ACTIVE" | "ARCHIVED";
+            incomplete: boolean;
+        };
+        MasterDataRoleDto: {
+            /** Format: uuid */
+            id: string;
+            key: string;
+            name: string;
+        };
+        ContactAssociationDto: {
+            /** Format: uuid */
+            id: string;
+            version: number;
+            contact: components["schemas"]["ContactSummaryDto"];
+            roles: components["schemas"]["MasterDataRoleDto"][];
+        };
+        ArtistDto: {
+            /** Format: uuid */
+            id: string;
+            /** Format: uuid */
+            organizationId: string;
+            stageName?: string | null;
+            firstName?: string | null;
+            lastName?: string | null;
+            addressLine1?: string | null;
+            addressLine2?: string | null;
+            postalCode?: string | null;
+            city?: string | null;
+            state?: string | null;
+            countryCode?: string | null;
+            email?: string | null;
+            phone?: string | null;
+            instagram?: string | null;
+            website?: string | null;
+            notes?: string | null;
+            /** @enum {string} */
+            status: "ACTIVE" | "ARCHIVED";
+            version: number;
+            /** Format: date-time */
+            archivedAt?: string | null;
+            /** Format: date-time */
+            createdAt: string;
+            /** Format: date-time */
+            updatedAt: string;
+            incomplete: boolean;
+            contacts: components["schemas"]["ContactAssociationDto"][];
+        };
+        ArtistPageDto: {
+            items: components["schemas"]["ArtistDto"][];
+            total: number;
+            limit: number;
+            offset: number;
+        };
+        CreateArtistDto: {
+            stageName?: string | null;
+            firstName?: string | null;
+            lastName?: string | null;
+            addressLine1?: string | null;
+            addressLine2?: string | null;
+            postalCode?: string | null;
+            city?: string | null;
+            state?: string | null;
+            countryCode?: string | null;
+            email?: string | null;
+            phone?: string | null;
+            instagram?: string | null;
+            website?: string | null;
+            notes?: string | null;
+        };
+        UpdateArtistDto: {
+            stageName?: string | null;
+            firstName?: string | null;
+            lastName?: string | null;
+            addressLine1?: string | null;
+            addressLine2?: string | null;
+            postalCode?: string | null;
+            city?: string | null;
+            state?: string | null;
+            countryCode?: string | null;
+            email?: string | null;
+            phone?: string | null;
+            instagram?: string | null;
+            website?: string | null;
+            notes?: string | null;
+            version: number;
+        };
+        UpdateEntityStatusDto: {
+            /** @enum {string} */
+            status: "ACTIVE" | "ARCHIVED";
+            version: number;
+        };
+        CreateContactAssociationDto: {
+            /** Format: uuid */
+            contactId: string;
+            roleIds: string[];
+        };
+        AssignAssociationRolesDto: {
+            roleIds: string[];
+            version: number;
+        };
+        LinkedEntityDto: {
+            /** Format: uuid */
+            id: string;
+            /** Format: uuid */
+            entityId: string;
+            name: string;
+            roles: components["schemas"]["MasterDataRoleDto"][];
+        };
+        ContactDto: {
+            /** Format: uuid */
+            id: string;
+            firstName?: string | null;
+            lastName?: string | null;
+            label?: string | null;
+            email?: string | null;
+            phone?: string | null;
+            mobile?: string | null;
+            /** @enum {string} */
+            status: "ACTIVE" | "ARCHIVED";
+            incomplete: boolean;
+            /** Format: uuid */
+            organizationId: string;
+            notes?: string | null;
+            version: number;
+            /** Format: date-time */
+            archivedAt?: string | null;
+            /** Format: date-time */
+            createdAt: string;
+            /** Format: date-time */
+            updatedAt: string;
+            artistLinks: components["schemas"]["LinkedEntityDto"][];
+            businessPartnerLinks: components["schemas"]["LinkedEntityDto"][];
+        };
+        ContactPageDto: {
+            items: components["schemas"]["ContactDto"][];
+            total: number;
+            limit: number;
+            offset: number;
+        };
+        CreateContactDto: {
+            firstName?: string | null;
+            lastName?: string | null;
+            label?: string | null;
+            email?: string | null;
+            phone?: string | null;
+            mobile?: string | null;
+            notes?: string | null;
+        };
+        UpdateContactDto: {
+            firstName?: string | null;
+            lastName?: string | null;
+            label?: string | null;
+            email?: string | null;
+            phone?: string | null;
+            mobile?: string | null;
+            notes?: string | null;
+            version: number;
+        };
+        BusinessPartnerDto: {
+            /** Format: uuid */
+            id: string;
+            /** Format: uuid */
+            organizationId: string;
+            companyName: string;
+            addressLine1?: string | null;
+            addressLine2?: string | null;
+            postalCode?: string | null;
+            city?: string | null;
+            state?: string | null;
+            countryCode?: string | null;
+            billingAddressLine1?: string | null;
+            billingAddressLine2?: string | null;
+            billingPostalCode?: string | null;
+            billingCity?: string | null;
+            billingState?: string | null;
+            billingCountryCode?: string | null;
+            vatId?: string | null;
+            email?: string | null;
+            phone?: string | null;
+            website?: string | null;
+            notes?: string | null;
+            /** @enum {string} */
+            status: "ACTIVE" | "ARCHIVED";
+            version: number;
+            /** Format: date-time */
+            archivedAt?: string | null;
+            /** Format: date-time */
+            createdAt: string;
+            /** Format: date-time */
+            updatedAt: string;
+            roles: components["schemas"]["MasterDataRoleDto"][];
+            contacts: components["schemas"]["ContactAssociationDto"][];
+        };
+        BusinessPartnerPageDto: {
+            items: components["schemas"]["BusinessPartnerDto"][];
+            total: number;
+            limit: number;
+            offset: number;
+        };
+        CreateBusinessPartnerDto: {
+            companyName?: string;
+            addressLine1?: string | null;
+            addressLine2?: string | null;
+            postalCode?: string | null;
+            city?: string | null;
+            state?: string | null;
+            countryCode?: string | null;
+            billingAddressLine1?: string | null;
+            billingAddressLine2?: string | null;
+            billingPostalCode?: string | null;
+            billingCity?: string | null;
+            billingState?: string | null;
+            billingCountryCode?: string | null;
+            vatId?: string | null;
+            email?: string | null;
+            phone?: string | null;
+            website?: string | null;
+            notes?: string | null;
+            /** @default [] */
+            roleIds: string[];
+        };
+        UpdateBusinessPartnerDto: {
+            companyName?: string;
+            addressLine1?: string | null;
+            addressLine2?: string | null;
+            postalCode?: string | null;
+            city?: string | null;
+            state?: string | null;
+            countryCode?: string | null;
+            billingAddressLine1?: string | null;
+            billingAddressLine2?: string | null;
+            billingPostalCode?: string | null;
+            billingCity?: string | null;
+            billingState?: string | null;
+            billingCountryCode?: string | null;
+            vatId?: string | null;
+            email?: string | null;
+            phone?: string | null;
+            website?: string | null;
+            notes?: string | null;
+            version: number;
+        };
+        AssignBusinessPartnerRolesDto: {
+            roleIds: string[];
+            version: number;
         };
         ServiceHealthDto: {
             /** @enum {string} */
@@ -1000,6 +1544,611 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["AcceptInvitationResultDto"];
+                };
+            };
+        };
+    };
+    MasterDataController_listArtists_v1: {
+        parameters: {
+            query?: {
+                q?: string;
+                status?: "ACTIVE" | "ARCHIVED" | "ALL";
+                incomplete?: boolean;
+                roleKey?: string;
+                limit?: number;
+                offset?: number;
+            };
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ArtistPageDto"];
+                };
+            };
+        };
+    };
+    MasterDataController_createArtist_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateArtistDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ArtistDto"];
+                };
+            };
+        };
+    };
+    MasterDataController_artist_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                artistId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ArtistDto"];
+                };
+            };
+        };
+    };
+    MasterDataController_updateArtist_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                artistId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateArtistDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ArtistDto"];
+                };
+            };
+        };
+    };
+    MasterDataController_setArtistStatus_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                artistId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateEntityStatusDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ArtistDto"];
+                };
+            };
+        };
+    };
+    MasterDataController_linkArtistContact_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                artistId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateContactAssociationDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ArtistDto"];
+                };
+            };
+        };
+    };
+    MasterDataController_unlinkArtistContact_v1: {
+        parameters: {
+            query: {
+                version: number;
+            };
+            header?: never;
+            path: {
+                associationId: string;
+                artistId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ArtistDto"];
+                };
+            };
+        };
+    };
+    MasterDataController_setArtistContactRoles_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                associationId: string;
+                artistId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["AssignAssociationRolesDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ArtistDto"];
+                };
+            };
+        };
+    };
+    MasterDataController_listContacts_v1: {
+        parameters: {
+            query?: {
+                q?: string;
+                status?: "ACTIVE" | "ARCHIVED" | "ALL";
+                incomplete?: boolean;
+                roleKey?: string;
+                limit?: number;
+                offset?: number;
+            };
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ContactPageDto"];
+                };
+            };
+        };
+    };
+    MasterDataController_createContact_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateContactDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ContactDto"];
+                };
+            };
+        };
+    };
+    MasterDataController_contact_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                contactId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ContactDto"];
+                };
+            };
+        };
+    };
+    MasterDataController_updateContact_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                contactId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateContactDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ContactDto"];
+                };
+            };
+        };
+    };
+    MasterDataController_setContactStatus_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                contactId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateEntityStatusDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ContactDto"];
+                };
+            };
+        };
+    };
+    MasterDataController_listBusinessPartners_v1: {
+        parameters: {
+            query?: {
+                q?: string;
+                status?: "ACTIVE" | "ARCHIVED" | "ALL";
+                incomplete?: boolean;
+                roleKey?: string;
+                limit?: number;
+                offset?: number;
+            };
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BusinessPartnerPageDto"];
+                };
+            };
+        };
+    };
+    MasterDataController_createBusinessPartner_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateBusinessPartnerDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BusinessPartnerDto"];
+                };
+            };
+        };
+    };
+    MasterDataController_businessPartner_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                businessPartnerId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BusinessPartnerDto"];
+                };
+            };
+        };
+    };
+    MasterDataController_updateBusinessPartner_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                businessPartnerId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateBusinessPartnerDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BusinessPartnerDto"];
+                };
+            };
+        };
+    };
+    MasterDataController_setBusinessPartnerStatus_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                businessPartnerId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateEntityStatusDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BusinessPartnerDto"];
+                };
+            };
+        };
+    };
+    MasterDataController_setBusinessPartnerRoles_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                businessPartnerId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["AssignBusinessPartnerRolesDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BusinessPartnerDto"];
+                };
+            };
+        };
+    };
+    MasterDataController_linkBusinessPartnerContact_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                businessPartnerId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateContactAssociationDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BusinessPartnerDto"];
+                };
+            };
+        };
+    };
+    MasterDataController_unlinkBusinessPartnerContact_v1: {
+        parameters: {
+            query: {
+                version: number;
+            };
+            header?: never;
+            path: {
+                associationId: string;
+                businessPartnerId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BusinessPartnerDto"];
+                };
+            };
+        };
+    };
+    MasterDataController_setBusinessPartnerContactRoles_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                associationId: string;
+                businessPartnerId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["AssignAssociationRolesDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BusinessPartnerDto"];
+                };
+            };
+        };
+    };
+    MasterDataController_contactRoles_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MasterDataRoleDto"][];
+                };
+            };
+        };
+    };
+    MasterDataController_businessPartnerRoles_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MasterDataRoleDto"][];
                 };
             };
         };

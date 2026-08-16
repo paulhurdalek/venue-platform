@@ -10,7 +10,7 @@ const require = createRequire(import.meta.url);
 const pnpmPackagePath = require.resolve('pnpm');
 const pnpmPackage = JSON.parse(readFileSync(pnpmPackagePath, 'utf8'));
 const pnpmCli = resolve(dirname(pnpmPackagePath), pnpmPackage.bin.pnpm);
-const projectName = `venue-platform-phase1-${process.pid}`;
+const projectName = `venue-platform-phase3-${process.pid}`;
 const marker = randomUUID();
 const composeArguments = ['compose', '--project-name', projectName, '--profile', 'test'];
 
@@ -57,7 +57,7 @@ try {
   run('docker', ['compose', 'version'], { capture: true });
 } catch (error) {
   const message = error instanceof Error ? error.message : String(error);
-  process.stderr.write(`Phase 1 container verification cannot start: ${message}\n`);
+  process.stderr.write(`Phase 3 container verification cannot start: ${message}\n`);
   process.exit(1);
 }
 
@@ -79,7 +79,7 @@ try {
   logStep(4, 'Building the internal workspace packages required by the API');
   pnpm(['packages:build']);
 
-  logStep(5, 'Running the real Phase 1 API integration suite');
+  logStep(5, 'Running the real Phase 1 and Phase 3 API integration suites');
   pnpm(['--filter', '@venue/api', 'test:integration'], testDatabaseEnvironment);
 
   logStep(6, 'Verifying development data survives container replacement');
@@ -150,12 +150,12 @@ try {
       '--file',
       `apps/${application}/Dockerfile`,
       '--tag',
-      `venue-${application}:phase1-verification`,
+      `venue-${application}:phase3-verification`,
       '.',
     );
   }
 
-  process.stdout.write('\nPhase 1 container verification passed.\n');
+  process.stdout.write('\nPhase 3 container verification passed.\n');
 } finally {
   run('docker', [...composeArguments, 'down', '--volumes', '--remove-orphans'], {
     allowFailure: true,

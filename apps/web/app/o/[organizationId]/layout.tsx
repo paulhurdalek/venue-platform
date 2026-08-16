@@ -39,6 +39,9 @@ export default async function OrganizationLayout({
     }
 
     const canViewTeam = hasPermission(membership, 'memberships.read');
+    const canViewArtists = hasPermission(membership, 'artists.read');
+    const canViewContacts = hasPermission(membership, 'contacts.read');
+    const canViewBusinessPartners = hasPermission(membership, 'business_partners.read');
     return (
       <div className="workspace-shell">
         <header className="workspace-header">
@@ -53,6 +56,11 @@ export default async function OrganizationLayout({
           </a>
           <nav aria-label="Hauptnavigation" className="workspace-nav">
             <a href={`/o/${organizationId}`}>Übersicht</a>
+            {canViewArtists ? <a href={`/o/${organizationId}/artists`}>Artists</a> : null}
+            {canViewContacts ? <a href={`/o/${organizationId}/contacts`}>Kontakte</a> : null}
+            {canViewBusinessPartners ? (
+              <a href={`/o/${organizationId}/business-partners`}>Geschäftspartner</a>
+            ) : null}
             <a href={`/o/${organizationId}/settings/organization`}>Organisation</a>
             <a href={`/o/${organizationId}/settings/location`}>Location</a>
             {canViewTeam ? <a href={`/o/${organizationId}/settings/team`}>Team</a> : null}

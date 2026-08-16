@@ -477,6 +477,16 @@ legend {
   background: #e9e8e2;
 }
 
+.button--danger {
+  color: white;
+  background: #8f342c;
+  border-color: #8f342c;
+}
+
+.button--danger:hover {
+  background: #752b25;
+}
+
 .button--small {
   min-height: 2.25rem;
   margin-top: 0.75rem;
@@ -666,6 +676,17 @@ legend {
   background: #f3dfdc;
 }
 
+.status-badge--warning {
+  color: #67430e;
+  background: #fff0cf;
+}
+
+.heading-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
 .detail-list {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -810,6 +831,133 @@ th {
   border-top: 1px solid var(--line);
 }
 
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: end;
+  margin-bottom: 1.5rem;
+}
+
+.filter-bar > label:not(.filter-checkbox) {
+  display: grid;
+  flex: 1 1 180px;
+  gap: 0.35rem;
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.filter-checkbox {
+  min-height: 2.8rem;
+  align-items: center;
+}
+
+.pagination {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 1.5rem;
+}
+
+.nested-grid,
+.address-fieldset .form-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.address-fieldset {
+  background: rgba(255, 255, 255, 0.45);
+}
+
+.form-actions {
+  margin-top: 0.75rem;
+}
+
+.association-create,
+.association-list,
+.usage-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.association-create {
+  margin-bottom: 1.5rem;
+}
+
+.association-create label {
+  display: grid;
+  gap: 0.38rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.association-search {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) auto;
+  gap: 0.75rem;
+  align-items: end;
+}
+
+.association-card,
+.usage-list li,
+.empty-state {
+  padding: 1rem;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 0.55rem;
+}
+
+.association-card > header {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.association-card h3,
+.association-card p,
+.empty-state {
+  margin: 0;
+}
+
+.association-card p,
+.empty-state {
+  color: var(--muted);
+}
+
+.usage-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.usage-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.danger-zone {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  justify-content: space-between;
+  border-color: #ddb5b0;
+}
+
+.danger-zone h2,
+.danger-zone p {
+  margin-bottom: 0.3rem;
+}
+
+.lifecycle-action {
+  display: grid;
+  gap: 0.75rem;
+  justify-items: end;
+}
+
 code {
   padding: 0.12rem 0.3rem;
   background: #e9e8e2;
@@ -839,7 +987,17 @@ code {
 @media (max-width: 620px) {
   .form-grid,
   .detail-list,
-  .member-card__columns {
+  .member-card__columns,
+  .usage-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .danger-zone {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .association-search {
     grid-template-columns: 1fr;
   }
 

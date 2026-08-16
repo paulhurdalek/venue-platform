@@ -16,10 +16,31 @@ export default async function OrganizationHomePage({
         <div>
           <p className="eyebrow">Arbeitsbereich</p>
           <h1>{membership.organizationName}</h1>
-          <p>Verwalten Sie hier die Stammdaten aus Phase 1.</p>
+          <p>Verwalten Sie Organisation, Betriebsort und die zentralen Stammdaten.</p>
         </div>
       </header>
       <div className="selection-grid selection-grid--compact">
+        {hasPermission(membership, 'artists.read') ? (
+          <a className="selection-card" href={`/o/${organizationId}/artists`}>
+            <span className="selection-card__label">Programm</span>
+            <strong>Artists</strong>
+            <span>Artists und ihre zentralen Kontaktbeziehungen verwalten.</span>
+          </a>
+        ) : null}
+        {hasPermission(membership, 'contacts.read') ? (
+          <a className="selection-card" href={`/o/${organizationId}/contacts`}>
+            <span className="selection-card__label">Adressbuch</span>
+            <strong>Kontakte</strong>
+            <span>Personen einmalig pflegen und mehrfach verknüpfen.</span>
+          </a>
+        ) : null}
+        {hasPermission(membership, 'business_partners.read') ? (
+          <a className="selection-card" href={`/o/${organizationId}/business-partners`}>
+            <span className="selection-card__label">Netzwerk</span>
+            <strong>Geschäftspartner</strong>
+            <span>Kunden, Veranstalter, Agenturen und Dienstleister verwalten.</span>
+          </a>
+        ) : null}
         <a className="selection-card" href={`/o/${organizationId}/settings/organization`}>
           <span className="selection-card__label">Stammdaten</span>
           <strong>Organisation</strong>
