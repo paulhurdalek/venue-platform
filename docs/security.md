@@ -36,6 +36,16 @@ Every business query includes `organization_id`. Organization-owned mapping tabl
 key and use composite foreign keys. Foreign and nonexistent tenant resources both return 404. UI
 visibility is convenience only; negative API tests prove backend enforcement.
 
+Phase 3 adds separate read, write and archive permissions for Artists, Contacts and Business
+Partners. The central guard resolves these concrete keys; role names never authorize a request.
+These records are organization-wide, so Location scope is not applicable. Association foreign keys
+repeat `organization_id`, preventing a Contact or owner from another tenant from being linked even
+through direct database access.
+
+Master-data audit writes share the mutation transaction. Metadata is deliberately allowlisted to
+IDs, role IDs, previous versions and changed field names. Raw names, addresses, emails, telephone
+numbers and notes are excluded.
+
 ## Dependency checks
 
 `pnpm security:audit` blocks high/critical production advisories. `pnpm install --frozen-lockfile`

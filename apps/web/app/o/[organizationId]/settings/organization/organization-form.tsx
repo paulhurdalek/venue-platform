@@ -7,11 +7,16 @@ import { useRouter } from 'next/navigation';
 
 import { apiErrorMessage, createBrowserApiClient } from '../../../../../src/api/browser';
 import { FormMessage } from '../../../../components/form-message';
+import {
+  EditCancelAction,
+  useDetailEdit,
+} from '../../../../components/master-data/editable-detail';
 
 type Organization = components['schemas']['OrganizationDto'];
 
 export function OrganizationForm({ organization }: { organization: Organization }) {
   const router = useRouter();
+  const detailEdit = useDetailEdit();
   const [message, setMessage] = useState<string>();
   const [pending, setPending] = useState(false);
 
@@ -40,7 +45,9 @@ export function OrganizationForm({ organization }: { organization: Organization 
       setPending(false);
       return;
     }
-    setMessage('Die Organisationsdaten wurden gespeichert.');
+    const success = 'Die Organisationsdaten wurden gespeichert.';
+    if (detailEdit) detailEdit.complete(success);
+    else setMessage(success);
     setPending(false);
     router.refresh();
   }
@@ -65,9 +72,12 @@ export function OrganizationForm({ organization }: { organization: Organization 
       </label>
       <div className="form-span">
         <FormMessage message={message} />
-        <button className="button" disabled={pending} type="submit">
-          {pending ? 'Speichern …' : 'Änderungen speichern'}
-        </button>
+        <div className="button-row form-actions">
+          <button className="button" disabled={pending} type="submit">
+            {pending ? 'Speichern …' : 'Änderungen speichern'}
+          </button>
+          <EditCancelAction fallbackHref={`/o/${organization.id}/settings/organization`} />
+        </div>
       </div>
     </form>
   );

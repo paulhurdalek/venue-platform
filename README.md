@@ -1,9 +1,9 @@
-# Venue Platform — Phase 1
+# Venue Platform — Phase 3
 
-This repository contains the secure identity and tenant foundation for a modular venue booking
-platform: email/password sign-in, database sessions, one-time setup, organizations, locations,
-memberships, role-based access, invitation links, and audit records. Later booking and event
-modules are deliberately absent.
+This repository contains the secure identity and tenant foundation plus organization-owned Artist,
+central Contact and Business Partner master data. It includes normalized role-bearing relations,
+permission-aware administration and privacy-conscious audit records. Booking and event modules are
+deliberately absent.
 
 ## Quick start
 
@@ -27,7 +27,8 @@ Open the one-time URL printed by `pnpm bootstrap:create` to create the first adm
 organization, and location. The command refuses to create a second installation or a second live
 setup link.
 
-Read [the Phase 1 guide](docs/phase-1.md) and
+Read [the Phase 1 guide](docs/phase-1.md), [the Phase 2 decision](docs/phase-2-decision.md),
+[the Phase 3 guide](docs/phase-3.md), and
 [the local development guide](docs/local-development.md) before making changes.
 The complete pinned toolchain is listed in [versions](docs/versions.md).
 Local verification evidence and the remaining container-only gate are recorded in

@@ -9,11 +9,7 @@ import type { TransactionClient } from '@venue/database';
 
 import { AuthService } from '../auth/auth.service.js';
 import { PrismaService } from '../database/prisma.service.js';
-import {
-  PERMISSION_CATALOG,
-  READ_ONLY_PERMISSION_KEYS,
-  STANDARD_ROLES,
-} from '../security/security.constants.js';
+import { PERMISSION_CATALOG, STANDARD_ROLES } from '../security/security.constants.js';
 import {
   bootstrapAllowed,
   generateOpaqueToken,
@@ -215,7 +211,7 @@ export class SetupService {
       if (definition.key === 'administrator') administratorRoleId = role.id;
       const assignedKeys = definition.allPermissions
         ? PERMISSION_CATALOG.map(({ key }) => key)
-        : READ_ONLY_PERMISSION_KEYS;
+        : [...definition.permissionKeys];
       await transaction.rolePermission.createMany({
         data: assignedKeys.map((key) => ({
           organizationId,

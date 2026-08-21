@@ -131,3 +131,73 @@ export type InvitationLocation = Prisma.InvitationLocationModel
  * 
  */
 export type AuditLog = Prisma.AuditLogModel
+/**
+ * Model Artist
+ * 
+ */
+export type Artist = Prisma.ArtistModel
+/**
+ * Model Contact
+ * 
+ */
+export type Contact = Prisma.ContactModel
+/**
+ * Model ContactRole
+ * 
+ */
+export type ContactRole = Prisma.ContactRoleModel
+/**
+ * Model ArtistContact
+ * 
+ */
+export type ArtistContact = Prisma.ArtistContactModel
+/**
+ * Model ArtistContactRole
+ * 
+ */
+export type ArtistContactRole = Prisma.ArtistContactRoleModel
+/**
+ * Model BusinessPartner
+ * 
+ */
+export type BusinessPartner = Prisma.BusinessPartnerModel
+/**
+ * Model BusinessPartnerRole
+ * 
+ */
+export type BusinessPartnerRole = Prisma.BusinessPartnerRoleModel
+/**
+ * Model BusinessPartnerRoleAssignment
+ * 
+ */
+export type BusinessPartnerRoleAssignment = Prisma.BusinessPartnerRoleAssignmentModel
+/**
+ * Model BusinessPartnerContact
+ * 
+ */
+export type BusinessPartnerContact = Prisma.BusinessPartnerContactModel
+/**
+ * Model BusinessPartnerContactRole
+ * 
+ */
+export type BusinessPartnerContactRole = Prisma.BusinessPartnerContactRoleModel
+/**
+ * Model ArtistBusinessPartner
+ * 
+ */
+export type ArtistBusinessPartner = Prisma.ArtistBusinessPartnerModel
+/**
+ * Model ArtistBusinessPartnerRole
+ * 
+ */
+export type ArtistBusinessPartnerRole = Prisma.ArtistBusinessPartnerRoleModel
+/**
+ * Model ArtistBusinessPartnerContact
+ * 
+ */
+export type ArtistBusinessPartnerContact = Prisma.ArtistBusinessPartnerContactModel
+/**
+ * Model ArtistBusinessPartnerContactRole
+ * 
+ */
+export type ArtistBusinessPartnerContactRole = Prisma.ArtistBusinessPartnerContactRoleModel

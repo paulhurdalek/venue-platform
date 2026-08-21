@@ -738,6 +738,1868 @@
         ]
       }
     },
+    "/api/v1/organizations/{organizationId}/artists": {
+      "get": {
+        "operationId": "MasterDataController_listArtists_v1",
+        "parameters": [
+          {
+            "name": "q",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "maxLength": 200,
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "ACTIVE",
+                "ARCHIVED",
+                "ALL"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "incomplete",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "roleKey",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "maxLength": 80,
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "maximum": 100,
+              "type": "number"
+            }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 0,
+              "type": "number"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArtistPageDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "master data"
+        ]
+      },
+      "post": {
+        "operationId": "MasterDataController_createArtist_v1",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateArtistDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArtistDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "master data"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/artists/{artistId}": {
+      "get": {
+        "operationId": "MasterDataController_artist_v1",
+        "parameters": [
+          {
+            "name": "artistId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArtistDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "master data"
+        ]
+      },
+      "patch": {
+        "operationId": "MasterDataController_updateArtist_v1",
+        "parameters": [
+          {
+            "name": "artistId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateArtistDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArtistDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "master data"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/artists/{artistId}/status": {
+      "patch": {
+        "operationId": "MasterDataController_setArtistStatus_v1",
+        "parameters": [
+          {
+            "name": "artistId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEntityStatusDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArtistDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "master data"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/artists/{artistId}/contacts": {
+      "post": {
+        "operationId": "MasterDataController_linkArtistContact_v1",
+        "parameters": [
+          {
+            "name": "artistId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateContactAssociationDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArtistDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "master data"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/artists/{artistId}/contacts/inline": {
+      "post": {
+        "operationId": "MasterDataController_createArtistContact_v1",
+        "parameters": [
+          {
+            "name": "artistId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateInlineContactAssociationDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArtistDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "master data"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/artists/{artistId}/contacts/{associationId}": {
+      "delete": {
+        "operationId": "MasterDataController_unlinkArtistContact_v1",
+        "parameters": [
+          {
+            "name": "version",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "type": "number"
+            }
+          },
+          {
+            "name": "associationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "artistId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArtistDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "master data"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/artists/{artistId}/contacts/{associationId}/roles": {
+      "put": {
+        "operationId": "MasterDataController_setArtistContactRoles_v1",
+        "parameters": [
+          {
+            "name": "associationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "artistId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssignAssociationRolesDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArtistDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "master data"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/artists/{artistId}/business-partners": {
+      "post": {
+        "operationId": "MasterDataController_linkArtistBusinessPartner_v1",
+        "parameters": [
+          {
+            "name": "artistId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateArtistBusinessPartnerDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArtistDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "master data"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/artists/{artistId}/business-partners/inline-contact": {
+      "post": {
+        "operationId": "MasterDataController_linkArtistBusinessPartnerWithContact_v1",
+        "parameters": [
+          {
+            "name": "artistId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateArtistBusinessPartnerWithContactDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArtistDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "master data"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/artists/{artistId}/business-partners/{associationId}/roles": {
+      "put": {
+        "operationId": "MasterDataController_setArtistBusinessPartnerRoles_v1",
+        "parameters": [
+          {
+            "name": "associationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "artistId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssignBusinessPartnerRolesDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArtistDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "master data"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/artists/{artistId}/business-partners/{associationId}": {
+      "delete": {
+        "operationId": "MasterDataController_unlinkArtistBusinessPartner_v1",
+        "parameters": [
+          {
+            "name": "version",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "type": "number"
+            }
+          },
+          {
+            "name": "associationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "artistId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArtistDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "master data"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/artists/{artistId}/business-partners/{associationId}/contacts": {
+      "post": {
+        "operationId": "MasterDataController_addArtistRepresentative_v1",
+        "parameters": [
+          {
+            "name": "associationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "artistId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateArtistRepresentativeDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArtistDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "master data"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/artists/{artistId}/business-partners/{associationId}/contacts/inline": {
+      "post": {
+        "operationId": "MasterDataController_addArtistRepresentativeWithContact_v1",
+        "parameters": [
+          {
+            "name": "associationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "artistId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateArtistContactReferenceDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArtistDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "master data"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/artists/{artistId}/business-partners/{associationId}/contacts/{representativeId}": {
+      "put": {
+        "operationId": "MasterDataController_updateArtistRepresentative_v1",
+        "parameters": [
+          {
+            "name": "representativeId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "associationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "artistId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateArtistRepresentativeDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArtistDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "master data"
+        ]
+      },
+      "delete": {
+        "operationId": "MasterDataController_unlinkArtistRepresentative_v1",
+        "parameters": [
+          {
+            "name": "version",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "type": "number"
+            }
+          },
+          {
+            "name": "representativeId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "associationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "artistId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArtistDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "master data"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/contacts": {
+      "get": {
+        "operationId": "MasterDataController_listContacts_v1",
+        "parameters": [
+          {
+            "name": "q",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "maxLength": 200,
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "ACTIVE",
+                "ARCHIVED",
+                "ALL"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "incomplete",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "roleKey",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "maxLength": 80,
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "maximum": 100,
+              "type": "number"
+            }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 0,
+              "type": "number"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContactPageDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "master data"
+        ]
+      },
+      "post": {
+        "operationId": "MasterDataController_createContact_v1",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateContactDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContactDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "master data"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/contacts/matches": {
+      "post": {
+        "operationId": "MasterDataController_contactMatches_v1",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContactMatchInputDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContactDuplicateMatchDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "master data"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/contacts/{contactId}": {
+      "get": {
+        "operationId": "MasterDataController_contact_v1",
+        "parameters": [
+          {
+            "name": "contactId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContactDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "master data"
+        ]
+      },
+      "patch": {
+        "operationId": "MasterDataController_updateContact_v1",
+        "parameters": [
+          {
+            "name": "contactId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateContactDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContactDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "master data"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/contacts/{contactId}/status": {
+      "patch": {
+        "operationId": "MasterDataController_setContactStatus_v1",
+        "parameters": [
+          {
+            "name": "contactId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEntityStatusDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContactDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "master data"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/business-partners": {
+      "get": {
+        "operationId": "MasterDataController_listBusinessPartners_v1",
+        "parameters": [
+          {
+            "name": "q",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "maxLength": 200,
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "ACTIVE",
+                "ARCHIVED",
+                "ALL"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "incomplete",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "roleKey",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "maxLength": 80,
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "maximum": 100,
+              "type": "number"
+            }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 0,
+              "type": "number"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BusinessPartnerPageDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "master data"
+        ]
+      },
+      "post": {
+        "operationId": "MasterDataController_createBusinessPartner_v1",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBusinessPartnerDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BusinessPartnerDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "master data"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/business-partners/{businessPartnerId}": {
+      "get": {
+        "operationId": "MasterDataController_businessPartner_v1",
+        "parameters": [
+          {
+            "name": "businessPartnerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BusinessPartnerDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "master data"
+        ]
+      },
+      "patch": {
+        "operationId": "MasterDataController_updateBusinessPartner_v1",
+        "parameters": [
+          {
+            "name": "businessPartnerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateBusinessPartnerDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BusinessPartnerDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "master data"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/business-partners/{businessPartnerId}/status": {
+      "patch": {
+        "operationId": "MasterDataController_setBusinessPartnerStatus_v1",
+        "parameters": [
+          {
+            "name": "businessPartnerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEntityStatusDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BusinessPartnerDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "master data"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/business-partners/{businessPartnerId}/roles": {
+      "put": {
+        "operationId": "MasterDataController_setBusinessPartnerRoles_v1",
+        "parameters": [
+          {
+            "name": "businessPartnerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssignBusinessPartnerRolesDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BusinessPartnerDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "master data"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/business-partners/{businessPartnerId}/contacts": {
+      "post": {
+        "operationId": "MasterDataController_linkBusinessPartnerContact_v1",
+        "parameters": [
+          {
+            "name": "businessPartnerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateContactAssociationDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BusinessPartnerDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "master data"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/business-partners/{businessPartnerId}/contacts/inline": {
+      "post": {
+        "operationId": "MasterDataController_createBusinessPartnerContact_v1",
+        "parameters": [
+          {
+            "name": "businessPartnerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateInlineContactAssociationDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BusinessPartnerDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "master data"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/business-partners/{businessPartnerId}/contacts/{associationId}": {
+      "delete": {
+        "operationId": "MasterDataController_unlinkBusinessPartnerContact_v1",
+        "parameters": [
+          {
+            "name": "version",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "type": "number"
+            }
+          },
+          {
+            "name": "associationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "businessPartnerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BusinessPartnerDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "master data"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/business-partners/{businessPartnerId}/contacts/{associationId}/roles": {
+      "put": {
+        "operationId": "MasterDataController_setBusinessPartnerContactRoles_v1",
+        "parameters": [
+          {
+            "name": "associationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "businessPartnerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssignAssociationRolesDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BusinessPartnerDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "master data"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/contact-roles": {
+      "get": {
+        "operationId": "MasterDataController_contactRoles_v1",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MasterDataRoleDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "master data"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/business-partner-roles": {
+      "get": {
+        "operationId": "MasterDataController_businessPartnerRoles_v1",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MasterDataRoleDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "master data"
+        ]
+      }
+    },
     "/api/v1/health": {
       "get": {
         "operationId": "HealthController_get_v1",
@@ -773,7 +2635,7 @@
   },
   "info": {
     "title": "Venue Platform API",
-    "description": "Phase 1 organization, location and authorization API",
+    "description": "Venue Platform organization, authorization and master-data API",
     "version": "1.0.0",
     "contact": {}
   },
@@ -1608,6 +3470,1321 @@
           "organizationId",
           "membershipId",
           "createdUser"
+        ]
+      },
+      "ContactSummaryDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "firstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "label": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "phone": {
+            "type": "string",
+            "nullable": true
+          },
+          "mobile": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "ARCHIVED"
+            ]
+          },
+          "incomplete": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "status",
+          "incomplete"
+        ]
+      },
+      "MasterDataRoleDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "key": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "key",
+          "name"
+        ]
+      },
+      "ContactAssociationDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "version": {
+            "type": "number"
+          },
+          "contact": {
+            "$ref": "#/components/schemas/ContactSummaryDto"
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MasterDataRoleDto"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "version",
+          "contact",
+          "roles"
+        ]
+      },
+      "BusinessPartnerSummaryDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "companyName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "phone": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "ARCHIVED"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "companyName",
+          "status"
+        ]
+      },
+      "ArtistRepresentativeDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "version": {
+            "type": "number"
+          },
+          "businessPartnerContactId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "isPrimary": {
+            "type": "boolean"
+          },
+          "contact": {
+            "$ref": "#/components/schemas/ContactSummaryDto"
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MasterDataRoleDto"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "version",
+          "businessPartnerContactId",
+          "isPrimary",
+          "contact",
+          "roles"
+        ]
+      },
+      "ArtistBusinessPartnerAssociationDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "version": {
+            "type": "number"
+          },
+          "businessPartner": {
+            "$ref": "#/components/schemas/BusinessPartnerSummaryDto"
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MasterDataRoleDto"
+            }
+          },
+          "representatives": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ArtistRepresentativeDto"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "version",
+          "businessPartner",
+          "roles",
+          "representatives"
+        ]
+      },
+      "ArtistDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "organizationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "stageName": {
+            "type": "string",
+            "nullable": true
+          },
+          "firstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressLine1": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressLine2": {
+            "type": "string",
+            "nullable": true
+          },
+          "postalCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "city": {
+            "type": "string",
+            "nullable": true
+          },
+          "state": {
+            "type": "string",
+            "nullable": true
+          },
+          "countryCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "phone": {
+            "type": "string",
+            "nullable": true
+          },
+          "instagram": {
+            "type": "string",
+            "nullable": true
+          },
+          "website": {
+            "type": "string",
+            "nullable": true
+          },
+          "notes": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "ARCHIVED"
+            ]
+          },
+          "version": {
+            "type": "number"
+          },
+          "archivedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "incomplete": {
+            "type": "boolean"
+          },
+          "contacts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContactAssociationDto"
+            }
+          },
+          "businessPartners": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ArtistBusinessPartnerAssociationDto"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "organizationId",
+          "status",
+          "version",
+          "createdAt",
+          "updatedAt",
+          "incomplete",
+          "contacts",
+          "businessPartners"
+        ]
+      },
+      "ArtistPageDto": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ArtistDto"
+            }
+          },
+          "total": {
+            "type": "number"
+          },
+          "limit": {
+            "type": "number"
+          },
+          "offset": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "items",
+          "total",
+          "limit",
+          "offset"
+        ]
+      },
+      "CreateArtistDto": {
+        "type": "object",
+        "properties": {
+          "stageName": {
+            "type": "string",
+            "nullable": true
+          },
+          "firstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressLine1": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressLine2": {
+            "type": "string",
+            "nullable": true
+          },
+          "postalCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "city": {
+            "type": "string",
+            "nullable": true
+          },
+          "state": {
+            "type": "string",
+            "nullable": true
+          },
+          "countryCode": {
+            "type": "string",
+            "nullable": true,
+            "pattern": "^[A-Z]{2}$"
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "phone": {
+            "type": "string",
+            "nullable": true
+          },
+          "instagram": {
+            "type": "string",
+            "nullable": true
+          },
+          "website": {
+            "type": "string",
+            "nullable": true
+          },
+          "notes": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "UpdateArtistDto": {
+        "type": "object",
+        "properties": {
+          "stageName": {
+            "type": "string",
+            "nullable": true
+          },
+          "firstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressLine1": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressLine2": {
+            "type": "string",
+            "nullable": true
+          },
+          "postalCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "city": {
+            "type": "string",
+            "nullable": true
+          },
+          "state": {
+            "type": "string",
+            "nullable": true
+          },
+          "countryCode": {
+            "type": "string",
+            "nullable": true,
+            "pattern": "^[A-Z]{2}$"
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "phone": {
+            "type": "string",
+            "nullable": true
+          },
+          "instagram": {
+            "type": "string",
+            "nullable": true
+          },
+          "website": {
+            "type": "string",
+            "nullable": true
+          },
+          "notes": {
+            "type": "string",
+            "nullable": true
+          },
+          "version": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "version"
+        ]
+      },
+      "UpdateEntityStatusDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "ARCHIVED"
+            ]
+          },
+          "version": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "status",
+          "version"
+        ]
+      },
+      "CreateContactAssociationDto": {
+        "type": "object",
+        "properties": {
+          "contactId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "roleIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        },
+        "required": [
+          "contactId",
+          "roleIds"
+        ]
+      },
+      "CreateContactDto": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "label": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "phone": {
+            "type": "string",
+            "nullable": true
+          },
+          "mobile": {
+            "type": "string",
+            "nullable": true
+          },
+          "notes": {
+            "type": "string",
+            "nullable": true
+          },
+          "allowNameDuplicate": {
+            "type": "boolean"
+          }
+        }
+      },
+      "CreateInlineContactAssociationDto": {
+        "type": "object",
+        "properties": {
+          "contact": {
+            "$ref": "#/components/schemas/CreateContactDto"
+          },
+          "roleIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        },
+        "required": [
+          "contact",
+          "roleIds"
+        ]
+      },
+      "AssignAssociationRolesDto": {
+        "type": "object",
+        "properties": {
+          "roleIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "version": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "roleIds",
+          "version"
+        ]
+      },
+      "CreateArtistRepresentativeDto": {
+        "type": "object",
+        "properties": {
+          "businessPartnerContactId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "roleIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "isPrimary": {
+            "type": "boolean",
+            "default": false
+          }
+        },
+        "required": [
+          "businessPartnerContactId",
+          "roleIds"
+        ]
+      },
+      "CreateArtistBusinessPartnerDto": {
+        "type": "object",
+        "properties": {
+          "businessPartnerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "roleIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "representatives": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateArtistRepresentativeDto"
+            }
+          }
+        },
+        "required": [
+          "businessPartnerId",
+          "roleIds",
+          "representatives"
+        ]
+      },
+      "CreateArtistBusinessPartnerWithContactDto": {
+        "type": "object",
+        "properties": {
+          "contactId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "contact": {
+            "$ref": "#/components/schemas/CreateContactDto"
+          },
+          "roleIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "isPrimary": {
+            "type": "boolean",
+            "default": false
+          },
+          "businessPartnerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "businessPartnerRoleIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        },
+        "required": [
+          "roleIds",
+          "businessPartnerId",
+          "businessPartnerRoleIds"
+        ]
+      },
+      "AssignBusinessPartnerRolesDto": {
+        "type": "object",
+        "properties": {
+          "roleIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "version": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "roleIds",
+          "version"
+        ]
+      },
+      "CreateArtistContactReferenceDto": {
+        "type": "object",
+        "properties": {
+          "contactId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "contact": {
+            "$ref": "#/components/schemas/CreateContactDto"
+          },
+          "roleIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "isPrimary": {
+            "type": "boolean",
+            "default": false
+          }
+        },
+        "required": [
+          "roleIds"
+        ]
+      },
+      "UpdateArtistRepresentativeDto": {
+        "type": "object",
+        "properties": {
+          "roleIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "isPrimary": {
+            "type": "boolean"
+          },
+          "version": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "roleIds",
+          "isPrimary",
+          "version"
+        ]
+      },
+      "LinkedEntityDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "entityId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MasterDataRoleDto"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "entityId",
+          "name",
+          "roles"
+        ]
+      },
+      "ContactDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "firstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "label": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "phone": {
+            "type": "string",
+            "nullable": true
+          },
+          "mobile": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "ARCHIVED"
+            ]
+          },
+          "incomplete": {
+            "type": "boolean"
+          },
+          "organizationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "notes": {
+            "type": "string",
+            "nullable": true
+          },
+          "version": {
+            "type": "number"
+          },
+          "archivedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "artistLinks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LinkedEntityDto"
+            }
+          },
+          "businessPartnerLinks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LinkedEntityDto"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "status",
+          "incomplete",
+          "organizationId",
+          "version",
+          "createdAt",
+          "updatedAt",
+          "artistLinks",
+          "businessPartnerLinks"
+        ]
+      },
+      "ContactPageDto": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContactDto"
+            }
+          },
+          "total": {
+            "type": "number"
+          },
+          "limit": {
+            "type": "number"
+          },
+          "offset": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "items",
+          "total",
+          "limit",
+          "offset"
+        ]
+      },
+      "ContactMatchInputDto": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "label": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "phone": {
+            "type": "string",
+            "nullable": true
+          },
+          "mobile": {
+            "type": "string",
+            "nullable": true
+          },
+          "notes": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "ContactDuplicateMatchDto": {
+        "type": "object",
+        "properties": {
+          "contact": {
+            "$ref": "#/components/schemas/ContactSummaryDto"
+          },
+          "reasons": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "EMAIL",
+                "PHONE",
+                "NAME"
+              ]
+            }
+          },
+          "strength": {
+            "type": "string",
+            "enum": [
+              "STRONG",
+              "WEAK"
+            ]
+          }
+        },
+        "required": [
+          "contact",
+          "reasons",
+          "strength"
+        ]
+      },
+      "UpdateContactDto": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "label": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "phone": {
+            "type": "string",
+            "nullable": true
+          },
+          "mobile": {
+            "type": "string",
+            "nullable": true
+          },
+          "notes": {
+            "type": "string",
+            "nullable": true
+          },
+          "version": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "version"
+        ]
+      },
+      "BusinessPartnerDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "organizationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "companyName": {
+            "type": "string"
+          },
+          "addressLine1": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressLine2": {
+            "type": "string",
+            "nullable": true
+          },
+          "postalCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "city": {
+            "type": "string",
+            "nullable": true
+          },
+          "state": {
+            "type": "string",
+            "nullable": true
+          },
+          "countryCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "billingAddressLine1": {
+            "type": "string",
+            "nullable": true
+          },
+          "billingAddressLine2": {
+            "type": "string",
+            "nullable": true
+          },
+          "billingPostalCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "billingCity": {
+            "type": "string",
+            "nullable": true
+          },
+          "billingState": {
+            "type": "string",
+            "nullable": true
+          },
+          "billingCountryCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "vatId": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "phone": {
+            "type": "string",
+            "nullable": true
+          },
+          "website": {
+            "type": "string",
+            "nullable": true
+          },
+          "notes": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "ARCHIVED"
+            ]
+          },
+          "version": {
+            "type": "number"
+          },
+          "archivedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MasterDataRoleDto"
+            }
+          },
+          "contacts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContactAssociationDto"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "organizationId",
+          "companyName",
+          "status",
+          "version",
+          "createdAt",
+          "updatedAt",
+          "roles",
+          "contacts"
+        ]
+      },
+      "BusinessPartnerPageDto": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BusinessPartnerDto"
+            }
+          },
+          "total": {
+            "type": "number"
+          },
+          "limit": {
+            "type": "number"
+          },
+          "offset": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "items",
+          "total",
+          "limit",
+          "offset"
+        ]
+      },
+      "CreateBusinessPartnerDto": {
+        "type": "object",
+        "properties": {
+          "companyName": {
+            "type": "string"
+          },
+          "addressLine1": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressLine2": {
+            "type": "string",
+            "nullable": true
+          },
+          "postalCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "city": {
+            "type": "string",
+            "nullable": true
+          },
+          "state": {
+            "type": "string",
+            "nullable": true
+          },
+          "countryCode": {
+            "type": "string",
+            "nullable": true,
+            "pattern": "^[A-Z]{2}$"
+          },
+          "billingAddressLine1": {
+            "type": "string",
+            "nullable": true
+          },
+          "billingAddressLine2": {
+            "type": "string",
+            "nullable": true
+          },
+          "billingPostalCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "billingCity": {
+            "type": "string",
+            "nullable": true
+          },
+          "billingState": {
+            "type": "string",
+            "nullable": true
+          },
+          "billingCountryCode": {
+            "type": "string",
+            "nullable": true,
+            "pattern": "^[A-Z]{2}$"
+          },
+          "vatId": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "phone": {
+            "type": "string",
+            "nullable": true
+          },
+          "website": {
+            "type": "string",
+            "nullable": true
+          },
+          "notes": {
+            "type": "string",
+            "nullable": true
+          },
+          "roleIds": {
+            "default": [],
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        }
+      },
+      "UpdateBusinessPartnerDto": {
+        "type": "object",
+        "properties": {
+          "companyName": {
+            "type": "string"
+          },
+          "addressLine1": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressLine2": {
+            "type": "string",
+            "nullable": true
+          },
+          "postalCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "city": {
+            "type": "string",
+            "nullable": true
+          },
+          "state": {
+            "type": "string",
+            "nullable": true
+          },
+          "countryCode": {
+            "type": "string",
+            "nullable": true,
+            "pattern": "^[A-Z]{2}$"
+          },
+          "billingAddressLine1": {
+            "type": "string",
+            "nullable": true
+          },
+          "billingAddressLine2": {
+            "type": "string",
+            "nullable": true
+          },
+          "billingPostalCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "billingCity": {
+            "type": "string",
+            "nullable": true
+          },
+          "billingState": {
+            "type": "string",
+            "nullable": true
+          },
+          "billingCountryCode": {
+            "type": "string",
+            "nullable": true,
+            "pattern": "^[A-Z]{2}$"
+          },
+          "vatId": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "phone": {
+            "type": "string",
+            "nullable": true
+          },
+          "website": {
+            "type": "string",
+            "nullable": true
+          },
+          "notes": {
+            "type": "string",
+            "nullable": true
+          },
+          "version": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "version"
         ]
       },
       "ServiceHealthDto": {

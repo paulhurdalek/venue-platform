@@ -68,7 +68,21 @@ export const ModelName = {
   Invitation: 'Invitation',
   InvitationRole: 'InvitationRole',
   InvitationLocation: 'InvitationLocation',
-  AuditLog: 'AuditLog'
+  AuditLog: 'AuditLog',
+  Artist: 'Artist',
+  Contact: 'Contact',
+  ContactRole: 'ContactRole',
+  ArtistContact: 'ArtistContact',
+  ArtistContactRole: 'ArtistContactRole',
+  BusinessPartner: 'BusinessPartner',
+  BusinessPartnerRole: 'BusinessPartnerRole',
+  BusinessPartnerRoleAssignment: 'BusinessPartnerRoleAssignment',
+  BusinessPartnerContact: 'BusinessPartnerContact',
+  BusinessPartnerContactRole: 'BusinessPartnerContactRole',
+  ArtistBusinessPartner: 'ArtistBusinessPartner',
+  ArtistBusinessPartnerRole: 'ArtistBusinessPartnerRole',
+  ArtistBusinessPartnerContact: 'ArtistBusinessPartnerContact',
+  ArtistBusinessPartnerContactRole: 'ArtistBusinessPartnerContactRole'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -328,6 +342,206 @@ export const AuditLogScalarFieldEnum = {
 } as const
 
 export type AuditLogScalarFieldEnum = (typeof AuditLogScalarFieldEnum)[keyof typeof AuditLogScalarFieldEnum]
+
+
+export const ArtistScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  stageName: 'stageName',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  addressLine1: 'addressLine1',
+  addressLine2: 'addressLine2',
+  postalCode: 'postalCode',
+  city: 'city',
+  state: 'state',
+  countryCode: 'countryCode',
+  email: 'email',
+  phone: 'phone',
+  instagram: 'instagram',
+  website: 'website',
+  notes: 'notes',
+  status: 'status',
+  version: 'version',
+  archivedAt: 'archivedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ArtistScalarFieldEnum = (typeof ArtistScalarFieldEnum)[keyof typeof ArtistScalarFieldEnum]
+
+
+export const ContactScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  label: 'label',
+  email: 'email',
+  phone: 'phone',
+  mobile: 'mobile',
+  notes: 'notes',
+  status: 'status',
+  version: 'version',
+  archivedAt: 'archivedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ContactScalarFieldEnum = (typeof ContactScalarFieldEnum)[keyof typeof ContactScalarFieldEnum]
+
+
+export const ContactRoleScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  name: 'name'
+} as const
+
+export type ContactRoleScalarFieldEnum = (typeof ContactRoleScalarFieldEnum)[keyof typeof ContactRoleScalarFieldEnum]
+
+
+export const ArtistContactScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  artistId: 'artistId',
+  contactId: 'contactId',
+  version: 'version',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ArtistContactScalarFieldEnum = (typeof ArtistContactScalarFieldEnum)[keyof typeof ArtistContactScalarFieldEnum]
+
+
+export const ArtistContactRoleScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  artistContactId: 'artistContactId',
+  roleId: 'roleId'
+} as const
+
+export type ArtistContactRoleScalarFieldEnum = (typeof ArtistContactRoleScalarFieldEnum)[keyof typeof ArtistContactRoleScalarFieldEnum]
+
+
+export const BusinessPartnerScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  companyName: 'companyName',
+  addressLine1: 'addressLine1',
+  addressLine2: 'addressLine2',
+  postalCode: 'postalCode',
+  city: 'city',
+  state: 'state',
+  countryCode: 'countryCode',
+  billingAddressLine1: 'billingAddressLine1',
+  billingAddressLine2: 'billingAddressLine2',
+  billingPostalCode: 'billingPostalCode',
+  billingCity: 'billingCity',
+  billingState: 'billingState',
+  billingCountryCode: 'billingCountryCode',
+  vatId: 'vatId',
+  email: 'email',
+  phone: 'phone',
+  website: 'website',
+  notes: 'notes',
+  status: 'status',
+  version: 'version',
+  archivedAt: 'archivedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BusinessPartnerScalarFieldEnum = (typeof BusinessPartnerScalarFieldEnum)[keyof typeof BusinessPartnerScalarFieldEnum]
+
+
+export const BusinessPartnerRoleScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  name: 'name'
+} as const
+
+export type BusinessPartnerRoleScalarFieldEnum = (typeof BusinessPartnerRoleScalarFieldEnum)[keyof typeof BusinessPartnerRoleScalarFieldEnum]
+
+
+export const BusinessPartnerRoleAssignmentScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  businessPartnerId: 'businessPartnerId',
+  roleId: 'roleId'
+} as const
+
+export type BusinessPartnerRoleAssignmentScalarFieldEnum = (typeof BusinessPartnerRoleAssignmentScalarFieldEnum)[keyof typeof BusinessPartnerRoleAssignmentScalarFieldEnum]
+
+
+export const BusinessPartnerContactScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  businessPartnerId: 'businessPartnerId',
+  contactId: 'contactId',
+  version: 'version',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BusinessPartnerContactScalarFieldEnum = (typeof BusinessPartnerContactScalarFieldEnum)[keyof typeof BusinessPartnerContactScalarFieldEnum]
+
+
+export const BusinessPartnerContactRoleScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  businessPartnerContactId: 'businessPartnerContactId',
+  roleId: 'roleId'
+} as const
+
+export type BusinessPartnerContactRoleScalarFieldEnum = (typeof BusinessPartnerContactRoleScalarFieldEnum)[keyof typeof BusinessPartnerContactRoleScalarFieldEnum]
+
+
+export const ArtistBusinessPartnerScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  artistId: 'artistId',
+  businessPartnerId: 'businessPartnerId',
+  version: 'version',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ArtistBusinessPartnerScalarFieldEnum = (typeof ArtistBusinessPartnerScalarFieldEnum)[keyof typeof ArtistBusinessPartnerScalarFieldEnum]
+
+
+export const ArtistBusinessPartnerRoleScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  artistBusinessPartnerId: 'artistBusinessPartnerId',
+  roleId: 'roleId'
+} as const
+
+export type ArtistBusinessPartnerRoleScalarFieldEnum = (typeof ArtistBusinessPartnerRoleScalarFieldEnum)[keyof typeof ArtistBusinessPartnerRoleScalarFieldEnum]
+
+
+export const ArtistBusinessPartnerContactScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  artistBusinessPartnerId: 'artistBusinessPartnerId',
+  businessPartnerId: 'businessPartnerId',
+  businessPartnerContactId: 'businessPartnerContactId',
+  isPrimary: 'isPrimary',
+  version: 'version',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ArtistBusinessPartnerContactScalarFieldEnum = (typeof ArtistBusinessPartnerContactScalarFieldEnum)[keyof typeof ArtistBusinessPartnerContactScalarFieldEnum]
+
+
+export const ArtistBusinessPartnerContactRoleScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  artistBusinessPartnerContactId: 'artistBusinessPartnerContactId',
+  roleId: 'roleId'
+} as const
+
+export type ArtistBusinessPartnerContactRoleScalarFieldEnum = (typeof ArtistBusinessPartnerContactRoleScalarFieldEnum)[keyof typeof ArtistBusinessPartnerContactRoleScalarFieldEnum]
 
 
 export const SortOrder = {

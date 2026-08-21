@@ -124,21 +124,24 @@ model BootstrapToken {
 }
 
 model Organization {
-  id           String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  id           String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name         String
-  legalName    String?      @map("legal_name")
+  legalName    String?           @map("legal_name")
   email        String?
   phone        String?
-  status       EntityStatus @default(ACTIVE)
-  version      Int          @default(1)
-  archivedAt   DateTime?    @map("archived_at")
-  createdAt    DateTime     @default(now()) @map("created_at")
-  updatedAt    DateTime     @updatedAt @map("updated_at")
+  status       EntityStatus      @default(ACTIVE)
+  version      Int               @default(1)
+  archivedAt   DateTime?         @map("archived_at")
+  createdAt    DateTime          @default(now()) @map("created_at")
+  updatedAt    DateTime          @updatedAt @map("updated_at")
   locations    Location[]
   memberships  Membership[]
   roles        Role[]
   invitations  Invitation[]
   auditEntries AuditLog[]
+  artists      Artist[]
+  contacts     Contact[]
+  partners     BusinessPartner[]
 
   @@index([status])
   @@map("organization")
@@ -336,4 +339,271 @@ model AuditLog {
   @@index([organizationId, createdAt])
   @@index([actorUserId])
   @@map("audit_log")
+}
+
+model Artist {
+  id               String                  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId   String                  @map("organization_id") @db.Uuid
+  stageName        String?                 @map("stage_name")
+  firstName        String?                 @map("first_name")
+  lastName         String?                 @map("last_name")
+  addressLine1     String?                 @map("address_line_1")
+  addressLine2     String?                 @map("address_line_2")
+  postalCode       String?                 @map("postal_code")
+  city             String?
+  state            String?
+  countryCode      String?                 @map("country_code") @db.Char(2)
+  email            String?
+  phone            String?
+  instagram        String?
+  website          String?
+  notes            String?
+  status           EntityStatus            @default(ACTIVE)
+  version          Int                     @default(1)
+  archivedAt       DateTime?               @map("archived_at")
+  createdAt        DateTime                @default(now()) @map("created_at")
+  updatedAt        DateTime                @updatedAt @map("updated_at")
+  organization     Organization            @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  contacts         ArtistContact[]
+  businessPartners ArtistBusinessPartner[]
+
+  @@unique([id, organizationId])
+  @@index([organizationId, status])
+  @@index([organizationId, stageName])
+  @@map("artist")
+}
+
+model Contact {
+  id                   String                   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId       String                   @map("organization_id") @db.Uuid
+  firstName            String?                  @map("first_name")
+  lastName             String?                  @map("last_name")
+  label                String?
+  email                String?
+  phone                String?
+  mobile               String?
+  notes                String?
+  status               EntityStatus             @default(ACTIVE)
+  version              Int                      @default(1)
+  archivedAt           DateTime?                @map("archived_at")
+  createdAt            DateTime                 @default(now()) @map("created_at")
+  updatedAt            DateTime                 @updatedAt @map("updated_at")
+  organization         Organization             @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  artistLinks          ArtistContact[]
+  businessPartnerLinks BusinessPartnerContact[]
+
+  @@unique([id, organizationId])
+  @@index([organizationId, status])
+  @@index([organizationId, lastName, firstName])
+  @@map("contact")
+}
+
+model ContactRole {
+  id                              String                             @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  key                             String                             @unique
+  name                            String
+  artistAssignments               ArtistContactRole[]
+  partnerAssignments              BusinessPartnerContactRole[]
+  artistRepresentativeAssignments ArtistBusinessPartnerContactRole[]
+
+  @@map("contact_role")
+}
+
+model ArtistContact {
+  id             String              @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId String              @map("organization_id") @db.Uuid
+  artistId       String              @map("artist_id") @db.Uuid
+  contactId      String              @map("contact_id") @db.Uuid
+  version        Int                 @default(1)
+  createdAt      DateTime            @default(now()) @map("created_at")
+  updatedAt      DateTime            @updatedAt @map("updated_at")
+  artist         Artist              @relation(fields: [artistId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  contact        Contact             @relation(fields: [contactId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  roles          ArtistContactRole[]
+
+  @@unique([id, organizationId])
+  @@unique([artistId, contactId])
+  @@index([organizationId])
+  @@index([contactId])
+  @@map("artist_contact")
+}
+
+model ArtistContactRole {
+  id              String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId  String        @map("organization_id") @db.Uuid
+  artistContactId String        @map("artist_contact_id") @db.Uuid
+  roleId          String        @map("role_id") @db.Uuid
+  artistContact   ArtistContact @relation(fields: [artistContactId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  role            ContactRole   @relation(fields: [roleId], references: [id], onDelete: Restrict)
+
+  @@unique([artistContactId, roleId])
+  @@index([organizationId])
+  @@index([roleId])
+  @@map("artist_contact_role")
+}
+
+model BusinessPartner {
+  id                  String                          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId      String                          @map("organization_id") @db.Uuid
+  companyName         String                          @map("company_name")
+  addressLine1        String?                         @map("address_line_1")
+  addressLine2        String?                         @map("address_line_2")
+  postalCode          String?                         @map("postal_code")
+  city                String?
+  state               String?
+  countryCode         String?                         @map("country_code") @db.Char(2)
+  billingAddressLine1 String?                         @map("billing_address_line_1")
+  billingAddressLine2 String?                         @map("billing_address_line_2")
+  billingPostalCode   String?                         @map("billing_postal_code")
+  billingCity         String?                         @map("billing_city")
+  billingState        String?                         @map("billing_state")
+  billingCountryCode  String?                         @map("billing_country_code") @db.Char(2)
+  vatId               String?                         @map("vat_id")
+  email               String?
+  phone               String?
+  website             String?
+  notes               String?
+  status              EntityStatus                    @default(ACTIVE)
+  version             Int                             @default(1)
+  archivedAt          DateTime?                       @map("archived_at")
+  createdAt           DateTime                        @default(now()) @map("created_at")
+  updatedAt           DateTime                        @updatedAt @map("updated_at")
+  organization        Organization                    @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  contacts            BusinessPartnerContact[]
+  roles               BusinessPartnerRoleAssignment[]
+  artistLinks         ArtistBusinessPartner[]
+
+  @@unique([id, organizationId])
+  @@index([organizationId, status])
+  @@index([organizationId, companyName])
+  @@map("business_partner")
+}
+
+model BusinessPartnerRole {
+  id                String                          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  key               String                          @unique
+  name              String
+  assignments       BusinessPartnerRoleAssignment[]
+  artistAssignments ArtistBusinessPartnerRole[]
+
+  @@map("business_partner_role")
+}
+
+model BusinessPartnerRoleAssignment {
+  id                String              @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId    String              @map("organization_id") @db.Uuid
+  businessPartnerId String              @map("business_partner_id") @db.Uuid
+  roleId            String              @map("role_id") @db.Uuid
+  businessPartner   BusinessPartner     @relation(fields: [businessPartnerId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  role              BusinessPartnerRole @relation(fields: [roleId], references: [id], onDelete: Restrict)
+
+  @@unique([businessPartnerId, roleId])
+  @@index([organizationId])
+  @@index([roleId])
+  @@map("business_partner_role_assignment")
+}
+
+model BusinessPartnerContact {
+  id                    String                         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId        String                         @map("organization_id") @db.Uuid
+  businessPartnerId     String                         @map("business_partner_id") @db.Uuid
+  contactId             String                         @map("contact_id") @db.Uuid
+  version               Int                            @default(1)
+  createdAt             DateTime                       @default(now()) @map("created_at")
+  updatedAt             DateTime                       @updatedAt @map("updated_at")
+  businessPartner       BusinessPartner                @relation(fields: [businessPartnerId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  contact               Contact                        @relation(fields: [contactId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  roles                 BusinessPartnerContactRole[]
+  artistRepresentatives ArtistBusinessPartnerContact[]
+
+  @@unique([id, organizationId])
+  @@unique([id, organizationId, businessPartnerId], map: "business_partner_contact_tenant_partner_key")
+  @@unique([businessPartnerId, contactId])
+  @@index([organizationId])
+  @@index([contactId])
+  @@map("business_partner_contact")
+}
+
+model BusinessPartnerContactRole {
+  id                       String                 @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId           String                 @map("organization_id") @db.Uuid
+  businessPartnerContactId String                 @map("business_partner_contact_id") @db.Uuid
+  roleId                   String                 @map("role_id") @db.Uuid
+  businessPartnerContact   BusinessPartnerContact @relation(fields: [businessPartnerContactId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  role                     ContactRole            @relation(fields: [roleId], references: [id], onDelete: Restrict)
+
+  @@unique([businessPartnerContactId, roleId])
+  @@index([organizationId])
+  @@index([roleId])
+  @@map("business_partner_contact_role")
+}
+
+model ArtistBusinessPartner {
+  id                String                         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId    String                         @map("organization_id") @db.Uuid
+  artistId          String                         @map("artist_id") @db.Uuid
+  businessPartnerId String                         @map("business_partner_id") @db.Uuid
+  version           Int                            @default(1)
+  createdAt         DateTime                       @default(now()) @map("created_at")
+  updatedAt         DateTime                       @updatedAt @map("updated_at")
+  artist            Artist                         @relation(fields: [artistId, organizationId], references: [id, organizationId], onDelete: Restrict, map: "artist_business_partner_artist_tenant_fkey")
+  businessPartner   BusinessPartner                @relation(fields: [businessPartnerId, organizationId], references: [id, organizationId], onDelete: Restrict, map: "artist_business_partner_partner_tenant_fkey")
+  roles             ArtistBusinessPartnerRole[]
+  representatives   ArtistBusinessPartnerContact[]
+
+  @@unique([id, organizationId], map: "artist_business_partner_tenant_key")
+  @@unique([id, organizationId, businessPartnerId], map: "artist_business_partner_tenant_partner_key")
+  @@unique([artistId, businessPartnerId], map: "artist_business_partner_artist_partner_key")
+  @@index([organizationId], map: "artist_business_partner_tenant_idx")
+  @@index([businessPartnerId], map: "artist_business_partner_partner_idx")
+  @@map("artist_business_partner")
+}
+
+model ArtistBusinessPartnerRole {
+  id                      String                @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId          String                @map("organization_id") @db.Uuid
+  artistBusinessPartnerId String                @map("artist_business_partner_id") @db.Uuid
+  roleId                  String                @map("role_id") @db.Uuid
+  artistBusinessPartner   ArtistBusinessPartner @relation(fields: [artistBusinessPartnerId, organizationId], references: [id, organizationId], onDelete: Restrict, map: "artist_business_partner_role_parent_tenant_fkey")
+  role                    BusinessPartnerRole   @relation(fields: [roleId], references: [id], onDelete: Restrict, map: "artist_business_partner_role_role_fkey")
+
+  @@unique([artistBusinessPartnerId, roleId], map: "artist_business_partner_role_parent_role_key")
+  @@index([organizationId], map: "artist_business_partner_role_tenant_idx")
+  @@index([roleId], map: "artist_business_partner_role_role_idx")
+  @@map("artist_business_partner_role")
+}
+
+model ArtistBusinessPartnerContact {
+  id                       String                             @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId           String                             @map("organization_id") @db.Uuid
+  artistBusinessPartnerId  String                             @map("artist_business_partner_id") @db.Uuid
+  businessPartnerId        String                             @map("business_partner_id") @db.Uuid
+  businessPartnerContactId String                             @map("business_partner_contact_id") @db.Uuid
+  isPrimary                Boolean                            @default(false) @map("is_primary")
+  version                  Int                                @default(1)
+  createdAt                DateTime                           @default(now()) @map("created_at")
+  updatedAt                DateTime                           @updatedAt @map("updated_at")
+  artistBusinessPartner    ArtistBusinessPartner              @relation(fields: [artistBusinessPartnerId, organizationId, businessPartnerId], references: [id, organizationId, businessPartnerId], onDelete: Restrict, map: "artist_partner_contact_parent_tenant_partner_fkey")
+  businessPartnerContact   BusinessPartnerContact             @relation(fields: [businessPartnerContactId, organizationId, businessPartnerId], references: [id, organizationId, businessPartnerId], onDelete: Restrict, map: "artist_partner_contact_source_tenant_partner_fkey")
+  roles                    ArtistBusinessPartnerContactRole[]
+
+  @@unique([id, organizationId], map: "artist_partner_contact_tenant_key")
+  @@unique([artistBusinessPartnerId, businessPartnerContactId], map: "artist_partner_contact_parent_source_key")
+  @@index([organizationId], map: "artist_partner_contact_tenant_idx")
+  @@index([businessPartnerContactId], map: "artist_partner_contact_source_idx")
+  @@map("artist_business_partner_contact")
+}
+
+model ArtistBusinessPartnerContactRole {
+  id                             String                       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId                 String                       @map("organization_id") @db.Uuid
+  artistBusinessPartnerContactId String                       @map("artist_business_partner_contact_id") @db.Uuid
+  roleId                         String                       @map("role_id") @db.Uuid
+  artistBusinessPartnerContact   ArtistBusinessPartnerContact @relation(fields: [artistBusinessPartnerContactId, organizationId], references: [id, organizationId], onDelete: Restrict, map: "artist_partner_contact_role_parent_tenant_fkey")
+  role                           ContactRole                  @relation(fields: [roleId], references: [id], onDelete: Restrict, map: "artist_partner_contact_role_role_fkey")
+
+  @@unique([artistBusinessPartnerContactId, roleId], map: "artist_partner_contact_role_parent_role_key")
+  @@index([organizationId], map: "artist_partner_contact_role_tenant_idx")
+  @@index([roleId], map: "artist_partner_contact_role_role_idx")
+  @@map("artist_business_partner_contact_role")
 }

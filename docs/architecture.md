@@ -2,10 +2,11 @@
 
 ## Scope
 
-Phase 1 adds only the identity and tenant boundary: Better Auth email/password authentication,
-database sessions, one-time bootstrap, organizations, locations, memberships, fixed standard
-roles, permission policies, invitation links, and append-only audit entries. Bookings, events,
-calculations, documents, invoices, rooms, and business dashboards remain absent.
+Phase 1 provides the identity and tenant boundary. Phase 3 adds the first business module:
+organization-owned Artists, reusable Contacts, Business Partners and their normalized role-bearing
+associations. Artist representation by a company is an explicit normalized association whose
+representatives point to existing company-Contact associations; it is never inferred from shared
+Contacts. Bookings, events, calculations, documents, invoices and rooms remain absent.
 
 ## Runtime view
 
@@ -31,15 +32,15 @@ a separate process so long-running work cannot consume API request capacity.
 
 ## Workspace components
 
-| Component                | Responsibility                                       | Must not contain               |
-| ------------------------ | ---------------------------------------------------- | ------------------------------ |
-| `apps/web`               | Accessible setup, sign-in, and tenant administration | Business rules or copied DTOs  |
-| `apps/api`               | Versioned HTTP delivery and use-case composition     | UI concerns                    |
-| `apps/worker`            | Lifecycle and ports for later background work        | Phase 0 jobs or a queue system |
-| `packages/api-client`    | Generated OpenAPI types and small client factory     | Handwritten endpoint DTOs      |
-| `packages/database`      | Prisma client creation, transactions, migrations     | Business orchestration         |
-| `packages/configuration` | Validated process configuration                      | Secrets or logging of values   |
-| `packages/shared`        | Small, stable technical contracts                    | A universal domain engine      |
+| Component                | Responsibility                                   | Must not contain               |
+| ------------------------ | ------------------------------------------------ | ------------------------------ |
+| `apps/web`               | Accessible identity, tenant and master-data UI   | Business rules or copied DTOs  |
+| `apps/api`               | Versioned HTTP delivery and use-case composition | UI concerns                    |
+| `apps/worker`            | Lifecycle and ports for later background work    | Phase 0 jobs or a queue system |
+| `packages/api-client`    | Generated OpenAPI types and small client factory | Handwritten endpoint DTOs      |
+| `packages/database`      | Prisma client creation, transactions, migrations | Business orchestration         |
+| `packages/configuration` | Validated process configuration                  | Secrets or logging of values   |
+| `packages/shared`        | Small, stable technical contracts                | A universal domain engine      |
 
 ## Cross-cutting behavior
 
@@ -62,7 +63,13 @@ loads the current membership from PostgreSQL, requires `ACTIVE`, checks the conc
 key, and checks the selected Location scope where applicable. Controllers never authorize by role
 name. Services repeat `organization_id` in every business query; mapping tables additionally use
 composite organization foreign keys. Unknown and foreign tenant IDs both return the same 404
-response.
+response. Artist-company representatives additionally use company-aware three-column foreign keys,
+which ensure that the selected source Contact association belongs to the same company and tenant.
+
+The `master-data` API module is the first concrete application of the four-layer business-module
+rule. It owns Artist, Contact and Business Partner presentation, application, domain and
+infrastructure code. The platform module continues to own identity-adjacent organization access.
+The only extracted cross-cutting service is the transaction-scoped audit writer.
 
 Authentication answers “who is this user?” and remains owned by Better Auth. Authorization
 answers “what may this membership do in this organization?” and remains owned by the platform.

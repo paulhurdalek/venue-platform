@@ -108,10 +108,11 @@ describeWithDatabase('Phase 1 PostgreSQL and API integration', () => {
     expect(roles.map((role) => role.name).sort()).toEqual(
       ['Administrator', 'Booking', 'Lesend', 'Management & Finanzen', 'Produktion'].sort(),
     );
-    expect(roles.find((role) => role.key === 'administrator')?.permissions).toHaveLength(12);
-    for (const role of roles.filter((role) => role.key !== 'administrator')) {
-      expect(role.permissions).toHaveLength(2);
-    }
+    expect(roles.find((role) => role.key === 'administrator')?.permissions).toHaveLength(21);
+    expect(roles.find((role) => role.key === 'management_finance')?.permissions).toHaveLength(9);
+    expect(roles.find((role) => role.key === 'booking')?.permissions).toHaveLength(9);
+    expect(roles.find((role) => role.key === 'production')?.permissions).toHaveLength(5);
+    expect(roles.find((role) => role.key === 'read_only')?.permissions).toHaveLength(5);
     readOnlyRoleId = roles.find((role) => role.key === 'read_only')!.id;
   });
 
@@ -449,6 +450,7 @@ describeWithDatabase('Phase 1 PostgreSQL and API integration', () => {
     expect(serialized).not.toContain(administratorPassword);
     expect(serialized).not.toContain(invitedPassword);
     expect(serialized).not.toContain(firstInvitationToken);
+    expect(serialized).not.toContain(invitedEmail);
     for (const session of sessionTokens) expect(serialized).not.toContain(session.token);
 
     const firstAudit = auditEntries[0]!;
@@ -487,7 +489,12 @@ function readSetCookieHeaders(value: unknown): string[] {
 async function cleanDatabase(prisma: PrismaService): Promise<void> {
   await prisma.database.$executeRawUnsafe(`
     TRUNCATE TABLE
-      "audit_log", "invitation_location", "invitation_role", "invitation",
+      "artist_business_partner_contact_role", "artist_business_partner_contact",
+      "artist_business_partner_role", "artist_business_partner",
+      "business_partner_contact_role", "business_partner_contact",
+      "business_partner_role_assignment", "artist_contact_role", "artist_contact",
+      "business_partner", "artist", "contact", "audit_log",
+      "invitation_location", "invitation_role", "invitation",
       "membership_location", "membership_role", "role_permission", "role", "permission",
       "membership", "location", "organization", "bootstrap_token", "auth_rate_limit",
       "auth_verification", "auth_session", "auth_account", "auth_user"

@@ -59,4 +59,122 @@ describeWithDatabase('PostgreSQL connection', () => {
     `;
     expect(migration).toHaveLength(1);
   });
+
+  it('has the additive Phase 3 schema, dictionaries and composite tenant constraints', async () => {
+    client = createDatabaseClient(testDatabaseUrl!);
+    const tables = await client.$queryRaw<Array<{ table_name: string }>>`
+      SELECT table_name
+      FROM information_schema.tables
+      WHERE table_schema = 'public'
+        AND table_name IN (
+          'artist', 'contact', 'contact_role', 'artist_contact', 'artist_contact_role',
+          'business_partner', 'business_partner_role', 'business_partner_role_assignment',
+          'business_partner_contact', 'business_partner_contact_role',
+          'artist_business_partner', 'artist_business_partner_role',
+          'artist_business_partner_contact', 'artist_business_partner_contact_role'
+        )
+      ORDER BY table_name
+    `;
+    expect(tables).toHaveLength(14);
+
+    const tenantColumns = await client.$queryRaw<Array<{ table_name: string }>>`
+      SELECT table_name
+      FROM information_schema.columns
+      WHERE table_schema = 'public'
+        AND column_name = 'organization_id'
+        AND table_name IN (
+          'artist', 'contact', 'artist_contact', 'artist_contact_role',
+          'business_partner', 'business_partner_role_assignment',
+          'business_partner_contact', 'business_partner_contact_role',
+          'artist_business_partner', 'artist_business_partner_role',
+          'artist_business_partner_contact', 'artist_business_partner_contact_role'
+        )
+      ORDER BY table_name
+    `;
+    expect(tenantColumns).toHaveLength(12);
+
+    const compositeForeignKeys = await client.$queryRaw<Array<{ constraint_name: string }>>`
+      SELECT conname AS constraint_name
+      FROM pg_constraint
+      WHERE contype = 'f'
+        AND conname IN (
+          'artist_contact_artist_id_organization_id_fkey',
+          'artist_contact_contact_id_organization_id_fkey',
+          'artist_contact_role_artist_contact_id_organization_id_fkey',
+          'business_partner_role_assignment_business_partner_id_organization_id_fkey',
+          'business_partner_contact_business_partner_id_organization_id_fkey',
+          'business_partner_contact_contact_id_organization_id_fkey',
+          'business_partner_contact_role_business_partner_contact_id_organization_id_fkey',
+          'artist_business_partner_artist_tenant_fkey',
+          'artist_business_partner_partner_tenant_fkey',
+          'artist_business_partner_role_parent_tenant_fkey',
+          'artist_partner_contact_parent_tenant_partner_fkey',
+          'artist_partner_contact_source_tenant_partner_fkey',
+          'artist_partner_contact_role_parent_tenant_fkey'
+        )
+    `;
+    expect(compositeForeignKeys).toHaveLength(13);
+
+    const businessChecks = await client.$queryRaw<Array<{ constraint_name: string }>>`
+      SELECT conname AS constraint_name
+      FROM pg_constraint
+      WHERE contype = 'c'
+        AND conname IN (
+          'artist_identity_required',
+          'artist_country_code_format',
+          'artist_version_positive',
+          'artist_archive_consistent',
+          'contact_name_required',
+          'contact_version_positive',
+          'contact_archive_consistent',
+          'artist_contact_version_positive',
+          'business_partner_company_name_not_blank',
+          'business_partner_country_code_format',
+          'business_partner_billing_country_code_format',
+          'business_partner_version_positive',
+          'business_partner_archive_consistent',
+          'business_partner_contact_version_positive',
+          'artist_business_partner_version_positive',
+          'artist_business_partner_contact_version_positive'
+        )
+    `;
+    expect(businessChecks).toHaveLength(16);
+
+    const primaryRepresentativeIndex = await client.$queryRaw<Array<{ indexname: string }>>`
+      SELECT indexname
+      FROM pg_indexes
+      WHERE schemaname = 'public'
+        AND indexname = 'artist_partner_contact_primary_key'
+        AND indexdef LIKE '%WHERE (is_primary = true)%'
+    `;
+    expect(primaryRepresentativeIndex).toHaveLength(1);
+
+    const lifecycleValues = await client.$queryRaw<Array<{ enumlabel: string }>>`
+      SELECT enumlabel
+      FROM pg_enum
+      JOIN pg_type ON pg_type.oid = pg_enum.enumtypid
+      WHERE pg_type.typname = 'EntityStatus'
+      ORDER BY enumsortorder
+    `;
+    expect(lifecycleValues.map(({ enumlabel }) => enumlabel)).toEqual(['ACTIVE', 'ARCHIVED']);
+
+    expect(await client.contactRole.count()).toBe(6);
+    expect(await client.businessPartnerRole.count()).toBe(8);
+    const migration = await client.$queryRaw<Array<{ migration_name: string }>>`
+      SELECT migration_name
+      FROM _prisma_migrations
+      WHERE migration_name = '20260816000100_phase_3_master_data'
+        AND finished_at IS NOT NULL
+        AND rolled_back_at IS NULL
+    `;
+    expect(migration).toHaveLength(1);
+    const representationMigration = await client.$queryRaw<Array<{ migration_name: string }>>`
+      SELECT migration_name
+      FROM _prisma_migrations
+      WHERE migration_name = '20260817000100_artist_representations'
+        AND finished_at IS NOT NULL
+        AND rolled_back_at IS NULL
+    `;
+    expect(representationMigration).toHaveLength(1);
+  });
 });

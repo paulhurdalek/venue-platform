@@ -15,19 +15,25 @@ const tsxCli = rootRequire.resolve('tsx/cli');
 
 const databaseUrl = process.env.TEST_DATABASE_URL ?? process.env.DATABASE_URL;
 if (!databaseUrl?.startsWith('postgresql://')) {
-  throw new Error('TEST_DATABASE_URL is required for Phase 1 browser tests.');
+  throw new Error('TEST_DATABASE_URL is required for browser tests.');
 }
+
+const webPort = Number(process.env.E2E_WEB_PORT ?? '3000');
+const apiPort = Number(process.env.E2E_API_PORT ?? '3101');
+const webBaseUrl = `http://127.0.0.1:${webPort}`;
+const apiBaseUrl = `http://127.0.0.1:${apiPort}`;
+const webServerCommand = process.env.E2E_WEB_SERVER_MODE === 'production' ? 'start' : 'dev';
 
 const runtimeEnvironment = {
   ...process.env,
   NODE_ENV: 'test',
   DATABASE_URL: databaseUrl,
   TEST_DATABASE_URL: databaseUrl,
-  PORT: '3101',
-  CORS_ORIGINS: 'http://127.0.0.1:3000',
-  WEB_PUBLIC_URL: 'http://127.0.0.1:3000',
-  AUTH_PUBLIC_BASE_URL: 'http://127.0.0.1:3000',
-  AUTH_INTERNAL_BASE_URL: 'http://127.0.0.1:3101',
+  PORT: String(apiPort),
+  CORS_ORIGINS: webBaseUrl,
+  WEB_PUBLIC_URL: webBaseUrl,
+  AUTH_PUBLIC_BASE_URL: webBaseUrl,
+  AUTH_INTERNAL_BASE_URL: apiBaseUrl,
   BETTER_AUTH_SECRET:
     process.env.BETTER_AUTH_SECRET ?? 'test-only-secret-never-use-in-production-1234567890',
   SESSION_DURATION_SECONDS: process.env.SESSION_DURATION_SECONDS ?? '3600',
@@ -40,8 +46,9 @@ const runtimeEnvironment = {
   SENSITIVE_RATE_LIMIT_MAX: process.env.SENSITIVE_RATE_LIMIT_MAX ?? '50',
   LOG_LEVEL: 'warn',
   SWAGGER_UI_ENABLED: 'false',
-  API_BASE_URL: 'http://127.0.0.1:3101',
-  NEXT_PUBLIC_API_BASE_URL: 'http://127.0.0.1:3000',
+  API_BASE_URL: apiBaseUrl,
+  NEXT_PUBLIC_API_BASE_URL: webBaseUrl,
+  E2E_BASE_URL: webBaseUrl,
 };
 
 await cleanDatabase(databaseUrl);
@@ -58,7 +65,7 @@ const apiServer = spawn(
   },
 );
 
-const webServer = spawn(process.execPath, [nextCli, 'dev', '-p', '3000'], {
+const webServer = spawn(process.execPath, [nextCli, webServerCommand, '-p', String(webPort)], {
   cwd: resolve(rootDirectory, 'apps/web'),
   detached: process.platform !== 'win32',
   env: runtimeEnvironment,
@@ -117,8 +124,8 @@ let exitCode;
 
 try {
   await Promise.all([
-    waitForServer(apiServer, 3101, 120_000),
-    waitForServer(webServer, 3000, 120_000),
+    waitForServer(apiServer, apiPort, 120_000),
+    waitForServer(webServer, webPort, 120_000),
   ]);
   const tests = spawn(process.execPath, [playwrightCli, 'test'], {
     cwd: rootDirectory,
@@ -182,7 +189,12 @@ async function cleanDatabase(connectionString) {
   try {
     await database.$executeRawUnsafe(`
       TRUNCATE TABLE
-        "audit_log", "invitation_location", "invitation_role", "invitation",
+        "artist_business_partner_contact_role", "artist_business_partner_contact",
+        "artist_business_partner_role", "artist_business_partner",
+        "business_partner_contact_role", "business_partner_contact",
+        "business_partner_role_assignment", "artist_contact_role", "artist_contact",
+        "business_partner", "artist", "contact", "audit_log",
+        "invitation_location", "invitation_role", "invitation",
         "membership_location", "membership_role", "role_permission", "role", "permission",
         "membership", "location", "organization", "bootstrap_token", "auth_rate_limit",
         "auth_verification", "auth_session", "auth_account", "auth_user"

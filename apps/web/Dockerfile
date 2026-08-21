@@ -1,3 +1,5 @@
+# syntax=docker/dockerfile:1
+
 FROM node:24.18.0-bookworm-slim AS base
 ENV PNPM_HOME=/pnpm
 ENV PATH=$PNPM_HOME:$PATH
@@ -6,7 +8,8 @@ RUN corepack enable && corepack prepare pnpm@11.21.0 --activate
 
 FROM base AS dependencies
 COPY . .
-RUN pnpm install --frozen-lockfile
+RUN --mount=type=cache,id=venue-pnpm-store,target=/pnpm/store,sharing=locked \
+  pnpm install --frozen-lockfile --prefer-offline
 
 FROM dependencies AS build
 ENV NODE_ENV=production

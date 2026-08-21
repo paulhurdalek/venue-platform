@@ -1,14 +1,14 @@
 # Test strategy
 
-| Layer          | Command                                                 | Phase 1 evidence                                                                                                                                                                |
-| -------------- | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Unit           | `pnpm test:unit`                                        | permission and membership evaluation, Location scope, invitation state, token hashing, optimistic versions, bootstrap eligibility                                               |
-| API/PostgreSQL | `pnpm test:integration`                                 | bootstrap, blocked signup, sign-in/session/logout, cookies, roles, tenant/Location isolation, permission denial, suspension, invitation lifecycle, multi-org user, audit safety |
-| Migration      | `pnpm test:db`                                          | real driver, applied Phase 1 migration, tables, and tenant columns                                                                                                              |
-| Browser E2E    | `pnpm test:e2e`                                         | setup UI, sign-in, organization/Location edits, invite/copy, second browser acceptance, UI/API denial, logout                                                                   |
-| Static/build   | `pnpm verify`                                           | formatting, lint, TypeScript, generated OpenAPI client, tests, production builds                                                                                                |
-| Delivery       | `pnpm test:containers`                                  | fresh migrations, DB/API integration, volume persistence, all three images                                                                                                      |
-| Supply chain   | `pnpm security:audit`; `pnpm install --frozen-lockfile` | production advisories and peer/lock consistency                                                                                                                                 |
+| Layer          | Command                                                 | Evidence                                                                                                                                      |
+| -------------- | ------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| Unit           | `pnpm test:unit`                                        | Phase-1 security rules plus Artist/Contact identity and derived completeness rules                                                            |
+| API/PostgreSQL | `pnpm test:integration`                                 | Phase-1 regression plus Phase-3 CRUD, search/filter/page, versions, lifecycle, reuse, roles, permissions, tenant isolation and PII-safe audit |
+| Migration      | `pnpm test:db`                                          | real driver, applied Phase-1/3 migrations, new tables/dictionaries and composite tenant foreign keys                                          |
+| Browser E2E    | `pnpm test:e2e`                                         | Phase-1 identity/admin flow plus Artist, Contact reuse, partner multi-role/link, lifecycle and read-only UI                                   |
+| Static/build   | `pnpm verify`                                           | formatting, lint, TypeScript, generated OpenAPI client, tests, production builds                                                              |
+| Delivery       | `pnpm test:containers`                                  | fresh migrations, DB/API integration, volume persistence, all three images                                                                    |
+| Supply chain   | `pnpm security:audit`; `pnpm install --frozen-lockfile` | production advisories and peer/lock consistency                                                                                               |
 
 Database-bearing suites require `TEST_DATABASE_URL`, deliberately refuse a development URL, and
 clean only their isolated test tables. The ordinary test suite skips real-DB cases when the

@@ -2,7 +2,7 @@
   "name": "venue-platform",
   "version": "0.0.0",
   "private": true,
-  "description": "Phase 1 identity and tenant foundation for the venue booking platform",
+  "description": "Tenant-safe venue platform with identity, access control and central master data",
   "packageManager": "pnpm@11.21.0",
   "engines": {
     "node": ">=24.0.0 <25"

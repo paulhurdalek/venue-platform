@@ -11,6 +11,15 @@ export const PERMISSIONS = {
   MEMBERSHIPS_LOCATION_ACCESS: 'memberships.location_access',
   ROLES_READ: 'roles.read',
   AUDIT_READ: 'audit.read',
+  ARTISTS_READ: 'artists.read',
+  ARTISTS_WRITE: 'artists.write',
+  ARTISTS_ARCHIVE: 'artists.archive',
+  CONTACTS_READ: 'contacts.read',
+  CONTACTS_WRITE: 'contacts.write',
+  CONTACTS_ARCHIVE: 'contacts.archive',
+  BUSINESS_PARTNERS_READ: 'business_partners.read',
+  BUSINESS_PARTNERS_WRITE: 'business_partners.write',
+  BUSINESS_PARTNERS_ARCHIVE: 'business_partners.archive',
 } as const;
 
 export type PermissionKey = (typeof PERMISSIONS)[keyof typeof PERMISSIONS];
@@ -37,17 +46,82 @@ export const PERMISSION_CATALOG: ReadonlyArray<{
   },
   { key: PERMISSIONS.ROLES_READ, description: 'Rollen ansehen' },
   { key: PERMISSIONS.AUDIT_READ, description: 'Audit-Protokoll ansehen' },
+  { key: PERMISSIONS.ARTISTS_READ, description: 'Artists ansehen' },
+  { key: PERMISSIONS.ARTISTS_WRITE, description: 'Artists anlegen und bearbeiten' },
+  { key: PERMISSIONS.ARTISTS_ARCHIVE, description: 'Artists archivieren und reaktivieren' },
+  { key: PERMISSIONS.CONTACTS_READ, description: 'Kontakte ansehen' },
+  { key: PERMISSIONS.CONTACTS_WRITE, description: 'Kontakte anlegen und bearbeiten' },
+  { key: PERMISSIONS.CONTACTS_ARCHIVE, description: 'Kontakte archivieren und reaktivieren' },
+  {
+    key: PERMISSIONS.BUSINESS_PARTNERS_READ,
+    description: 'Geschäftspartner ansehen',
+  },
+  {
+    key: PERMISSIONS.BUSINESS_PARTNERS_WRITE,
+    description: 'Geschäftspartner anlegen und bearbeiten',
+  },
+  {
+    key: PERMISSIONS.BUSINESS_PARTNERS_ARCHIVE,
+    description: 'Geschäftspartner archivieren und reaktivieren',
+  },
 ];
 
 export const STANDARD_ROLES = [
-  { key: 'administrator', name: 'Administrator', allPermissions: true },
-  { key: 'management_finance', name: 'Management & Finanzen', allPermissions: false },
-  { key: 'booking', name: 'Booking', allPermissions: false },
-  { key: 'production', name: 'Produktion', allPermissions: false },
-  { key: 'read_only', name: 'Lesend', allPermissions: false },
+  { key: 'administrator', name: 'Administrator', allPermissions: true, permissionKeys: [] },
+  {
+    key: 'management_finance',
+    name: 'Management & Finanzen',
+    allPermissions: false,
+    permissionKeys: [
+      PERMISSIONS.ORGANIZATION_READ,
+      PERMISSIONS.LOCATION_READ,
+      PERMISSIONS.ARTISTS_READ,
+      PERMISSIONS.CONTACTS_READ,
+      PERMISSIONS.CONTACTS_WRITE,
+      PERMISSIONS.CONTACTS_ARCHIVE,
+      PERMISSIONS.BUSINESS_PARTNERS_READ,
+      PERMISSIONS.BUSINESS_PARTNERS_WRITE,
+      PERMISSIONS.BUSINESS_PARTNERS_ARCHIVE,
+    ],
+  },
+  {
+    key: 'booking',
+    name: 'Booking',
+    allPermissions: false,
+    permissionKeys: [
+      PERMISSIONS.ORGANIZATION_READ,
+      PERMISSIONS.LOCATION_READ,
+      PERMISSIONS.ARTISTS_READ,
+      PERMISSIONS.ARTISTS_WRITE,
+      PERMISSIONS.ARTISTS_ARCHIVE,
+      PERMISSIONS.CONTACTS_READ,
+      PERMISSIONS.CONTACTS_WRITE,
+      PERMISSIONS.CONTACTS_ARCHIVE,
+      PERMISSIONS.BUSINESS_PARTNERS_READ,
+    ],
+  },
+  {
+    key: 'production',
+    name: 'Produktion',
+    allPermissions: false,
+    permissionKeys: [
+      PERMISSIONS.ORGANIZATION_READ,
+      PERMISSIONS.LOCATION_READ,
+      PERMISSIONS.ARTISTS_READ,
+      PERMISSIONS.CONTACTS_READ,
+      PERMISSIONS.BUSINESS_PARTNERS_READ,
+    ],
+  },
+  {
+    key: 'read_only',
+    name: 'Lesend',
+    allPermissions: false,
+    permissionKeys: [
+      PERMISSIONS.ORGANIZATION_READ,
+      PERMISSIONS.LOCATION_READ,
+      PERMISSIONS.ARTISTS_READ,
+      PERMISSIONS.CONTACTS_READ,
+      PERMISSIONS.BUSINESS_PARTNERS_READ,
+    ],
+  },
 ] as const;
-
-export const READ_ONLY_PERMISSION_KEYS: PermissionKey[] = [
-  PERMISSIONS.ORGANIZATION_READ,
-  PERMISSIONS.LOCATION_READ,
-];

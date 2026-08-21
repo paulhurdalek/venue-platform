@@ -24,6 +24,23 @@ Mutable organization, Location, and membership rows have positive integer versio
 `WHERE id = ? AND organization_id = ? AND version = ?` and atomically increment the version; zero
 updated rows become HTTP 409.
 
+## Phase 3 migration
+
+`20260816000100_phase_3_master_data` is additive and leaves both Phase 0 and Phase 1 migrations
+unchanged. It creates Artist, Contact and Business Partner tables; normalized Contact assignments;
+Contact-role and partner-role dictionaries; normalized partner-role assignments; checks for
+identity, country codes, lifecycle consistency and positive versions; and tenant-aware indexes and
+composite foreign keys.
+
+The migration seeds only non-personal fixed dictionaries and nine stable permission definitions.
+It backfills the Phase-3 matrix for every existing organization-local standard role with
+conflict-safe inserts. `SetupService` uses the same source matrix when a future organization is
+created. No example Artist, Contact or partner rows are seeded.
+
+Artist, Contact and Business Partner updates use the same optimistic `WHERE id + organization_id +
+version` pattern. Role-bearing Contact associations also have versions. Business entities use
+restrictive foreign keys and are archived rather than deleted.
+
 ## Workflow
 
 1. Change `packages/database/prisma/schema.prisma`.
