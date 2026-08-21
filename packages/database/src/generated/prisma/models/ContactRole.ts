@@ -168,6 +168,7 @@ export type ContactRoleWhereInput = {
   name?: Prisma.StringFilter<"ContactRole"> | string
   artistAssignments?: Prisma.ArtistContactRoleListRelationFilter
   partnerAssignments?: Prisma.BusinessPartnerContactRoleListRelationFilter
+  artistRepresentativeAssignments?: Prisma.ArtistBusinessPartnerContactRoleListRelationFilter
 }
 
 export type ContactRoleOrderByWithRelationInput = {
@@ -176,6 +177,7 @@ export type ContactRoleOrderByWithRelationInput = {
   name?: Prisma.SortOrder
   artistAssignments?: Prisma.ArtistContactRoleOrderByRelationAggregateInput
   partnerAssignments?: Prisma.BusinessPartnerContactRoleOrderByRelationAggregateInput
+  artistRepresentativeAssignments?: Prisma.ArtistBusinessPartnerContactRoleOrderByRelationAggregateInput
 }
 
 export type ContactRoleWhereUniqueInput = Prisma.AtLeast<{
@@ -187,6 +189,7 @@ export type ContactRoleWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringFilter<"ContactRole"> | string
   artistAssignments?: Prisma.ArtistContactRoleListRelationFilter
   partnerAssignments?: Prisma.BusinessPartnerContactRoleListRelationFilter
+  artistRepresentativeAssignments?: Prisma.ArtistBusinessPartnerContactRoleListRelationFilter
 }, "id" | "key">
 
 export type ContactRoleOrderByWithAggregationInput = {
@@ -213,6 +216,7 @@ export type ContactRoleCreateInput = {
   name: string
   artistAssignments?: Prisma.ArtistContactRoleCreateNestedManyWithoutRoleInput
   partnerAssignments?: Prisma.BusinessPartnerContactRoleCreateNestedManyWithoutRoleInput
+  artistRepresentativeAssignments?: Prisma.ArtistBusinessPartnerContactRoleCreateNestedManyWithoutRoleInput
 }
 
 export type ContactRoleUncheckedCreateInput = {
@@ -221,6 +225,7 @@ export type ContactRoleUncheckedCreateInput = {
   name: string
   artistAssignments?: Prisma.ArtistContactRoleUncheckedCreateNestedManyWithoutRoleInput
   partnerAssignments?: Prisma.BusinessPartnerContactRoleUncheckedCreateNestedManyWithoutRoleInput
+  artistRepresentativeAssignments?: Prisma.ArtistBusinessPartnerContactRoleUncheckedCreateNestedManyWithoutRoleInput
 }
 
 export type ContactRoleUpdateInput = {
@@ -229,6 +234,7 @@ export type ContactRoleUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   artistAssignments?: Prisma.ArtistContactRoleUpdateManyWithoutRoleNestedInput
   partnerAssignments?: Prisma.BusinessPartnerContactRoleUpdateManyWithoutRoleNestedInput
+  artistRepresentativeAssignments?: Prisma.ArtistBusinessPartnerContactRoleUpdateManyWithoutRoleNestedInput
 }
 
 export type ContactRoleUncheckedUpdateInput = {
@@ -237,6 +243,7 @@ export type ContactRoleUncheckedUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   artistAssignments?: Prisma.ArtistContactRoleUncheckedUpdateManyWithoutRoleNestedInput
   partnerAssignments?: Prisma.BusinessPartnerContactRoleUncheckedUpdateManyWithoutRoleNestedInput
+  artistRepresentativeAssignments?: Prisma.ArtistBusinessPartnerContactRoleUncheckedUpdateManyWithoutRoleNestedInput
 }
 
 export type ContactRoleCreateManyInput = {
@@ -308,11 +315,26 @@ export type ContactRoleUpdateOneRequiredWithoutPartnerAssignmentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ContactRoleUpdateToOneWithWhereWithoutPartnerAssignmentsInput, Prisma.ContactRoleUpdateWithoutPartnerAssignmentsInput>, Prisma.ContactRoleUncheckedUpdateWithoutPartnerAssignmentsInput>
 }
 
+export type ContactRoleCreateNestedOneWithoutArtistRepresentativeAssignmentsInput = {
+  create?: Prisma.XOR<Prisma.ContactRoleCreateWithoutArtistRepresentativeAssignmentsInput, Prisma.ContactRoleUncheckedCreateWithoutArtistRepresentativeAssignmentsInput>
+  connectOrCreate?: Prisma.ContactRoleCreateOrConnectWithoutArtistRepresentativeAssignmentsInput
+  connect?: Prisma.ContactRoleWhereUniqueInput
+}
+
+export type ContactRoleUpdateOneRequiredWithoutArtistRepresentativeAssignmentsNestedInput = {
+  create?: Prisma.XOR<Prisma.ContactRoleCreateWithoutArtistRepresentativeAssignmentsInput, Prisma.ContactRoleUncheckedCreateWithoutArtistRepresentativeAssignmentsInput>
+  connectOrCreate?: Prisma.ContactRoleCreateOrConnectWithoutArtistRepresentativeAssignmentsInput
+  upsert?: Prisma.ContactRoleUpsertWithoutArtistRepresentativeAssignmentsInput
+  connect?: Prisma.ContactRoleWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ContactRoleUpdateToOneWithWhereWithoutArtistRepresentativeAssignmentsInput, Prisma.ContactRoleUpdateWithoutArtistRepresentativeAssignmentsInput>, Prisma.ContactRoleUncheckedUpdateWithoutArtistRepresentativeAssignmentsInput>
+}
+
 export type ContactRoleCreateWithoutArtistAssignmentsInput = {
   id?: string
   key: string
   name: string
   partnerAssignments?: Prisma.BusinessPartnerContactRoleCreateNestedManyWithoutRoleInput
+  artistRepresentativeAssignments?: Prisma.ArtistBusinessPartnerContactRoleCreateNestedManyWithoutRoleInput
 }
 
 export type ContactRoleUncheckedCreateWithoutArtistAssignmentsInput = {
@@ -320,6 +342,7 @@ export type ContactRoleUncheckedCreateWithoutArtistAssignmentsInput = {
   key: string
   name: string
   partnerAssignments?: Prisma.BusinessPartnerContactRoleUncheckedCreateNestedManyWithoutRoleInput
+  artistRepresentativeAssignments?: Prisma.ArtistBusinessPartnerContactRoleUncheckedCreateNestedManyWithoutRoleInput
 }
 
 export type ContactRoleCreateOrConnectWithoutArtistAssignmentsInput = {
@@ -343,6 +366,7 @@ export type ContactRoleUpdateWithoutArtistAssignmentsInput = {
   key?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   partnerAssignments?: Prisma.BusinessPartnerContactRoleUpdateManyWithoutRoleNestedInput
+  artistRepresentativeAssignments?: Prisma.ArtistBusinessPartnerContactRoleUpdateManyWithoutRoleNestedInput
 }
 
 export type ContactRoleUncheckedUpdateWithoutArtistAssignmentsInput = {
@@ -350,6 +374,7 @@ export type ContactRoleUncheckedUpdateWithoutArtistAssignmentsInput = {
   key?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   partnerAssignments?: Prisma.BusinessPartnerContactRoleUncheckedUpdateManyWithoutRoleNestedInput
+  artistRepresentativeAssignments?: Prisma.ArtistBusinessPartnerContactRoleUncheckedUpdateManyWithoutRoleNestedInput
 }
 
 export type ContactRoleCreateWithoutPartnerAssignmentsInput = {
@@ -357,6 +382,7 @@ export type ContactRoleCreateWithoutPartnerAssignmentsInput = {
   key: string
   name: string
   artistAssignments?: Prisma.ArtistContactRoleCreateNestedManyWithoutRoleInput
+  artistRepresentativeAssignments?: Prisma.ArtistBusinessPartnerContactRoleCreateNestedManyWithoutRoleInput
 }
 
 export type ContactRoleUncheckedCreateWithoutPartnerAssignmentsInput = {
@@ -364,6 +390,7 @@ export type ContactRoleUncheckedCreateWithoutPartnerAssignmentsInput = {
   key: string
   name: string
   artistAssignments?: Prisma.ArtistContactRoleUncheckedCreateNestedManyWithoutRoleInput
+  artistRepresentativeAssignments?: Prisma.ArtistBusinessPartnerContactRoleUncheckedCreateNestedManyWithoutRoleInput
 }
 
 export type ContactRoleCreateOrConnectWithoutPartnerAssignmentsInput = {
@@ -387,6 +414,7 @@ export type ContactRoleUpdateWithoutPartnerAssignmentsInput = {
   key?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   artistAssignments?: Prisma.ArtistContactRoleUpdateManyWithoutRoleNestedInput
+  artistRepresentativeAssignments?: Prisma.ArtistBusinessPartnerContactRoleUpdateManyWithoutRoleNestedInput
 }
 
 export type ContactRoleUncheckedUpdateWithoutPartnerAssignmentsInput = {
@@ -394,6 +422,55 @@ export type ContactRoleUncheckedUpdateWithoutPartnerAssignmentsInput = {
   key?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   artistAssignments?: Prisma.ArtistContactRoleUncheckedUpdateManyWithoutRoleNestedInput
+  artistRepresentativeAssignments?: Prisma.ArtistBusinessPartnerContactRoleUncheckedUpdateManyWithoutRoleNestedInput
+}
+
+export type ContactRoleCreateWithoutArtistRepresentativeAssignmentsInput = {
+  id?: string
+  key: string
+  name: string
+  artistAssignments?: Prisma.ArtistContactRoleCreateNestedManyWithoutRoleInput
+  partnerAssignments?: Prisma.BusinessPartnerContactRoleCreateNestedManyWithoutRoleInput
+}
+
+export type ContactRoleUncheckedCreateWithoutArtistRepresentativeAssignmentsInput = {
+  id?: string
+  key: string
+  name: string
+  artistAssignments?: Prisma.ArtistContactRoleUncheckedCreateNestedManyWithoutRoleInput
+  partnerAssignments?: Prisma.BusinessPartnerContactRoleUncheckedCreateNestedManyWithoutRoleInput
+}
+
+export type ContactRoleCreateOrConnectWithoutArtistRepresentativeAssignmentsInput = {
+  where: Prisma.ContactRoleWhereUniqueInput
+  create: Prisma.XOR<Prisma.ContactRoleCreateWithoutArtistRepresentativeAssignmentsInput, Prisma.ContactRoleUncheckedCreateWithoutArtistRepresentativeAssignmentsInput>
+}
+
+export type ContactRoleUpsertWithoutArtistRepresentativeAssignmentsInput = {
+  update: Prisma.XOR<Prisma.ContactRoleUpdateWithoutArtistRepresentativeAssignmentsInput, Prisma.ContactRoleUncheckedUpdateWithoutArtistRepresentativeAssignmentsInput>
+  create: Prisma.XOR<Prisma.ContactRoleCreateWithoutArtistRepresentativeAssignmentsInput, Prisma.ContactRoleUncheckedCreateWithoutArtistRepresentativeAssignmentsInput>
+  where?: Prisma.ContactRoleWhereInput
+}
+
+export type ContactRoleUpdateToOneWithWhereWithoutArtistRepresentativeAssignmentsInput = {
+  where?: Prisma.ContactRoleWhereInput
+  data: Prisma.XOR<Prisma.ContactRoleUpdateWithoutArtistRepresentativeAssignmentsInput, Prisma.ContactRoleUncheckedUpdateWithoutArtistRepresentativeAssignmentsInput>
+}
+
+export type ContactRoleUpdateWithoutArtistRepresentativeAssignmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  artistAssignments?: Prisma.ArtistContactRoleUpdateManyWithoutRoleNestedInput
+  partnerAssignments?: Prisma.BusinessPartnerContactRoleUpdateManyWithoutRoleNestedInput
+}
+
+export type ContactRoleUncheckedUpdateWithoutArtistRepresentativeAssignmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  artistAssignments?: Prisma.ArtistContactRoleUncheckedUpdateManyWithoutRoleNestedInput
+  partnerAssignments?: Prisma.BusinessPartnerContactRoleUncheckedUpdateManyWithoutRoleNestedInput
 }
 
 
@@ -404,11 +481,13 @@ export type ContactRoleUncheckedUpdateWithoutPartnerAssignmentsInput = {
 export type ContactRoleCountOutputType = {
   artistAssignments: number
   partnerAssignments: number
+  artistRepresentativeAssignments: number
 }
 
 export type ContactRoleCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   artistAssignments?: boolean | ContactRoleCountOutputTypeCountArtistAssignmentsArgs
   partnerAssignments?: boolean | ContactRoleCountOutputTypeCountPartnerAssignmentsArgs
+  artistRepresentativeAssignments?: boolean | ContactRoleCountOutputTypeCountArtistRepresentativeAssignmentsArgs
 }
 
 /**
@@ -435,6 +514,13 @@ export type ContactRoleCountOutputTypeCountPartnerAssignmentsArgs<ExtArgs extend
   where?: Prisma.BusinessPartnerContactRoleWhereInput
 }
 
+/**
+ * ContactRoleCountOutputType without action
+ */
+export type ContactRoleCountOutputTypeCountArtistRepresentativeAssignmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ArtistBusinessPartnerContactRoleWhereInput
+}
+
 
 export type ContactRoleSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -442,6 +528,7 @@ export type ContactRoleSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   name?: boolean
   artistAssignments?: boolean | Prisma.ContactRole$artistAssignmentsArgs<ExtArgs>
   partnerAssignments?: boolean | Prisma.ContactRole$partnerAssignmentsArgs<ExtArgs>
+  artistRepresentativeAssignments?: boolean | Prisma.ContactRole$artistRepresentativeAssignmentsArgs<ExtArgs>
   _count?: boolean | Prisma.ContactRoleCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["contactRole"]>
 
@@ -467,6 +554,7 @@ export type ContactRoleOmit<ExtArgs extends runtime.Types.Extensions.InternalArg
 export type ContactRoleInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   artistAssignments?: boolean | Prisma.ContactRole$artistAssignmentsArgs<ExtArgs>
   partnerAssignments?: boolean | Prisma.ContactRole$partnerAssignmentsArgs<ExtArgs>
+  artistRepresentativeAssignments?: boolean | Prisma.ContactRole$artistRepresentativeAssignmentsArgs<ExtArgs>
   _count?: boolean | Prisma.ContactRoleCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ContactRoleIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -477,6 +565,7 @@ export type $ContactRolePayload<ExtArgs extends runtime.Types.Extensions.Interna
   objects: {
     artistAssignments: Prisma.$ArtistContactRolePayload<ExtArgs>[]
     partnerAssignments: Prisma.$BusinessPartnerContactRolePayload<ExtArgs>[]
+    artistRepresentativeAssignments: Prisma.$ArtistBusinessPartnerContactRolePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -878,6 +967,7 @@ export interface Prisma__ContactRoleClient<T, Null = never, ExtArgs extends runt
   readonly [Symbol.toStringTag]: "PrismaPromise"
   artistAssignments<T extends Prisma.ContactRole$artistAssignmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ContactRole$artistAssignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ArtistContactRolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   partnerAssignments<T extends Prisma.ContactRole$partnerAssignmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ContactRole$partnerAssignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BusinessPartnerContactRolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  artistRepresentativeAssignments<T extends Prisma.ContactRole$artistRepresentativeAssignmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ContactRole$artistRepresentativeAssignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ArtistBusinessPartnerContactRolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1348,6 +1438,30 @@ export type ContactRole$partnerAssignmentsArgs<ExtArgs extends runtime.Types.Ext
   take?: number
   skip?: number
   distinct?: Prisma.BusinessPartnerContactRoleScalarFieldEnum | Prisma.BusinessPartnerContactRoleScalarFieldEnum[]
+}
+
+/**
+ * ContactRole.artistRepresentativeAssignments
+ */
+export type ContactRole$artistRepresentativeAssignmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ArtistBusinessPartnerContactRole
+   */
+  select?: Prisma.ArtistBusinessPartnerContactRoleSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ArtistBusinessPartnerContactRole
+   */
+  omit?: Prisma.ArtistBusinessPartnerContactRoleOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ArtistBusinessPartnerContactRoleInclude<ExtArgs> | null
+  where?: Prisma.ArtistBusinessPartnerContactRoleWhereInput
+  orderBy?: Prisma.ArtistBusinessPartnerContactRoleOrderByWithRelationInput | Prisma.ArtistBusinessPartnerContactRoleOrderByWithRelationInput[]
+  cursor?: Prisma.ArtistBusinessPartnerContactRoleWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ArtistBusinessPartnerContactRoleScalarFieldEnum | Prisma.ArtistBusinessPartnerContactRoleScalarFieldEnum[]
 }
 
 /**

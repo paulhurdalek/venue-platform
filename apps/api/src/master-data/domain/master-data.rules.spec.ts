@@ -5,6 +5,9 @@ import {
   artistIsIncomplete,
   contactHasName,
   contactIsIncomplete,
+  contactMatchReasons,
+  hasAtMostOnePrimaryRepresentative,
+  hasUniqueRepresentativeContacts,
 } from './master-data.rules.js';
 
 describe('Phase 3 master-data rules', () => {
@@ -32,5 +35,48 @@ describe('Phase 3 master-data rules', () => {
     expect(artistIsIncomplete({}, [{ status: 'ARCHIVED', email: 'contact@example.test' }])).toBe(
       true,
     );
+  });
+
+  it('requires unique source contacts within one company representation', () => {
+    expect(
+      hasUniqueRepresentativeContacts([
+        { businessPartnerContactId: 'first' },
+        { businessPartnerContactId: 'second' },
+      ]),
+    ).toBe(true);
+    expect(
+      hasUniqueRepresentativeContacts([
+        { businessPartnerContactId: 'same' },
+        { businessPartnerContactId: 'same' },
+      ]),
+    ).toBe(false);
+  });
+
+  it('allows at most one primary representative per company', () => {
+    expect(hasAtMostOnePrimaryRepresentative([{ isPrimary: true }, { isPrimary: false }])).toBe(
+      true,
+    );
+    expect(hasAtMostOnePrimaryRepresentative([{ isPrimary: true }, { isPrimary: true }])).toBe(
+      false,
+    );
+  });
+
+  it('matches normalized e-mail addresses and phone numbers across phone fields', () => {
+    expect(
+      contactMatchReasons(
+        { email: 'booking@example.test', mobile: '+49 (170) 123-45' },
+        { email: ' BOOKING@EXAMPLE.TEST ', phone: '0049 170 12345' },
+      ),
+    ).toEqual(['EMAIL', 'PHONE']);
+  });
+
+  it('treats equal complete names as a weak match but not partial names', () => {
+    expect(
+      contactMatchReasons(
+        { firstName: ' Anna ', lastName: 'von  Berg' },
+        { firstName: 'anna', lastName: 'VON BERG' },
+      ),
+    ).toEqual(['NAME']);
+    expect(contactMatchReasons({ firstName: 'Anna' }, { firstName: 'anna' })).toEqual([]);
   });
 });

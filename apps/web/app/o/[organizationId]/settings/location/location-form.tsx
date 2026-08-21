@@ -7,6 +7,10 @@ import { useRouter } from 'next/navigation';
 
 import { apiErrorMessage, createBrowserApiClient } from '../../../../../src/api/browser';
 import { FormMessage } from '../../../../components/form-message';
+import {
+  EditCancelAction,
+  useDetailEdit,
+} from '../../../../components/master-data/editable-detail';
 
 type Location = components['schemas']['LocationDto'];
 
@@ -25,6 +29,7 @@ function isCountryCodeValidationError(error: unknown): boolean {
 
 export function LocationForm({ location }: { location: Location }) {
   const router = useRouter();
+  const detailEdit = useDetailEdit();
   const [message, setMessage] = useState<string>();
   const [pending, setPending] = useState(false);
 
@@ -74,7 +79,9 @@ export function LocationForm({ location }: { location: Location }) {
       setPending(false);
       return;
     }
-    setMessage('Die Locationdaten wurden gespeichert.');
+    const success = 'Die Locationdaten wurden gespeichert.';
+    if (detailEdit) detailEdit.complete(success);
+    else setMessage(success);
     setPending(false);
     router.refresh();
   }
@@ -151,9 +158,12 @@ export function LocationForm({ location }: { location: Location }) {
       </label>
       <div className="form-span">
         <FormMessage message={message} />
-        <button className="button" disabled={pending} type="submit">
-          {pending ? 'Speichern …' : 'Änderungen speichern'}
-        </button>
+        <div className="button-row form-actions">
+          <button className="button" disabled={pending} type="submit">
+            {pending ? 'Speichern …' : 'Änderungen speichern'}
+          </button>
+          <EditCancelAction fallbackHref={`/o/${location.organizationId}/settings/location`} />
+        </div>
       </div>
     </form>
   );

@@ -10,6 +10,17 @@ import {
 } from '../../../../../src/api/server';
 import { BusinessPartnerForm } from '../../../../components/master-data/entity-forms';
 import {
+  CompactEmpty,
+  ContactChannels,
+  DetailField,
+  DetailFields,
+  DetailSection,
+  DetailSections,
+  formatAddress,
+  SafeWebLink,
+} from '../../../../components/master-data/detail-display';
+import { EditableDetail } from '../../../../components/master-data/editable-detail';
+import {
   BusinessPartnerRoleManager,
   ContactAssociationManager,
   LifecycleAction,
@@ -52,6 +63,7 @@ export default async function BusinessPartnerDetailPage({
     throw error;
   }
   const canWrite = hasPermission(membership, 'business_partners.write');
+  const canCreateContacts = hasPermission(membership, 'contacts.write');
   const canArchive = hasPermission(membership, 'business_partners.archive');
   const [partnerRoles, contactRoles, contacts] = await Promise.all([
     client
@@ -84,35 +96,41 @@ export default async function BusinessPartnerDetailPage({
   ]);
   return (
     <>
-      <header className="page-heading">
-        <div>
-          <p className="eyebrow">Geschäftspartner</p>
-          <h1>{partner.companyName}</h1>
-          <p>
-            {partner.roles.map((role) => role.name).join(', ') || 'Noch keine Rolle zugewiesen'}
-          </p>
-        </div>
-        <span className={`status-badge status-badge--${partner.status.toLowerCase()}`}>
-          {partner.status === 'ACTIVE' ? 'Aktiv' : 'Archiviert'}
-        </span>
-      </header>
-      <section className="panel">
-        <div className="panel__heading">
-          <div>
-            <h2>Stammdaten</h2>
-            <p>Zuletzt geändert: {new Date(partner.updatedAt).toLocaleString('de-DE')}</p>
-          </div>
-        </div>
+      <EditableDetail
+        badges={
+          <span className={`status-badge status-badge--${partner.status.toLowerCase()}`}>
+            {partner.status === 'ACTIVE' ? 'Aktiv' : 'Archiviert'}
+          </span>
+        }
+        canEdit={canWrite}
+        editTitle="Geschäftspartner bearbeiten"
+        eyebrow="Geschäftspartner"
+        id="business-partner-detail"
+        sectionTitle="Unternehmensdaten"
+        secondaryActions={
+          canArchive ? (
+            <LifecycleAction
+              entityId={partner.id}
+              kind="business-partner"
+              organizationId={organizationId}
+              status={partner.status}
+              version={partner.version}
+            />
+          ) : null
+        }
+        summary={partner.roles.map((role) => role.name).join(', ') || undefined}
+        title={partner.companyName}
+        updatedLabel={`Zuletzt geändert: ${new Date(partner.updatedAt).toLocaleString('de-DE')}`}
+        view={<PartnerDetails partner={partner} />}
+      >
         {canWrite ? (
           <BusinessPartnerForm
             organizationId={organizationId}
             partner={partner}
             roles={partnerRoles}
           />
-        ) : (
-          <PartnerDetails partner={partner} />
-        )}
-      </section>
+        ) : null}
+      </EditableDetail>
       {canWrite ? (
         <BusinessPartnerRoleManager
           organizationId={organizationId}
@@ -123,27 +141,13 @@ export default async function BusinessPartnerDetailPage({
       <ContactAssociationManager
         associations={partner.contacts}
         canWrite={canWrite}
+        canCreateContacts={canCreateContacts}
         contactSearch={contactSearch}
         contacts={contacts.items}
         organizationId={organizationId}
         owner={{ kind: 'business-partner', value: partner }}
         roles={contactRoles}
       />
-      {canArchive ? (
-        <section className="panel danger-zone">
-          <div>
-            <h2>Lebenszyklus</h2>
-            <p>Verknüpfungen bleiben beim Archivieren nachvollziehbar.</p>
-          </div>
-          <LifecycleAction
-            entityId={partner.id}
-            kind="business-partner"
-            organizationId={organizationId}
-            status={partner.status}
-            version={partner.version}
-          />
-        </section>
-      ) : null}
     </>
   );
 }
@@ -153,41 +157,54 @@ function first(value: string | string[] | undefined) {
 }
 
 function PartnerDetails({ partner }: { partner: Partner }) {
+  const address = formatAddress(partner);
+  const billingAddress = formatAddress({
+    addressLine1: partner.billingAddressLine1,
+    addressLine2: partner.billingAddressLine2,
+    postalCode: partner.billingPostalCode,
+    city: partner.billingCity,
+    state: partner.billingState,
+    countryCode: partner.billingCountryCode,
+  });
+  const hasContact = Boolean(partner.email || partner.phone || partner.website);
+  const hasCompany = Boolean(partner.vatId || address || billingAddress);
+  if (!hasContact && !hasCompany && !partner.notes) {
+    return <CompactEmpty>Keine weiteren Unternehmensdaten hinterlegt.</CompactEmpty>;
+  }
   return (
-    <dl className="detail-list">
-      <div>
-        <dt>E-Mail</dt>
-        <dd>{partner.email ?? 'Nicht angegeben'}</dd>
-      </div>
-      <div>
-        <dt>Telefon</dt>
-        <dd>{partner.phone ?? 'Nicht angegeben'}</dd>
-      </div>
-      <div>
-        <dt>USt-ID</dt>
-        <dd>{partner.vatId ?? 'Nicht angegeben'}</dd>
-      </div>
-      <div>
-        <dt>Website</dt>
-        <dd>{partner.website ?? 'Nicht angegeben'}</dd>
-      </div>
-      <div>
-        <dt>Anschrift</dt>
-        <dd>
-          {[
-            partner.addressLine1,
-            partner.addressLine2,
-            [partner.postalCode, partner.city].filter(Boolean).join(' '),
-            partner.countryCode,
-          ]
-            .filter(Boolean)
-            .join(', ') || 'Nicht angegeben'}
-        </dd>
-      </div>
-      <div>
-        <dt>Notizen</dt>
-        <dd>{partner.notes ?? 'Nicht angegeben'}</dd>
-      </div>
-    </dl>
+    <DetailSections>
+      {hasContact ? (
+        <DetailSection title="Kontakt">
+          <ContactChannels contact={partner} emptyMessage={null} />
+          {partner.website ? (
+            <DetailFields>
+              <DetailField label="Website">
+                <SafeWebLink href={partner.website} />
+              </DetailField>
+            </DetailFields>
+          ) : null}
+        </DetailSection>
+      ) : null}
+      {hasCompany ? (
+        <DetailSection title="Unternehmensangaben">
+          <DetailFields>
+            {partner.vatId ? <DetailField label="USt-ID">{partner.vatId}</DetailField> : null}
+            {address ? <DetailField label="Anschrift">{address}</DetailField> : null}
+            {billingAddress ? (
+              <DetailField label="Rechnungsanschrift">{billingAddress}</DetailField>
+            ) : null}
+          </DetailFields>
+        </DetailSection>
+      ) : null}
+      {partner.notes ? (
+        <DetailSection title="Interne Angaben" wide>
+          <DetailFields>
+            <DetailField label="Notizen" wide>
+              <span className="pre-wrap">{partner.notes}</span>
+            </DetailField>
+          </DetailFields>
+        </DetailSection>
+      ) : null}
+    </DetailSections>
   );
 }

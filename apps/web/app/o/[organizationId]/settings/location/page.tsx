@@ -1,5 +1,14 @@
 import { activePageMembership } from '../../../../../src/api/page-access';
 import { hasPermission, serverApiClient, unwrap } from '../../../../../src/api/server';
+import {
+  ContactChannels,
+  DetailField,
+  DetailFields,
+  DetailSection,
+  DetailSections,
+  formatAddress,
+} from '../../../../components/master-data/detail-display';
+import { EditableDetail } from '../../../../components/master-data/editable-detail';
 import { LocationForm } from './location-form';
 
 export default async function LocationSettingsPage({
@@ -20,86 +29,90 @@ export default async function LocationSettingsPage({
   const location = locations[0];
   const canEdit = hasPermission(membership, 'location.edit');
 
-  return (
-    <>
-      <header className="page-heading">
-        <div>
-          <p className="eyebrow">Einstellungen</p>
-          <h1>Location</h1>
-          <p>Stammdaten der in Phase 1 verwalteten Location.</p>
-        </div>
-        {location ? (
-          <span className={`status-badge status-badge--${location.status.toLowerCase()}`}>
-            {location.status === 'ACTIVE' ? 'Aktiv' : 'Archiviert'}
-          </span>
-        ) : null}
-      </header>
-      {location ? (
-        <section className="panel">
-          <div className="panel__heading">
-            <div>
-              <h2>{location.name}</h2>
-              <p>Zuletzt geändert: {new Date(location.updatedAt).toLocaleString('de-DE')}</p>
-            </div>
+  if (!location) {
+    return (
+      <>
+        <header className="page-heading">
+          <div>
+            <p className="eyebrow">Einstellungen</p>
+            <h1>Location</h1>
           </div>
-          {canEdit ? (
-            <LocationForm location={location} />
-          ) : (
-            <dl className="detail-list">
-              <div>
-                <dt>Name</dt>
-                <dd>{location.name}</dd>
-              </div>
-              <div>
-                <dt>Zeitzone</dt>
-                <dd>{location.timezone}</dd>
-              </div>
-              <div>
-                <dt>Kapazität</dt>
-                <dd>{location.capacity ?? 'Nicht angegeben'}</dd>
-              </div>
-              <div>
-                <dt>Anschrift</dt>
-                <dd>{formatAddress(location)}</dd>
-              </div>
-              <div>
-                <dt>E-Mail</dt>
-                <dd>{location.contactEmail ?? 'Nicht angegeben'}</dd>
-              </div>
-              <div>
-                <dt>Telefon</dt>
-                <dd>{location.contactPhone ?? 'Nicht angegeben'}</dd>
-              </div>
-            </dl>
-          )}
-        </section>
-      ) : (
+        </header>
         <section className="state-card">
           <h2>Keine Location verfügbar</h2>
           <p>Die Organisation besitzt derzeit keine aktive Phase-1-Location.</p>
         </section>
-      )}
-      {!canEdit && location ? (
-        <p className="permission-note">
-          Sie besitzen Leserechte. Änderungen sind für Ihre Rolle nicht freigegeben.
-        </p>
-      ) : null}
-    </>
+      </>
+    );
+  }
+
+  return (
+    <EditableDetail
+      badges={
+        <span className={`status-badge status-badge--${location.status.toLowerCase()}`}>
+          {location.status === 'ACTIVE' ? 'Aktiv' : 'Archiviert'}
+        </span>
+      }
+      canEdit={canEdit}
+      editTitle="Location bearbeiten"
+      eyebrow="Einstellungen"
+      id="location-detail"
+      sectionTitle="Locationdaten"
+      summary={location.name}
+      title="Location"
+      updatedLabel={`Zuletzt geändert: ${new Date(location.updatedAt).toLocaleString('de-DE')}`}
+      view={<LocationDetails location={location} />}
+    >
+      {canEdit ? <LocationForm location={location} /> : null}
+    </EditableDetail>
   );
 }
 
-function formatAddress(location: {
-  addressLine1?: string | null;
-  addressLine2?: string | null;
-  postalCode?: string | null;
-  city?: string | null;
-  state?: string | null;
-  countryCode?: string | null;
+function LocationDetails({
+  location,
+}: {
+  location: {
+    name: string;
+    timezone: string;
+    capacity?: number | null;
+    addressLine1?: string | null;
+    addressLine2?: string | null;
+    postalCode?: string | null;
+    city?: string | null;
+    state?: string | null;
+    countryCode?: string | null;
+    contactEmail?: string | null;
+    contactPhone?: string | null;
+  };
 }) {
-  const cityLine = [location.postalCode, location.city].filter(Boolean).join(' ');
+  const address = formatAddress(location);
+
   return (
-    [location.addressLine1, location.addressLine2, cityLine, location.state, location.countryCode]
-      .filter(Boolean)
-      .join(', ') || 'Nicht angegeben'
+    <DetailSections>
+      <DetailSection title="Basisdaten">
+        <DetailFields>
+          <DetailField label="Name">{location.name}</DetailField>
+          <DetailField label="Zeitzone">{location.timezone}</DetailField>
+          {location.capacity !== null && location.capacity !== undefined ? (
+            <DetailField label="Kapazität">{location.capacity}</DetailField>
+          ) : null}
+        </DetailFields>
+      </DetailSection>
+      {address ? (
+        <DetailSection title="Adresse">
+          <DetailFields>
+            <DetailField label="Anschrift">{address}</DetailField>
+          </DetailFields>
+        </DetailSection>
+      ) : null}
+      {location.contactEmail || location.contactPhone ? (
+        <DetailSection title="Kontakt">
+          <ContactChannels
+            contact={{ email: location.contactEmail, phone: location.contactPhone }}
+            emptyMessage={null}
+          />
+        </DetailSection>
+      ) : null}
+    </DetailSections>
   );
 }

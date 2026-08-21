@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  HttpCode,
   Inject,
   Param,
   ParseUUIDPipe,
@@ -36,14 +37,22 @@ import {
   BusinessPartnerDto,
   BusinessPartnerPageDto,
   ContactDto,
+  ContactDuplicateMatchDto,
+  ContactMatchInputDto,
   ContactPageDto,
   CreateArtistDto,
+  CreateArtistBusinessPartnerDto,
+  CreateArtistBusinessPartnerWithContactDto,
+  CreateArtistContactReferenceDto,
+  CreateArtistRepresentativeDto,
   CreateBusinessPartnerDto,
   CreateContactAssociationDto,
   CreateContactDto,
+  CreateInlineContactAssociationDto,
   MasterDataListQueryDto,
   MasterDataRoleDto,
   UpdateArtistDto,
+  UpdateArtistRepresentativeDto,
   UpdateBusinessPartnerDto,
   UpdateContactDto,
   UpdateEntityStatusDto,
@@ -133,6 +142,27 @@ export class MasterDataController {
     return this.masterData.linkArtistContact(access, artistId, body.contactId, body.roleIds);
   }
 
+  @Post('artists/:artistId/contacts/inline')
+  @RequirePermission(PERMISSIONS.ARTISTS_WRITE)
+  @ApiParam({ name: 'artistId', type: String, format: 'uuid' })
+  @ApiBody({ type: CreateInlineContactAssociationDto })
+  @ApiCreatedResponse({ type: ArtistDto })
+  createArtistContact(
+    @CurrentAccess() access: AccessContext,
+    @Param('artistId', ParseUUIDPipe) artistId: string,
+    @Body(createDtoValidationPipe(CreateInlineContactAssociationDto))
+    body: CreateInlineContactAssociationDto,
+  ): Promise<ArtistDto> {
+    const { allowNameDuplicate, ...contact } = body.contact;
+    return this.masterData.createArtistContact(
+      access,
+      artistId,
+      contact,
+      body.roleIds,
+      allowNameDuplicate,
+    );
+  }
+
   @Delete('artists/:artistId/contacts/:associationId')
   @RequirePermission(PERMISSIONS.ARTISTS_WRITE)
   @ApiParam({ name: 'artistId', type: String, format: 'uuid' })
@@ -169,6 +199,187 @@ export class MasterDataController {
     );
   }
 
+  @Post('artists/:artistId/business-partners')
+  @RequirePermission(PERMISSIONS.ARTISTS_WRITE)
+  @ApiParam({ name: 'artistId', type: String, format: 'uuid' })
+  @ApiBody({ type: CreateArtistBusinessPartnerDto })
+  @ApiCreatedResponse({ type: ArtistDto })
+  linkArtistBusinessPartner(
+    @CurrentAccess() access: AccessContext,
+    @Param('artistId', ParseUUIDPipe) artistId: string,
+    @Body(createDtoValidationPipe(CreateArtistBusinessPartnerDto))
+    body: CreateArtistBusinessPartnerDto,
+  ): Promise<ArtistDto> {
+    return this.masterData.linkArtistBusinessPartner(
+      access,
+      artistId,
+      body.businessPartnerId,
+      body.roleIds,
+      body.representatives,
+    );
+  }
+
+  @Post('artists/:artistId/business-partners/inline-contact')
+  @RequirePermission(PERMISSIONS.ARTISTS_WRITE)
+  @ApiParam({ name: 'artistId', type: String, format: 'uuid' })
+  @ApiBody({ type: CreateArtistBusinessPartnerWithContactDto })
+  @ApiCreatedResponse({ type: ArtistDto })
+  linkArtistBusinessPartnerWithContact(
+    @CurrentAccess() access: AccessContext,
+    @Param('artistId', ParseUUIDPipe) artistId: string,
+    @Body(createDtoValidationPipe(CreateArtistBusinessPartnerWithContactDto))
+    body: CreateArtistBusinessPartnerWithContactDto,
+  ): Promise<ArtistDto> {
+    const nestedContact = body.contact;
+    const allowNameDuplicate = nestedContact?.allowNameDuplicate ?? false;
+    const contact = nestedContact
+      ? (({ allowNameDuplicate: _allowNameDuplicate, ...values }) => values)(nestedContact)
+      : undefined;
+    return this.masterData.linkArtistBusinessPartnerWithContact(access, artistId, {
+      businessPartnerId: body.businessPartnerId,
+      roleIds: body.businessPartnerRoleIds,
+      ...(body.contactId ? { contactId: body.contactId } : {}),
+      ...(contact ? { contact } : {}),
+      contactRoleIds: body.roleIds,
+      isPrimary: body.isPrimary,
+      allowNameDuplicate,
+    });
+  }
+
+  @Put('artists/:artistId/business-partners/:associationId/roles')
+  @RequirePermission(PERMISSIONS.ARTISTS_WRITE)
+  @ApiParam({ name: 'artistId', type: String, format: 'uuid' })
+  @ApiParam({ name: 'associationId', type: String, format: 'uuid' })
+  @ApiBody({ type: AssignBusinessPartnerRolesDto })
+  @ApiOkResponse({ type: ArtistDto })
+  setArtistBusinessPartnerRoles(
+    @CurrentAccess() access: AccessContext,
+    @Param('artistId', ParseUUIDPipe) artistId: string,
+    @Param('associationId', ParseUUIDPipe) associationId: string,
+    @Body(createDtoValidationPipe(AssignBusinessPartnerRolesDto))
+    body: AssignBusinessPartnerRolesDto,
+  ): Promise<ArtistDto> {
+    return this.masterData.setArtistBusinessPartnerRoles(
+      access,
+      artistId,
+      associationId,
+      body.version,
+      body.roleIds,
+    );
+  }
+
+  @Delete('artists/:artistId/business-partners/:associationId')
+  @RequirePermission(PERMISSIONS.ARTISTS_WRITE)
+  @ApiParam({ name: 'artistId', type: String, format: 'uuid' })
+  @ApiParam({ name: 'associationId', type: String, format: 'uuid' })
+  @ApiQuery({ name: 'version', type: Number, minimum: 1 })
+  @ApiOkResponse({ type: ArtistDto })
+  unlinkArtistBusinessPartner(
+    @CurrentAccess() access: AccessContext,
+    @Param('artistId', ParseUUIDPipe) artistId: string,
+    @Param('associationId', ParseUUIDPipe) associationId: string,
+    @Query(createDtoValidationPipe(VersionQueryDto)) query: VersionQueryDto,
+  ): Promise<ArtistDto> {
+    return this.masterData.unlinkArtistBusinessPartner(
+      access,
+      artistId,
+      associationId,
+      query.version,
+    );
+  }
+
+  @Post('artists/:artistId/business-partners/:associationId/contacts')
+  @RequirePermission(PERMISSIONS.ARTISTS_WRITE)
+  @ApiParam({ name: 'artistId', type: String, format: 'uuid' })
+  @ApiParam({ name: 'associationId', type: String, format: 'uuid' })
+  @ApiBody({ type: CreateArtistRepresentativeDto })
+  @ApiCreatedResponse({ type: ArtistDto })
+  addArtistRepresentative(
+    @CurrentAccess() access: AccessContext,
+    @Param('artistId', ParseUUIDPipe) artistId: string,
+    @Param('associationId', ParseUUIDPipe) associationId: string,
+    @Body(createDtoValidationPipe(CreateArtistRepresentativeDto))
+    body: CreateArtistRepresentativeDto,
+  ): Promise<ArtistDto> {
+    return this.masterData.addArtistRepresentative(access, artistId, associationId, body);
+  }
+
+  @Post('artists/:artistId/business-partners/:associationId/contacts/inline')
+  @RequirePermission(PERMISSIONS.ARTISTS_WRITE)
+  @ApiParam({ name: 'artistId', type: String, format: 'uuid' })
+  @ApiParam({ name: 'associationId', type: String, format: 'uuid' })
+  @ApiBody({ type: CreateArtistContactReferenceDto })
+  @ApiCreatedResponse({ type: ArtistDto })
+  addArtistRepresentativeWithContact(
+    @CurrentAccess() access: AccessContext,
+    @Param('artistId', ParseUUIDPipe) artistId: string,
+    @Param('associationId', ParseUUIDPipe) associationId: string,
+    @Body(createDtoValidationPipe(CreateArtistContactReferenceDto))
+    body: CreateArtistContactReferenceDto,
+  ): Promise<ArtistDto> {
+    const nestedContact = body.contact;
+    const allowNameDuplicate = nestedContact?.allowNameDuplicate ?? false;
+    const contact = nestedContact
+      ? (({ allowNameDuplicate: _allowNameDuplicate, ...values }) => values)(nestedContact)
+      : undefined;
+    return this.masterData.addArtistRepresentativeWithContact(access, artistId, associationId, {
+      ...(body.contactId ? { contactId: body.contactId } : {}),
+      ...(contact ? { contact } : {}),
+      roleIds: body.roleIds,
+      isPrimary: body.isPrimary,
+      allowNameDuplicate,
+    });
+  }
+
+  @Put('artists/:artistId/business-partners/:associationId/contacts/:representativeId')
+  @RequirePermission(PERMISSIONS.ARTISTS_WRITE)
+  @ApiParam({ name: 'artistId', type: String, format: 'uuid' })
+  @ApiParam({ name: 'associationId', type: String, format: 'uuid' })
+  @ApiParam({ name: 'representativeId', type: String, format: 'uuid' })
+  @ApiBody({ type: UpdateArtistRepresentativeDto })
+  @ApiOkResponse({ type: ArtistDto })
+  updateArtistRepresentative(
+    @CurrentAccess() access: AccessContext,
+    @Param('artistId', ParseUUIDPipe) artistId: string,
+    @Param('associationId', ParseUUIDPipe) associationId: string,
+    @Param('representativeId', ParseUUIDPipe) representativeId: string,
+    @Body(createDtoValidationPipe(UpdateArtistRepresentativeDto))
+    body: UpdateArtistRepresentativeDto,
+  ): Promise<ArtistDto> {
+    return this.masterData.updateArtistRepresentative(
+      access,
+      artistId,
+      associationId,
+      representativeId,
+      body.version,
+      body.roleIds,
+      body.isPrimary,
+    );
+  }
+
+  @Delete('artists/:artistId/business-partners/:associationId/contacts/:representativeId')
+  @RequirePermission(PERMISSIONS.ARTISTS_WRITE)
+  @ApiParam({ name: 'artistId', type: String, format: 'uuid' })
+  @ApiParam({ name: 'associationId', type: String, format: 'uuid' })
+  @ApiParam({ name: 'representativeId', type: String, format: 'uuid' })
+  @ApiQuery({ name: 'version', type: Number, minimum: 1 })
+  @ApiOkResponse({ type: ArtistDto })
+  unlinkArtistRepresentative(
+    @CurrentAccess() access: AccessContext,
+    @Param('artistId', ParseUUIDPipe) artistId: string,
+    @Param('associationId', ParseUUIDPipe) associationId: string,
+    @Param('representativeId', ParseUUIDPipe) representativeId: string,
+    @Query(createDtoValidationPipe(VersionQueryDto)) query: VersionQueryDto,
+  ): Promise<ArtistDto> {
+    return this.masterData.unlinkArtistRepresentative(
+      access,
+      artistId,
+      associationId,
+      representativeId,
+      query.version,
+    );
+  }
+
   @Get('contacts')
   @RequirePermission(PERMISSIONS.CONTACTS_READ)
   @ApiMasterDataListQuery()
@@ -188,7 +399,20 @@ export class MasterDataController {
     @CurrentAccess() access: AccessContext,
     @Body(createDtoValidationPipe(CreateContactDto)) body: CreateContactDto,
   ): Promise<ContactDto> {
-    return this.masterData.createContact(access, body);
+    const { allowNameDuplicate, ...values } = body;
+    return this.masterData.createContact(access, values, allowNameDuplicate);
+  }
+
+  @Post('contacts/matches')
+  @HttpCode(200)
+  @RequirePermission(PERMISSIONS.CONTACTS_READ)
+  @ApiBody({ type: ContactMatchInputDto })
+  @ApiOkResponse({ type: [ContactDuplicateMatchDto] })
+  contactMatches(
+    @CurrentAccess() access: AccessContext,
+    @Body(createDtoValidationPipe(ContactMatchInputDto)) body: ContactMatchInputDto,
+  ): Promise<ContactDuplicateMatchDto[]> {
+    return this.masterData.contactMatches(access.organizationId, body);
   }
 
   @Get('contacts/:contactId')
@@ -329,6 +553,27 @@ export class MasterDataController {
       businessPartnerId,
       body.contactId,
       body.roleIds,
+    );
+  }
+
+  @Post('business-partners/:businessPartnerId/contacts/inline')
+  @RequirePermission(PERMISSIONS.BUSINESS_PARTNERS_WRITE)
+  @ApiParam({ name: 'businessPartnerId', type: String, format: 'uuid' })
+  @ApiBody({ type: CreateInlineContactAssociationDto })
+  @ApiCreatedResponse({ type: BusinessPartnerDto })
+  createBusinessPartnerContact(
+    @CurrentAccess() access: AccessContext,
+    @Param('businessPartnerId', ParseUUIDPipe) businessPartnerId: string,
+    @Body(createDtoValidationPipe(CreateInlineContactAssociationDto))
+    body: CreateInlineContactAssociationDto,
+  ): Promise<BusinessPartnerDto> {
+    const { allowNameDuplicate, ...contact } = body.contact;
+    return this.masterData.createBusinessPartnerContact(
+      access,
+      businessPartnerId,
+      contact,
+      body.roleIds,
+      allowNameDuplicate,
     );
   }
 

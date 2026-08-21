@@ -1,5 +1,6 @@
 import { activePageMembership } from '../../../../src/api/page-access';
 import { hasPermission, serverApiClient, unwrap } from '../../../../src/api/server';
+import { ContactChannels } from '../../../components/master-data/detail-display';
 import { MasterDataFilters, Pagination } from '../../../components/master-data/list-controls';
 
 export default async function ContactsPage({
@@ -56,37 +57,47 @@ export default async function ContactsPage({
       <section className="panel">
         <MasterDataFilters incomplete={incomplete} q={q} status={status} />
         <div className="table-wrap">
-          <table>
+          <table className="master-data-table">
             <thead>
               <tr>
                 <th>Name</th>
                 <th>Funktion</th>
                 <th>Kontakt</th>
-                <th>Vollständigkeit</th>
+                <th>Zuordnungen</th>
                 <th>Status</th>
               </tr>
             </thead>
             <tbody>
               {result.items.map((contact) => (
                 <tr key={contact.id}>
-                  <td>
+                  <td data-label="Name">
                     <a className="text-link" href={`/o/${organizationId}/contacts/${contact.id}`}>
                       {contactName(contact)}
                     </a>
                   </td>
-                  <td>{contact.label ?? 'Nicht angegeben'}</td>
-                  <td>{contact.email ?? contact.mobile ?? contact.phone ?? 'Nicht angegeben'}</td>
-                  <td>
-                    {contact.incomplete ? (
-                      <span className="status-badge status-badge--warning">Unvollständig</span>
-                    ) : (
-                      <span className="status-badge status-badge--active">Erreichbar</span>
-                    )}
+                  <td data-label="Funktion">{contact.label || <span className="muted">—</span>}</td>
+                  <td data-label="Kontakt">
+                    <ContactChannels contact={contact} compact emptyMessage="Keine Kontaktwege" />
                   </td>
-                  <td>
-                    <span className={`status-badge status-badge--${contact.status.toLowerCase()}`}>
-                      {contact.status === 'ACTIVE' ? 'Aktiv' : 'Archiviert'}
+                  <td data-label="Zuordnungen">
+                    <span className="list-meta">
+                      {assignmentSummary(
+                        contact.artistLinks.length,
+                        contact.businessPartnerLinks.length,
+                      )}
                     </span>
+                  </td>
+                  <td data-label="Status">
+                    <div className="list-statuses">
+                      <span
+                        className={`status-badge status-badge--${contact.status.toLowerCase()}`}
+                      >
+                        {contact.status === 'ACTIVE' ? 'Aktiv' : 'Archiviert'}
+                      </span>
+                      {contact.incomplete ? (
+                        <span className="status-badge status-badge--warning">Unvollständig</span>
+                      ) : null}
+                    </div>
                   </td>
                 </tr>
               ))}
@@ -111,7 +122,13 @@ export default async function ContactsPage({
 }
 
 function contactName(contact: { firstName?: string | null; lastName?: string | null }) {
-  return [contact.firstName, contact.lastName].filter(Boolean).join(' ');
+  return [contact.firstName, contact.lastName].filter(Boolean).join(' ') || 'Kontakt';
+}
+function assignmentSummary(artists: number, partners: number) {
+  const parts = [];
+  if (artists) parts.push(`${artists} Artist${artists === 1 ? '' : 's'}`);
+  if (partners) parts.push(`${partners} Geschäftspartner`);
+  return parts.join(', ') || 'Nicht zugeordnet';
 }
 function value(input: string | string[] | undefined) {
   return Array.isArray(input) ? input[0] : input;

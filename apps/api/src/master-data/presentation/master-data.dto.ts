@@ -14,6 +14,7 @@ import {
   Max,
   MaxLength,
   Min,
+  ValidateNested,
 } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
@@ -219,7 +220,27 @@ class MutableContactDto {
   notes?: string | null;
 }
 
-export class CreateContactDto extends MutableContactDto {}
+export class CreateContactDto extends MutableContactDto {
+  @ApiPropertyOptional({ type: Boolean })
+  @IsOptional()
+  @IsBoolean()
+  allowNameDuplicate?: boolean;
+}
+
+export class ContactMatchInputDto extends MutableContactDto {}
+
+export class CreateInlineContactAssociationDto {
+  @ApiProperty({ type: () => CreateContactDto })
+  @ValidateNested()
+  @Type(() => CreateContactDto)
+  contact!: CreateContactDto;
+
+  @ApiProperty({ type: [String], format: 'uuid' })
+  @IsArray()
+  @ArrayNotEmpty()
+  @IsUUID('4', { each: true })
+  roleIds!: string[];
+}
 
 export class UpdateContactDto extends MutableContactDto {
   @ApiProperty({ type: Number }) @IsInt() @Min(1) version!: number;
@@ -409,6 +430,92 @@ export class AssignBusinessPartnerRolesDto {
   @ApiProperty({ type: Number }) @IsInt() @Min(1) version!: number;
 }
 
+export class CreateArtistRepresentativeDto {
+  @ApiProperty({ type: String, format: 'uuid' })
+  @IsUUID('4')
+  businessPartnerContactId!: string;
+
+  @ApiProperty({ type: [String], format: 'uuid' })
+  @IsArray()
+  @ArrayNotEmpty()
+  @IsUUID('4', { each: true })
+  roleIds!: string[];
+
+  @ApiPropertyOptional({ type: Boolean, default: false })
+  @IsOptional()
+  @IsBoolean()
+  isPrimary = false;
+}
+
+export class CreateArtistBusinessPartnerDto {
+  @ApiProperty({ type: String, format: 'uuid' })
+  @IsUUID('4')
+  businessPartnerId!: string;
+
+  @ApiProperty({ type: [String], format: 'uuid' })
+  @IsArray()
+  @ArrayNotEmpty()
+  @IsUUID('4', { each: true })
+  roleIds!: string[];
+
+  @ApiProperty({ type: [CreateArtistRepresentativeDto] })
+  @IsArray()
+  @ArrayNotEmpty()
+  @ValidateNested({ each: true })
+  @Type(() => CreateArtistRepresentativeDto)
+  representatives!: CreateArtistRepresentativeDto[];
+}
+
+export class CreateArtistContactReferenceDto {
+  @ApiPropertyOptional({ type: String, format: 'uuid' })
+  @IsOptional()
+  @IsUUID('4')
+  contactId?: string;
+
+  @ApiPropertyOptional({ type: () => CreateContactDto })
+  @IsOptional()
+  @ValidateNested()
+  @Type(() => CreateContactDto)
+  contact?: CreateContactDto;
+
+  @ApiProperty({ type: [String], format: 'uuid' })
+  @IsArray()
+  @ArrayNotEmpty()
+  @IsUUID('4', { each: true })
+  roleIds!: string[];
+
+  @ApiPropertyOptional({ type: Boolean, default: false })
+  @IsOptional()
+  @IsBoolean()
+  isPrimary = false;
+}
+
+export class CreateArtistBusinessPartnerWithContactDto extends CreateArtistContactReferenceDto {
+  @ApiProperty({ type: String, format: 'uuid' })
+  @IsUUID('4')
+  businessPartnerId!: string;
+
+  @ApiProperty({ type: [String], format: 'uuid' })
+  @IsArray()
+  @ArrayNotEmpty()
+  @IsUUID('4', { each: true })
+  businessPartnerRoleIds!: string[];
+}
+
+export class UpdateArtistRepresentativeDto {
+  @ApiProperty({ type: [String], format: 'uuid' })
+  @IsArray()
+  @ArrayNotEmpty()
+  @IsUUID('4', { each: true })
+  roleIds!: string[];
+
+  @ApiProperty({ type: Boolean })
+  @IsBoolean()
+  isPrimary!: boolean;
+
+  @ApiProperty({ type: Number }) @IsInt() @Min(1) version!: number;
+}
+
 export class MasterDataRoleDto {
   @ApiProperty({ type: String, format: 'uuid' }) id!: string;
   @ApiProperty({ type: String }) key!: string;
@@ -427,11 +534,45 @@ export class ContactSummaryDto {
   @ApiProperty({ type: Boolean }) incomplete!: boolean;
 }
 
+export class ContactDuplicateMatchDto {
+  @ApiProperty({ type: () => ContactSummaryDto }) contact!: ContactSummaryDto;
+  @ApiProperty({ type: [String], enum: ['EMAIL', 'PHONE', 'NAME'] })
+  reasons!: Array<'EMAIL' | 'PHONE' | 'NAME'>;
+  @ApiProperty({ type: String, enum: ['STRONG', 'WEAK'] }) strength!: 'STRONG' | 'WEAK';
+}
+
 export class ContactAssociationDto {
   @ApiProperty({ type: String, format: 'uuid' }) id!: string;
   @ApiProperty({ type: Number }) version!: number;
   @ApiProperty({ type: () => ContactSummaryDto }) contact!: ContactSummaryDto;
   @ApiProperty({ type: [MasterDataRoleDto] }) roles!: MasterDataRoleDto[];
+}
+
+export class BusinessPartnerSummaryDto {
+  @ApiProperty({ type: String, format: 'uuid' }) id!: string;
+  @ApiProperty({ type: String }) companyName!: string;
+  @ApiPropertyOptional({ type: String, nullable: true }) email!: string | null;
+  @ApiPropertyOptional({ type: String, nullable: true }) phone!: string | null;
+  @ApiProperty({ type: String, enum: ['ACTIVE', 'ARCHIVED'] }) status!: string;
+}
+
+export class ArtistRepresentativeDto {
+  @ApiProperty({ type: String, format: 'uuid' }) id!: string;
+  @ApiProperty({ type: Number }) version!: number;
+  @ApiProperty({ type: String, format: 'uuid' }) businessPartnerContactId!: string;
+  @ApiProperty({ type: Boolean }) isPrimary!: boolean;
+  @ApiProperty({ type: () => ContactSummaryDto }) contact!: ContactSummaryDto;
+  @ApiProperty({ type: [MasterDataRoleDto] }) roles!: MasterDataRoleDto[];
+}
+
+export class ArtistBusinessPartnerAssociationDto {
+  @ApiProperty({ type: String, format: 'uuid' }) id!: string;
+  @ApiProperty({ type: Number }) version!: number;
+  @ApiProperty({ type: () => BusinessPartnerSummaryDto })
+  businessPartner!: BusinessPartnerSummaryDto;
+  @ApiProperty({ type: [MasterDataRoleDto] }) roles!: MasterDataRoleDto[];
+  @ApiProperty({ type: [ArtistRepresentativeDto] })
+  representatives!: ArtistRepresentativeDto[];
 }
 
 export class ArtistDto {
@@ -459,6 +600,8 @@ export class ArtistDto {
   @ApiProperty({ type: String, format: 'date-time' }) updatedAt!: string;
   @ApiProperty({ type: Boolean }) incomplete!: boolean;
   @ApiProperty({ type: [ContactAssociationDto] }) contacts!: ContactAssociationDto[];
+  @ApiProperty({ type: [ArtistBusinessPartnerAssociationDto] })
+  businessPartners!: ArtistBusinessPartnerAssociationDto[];
 }
 
 export class ArtistPageDto {

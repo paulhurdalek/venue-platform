@@ -489,6 +489,8 @@ function readSetCookieHeaders(value: unknown): string[] {
 async function cleanDatabase(prisma: PrismaService): Promise<void> {
   await prisma.database.$executeRawUnsafe(`
     TRUNCATE TABLE
+      "artist_business_partner_contact_role", "artist_business_partner_contact",
+      "artist_business_partner_role", "artist_business_partner",
       "business_partner_contact_role", "business_partner_contact",
       "business_partner_role_assignment", "artist_contact_role", "artist_contact",
       "business_partner", "artist", "contact", "audit_log",

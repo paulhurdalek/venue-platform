@@ -10,6 +10,15 @@ import {
 } from '../../../../../src/api/server';
 import { ContactForm } from '../../../../components/master-data/entity-forms';
 import { LifecycleAction } from '../../../../components/master-data/entity-actions';
+import {
+  CompactEmpty,
+  ContactChannels,
+  DetailField,
+  DetailFields,
+  DetailSection,
+  DetailSections,
+} from '../../../../components/master-data/detail-display';
+import { EditableDetail } from '../../../../components/master-data/editable-detail';
 
 type Contact = components['schemas']['ContactDto'];
 
@@ -46,36 +55,42 @@ export default async function ContactDetailPage({
   const canArchive = hasPermission(membership, 'contacts.archive');
   return (
     <>
-      <header className="page-heading">
-        <div>
-          <p className="eyebrow">Kontakt</p>
-          <h1>{[contact.firstName, contact.lastName].filter(Boolean).join(' ')}</h1>
-          <p>{contact.label ?? 'Keine Funktionsbezeichnung'}</p>
-        </div>
-        <div className="heading-badges">
-          <span className={`status-badge status-badge--${contact.status.toLowerCase()}`}>
-            {contact.status === 'ACTIVE' ? 'Aktiv' : 'Archiviert'}
-          </span>
-          {contact.incomplete ? (
-            <span className="status-badge status-badge--warning">Keine Kontaktmöglichkeit</span>
-          ) : null}
-        </div>
-      </header>
-      <section className="panel">
-        <div className="panel__heading">
-          <div>
-            <h2>Stammdaten</h2>
-            <p>Zuletzt geändert: {new Date(contact.updatedAt).toLocaleString('de-DE')}</p>
-          </div>
-        </div>
-        {canWrite ? (
-          <ContactForm contact={contact} organizationId={organizationId} />
-        ) : (
-          <ContactDetails contact={contact} />
-        )}
-      </section>
-      <section className="panel">
-        <div className="panel__heading">
+      <EditableDetail
+        badges={
+          <>
+            <span className={`status-badge status-badge--${contact.status.toLowerCase()}`}>
+              {contact.status === 'ACTIVE' ? 'Aktiv' : 'Archiviert'}
+            </span>
+            {contact.incomplete ? (
+              <span className="status-badge status-badge--warning">Keine Kontaktmöglichkeit</span>
+            ) : null}
+          </>
+        }
+        canEdit={canWrite}
+        editTitle="Kontakt bearbeiten"
+        eyebrow="Kontakt"
+        id="contact-detail"
+        sectionTitle="Kontakt-Stammdaten"
+        secondaryActions={
+          canArchive ? (
+            <LifecycleAction
+              entityId={contact.id}
+              kind="contact"
+              organizationId={organizationId}
+              status={contact.status}
+              version={contact.version}
+            />
+          ) : null
+        }
+        summary={contact.label}
+        title={contactName(contact)}
+        updatedLabel={`Zuletzt geändert: ${new Date(contact.updatedAt).toLocaleString('de-DE')}`}
+        view={<ContactDetails contact={contact} />}
+      >
+        {canWrite ? <ContactForm contact={contact} organizationId={organizationId} /> : null}
+      </EditableDetail>
+      <section className="panel detail-panel">
+        <div className="panel__heading panel__heading--compact">
           <div>
             <h2>Verwendung</h2>
             <p>Zuordnungsrollen gelten jeweils nur für die konkrete Verknüpfung.</p>
@@ -94,46 +109,37 @@ export default async function ContactDetailPage({
           />
         </div>
       </section>
-      {canArchive ? (
-        <section className="panel danger-zone">
-          <div>
-            <h2>Lebenszyklus</h2>
-            <p>Verknüpfungen bleiben beim Archivieren nachvollziehbar.</p>
-          </div>
-          <LifecycleAction
-            entityId={contact.id}
-            kind="contact"
-            organizationId={organizationId}
-            status={contact.status}
-            version={contact.version}
-          />
-        </section>
-      ) : null}
     </>
   );
 }
 
 function ContactDetails({ contact }: { contact: Contact }) {
+  const hasContact = Boolean(contact.email || contact.phone || contact.mobile);
+  if (!hasContact && !contact.notes) {
+    return <CompactEmpty>Keine weiteren Kontaktinformationen hinterlegt.</CompactEmpty>;
+  }
   return (
-    <dl className="detail-list">
-      <div>
-        <dt>E-Mail</dt>
-        <dd>{contact.email ?? 'Nicht angegeben'}</dd>
-      </div>
-      <div>
-        <dt>Telefon</dt>
-        <dd>{contact.phone ?? 'Nicht angegeben'}</dd>
-      </div>
-      <div>
-        <dt>Mobil</dt>
-        <dd>{contact.mobile ?? 'Nicht angegeben'}</dd>
-      </div>
-      <div>
-        <dt>Notizen</dt>
-        <dd>{contact.notes ?? 'Nicht angegeben'}</dd>
-      </div>
-    </dl>
+    <DetailSections>
+      {hasContact ? (
+        <DetailSection title="Kontaktwege">
+          <ContactChannels contact={contact} emptyMessage={null} />
+        </DetailSection>
+      ) : null}
+      {contact.notes ? (
+        <DetailSection title="Weitere Angaben" wide>
+          <DetailFields>
+            <DetailField label="Notizen" wide>
+              <span className="pre-wrap">{contact.notes}</span>
+            </DetailField>
+          </DetailFields>
+        </DetailSection>
+      ) : null}
+    </DetailSections>
   );
+}
+
+function contactName(contact: Contact): string {
+  return [contact.firstName, contact.lastName].filter(Boolean).join(' ') || 'Unbenannter Kontakt';
 }
 function Usage({
   title,

@@ -8,7 +8,7 @@ services:
       POSTGRES_PASSWORD: venue_local_only
       POSTGRES_USER: venue
     ports:
-      - '5432:5432'
+      - '${VENUE_POSTGRES_PORT:-5432}:5432'
     volumes:
       - venue_postgres_data:/var/lib/postgresql
     healthcheck:
@@ -26,7 +26,7 @@ services:
       POSTGRES_PASSWORD: venue_test_local_only
       POSTGRES_USER: venue
     ports:
-      - '5433:5432'
+      - '${VENUE_POSTGRES_TEST_PORT:-5433}:5432'
     tmpfs:
       - /var/lib/postgresql
     healthcheck:

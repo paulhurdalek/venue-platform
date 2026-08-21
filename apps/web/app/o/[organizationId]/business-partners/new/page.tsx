@@ -4,10 +4,14 @@ import { BusinessPartnerForm } from '../../../../components/master-data/entity-f
 
 export default async function NewBusinessPartnerPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ organizationId: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
   const { organizationId } = await params;
+  const search = await searchParams;
+  const returnTo = safeArtistReturnTo(organizationId, first(search.returnTo));
   const membership = await activePageMembership(
     organizationId,
     `/o/${organizationId}/business-partners/new`,
@@ -35,8 +39,28 @@ export default async function NewBusinessPartnerPage({
         </div>
       </header>
       <section className="panel">
-        <BusinessPartnerForm organizationId={organizationId} roles={roles} />
+        <BusinessPartnerForm organizationId={organizationId} returnTo={returnTo} roles={roles} />
       </section>
     </>
   );
+}
+
+function first(value: string | string[] | undefined): string | undefined {
+  return Array.isArray(value) ? value[0] : value;
+}
+
+function safeArtistReturnTo(organizationId: string, candidate: string | undefined) {
+  if (!candidate || candidate.startsWith('//')) return undefined;
+  try {
+    const parsed = new URL(candidate, 'http://venue.local');
+    const prefix = `/o/${organizationId}/artists/`;
+    if (parsed.origin !== 'http://venue.local' || !parsed.pathname.startsWith(prefix)) {
+      return undefined;
+    }
+    const artistId = parsed.pathname.slice(prefix.length);
+    if (!/^[0-9a-f-]{36}$/i.test(artistId)) return undefined;
+    return `${parsed.pathname}${parsed.search}`;
+  } catch {
+    return undefined;
+  }
 }

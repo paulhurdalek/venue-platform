@@ -7,6 +7,8 @@ import { useState } from 'react';
 
 import { apiErrorMessage, createBrowserApiClient } from '../../../src/api/browser';
 import { FormMessage } from '../form-message';
+import { EditCancelAction, useDetailEdit } from './editable-detail';
+import { ContactMatches, type ContactDraft, type ContactMatch } from './inline-contact';
 
 type Artist = components['schemas']['ArtistDto'];
 type Contact = components['schemas']['ContactDto'];
@@ -37,6 +39,7 @@ export function ArtistForm({
   artist?: Artist;
 }) {
   const router = useRouter();
+  const detailEdit = useDetailEdit();
   const [message, setMessage] = useState<string>();
   const [pending, setPending] = useState(false);
 
@@ -82,7 +85,9 @@ export function ArtistForm({
       router.push(`/o/${organizationId}/artists/${result.data.id}`);
       return;
     }
-    setMessage('Die Artist-Stammdaten wurden gespeichert.');
+    const success = 'Die Artist-Stammdaten wurden gespeichert.';
+    if (detailEdit) detailEdit.complete(success);
+    else setMessage(success);
     setPending(false);
     router.refresh();
   }
@@ -130,9 +135,7 @@ export function ArtistForm({
           <button className="button" disabled={pending} type="submit">
             {pending ? 'Speichern …' : artist ? 'Änderungen speichern' : 'Artist anlegen'}
           </button>
-          <a className="button button--secondary" href={`/o/${organizationId}/artists`}>
-            Abbrechen
-          </a>
+          <EditCancelAction fallbackHref={`/o/${organizationId}/artists`} />
         </div>
       </div>
     </form>
@@ -147,8 +150,11 @@ export function ContactForm({
   contact?: Contact;
 }) {
   const router = useRouter();
+  const detailEdit = useDetailEdit();
   const [message, setMessage] = useState<string>();
   const [pending, setPending] = useState(false);
+  const [matches, setMatches] = useState<ContactMatch[]>([]);
+  const [pendingContact, setPendingContact] = useState<ContactDraft>();
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -165,33 +171,82 @@ export function ContactForm({
       notes: nullable(form, 'notes'),
     };
     const client = createBrowserApiClient();
-    const result = contact
-      ? await client.PATCH('/api/v1/organizations/{organizationId}/contacts/{contactId}', {
-          credentials: 'include',
-          params: { path: { organizationId, contactId: contact.id } },
-          body: { ...body, version: contact.version },
-        })
-      : await client.POST('/api/v1/organizations/{organizationId}/contacts', {
+    if (!contact) {
+      const matchResult = await client.POST(
+        '/api/v1/organizations/{organizationId}/contacts/matches',
+        {
           credentials: 'include',
           params: { path: { organizationId } },
           body,
-        });
+        },
+      );
+      if (!matchResult.data) {
+        setMessage(
+          apiErrorMessage(
+            (matchResult as { error?: unknown }).error,
+            'Der Kontaktabgleich ist fehlgeschlagen.',
+          ),
+        );
+        setPending(false);
+        return;
+      }
+      if (matchResult.data.length > 0) {
+        setMatches(matchResult.data);
+        setPendingContact(body);
+        setPending(false);
+        return;
+      }
+      await createNewContact(body, false);
+      return;
+    }
+    const result = await client.PATCH(
+      '/api/v1/organizations/{organizationId}/contacts/{contactId}',
+      {
+        credentials: 'include',
+        params: { path: { organizationId, contactId: contact.id } },
+        body: { ...body, version: contact.version },
+      },
+    );
     if (!result.data || result.error) {
       setMessage(apiErrorMessage(result.error, 'Der Kontakt konnte nicht gespeichert werden.'));
       setPending(false);
       return;
     }
-    if (!contact) {
-      router.push(`/o/${organizationId}/contacts/${result.data.id}`);
-      return;
-    }
-    setMessage('Die Kontakt-Stammdaten wurden gespeichert.');
+    const success = 'Die Kontakt-Stammdaten wurden gespeichert.';
+    if (detailEdit) detailEdit.complete(success);
+    else setMessage(success);
     setPending(false);
     router.refresh();
   }
 
+  async function createNewContact(body: ContactDraft, allowNameDuplicate: boolean) {
+    setPending(true);
+    setMessage(undefined);
+    const client = createBrowserApiClient();
+    const result = await client.POST('/api/v1/organizations/{organizationId}/contacts', {
+      credentials: 'include',
+      params: { path: { organizationId } },
+      body: { ...body, allowNameDuplicate },
+    });
+    if (!result.data || result.error) {
+      setMessage(apiErrorMessage(result.error, 'Der Kontakt konnte nicht gespeichert werden.'));
+      setPending(false);
+      return;
+    }
+    router.push(`/o/${organizationId}/contacts/${result.data.id}`);
+  }
+
   return (
-    <form className="form-stack form-grid" onSubmit={submit}>
+    <form
+      className="form-stack form-grid"
+      onChange={() => {
+        if (matches.length > 0) {
+          setMatches([]);
+          setPendingContact(undefined);
+        }
+      }}
+      onSubmit={submit}
+    >
       <label>
         Vorname <span className="optional">optional bei Nachname</span>
         <input defaultValue={contact?.firstName ?? ''} maxLength={120} name="firstName" />
@@ -221,14 +276,22 @@ export function ContactForm({
         <textarea defaultValue={contact?.notes ?? ''} maxLength={5000} name="notes" rows={5} />
       </label>
       <div className="form-span">
+        {!contact ? (
+          <ContactMatches
+            matches={matches}
+            onCreateAnyway={
+              pendingContact ? () => createNewContact(pendingContact, true) : undefined
+            }
+            onReuse={(contactId) => router.push(`/o/${organizationId}/contacts/${contactId}`)}
+            pending={pending}
+          />
+        ) : null}
         <FormMessage message={message} success={message?.includes('gespeichert')} />
         <div className="button-row form-actions">
-          <button className="button" disabled={pending} type="submit">
+          <button className="button" disabled={pending || matches.length > 0} type="submit">
             {pending ? 'Speichern …' : contact ? 'Änderungen speichern' : 'Kontakt anlegen'}
           </button>
-          <a className="button button--secondary" href={`/o/${organizationId}/contacts`}>
-            Abbrechen
-          </a>
+          <EditCancelAction fallbackHref={`/o/${organizationId}/contacts`} />
         </div>
       </div>
     </form>
@@ -239,12 +302,15 @@ export function BusinessPartnerForm({
   organizationId,
   partner,
   roles,
+  returnTo,
 }: {
   organizationId: string;
   partner?: Partner;
   roles: Role[];
+  returnTo?: string | undefined;
 }) {
   const router = useRouter();
+  const detailEdit = useDetailEdit();
   const [message, setMessage] = useState<string>();
   const [pending, setPending] = useState(false);
 
@@ -296,10 +362,12 @@ export function BusinessPartnerForm({
       return;
     }
     if (!partner) {
-      router.push(`/o/${organizationId}/business-partners/${result.data.id}`);
+      router.push(returnTo ?? `/o/${organizationId}/business-partners/${result.data.id}`);
       return;
     }
-    setMessage('Die Geschäftspartner-Stammdaten wurden gespeichert.');
+    const success = 'Die Geschäftspartner-Stammdaten wurden gespeichert.';
+    if (detailEdit) detailEdit.complete(success);
+    else setMessage(success);
     setPending(false);
     router.refresh();
   }
@@ -370,9 +438,7 @@ export function BusinessPartnerForm({
                 ? 'Änderungen speichern'
                 : 'Geschäftspartner anlegen'}
           </button>
-          <a className="button button--secondary" href={`/o/${organizationId}/business-partners`}>
-            Abbrechen
-          </a>
+          <EditCancelAction fallbackHref={`/o/${organizationId}/business-partners`} />
         </div>
       </div>
     </form>

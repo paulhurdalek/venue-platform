@@ -6,11 +6,14 @@ import { PrismaService } from '../../database/prisma.service.js';
 import type { AccessContext } from '../../security/access.types.js';
 import type {
   ArtistRecord,
+  ArtistRepresentativeValues,
   ArtistValues,
   BusinessPartnerRecord,
   BusinessPartnerValues,
   ContactAssociation,
+  ContactDuplicateMatch,
   ContactRecord,
+  ContactReference,
   ContactValues,
   EntityStatus,
   ListQuery,
@@ -18,17 +21,40 @@ import type {
   RoleReference,
 } from '../application/master-data.models.js';
 import type { MasterDataRepository } from '../application/master-data.repository.js';
-import { artistIsIncomplete, contactIsIncomplete } from '../domain/master-data.rules.js';
+import {
+  artistIsIncomplete,
+  contactIsIncomplete,
+  contactMatchReasons,
+} from '../domain/master-data.rules.js';
 
 const associationInclude = {
   contact: true,
   roles: { include: { role: true }, orderBy: { role: { name: 'asc' as const } } },
 } satisfies Prisma.ArtistContactInclude;
 
+const artistBusinessPartnerInclude = {
+  businessPartner: true,
+  roles: {
+    include: { role: true },
+    orderBy: { role: { name: 'asc' as const } },
+  },
+  representatives: {
+    include: {
+      businessPartnerContact: { include: { contact: true } },
+      roles: { include: { role: true }, orderBy: { role: { name: 'asc' as const } } },
+    },
+    orderBy: [{ isPrimary: 'desc' as const }, { createdAt: 'asc' as const }],
+  },
+} satisfies Prisma.ArtistBusinessPartnerInclude;
+
 const artistInclude = {
   contacts: {
     include: associationInclude,
     orderBy: { createdAt: 'asc' as const },
+  },
+  businessPartners: {
+    include: artistBusinessPartnerInclude,
+    orderBy: { businessPartner: { companyName: 'asc' as const } },
   },
 } satisfies Prisma.ArtistInclude;
 
@@ -219,6 +245,39 @@ export class PrismaMasterDataRepository implements MasterDataRepository {
       });
       await this.audit.append(transaction, access, 'contact.created', 'contact', contact.id, {});
       return (await this.findContact(transaction, access.organizationId, contact.id))!;
+    });
+  }
+
+  async findContactMatches(
+    organizationId: string,
+    values: ContactValues,
+  ): Promise<ContactDuplicateMatch[]> {
+    const contacts = await this.prisma.database.contact.findMany({
+      where: { organizationId, status: 'ACTIVE' },
+      orderBy: [{ lastName: 'asc' }, { firstName: 'asc' }, { id: 'asc' }],
+    });
+    return contacts.flatMap((contact) => {
+      const reasons = contactMatchReasons(contact, values);
+      if (reasons.length === 0) return [];
+      return [
+        {
+          contact: {
+            id: contact.id,
+            firstName: contact.firstName,
+            lastName: contact.lastName,
+            label: contact.label,
+            email: contact.email,
+            phone: contact.phone,
+            mobile: contact.mobile,
+            status: contact.status,
+            incomplete: contactIsIncomplete(contact),
+          },
+          reasons,
+          strength: reasons.some((reason) => reason === 'EMAIL' || reason === 'PHONE')
+            ? ('STRONG' as const)
+            : ('WEAK' as const),
+        },
+      ];
     });
   }
 
@@ -467,6 +526,40 @@ export class PrismaMasterDataRepository implements MasterDataRepository {
     });
   }
 
+  async createArtistContact(
+    access: AccessContext,
+    artistId: string,
+    values: ContactValues,
+    roleIds: string[],
+  ): Promise<ArtistRecord> {
+    return this.prisma.transaction(async (transaction) => {
+      const contactId = await this.createContactInTransaction(transaction, access, values);
+      const link = await transaction.artistContact.create({
+        data: { organizationId: access.organizationId, artistId, contactId },
+      });
+      await transaction.artistContactRole.createMany({
+        data: roleIds.map((roleId) => ({
+          organizationId: access.organizationId,
+          artistContactId: link.id,
+          roleId,
+        })),
+      });
+      await this.audit.append(
+        transaction,
+        access,
+        'artist.contact_linked',
+        'artist_contact',
+        link.id,
+        {
+          artistId,
+          contactId,
+          roleIds,
+        },
+      );
+      return (await this.findArtist(transaction, access.organizationId, artistId))!;
+    });
+  }
+
   async unlinkArtistContact(
     access: AccessContext,
     artistId: string,
@@ -539,6 +632,374 @@ export class PrismaMasterDataRepository implements MasterDataRepository {
     });
   }
 
+  async linkArtistBusinessPartner(
+    access: AccessContext,
+    artistId: string,
+    businessPartnerId: string,
+    roleIds: string[],
+    representatives: ArtistRepresentativeValues[],
+  ): Promise<ArtistRecord> {
+    return this.prisma.transaction(async (transaction) => {
+      const link = await transaction.artistBusinessPartner.create({
+        data: { organizationId: access.organizationId, artistId, businessPartnerId },
+      });
+      await transaction.artistBusinessPartnerRole.createMany({
+        data: roleIds.map((roleId) => ({
+          organizationId: access.organizationId,
+          artistBusinessPartnerId: link.id,
+          roleId,
+        })),
+      });
+      for (const representative of representatives) {
+        const contact = await transaction.artistBusinessPartnerContact.create({
+          data: {
+            organizationId: access.organizationId,
+            artistBusinessPartnerId: link.id,
+            businessPartnerId,
+            businessPartnerContactId: representative.businessPartnerContactId,
+            isPrimary: representative.isPrimary,
+          },
+        });
+        await transaction.artistBusinessPartnerContactRole.createMany({
+          data: representative.roleIds.map((roleId) => ({
+            organizationId: access.organizationId,
+            artistBusinessPartnerContactId: contact.id,
+            roleId,
+          })),
+        });
+      }
+      await this.audit.append(
+        transaction,
+        access,
+        'artist.business_partner_linked',
+        'artist_business_partner',
+        link.id,
+        {
+          artistId,
+          businessPartnerId,
+          roleIds,
+          representatives: representatives.map((representative) => ({
+            businessPartnerContactId: representative.businessPartnerContactId,
+            roleIds: representative.roleIds,
+            isPrimary: representative.isPrimary,
+          })),
+        },
+      );
+      return (await this.findArtist(transaction, access.organizationId, artistId))!;
+    });
+  }
+
+  async linkArtistBusinessPartnerWithContact(
+    access: AccessContext,
+    artistId: string,
+    businessPartnerId: string,
+    roleIds: string[],
+    contact: ContactReference,
+    contactRoleIds: string[],
+    isPrimary: boolean,
+  ): Promise<ArtistRecord> {
+    return this.prisma.transaction(async (transaction) => {
+      const contactId =
+        'contactId' in contact
+          ? contact.contactId
+          : await this.createContactInTransaction(transaction, access, contact.contact);
+      const source = await this.ensureBusinessPartnerContact(
+        transaction,
+        access,
+        businessPartnerId,
+        contactId,
+        contactRoleIds,
+      );
+      const association = await transaction.artistBusinessPartner.create({
+        data: { organizationId: access.organizationId, artistId, businessPartnerId },
+      });
+      await transaction.artistBusinessPartnerRole.createMany({
+        data: roleIds.map((roleId) => ({
+          organizationId: access.organizationId,
+          artistBusinessPartnerId: association.id,
+          roleId,
+        })),
+      });
+      const representative = await this.createArtistRepresentativeInTransaction(
+        transaction,
+        access,
+        association.id,
+        businessPartnerId,
+        source.id,
+        contactRoleIds,
+        isPrimary,
+      );
+      await this.audit.append(
+        transaction,
+        access,
+        'artist.business_partner_linked',
+        'artist_business_partner',
+        association.id,
+        {
+          artistId,
+          businessPartnerId,
+          roleIds,
+          representativeIds: [representative.id],
+        },
+      );
+      return (await this.findArtist(transaction, access.organizationId, artistId))!;
+    });
+  }
+
+  async setArtistBusinessPartnerRoles(
+    access: AccessContext,
+    artistId: string,
+    associationId: string,
+    version: number,
+    roleIds: string[],
+  ): Promise<ArtistRecord | undefined> {
+    return this.prisma.transaction(async (transaction) => {
+      const updated = await transaction.artistBusinessPartner.updateMany({
+        where: {
+          id: associationId,
+          organizationId: access.organizationId,
+          artistId,
+          version,
+        },
+        data: { version: { increment: 1 } },
+      });
+      if (updated.count !== 1) return undefined;
+      await transaction.artistBusinessPartnerRole.deleteMany({
+        where: { artistBusinessPartnerId: associationId },
+      });
+      await transaction.artistBusinessPartnerRole.createMany({
+        data: roleIds.map((roleId) => ({
+          organizationId: access.organizationId,
+          artistBusinessPartnerId: associationId,
+          roleId,
+        })),
+      });
+      await this.audit.append(
+        transaction,
+        access,
+        'artist.business_partner_roles_updated',
+        'artist_business_partner',
+        associationId,
+        { artistId, roleIds, previousVersion: version },
+      );
+      return this.findArtist(transaction, access.organizationId, artistId);
+    });
+  }
+
+  async unlinkArtistBusinessPartner(
+    access: AccessContext,
+    artistId: string,
+    associationId: string,
+    version: number,
+  ): Promise<ArtistRecord | undefined> {
+    return this.prisma.transaction(async (transaction) => {
+      const updated = await transaction.artistBusinessPartner.updateMany({
+        where: {
+          id: associationId,
+          organizationId: access.organizationId,
+          artistId,
+          version,
+        },
+        data: { version: { increment: 1 } },
+      });
+      if (updated.count !== 1) return undefined;
+      const link = await transaction.artistBusinessPartner.findUniqueOrThrow({
+        where: { id: associationId },
+      });
+      const representatives = await transaction.artistBusinessPartnerContact.findMany({
+        where: { artistBusinessPartnerId: associationId },
+        select: { id: true },
+      });
+      const representativeIds = representatives.map(({ id }) => id);
+      await transaction.artistBusinessPartnerContactRole.deleteMany({
+        where: { artistBusinessPartnerContactId: { in: representativeIds } },
+      });
+      await transaction.artistBusinessPartnerContact.deleteMany({
+        where: { artistBusinessPartnerId: associationId },
+      });
+      await transaction.artistBusinessPartnerRole.deleteMany({
+        where: { artistBusinessPartnerId: associationId },
+      });
+      await transaction.artistBusinessPartner.delete({ where: { id: associationId } });
+      await this.audit.append(
+        transaction,
+        access,
+        'artist.business_partner_unlinked',
+        'artist_business_partner',
+        associationId,
+        { artistId, businessPartnerId: link.businessPartnerId, previousVersion: version },
+      );
+      return this.findArtist(transaction, access.organizationId, artistId);
+    });
+  }
+
+  async addArtistRepresentative(
+    access: AccessContext,
+    artistId: string,
+    associationId: string,
+    businessPartnerId: string,
+    representative: ArtistRepresentativeValues,
+  ): Promise<ArtistRecord> {
+    return this.prisma.transaction(async (transaction) => {
+      const link = await transaction.artistBusinessPartnerContact.create({
+        data: {
+          organizationId: access.organizationId,
+          artistBusinessPartnerId: associationId,
+          businessPartnerId,
+          businessPartnerContactId: representative.businessPartnerContactId,
+          isPrimary: representative.isPrimary,
+        },
+      });
+      await transaction.artistBusinessPartnerContactRole.createMany({
+        data: representative.roleIds.map((roleId) => ({
+          organizationId: access.organizationId,
+          artistBusinessPartnerContactId: link.id,
+          roleId,
+        })),
+      });
+      await this.audit.append(
+        transaction,
+        access,
+        'artist.representative_linked',
+        'artist_business_partner_contact',
+        link.id,
+        {
+          artistId,
+          artistBusinessPartnerId: associationId,
+          businessPartnerId,
+          businessPartnerContactId: representative.businessPartnerContactId,
+          roleIds: representative.roleIds,
+          isPrimary: representative.isPrimary,
+        },
+      );
+      return (await this.findArtist(transaction, access.organizationId, artistId))!;
+    });
+  }
+
+  async addArtistRepresentativeWithContact(
+    access: AccessContext,
+    artistId: string,
+    associationId: string,
+    businessPartnerId: string,
+    contact: ContactReference,
+    contactRoleIds: string[],
+    isPrimary: boolean,
+  ): Promise<ArtistRecord> {
+    return this.prisma.transaction(async (transaction) => {
+      const contactId =
+        'contactId' in contact
+          ? contact.contactId
+          : await this.createContactInTransaction(transaction, access, contact.contact);
+      const source = await this.ensureBusinessPartnerContact(
+        transaction,
+        access,
+        businessPartnerId,
+        contactId,
+        contactRoleIds,
+      );
+      await this.createArtistRepresentativeInTransaction(
+        transaction,
+        access,
+        associationId,
+        businessPartnerId,
+        source.id,
+        contactRoleIds,
+        isPrimary,
+      );
+      return (await this.findArtist(transaction, access.organizationId, artistId))!;
+    });
+  }
+
+  async updateArtistRepresentative(
+    access: AccessContext,
+    artistId: string,
+    associationId: string,
+    representativeId: string,
+    version: number,
+    roleIds: string[],
+    isPrimary: boolean,
+  ): Promise<ArtistRecord | undefined> {
+    return this.prisma.transaction(async (transaction) => {
+      const updated = await transaction.artistBusinessPartnerContact.updateMany({
+        where: {
+          id: representativeId,
+          organizationId: access.organizationId,
+          artistBusinessPartnerId: associationId,
+          version,
+        },
+        data: { isPrimary, version: { increment: 1 } },
+      });
+      if (updated.count !== 1) return undefined;
+      await transaction.artistBusinessPartnerContactRole.deleteMany({
+        where: { artistBusinessPartnerContactId: representativeId },
+      });
+      await transaction.artistBusinessPartnerContactRole.createMany({
+        data: roleIds.map((roleId) => ({
+          organizationId: access.organizationId,
+          artistBusinessPartnerContactId: representativeId,
+          roleId,
+        })),
+      });
+      await this.audit.append(
+        transaction,
+        access,
+        'artist.representative_updated',
+        'artist_business_partner_contact',
+        representativeId,
+        {
+          artistId,
+          artistBusinessPartnerId: associationId,
+          roleIds,
+          isPrimary,
+          previousVersion: version,
+        },
+      );
+      return this.findArtist(transaction, access.organizationId, artistId);
+    });
+  }
+
+  async unlinkArtistRepresentative(
+    access: AccessContext,
+    artistId: string,
+    associationId: string,
+    representativeId: string,
+    version: number,
+  ): Promise<ArtistRecord | undefined> {
+    return this.prisma.transaction(async (transaction) => {
+      const updated = await transaction.artistBusinessPartnerContact.updateMany({
+        where: {
+          id: representativeId,
+          organizationId: access.organizationId,
+          artistBusinessPartnerId: associationId,
+          version,
+        },
+        data: { version: { increment: 1 } },
+      });
+      if (updated.count !== 1) return undefined;
+      const representative = await transaction.artistBusinessPartnerContact.findUniqueOrThrow({
+        where: { id: representativeId },
+      });
+      await transaction.artistBusinessPartnerContactRole.deleteMany({
+        where: { artistBusinessPartnerContactId: representativeId },
+      });
+      await transaction.artistBusinessPartnerContact.delete({ where: { id: representativeId } });
+      await this.audit.append(
+        transaction,
+        access,
+        'artist.representative_unlinked',
+        'artist_business_partner_contact',
+        representativeId,
+        {
+          artistId,
+          artistBusinessPartnerId: associationId,
+          businessPartnerContactId: representative.businessPartnerContactId,
+          previousVersion: version,
+        },
+      );
+      return this.findArtist(transaction, access.organizationId, artistId);
+    });
+  }
+
   async linkBusinessPartnerContact(
     access: AccessContext,
     businessPartnerId: string,
@@ -563,6 +1024,25 @@ export class PrismaMasterDataRepository implements MasterDataRepository {
         'business_partner_contact',
         link.id,
         { businessPartnerId, contactId, roleIds },
+      );
+      return (await this.findPartner(transaction, access.organizationId, businessPartnerId))!;
+    });
+  }
+
+  async createBusinessPartnerContact(
+    access: AccessContext,
+    businessPartnerId: string,
+    values: ContactValues,
+    roleIds: string[],
+  ): Promise<BusinessPartnerRecord> {
+    return this.prisma.transaction(async (transaction) => {
+      const contactId = await this.createContactInTransaction(transaction, access, values);
+      await this.ensureBusinessPartnerContact(
+        transaction,
+        access,
+        businessPartnerId,
+        contactId,
+        roleIds,
       );
       return (await this.findPartner(transaction, access.organizationId, businessPartnerId))!;
     });
@@ -644,6 +1124,104 @@ export class PrismaMasterDataRepository implements MasterDataRepository {
     });
   }
 
+  async businessPartnerContactIsRepresentative(
+    organizationId: string,
+    associationId: string,
+  ): Promise<boolean> {
+    return (
+      (await this.prisma.database.artistBusinessPartnerContact.count({
+        where: { organizationId, businessPartnerContactId: associationId },
+      })) > 0
+    );
+  }
+
+  private async createContactInTransaction(
+    transaction: TransactionClient,
+    access: AccessContext,
+    values: ContactValues,
+  ): Promise<string> {
+    const contact = await transaction.contact.create({
+      data: { organizationId: access.organizationId, ...values },
+    });
+    await this.audit.append(transaction, access, 'contact.created', 'contact', contact.id, {});
+    return contact.id;
+  }
+
+  private async ensureBusinessPartnerContact(
+    transaction: TransactionClient,
+    access: AccessContext,
+    businessPartnerId: string,
+    contactId: string,
+    roleIds: string[],
+  ): Promise<{ id: string }> {
+    const existing = await transaction.businessPartnerContact.findFirst({
+      where: { organizationId: access.organizationId, businessPartnerId, contactId },
+      select: { id: true },
+    });
+    if (existing) return existing;
+    const link = await transaction.businessPartnerContact.create({
+      data: { organizationId: access.organizationId, businessPartnerId, contactId },
+    });
+    await transaction.businessPartnerContactRole.createMany({
+      data: roleIds.map((roleId) => ({
+        organizationId: access.organizationId,
+        businessPartnerContactId: link.id,
+        roleId,
+      })),
+    });
+    await this.audit.append(
+      transaction,
+      access,
+      'business_partner.contact_linked',
+      'business_partner_contact',
+      link.id,
+      { businessPartnerId, contactId, roleIds },
+    );
+    return link;
+  }
+
+  private async createArtistRepresentativeInTransaction(
+    transaction: TransactionClient,
+    access: AccessContext,
+    associationId: string,
+    businessPartnerId: string,
+    businessPartnerContactId: string,
+    roleIds: string[],
+    isPrimary: boolean,
+  ): Promise<{ id: string }> {
+    const link = await transaction.artistBusinessPartnerContact.create({
+      data: {
+        organizationId: access.organizationId,
+        artistBusinessPartnerId: associationId,
+        businessPartnerId,
+        businessPartnerContactId,
+        isPrimary,
+      },
+    });
+    await transaction.artistBusinessPartnerContactRole.createMany({
+      data: roleIds.map((roleId) => ({
+        organizationId: access.organizationId,
+        artistBusinessPartnerContactId: link.id,
+        roleId,
+      })),
+    });
+    await this.audit.append(
+      transaction,
+      access,
+      'artist.representative_linked',
+      'artist_business_partner_contact',
+      link.id,
+      {
+        artistBusinessPartnerId: associationId,
+        businessPartnerId,
+        businessPartnerContactId,
+        roleIds,
+        isPrimary,
+      },
+    );
+    return link;
+  }
+
   private async findArtist(
     database: Database,
     organizationId: string,
@@ -682,16 +1260,60 @@ export class PrismaMasterDataRepository implements MasterDataRepository {
 
   private mapArtist(row: ArtistRow): ArtistRecord {
     const contacts = row.contacts.map((association) => this.mapAssociation(association));
+    const businessPartners = row.businessPartners.map((association) =>
+      this.mapArtistBusinessPartner(association),
+    );
     return {
       ...row,
       archivedAt: row.archivedAt?.toISOString() ?? null,
       createdAt: row.createdAt.toISOString(),
       updatedAt: row.updatedAt.toISOString(),
-      incomplete: artistIsIncomplete(
-        row,
-        contacts.map(({ contact }) => contact),
-      ),
+      incomplete: artistIsIncomplete(row, [
+        ...contacts.map(({ contact }) => contact),
+        ...businessPartners.flatMap(({ representatives }) =>
+          representatives.map(({ contact }) => contact),
+        ),
+      ]),
       contacts,
+      businessPartners,
+    };
+  }
+
+  private mapArtistBusinessPartner(
+    association: ArtistRow['businessPartners'][number],
+  ): ArtistRecord['businessPartners'][number] {
+    return {
+      id: association.id,
+      version: association.version,
+      businessPartner: {
+        id: association.businessPartner.id,
+        companyName: association.businessPartner.companyName,
+        email: association.businessPartner.email,
+        phone: association.businessPartner.phone,
+        status: association.businessPartner.status,
+      },
+      roles: association.roles.map(({ role }) => role),
+      representatives: association.representatives.map((representative) => {
+        const contact = representative.businessPartnerContact.contact;
+        return {
+          id: representative.id,
+          version: representative.version,
+          businessPartnerContactId: representative.businessPartnerContactId,
+          isPrimary: representative.isPrimary,
+          contact: {
+            id: contact.id,
+            firstName: contact.firstName,
+            lastName: contact.lastName,
+            label: contact.label,
+            email: contact.email,
+            phone: contact.phone,
+            mobile: contact.mobile,
+            status: contact.status,
+            incomplete: contactIsIncomplete(contact),
+          },
+          roles: representative.roles.map(({ role }) => role),
+        };
+      }),
     };
   }
 

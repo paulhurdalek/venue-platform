@@ -4,7 +4,9 @@
 
 Phase 1 provides the identity and tenant boundary. Phase 3 adds the first business module:
 organization-owned Artists, reusable Contacts, Business Partners and their normalized role-bearing
-associations. Bookings, events, calculations, documents, invoices and rooms remain absent.
+associations. Artist representation by a company is an explicit normalized association whose
+representatives point to existing company-Contact associations; it is never inferred from shared
+Contacts. Bookings, events, calculations, documents, invoices and rooms remain absent.
 
 ## Runtime view
 
@@ -61,7 +63,8 @@ loads the current membership from PostgreSQL, requires `ACTIVE`, checks the conc
 key, and checks the selected Location scope where applicable. Controllers never authorize by role
 name. Services repeat `organization_id` in every business query; mapping tables additionally use
 composite organization foreign keys. Unknown and foreign tenant IDs both return the same 404
-response.
+response. Artist-company representatives additionally use company-aware three-column foreign keys,
+which ensure that the selected source Contact association belongs to the same company and tenant.
 
 The `master-data` API module is the first concrete application of the four-layer business-module
 rule. It owns Artist, Contact and Business Partner presentation, application, domain and

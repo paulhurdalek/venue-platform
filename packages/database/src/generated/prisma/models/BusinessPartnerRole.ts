@@ -167,6 +167,7 @@ export type BusinessPartnerRoleWhereInput = {
   key?: Prisma.StringFilter<"BusinessPartnerRole"> | string
   name?: Prisma.StringFilter<"BusinessPartnerRole"> | string
   assignments?: Prisma.BusinessPartnerRoleAssignmentListRelationFilter
+  artistAssignments?: Prisma.ArtistBusinessPartnerRoleListRelationFilter
 }
 
 export type BusinessPartnerRoleOrderByWithRelationInput = {
@@ -174,6 +175,7 @@ export type BusinessPartnerRoleOrderByWithRelationInput = {
   key?: Prisma.SortOrder
   name?: Prisma.SortOrder
   assignments?: Prisma.BusinessPartnerRoleAssignmentOrderByRelationAggregateInput
+  artistAssignments?: Prisma.ArtistBusinessPartnerRoleOrderByRelationAggregateInput
 }
 
 export type BusinessPartnerRoleWhereUniqueInput = Prisma.AtLeast<{
@@ -184,6 +186,7 @@ export type BusinessPartnerRoleWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.BusinessPartnerRoleWhereInput | Prisma.BusinessPartnerRoleWhereInput[]
   name?: Prisma.StringFilter<"BusinessPartnerRole"> | string
   assignments?: Prisma.BusinessPartnerRoleAssignmentListRelationFilter
+  artistAssignments?: Prisma.ArtistBusinessPartnerRoleListRelationFilter
 }, "id" | "key">
 
 export type BusinessPartnerRoleOrderByWithAggregationInput = {
@@ -209,6 +212,7 @@ export type BusinessPartnerRoleCreateInput = {
   key: string
   name: string
   assignments?: Prisma.BusinessPartnerRoleAssignmentCreateNestedManyWithoutRoleInput
+  artistAssignments?: Prisma.ArtistBusinessPartnerRoleCreateNestedManyWithoutRoleInput
 }
 
 export type BusinessPartnerRoleUncheckedCreateInput = {
@@ -216,6 +220,7 @@ export type BusinessPartnerRoleUncheckedCreateInput = {
   key: string
   name: string
   assignments?: Prisma.BusinessPartnerRoleAssignmentUncheckedCreateNestedManyWithoutRoleInput
+  artistAssignments?: Prisma.ArtistBusinessPartnerRoleUncheckedCreateNestedManyWithoutRoleInput
 }
 
 export type BusinessPartnerRoleUpdateInput = {
@@ -223,6 +228,7 @@ export type BusinessPartnerRoleUpdateInput = {
   key?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   assignments?: Prisma.BusinessPartnerRoleAssignmentUpdateManyWithoutRoleNestedInput
+  artistAssignments?: Prisma.ArtistBusinessPartnerRoleUpdateManyWithoutRoleNestedInput
 }
 
 export type BusinessPartnerRoleUncheckedUpdateInput = {
@@ -230,6 +236,7 @@ export type BusinessPartnerRoleUncheckedUpdateInput = {
   key?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   assignments?: Prisma.BusinessPartnerRoleAssignmentUncheckedUpdateManyWithoutRoleNestedInput
+  artistAssignments?: Prisma.ArtistBusinessPartnerRoleUncheckedUpdateManyWithoutRoleNestedInput
 }
 
 export type BusinessPartnerRoleCreateManyInput = {
@@ -287,16 +294,32 @@ export type BusinessPartnerRoleUpdateOneRequiredWithoutAssignmentsNestedInput = 
   update?: Prisma.XOR<Prisma.XOR<Prisma.BusinessPartnerRoleUpdateToOneWithWhereWithoutAssignmentsInput, Prisma.BusinessPartnerRoleUpdateWithoutAssignmentsInput>, Prisma.BusinessPartnerRoleUncheckedUpdateWithoutAssignmentsInput>
 }
 
+export type BusinessPartnerRoleCreateNestedOneWithoutArtistAssignmentsInput = {
+  create?: Prisma.XOR<Prisma.BusinessPartnerRoleCreateWithoutArtistAssignmentsInput, Prisma.BusinessPartnerRoleUncheckedCreateWithoutArtistAssignmentsInput>
+  connectOrCreate?: Prisma.BusinessPartnerRoleCreateOrConnectWithoutArtistAssignmentsInput
+  connect?: Prisma.BusinessPartnerRoleWhereUniqueInput
+}
+
+export type BusinessPartnerRoleUpdateOneRequiredWithoutArtistAssignmentsNestedInput = {
+  create?: Prisma.XOR<Prisma.BusinessPartnerRoleCreateWithoutArtistAssignmentsInput, Prisma.BusinessPartnerRoleUncheckedCreateWithoutArtistAssignmentsInput>
+  connectOrCreate?: Prisma.BusinessPartnerRoleCreateOrConnectWithoutArtistAssignmentsInput
+  upsert?: Prisma.BusinessPartnerRoleUpsertWithoutArtistAssignmentsInput
+  connect?: Prisma.BusinessPartnerRoleWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BusinessPartnerRoleUpdateToOneWithWhereWithoutArtistAssignmentsInput, Prisma.BusinessPartnerRoleUpdateWithoutArtistAssignmentsInput>, Prisma.BusinessPartnerRoleUncheckedUpdateWithoutArtistAssignmentsInput>
+}
+
 export type BusinessPartnerRoleCreateWithoutAssignmentsInput = {
   id?: string
   key: string
   name: string
+  artistAssignments?: Prisma.ArtistBusinessPartnerRoleCreateNestedManyWithoutRoleInput
 }
 
 export type BusinessPartnerRoleUncheckedCreateWithoutAssignmentsInput = {
   id?: string
   key: string
   name: string
+  artistAssignments?: Prisma.ArtistBusinessPartnerRoleUncheckedCreateNestedManyWithoutRoleInput
 }
 
 export type BusinessPartnerRoleCreateOrConnectWithoutAssignmentsInput = {
@@ -319,12 +342,58 @@ export type BusinessPartnerRoleUpdateWithoutAssignmentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   key?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  artistAssignments?: Prisma.ArtistBusinessPartnerRoleUpdateManyWithoutRoleNestedInput
 }
 
 export type BusinessPartnerRoleUncheckedUpdateWithoutAssignmentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   key?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  artistAssignments?: Prisma.ArtistBusinessPartnerRoleUncheckedUpdateManyWithoutRoleNestedInput
+}
+
+export type BusinessPartnerRoleCreateWithoutArtistAssignmentsInput = {
+  id?: string
+  key: string
+  name: string
+  assignments?: Prisma.BusinessPartnerRoleAssignmentCreateNestedManyWithoutRoleInput
+}
+
+export type BusinessPartnerRoleUncheckedCreateWithoutArtistAssignmentsInput = {
+  id?: string
+  key: string
+  name: string
+  assignments?: Prisma.BusinessPartnerRoleAssignmentUncheckedCreateNestedManyWithoutRoleInput
+}
+
+export type BusinessPartnerRoleCreateOrConnectWithoutArtistAssignmentsInput = {
+  where: Prisma.BusinessPartnerRoleWhereUniqueInput
+  create: Prisma.XOR<Prisma.BusinessPartnerRoleCreateWithoutArtistAssignmentsInput, Prisma.BusinessPartnerRoleUncheckedCreateWithoutArtistAssignmentsInput>
+}
+
+export type BusinessPartnerRoleUpsertWithoutArtistAssignmentsInput = {
+  update: Prisma.XOR<Prisma.BusinessPartnerRoleUpdateWithoutArtistAssignmentsInput, Prisma.BusinessPartnerRoleUncheckedUpdateWithoutArtistAssignmentsInput>
+  create: Prisma.XOR<Prisma.BusinessPartnerRoleCreateWithoutArtistAssignmentsInput, Prisma.BusinessPartnerRoleUncheckedCreateWithoutArtistAssignmentsInput>
+  where?: Prisma.BusinessPartnerRoleWhereInput
+}
+
+export type BusinessPartnerRoleUpdateToOneWithWhereWithoutArtistAssignmentsInput = {
+  where?: Prisma.BusinessPartnerRoleWhereInput
+  data: Prisma.XOR<Prisma.BusinessPartnerRoleUpdateWithoutArtistAssignmentsInput, Prisma.BusinessPartnerRoleUncheckedUpdateWithoutArtistAssignmentsInput>
+}
+
+export type BusinessPartnerRoleUpdateWithoutArtistAssignmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  assignments?: Prisma.BusinessPartnerRoleAssignmentUpdateManyWithoutRoleNestedInput
+}
+
+export type BusinessPartnerRoleUncheckedUpdateWithoutArtistAssignmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  assignments?: Prisma.BusinessPartnerRoleAssignmentUncheckedUpdateManyWithoutRoleNestedInput
 }
 
 
@@ -334,10 +403,12 @@ export type BusinessPartnerRoleUncheckedUpdateWithoutAssignmentsInput = {
 
 export type BusinessPartnerRoleCountOutputType = {
   assignments: number
+  artistAssignments: number
 }
 
 export type BusinessPartnerRoleCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   assignments?: boolean | BusinessPartnerRoleCountOutputTypeCountAssignmentsArgs
+  artistAssignments?: boolean | BusinessPartnerRoleCountOutputTypeCountArtistAssignmentsArgs
 }
 
 /**
@@ -357,12 +428,20 @@ export type BusinessPartnerRoleCountOutputTypeCountAssignmentsArgs<ExtArgs exten
   where?: Prisma.BusinessPartnerRoleAssignmentWhereInput
 }
 
+/**
+ * BusinessPartnerRoleCountOutputType without action
+ */
+export type BusinessPartnerRoleCountOutputTypeCountArtistAssignmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ArtistBusinessPartnerRoleWhereInput
+}
+
 
 export type BusinessPartnerRoleSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   key?: boolean
   name?: boolean
   assignments?: boolean | Prisma.BusinessPartnerRole$assignmentsArgs<ExtArgs>
+  artistAssignments?: boolean | Prisma.BusinessPartnerRole$artistAssignmentsArgs<ExtArgs>
   _count?: boolean | Prisma.BusinessPartnerRoleCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["businessPartnerRole"]>
 
@@ -387,6 +466,7 @@ export type BusinessPartnerRoleSelectScalar = {
 export type BusinessPartnerRoleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "key" | "name", ExtArgs["result"]["businessPartnerRole"]>
 export type BusinessPartnerRoleInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   assignments?: boolean | Prisma.BusinessPartnerRole$assignmentsArgs<ExtArgs>
+  artistAssignments?: boolean | Prisma.BusinessPartnerRole$artistAssignmentsArgs<ExtArgs>
   _count?: boolean | Prisma.BusinessPartnerRoleCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type BusinessPartnerRoleIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -396,6 +476,7 @@ export type $BusinessPartnerRolePayload<ExtArgs extends runtime.Types.Extensions
   name: "BusinessPartnerRole"
   objects: {
     assignments: Prisma.$BusinessPartnerRoleAssignmentPayload<ExtArgs>[]
+    artistAssignments: Prisma.$ArtistBusinessPartnerRolePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -796,6 +877,7 @@ readonly fields: BusinessPartnerRoleFieldRefs;
 export interface Prisma__BusinessPartnerRoleClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   assignments<T extends Prisma.BusinessPartnerRole$assignmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BusinessPartnerRole$assignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BusinessPartnerRoleAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  artistAssignments<T extends Prisma.BusinessPartnerRole$artistAssignmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BusinessPartnerRole$artistAssignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ArtistBusinessPartnerRolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1242,6 +1324,30 @@ export type BusinessPartnerRole$assignmentsArgs<ExtArgs extends runtime.Types.Ex
   take?: number
   skip?: number
   distinct?: Prisma.BusinessPartnerRoleAssignmentScalarFieldEnum | Prisma.BusinessPartnerRoleAssignmentScalarFieldEnum[]
+}
+
+/**
+ * BusinessPartnerRole.artistAssignments
+ */
+export type BusinessPartnerRole$artistAssignmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ArtistBusinessPartnerRole
+   */
+  select?: Prisma.ArtistBusinessPartnerRoleSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ArtistBusinessPartnerRole
+   */
+  omit?: Prisma.ArtistBusinessPartnerRoleOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ArtistBusinessPartnerRoleInclude<ExtArgs> | null
+  where?: Prisma.ArtistBusinessPartnerRoleWhereInput
+  orderBy?: Prisma.ArtistBusinessPartnerRoleOrderByWithRelationInput | Prisma.ArtistBusinessPartnerRoleOrderByWithRelationInput[]
+  cursor?: Prisma.ArtistBusinessPartnerRoleWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ArtistBusinessPartnerRoleScalarFieldEnum | Prisma.ArtistBusinessPartnerRoleScalarFieldEnum[]
 }
 
 /**

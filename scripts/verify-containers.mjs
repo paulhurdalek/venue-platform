@@ -12,6 +12,10 @@ const pnpmPackage = JSON.parse(readFileSync(pnpmPackagePath, 'utf8'));
 const pnpmCli = resolve(dirname(pnpmPackagePath), pnpmPackage.bin.pnpm);
 const projectName = `venue-platform-phase3-${process.pid}`;
 const marker = randomUUID();
+const developmentDatabasePort = process.env.VENUE_VERIFICATION_POSTGRES_PORT ?? '55432';
+const testDatabasePort = process.env.VENUE_VERIFICATION_POSTGRES_TEST_PORT ?? '55433';
+process.env.VENUE_POSTGRES_PORT = developmentDatabasePort;
+process.env.VENUE_POSTGRES_TEST_PORT = testDatabasePort;
 const composeArguments = ['compose', '--project-name', projectName, '--profile', 'test'];
 
 function run(command, args, options = {}) {
@@ -66,8 +70,8 @@ try {
   compose('up', '--detach', '--wait', '--wait-timeout', '120', 'postgres', 'postgres-test');
 
   const testDatabaseEnvironment = {
-    DATABASE_URL: 'postgresql://venue:venue_test_local_only@127.0.0.1:5433/venue_test',
-    TEST_DATABASE_URL: 'postgresql://venue:venue_test_local_only@127.0.0.1:5433/venue_test',
+    DATABASE_URL: `postgresql://venue:venue_test_local_only@127.0.0.1:${testDatabasePort}/venue_test`,
+    TEST_DATABASE_URL: `postgresql://venue:venue_test_local_only@127.0.0.1:${testDatabasePort}/venue_test`,
   };
 
   logStep(2, 'Applying the committed Prisma migrations to the test database');

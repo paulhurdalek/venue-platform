@@ -1,5 +1,13 @@
 import { activePageMembership } from '../../../../../src/api/page-access';
 import { hasPermission, serverApiClient, unwrap } from '../../../../../src/api/server';
+import {
+  ContactChannels,
+  DetailField,
+  DetailFields,
+  DetailSection,
+  DetailSections,
+} from '../../../../components/master-data/detail-display';
+import { EditableDetail } from '../../../../components/master-data/editable-detail';
 import { OrganizationForm } from './organization-form';
 
 export default async function OrganizationSettingsPage({
@@ -20,52 +28,52 @@ export default async function OrganizationSettingsPage({
   const canEdit = hasPermission(membership, 'organization.edit');
 
   return (
-    <>
-      <header className="page-heading">
-        <div>
-          <p className="eyebrow">Einstellungen</p>
-          <h1>Organisation</h1>
-          <p>Grundlegende Namen und Kontaktdaten des Mandanten.</p>
-        </div>
+    <EditableDetail
+      badges={
         <span className={`status-badge status-badge--${organization.status.toLowerCase()}`}>
           {organization.status === 'ACTIVE' ? 'Aktiv' : 'Archiviert'}
         </span>
-      </header>
-      <section className="panel">
-        <div className="panel__heading">
-          <div>
-            <h2>Stammdaten</h2>
-            <p>Zuletzt geändert: {new Date(organization.updatedAt).toLocaleString('de-DE')}</p>
-          </div>
-        </div>
-        {canEdit ? (
-          <OrganizationForm organization={organization} />
-        ) : (
-          <dl className="detail-list">
-            <div>
-              <dt>Name</dt>
-              <dd>{organization.name}</dd>
-            </div>
-            <div>
-              <dt>Rechtlicher Name</dt>
-              <dd>{organization.legalName ?? 'Nicht angegeben'}</dd>
-            </div>
-            <div>
-              <dt>E-Mail</dt>
-              <dd>{organization.email ?? 'Nicht angegeben'}</dd>
-            </div>
-            <div>
-              <dt>Telefon</dt>
-              <dd>{organization.phone ?? 'Nicht angegeben'}</dd>
-            </div>
-          </dl>
-        )}
-      </section>
-      {!canEdit ? (
-        <p className="permission-note">
-          Sie besitzen Leserechte. Änderungen sind für Ihre Rolle nicht freigegeben.
-        </p>
+      }
+      canEdit={canEdit}
+      editTitle="Organisation bearbeiten"
+      eyebrow="Einstellungen"
+      id="organization-detail"
+      sectionTitle="Organisationsdaten"
+      summary={organization.name}
+      title="Organisation"
+      updatedLabel={`Zuletzt geändert: ${new Date(organization.updatedAt).toLocaleString('de-DE')}`}
+      view={<OrganizationDetails organization={organization} />}
+    >
+      {canEdit ? <OrganizationForm organization={organization} /> : null}
+    </EditableDetail>
+  );
+}
+
+function OrganizationDetails({
+  organization,
+}: {
+  organization: {
+    name: string;
+    legalName?: string | null;
+    email?: string | null;
+    phone?: string | null;
+  };
+}) {
+  return (
+    <DetailSections>
+      <DetailSection title="Basisdaten">
+        <DetailFields>
+          <DetailField label="Name">{organization.name}</DetailField>
+          {organization.legalName ? (
+            <DetailField label="Rechtlicher Name">{organization.legalName}</DetailField>
+          ) : null}
+        </DetailFields>
+      </DetailSection>
+      {organization.email || organization.phone ? (
+        <DetailSection title="Kontakt">
+          <ContactChannels contact={organization} emptyMessage={null} />
+        </DetailSection>
       ) : null}
-    </>
+    </DetailSections>
   );
 }

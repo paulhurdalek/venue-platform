@@ -41,6 +41,37 @@ export interface ContactAssociation {
   roles: RoleReference[];
 }
 
+export interface BusinessPartnerSummary {
+  id: string;
+  companyName: string;
+  email: string | null;
+  phone: string | null;
+  status: EntityStatus;
+}
+
+export interface ArtistRepresentative {
+  id: string;
+  version: number;
+  businessPartnerContactId: string;
+  isPrimary: boolean;
+  contact: ContactSummary;
+  roles: RoleReference[];
+}
+
+export interface ArtistBusinessPartnerAssociation {
+  id: string;
+  version: number;
+  businessPartner: BusinessPartnerSummary;
+  roles: RoleReference[];
+  representatives: ArtistRepresentative[];
+}
+
+export interface ArtistRepresentativeValues {
+  businessPartnerContactId: string;
+  roleIds: string[];
+  isPrimary: boolean;
+}
+
 export interface ArtistRecord {
   id: string;
   organizationId: string;
@@ -65,6 +96,7 @@ export interface ArtistRecord {
   updatedAt: string;
   incomplete: boolean;
   contacts: ContactAssociation[];
+  businessPartners: ArtistBusinessPartnerAssociation[];
 }
 
 export interface ContactRecord extends ContactSummary {
@@ -124,12 +156,24 @@ export type ArtistValues = Omit<
   | 'updatedAt'
   | 'incomplete'
   | 'contacts'
+  | 'businessPartners'
 >;
 
 export type ContactValues = Pick<
   ContactRecord,
   'firstName' | 'lastName' | 'label' | 'email' | 'phone' | 'mobile' | 'notes'
 >;
+
+export type ContactMatchReason = 'EMAIL' | 'PHONE' | 'NAME';
+
+export interface ContactDuplicateMatch {
+  contact: ContactSummary;
+  reasons: ContactMatchReason[];
+  strength: 'STRONG' | 'WEAK';
+}
+
+export type ContactReference =
+  { contactId: string; contact?: never } | { contact: ContactValues; contactId?: never };
 
 export type BusinessPartnerValues = Omit<
   BusinessPartnerRecord,

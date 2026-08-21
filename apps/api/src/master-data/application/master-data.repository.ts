@@ -1,10 +1,13 @@
 import type { AccessContext } from '../../security/access.types.js';
 import type {
   ArtistRecord,
+  ArtistRepresentativeValues,
   ArtistValues,
   BusinessPartnerRecord,
   BusinessPartnerValues,
   ContactRecord,
+  ContactDuplicateMatch,
+  ContactReference,
   ContactValues,
   EntityStatus,
   ListQuery,
@@ -35,6 +38,10 @@ export interface MasterDataRepository {
   listContacts(organizationId: string, query: ListQuery): Promise<PageResult<ContactRecord>>;
   contact(organizationId: string, contactId: string): Promise<ContactRecord | undefined>;
   createContact(access: AccessContext, values: ContactValues): Promise<ContactRecord>;
+  findContactMatches(
+    organizationId: string,
+    values: ContactValues,
+  ): Promise<ContactDuplicateMatch[]>;
   updateContact(
     access: AccessContext,
     contactId: string,
@@ -90,6 +97,12 @@ export interface MasterDataRepository {
     contactId: string,
     roleIds: string[],
   ): Promise<ArtistRecord>;
+  createArtistContact(
+    access: AccessContext,
+    artistId: string,
+    values: ContactValues,
+    roleIds: string[],
+  ): Promise<ArtistRecord>;
   unlinkArtistContact(
     access: AccessContext,
     artistId: string,
@@ -103,10 +116,77 @@ export interface MasterDataRepository {
     version: number,
     roleIds: string[],
   ): Promise<ArtistRecord | undefined>;
+  linkArtistBusinessPartner(
+    access: AccessContext,
+    artistId: string,
+    businessPartnerId: string,
+    roleIds: string[],
+    representatives: ArtistRepresentativeValues[],
+  ): Promise<ArtistRecord>;
+  linkArtistBusinessPartnerWithContact(
+    access: AccessContext,
+    artistId: string,
+    businessPartnerId: string,
+    roleIds: string[],
+    contact: ContactReference,
+    contactRoleIds: string[],
+    isPrimary: boolean,
+  ): Promise<ArtistRecord>;
+  setArtistBusinessPartnerRoles(
+    access: AccessContext,
+    artistId: string,
+    associationId: string,
+    version: number,
+    roleIds: string[],
+  ): Promise<ArtistRecord | undefined>;
+  unlinkArtistBusinessPartner(
+    access: AccessContext,
+    artistId: string,
+    associationId: string,
+    version: number,
+  ): Promise<ArtistRecord | undefined>;
+  addArtistRepresentative(
+    access: AccessContext,
+    artistId: string,
+    associationId: string,
+    businessPartnerId: string,
+    representative: ArtistRepresentativeValues,
+  ): Promise<ArtistRecord>;
+  addArtistRepresentativeWithContact(
+    access: AccessContext,
+    artistId: string,
+    associationId: string,
+    businessPartnerId: string,
+    contact: ContactReference,
+    contactRoleIds: string[],
+    isPrimary: boolean,
+  ): Promise<ArtistRecord>;
+  updateArtistRepresentative(
+    access: AccessContext,
+    artistId: string,
+    associationId: string,
+    representativeId: string,
+    version: number,
+    roleIds: string[],
+    isPrimary: boolean,
+  ): Promise<ArtistRecord | undefined>;
+  unlinkArtistRepresentative(
+    access: AccessContext,
+    artistId: string,
+    associationId: string,
+    representativeId: string,
+    version: number,
+  ): Promise<ArtistRecord | undefined>;
   linkBusinessPartnerContact(
     access: AccessContext,
     businessPartnerId: string,
     contactId: string,
+    roleIds: string[],
+  ): Promise<BusinessPartnerRecord>;
+  createBusinessPartnerContact(
+    access: AccessContext,
+    businessPartnerId: string,
+    values: ContactValues,
     roleIds: string[],
   ): Promise<BusinessPartnerRecord>;
   unlinkBusinessPartnerContact(
@@ -122,4 +202,8 @@ export interface MasterDataRepository {
     version: number,
     roleIds: string[],
   ): Promise<BusinessPartnerRecord | undefined>;
+  businessPartnerContactIsRepresentative(
+    organizationId: string,
+    associationId: string,
+  ): Promise<boolean>;
 }

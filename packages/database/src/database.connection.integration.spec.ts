@@ -69,11 +69,13 @@ describeWithDatabase('PostgreSQL connection', () => {
         AND table_name IN (
           'artist', 'contact', 'contact_role', 'artist_contact', 'artist_contact_role',
           'business_partner', 'business_partner_role', 'business_partner_role_assignment',
-          'business_partner_contact', 'business_partner_contact_role'
+          'business_partner_contact', 'business_partner_contact_role',
+          'artist_business_partner', 'artist_business_partner_role',
+          'artist_business_partner_contact', 'artist_business_partner_contact_role'
         )
       ORDER BY table_name
     `;
-    expect(tables).toHaveLength(10);
+    expect(tables).toHaveLength(14);
 
     const tenantColumns = await client.$queryRaw<Array<{ table_name: string }>>`
       SELECT table_name
@@ -83,11 +85,13 @@ describeWithDatabase('PostgreSQL connection', () => {
         AND table_name IN (
           'artist', 'contact', 'artist_contact', 'artist_contact_role',
           'business_partner', 'business_partner_role_assignment',
-          'business_partner_contact', 'business_partner_contact_role'
+          'business_partner_contact', 'business_partner_contact_role',
+          'artist_business_partner', 'artist_business_partner_role',
+          'artist_business_partner_contact', 'artist_business_partner_contact_role'
         )
       ORDER BY table_name
     `;
-    expect(tenantColumns).toHaveLength(8);
+    expect(tenantColumns).toHaveLength(12);
 
     const compositeForeignKeys = await client.$queryRaw<Array<{ constraint_name: string }>>`
       SELECT conname AS constraint_name
@@ -100,10 +104,16 @@ describeWithDatabase('PostgreSQL connection', () => {
           'business_partner_role_assignment_business_partner_id_organization_id_fkey',
           'business_partner_contact_business_partner_id_organization_id_fkey',
           'business_partner_contact_contact_id_organization_id_fkey',
-          'business_partner_contact_role_business_partner_contact_id_organization_id_fkey'
+          'business_partner_contact_role_business_partner_contact_id_organization_id_fkey',
+          'artist_business_partner_artist_tenant_fkey',
+          'artist_business_partner_partner_tenant_fkey',
+          'artist_business_partner_role_parent_tenant_fkey',
+          'artist_partner_contact_parent_tenant_partner_fkey',
+          'artist_partner_contact_source_tenant_partner_fkey',
+          'artist_partner_contact_role_parent_tenant_fkey'
         )
     `;
-    expect(compositeForeignKeys).toHaveLength(7);
+    expect(compositeForeignKeys).toHaveLength(13);
 
     const businessChecks = await client.$queryRaw<Array<{ constraint_name: string }>>`
       SELECT conname AS constraint_name
@@ -123,10 +133,21 @@ describeWithDatabase('PostgreSQL connection', () => {
           'business_partner_billing_country_code_format',
           'business_partner_version_positive',
           'business_partner_archive_consistent',
-          'business_partner_contact_version_positive'
+          'business_partner_contact_version_positive',
+          'artist_business_partner_version_positive',
+          'artist_business_partner_contact_version_positive'
         )
     `;
-    expect(businessChecks).toHaveLength(14);
+    expect(businessChecks).toHaveLength(16);
+
+    const primaryRepresentativeIndex = await client.$queryRaw<Array<{ indexname: string }>>`
+      SELECT indexname
+      FROM pg_indexes
+      WHERE schemaname = 'public'
+        AND indexname = 'artist_partner_contact_primary_key'
+        AND indexdef LIKE '%WHERE (is_primary = true)%'
+    `;
+    expect(primaryRepresentativeIndex).toHaveLength(1);
 
     const lifecycleValues = await client.$queryRaw<Array<{ enumlabel: string }>>`
       SELECT enumlabel
@@ -147,5 +168,13 @@ describeWithDatabase('PostgreSQL connection', () => {
         AND rolled_back_at IS NULL
     `;
     expect(migration).toHaveLength(1);
+    const representationMigration = await client.$queryRaw<Array<{ migration_name: string }>>`
+      SELECT migration_name
+      FROM _prisma_migrations
+      WHERE migration_name = '20260817000100_artist_representations'
+        AND finished_at IS NOT NULL
+        AND rolled_back_at IS NULL
+    `;
+    expect(representationMigration).toHaveLength(1);
   });
 });

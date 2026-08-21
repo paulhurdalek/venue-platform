@@ -181,3 +181,23 @@ export type BusinessPartnerContact = Prisma.BusinessPartnerContactModel
  * 
  */
 export type BusinessPartnerContactRole = Prisma.BusinessPartnerContactRoleModel
+/**
+ * Model ArtistBusinessPartner
+ * 
+ */
+export type ArtistBusinessPartner = Prisma.ArtistBusinessPartnerModel
+/**
+ * Model ArtistBusinessPartnerRole
+ * 
+ */
+export type ArtistBusinessPartnerRole = Prisma.ArtistBusinessPartnerRoleModel
+/**
+ * Model ArtistBusinessPartnerContact
+ * 
+ */
+export type ArtistBusinessPartnerContact = Prisma.ArtistBusinessPartnerContactModel
+/**
+ * Model ArtistBusinessPartnerContactRole
+ * 
+ */
+export type ArtistBusinessPartnerContactRole = Prisma.ArtistBusinessPartnerContactRoleModel

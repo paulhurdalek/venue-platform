@@ -1,5 +1,6 @@
 import { activePageMembership } from '../../../../src/api/page-access';
 import { hasPermission, serverApiClient, unwrap } from '../../../../src/api/server';
+import { ContactChannels } from '../../../components/master-data/detail-display';
 import { MasterDataFilters, Pagination } from '../../../components/master-data/list-controls';
 
 export default async function BusinessPartnersPage({
@@ -66,7 +67,7 @@ export default async function BusinessPartnersPage({
       <section className="panel">
         <MasterDataFilters q={q} roleKey={roleKey} roles={roles} status={status} />
         <div className="table-wrap">
-          <table>
+          <table className="master-data-table">
             <thead>
               <tr>
                 <th>Firma</th>
@@ -78,7 +79,7 @@ export default async function BusinessPartnersPage({
             <tbody>
               {result.items.map((partner) => (
                 <tr key={partner.id}>
-                  <td>
+                  <td data-label="Firma">
                     <a
                       className="text-link"
                       href={`/o/${organizationId}/business-partners/${partner.id}`}
@@ -86,9 +87,26 @@ export default async function BusinessPartnersPage({
                       {partner.companyName}
                     </a>
                   </td>
-                  <td>{partner.roles.map((role) => role.name).join(', ') || 'Keine Rolle'}</td>
-                  <td>{partner.email ?? partner.phone ?? 'Nicht angegeben'}</td>
-                  <td>
+                  <td data-label="Rollen">
+                    {partner.roles.length ? (
+                      <div className="role-chips">
+                        {partner.roles.map((role) => (
+                          <span className="status-badge" key={role.id}>
+                            {role.name}
+                          </span>
+                        ))}
+                      </div>
+                    ) : (
+                      <span className="muted">Keine Rolle</span>
+                    )}
+                  </td>
+                  <td data-label="Kontakt">
+                    <ContactChannels contact={partner} compact emptyMessage="Keine Kontaktwege" />
+                    {partner.contacts.length ? (
+                      <span className="list-meta">{partner.contacts.length} Ansprechpartner</span>
+                    ) : null}
+                  </td>
+                  <td data-label="Status">
                     <span className={`status-badge status-badge--${partner.status.toLowerCase()}`}>
                       {partner.status === 'ACTIVE' ? 'Aktiv' : 'Archiviert'}
                     </span>
