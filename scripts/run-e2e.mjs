@@ -5,15 +5,28 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { createDatabaseClient } from '../packages/database/dist/index.js';
+import { cleanTestDatabase } from '../packages/database/dist/testing.js';
+import {
+  createE2eNextDistDirectoryName,
+  createE2eTypeScriptConfig,
+  createE2eTypeScriptConfigName,
+  removeE2eNextDistDirectory,
+  removeE2eTypeScriptConfig,
+  restoreFileSnapshots,
+  snapshotFiles,
+} from './e2e-next-artifacts.mjs';
+import { createTestRuntimeEnvironment } from './test-runtime-environment.mjs';
 
 const rootDirectory = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+const webDirectory = resolve(rootDirectory, 'apps/web');
 const rootRequire = createRequire(resolve(rootDirectory, 'package.json'));
 const webRequire = createRequire(resolve(rootDirectory, 'apps/web/package.json'));
 const nextCli = webRequire.resolve('next/dist/bin/next');
 const playwrightCli = rootRequire.resolve('@playwright/test/cli');
 const tsxCli = rootRequire.resolve('tsx/cli');
 
-const databaseUrl = process.env.TEST_DATABASE_URL ?? process.env.DATABASE_URL;
+const configuredTestEnvironment = createTestRuntimeEnvironment();
+const databaseUrl = process.env.TEST_DATABASE_URL ?? configuredTestEnvironment.TEST_DATABASE_URL;
 if (!databaseUrl?.startsWith('postgresql://')) {
   throw new Error('TEST_DATABASE_URL is required for browser tests.');
 }
@@ -23,10 +36,11 @@ const apiPort = Number(process.env.E2E_API_PORT ?? '3101');
 const webBaseUrl = `http://127.0.0.1:${webPort}`;
 const apiBaseUrl = `http://127.0.0.1:${apiPort}`;
 const webServerCommand = process.env.E2E_WEB_SERVER_MODE === 'production' ? 'start' : 'dev';
+const e2eNextDistDirectoryName = createE2eNextDistDirectoryName();
+const e2eTypeScriptConfigName = createE2eTypeScriptConfigName(e2eNextDistDirectoryName);
+const nextManagedFiles = [resolve(webDirectory, 'next-env.d.ts')];
 
-const runtimeEnvironment = {
-  ...process.env,
-  NODE_ENV: 'test',
+const runtimeEnvironment = createTestRuntimeEnvironment({
   DATABASE_URL: databaseUrl,
   TEST_DATABASE_URL: databaseUrl,
   PORT: String(apiPort),
@@ -34,42 +48,11 @@ const runtimeEnvironment = {
   WEB_PUBLIC_URL: webBaseUrl,
   AUTH_PUBLIC_BASE_URL: webBaseUrl,
   AUTH_INTERNAL_BASE_URL: apiBaseUrl,
-  BETTER_AUTH_SECRET:
-    process.env.BETTER_AUTH_SECRET ?? 'test-only-secret-never-use-in-production-1234567890',
-  SESSION_DURATION_SECONDS: process.env.SESSION_DURATION_SECONDS ?? '3600',
-  PASSWORD_MIN_LENGTH: process.env.PASSWORD_MIN_LENGTH ?? '10',
-  BOOTSTRAP_TOKEN_TTL_SECONDS: process.env.BOOTSTRAP_TOKEN_TTL_SECONDS ?? '600',
-  INVITATION_TTL_SECONDS: process.env.INVITATION_TTL_SECONDS ?? '3600',
-  RATE_LIMIT_WINDOW_SECONDS: process.env.RATE_LIMIT_WINDOW_SECONDS ?? '60',
-  RATE_LIMIT_MAX_REQUESTS: process.env.RATE_LIMIT_MAX_REQUESTS ?? '100',
-  AUTH_SIGN_IN_RATE_LIMIT_MAX: process.env.AUTH_SIGN_IN_RATE_LIMIT_MAX ?? '20',
-  SENSITIVE_RATE_LIMIT_MAX: process.env.SENSITIVE_RATE_LIMIT_MAX ?? '50',
-  LOG_LEVEL: 'warn',
-  SWAGGER_UI_ENABLED: 'false',
   API_BASE_URL: apiBaseUrl,
   NEXT_PUBLIC_API_BASE_URL: webBaseUrl,
   E2E_BASE_URL: webBaseUrl,
-};
-
-await cleanDatabase(databaseUrl);
-const bootstrapLink = await createBootstrapLink(runtimeEnvironment);
-
-const apiServer = spawn(
-  process.execPath,
-  [tsxCli, '--tsconfig', 'apps/api/tsconfig.json', 'apps/api/src/main.ts'],
-  {
-    cwd: rootDirectory,
-    detached: process.platform !== 'win32',
-    env: runtimeEnvironment,
-    stdio: 'inherit',
-  },
-);
-
-const webServer = spawn(process.execPath, [nextCli, webServerCommand, '-p', String(webPort)], {
-  cwd: resolve(rootDirectory, 'apps/web'),
-  detached: process.platform !== 'win32',
-  env: runtimeEnvironment,
-  stdio: 'inherit',
+  VENUE_E2E_NEXT_DIST_DIR: e2eNextDistDirectoryName,
+  VENUE_E2E_TSCONFIG: e2eTypeScriptConfigName,
 });
 
 async function waitForServer(server, port, timeoutMs) {
@@ -103,31 +86,79 @@ async function waitForServer(server, port, timeoutMs) {
 }
 
 async function stopProcessTree(child) {
-  if (!child.pid || child.exitCode !== null) return;
+  if (!child?.pid || child.exitCode !== null || child.signalCode !== null) return;
+
+  const stopped = new Promise((resolveStopped) => {
+    child.once('exit', resolveStopped);
+    child.once('error', resolveStopped);
+  });
 
   if (process.platform === 'win32') {
-    child.kill();
-    child.stdout?.destroy();
-    child.stderr?.destroy();
-    child.unref();
-    return;
+    const taskkill = spawn('taskkill.exe', ['/pid', String(child.pid), '/t', '/f'], {
+      stdio: 'ignore',
+      windowsHide: true,
+    });
+    await new Promise((resolveTaskkill) => {
+      taskkill.once('exit', resolveTaskkill);
+      taskkill.once('error', resolveTaskkill);
+    });
+  } else {
+    try {
+      process.kill(-child.pid, 'SIGTERM');
+    } catch {
+      // The process group already stopped.
+    }
   }
 
-  try {
-    process.kill(-child.pid, 'SIGTERM');
-  } catch {
-    // The process group already stopped.
+  await Promise.race([stopped, new Promise((resolveStopped) => setTimeout(resolveStopped, 5_000))]);
+  if (child.exitCode === null && child.signalCode === null) {
+    child.kill('SIGKILL');
+    await Promise.race([
+      stopped,
+      new Promise((resolveStopped) => setTimeout(resolveStopped, 2_000)),
+    ]);
   }
+  child.stdout?.destroy();
+  child.stderr?.destroy();
+  child.unref();
 }
 
+let apiServer;
+let webServer;
+let tests;
+let managedFileSnapshots;
+let databasePrepared = false;
 let exitCode;
 
 try {
+  await cleanDatabase(databaseUrl);
+  databasePrepared = true;
+  const bootstrapLink = await createBootstrapLink(runtimeEnvironment);
+  managedFileSnapshots = await snapshotFiles(nextManagedFiles);
+  await createE2eTypeScriptConfig(webDirectory, e2eTypeScriptConfigName);
+
+  apiServer = spawn(
+    process.execPath,
+    [tsxCli, '--tsconfig', 'apps/api/tsconfig.json', 'apps/api/src/main.ts'],
+    {
+      cwd: rootDirectory,
+      detached: process.platform !== 'win32',
+      env: runtimeEnvironment,
+      stdio: 'inherit',
+    },
+  );
+  webServer = spawn(process.execPath, [nextCli, webServerCommand, '-p', String(webPort)], {
+    cwd: webDirectory,
+    detached: process.platform !== 'win32',
+    env: runtimeEnvironment,
+    stdio: 'inherit',
+  });
+
   await Promise.all([
     waitForServer(apiServer, apiPort, 120_000),
     waitForServer(webServer, webPort, 120_000),
   ]);
-  const tests = spawn(process.execPath, [playwrightCli, 'test'], {
+  tests = spawn(process.execPath, [playwrightCli, 'test'], {
     cwd: rootDirectory,
     detached: process.platform !== 'win32',
     env: { ...runtimeEnvironment, E2E_BOOTSTRAP_LINK: bootstrapLink },
@@ -148,12 +179,25 @@ try {
     tests.once('exit', (code) => resolve(code ?? 1));
     tests.once('error', reject);
   });
-
-  await stopProcessTree(tests);
 } finally {
+  await stopProcessTree(tests);
   await stopProcessTree(webServer);
   await stopProcessTree(apiServer);
-  await cleanDatabase(databaseUrl);
+  try {
+    if (databasePrepared) await cleanDatabase(databaseUrl);
+  } finally {
+    try {
+      if (managedFileSnapshots) {
+        await restoreFileSnapshots(managedFileSnapshots, e2eNextDistDirectoryName);
+      }
+    } finally {
+      try {
+        await removeE2eTypeScriptConfig(webDirectory, e2eTypeScriptConfigName);
+      } finally {
+        await removeE2eNextDistDirectory(webDirectory, e2eNextDistDirectoryName);
+      }
+    }
+  }
 }
 
 process.exitCode = exitCode;
@@ -187,19 +231,7 @@ async function createBootstrapLink(environment) {
 async function cleanDatabase(connectionString) {
   const database = createDatabaseClient(connectionString);
   try {
-    await database.$executeRawUnsafe(`
-      TRUNCATE TABLE
-        "artist_business_partner_contact_role", "artist_business_partner_contact",
-        "artist_business_partner_role", "artist_business_partner",
-        "business_partner_contact_role", "business_partner_contact",
-        "business_partner_role_assignment", "artist_contact_role", "artist_contact",
-        "business_partner", "artist", "contact", "audit_log",
-        "invitation_location", "invitation_role", "invitation",
-        "membership_location", "membership_role", "role_permission", "role", "permission",
-        "membership", "location", "organization", "bootstrap_token", "auth_rate_limit",
-        "auth_verification", "auth_session", "auth_account", "auth_user"
-      RESTART IDENTITY CASCADE
-    `);
+    await cleanTestDatabase(database);
   } finally {
     await database.$disconnect();
   }

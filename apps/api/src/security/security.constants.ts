@@ -20,6 +20,9 @@ export const PERMISSIONS = {
   BUSINESS_PARTNERS_READ: 'business_partners.read',
   BUSINESS_PARTNERS_WRITE: 'business_partners.write',
   BUSINESS_PARTNERS_ARCHIVE: 'business_partners.archive',
+  EVENT_FORMATS_READ: 'event_formats.read',
+  EVENT_FORMATS_WRITE: 'event_formats.write',
+  EVENT_FORMATS_ARCHIVE: 'event_formats.archive',
 } as const;
 
 export type PermissionKey = (typeof PERMISSIONS)[keyof typeof PERMISSIONS];
@@ -64,6 +67,15 @@ export const PERMISSION_CATALOG: ReadonlyArray<{
     key: PERMISSIONS.BUSINESS_PARTNERS_ARCHIVE,
     description: 'Geschäftspartner archivieren und reaktivieren',
   },
+  { key: PERMISSIONS.EVENT_FORMATS_READ, description: 'Veranstaltungsformate ansehen' },
+  {
+    key: PERMISSIONS.EVENT_FORMATS_WRITE,
+    description: 'Veranstaltungsformate anlegen und bearbeiten',
+  },
+  {
+    key: PERMISSIONS.EVENT_FORMATS_ARCHIVE,
+    description: 'Veranstaltungsformate archivieren und reaktivieren',
+  },
 ];
 
 export const STANDARD_ROLES = [
@@ -82,6 +94,9 @@ export const STANDARD_ROLES = [
       PERMISSIONS.BUSINESS_PARTNERS_READ,
       PERMISSIONS.BUSINESS_PARTNERS_WRITE,
       PERMISSIONS.BUSINESS_PARTNERS_ARCHIVE,
+      PERMISSIONS.EVENT_FORMATS_READ,
+      PERMISSIONS.EVENT_FORMATS_WRITE,
+      PERMISSIONS.EVENT_FORMATS_ARCHIVE,
     ],
   },
   {
@@ -98,6 +113,7 @@ export const STANDARD_ROLES = [
       PERMISSIONS.CONTACTS_WRITE,
       PERMISSIONS.CONTACTS_ARCHIVE,
       PERMISSIONS.BUSINESS_PARTNERS_READ,
+      PERMISSIONS.EVENT_FORMATS_READ,
     ],
   },
   {
@@ -110,6 +126,8 @@ export const STANDARD_ROLES = [
       PERMISSIONS.ARTISTS_READ,
       PERMISSIONS.CONTACTS_READ,
       PERMISSIONS.BUSINESS_PARTNERS_READ,
+      PERMISSIONS.EVENT_FORMATS_READ,
+      PERMISSIONS.EVENT_FORMATS_WRITE,
     ],
   },
   {
@@ -122,6 +140,7 @@ export const STANDARD_ROLES = [
       PERMISSIONS.ARTISTS_READ,
       PERMISSIONS.CONTACTS_READ,
       PERMISSIONS.BUSINESS_PARTNERS_READ,
+      PERMISSIONS.EVENT_FORMATS_READ,
     ],
   },
 ] as const;

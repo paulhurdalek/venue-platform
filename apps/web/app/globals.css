@@ -1065,6 +1065,28 @@ th {
   font-weight: 700;
 }
 
+.event-format-times {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.event-format-times small {
+  color: var(--muted);
+}
+
+.event-format-empty {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.event-format-empty p,
+.event-time-grid {
+  margin-top: 0.55rem;
+}
+
 .filter-checkbox {
   min-height: 2.8rem;
   align-items: center;

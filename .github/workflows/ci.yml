@@ -58,7 +58,8 @@ jobs:
       - run: pnpm db:migrate:deploy
       - run: pnpm exec playwright install --with-deps chromium
       - run: pnpm verify
-      - run: pnpm test:db
+      - name: Verify migration-owned catalogs after API integration cleanup
+        run: pnpm test:db
       - run: pnpm test:e2e
       - run: pnpm security:audit
 

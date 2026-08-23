@@ -1,4 +1,5 @@
 import type { INestApplication } from '@nestjs/common';
+import { cleanTestDatabase } from '@venue/database/testing';
 import { describe, expect, it, beforeAll, afterAll } from 'vitest';
 import request from 'supertest';
 
@@ -42,11 +43,11 @@ describeWithDatabase('Phase 1 PostgreSQL and API integration', () => {
     prisma = application.get(PrismaService);
     setup = application.get(SetupService);
     auth = application.get(AuthService);
-    await cleanDatabase(prisma);
+    await cleanTestDatabase(prisma.database);
   });
 
   afterAll(async () => {
-    if (prisma) await cleanDatabase(prisma);
+    if (prisma) await cleanTestDatabase(prisma.database);
     await application?.close();
   });
 
@@ -108,11 +109,11 @@ describeWithDatabase('Phase 1 PostgreSQL and API integration', () => {
     expect(roles.map((role) => role.name).sort()).toEqual(
       ['Administrator', 'Booking', 'Lesend', 'Management & Finanzen', 'Produktion'].sort(),
     );
-    expect(roles.find((role) => role.key === 'administrator')?.permissions).toHaveLength(21);
-    expect(roles.find((role) => role.key === 'management_finance')?.permissions).toHaveLength(9);
-    expect(roles.find((role) => role.key === 'booking')?.permissions).toHaveLength(9);
-    expect(roles.find((role) => role.key === 'production')?.permissions).toHaveLength(5);
-    expect(roles.find((role) => role.key === 'read_only')?.permissions).toHaveLength(5);
+    expect(roles.find((role) => role.key === 'administrator')?.permissions).toHaveLength(24);
+    expect(roles.find((role) => role.key === 'management_finance')?.permissions).toHaveLength(12);
+    expect(roles.find((role) => role.key === 'booking')?.permissions).toHaveLength(10);
+    expect(roles.find((role) => role.key === 'production')?.permissions).toHaveLength(7);
+    expect(roles.find((role) => role.key === 'read_only')?.permissions).toHaveLength(6);
     readOnlyRoleId = roles.find((role) => role.key === 'read_only')!.id;
   });
 
@@ -472,6 +473,30 @@ describeWithDatabase('Phase 1 PostgreSQL and API integration', () => {
       countBefore,
     );
   });
+
+  it('enforces the configured sign-in rate limit without leaving counters behind', async () => {
+    const maximum = Number(process.env.AUTH_SIGN_IN_RATE_LIMIT_MAX ?? '5');
+    expect(maximum).toBeGreaterThan(0);
+    await prisma.database.rateLimit.deleteMany();
+
+    try {
+      for (let attempt = 0; attempt < maximum; attempt += 1) {
+        const response = await request(application.getHttpServer())
+          .post('/api/auth/sign-in/email')
+          .set('Origin', origin)
+          .send({ email: 'rate-limit-target@example.test', password: 'wrong-password' });
+        expect(response.status).not.toBe(429);
+      }
+
+      const limited = await request(application.getHttpServer())
+        .post('/api/auth/sign-in/email')
+        .set('Origin', origin)
+        .send({ email: 'rate-limit-target@example.test', password: 'wrong-password' });
+      expect(limited.status).toBe(429);
+    } finally {
+      await prisma.database.rateLimit.deleteMany();
+    }
+  });
 });
 
 async function signInAs(agent: ReturnType<typeof request.agent>, email: string, password: string) {
@@ -484,20 +509,4 @@ async function signInAs(agent: ReturnType<typeof request.agent>, email: string, 
 function readSetCookieHeaders(value: unknown): string[] {
   if (Array.isArray(value)) return value.filter((item): item is string => typeof item === 'string');
   return typeof value === 'string' ? [value] : [];
-}
-
-async function cleanDatabase(prisma: PrismaService): Promise<void> {
-  await prisma.database.$executeRawUnsafe(`
-    TRUNCATE TABLE
-      "artist_business_partner_contact_role", "artist_business_partner_contact",
-      "artist_business_partner_role", "artist_business_partner",
-      "business_partner_contact_role", "business_partner_contact",
-      "business_partner_role_assignment", "artist_contact_role", "artist_contact",
-      "business_partner", "artist", "contact", "audit_log",
-      "invitation_location", "invitation_role", "invitation",
-      "membership_location", "membership_role", "role_permission", "role", "permission",
-      "membership", "location", "organization", "bootstrap_token", "auth_rate_limit",
-      "auth_verification", "auth_session", "auth_account", "auth_user"
-    RESTART IDENTITY CASCADE
-  `);
 }

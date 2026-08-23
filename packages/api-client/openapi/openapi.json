@@ -2600,6 +2600,267 @@
         ]
       }
     },
+    "/api/v1/organizations/{organizationId}/event-formats": {
+      "get": {
+        "operationId": "EventFormatController_list_v1",
+        "parameters": [
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 0,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "maximum": 100,
+              "type": "number"
+            }
+          },
+          {
+            "name": "eventKind",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "OWN_PRODUCTION",
+                "THIRD_PARTY_EVENT"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "ACTIVE",
+                "ARCHIVED",
+                "ALL"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "q",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "maxLength": 160,
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventFormatPageDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "event formats"
+        ]
+      },
+      "post": {
+        "operationId": "EventFormatController_create_v1",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateEventFormatDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventFormatDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "event formats"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/event-formats/{eventFormatId}": {
+      "get": {
+        "operationId": "EventFormatController_find_v1",
+        "parameters": [
+          {
+            "name": "eventFormatId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventFormatDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "event formats"
+        ]
+      },
+      "patch": {
+        "operationId": "EventFormatController_update_v1",
+        "parameters": [
+          {
+            "name": "eventFormatId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEventFormatDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventFormatDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "event formats"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/event-formats/{eventFormatId}/status": {
+      "patch": {
+        "operationId": "EventFormatController_setStatus_v1",
+        "parameters": [
+          {
+            "name": "eventFormatId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEventFormatStatusDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventFormatDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "event formats"
+        ]
+      }
+    },
     "/api/v1/health": {
       "get": {
         "operationId": "HealthController_get_v1",
@@ -4785,6 +5046,283 @@
         },
         "required": [
           "version"
+        ]
+      },
+      "EventFormatDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "organizationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "normalizedName": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "eventKind": {
+            "type": "string",
+            "enum": [
+              "OWN_PRODUCTION",
+              "THIRD_PARTY_EVENT"
+            ]
+          },
+          "defaultTechnicalGetInTime": {
+            "type": "string",
+            "nullable": true,
+            "example": "16:00"
+          },
+          "defaultArtistGetInTime": {
+            "type": "string",
+            "nullable": true,
+            "example": "17:30"
+          },
+          "defaultDoorsTime": {
+            "type": "string",
+            "nullable": true,
+            "example": "19:00"
+          },
+          "defaultStartTime": {
+            "type": "string",
+            "nullable": true,
+            "example": "20:00"
+          },
+          "defaultEndTime": {
+            "type": "string",
+            "nullable": true,
+            "example": "01:30"
+          },
+          "defaultEndNextDay": {
+            "type": "boolean"
+          },
+          "recordingDefault": {
+            "type": "string",
+            "enum": [
+              "UNSPECIFIED",
+              "ENABLED",
+              "DISABLED"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "ARCHIVED"
+            ]
+          },
+          "archivedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "version": {
+            "type": "number"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "id",
+          "organizationId",
+          "name",
+          "normalizedName",
+          "eventKind",
+          "defaultEndNextDay",
+          "recordingDefault",
+          "status",
+          "version",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "EventFormatPageDto": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EventFormatDto"
+            }
+          },
+          "total": {
+            "type": "number"
+          },
+          "limit": {
+            "type": "number"
+          },
+          "offset": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "items",
+          "total",
+          "limit",
+          "offset"
+        ]
+      },
+      "CreateEventFormatDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 200
+          },
+          "description": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 5000
+          },
+          "eventKind": {
+            "type": "string",
+            "enum": [
+              "OWN_PRODUCTION",
+              "THIRD_PARTY_EVENT"
+            ]
+          },
+          "defaultTechnicalGetInTime": {
+            "type": "string",
+            "nullable": true,
+            "example": "16:00"
+          },
+          "defaultArtistGetInTime": {
+            "type": "string",
+            "nullable": true,
+            "example": "17:30"
+          },
+          "defaultDoorsTime": {
+            "type": "string",
+            "nullable": true,
+            "example": "19:00"
+          },
+          "defaultStartTime": {
+            "type": "string",
+            "nullable": true,
+            "example": "20:00"
+          },
+          "defaultEndTime": {
+            "type": "string",
+            "nullable": true,
+            "example": "01:30"
+          },
+          "defaultEndNextDay": {
+            "type": "boolean",
+            "default": false
+          },
+          "recordingDefault": {
+            "type": "string",
+            "enum": [
+              "UNSPECIFIED",
+              "ENABLED",
+              "DISABLED"
+            ],
+            "default": "UNSPECIFIED"
+          }
+        },
+        "required": [
+          "name",
+          "eventKind"
+        ]
+      },
+      "UpdateEventFormatDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 200
+          },
+          "description": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 5000
+          },
+          "eventKind": {
+            "type": "string",
+            "enum": [
+              "OWN_PRODUCTION",
+              "THIRD_PARTY_EVENT"
+            ]
+          },
+          "defaultTechnicalGetInTime": {
+            "type": "string",
+            "nullable": true,
+            "example": "16:00"
+          },
+          "defaultArtistGetInTime": {
+            "type": "string",
+            "nullable": true,
+            "example": "17:30"
+          },
+          "defaultDoorsTime": {
+            "type": "string",
+            "nullable": true,
+            "example": "19:00"
+          },
+          "defaultStartTime": {
+            "type": "string",
+            "nullable": true,
+            "example": "20:00"
+          },
+          "defaultEndTime": {
+            "type": "string",
+            "nullable": true,
+            "example": "01:30"
+          },
+          "defaultEndNextDay": {
+            "type": "boolean",
+            "default": false
+          },
+          "recordingDefault": {
+            "type": "string",
+            "enum": [
+              "UNSPECIFIED",
+              "ENABLED",
+              "DISABLED"
+            ],
+            "default": "UNSPECIFIED"
+          },
+          "version": {
+            "type": "number",
+            "minimum": 1
+          }
+        },
+        "required": [
+          "version"
+        ]
+      },
+      "UpdateEventFormatStatusDto": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "number",
+            "minimum": 1
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "ARCHIVED"
+            ]
+          }
+        },
+        "required": [
+          "version",
+          "status"
         ]
       },
       "ServiceHealthDto": {

@@ -40,3 +40,20 @@ export const InvitationStatus = {
 } as const
 
 export type InvitationStatus = (typeof InvitationStatus)[keyof typeof InvitationStatus]
+
+
+export const EventKind = {
+  OWN_PRODUCTION: 'OWN_PRODUCTION',
+  THIRD_PARTY_EVENT: 'THIRD_PARTY_EVENT'
+} as const
+
+export type EventKind = (typeof EventKind)[keyof typeof EventKind]
+
+
+export const RecordingDefault = {
+  UNSPECIFIED: 'UNSPECIFIED',
+  ENABLED: 'ENABLED',
+  DISABLED: 'DISABLED'
+} as const
+
+export type RecordingDefault = (typeof RecordingDefault)[keyof typeof RecordingDefault]

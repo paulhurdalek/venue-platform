@@ -71,6 +71,11 @@ pnpm test:e2e
 pnpm security:audit
 ```
 
+`pnpm test:e2e` and `pnpm test:containers` load the complete local `.env.test` file directly (or
+the committed `.env.test.example` defaults when the local file is absent). Runtime database URLs,
+ports and E2E origins are then applied explicitly. A value inherited from `.env`, such as the
+development sign-in limit `5`, therefore cannot leak into an integration process.
+
 Build the production images from the repository root:
 
 ```bash

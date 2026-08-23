@@ -6,7 +6,9 @@ Phase 1 provides the identity and tenant boundary. Phase 3 adds the first busine
 organization-owned Artists, reusable Contacts, Business Partners and their normalized role-bearing
 associations. Artist representation by a company is an explicit normalized association whose
 representatives point to existing company-Contact associations; it is never inferred from shared
-Contacts. Bookings, events, calculations, documents, invoices and rooms remain absent.
+Contacts. Phase 4 adds organization-wide EventFormats whose V1 data is the concrete fachliche
+Formatvorlage for later events. Bookings, events, event snapshots, calculations, documents,
+invoices and rooms remain absent.
 
 ## Runtime view
 
@@ -70,6 +72,16 @@ The `master-data` API module is the first concrete application of the four-layer
 rule. It owns Artist, Contact and Business Partner presentation, application, domain and
 infrastructure code. The platform module continues to own identity-adjacent organization access.
 The only extracted cross-cutting service is the transaction-scoped audit writer.
+
+The separate `event-formats` module follows the same presentation, application, domain and
+infrastructure boundaries. Its application use cases own mutation transaction boundaries through
+a repository transaction port; Prisma remains confined to the infrastructure adapter. EventFormat
+is deliberately the concrete V1 format template itself. No generic template abstraction or
+configuration engine exists.
+
+The future event boundary is snapshot-based: an event will copy current EventFormat values at
+creation and may retain the source format ID and version. EventFormat updates never mutate existing
+events. Archived formats remain historically referencable but will not be offered for new events.
 
 Authentication answers “who is this user?” and remains owned by Better Auth. Authorization
 answers “what may this membership do in this organization?” and remains owned by the platform.

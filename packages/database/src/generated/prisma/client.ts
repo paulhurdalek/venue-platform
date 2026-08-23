@@ -77,6 +77,11 @@ export type BootstrapToken = Prisma.BootstrapTokenModel
  */
 export type Organization = Prisma.OrganizationModel
 /**
+ * Model EventFormat
+ * 
+ */
+export type EventFormat = Prisma.EventFormatModel
+/**
  * Model Location
  * 
  */
