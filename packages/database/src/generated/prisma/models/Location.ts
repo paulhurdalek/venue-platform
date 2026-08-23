@@ -720,14 +720,6 @@ export type LocationUncheckedUpdateManyWithoutOrganizationNestedInput = {
   deleteMany?: Prisma.LocationScalarWhereInput | Prisma.LocationScalarWhereInput[]
 }
 
-export type NullableIntFieldUpdateOperationsInput = {
-  set?: number | null
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type LocationCreateNestedOneWithoutMembershipLinksInput = {
   create?: Prisma.XOR<Prisma.LocationCreateWithoutMembershipLinksInput, Prisma.LocationUncheckedCreateWithoutMembershipLinksInput>
   connectOrCreate?: Prisma.LocationCreateOrConnectWithoutMembershipLinksInput

@@ -41,6 +41,20 @@ Artist, Contact and Business Partner updates use the same optimistic `WHERE id +
 version` pattern. Role-bearing Contact associations also have versions. Business entities use
 restrictive foreign keys and are archived rather than deleted.
 
+## Phase 4 migration
+
+`20260822000100_phase_4_event_formats` is additive on the merged Phase-3 schema. It creates the
+organization-owned `event_format` table, the two-value `EventKind` and three-value
+`RecordingDefault` enums, a tenant-scoped unique normalized name, lifecycle/version checks and
+stable list/search indexes. Local time defaults use nullable integer columns. Get-ins, doors and
+start are constrained to `0..1439`; end is constrained to `0..2879` for a next-day end. SQL checks
+also enforce known start-relative ordering without inferring an order from missing optional values.
+
+The migration adds the three stable `event_formats.*` permissions and backfills all existing
+organization-local standard roles with conflict-safe inserts. Setup uses the same application
+catalog for future organizations. No example format, event, snapshot or generic template row is
+seeded.
+
 ## Workflow
 
 1. Change `packages/database/prisma/schema.prisma`.

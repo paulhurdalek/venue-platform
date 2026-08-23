@@ -31,6 +31,12 @@ public origins, or a Better Auth public origin that differs from the web origin.
 | `NEXT_PUBLIC_API_BASE_URL`    | browser client      | `http://localhost:3001`                           | Same-origin URL in recommended deployments         |
 | `WORKER_POLL_INTERVAL_MS`     | worker              | `5000`                                            | Reserved cadence; no Phase 1 jobs                  |
 
+The development defaults remain deliberately strict (`AUTH_SIGN_IN_RATE_LIMIT_MAX=5` and
+`SENSITIVE_RATE_LIMIT_MAX=10`). The test configuration uses `20` and `50` respectively so fixture
+setup does not consume the test's own allowance. Repository-level E2E and container runners load
+the complete `.env.test` configuration centrally and override inherited development values; they
+do not change development or production limits.
+
 Rotate the Better Auth secret by deploying the new value as `BETTER_AUTH_SECRET` and the old value
 as `BETTER_AUTH_SECRET_PREVIOUS`. After the maximum session lifetime has passed, deploy again
 without the previous value. Never give either value a `NEXT_PUBLIC_` prefix.

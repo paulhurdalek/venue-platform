@@ -5,6 +5,8 @@ node_modules/
 # Builds and generated runtime output
 dist/
 .next/
+.next-e2e-*/
+tsconfig.e2e-*.json
 coverage/
 playwright-report/
 test-results/

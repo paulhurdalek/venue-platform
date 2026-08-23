@@ -177,4 +177,55 @@ describeWithDatabase('PostgreSQL connection', () => {
     `;
     expect(representationMigration).toHaveLength(1);
   });
+
+  it('has the additive Phase 4 event-format schema and relational invariants', async () => {
+    client = createDatabaseClient(testDatabaseUrl!);
+    const table = await client.$queryRaw<Array<{ table_name: string }>>`
+      SELECT table_name
+      FROM information_schema.tables
+      WHERE table_schema = 'public' AND table_name = 'event_format'
+    `;
+    expect(table).toHaveLength(1);
+
+    const checks = await client.$queryRaw<Array<{ constraint_name: string }>>`
+      SELECT conname AS constraint_name
+      FROM pg_constraint
+      WHERE contype = 'c'
+        AND conname IN (
+          'event_format_name_not_blank',
+          'event_format_version_positive',
+          'event_format_archive_consistent',
+          'event_format_technical_get_in_range',
+          'event_format_artist_get_in_range',
+          'event_format_doors_range',
+          'event_format_start_range',
+          'event_format_end_range',
+          'event_format_doors_before_start',
+          'event_format_technical_get_in_before_start',
+          'event_format_artist_get_in_before_start',
+          'event_format_end_after_start'
+        )
+    `;
+    expect(checks).toHaveLength(12);
+
+    const uniqueName = await client.$queryRaw<Array<{ indexname: string }>>`
+      SELECT indexname
+      FROM pg_indexes
+      WHERE schemaname = 'public'
+        AND indexname = 'event_format_organization_id_normalized_name_key'
+    `;
+    expect(uniqueName).toHaveLength(1);
+    expect(
+      await client.permission.count({ where: { key: { startsWith: 'event_formats.' } } }),
+    ).toBe(3);
+
+    const migration = await client.$queryRaw<Array<{ migration_name: string }>>`
+      SELECT migration_name
+      FROM _prisma_migrations
+      WHERE migration_name = '20260822000100_phase_4_event_formats'
+        AND finished_at IS NOT NULL
+        AND rolled_back_at IS NULL
+    `;
+    expect(migration).toHaveLength(1);
+  });
 });

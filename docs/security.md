@@ -42,9 +42,19 @@ These records are organization-wide, so Location scope is not applicable. Associ
 repeat `organization_id`, preventing a Contact or owner from another tenant from being linked even
 through direct database access.
 
+Phase 4 adds `event_formats.read`, `event_formats.write` and `event_formats.archive`. EventFormats
+are organization-wide, so no Location scope is evaluated. Every repository read and versioned
+write repeats `organization_id`; foreign and unknown IDs remain indistinguishable 404 responses.
+The normalized unique name includes `organization_id`, allowing the same name in another tenant
+while preventing duplicates, including archived rows, inside one tenant.
+
 Master-data audit writes share the mutation transaction. Metadata is deliberately allowlisted to
 IDs, role IDs, previous versions and changed field names. Raw names, addresses, emails, telephone
 numbers and notes are excluded.
+
+EventFormat audit writes likewise share the mutation transaction. Their metadata contains only
+record IDs through the audit target, old/new versions, old/new status and changed field names;
+format names and descriptions are excluded.
 
 ## Dependency checks
 

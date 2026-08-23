@@ -273,6 +273,13 @@ export type EnumEntityStatusWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumEntityStatusFilter<$PrismaModel>
 }
 
+export type EnumEventKindFilter<$PrismaModel = never> = {
+  equals?: $Enums.EventKind | Prisma.EnumEventKindFieldRefInput<$PrismaModel>
+  in?: $Enums.EventKind[] | Prisma.ListEnumEventKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.EventKind[] | Prisma.ListEnumEventKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumEventKindFilter<$PrismaModel> | $Enums.EventKind
+}
+
 export type IntNullableFilter<$PrismaModel = never> = {
   equals?: number | Prisma.IntFieldRefInput<$PrismaModel> | null
   in?: number[] | Prisma.ListIntFieldRefInput<$PrismaModel> | null
@@ -282,6 +289,23 @@ export type IntNullableFilter<$PrismaModel = never> = {
   gt?: number | Prisma.IntFieldRefInput<$PrismaModel>
   gte?: number | Prisma.IntFieldRefInput<$PrismaModel>
   not?: Prisma.NestedIntNullableFilter<$PrismaModel> | number | null
+}
+
+export type EnumRecordingDefaultFilter<$PrismaModel = never> = {
+  equals?: $Enums.RecordingDefault | Prisma.EnumRecordingDefaultFieldRefInput<$PrismaModel>
+  in?: $Enums.RecordingDefault[] | Prisma.ListEnumRecordingDefaultFieldRefInput<$PrismaModel>
+  notIn?: $Enums.RecordingDefault[] | Prisma.ListEnumRecordingDefaultFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumRecordingDefaultFilter<$PrismaModel> | $Enums.RecordingDefault
+}
+
+export type EnumEventKindWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.EventKind | Prisma.EnumEventKindFieldRefInput<$PrismaModel>
+  in?: $Enums.EventKind[] | Prisma.ListEnumEventKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.EventKind[] | Prisma.ListEnumEventKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumEventKindWithAggregatesFilter<$PrismaModel> | $Enums.EventKind
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumEventKindFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumEventKindFilter<$PrismaModel>
 }
 
 export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -298,6 +322,16 @@ export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
   _sum?: Prisma.NestedIntNullableFilter<$PrismaModel>
   _min?: Prisma.NestedIntNullableFilter<$PrismaModel>
   _max?: Prisma.NestedIntNullableFilter<$PrismaModel>
+}
+
+export type EnumRecordingDefaultWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.RecordingDefault | Prisma.EnumRecordingDefaultFieldRefInput<$PrismaModel>
+  in?: $Enums.RecordingDefault[] | Prisma.ListEnumRecordingDefaultFieldRefInput<$PrismaModel>
+  notIn?: $Enums.RecordingDefault[] | Prisma.ListEnumRecordingDefaultFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumRecordingDefaultWithAggregatesFilter<$PrismaModel> | $Enums.RecordingDefault
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumRecordingDefaultFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumRecordingDefaultFilter<$PrismaModel>
 }
 
 export type EnumMembershipStatusFilter<$PrismaModel = never> = {
@@ -670,6 +704,30 @@ export type NestedEnumEntityStatusWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumEntityStatusFilter<$PrismaModel>
 }
 
+export type NestedEnumEventKindFilter<$PrismaModel = never> = {
+  equals?: $Enums.EventKind | Prisma.EnumEventKindFieldRefInput<$PrismaModel>
+  in?: $Enums.EventKind[] | Prisma.ListEnumEventKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.EventKind[] | Prisma.ListEnumEventKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumEventKindFilter<$PrismaModel> | $Enums.EventKind
+}
+
+export type NestedEnumRecordingDefaultFilter<$PrismaModel = never> = {
+  equals?: $Enums.RecordingDefault | Prisma.EnumRecordingDefaultFieldRefInput<$PrismaModel>
+  in?: $Enums.RecordingDefault[] | Prisma.ListEnumRecordingDefaultFieldRefInput<$PrismaModel>
+  notIn?: $Enums.RecordingDefault[] | Prisma.ListEnumRecordingDefaultFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumRecordingDefaultFilter<$PrismaModel> | $Enums.RecordingDefault
+}
+
+export type NestedEnumEventKindWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.EventKind | Prisma.EnumEventKindFieldRefInput<$PrismaModel>
+  in?: $Enums.EventKind[] | Prisma.ListEnumEventKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.EventKind[] | Prisma.ListEnumEventKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumEventKindWithAggregatesFilter<$PrismaModel> | $Enums.EventKind
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumEventKindFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumEventKindFilter<$PrismaModel>
+}
+
 export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
   equals?: number | Prisma.IntFieldRefInput<$PrismaModel> | null
   in?: number[] | Prisma.ListIntFieldRefInput<$PrismaModel> | null
@@ -695,6 +753,16 @@ export type NestedFloatNullableFilter<$PrismaModel = never> = {
   gt?: number | Prisma.FloatFieldRefInput<$PrismaModel>
   gte?: number | Prisma.FloatFieldRefInput<$PrismaModel>
   not?: Prisma.NestedFloatNullableFilter<$PrismaModel> | number | null
+}
+
+export type NestedEnumRecordingDefaultWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.RecordingDefault | Prisma.EnumRecordingDefaultFieldRefInput<$PrismaModel>
+  in?: $Enums.RecordingDefault[] | Prisma.ListEnumRecordingDefaultFieldRefInput<$PrismaModel>
+  notIn?: $Enums.RecordingDefault[] | Prisma.ListEnumRecordingDefaultFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumRecordingDefaultWithAggregatesFilter<$PrismaModel> | $Enums.RecordingDefault
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumRecordingDefaultFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumRecordingDefaultFilter<$PrismaModel>
 }
 
 export type NestedEnumMembershipStatusFilter<$PrismaModel = never> = {

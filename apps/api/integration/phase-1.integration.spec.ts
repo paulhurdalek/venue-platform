@@ -108,11 +108,11 @@ describeWithDatabase('Phase 1 PostgreSQL and API integration', () => {
     expect(roles.map((role) => role.name).sort()).toEqual(
       ['Administrator', 'Booking', 'Lesend', 'Management & Finanzen', 'Produktion'].sort(),
     );
-    expect(roles.find((role) => role.key === 'administrator')?.permissions).toHaveLength(21);
-    expect(roles.find((role) => role.key === 'management_finance')?.permissions).toHaveLength(9);
-    expect(roles.find((role) => role.key === 'booking')?.permissions).toHaveLength(9);
-    expect(roles.find((role) => role.key === 'production')?.permissions).toHaveLength(5);
-    expect(roles.find((role) => role.key === 'read_only')?.permissions).toHaveLength(5);
+    expect(roles.find((role) => role.key === 'administrator')?.permissions).toHaveLength(24);
+    expect(roles.find((role) => role.key === 'management_finance')?.permissions).toHaveLength(12);
+    expect(roles.find((role) => role.key === 'booking')?.permissions).toHaveLength(10);
+    expect(roles.find((role) => role.key === 'production')?.permissions).toHaveLength(7);
+    expect(roles.find((role) => role.key === 'read_only')?.permissions).toHaveLength(6);
     readOnlyRoleId = roles.find((role) => role.key === 'read_only')!.id;
   });
 
@@ -471,6 +471,30 @@ describeWithDatabase('Phase 1 PostgreSQL and API integration', () => {
     expect(await prisma.database.session.count({ where: { userId: user.id } })).toBeLessThan(
       countBefore,
     );
+  });
+
+  it('enforces the configured sign-in rate limit without leaving counters behind', async () => {
+    const maximum = Number(process.env.AUTH_SIGN_IN_RATE_LIMIT_MAX ?? '5');
+    expect(maximum).toBeGreaterThan(0);
+    await prisma.database.rateLimit.deleteMany();
+
+    try {
+      for (let attempt = 0; attempt < maximum; attempt += 1) {
+        const response = await request(application.getHttpServer())
+          .post('/api/auth/sign-in/email')
+          .set('Origin', origin)
+          .send({ email: 'rate-limit-target@example.test', password: 'wrong-password' });
+        expect(response.status).not.toBe(429);
+      }
+
+      const limited = await request(application.getHttpServer())
+        .post('/api/auth/sign-in/email')
+        .set('Origin', origin)
+        .send({ email: 'rate-limit-target@example.test', password: 'wrong-password' });
+      expect(limited.status).toBe(429);
+    } finally {
+      await prisma.database.rateLimit.deleteMany();
+    }
   });
 });
 

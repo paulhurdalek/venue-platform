@@ -28,6 +28,17 @@ enum InvitationStatus {
   REVOKED
 }
 
+enum EventKind {
+  OWN_PRODUCTION
+  THIRD_PARTY_EVENT
+}
+
+enum RecordingDefault {
+  UNSPECIFIED
+  ENABLED
+  DISABLED
+}
+
 model User {
   id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name          String
@@ -142,9 +153,37 @@ model Organization {
   artists      Artist[]
   contacts     Contact[]
   partners     BusinessPartner[]
+  eventFormats EventFormat[]
 
   @@index([status])
   @@map("organization")
+}
+
+model EventFormat {
+  id                    String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId        String           @map("organization_id") @db.Uuid
+  name                  String           @db.VarChar(200)
+  normalizedName        String           @map("normalized_name") @db.VarChar(200)
+  description           String?
+  eventKind             EventKind        @map("event_kind")
+  technicalGetInMinutes Int?             @map("technical_get_in_minutes")
+  artistGetInMinutes    Int?             @map("artist_get_in_minutes")
+  doorsMinutes          Int?             @map("doors_minutes")
+  startMinutes          Int?             @map("start_minutes")
+  endMinutes            Int?             @map("end_minutes")
+  recordingDefault      RecordingDefault @default(UNSPECIFIED) @map("recording_default")
+  status                EntityStatus     @default(ACTIVE)
+  archivedAt            DateTime?        @map("archived_at")
+  version               Int              @default(1)
+  createdAt             DateTime         @default(now()) @map("created_at")
+  updatedAt             DateTime         @updatedAt @map("updated_at")
+  organization          Organization     @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+
+  @@unique([id, organizationId])
+  @@unique([organizationId, normalizedName])
+  @@index([organizationId, status, name, id])
+  @@index([organizationId, eventKind, status])
+  @@map("event_format")
 }
 
 model Location {

@@ -6,17 +6,45 @@ import type { NextConfig } from 'next';
 
 const directory = path.dirname(fileURLToPath(import.meta.url));
 const rootEnvironmentFile = path.join(directory, '../../.env');
+const isolatedE2eDistDirectory = /^\.next-e2e-[a-z0-9-]+$/;
+const isolatedE2eTypeScriptConfig = /^tsconfig\.e2e-[a-z0-9-]+\.json$/;
 
 if (existsSync(rootEnvironmentFile)) {
   process.loadEnvFile(rootEnvironmentFile);
 }
 
+export function resolveNextDistDirectory(
+  environment: Readonly<Record<string, string | undefined>> = process.env,
+): string {
+  const configured = environment.VENUE_E2E_NEXT_DIST_DIR?.trim();
+  if (!configured) return '.next';
+  if (!isolatedE2eDistDirectory.test(configured)) {
+    throw new Error('VENUE_E2E_NEXT_DIST_DIR must be a project-local directory named .next-e2e-*');
+  }
+  return configured;
+}
+
+export function resolveNextTypeScriptConfig(
+  environment: Readonly<Record<string, string | undefined>> = process.env,
+): string {
+  const configured = environment.VENUE_E2E_TSCONFIG?.trim();
+  if (!configured) return 'tsconfig.json';
+  if (!isolatedE2eTypeScriptConfig.test(configured)) {
+    throw new Error('VENUE_E2E_TSCONFIG must be a project-local file named tsconfig.e2e-*.json');
+  }
+  return configured;
+}
+
 const nextConfig: NextConfig = {
   allowedDevOrigins: ['127.0.0.1'],
+  distDir: resolveNextDistDirectory(),
   output: 'standalone',
   outputFileTracingRoot: path.join(directory, '../..'),
   poweredByHeader: false,
   reactStrictMode: true,
+  typescript: {
+    tsconfigPath: resolveNextTypeScriptConfig(),
+  },
   logging: {
     incomingRequests: false,
     browserToTerminal: 'error',

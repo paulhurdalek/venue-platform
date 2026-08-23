@@ -112,7 +112,7 @@ describeWithDatabase('Phase 3 master-data integration', () => {
       ]),
     );
 
-    expect(keysByRole.administrator).toHaveLength(21);
+    expect(keysByRole.administrator).toHaveLength(24);
     expect(keysByRole.management_finance).toEqual(
       [
         'artists.read',
@@ -122,6 +122,9 @@ describeWithDatabase('Phase 3 master-data integration', () => {
         'contacts.archive',
         'contacts.read',
         'contacts.write',
+        'event_formats.archive',
+        'event_formats.read',
+        'event_formats.write',
         'location.read',
         'organization.read',
       ].sort(),
@@ -135,6 +138,7 @@ describeWithDatabase('Phase 3 master-data integration', () => {
         'contacts.archive',
         'contacts.read',
         'contacts.write',
+        'event_formats.read',
         'location.read',
         'organization.read',
       ].sort(),
@@ -144,11 +148,22 @@ describeWithDatabase('Phase 3 master-data integration', () => {
         'artists.read',
         'business_partners.read',
         'contacts.read',
+        'event_formats.read',
+        'event_formats.write',
         'location.read',
         'organization.read',
       ].sort(),
     );
-    expect(keysByRole.read_only).toEqual(keysByRole.production);
+    expect(keysByRole.read_only).toEqual(
+      [
+        'artists.read',
+        'business_partners.read',
+        'contacts.read',
+        'event_formats.read',
+        'location.read',
+        'organization.read',
+      ].sort(),
+    );
 
     const contactRoles = await administratorAgent.get(
       `/api/v1/organizations/${organizationId}/contact-roles`,

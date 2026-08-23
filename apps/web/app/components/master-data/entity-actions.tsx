@@ -32,7 +32,7 @@ export function LifecycleAction({
   status,
 }: {
   organizationId: string;
-  kind: 'artist' | 'contact' | 'business-partner';
+  kind: 'artist' | 'contact' | 'business-partner' | 'event-format';
   entityId: string;
   version: number;
   status: string;
@@ -52,8 +52,15 @@ export function LifecycleAction({
   const [pending, setPending] = useState(false);
   const archive = status === 'ACTIVE';
   const entityLabel =
-    kind === 'artist' ? 'Artist' : kind === 'contact' ? 'Kontakt' : 'Geschäftspartner';
+    kind === 'artist'
+      ? 'Artist'
+      : kind === 'contact'
+        ? 'Kontakt'
+        : kind === 'business-partner'
+          ? 'Geschäftspartner'
+          : 'Veranstaltungsformat';
   const actionLabel = archive ? `${entityLabel} archivieren` : 'Reaktivieren';
+  const entityArticle = kind === 'event-format' ? 'Das' : 'Der';
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -139,14 +146,23 @@ export function LifecycleAction({
                 body,
               },
             )
-          : await client.PATCH(
-              '/api/v1/organizations/{organizationId}/business-partners/{businessPartnerId}/status',
-              {
-                credentials: 'include',
-                params: { path: { organizationId, businessPartnerId: entityId } },
-                body,
-              },
-            );
+          : kind === 'business-partner'
+            ? await client.PATCH(
+                '/api/v1/organizations/{organizationId}/business-partners/{businessPartnerId}/status',
+                {
+                  credentials: 'include',
+                  params: { path: { organizationId, businessPartnerId: entityId } },
+                  body,
+                },
+              )
+            : await client.PATCH(
+                '/api/v1/organizations/{organizationId}/event-formats/{eventFormatId}/status',
+                {
+                  credentials: 'include',
+                  params: { path: { organizationId, eventFormatId: entityId } },
+                  body,
+                },
+              );
     if (!result.data || result.error) {
       setMessage(apiErrorMessage(result.error, 'Der Status konnte nicht geändert werden.'));
       setPending(false);
@@ -157,7 +173,9 @@ export function LifecycleAction({
     setPending(false);
     setMessageSuccess(true);
     setMessage(
-      archive ? `Der ${entityLabel} wurde archiviert.` : `Der ${entityLabel} wurde reaktiviert.`,
+      archive
+        ? `${entityArticle} ${entityLabel} wurde archiviert.`
+        : `${entityArticle} ${entityLabel} wurde reaktiviert.`,
     );
     router.refresh();
     requestAnimationFrame(() => triggerRef.current?.focus());
@@ -231,7 +249,9 @@ export function LifecycleAction({
             <div className="confirmation-dialog__description" id={dialogDescriptionId}>
               {archive ? (
                 <>
-                  <p>Der {entityLabel} wird archiviert.</p>
+                  <p>
+                    {entityArticle} {entityLabel} wird archiviert.
+                  </p>
                   <ul>
                     <li>Bestehende Verknüpfungen bleiben erhalten.</li>
                     <li>Der Datensatz steht für neue Zuordnungen nicht mehr zur Verfügung.</li>
@@ -240,8 +260,8 @@ export function LifecycleAction({
                 </>
               ) : (
                 <p>
-                  Der {entityLabel} wird reaktiviert und steht anschließend wieder für neue
-                  Zuordnungen zur Verfügung.
+                  {entityArticle} {entityLabel} wird reaktiviert und steht anschließend wieder für
+                  neue Zuordnungen zur Verfügung.
                 </p>
               )}
             </div>

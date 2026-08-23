@@ -711,6 +711,54 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/organizations/{organizationId}/event-formats": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["EventFormatController_list_v1"];
+        put?: never;
+        post: operations["EventFormatController_create_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/event-formats/{eventFormatId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["EventFormatController_find_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["EventFormatController_update_v1"];
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/event-formats/{eventFormatId}/status": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["EventFormatController_setStatus_v1"];
+        trace?: never;
+    };
     "/api/v1/health": {
         parameters: {
             query?: never;
@@ -1303,6 +1351,97 @@ export interface components {
             website?: string | null;
             notes?: string | null;
             version: number;
+        };
+        EventFormatDto: {
+            /** Format: uuid */
+            id: string;
+            /** Format: uuid */
+            organizationId: string;
+            name: string;
+            normalizedName: string;
+            description?: string | null;
+            /** @enum {string} */
+            eventKind: "OWN_PRODUCTION" | "THIRD_PARTY_EVENT";
+            /** @example 16:00 */
+            defaultTechnicalGetInTime?: string | null;
+            /** @example 17:30 */
+            defaultArtistGetInTime?: string | null;
+            /** @example 19:00 */
+            defaultDoorsTime?: string | null;
+            /** @example 20:00 */
+            defaultStartTime?: string | null;
+            /** @example 01:30 */
+            defaultEndTime?: string | null;
+            defaultEndNextDay: boolean;
+            /** @enum {string} */
+            recordingDefault: "UNSPECIFIED" | "ENABLED" | "DISABLED";
+            /** @enum {string} */
+            status: "ACTIVE" | "ARCHIVED";
+            /** Format: date-time */
+            archivedAt?: string | null;
+            version: number;
+            /** Format: date-time */
+            createdAt: string;
+            /** Format: date-time */
+            updatedAt: string;
+        };
+        EventFormatPageDto: {
+            items: components["schemas"]["EventFormatDto"][];
+            total: number;
+            limit: number;
+            offset: number;
+        };
+        CreateEventFormatDto: {
+            name: string;
+            description?: string | null;
+            /** @enum {string} */
+            eventKind: "OWN_PRODUCTION" | "THIRD_PARTY_EVENT";
+            /** @example 16:00 */
+            defaultTechnicalGetInTime?: string | null;
+            /** @example 17:30 */
+            defaultArtistGetInTime?: string | null;
+            /** @example 19:00 */
+            defaultDoorsTime?: string | null;
+            /** @example 20:00 */
+            defaultStartTime?: string | null;
+            /** @example 01:30 */
+            defaultEndTime?: string | null;
+            /** @default false */
+            defaultEndNextDay: boolean;
+            /**
+             * @default UNSPECIFIED
+             * @enum {string}
+             */
+            recordingDefault: "UNSPECIFIED" | "ENABLED" | "DISABLED";
+        };
+        UpdateEventFormatDto: {
+            name?: string;
+            description?: string | null;
+            /** @enum {string} */
+            eventKind?: "OWN_PRODUCTION" | "THIRD_PARTY_EVENT";
+            /** @example 16:00 */
+            defaultTechnicalGetInTime?: string | null;
+            /** @example 17:30 */
+            defaultArtistGetInTime?: string | null;
+            /** @example 19:00 */
+            defaultDoorsTime?: string | null;
+            /** @example 20:00 */
+            defaultStartTime?: string | null;
+            /** @example 01:30 */
+            defaultEndTime?: string | null;
+            /** @default false */
+            defaultEndNextDay: boolean;
+            /**
+             * @default UNSPECIFIED
+             * @enum {string}
+             */
+            recordingDefault: "UNSPECIFIED" | "ENABLED" | "DISABLED";
+            version: number;
+        };
+        UpdateEventFormatStatusDto: {
+            version: number;
+            /** @enum {string} */
+            status: "ACTIVE" | "ARCHIVED";
         };
         ServiceHealthDto: {
             /** @enum {string} */
@@ -2683,6 +2822,132 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["MasterDataRoleDto"][];
+                };
+            };
+        };
+    };
+    EventFormatController_list_v1: {
+        parameters: {
+            query?: {
+                offset?: number;
+                limit?: number;
+                eventKind?: "OWN_PRODUCTION" | "THIRD_PARTY_EVENT";
+                status?: "ACTIVE" | "ARCHIVED" | "ALL";
+                q?: string;
+            };
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EventFormatPageDto"];
+                };
+            };
+        };
+    };
+    EventFormatController_create_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateEventFormatDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EventFormatDto"];
+                };
+            };
+        };
+    };
+    EventFormatController_find_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                eventFormatId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EventFormatDto"];
+                };
+            };
+        };
+    };
+    EventFormatController_update_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                eventFormatId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateEventFormatDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EventFormatDto"];
+                };
+            };
+        };
+    };
+    EventFormatController_setStatus_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                eventFormatId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateEventFormatStatusDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EventFormatDto"];
                 };
             };
         };

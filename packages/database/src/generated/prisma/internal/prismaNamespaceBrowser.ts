@@ -58,6 +58,7 @@ export const ModelName = {
   RateLimit: 'RateLimit',
   BootstrapToken: 'BootstrapToken',
   Organization: 'Organization',
+  EventFormat: 'EventFormat',
   Location: 'Location',
   Membership: 'Membership',
   Permission: 'Permission',
@@ -199,6 +200,29 @@ export const OrganizationScalarFieldEnum = {
 } as const
 
 export type OrganizationScalarFieldEnum = (typeof OrganizationScalarFieldEnum)[keyof typeof OrganizationScalarFieldEnum]
+
+
+export const EventFormatScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  name: 'name',
+  normalizedName: 'normalizedName',
+  description: 'description',
+  eventKind: 'eventKind',
+  technicalGetInMinutes: 'technicalGetInMinutes',
+  artistGetInMinutes: 'artistGetInMinutes',
+  doorsMinutes: 'doorsMinutes',
+  startMinutes: 'startMinutes',
+  endMinutes: 'endMinutes',
+  recordingDefault: 'recordingDefault',
+  status: 'status',
+  archivedAt: 'archivedAt',
+  version: 'version',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type EventFormatScalarFieldEnum = (typeof EventFormatScalarFieldEnum)[keyof typeof EventFormatScalarFieldEnum]
 
 
 export const LocationScalarFieldEnum = {
