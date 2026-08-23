@@ -57,3 +57,48 @@ export const RecordingDefault = {
 } as const
 
 export type RecordingDefault = (typeof RecordingDefault)[keyof typeof RecordingDefault]
+
+
+export const EventStatus = {
+  DRAFT: 'DRAFT',
+  PLANNED: 'PLANNED',
+  CONFIRMED: 'CONFIRMED',
+  COMPLETED: 'COMPLETED',
+  CANCELLED: 'CANCELLED'
+} as const
+
+export type EventStatus = (typeof EventStatus)[keyof typeof EventStatus]
+
+
+export const EventSnapshotSource = {
+  EVENT_FORMAT: 'EVENT_FORMAT'
+} as const
+
+export type EventSnapshotSource = (typeof EventSnapshotSource)[keyof typeof EventSnapshotSource]
+
+
+export const VenueDateOptionRank = {
+  FIRST: 'FIRST',
+  SECOND: 'SECOND'
+} as const
+
+export type VenueDateOptionRank = (typeof VenueDateOptionRank)[keyof typeof VenueDateOptionRank]
+
+
+export const VenueDateOptionStatus = {
+  ACTIVE: 'ACTIVE',
+  CONVERTED: 'CONVERTED',
+  RELEASED: 'RELEASED',
+  EXPIRED: 'EXPIRED',
+  UNAVAILABLE: 'UNAVAILABLE'
+} as const
+
+export type VenueDateOptionStatus = (typeof VenueDateOptionStatus)[keyof typeof VenueDateOptionStatus]
+
+
+export const OccupancySlot = {
+  FIRST: 'FIRST',
+  SECOND: 'SECOND'
+} as const
+
+export type OccupancySlot = (typeof OccupancySlot)[keyof typeof OccupancySlot]

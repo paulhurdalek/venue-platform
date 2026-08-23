@@ -7,6 +7,8 @@ import { AuditModule } from './audit/audit.module.js';
 import { DatabaseModule } from './database/database.module.js';
 import { HealthModule } from './health/health.module.js';
 import { EventFormatsModule } from './event-formats/event-formats.module.js';
+import { EventsModule } from './events/events.module.js';
+import { DateOptionsModule } from './date-options/date-options.module.js';
 import { MasterDataModule } from './master-data/master-data.module.js';
 import { SecurityModule } from './security/security.module.js';
 import { SetupModule } from './setup/setup.module.js';
@@ -28,6 +30,8 @@ import { PlatformModule } from './platform/platform.module.js';
     PlatformModule,
     MasterDataModule,
     EventFormatsModule,
+    EventsModule,
+    DateOptionsModule,
     HealthModule,
   ],
 })

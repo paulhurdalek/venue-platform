@@ -11,6 +11,8 @@ export type Location = components['schemas']['LocationDto'];
 export type Membership = components['schemas']['MembershipDto'];
 export type Role = components['schemas']['RoleDto'];
 export type Invitation = components['schemas']['InvitationDto'];
+export type Event = components['schemas']['EventDto'];
+export type EventFormat = components['schemas']['EventFormatDto'];
 
 export class ApiResponseError extends Error {
   constructor(

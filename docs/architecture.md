@@ -7,8 +7,10 @@ organization-owned Artists, reusable Contacts, Business Partners and their norma
 associations. Artist representation by a company is an explicit normalized association whose
 representatives point to existing company-Contact associations; it is never inferred from shared
 Contacts. Phase 4 adds organization-wide EventFormats whose V1 data is the concrete fachliche
-Formatvorlage for later events. Bookings, events, event snapshots, calculations, documents,
-invoices and rooms remain absent.
+Formatvorlage for concrete events. Phase 5 adds Location-scoped Events with optional EventFormat
+provenance, independent VenueDateOptions and calculated availability. A central relational
+occupancy model coordinates all three. Bookings, line-ups, calculations, documents, invoices and
+rooms remain absent.
 
 ## Runtime view
 
@@ -29,8 +31,13 @@ apps/worker (separate NestJS application context)
 ```
 
 The API is a modular monolith. Future business modules remain deployment-aligned while owning
-their internal application, domain, infrastructure, and presentation boundaries. The worker is
-a separate process so long-running work cannot consume API request capacity.
+their internal application, domain, infrastructure, and presentation boundaries. Phase 5 adds the
+Location-bound `events` and `date-options` modules plus a shared occupancy domain/infrastructure
+boundary. The EventFormat snapshot boundary, option lifecycle, availability query and bounded
+calendar/list read models stay in their owning use cases. Date-option batch creation is an
+application-level transaction over ordinary option aggregates; it deliberately introduces no
+batch aggregate or persistence table. The worker is a separate process so
+long-running work cannot consume API request capacity.
 
 ## Workspace components
 
@@ -79,9 +86,31 @@ a repository transaction port; Prisma remains confined to the infrastructure ada
 is deliberately the concrete V1 format template itself. No generic template abstraction or
 configuration engine exists.
 
-The future event boundary is snapshot-based: an event will copy current EventFormat values at
-creation and may retain the source format ID and version. EventFormat updates never mutate existing
-events. Archived formats remain historically referencable but will not be offered for new events.
+The event boundary supports two explicit creation paths. A template-backed Event copies current
+EventFormat values inside its creation transaction and retains source format ID/version plus
+provenance snapshots. A free Event has all source/snapshot columns null and requires its own
+EventKind; it never creates a placeholder format. Both paths store independently editable values.
+EventFormat updates never mutate existing Events, and archived formats remain historically
+referencable but cannot create new Events.
+
+Event reads and mutations repeat `organization_id` and apply the membership Location scope.
+Location and source-format foreign keys are tenant-composite. Event application use cases own the
+snapshot, optimistic-update, status and audit transactions; controllers only map validated HTTP
+input. A PostgreSQL `DATE` carries the local calendar day, minute columns carry local times and the
+Location's IANA timezone is snapshotted without constructing a UTC event instant.
+
+The occupancy boundary converts complete Event schedules and DateOptions to half-open local
+timestamp ranges. Events reserve both rank slots; a DateOption reserves only `FIRST` or `SECOND`.
+Sorted transaction-scoped advisory locks serialize rank decisions and Location changes, while a
+PostgreSQL GiST exclusion constraint is the final concurrent-write invariant. Expiry cleanup,
+availability, Event mutations and option mutations all call this same boundary. Incomplete Events
+remain valid business records but deliberately have no exact occupancy row and force manual review
+for their local date.
+
+`VenueDateOption` remains separate from Event and future Booking aggregates. It owns rank, expiry,
+status, version and optional master-data references. Release, manual promotion and conversion are
+atomic repository transactions. Conversion replaces the option occupancy with the final Event
+occupancy and marks overlapping second options unavailable without deleting their history.
 
 Authentication answers “who is this user?” and remains owned by Better Auth. Authorization
 answers “what may this membership do in this organization?” and remains owned by the platform.

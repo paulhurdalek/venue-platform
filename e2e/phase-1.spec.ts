@@ -7,6 +7,20 @@ const invitedPassword = 'Local-E2E-Member-42!';
 const focusedScenarioTimeout = 90_000;
 const e2eBaseUrl = process.env.E2E_BASE_URL ?? 'http://127.0.0.1:3000';
 
+function contrastRatio(foreground: string, background: string) {
+  const luminance = (value: string) => {
+    const channels = (value.match(/[\d.]+/g) ?? []).slice(0, 3).map(Number);
+    const [red = 0, green = 0, blue = 0] = channels.map((channel) => {
+      const normalized = channel / 255;
+      return normalized <= 0.04045 ? normalized / 12.92 : ((normalized + 0.055) / 1.055) ** 2.4;
+    });
+    return 0.2126 * red + 0.7152 * green + 0.0722 * blue;
+  };
+  const first = luminance(foreground);
+  const second = luminance(background);
+  return (Math.max(first, second) + 0.05) / (Math.min(first, second) + 0.05);
+}
+
 function attachBrowserDiagnostics(page: Page) {
   page.on('requestfailed', (failedRequest) => {
     const url = new URL(failedRequest.url());
@@ -95,7 +109,7 @@ async function exerciseLifecycle(
   await expect(page.getByText(`${entityArticle} ${entityLabel} wurde reaktiviert.`)).toBeVisible();
 }
 
-test.describe.serial('Phase 1, Phase 3 and Phase 4 browser acceptance', () => {
+test.describe.serial('Phase 1, Phase 3, Phase 4 and Phase 5 browser acceptance', () => {
   // Database reset and the one-time bootstrap link make the complete E2E command the retry boundary.
   test.describe.configure({ retries: 0, timeout: focusedScenarioTimeout });
 
@@ -103,6 +117,8 @@ test.describe.serial('Phase 1, Phase 3 and Phase 4 browser acceptance', () => {
   let page: Page;
   let organizationId = '';
   let eventFormatDetailPath = '';
+  let eventDetailPath = '';
+  let dateOptionDetailPath = '';
   let artistDetailPath = '';
   let contactDetailPath = '';
   let partnerDetailPath = '';
@@ -231,6 +247,305 @@ test.describe.serial('Phase 1, Phase 3 and Phase 4 browser acceptance', () => {
     await exerciseLifecycle(page, 'Veranstaltungsformat', { cancel: true, keyboard: true });
 
     await page.setViewportSize({ width: 390, height: 844 });
+    expect(
+      await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth),
+    ).toBe(true);
+    await page.setViewportSize({ width: 1280, height: 720 });
+  });
+
+  test('Phase 5: empty calendar and event creation from visible format defaults', async () => {
+    await openOrganizationHome(page, organizationId);
+    await page.getByRole('link', { name: 'Veranstaltungen', exact: true }).click();
+    await expect(page.getByRole('heading', { name: 'Veranstaltungen', exact: true })).toBeVisible();
+    await expect(page.locator('.month-calendar')).toBeVisible();
+    await expect(page.locator('.calendar-event')).toHaveCount(0);
+
+    await page.getByRole('link', { name: 'Veranstaltung anlegen', exact: true }).click();
+    await expect(
+      page.getByRole('heading', { name: 'Veranstaltung anlegen', exact: true }),
+    ).toBeVisible();
+    await expect(page.getByLabel('Veranstaltungsformat')).toContainText('E2E Late Show');
+    await expect(page.getByLabel('Veranstaltungsname')).toHaveValue('E2E Late Show');
+    await expect(page.getByLabel('Get-in Technik')).toHaveValue('16:00');
+    await expect(page.getByLabel('Get-in Artists')).toHaveValue('17:30');
+    await expect(page.getByLabel('Einlass')).toHaveValue('19:00');
+    await expect(page.getByLabel('Beginn')).toHaveValue('20:00');
+    await expect(page.getByRole('textbox', { name: 'Ende optional', exact: true })).toHaveValue(
+      '01:30',
+    );
+    await expect(page.getByLabel('Tag des Endes')).toHaveValue('NEXT');
+    await expect(page.getByLabel('Location')).toHaveValue(/.+/);
+    await page.getByLabel('Datum').fill('2026-08-23');
+    await page.getByLabel('Veranstaltungsname').fill('E2E Venue Night');
+    await page.getByRole('button', { name: 'Veranstaltung anlegen', exact: true }).click();
+
+    await expect(page.getByRole('heading', { name: 'E2E Venue Night', exact: true })).toBeVisible();
+    eventDetailPath = new URL(page.url()).pathname;
+    await expect(page.locator('input[name="name"]')).toHaveCount(0);
+    await expect(page.getByText('E2E Late Show', { exact: true })).toBeVisible();
+    await expect(page.getByText('Fremdveranstaltung / Vermietung', { exact: true })).toBeVisible();
+    await expect(page.getByText('01:30 (+1 Tag)', { exact: true })).toBeVisible();
+    await expect(page.getByText('Inaktiv', { exact: true })).toBeVisible();
+  });
+
+  test('Phase 5: read-only detail, edit cancel/save and confirmed status', async () => {
+    await page.goto(eventDetailPath);
+    await expect(page.locator('input[name="name"]')).toHaveCount(0);
+    await page.getByRole('button', { name: 'Bearbeiten', exact: true }).click();
+    await page.getByLabel('Veranstaltungsname').fill('Dieser Entwurf wird verworfen');
+    await page.getByRole('button', { name: 'Abbrechen', exact: true }).click();
+    await expect(page.getByText('Dieser Entwurf wird verworfen', { exact: true })).toHaveCount(0);
+    await expect(page.getByRole('heading', { name: 'E2E Venue Night', exact: true })).toBeVisible();
+
+    await page.getByRole('button', { name: 'Bearbeiten', exact: true }).click();
+    await page.getByLabel('Beginn').fill('20:30');
+    await page.getByRole('button', { name: 'Änderungen speichern', exact: true }).click();
+    await expect(page.getByText('Die Veranstaltung wurde gespeichert.')).toBeVisible();
+    await expect(page.getByText('20:30', { exact: true })).toBeVisible();
+    await expect(page.locator('input[name="name"]')).toHaveCount(0);
+
+    await page.getByLabel('Status ändern').selectOption('CONFIRMED');
+    await page.getByRole('button', { name: 'Übernehmen', exact: true }).click();
+    await expect(page.locator('.page-heading .status-badge')).toHaveText('Bestätigt');
+
+    await page.getByLabel('Status ändern').selectOption('CANCELLED');
+    await page.getByRole('button', { name: 'Übernehmen', exact: true }).click();
+    const cancellation = page.getByRole('dialog', { name: 'Abgesagt bestätigen?', exact: true });
+    await expect(cancellation).toBeVisible();
+    await cancellation.getByRole('button', { name: 'Abbrechen', exact: true }).click();
+    await expect(cancellation).toHaveCount(0);
+    await expect(page.locator('.page-heading .status-badge')).toHaveText('Bestätigt');
+  });
+
+  test('Phase 5: free event creation clears template values and shows manual review', async () => {
+    await page.goto(`/o/${organizationId}/events/new`);
+    await expect(page.getByLabel('Veranstaltungsname')).toHaveValue('E2E Late Show');
+    await page.getByLabel('Ohne Vorlage', { exact: true }).check();
+    await expect(page.getByLabel('Veranstaltungsformat')).toHaveCount(0);
+    await expect(page.getByLabel('Veranstaltungsname')).toHaveValue('');
+    await expect(page.getByLabel('Get-in Technik')).toHaveValue('');
+    await page
+      .getByRole('combobox', { name: 'Veranstaltungsart', exact: true })
+      .selectOption('OWN_PRODUCTION');
+    await page.getByLabel('Veranstaltungsname').fill('E2E Freies Event');
+    await page.getByLabel('Datum').fill('2026-08-24');
+    await page.getByRole('button', { name: 'Veranstaltung anlegen', exact: true }).click();
+
+    await expect(
+      page.getByRole('heading', { name: 'E2E Freies Event', exact: true }),
+    ).toBeVisible();
+    await expect(page.getByText('Ohne Vorlage', { exact: true })).toBeVisible();
+    await expect(
+      page.getByText('Zeiten unvollständig – Konfliktprüfung nur eingeschränkt möglich', {
+        exact: true,
+      }),
+    ).toBeVisible();
+  });
+
+  test('Phase 5: date option ranks, calendar markers and manual promotion', async () => {
+    await page.goto(`/o/${organizationId}/events`);
+    await page.getByRole('link', { name: 'Terminoption anlegen', exact: true }).click();
+    await page.getByLabel('Bezeichnung').fill('E2E Erste Option');
+    await page.getByLabel('Datum').fill('2026-08-26');
+    await page.getByLabel('Belegungsbeginn').fill('16:00');
+    await page.getByLabel('Belegungsende').fill('23:00');
+    await page.getByRole('button', { name: 'Terminoption anlegen', exact: true }).click();
+    await expect(
+      page.getByRole('heading', { name: 'E2E Erste Option', exact: true }),
+    ).toBeVisible();
+    await expect(page.getByText('1. Option', { exact: true }).first()).toBeVisible();
+    const firstOptionDetailPath = new URL(page.url()).pathname;
+
+    await page.goto(`/o/${organizationId}/events/options/new`);
+    await page.getByLabel('Bezeichnung').fill('E2E Zweite Option');
+    await page.getByLabel('Datum').fill('2026-08-26');
+    await page.getByLabel('Belegungsbeginn').fill('17:00');
+    await page.getByLabel('Belegungsende').fill('22:00');
+    await page.getByRole('button', { name: 'Terminoption anlegen', exact: true }).click();
+    await expect(
+      page.getByRole('heading', { name: 'E2E Zweite Option', exact: true }),
+    ).toBeVisible();
+    await expect(page.getByText('2. Option', { exact: true }).first()).toBeVisible();
+    dateOptionDetailPath = new URL(page.url()).pathname;
+
+    await page.goto(`/o/${organizationId}/events?view=calendar&month=2026-08`);
+    await expect(
+      page
+        .locator('.month-calendar .calendar-option--first')
+        .filter({ hasText: 'E2E Erste Option' }),
+    ).toBeVisible();
+    await expect(
+      page
+        .locator('.month-calendar .calendar-option--second')
+        .filter({ hasText: 'E2E Zweite Option' }),
+    ).toBeVisible();
+
+    await page.goto(firstOptionDetailPath);
+    page.once('dialog', (dialog) => void dialog.accept());
+    await page.getByRole('button', { name: 'Freigeben', exact: true }).click();
+    await expect(page.locator('.page-heading .status-badge')).toHaveText('Freigegeben');
+
+    await page.goto(dateOptionDetailPath);
+    await expect(
+      page.getByText('Kann zur 1. Option hochgestuft werden', { exact: true }),
+    ).toBeVisible();
+    await page.getByRole('button', { name: 'Zur 1. Option hochstufen', exact: true }).click();
+    await expect(page.getByText('1. Option', { exact: true }).first()).toBeVisible();
+  });
+
+  test('Phase 5: weekday availability selection and safe clipboard text', async () => {
+    await page.goto(`/o/${organizationId}/events?view=free`);
+    const freeDatesNavigation = page.getByRole('link', { name: 'Freitermine', exact: true });
+    const calendarNavigation = page.getByRole('link', { name: 'Kalender', exact: true });
+    await expect(freeDatesNavigation).toHaveAttribute('aria-current', 'page');
+    const unselectedStyles = await calendarNavigation.evaluate((element) => {
+      const style = getComputedStyle(element);
+      return {
+        background: style.backgroundColor,
+        border: style.borderColor,
+        color: style.color,
+      };
+    });
+    expect(unselectedStyles).toEqual({
+      background: 'rgb(255, 255, 255)',
+      border: 'rgb(22, 95, 74)',
+      color: 'rgb(15, 81, 61)',
+    });
+    expect(
+      contrastRatio(unselectedStyles.color, unselectedStyles.background),
+    ).toBeGreaterThanOrEqual(4.5);
+    const selectedStyles = await freeDatesNavigation.evaluate((element) => {
+      const style = getComputedStyle(element);
+      return {
+        background: style.backgroundColor,
+        color: style.color,
+        decoration: style.textDecorationLine,
+      };
+    });
+    expect(selectedStyles).toEqual({
+      background: 'rgb(22, 95, 74)',
+      color: 'rgb(255, 255, 255)',
+      decoration: 'underline',
+    });
+    expect(contrastRatio(selectedStyles.color, selectedStyles.background)).toBeGreaterThanOrEqual(
+      4.5,
+    );
+    await calendarNavigation.hover();
+    await expect(calendarNavigation).toHaveCSS('background-color', 'rgb(237, 247, 242)');
+    await expect(calendarNavigation).toHaveCSS('color', 'rgb(15, 81, 61)');
+    await calendarNavigation.focus();
+    await expect(calendarNavigation).toHaveCSS('outline-width', '3px');
+    const disabledCopy = page.getByRole('button', { name: 'Auswahl kopieren', exact: true });
+    const disabledStyles = await disabledCopy.evaluate((element) => {
+      const style = getComputedStyle(element);
+      return { background: style.backgroundColor, color: style.color };
+    });
+    expect(disabledStyles).toEqual({
+      background: 'rgb(232, 234, 231)',
+      color: 'rgb(89, 97, 93)',
+    });
+    expect(contrastRatio(disabledStyles.color, disabledStyles.background)).toBeGreaterThanOrEqual(
+      4.5,
+    );
+    await page.getByLabel('Von').fill('2026-08-27');
+    await page.getByLabel('Bis').fill('2026-08-28');
+    await page.getByLabel('Fr', { exact: true }).check();
+    await page.getByRole('button', { name: 'Freitermine prüfen', exact: true }).click();
+    const results = page.getByLabel('Ergebnisse der Freiterminsuche');
+    await expect(results.locator('.availability-result')).toHaveCount(1);
+    const friday = results.locator('.availability-result').filter({ hasText: '28. August 2026' });
+    await expect(friday).toContainText('Frei');
+    await friday.getByRole('checkbox').check();
+    await page.getByRole('button', { name: 'Auswahl kopieren', exact: true }).click();
+    await expect(page.getByText('1 Termin wurde in die Zwischenablage kopiert.')).toBeVisible();
+    const clipboard = await page.evaluate(() => navigator.clipboard.readText());
+    expect(clipboard).toContain(
+      'Folgende Termine können wir Ihnen derzeit unverbindlich anbieten:',
+    );
+    expect(clipboard).toContain('Freitag, 28. August 2026 | 16:00–23:00');
+    expect(clipboard).toContain(
+      'Die Verfügbarkeit kann sich bis zur ausdrücklichen Optionierung ändern.',
+    );
+    expect(clipboard).not.toContain('E2E Erste Option');
+  });
+
+  test('Phase 5: keyboard batch selection proposes ranks and creates independent options', async () => {
+    await page.goto(`/o/${organizationId}/events?view=free`);
+    await page.getByLabel('Von').fill('2026-08-26');
+    await page.getByLabel('Bis').fill('2026-08-27');
+    await page
+      .getByRole('combobox', { name: 'Ergebnisfilter', exact: true })
+      .selectOption('FREE_AND_SECOND_OPTION');
+    await page.getByRole('button', { name: 'Freitermine prüfen', exact: true }).click();
+
+    const firstDate = page.getByRole('checkbox', {
+      name: 'Mittwoch, 26. August 2026 auswählen',
+      exact: true,
+    });
+    const secondDate = page.getByRole('checkbox', {
+      name: 'Donnerstag, 27. August 2026 auswählen',
+      exact: true,
+    });
+    await firstDate.focus();
+    await page.keyboard.press('Space');
+    await expect(firstDate).toBeChecked();
+    await page.keyboard.press('Tab');
+    await expect(secondDate).toBeFocused();
+    await page.keyboard.press('Space');
+    await expect(secondDate).toBeChecked();
+    await expect(page.getByText('2 Termine ausgewählt', { exact: true })).toBeVisible();
+
+    const createBatch = page.getByRole('button', { name: 'Optionen anlegen', exact: true });
+    await createBatch.focus();
+    await page.keyboard.press('Enter');
+    await expect(
+      page.getByRole('heading', { name: 'Mehrere Terminoptionen anlegen', exact: true }),
+    ).toBeFocused();
+    await expect(page.getByLabel('Rang Termin 1', { exact: true })).toHaveValue('SECOND');
+    await expect(page.getByLabel('Rang Termin 2', { exact: true })).toHaveValue('FIRST');
+    await expect(page.getByText('2 Optionen werden angelegt.', { exact: true })).toBeVisible();
+    await page.getByLabel('Bezeichnung beziehungsweise Anfrage').fill('E2E Batch-Anfrage');
+    await page.getByRole('button', { name: 'Optionen verbindlich anlegen', exact: true }).click();
+
+    await expect(
+      page.getByText('2 Terminoptionen wurden angelegt.', { exact: true }),
+    ).toBeVisible();
+    await expect(page.getByText('0 Termine ausgewählt', { exact: true })).toBeVisible();
+    const created = page.getByRole('region', { name: 'Neu angelegte Terminoptionen' });
+    await expect(created.getByRole('link')).toHaveCount(2);
+    await expect(created).toContainText('2. Option');
+    await expect(created).toContainText('1. Option');
+  });
+
+  test('Phase 5: correct calendar date, list filters and narrow agenda', async () => {
+    await page.goto(`/o/${organizationId}/events?view=calendar&month=2026-08`);
+    const calendarEvent = page.locator('.calendar-event').filter({ hasText: 'E2E Venue Night' });
+    await expect(calendarEvent).toBeVisible();
+    await expect(calendarEvent).toContainText('20:30');
+    await expect(
+      page.locator('.month-calendar__day').filter({ has: calendarEvent }),
+    ).toHaveAttribute('aria-label', /23\. August 2026/);
+
+    await page.getByRole('link', { name: 'Liste', exact: true }).click();
+    await expect(page.getByRole('link', { name: 'Liste', exact: true })).toHaveAttribute(
+      'aria-current',
+      'page',
+    );
+    await page.getByLabel('Suche').fill('Venue Night');
+    await page.getByLabel('Status').selectOption('CONFIRMED');
+    await page.getByRole('button', { name: 'Filtern', exact: true }).click();
+    const row = page.locator('.event-list-table tbody tr').filter({ hasText: 'E2E Venue Night' });
+    await expect(row).toContainText('23.08.2026');
+    await expect(row).toContainText('20:30');
+    await expect(row).toContainText('Bestätigt');
+
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto(`/o/${organizationId}/events?view=calendar&month=2026-08`);
+    await expect(page.locator('.month-calendar')).toBeHidden();
+    await expect(page.locator('.calendar-agenda')).toBeVisible();
+    await expect(
+      page.locator('.agenda-event').filter({ hasText: 'E2E Venue Night' }),
+    ).toBeVisible();
     expect(
       await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth),
     ).toBe(true);
@@ -492,7 +807,9 @@ test.describe.serial('Phase 1, Phase 3 and Phase 4 browser acceptance', () => {
     await exerciseLifecycle(page, 'Geschäftspartner');
   });
 
-  test('Phase 1, Phase 3 and Phase 4: read-only authorization and logout', async ({ browser }) => {
+  test('Phase 1, Phase 3, Phase 4 and Phase 5: read-only authorization and logout', async ({
+    browser,
+  }) => {
     await openOrganizationHome(page, organizationId);
     await page.getByRole('link', { name: 'Team', exact: true }).click();
     await page.getByLabel('E-Mail-Adresse').fill(invitedEmail);
@@ -537,6 +854,9 @@ test.describe.serial('Phase 1, Phase 3 and Phase 4 browser acceptance', () => {
         invitedPage.getByRole('link', { name: 'Geschäftspartner', exact: true }),
       ).toBeVisible();
       await expect(invitedPage.getByRole('link', { name: 'Formate', exact: true })).toBeVisible();
+      await expect(
+        invitedPage.getByRole('link', { name: 'Veranstaltungen', exact: true }),
+      ).toBeVisible();
       await invitedPage.getByRole('link', { name: 'Formate', exact: true }).click();
       await expect(
         invitedPage.getByRole('link', { name: 'Veranstaltungsformat anlegen', exact: true }),
@@ -557,6 +877,43 @@ test.describe.serial('Phase 1, Phase 3 and Phase 4 browser acceptance', () => {
         { data: { name: 'Forbidden browser format', eventKind: 'OWN_PRODUCTION' } },
       );
       expect(forbiddenEventFormat.status()).toBe(403);
+      await invitedPage.getByRole('link', { name: 'Veranstaltungen', exact: true }).click();
+      await expect(
+        invitedPage.getByRole('link', { name: 'Veranstaltung anlegen', exact: true }),
+      ).toHaveCount(0);
+      await expect(
+        invitedPage.getByRole('link', { name: 'Terminoption anlegen', exact: true }),
+      ).toHaveCount(0);
+      await invitedPage.goto(dateOptionDetailPath);
+      await expect(
+        invitedPage.getByRole('heading', { name: 'E2E Zweite Option', exact: true }),
+      ).toBeVisible();
+      await expect(
+        invitedPage.getByRole('button', { name: 'Bearbeiten', exact: true }),
+      ).toHaveCount(0);
+      await expect(invitedPage.getByRole('button', { name: 'Freigeben', exact: true })).toHaveCount(
+        0,
+      );
+      await expect(
+        invitedPage.getByRole('link', { name: 'In Veranstaltung umwandeln', exact: true }),
+      ).toHaveCount(0);
+      await invitedPage.goto(eventDetailPath);
+      await expect(
+        invitedPage.getByRole('heading', { name: 'E2E Venue Night', exact: true }),
+      ).toBeVisible();
+      await expect(
+        invitedPage.getByRole('button', { name: 'Bearbeiten', exact: true }),
+      ).toHaveCount(0);
+      await expect(invitedPage.getByLabel('Status ändern')).toHaveCount(0);
+      const eventId = eventDetailPath.split('/').at(-1)!;
+      const forbiddenEvent = await invitedContext.request.patch(
+        new URL(
+          `/api/v1/organizations/${organizationId}/events/${eventId}/status`,
+          invitedPage.url(),
+        ).toString(),
+        { data: { version: 3, status: 'CANCELLED' } },
+      );
+      expect(forbiddenEvent.status()).toBe(403);
       await invitedPage.goto(eventFormatDetailPath);
       await expect(
         invitedPage.getByRole('heading', { name: 'E2E Late Show', exact: true }),

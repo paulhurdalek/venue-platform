@@ -1,9 +1,12 @@
-# Venue Platform — Phase 4
+# Venue Platform — Phase 5
 
 This repository contains the secure identity and tenant foundation plus organization-owned Artist,
-central Contact and Business Partner master data plus organization-wide EventFormat templates. It
-includes normalized role-bearing relations, permission-aware administration and privacy-conscious
-audit records. Concrete events and bookings are deliberately absent.
+central Contact and Business Partner master data, organization-wide EventFormat templates and
+Location-scoped concrete events, two-rank VenueDateOptions and calculated availability with
+calendar/list planning and transactional multi-option creation from selected free dates. It
+includes normalized role-bearing relations, permission-aware
+administration, optional immutable EventFormat provenance, concurrency-safe relational occupancy
+and privacy-conscious audit records. Bookings and line-ups are deliberately absent.
 
 ## Quick start
 
@@ -28,11 +31,12 @@ organization, and location. The command refuses to create a second installation 
 setup link.
 
 Read [the Phase 1 guide](docs/phase-1.md), [the Phase 2 decision](docs/phase-2-decision.md),
-[the Phase 3 guide](docs/phase-3.md), [the Phase 4 guide](docs/phase-4.md), and
+[the Phase 3 guide](docs/phase-3.md), [the Phase 4 guide](docs/phase-4.md),
+[the Phase 5 guide](docs/phase-5.md), and
 [the local development guide](docs/local-development.md) before making changes.
 The complete pinned toolchain is listed in [versions](docs/versions.md).
-Local verification evidence and the remaining container-only gate are recorded in
-[Phase 1 verification](docs/phase-1-verification.md).
+Phase-specific local verification evidence and remaining host-only gates are recorded in the
+corresponding verification documents, including [Phase 5 verification](docs/phase-5-verification.md).
 
 ## Repository map
 

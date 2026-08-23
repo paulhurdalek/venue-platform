@@ -23,6 +23,12 @@ export const PERMISSIONS = {
   EVENT_FORMATS_READ: 'event_formats.read',
   EVENT_FORMATS_WRITE: 'event_formats.write',
   EVENT_FORMATS_ARCHIVE: 'event_formats.archive',
+  EVENTS_READ: 'events.read',
+  EVENTS_WRITE: 'events.write',
+  EVENTS_STATUS: 'events.status',
+  DATE_OPTIONS_READ: 'date_options.read',
+  DATE_OPTIONS_WRITE: 'date_options.write',
+  DATE_OPTIONS_CONVERT: 'date_options.convert',
 } as const;
 
 export type PermissionKey = (typeof PERMISSIONS)[keyof typeof PERMISSIONS];
@@ -76,6 +82,15 @@ export const PERMISSION_CATALOG: ReadonlyArray<{
     key: PERMISSIONS.EVENT_FORMATS_ARCHIVE,
     description: 'Veranstaltungsformate archivieren und reaktivieren',
   },
+  { key: PERMISSIONS.EVENTS_READ, description: 'Veranstaltungen ansehen' },
+  { key: PERMISSIONS.EVENTS_WRITE, description: 'Veranstaltungen anlegen und bearbeiten' },
+  { key: PERMISSIONS.EVENTS_STATUS, description: 'Veranstaltungsstatus ändern' },
+  { key: PERMISSIONS.DATE_OPTIONS_READ, description: 'Terminoptionen und Freitermine ansehen' },
+  { key: PERMISSIONS.DATE_OPTIONS_WRITE, description: 'Terminoptionen anlegen und bearbeiten' },
+  {
+    key: PERMISSIONS.DATE_OPTIONS_CONVERT,
+    description: 'Terminoptionen in Veranstaltungen umwandeln',
+  },
 ];
 
 export const STANDARD_ROLES = [
@@ -97,6 +112,12 @@ export const STANDARD_ROLES = [
       PERMISSIONS.EVENT_FORMATS_READ,
       PERMISSIONS.EVENT_FORMATS_WRITE,
       PERMISSIONS.EVENT_FORMATS_ARCHIVE,
+      PERMISSIONS.EVENTS_READ,
+      PERMISSIONS.EVENTS_WRITE,
+      PERMISSIONS.EVENTS_STATUS,
+      PERMISSIONS.DATE_OPTIONS_READ,
+      PERMISSIONS.DATE_OPTIONS_WRITE,
+      PERMISSIONS.DATE_OPTIONS_CONVERT,
     ],
   },
   {
@@ -114,6 +135,12 @@ export const STANDARD_ROLES = [
       PERMISSIONS.CONTACTS_ARCHIVE,
       PERMISSIONS.BUSINESS_PARTNERS_READ,
       PERMISSIONS.EVENT_FORMATS_READ,
+      PERMISSIONS.EVENTS_READ,
+      PERMISSIONS.EVENTS_WRITE,
+      PERMISSIONS.EVENTS_STATUS,
+      PERMISSIONS.DATE_OPTIONS_READ,
+      PERMISSIONS.DATE_OPTIONS_WRITE,
+      PERMISSIONS.DATE_OPTIONS_CONVERT,
     ],
   },
   {
@@ -128,6 +155,9 @@ export const STANDARD_ROLES = [
       PERMISSIONS.BUSINESS_PARTNERS_READ,
       PERMISSIONS.EVENT_FORMATS_READ,
       PERMISSIONS.EVENT_FORMATS_WRITE,
+      PERMISSIONS.EVENTS_READ,
+      PERMISSIONS.EVENTS_WRITE,
+      PERMISSIONS.DATE_OPTIONS_READ,
     ],
   },
   {
@@ -141,6 +171,8 @@ export const STANDARD_ROLES = [
       PERMISSIONS.CONTACTS_READ,
       PERMISSIONS.BUSINESS_PARTNERS_READ,
       PERMISSIONS.EVENT_FORMATS_READ,
+      PERMISSIONS.EVENTS_READ,
+      PERMISSIONS.DATE_OPTIONS_READ,
     ],
   },
 ] as const;

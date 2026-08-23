@@ -58,6 +58,11 @@ export type Organization = Prisma.OrganizationModel
  */
 export type EventFormat = Prisma.EventFormatModel
 /**
+ * Model Event
+ * 
+ */
+export type Event = Prisma.EventModel
+/**
  * Model Location
  * 
  */
@@ -182,3 +187,13 @@ export type ArtistBusinessPartnerContact = Prisma.ArtistBusinessPartnerContactMo
  * 
  */
 export type ArtistBusinessPartnerContactRole = Prisma.ArtistBusinessPartnerContactRoleModel
+/**
+ * Model VenueDateOption
+ * 
+ */
+export type VenueDateOption = Prisma.VenueDateOptionModel
+/**
+ * Model LocationOccupancy
+ * 
+ */
+export type LocationOccupancy = Prisma.LocationOccupancyModel

@@ -56,6 +56,39 @@ EventFormat audit writes likewise share the mutation transaction. Their metadata
 record IDs through the audit target, old/new versions, old/new status and changed field names;
 format names and descriptions are excluded.
 
+Phase 5 adds `events.read`, `events.write` and `events.status`. The central guard resolves the
+concrete permission and Event application use cases additionally constrain every read and mutation
+to the membership's accessible Location IDs. A foreign, unknown or inaccessible Event, Location or
+EventFormat ID never returns cross-tenant content. Event creation validates organization, Location,
+Location access and the active source format inside one transaction before writing the Event and
+audit entry.
+
+Event audit metadata is allowlisted to versions, statuses, changed field names and source-format
+technical IDs/version. Event names, descriptions and copied format free text are excluded. Status
+correction is explicitly supported; cancellation and completion never delete historical events.
+
+The refinement adds `date_options.read`, `date_options.write` and `date_options.convert`; the
+availability endpoint requires the read key. Administrator, Management & Finances and Booking
+receive all three, while Production and Read-only receive only read. The same central guard and
+repository predicates apply membership Location scope to option lists, details, availability and
+mutations. Partner/contact references are tenant-composite, and a supplied partner/contact pair
+must be an existing association.
+
+Occupancy conflict details are derived only after the requested Location has passed tenant and
+membership-scope checks. They can therefore link an authorized user to a colliding Event or Option
+without revealing an inaccessible tenant or Location. PostgreSQL advisory locks and an exclusion
+constraint protect against request races; UI checks are never a security or consistency boundary.
+Option audit metadata contains technical IDs, ranks, statuses and versions, not labels, notes,
+partner names or Contact data. Release, expiry, promotion, conversion and unavailable transitions
+preserve historical rows.
+
+Batch creation uses the existing `date_options.write` permission and repeats Location-scope and
+tenant checks for every requested option before any write. Shared partner/contact references are
+validated once against the same organization. All option and audit writes share one transaction;
+one invalid, duplicate or occupied entry rolls back the complete request. Conflict responses expose
+only the affected Batch index/date/Location/rank and already-authorized occupancy targets, never
+raw Prisma/PostgreSQL errors or foreign-tenant data. The request DTO accepts 1–50 nested entries.
+
 ## Dependency checks
 
 `pnpm security:audit` blocks high/critical production advisories. `pnpm install --frozen-lockfile`

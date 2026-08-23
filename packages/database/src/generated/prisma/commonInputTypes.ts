@@ -334,6 +334,40 @@ export type EnumRecordingDefaultWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumRecordingDefaultFilter<$PrismaModel>
 }
 
+export type EnumEventStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.EventStatus | Prisma.EnumEventStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.EventStatus[] | Prisma.ListEnumEventStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.EventStatus[] | Prisma.ListEnumEventStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumEventStatusFilter<$PrismaModel> | $Enums.EventStatus
+}
+
+export type EnumEventSnapshotSourceNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.EventSnapshotSource | Prisma.EnumEventSnapshotSourceFieldRefInput<$PrismaModel> | null
+  in?: $Enums.EventSnapshotSource[] | Prisma.ListEnumEventSnapshotSourceFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.EventSnapshotSource[] | Prisma.ListEnumEventSnapshotSourceFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumEventSnapshotSourceNullableFilter<$PrismaModel> | $Enums.EventSnapshotSource | null
+}
+
+export type EnumEventStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.EventStatus | Prisma.EnumEventStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.EventStatus[] | Prisma.ListEnumEventStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.EventStatus[] | Prisma.ListEnumEventStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumEventStatusWithAggregatesFilter<$PrismaModel> | $Enums.EventStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumEventStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumEventStatusFilter<$PrismaModel>
+}
+
+export type EnumEventSnapshotSourceNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.EventSnapshotSource | Prisma.EnumEventSnapshotSourceFieldRefInput<$PrismaModel> | null
+  in?: $Enums.EventSnapshotSource[] | Prisma.ListEnumEventSnapshotSourceFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.EventSnapshotSource[] | Prisma.ListEnumEventSnapshotSourceFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumEventSnapshotSourceNullableWithAggregatesFilter<$PrismaModel> | $Enums.EventSnapshotSource | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumEventSnapshotSourceNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumEventSnapshotSourceNullableFilter<$PrismaModel>
+}
+
 export type EnumMembershipStatusFilter<$PrismaModel = never> = {
   equals?: $Enums.MembershipStatus | Prisma.EnumMembershipStatusFieldRefInput<$PrismaModel>
   in?: $Enums.MembershipStatus[] | Prisma.ListEnumMembershipStatusFieldRefInput<$PrismaModel>
@@ -434,6 +468,57 @@ export type JsonWithAggregatesFilterBase<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedJsonFilter<$PrismaModel>
   _max?: Prisma.NestedJsonFilter<$PrismaModel>
+}
+
+export type EnumVenueDateOptionRankFilter<$PrismaModel = never> = {
+  equals?: $Enums.VenueDateOptionRank | Prisma.EnumVenueDateOptionRankFieldRefInput<$PrismaModel>
+  in?: $Enums.VenueDateOptionRank[] | Prisma.ListEnumVenueDateOptionRankFieldRefInput<$PrismaModel>
+  notIn?: $Enums.VenueDateOptionRank[] | Prisma.ListEnumVenueDateOptionRankFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumVenueDateOptionRankFilter<$PrismaModel> | $Enums.VenueDateOptionRank
+}
+
+export type EnumVenueDateOptionStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.VenueDateOptionStatus | Prisma.EnumVenueDateOptionStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.VenueDateOptionStatus[] | Prisma.ListEnumVenueDateOptionStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.VenueDateOptionStatus[] | Prisma.ListEnumVenueDateOptionStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumVenueDateOptionStatusFilter<$PrismaModel> | $Enums.VenueDateOptionStatus
+}
+
+export type EnumVenueDateOptionRankWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.VenueDateOptionRank | Prisma.EnumVenueDateOptionRankFieldRefInput<$PrismaModel>
+  in?: $Enums.VenueDateOptionRank[] | Prisma.ListEnumVenueDateOptionRankFieldRefInput<$PrismaModel>
+  notIn?: $Enums.VenueDateOptionRank[] | Prisma.ListEnumVenueDateOptionRankFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumVenueDateOptionRankWithAggregatesFilter<$PrismaModel> | $Enums.VenueDateOptionRank
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumVenueDateOptionRankFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumVenueDateOptionRankFilter<$PrismaModel>
+}
+
+export type EnumVenueDateOptionStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.VenueDateOptionStatus | Prisma.EnumVenueDateOptionStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.VenueDateOptionStatus[] | Prisma.ListEnumVenueDateOptionStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.VenueDateOptionStatus[] | Prisma.ListEnumVenueDateOptionStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumVenueDateOptionStatusWithAggregatesFilter<$PrismaModel> | $Enums.VenueDateOptionStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumVenueDateOptionStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumVenueDateOptionStatusFilter<$PrismaModel>
+}
+
+export type EnumOccupancySlotFilter<$PrismaModel = never> = {
+  equals?: $Enums.OccupancySlot | Prisma.EnumOccupancySlotFieldRefInput<$PrismaModel>
+  in?: $Enums.OccupancySlot[] | Prisma.ListEnumOccupancySlotFieldRefInput<$PrismaModel>
+  notIn?: $Enums.OccupancySlot[] | Prisma.ListEnumOccupancySlotFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumOccupancySlotFilter<$PrismaModel> | $Enums.OccupancySlot
+}
+
+export type EnumOccupancySlotWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.OccupancySlot | Prisma.EnumOccupancySlotFieldRefInput<$PrismaModel>
+  in?: $Enums.OccupancySlot[] | Prisma.ListEnumOccupancySlotFieldRefInput<$PrismaModel>
+  notIn?: $Enums.OccupancySlot[] | Prisma.ListEnumOccupancySlotFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumOccupancySlotWithAggregatesFilter<$PrismaModel> | $Enums.OccupancySlot
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumOccupancySlotFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumOccupancySlotFilter<$PrismaModel>
 }
 
 export type NestedUuidFilter<$PrismaModel = never> = {
@@ -765,6 +850,40 @@ export type NestedEnumRecordingDefaultWithAggregatesFilter<$PrismaModel = never>
   _max?: Prisma.NestedEnumRecordingDefaultFilter<$PrismaModel>
 }
 
+export type NestedEnumEventStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.EventStatus | Prisma.EnumEventStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.EventStatus[] | Prisma.ListEnumEventStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.EventStatus[] | Prisma.ListEnumEventStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumEventStatusFilter<$PrismaModel> | $Enums.EventStatus
+}
+
+export type NestedEnumEventSnapshotSourceNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.EventSnapshotSource | Prisma.EnumEventSnapshotSourceFieldRefInput<$PrismaModel> | null
+  in?: $Enums.EventSnapshotSource[] | Prisma.ListEnumEventSnapshotSourceFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.EventSnapshotSource[] | Prisma.ListEnumEventSnapshotSourceFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumEventSnapshotSourceNullableFilter<$PrismaModel> | $Enums.EventSnapshotSource | null
+}
+
+export type NestedEnumEventStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.EventStatus | Prisma.EnumEventStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.EventStatus[] | Prisma.ListEnumEventStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.EventStatus[] | Prisma.ListEnumEventStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumEventStatusWithAggregatesFilter<$PrismaModel> | $Enums.EventStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumEventStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumEventStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumEventSnapshotSourceNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.EventSnapshotSource | Prisma.EnumEventSnapshotSourceFieldRefInput<$PrismaModel> | null
+  in?: $Enums.EventSnapshotSource[] | Prisma.ListEnumEventSnapshotSourceFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.EventSnapshotSource[] | Prisma.ListEnumEventSnapshotSourceFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumEventSnapshotSourceNullableWithAggregatesFilter<$PrismaModel> | $Enums.EventSnapshotSource | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumEventSnapshotSourceNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumEventSnapshotSourceNullableFilter<$PrismaModel>
+}
+
 export type NestedEnumMembershipStatusFilter<$PrismaModel = never> = {
   equals?: $Enums.MembershipStatus | Prisma.EnumMembershipStatusFieldRefInput<$PrismaModel>
   in?: $Enums.MembershipStatus[] | Prisma.ListEnumMembershipStatusFieldRefInput<$PrismaModel>
@@ -838,6 +957,57 @@ export type NestedJsonFilterBase<$PrismaModel = never> = {
   gt?: runtime.InputJsonValue | Prisma.JsonFieldRefInput<$PrismaModel>
   gte?: runtime.InputJsonValue | Prisma.JsonFieldRefInput<$PrismaModel>
   not?: runtime.InputJsonValue | Prisma.JsonFieldRefInput<$PrismaModel> | Prisma.JsonNullValueFilter
+}
+
+export type NestedEnumVenueDateOptionRankFilter<$PrismaModel = never> = {
+  equals?: $Enums.VenueDateOptionRank | Prisma.EnumVenueDateOptionRankFieldRefInput<$PrismaModel>
+  in?: $Enums.VenueDateOptionRank[] | Prisma.ListEnumVenueDateOptionRankFieldRefInput<$PrismaModel>
+  notIn?: $Enums.VenueDateOptionRank[] | Prisma.ListEnumVenueDateOptionRankFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumVenueDateOptionRankFilter<$PrismaModel> | $Enums.VenueDateOptionRank
+}
+
+export type NestedEnumVenueDateOptionStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.VenueDateOptionStatus | Prisma.EnumVenueDateOptionStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.VenueDateOptionStatus[] | Prisma.ListEnumVenueDateOptionStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.VenueDateOptionStatus[] | Prisma.ListEnumVenueDateOptionStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumVenueDateOptionStatusFilter<$PrismaModel> | $Enums.VenueDateOptionStatus
+}
+
+export type NestedEnumVenueDateOptionRankWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.VenueDateOptionRank | Prisma.EnumVenueDateOptionRankFieldRefInput<$PrismaModel>
+  in?: $Enums.VenueDateOptionRank[] | Prisma.ListEnumVenueDateOptionRankFieldRefInput<$PrismaModel>
+  notIn?: $Enums.VenueDateOptionRank[] | Prisma.ListEnumVenueDateOptionRankFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumVenueDateOptionRankWithAggregatesFilter<$PrismaModel> | $Enums.VenueDateOptionRank
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumVenueDateOptionRankFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumVenueDateOptionRankFilter<$PrismaModel>
+}
+
+export type NestedEnumVenueDateOptionStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.VenueDateOptionStatus | Prisma.EnumVenueDateOptionStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.VenueDateOptionStatus[] | Prisma.ListEnumVenueDateOptionStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.VenueDateOptionStatus[] | Prisma.ListEnumVenueDateOptionStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumVenueDateOptionStatusWithAggregatesFilter<$PrismaModel> | $Enums.VenueDateOptionStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumVenueDateOptionStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumVenueDateOptionStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumOccupancySlotFilter<$PrismaModel = never> = {
+  equals?: $Enums.OccupancySlot | Prisma.EnumOccupancySlotFieldRefInput<$PrismaModel>
+  in?: $Enums.OccupancySlot[] | Prisma.ListEnumOccupancySlotFieldRefInput<$PrismaModel>
+  notIn?: $Enums.OccupancySlot[] | Prisma.ListEnumOccupancySlotFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumOccupancySlotFilter<$PrismaModel> | $Enums.OccupancySlot
+}
+
+export type NestedEnumOccupancySlotWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.OccupancySlot | Prisma.EnumOccupancySlotFieldRefInput<$PrismaModel>
+  in?: $Enums.OccupancySlot[] | Prisma.ListEnumOccupancySlotFieldRefInput<$PrismaModel>
+  notIn?: $Enums.OccupancySlot[] | Prisma.ListEnumOccupancySlotFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumOccupancySlotWithAggregatesFilter<$PrismaModel> | $Enums.OccupancySlot
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumOccupancySlotFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumOccupancySlotFilter<$PrismaModel>
 }
 
 
