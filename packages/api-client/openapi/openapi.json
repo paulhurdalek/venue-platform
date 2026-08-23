@@ -2861,6 +2861,817 @@
         ]
       }
     },
+    "/api/v1/organizations/{organizationId}/events": {
+      "get": {
+        "operationId": "EventController_list_v1",
+        "parameters": [
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 0,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "maximum": 100,
+              "type": "number"
+            }
+          },
+          {
+            "name": "locationId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "eventKind",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "OWN_PRODUCTION",
+                "THIRD_PARTY_EVENT"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "eventFormatId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "DRAFT",
+                "PLANNED",
+                "CONFIRMED",
+                "COMPLETED",
+                "CANCELLED"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "toDate",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "date",
+              "type": "string"
+            }
+          },
+          {
+            "name": "fromDate",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "date",
+              "type": "string"
+            }
+          },
+          {
+            "name": "q",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "maxLength": 160,
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventPageDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "events"
+        ]
+      },
+      "post": {
+        "operationId": "EventController_create_v1",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateEventDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "events"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/events/{eventId}": {
+      "get": {
+        "operationId": "EventController_find_v1",
+        "parameters": [
+          {
+            "name": "eventId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "events"
+        ]
+      },
+      "patch": {
+        "operationId": "EventController_update_v1",
+        "parameters": [
+          {
+            "name": "eventId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEventDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "events"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/events/{eventId}/status": {
+      "patch": {
+        "operationId": "EventController_setStatus_v1",
+        "parameters": [
+          {
+            "name": "eventId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEventStatusDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "events"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/date-options": {
+      "get": {
+        "operationId": "DateOptionController_list_v1",
+        "parameters": [
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "ACTIVE",
+                "CONVERTED",
+                "RELEASED",
+                "EXPIRED",
+                "UNAVAILABLE"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "locationId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "toDate",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "date",
+              "type": "string"
+            }
+          },
+          {
+            "name": "fromDate",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "date",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DateOptionPageDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "date-options"
+        ]
+      },
+      "post": {
+        "operationId": "DateOptionController_create_v1",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDateOptionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DateOptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "date-options"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/date-options/batch": {
+      "post": {
+        "operationId": "DateOptionController_createBatch_v1",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDateOptionBatchDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DateOptionBatchResultDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "date-options"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/date-options/{optionId}": {
+      "get": {
+        "operationId": "DateOptionController_find_v1",
+        "parameters": [
+          {
+            "name": "optionId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DateOptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "date-options"
+        ]
+      },
+      "patch": {
+        "operationId": "DateOptionController_update_v1",
+        "parameters": [
+          {
+            "name": "optionId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDateOptionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DateOptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "date-options"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/date-options/{optionId}/release": {
+      "patch": {
+        "operationId": "DateOptionController_release_v1",
+        "parameters": [
+          {
+            "name": "optionId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VersionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DateOptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "date-options"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/date-options/{optionId}/promote": {
+      "patch": {
+        "operationId": "DateOptionController_promote_v1",
+        "parameters": [
+          {
+            "name": "optionId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VersionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DateOptionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "date-options"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/date-options/{optionId}/convert": {
+      "post": {
+        "operationId": "DateOptionController_convert_v1",
+        "parameters": [
+          {
+            "name": "optionId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConvertDateOptionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "date-options"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/availability": {
+      "get": {
+        "operationId": "AvailabilityController_availability_v1",
+        "parameters": [
+          {
+            "name": "resultFilter",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "FREE_ONLY",
+                "FREE_AND_SECOND_OPTION"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "weekdays",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "occupancyEndNextDay",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "occupancyEndTime",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "occupancyStartTime",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "toDate",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "format": "date",
+              "type": "string"
+            }
+          },
+          {
+            "name": "fromDate",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "format": "date",
+              "type": "string"
+            }
+          },
+          {
+            "name": "locationId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AvailabilityResultDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "availability"
+        ]
+      }
+    },
     "/api/v1/health": {
       "get": {
         "operationId": "HealthController_get_v1",
@@ -5323,6 +6134,821 @@
         "required": [
           "version",
           "status"
+        ]
+      },
+      "EventDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "organizationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "locationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "locationName": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "eventDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "DRAFT",
+              "PLANNED",
+              "CONFIRMED",
+              "COMPLETED",
+              "CANCELLED"
+            ]
+          },
+          "version": {
+            "type": "number"
+          },
+          "cancelledAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "completedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "snapshotSource": {
+            "type": "string",
+            "enum": [
+              "EVENT_FORMAT"
+            ],
+            "nullable": true
+          },
+          "sourceEventFormatId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "sourceEventFormatVersion": {
+            "type": "number",
+            "nullable": true
+          },
+          "formatNameSnapshot": {
+            "type": "string",
+            "nullable": true
+          },
+          "formatDescriptionSnapshot": {
+            "type": "string",
+            "nullable": true
+          },
+          "eventKind": {
+            "type": "string",
+            "enum": [
+              "OWN_PRODUCTION",
+              "THIRD_PARTY_EVENT"
+            ]
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "technicalGetInTime": {
+            "type": "string",
+            "nullable": true
+          },
+          "artistGetInTime": {
+            "type": "string",
+            "nullable": true
+          },
+          "doorsTime": {
+            "type": "string",
+            "nullable": true
+          },
+          "startTime": {
+            "type": "string",
+            "nullable": true
+          },
+          "endTime": {
+            "type": "string",
+            "nullable": true
+          },
+          "endNextDay": {
+            "type": "boolean"
+          },
+          "recordingSetting": {
+            "type": "string",
+            "enum": [
+              "UNSPECIFIED",
+              "ENABLED",
+              "DISABLED"
+            ]
+          },
+          "timezone": {
+            "type": "string",
+            "example": "Europe/Berlin"
+          },
+          "occupancyComplete": {
+            "type": "boolean"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "id",
+          "organizationId",
+          "locationId",
+          "locationName",
+          "name",
+          "eventDate",
+          "status",
+          "version",
+          "eventKind",
+          "endNextDay",
+          "recordingSetting",
+          "timezone",
+          "occupancyComplete",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "EventPageDto": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EventDto"
+            }
+          },
+          "total": {
+            "type": "number"
+          },
+          "limit": {
+            "type": "number"
+          },
+          "offset": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "items",
+          "total",
+          "limit",
+          "offset"
+        ]
+      },
+      "CreateEventDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 200
+          },
+          "description": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 5000
+          },
+          "technicalGetInTime": {
+            "type": "string",
+            "nullable": true,
+            "example": "16:00"
+          },
+          "artistGetInTime": {
+            "type": "string",
+            "nullable": true,
+            "example": "17:30"
+          },
+          "doorsTime": {
+            "type": "string",
+            "nullable": true,
+            "example": "19:00"
+          },
+          "startTime": {
+            "type": "string",
+            "nullable": true,
+            "example": "20:00"
+          },
+          "endTime": {
+            "type": "string",
+            "nullable": true,
+            "example": "01:30"
+          },
+          "endNextDay": {
+            "type": "boolean"
+          },
+          "recordingSetting": {
+            "type": "string",
+            "enum": [
+              "UNSPECIFIED",
+              "ENABLED",
+              "DISABLED"
+            ]
+          },
+          "sourceEventFormatId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "eventKind": {
+            "type": "string",
+            "enum": [
+              "OWN_PRODUCTION",
+              "THIRD_PARTY_EVENT"
+            ]
+          },
+          "locationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "eventDate": {
+            "type": "string",
+            "format": "date",
+            "example": "2026-08-23"
+          }
+        },
+        "required": [
+          "locationId",
+          "eventDate"
+        ]
+      },
+      "UpdateEventDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 200
+          },
+          "description": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 5000
+          },
+          "technicalGetInTime": {
+            "type": "string",
+            "nullable": true,
+            "example": "16:00"
+          },
+          "artistGetInTime": {
+            "type": "string",
+            "nullable": true,
+            "example": "17:30"
+          },
+          "doorsTime": {
+            "type": "string",
+            "nullable": true,
+            "example": "19:00"
+          },
+          "startTime": {
+            "type": "string",
+            "nullable": true,
+            "example": "20:00"
+          },
+          "endTime": {
+            "type": "string",
+            "nullable": true,
+            "example": "01:30"
+          },
+          "endNextDay": {
+            "type": "boolean"
+          },
+          "recordingSetting": {
+            "type": "string",
+            "enum": [
+              "UNSPECIFIED",
+              "ENABLED",
+              "DISABLED"
+            ]
+          },
+          "version": {
+            "type": "number",
+            "minimum": 1
+          },
+          "locationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "eventDate": {
+            "type": "string",
+            "format": "date",
+            "example": "2026-08-23"
+          }
+        },
+        "required": [
+          "version"
+        ]
+      },
+      "UpdateEventStatusDto": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "number",
+            "minimum": 1
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "DRAFT",
+              "PLANNED",
+              "CONFIRMED",
+              "COMPLETED",
+              "CANCELLED"
+            ]
+          }
+        },
+        "required": [
+          "version",
+          "status"
+        ]
+      },
+      "DateOptionDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "organizationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "locationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "locationName": {
+            "type": "string"
+          },
+          "optionDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "occupancyStartTime": {
+            "type": "string"
+          },
+          "occupancyEndTime": {
+            "type": "string"
+          },
+          "occupancyEndNextDay": {
+            "type": "boolean"
+          },
+          "rank": {
+            "type": "string",
+            "enum": [
+              "FIRST",
+              "SECOND"
+            ]
+          },
+          "label": {
+            "type": "string"
+          },
+          "businessPartnerId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "businessPartnerName": {
+            "type": "string",
+            "nullable": true
+          },
+          "contactId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "contactName": {
+            "type": "string",
+            "nullable": true
+          },
+          "note": {
+            "type": "string",
+            "nullable": true
+          },
+          "validUntil": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "CONVERTED",
+              "RELEASED",
+              "EXPIRED",
+              "UNAVAILABLE"
+            ]
+          },
+          "version": {
+            "type": "number"
+          },
+          "canPromote": {
+            "type": "boolean"
+          },
+          "createdByMembershipId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "id",
+          "organizationId",
+          "locationId",
+          "locationName",
+          "optionDate",
+          "occupancyStartTime",
+          "occupancyEndTime",
+          "occupancyEndNextDay",
+          "rank",
+          "label",
+          "validUntil",
+          "status",
+          "version",
+          "canPromote",
+          "createdByMembershipId",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "DateOptionPageDto": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DateOptionDto"
+            }
+          },
+          "total": {
+            "type": "number"
+          },
+          "limit": {
+            "type": "number"
+          },
+          "offset": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "items",
+          "total",
+          "limit",
+          "offset"
+        ]
+      },
+      "CreateDateOptionDto": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "optionDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "occupancyStartTime": {
+            "type": "string",
+            "example": "16:00"
+          },
+          "occupancyEndTime": {
+            "type": "string",
+            "example": "23:00"
+          },
+          "occupancyEndNextDay": {
+            "type": "boolean",
+            "default": false
+          },
+          "label": {
+            "type": "string",
+            "maxLength": 200
+          },
+          "businessPartnerId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "contactId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "note": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 2000
+          },
+          "validUntil": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "locationId",
+          "optionDate",
+          "occupancyStartTime",
+          "occupancyEndTime",
+          "label",
+          "validUntil"
+        ]
+      },
+      "CreateDateOptionBatchItemDto": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "optionDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "occupancyStartTime": {
+            "type": "string",
+            "example": "16:00"
+          },
+          "occupancyEndTime": {
+            "type": "string",
+            "example": "23:00"
+          },
+          "occupancyEndNextDay": {
+            "type": "boolean",
+            "default": false
+          },
+          "rank": {
+            "type": "string",
+            "enum": [
+              "FIRST",
+              "SECOND"
+            ]
+          }
+        },
+        "required": [
+          "locationId",
+          "optionDate",
+          "occupancyStartTime",
+          "occupancyEndTime",
+          "rank"
+        ]
+      },
+      "CreateDateOptionBatchDto": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string",
+            "maxLength": 200
+          },
+          "businessPartnerId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "contactId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "note": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 2000
+          },
+          "validUntil": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "options": {
+            "minItems": 1,
+            "maxItems": 50,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateDateOptionBatchItemDto"
+            }
+          }
+        },
+        "required": [
+          "label",
+          "validUntil",
+          "options"
+        ]
+      },
+      "DateOptionBatchResultDto": {
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 50
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DateOptionDto"
+            }
+          }
+        },
+        "required": [
+          "count",
+          "items"
+        ]
+      },
+      "UpdateDateOptionDto": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "number",
+            "minimum": 1
+          },
+          "locationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "optionDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "occupancyStartTime": {
+            "type": "string"
+          },
+          "occupancyEndTime": {
+            "type": "string"
+          },
+          "occupancyEndNextDay": {
+            "type": "boolean"
+          },
+          "label": {
+            "type": "string",
+            "maxLength": 200
+          },
+          "businessPartnerId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "contactId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "note": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 2000
+          },
+          "validUntil": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "version"
+        ]
+      },
+      "VersionDto": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "number",
+            "minimum": 1
+          }
+        },
+        "required": [
+          "version"
+        ]
+      },
+      "ConvertDateOptionDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 200
+          },
+          "description": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 5000
+          },
+          "technicalGetInTime": {
+            "type": "string",
+            "nullable": true,
+            "example": "16:00"
+          },
+          "artistGetInTime": {
+            "type": "string",
+            "nullable": true,
+            "example": "17:30"
+          },
+          "doorsTime": {
+            "type": "string",
+            "nullable": true,
+            "example": "19:00"
+          },
+          "startTime": {
+            "type": "string",
+            "nullable": true,
+            "example": "20:00"
+          },
+          "endTime": {
+            "type": "string",
+            "nullable": true,
+            "example": "01:30"
+          },
+          "endNextDay": {
+            "type": "boolean"
+          },
+          "recordingSetting": {
+            "type": "string",
+            "enum": [
+              "UNSPECIFIED",
+              "ENABLED",
+              "DISABLED"
+            ]
+          },
+          "version": {
+            "type": "number",
+            "minimum": 1
+          },
+          "sourceEventFormatId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "eventKind": {
+            "type": "string",
+            "enum": [
+              "OWN_PRODUCTION",
+              "THIRD_PARTY_EVENT"
+            ]
+          },
+          "locationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "eventDate": {
+            "type": "string",
+            "format": "date"
+          }
+        },
+        "required": [
+          "version"
+        ]
+      },
+      "AvailabilityResultDto": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "occupancyStartTime": {
+            "type": "string"
+          },
+          "occupancyEndTime": {
+            "type": "string"
+          },
+          "occupancyEndNextDay": {
+            "type": "boolean"
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "FREE",
+              "SECOND_OPTION_AVAILABLE",
+              "FIRST_OPTION_AVAILABLE",
+              "FULLY_OPTIONED",
+              "EVENT_OCCUPIED",
+              "MANUAL_REVIEW"
+            ]
+          },
+          "selectable": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "date",
+          "occupancyStartTime",
+          "occupancyEndTime",
+          "occupancyEndNextDay",
+          "state",
+          "selectable"
         ]
       },
       "ServiceHealthDto": {

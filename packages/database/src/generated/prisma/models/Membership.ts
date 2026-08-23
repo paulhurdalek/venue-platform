@@ -246,6 +246,7 @@ export type MembershipWhereInput = {
   locations?: Prisma.MembershipLocationListRelationFilter
   sentInvitations?: Prisma.InvitationListRelationFilter
   auditEntries?: Prisma.AuditLogListRelationFilter
+  createdDateOptions?: Prisma.VenueDateOptionListRelationFilter
 }
 
 export type MembershipOrderByWithRelationInput = {
@@ -263,6 +264,7 @@ export type MembershipOrderByWithRelationInput = {
   locations?: Prisma.MembershipLocationOrderByRelationAggregateInput
   sentInvitations?: Prisma.InvitationOrderByRelationAggregateInput
   auditEntries?: Prisma.AuditLogOrderByRelationAggregateInput
+  createdDateOptions?: Prisma.VenueDateOptionOrderByRelationAggregateInput
 }
 
 export type MembershipWhereUniqueInput = Prisma.AtLeast<{
@@ -285,6 +287,7 @@ export type MembershipWhereUniqueInput = Prisma.AtLeast<{
   locations?: Prisma.MembershipLocationListRelationFilter
   sentInvitations?: Prisma.InvitationListRelationFilter
   auditEntries?: Prisma.AuditLogListRelationFilter
+  createdDateOptions?: Prisma.VenueDateOptionListRelationFilter
 }, "id" | "organizationId_userId" | "id_organizationId">
 
 export type MembershipOrderByWithAggregationInput = {
@@ -330,6 +333,7 @@ export type MembershipCreateInput = {
   locations?: Prisma.MembershipLocationCreateNestedManyWithoutMembershipInput
   sentInvitations?: Prisma.InvitationCreateNestedManyWithoutInviterMembershipInput
   auditEntries?: Prisma.AuditLogCreateNestedManyWithoutActorMembershipInput
+  createdDateOptions?: Prisma.VenueDateOptionCreateNestedManyWithoutCreatedByMembershipInput
 }
 
 export type MembershipUncheckedCreateInput = {
@@ -345,6 +349,7 @@ export type MembershipUncheckedCreateInput = {
   locations?: Prisma.MembershipLocationUncheckedCreateNestedManyWithoutMembershipInput
   sentInvitations?: Prisma.InvitationUncheckedCreateNestedManyWithoutInviterMembershipInput
   auditEntries?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorMembershipInput
+  createdDateOptions?: Prisma.VenueDateOptionUncheckedCreateNestedManyWithoutCreatedByMembershipInput
 }
 
 export type MembershipUpdateInput = {
@@ -360,6 +365,7 @@ export type MembershipUpdateInput = {
   locations?: Prisma.MembershipLocationUpdateManyWithoutMembershipNestedInput
   sentInvitations?: Prisma.InvitationUpdateManyWithoutInviterMembershipNestedInput
   auditEntries?: Prisma.AuditLogUpdateManyWithoutActorMembershipNestedInput
+  createdDateOptions?: Prisma.VenueDateOptionUpdateManyWithoutCreatedByMembershipNestedInput
 }
 
 export type MembershipUncheckedUpdateInput = {
@@ -375,6 +381,7 @@ export type MembershipUncheckedUpdateInput = {
   locations?: Prisma.MembershipLocationUncheckedUpdateManyWithoutMembershipNestedInput
   sentInvitations?: Prisma.InvitationUncheckedUpdateManyWithoutInviterMembershipNestedInput
   auditEntries?: Prisma.AuditLogUncheckedUpdateManyWithoutActorMembershipNestedInput
+  createdDateOptions?: Prisma.VenueDateOptionUncheckedUpdateManyWithoutCreatedByMembershipNestedInput
 }
 
 export type MembershipCreateManyInput = {
@@ -629,6 +636,20 @@ export type MembershipUpdateOneWithoutAuditEntriesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.MembershipUpdateToOneWithWhereWithoutAuditEntriesInput, Prisma.MembershipUpdateWithoutAuditEntriesInput>, Prisma.MembershipUncheckedUpdateWithoutAuditEntriesInput>
 }
 
+export type MembershipCreateNestedOneWithoutCreatedDateOptionsInput = {
+  create?: Prisma.XOR<Prisma.MembershipCreateWithoutCreatedDateOptionsInput, Prisma.MembershipUncheckedCreateWithoutCreatedDateOptionsInput>
+  connectOrCreate?: Prisma.MembershipCreateOrConnectWithoutCreatedDateOptionsInput
+  connect?: Prisma.MembershipWhereUniqueInput
+}
+
+export type MembershipUpdateOneRequiredWithoutCreatedDateOptionsNestedInput = {
+  create?: Prisma.XOR<Prisma.MembershipCreateWithoutCreatedDateOptionsInput, Prisma.MembershipUncheckedCreateWithoutCreatedDateOptionsInput>
+  connectOrCreate?: Prisma.MembershipCreateOrConnectWithoutCreatedDateOptionsInput
+  upsert?: Prisma.MembershipUpsertWithoutCreatedDateOptionsInput
+  connect?: Prisma.MembershipWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MembershipUpdateToOneWithWhereWithoutCreatedDateOptionsInput, Prisma.MembershipUpdateWithoutCreatedDateOptionsInput>, Prisma.MembershipUncheckedUpdateWithoutCreatedDateOptionsInput>
+}
+
 export type MembershipCreateWithoutUserInput = {
   id?: string
   status?: $Enums.MembershipStatus
@@ -641,6 +662,7 @@ export type MembershipCreateWithoutUserInput = {
   locations?: Prisma.MembershipLocationCreateNestedManyWithoutMembershipInput
   sentInvitations?: Prisma.InvitationCreateNestedManyWithoutInviterMembershipInput
   auditEntries?: Prisma.AuditLogCreateNestedManyWithoutActorMembershipInput
+  createdDateOptions?: Prisma.VenueDateOptionCreateNestedManyWithoutCreatedByMembershipInput
 }
 
 export type MembershipUncheckedCreateWithoutUserInput = {
@@ -655,6 +677,7 @@ export type MembershipUncheckedCreateWithoutUserInput = {
   locations?: Prisma.MembershipLocationUncheckedCreateNestedManyWithoutMembershipInput
   sentInvitations?: Prisma.InvitationUncheckedCreateNestedManyWithoutInviterMembershipInput
   auditEntries?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorMembershipInput
+  createdDateOptions?: Prisma.VenueDateOptionUncheckedCreateNestedManyWithoutCreatedByMembershipInput
 }
 
 export type MembershipCreateOrConnectWithoutUserInput = {
@@ -709,6 +732,7 @@ export type MembershipCreateWithoutOrganizationInput = {
   locations?: Prisma.MembershipLocationCreateNestedManyWithoutMembershipInput
   sentInvitations?: Prisma.InvitationCreateNestedManyWithoutInviterMembershipInput
   auditEntries?: Prisma.AuditLogCreateNestedManyWithoutActorMembershipInput
+  createdDateOptions?: Prisma.VenueDateOptionCreateNestedManyWithoutCreatedByMembershipInput
 }
 
 export type MembershipUncheckedCreateWithoutOrganizationInput = {
@@ -723,6 +747,7 @@ export type MembershipUncheckedCreateWithoutOrganizationInput = {
   locations?: Prisma.MembershipLocationUncheckedCreateNestedManyWithoutMembershipInput
   sentInvitations?: Prisma.InvitationUncheckedCreateNestedManyWithoutInviterMembershipInput
   auditEntries?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorMembershipInput
+  createdDateOptions?: Prisma.VenueDateOptionUncheckedCreateNestedManyWithoutCreatedByMembershipInput
 }
 
 export type MembershipCreateOrConnectWithoutOrganizationInput = {
@@ -763,6 +788,7 @@ export type MembershipCreateWithoutRolesInput = {
   locations?: Prisma.MembershipLocationCreateNestedManyWithoutMembershipInput
   sentInvitations?: Prisma.InvitationCreateNestedManyWithoutInviterMembershipInput
   auditEntries?: Prisma.AuditLogCreateNestedManyWithoutActorMembershipInput
+  createdDateOptions?: Prisma.VenueDateOptionCreateNestedManyWithoutCreatedByMembershipInput
 }
 
 export type MembershipUncheckedCreateWithoutRolesInput = {
@@ -777,6 +803,7 @@ export type MembershipUncheckedCreateWithoutRolesInput = {
   locations?: Prisma.MembershipLocationUncheckedCreateNestedManyWithoutMembershipInput
   sentInvitations?: Prisma.InvitationUncheckedCreateNestedManyWithoutInviterMembershipInput
   auditEntries?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorMembershipInput
+  createdDateOptions?: Prisma.VenueDateOptionUncheckedCreateNestedManyWithoutCreatedByMembershipInput
 }
 
 export type MembershipCreateOrConnectWithoutRolesInput = {
@@ -807,6 +834,7 @@ export type MembershipUpdateWithoutRolesInput = {
   locations?: Prisma.MembershipLocationUpdateManyWithoutMembershipNestedInput
   sentInvitations?: Prisma.InvitationUpdateManyWithoutInviterMembershipNestedInput
   auditEntries?: Prisma.AuditLogUpdateManyWithoutActorMembershipNestedInput
+  createdDateOptions?: Prisma.VenueDateOptionUpdateManyWithoutCreatedByMembershipNestedInput
 }
 
 export type MembershipUncheckedUpdateWithoutRolesInput = {
@@ -821,6 +849,7 @@ export type MembershipUncheckedUpdateWithoutRolesInput = {
   locations?: Prisma.MembershipLocationUncheckedUpdateManyWithoutMembershipNestedInput
   sentInvitations?: Prisma.InvitationUncheckedUpdateManyWithoutInviterMembershipNestedInput
   auditEntries?: Prisma.AuditLogUncheckedUpdateManyWithoutActorMembershipNestedInput
+  createdDateOptions?: Prisma.VenueDateOptionUncheckedUpdateManyWithoutCreatedByMembershipNestedInput
 }
 
 export type MembershipCreateWithoutLocationsInput = {
@@ -835,6 +864,7 @@ export type MembershipCreateWithoutLocationsInput = {
   roles?: Prisma.MembershipRoleCreateNestedManyWithoutMembershipInput
   sentInvitations?: Prisma.InvitationCreateNestedManyWithoutInviterMembershipInput
   auditEntries?: Prisma.AuditLogCreateNestedManyWithoutActorMembershipInput
+  createdDateOptions?: Prisma.VenueDateOptionCreateNestedManyWithoutCreatedByMembershipInput
 }
 
 export type MembershipUncheckedCreateWithoutLocationsInput = {
@@ -849,6 +879,7 @@ export type MembershipUncheckedCreateWithoutLocationsInput = {
   roles?: Prisma.MembershipRoleUncheckedCreateNestedManyWithoutMembershipInput
   sentInvitations?: Prisma.InvitationUncheckedCreateNestedManyWithoutInviterMembershipInput
   auditEntries?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorMembershipInput
+  createdDateOptions?: Prisma.VenueDateOptionUncheckedCreateNestedManyWithoutCreatedByMembershipInput
 }
 
 export type MembershipCreateOrConnectWithoutLocationsInput = {
@@ -879,6 +910,7 @@ export type MembershipUpdateWithoutLocationsInput = {
   roles?: Prisma.MembershipRoleUpdateManyWithoutMembershipNestedInput
   sentInvitations?: Prisma.InvitationUpdateManyWithoutInviterMembershipNestedInput
   auditEntries?: Prisma.AuditLogUpdateManyWithoutActorMembershipNestedInput
+  createdDateOptions?: Prisma.VenueDateOptionUpdateManyWithoutCreatedByMembershipNestedInput
 }
 
 export type MembershipUncheckedUpdateWithoutLocationsInput = {
@@ -893,6 +925,7 @@ export type MembershipUncheckedUpdateWithoutLocationsInput = {
   roles?: Prisma.MembershipRoleUncheckedUpdateManyWithoutMembershipNestedInput
   sentInvitations?: Prisma.InvitationUncheckedUpdateManyWithoutInviterMembershipNestedInput
   auditEntries?: Prisma.AuditLogUncheckedUpdateManyWithoutActorMembershipNestedInput
+  createdDateOptions?: Prisma.VenueDateOptionUncheckedUpdateManyWithoutCreatedByMembershipNestedInput
 }
 
 export type MembershipCreateWithoutSentInvitationsInput = {
@@ -907,6 +940,7 @@ export type MembershipCreateWithoutSentInvitationsInput = {
   roles?: Prisma.MembershipRoleCreateNestedManyWithoutMembershipInput
   locations?: Prisma.MembershipLocationCreateNestedManyWithoutMembershipInput
   auditEntries?: Prisma.AuditLogCreateNestedManyWithoutActorMembershipInput
+  createdDateOptions?: Prisma.VenueDateOptionCreateNestedManyWithoutCreatedByMembershipInput
 }
 
 export type MembershipUncheckedCreateWithoutSentInvitationsInput = {
@@ -921,6 +955,7 @@ export type MembershipUncheckedCreateWithoutSentInvitationsInput = {
   roles?: Prisma.MembershipRoleUncheckedCreateNestedManyWithoutMembershipInput
   locations?: Prisma.MembershipLocationUncheckedCreateNestedManyWithoutMembershipInput
   auditEntries?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorMembershipInput
+  createdDateOptions?: Prisma.VenueDateOptionUncheckedCreateNestedManyWithoutCreatedByMembershipInput
 }
 
 export type MembershipCreateOrConnectWithoutSentInvitationsInput = {
@@ -951,6 +986,7 @@ export type MembershipUpdateWithoutSentInvitationsInput = {
   roles?: Prisma.MembershipRoleUpdateManyWithoutMembershipNestedInput
   locations?: Prisma.MembershipLocationUpdateManyWithoutMembershipNestedInput
   auditEntries?: Prisma.AuditLogUpdateManyWithoutActorMembershipNestedInput
+  createdDateOptions?: Prisma.VenueDateOptionUpdateManyWithoutCreatedByMembershipNestedInput
 }
 
 export type MembershipUncheckedUpdateWithoutSentInvitationsInput = {
@@ -965,6 +1001,7 @@ export type MembershipUncheckedUpdateWithoutSentInvitationsInput = {
   roles?: Prisma.MembershipRoleUncheckedUpdateManyWithoutMembershipNestedInput
   locations?: Prisma.MembershipLocationUncheckedUpdateManyWithoutMembershipNestedInput
   auditEntries?: Prisma.AuditLogUncheckedUpdateManyWithoutActorMembershipNestedInput
+  createdDateOptions?: Prisma.VenueDateOptionUncheckedUpdateManyWithoutCreatedByMembershipNestedInput
 }
 
 export type MembershipCreateWithoutAuditEntriesInput = {
@@ -979,6 +1016,7 @@ export type MembershipCreateWithoutAuditEntriesInput = {
   roles?: Prisma.MembershipRoleCreateNestedManyWithoutMembershipInput
   locations?: Prisma.MembershipLocationCreateNestedManyWithoutMembershipInput
   sentInvitations?: Prisma.InvitationCreateNestedManyWithoutInviterMembershipInput
+  createdDateOptions?: Prisma.VenueDateOptionCreateNestedManyWithoutCreatedByMembershipInput
 }
 
 export type MembershipUncheckedCreateWithoutAuditEntriesInput = {
@@ -993,6 +1031,7 @@ export type MembershipUncheckedCreateWithoutAuditEntriesInput = {
   roles?: Prisma.MembershipRoleUncheckedCreateNestedManyWithoutMembershipInput
   locations?: Prisma.MembershipLocationUncheckedCreateNestedManyWithoutMembershipInput
   sentInvitations?: Prisma.InvitationUncheckedCreateNestedManyWithoutInviterMembershipInput
+  createdDateOptions?: Prisma.VenueDateOptionUncheckedCreateNestedManyWithoutCreatedByMembershipInput
 }
 
 export type MembershipCreateOrConnectWithoutAuditEntriesInput = {
@@ -1023,6 +1062,7 @@ export type MembershipUpdateWithoutAuditEntriesInput = {
   roles?: Prisma.MembershipRoleUpdateManyWithoutMembershipNestedInput
   locations?: Prisma.MembershipLocationUpdateManyWithoutMembershipNestedInput
   sentInvitations?: Prisma.InvitationUpdateManyWithoutInviterMembershipNestedInput
+  createdDateOptions?: Prisma.VenueDateOptionUpdateManyWithoutCreatedByMembershipNestedInput
 }
 
 export type MembershipUncheckedUpdateWithoutAuditEntriesInput = {
@@ -1037,6 +1077,83 @@ export type MembershipUncheckedUpdateWithoutAuditEntriesInput = {
   roles?: Prisma.MembershipRoleUncheckedUpdateManyWithoutMembershipNestedInput
   locations?: Prisma.MembershipLocationUncheckedUpdateManyWithoutMembershipNestedInput
   sentInvitations?: Prisma.InvitationUncheckedUpdateManyWithoutInviterMembershipNestedInput
+  createdDateOptions?: Prisma.VenueDateOptionUncheckedUpdateManyWithoutCreatedByMembershipNestedInput
+}
+
+export type MembershipCreateWithoutCreatedDateOptionsInput = {
+  id?: string
+  status?: $Enums.MembershipStatus
+  locationScope?: $Enums.LocationScope
+  version?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organization: Prisma.OrganizationCreateNestedOneWithoutMembershipsInput
+  user: Prisma.UserCreateNestedOneWithoutMembershipsInput
+  roles?: Prisma.MembershipRoleCreateNestedManyWithoutMembershipInput
+  locations?: Prisma.MembershipLocationCreateNestedManyWithoutMembershipInput
+  sentInvitations?: Prisma.InvitationCreateNestedManyWithoutInviterMembershipInput
+  auditEntries?: Prisma.AuditLogCreateNestedManyWithoutActorMembershipInput
+}
+
+export type MembershipUncheckedCreateWithoutCreatedDateOptionsInput = {
+  id?: string
+  organizationId: string
+  userId: string
+  status?: $Enums.MembershipStatus
+  locationScope?: $Enums.LocationScope
+  version?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  roles?: Prisma.MembershipRoleUncheckedCreateNestedManyWithoutMembershipInput
+  locations?: Prisma.MembershipLocationUncheckedCreateNestedManyWithoutMembershipInput
+  sentInvitations?: Prisma.InvitationUncheckedCreateNestedManyWithoutInviterMembershipInput
+  auditEntries?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorMembershipInput
+}
+
+export type MembershipCreateOrConnectWithoutCreatedDateOptionsInput = {
+  where: Prisma.MembershipWhereUniqueInput
+  create: Prisma.XOR<Prisma.MembershipCreateWithoutCreatedDateOptionsInput, Prisma.MembershipUncheckedCreateWithoutCreatedDateOptionsInput>
+}
+
+export type MembershipUpsertWithoutCreatedDateOptionsInput = {
+  update: Prisma.XOR<Prisma.MembershipUpdateWithoutCreatedDateOptionsInput, Prisma.MembershipUncheckedUpdateWithoutCreatedDateOptionsInput>
+  create: Prisma.XOR<Prisma.MembershipCreateWithoutCreatedDateOptionsInput, Prisma.MembershipUncheckedCreateWithoutCreatedDateOptionsInput>
+  where?: Prisma.MembershipWhereInput
+}
+
+export type MembershipUpdateToOneWithWhereWithoutCreatedDateOptionsInput = {
+  where?: Prisma.MembershipWhereInput
+  data: Prisma.XOR<Prisma.MembershipUpdateWithoutCreatedDateOptionsInput, Prisma.MembershipUncheckedUpdateWithoutCreatedDateOptionsInput>
+}
+
+export type MembershipUpdateWithoutCreatedDateOptionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumMembershipStatusFieldUpdateOperationsInput | $Enums.MembershipStatus
+  locationScope?: Prisma.EnumLocationScopeFieldUpdateOperationsInput | $Enums.LocationScope
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutMembershipsNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutMembershipsNestedInput
+  roles?: Prisma.MembershipRoleUpdateManyWithoutMembershipNestedInput
+  locations?: Prisma.MembershipLocationUpdateManyWithoutMembershipNestedInput
+  sentInvitations?: Prisma.InvitationUpdateManyWithoutInviterMembershipNestedInput
+  auditEntries?: Prisma.AuditLogUpdateManyWithoutActorMembershipNestedInput
+}
+
+export type MembershipUncheckedUpdateWithoutCreatedDateOptionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumMembershipStatusFieldUpdateOperationsInput | $Enums.MembershipStatus
+  locationScope?: Prisma.EnumLocationScopeFieldUpdateOperationsInput | $Enums.LocationScope
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  roles?: Prisma.MembershipRoleUncheckedUpdateManyWithoutMembershipNestedInput
+  locations?: Prisma.MembershipLocationUncheckedUpdateManyWithoutMembershipNestedInput
+  sentInvitations?: Prisma.InvitationUncheckedUpdateManyWithoutInviterMembershipNestedInput
+  auditEntries?: Prisma.AuditLogUncheckedUpdateManyWithoutActorMembershipNestedInput
 }
 
 export type MembershipCreateManyUserInput = {
@@ -1061,6 +1178,7 @@ export type MembershipUpdateWithoutUserInput = {
   locations?: Prisma.MembershipLocationUpdateManyWithoutMembershipNestedInput
   sentInvitations?: Prisma.InvitationUpdateManyWithoutInviterMembershipNestedInput
   auditEntries?: Prisma.AuditLogUpdateManyWithoutActorMembershipNestedInput
+  createdDateOptions?: Prisma.VenueDateOptionUpdateManyWithoutCreatedByMembershipNestedInput
 }
 
 export type MembershipUncheckedUpdateWithoutUserInput = {
@@ -1075,6 +1193,7 @@ export type MembershipUncheckedUpdateWithoutUserInput = {
   locations?: Prisma.MembershipLocationUncheckedUpdateManyWithoutMembershipNestedInput
   sentInvitations?: Prisma.InvitationUncheckedUpdateManyWithoutInviterMembershipNestedInput
   auditEntries?: Prisma.AuditLogUncheckedUpdateManyWithoutActorMembershipNestedInput
+  createdDateOptions?: Prisma.VenueDateOptionUncheckedUpdateManyWithoutCreatedByMembershipNestedInput
 }
 
 export type MembershipUncheckedUpdateManyWithoutUserInput = {
@@ -1109,6 +1228,7 @@ export type MembershipUpdateWithoutOrganizationInput = {
   locations?: Prisma.MembershipLocationUpdateManyWithoutMembershipNestedInput
   sentInvitations?: Prisma.InvitationUpdateManyWithoutInviterMembershipNestedInput
   auditEntries?: Prisma.AuditLogUpdateManyWithoutActorMembershipNestedInput
+  createdDateOptions?: Prisma.VenueDateOptionUpdateManyWithoutCreatedByMembershipNestedInput
 }
 
 export type MembershipUncheckedUpdateWithoutOrganizationInput = {
@@ -1123,6 +1243,7 @@ export type MembershipUncheckedUpdateWithoutOrganizationInput = {
   locations?: Prisma.MembershipLocationUncheckedUpdateManyWithoutMembershipNestedInput
   sentInvitations?: Prisma.InvitationUncheckedUpdateManyWithoutInviterMembershipNestedInput
   auditEntries?: Prisma.AuditLogUncheckedUpdateManyWithoutActorMembershipNestedInput
+  createdDateOptions?: Prisma.VenueDateOptionUncheckedUpdateManyWithoutCreatedByMembershipNestedInput
 }
 
 export type MembershipUncheckedUpdateManyWithoutOrganizationInput = {
@@ -1145,6 +1266,7 @@ export type MembershipCountOutputType = {
   locations: number
   sentInvitations: number
   auditEntries: number
+  createdDateOptions: number
 }
 
 export type MembershipCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1152,6 +1274,7 @@ export type MembershipCountOutputTypeSelect<ExtArgs extends runtime.Types.Extens
   locations?: boolean | MembershipCountOutputTypeCountLocationsArgs
   sentInvitations?: boolean | MembershipCountOutputTypeCountSentInvitationsArgs
   auditEntries?: boolean | MembershipCountOutputTypeCountAuditEntriesArgs
+  createdDateOptions?: boolean | MembershipCountOutputTypeCountCreatedDateOptionsArgs
 }
 
 /**
@@ -1192,6 +1315,13 @@ export type MembershipCountOutputTypeCountAuditEntriesArgs<ExtArgs extends runti
   where?: Prisma.AuditLogWhereInput
 }
 
+/**
+ * MembershipCountOutputType without action
+ */
+export type MembershipCountOutputTypeCountCreatedDateOptionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.VenueDateOptionWhereInput
+}
+
 
 export type MembershipSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1208,6 +1338,7 @@ export type MembershipSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   locations?: boolean | Prisma.Membership$locationsArgs<ExtArgs>
   sentInvitations?: boolean | Prisma.Membership$sentInvitationsArgs<ExtArgs>
   auditEntries?: boolean | Prisma.Membership$auditEntriesArgs<ExtArgs>
+  createdDateOptions?: boolean | Prisma.Membership$createdDateOptionsArgs<ExtArgs>
   _count?: boolean | Prisma.MembershipCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["membership"]>
 
@@ -1256,6 +1387,7 @@ export type MembershipInclude<ExtArgs extends runtime.Types.Extensions.InternalA
   locations?: boolean | Prisma.Membership$locationsArgs<ExtArgs>
   sentInvitations?: boolean | Prisma.Membership$sentInvitationsArgs<ExtArgs>
   auditEntries?: boolean | Prisma.Membership$auditEntriesArgs<ExtArgs>
+  createdDateOptions?: boolean | Prisma.Membership$createdDateOptionsArgs<ExtArgs>
   _count?: boolean | Prisma.MembershipCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type MembershipIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1276,6 +1408,7 @@ export type $MembershipPayload<ExtArgs extends runtime.Types.Extensions.Internal
     locations: Prisma.$MembershipLocationPayload<ExtArgs>[]
     sentInvitations: Prisma.$InvitationPayload<ExtArgs>[]
     auditEntries: Prisma.$AuditLogPayload<ExtArgs>[]
+    createdDateOptions: Prisma.$VenueDateOptionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1686,6 +1819,7 @@ export interface Prisma__MembershipClient<T, Null = never, ExtArgs extends runti
   locations<T extends Prisma.Membership$locationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Membership$locationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MembershipLocationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   sentInvitations<T extends Prisma.Membership$sentInvitationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Membership$sentInvitationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InvitationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   auditEntries<T extends Prisma.Membership$auditEntriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Membership$auditEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AuditLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  createdDateOptions<T extends Prisma.Membership$createdDateOptionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Membership$createdDateOptionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VenueDateOptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2217,6 +2351,30 @@ export type Membership$auditEntriesArgs<ExtArgs extends runtime.Types.Extensions
   take?: number
   skip?: number
   distinct?: Prisma.AuditLogScalarFieldEnum | Prisma.AuditLogScalarFieldEnum[]
+}
+
+/**
+ * Membership.createdDateOptions
+ */
+export type Membership$createdDateOptionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the VenueDateOption
+   */
+  select?: Prisma.VenueDateOptionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the VenueDateOption
+   */
+  omit?: Prisma.VenueDateOptionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.VenueDateOptionInclude<ExtArgs> | null
+  where?: Prisma.VenueDateOptionWhereInput
+  orderBy?: Prisma.VenueDateOptionOrderByWithRelationInput | Prisma.VenueDateOptionOrderByWithRelationInput[]
+  cursor?: Prisma.VenueDateOptionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.VenueDateOptionScalarFieldEnum | Prisma.VenueDateOptionScalarFieldEnum[]
 }
 
 /**

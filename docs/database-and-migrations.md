@@ -63,3 +63,46 @@ seeded.
 4. Run `pnpm db:migrate:deploy` on a fresh isolated PostgreSQL database.
 5. Run `pnpm test:db` and `pnpm test:integration` with `TEST_DATABASE_URL`.
 6. Commit schema and migration together; never edit a migration after deployment.
+
+## Phase 5 migration
+
+`20260823000100_phase_5_events` is the additive Phase-5 base migration. It creates the relational
+`event` table plus `EventStatus` and `EventSnapshotSource`. An Event stores organization, Location,
+local `DATE`, copied EventFormat provenance and values, local minute schedule, recording setting,
+timezone snapshot, lifecycle timestamps and a positive optimistic version. This migration has
+already been deployed and is not amended by the Phase-5 refinement.
+
+Composite tenant foreign keys protect Location and source EventFormat references. Restrictive
+delete behavior preserves historical events. SQL checks mirror the Phase-4 local-minute ranges and
+known start-relative order, distinguish next-day ends through `0..2879`, and keep completion/
+cancellation timestamps consistent with a correctable global status. Calendar, Location, status,
+format and kind indexes all begin with `organization_id` and include stable date/ID ordering.
+
+The migration adds `events.read`, `events.write` and `events.status`, and conflict-safely backfills
+the standard-role matrix. Setup uses the same application catalog for newly created organizations.
+No example event or format is seeded, and test cleanup continues to preserve the global permission
+catalog.
+
+`20260823000200_phase_5_occupancy_options` is a strictly additive follow-up. It makes the five
+EventFormat provenance columns consistently nullable for free Events, adds the format-description
+snapshot and enforces the all-present/all-absent source contract. It creates `venue_date_option`,
+the `VenueDateOptionRank`/`VenueDateOptionStatus` enums and tenant-composite foreign keys to Location,
+membership and optional master data. Options are versioned and statused rather than deleted.
+
+The same migration creates `location_occupancy`. Complete non-cancelled Events receive one row for
+each of the `FIRST` and `SECOND` slots; an active option receives only its rank's row. PostgreSQL's
+`btree_gist` extension and `location_occupancy_no_overlap` exclusion constraint combine
+`organization_id`, `location_id`, slot and a half-open local `tsrange`. Application transactions
+also acquire sorted organization/Location advisory locks, making rank selection and multi-row Event
+reservation safe under concurrency. Existing complete, non-cancelled Events are backfilled without
+altering or deleting Event rows; incomplete Events deliberately remain manual-review cases.
+
+The follow-up inserts `date_options.read`, `date_options.write` and `date_options.convert` with
+conflict-safe catalog updates and backfills the five standard roles. `SetupService` consumes the same
+permission constants for future organizations. No example Option, dummy EventFormat or persisted
+availability result is created.
+
+The later Phase-5 batch-option and contrast refinement changes no schema. It reuses ordinary
+`venue_date_option` rows, the existing audit log, sorted Location locks and the exclusion
+constraint in one transaction. Because `20260823000200_phase_5_occupancy_options` had already been
+applied, it remains byte-for-byte unchanged and no additional migration is required.

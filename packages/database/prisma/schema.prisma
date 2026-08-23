@@ -39,6 +39,36 @@ enum RecordingDefault {
   DISABLED
 }
 
+enum EventStatus {
+  DRAFT
+  PLANNED
+  CONFIRMED
+  COMPLETED
+  CANCELLED
+}
+
+enum EventSnapshotSource {
+  EVENT_FORMAT
+}
+
+enum VenueDateOptionRank {
+  FIRST
+  SECOND
+}
+
+enum VenueDateOptionStatus {
+  ACTIVE
+  CONVERTED
+  RELEASED
+  EXPIRED
+  UNAVAILABLE
+}
+
+enum OccupancySlot {
+  FIRST
+  SECOND
+}
+
 model User {
   id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name          String
@@ -154,6 +184,9 @@ model Organization {
   contacts     Contact[]
   partners     BusinessPartner[]
   eventFormats EventFormat[]
+  events       Event[]
+  dateOptions  VenueDateOption[]
+  occupancies  LocationOccupancy[]
 
   @@index([status])
   @@map("organization")
@@ -178,12 +211,53 @@ model EventFormat {
   createdAt             DateTime         @default(now()) @map("created_at")
   updatedAt             DateTime         @updatedAt @map("updated_at")
   organization          Organization     @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  sourceEvents          Event[]
 
   @@unique([id, organizationId])
   @@unique([organizationId, normalizedName])
   @@index([organizationId, status, name, id])
   @@index([organizationId, eventKind, status])
   @@map("event_format")
+}
+
+model Event {
+  id                    String              @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId        String              @map("organization_id") @db.Uuid
+  locationId            String              @map("location_id") @db.Uuid
+  name                  String              @db.VarChar(200)
+  eventDate             DateTime            @map("event_date") @db.Date
+  status                EventStatus         @default(DRAFT)
+  version               Int                 @default(1)
+  cancelledAt           DateTime?           @map("cancelled_at")
+  completedAt           DateTime?           @map("completed_at")
+  snapshotSource        EventSnapshotSource? @map("snapshot_source")
+  sourceEventFormatId   String?             @map("source_event_format_id") @db.Uuid
+  sourceEventFormatVersion Int?              @map("source_event_format_version")
+  formatNameSnapshot    String?             @map("format_name_snapshot") @db.VarChar(200)
+  formatDescriptionSnapshot String?          @map("format_description_snapshot")
+  eventKind             EventKind           @map("event_kind_snapshot")
+  description           String?
+  technicalGetInMinutes Int?                @map("technical_get_in_minutes")
+  artistGetInMinutes    Int?                @map("artist_get_in_minutes")
+  doorsMinutes          Int?                @map("doors_minutes")
+  startMinutes          Int?                @map("start_minutes")
+  endMinutes            Int?                @map("end_minutes")
+  recordingSetting      RecordingDefault    @default(UNSPECIFIED) @map("recording_setting")
+  timezone              String              @map("timezone_snapshot") @db.VarChar(100)
+  createdAt             DateTime            @default(now()) @map("created_at")
+  updatedAt             DateTime            @updatedAt @map("updated_at")
+  organization          Organization        @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  location              Location            @relation(fields: [locationId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  sourceEventFormat     EventFormat?        @relation(fields: [sourceEventFormatId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  occupancies           LocationOccupancy[]
+
+  @@unique([id, organizationId])
+  @@index([organizationId, eventDate, startMinutes, id])
+  @@index([organizationId, locationId, eventDate, id])
+  @@index([organizationId, status, eventDate, id])
+  @@index([organizationId, sourceEventFormatId, eventDate, id])
+  @@index([organizationId, eventKind, eventDate, id])
+  @@map("event")
 }
 
 model Location {
@@ -208,6 +282,9 @@ model Location {
   organization    Organization         @relation(fields: [organizationId], references: [id], onDelete: Restrict)
   membershipLinks MembershipLocation[]
   invitationLinks InvitationLocation[]
+  events          Event[]
+  dateOptions     VenueDateOption[]
+  occupancies     LocationOccupancy[]
 
   @@unique([id, organizationId])
   @@index([organizationId, status])
@@ -229,6 +306,7 @@ model Membership {
   locations       MembershipLocation[]
   sentInvitations Invitation[]         @relation("InvitationInviter")
   auditEntries    AuditLog[]           @relation("AuditActorMembership")
+  createdDateOptions VenueDateOption[]  @relation("DateOptionCreator")
 
   @@unique([organizationId, userId])
   @@unique([id, organizationId])
@@ -430,6 +508,7 @@ model Contact {
   organization         Organization             @relation(fields: [organizationId], references: [id], onDelete: Restrict)
   artistLinks          ArtistContact[]
   businessPartnerLinks BusinessPartnerContact[]
+  dateOptions          VenueDateOption[]
 
   @@unique([id, organizationId])
   @@index([organizationId, status])
@@ -511,6 +590,7 @@ model BusinessPartner {
   contacts            BusinessPartnerContact[]
   roles               BusinessPartnerRoleAssignment[]
   artistLinks         ArtistBusinessPartner[]
+  dateOptions         VenueDateOption[]
 
   @@unique([id, organizationId])
   @@index([organizationId, status])
@@ -645,4 +725,61 @@ model ArtistBusinessPartnerContactRole {
   @@index([organizationId], map: "artist_partner_contact_role_tenant_idx")
   @@index([roleId], map: "artist_partner_contact_role_role_idx")
   @@map("artist_business_partner_contact_role")
+}
+
+model VenueDateOption {
+  id                   String                @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId       String                @map("organization_id") @db.Uuid
+  locationId           String                @map("location_id") @db.Uuid
+  optionDate            DateTime              @map("option_date") @db.Date
+  occupancyStartMinutes Int                   @map("occupancy_start_minutes")
+  occupancyEndMinutes   Int                   @map("occupancy_end_minutes")
+  rank                  VenueDateOptionRank
+  label                 String                @db.VarChar(200)
+  businessPartnerId     String?               @map("business_partner_id") @db.Uuid
+  contactId             String?               @map("contact_id") @db.Uuid
+  note                  String?
+  validUntil            DateTime              @map("valid_until") @db.Timestamptz(3)
+  status                VenueDateOptionStatus @default(ACTIVE)
+  version               Int                   @default(1)
+  createdByMembershipId String                @map("created_by_membership_id") @db.Uuid
+  createdAt             DateTime              @default(now()) @map("created_at")
+  updatedAt             DateTime              @updatedAt @map("updated_at")
+  organization          Organization          @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  location              Location              @relation(fields: [locationId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  businessPartner       BusinessPartner?      @relation(fields: [businessPartnerId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  contact               Contact?              @relation(fields: [contactId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  createdByMembership   Membership            @relation("DateOptionCreator", fields: [createdByMembershipId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  occupancies           LocationOccupancy[]
+
+  @@unique([id, organizationId])
+  @@index([organizationId, optionDate, occupancyStartMinutes, id])
+  @@index([organizationId, locationId, optionDate, status, rank])
+  @@index([organizationId, validUntil, status])
+  @@index([organizationId, businessPartnerId])
+  @@index([organizationId, contactId])
+  @@map("venue_date_option")
+}
+
+model LocationOccupancy {
+  id             String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId String           @map("organization_id") @db.Uuid
+  locationId     String           @map("location_id") @db.Uuid
+  eventId        String?          @map("event_id") @db.Uuid
+  dateOptionId   String?          @map("date_option_id") @db.Uuid
+  slot           OccupancySlot
+  occupancyStart DateTime         @map("occupancy_start") @db.Timestamp(0)
+  occupancyEnd   DateTime         @map("occupancy_end") @db.Timestamp(0)
+  createdAt      DateTime         @default(now()) @map("created_at")
+  organization   Organization     @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  location       Location         @relation(fields: [locationId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  event          Event?           @relation(fields: [eventId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  dateOption     VenueDateOption? @relation(fields: [dateOptionId, organizationId], references: [id, organizationId], onDelete: Restrict)
+
+  @@unique([eventId, slot])
+  @@unique([dateOptionId, slot])
+  @@index([organizationId, locationId, occupancyStart, occupancyEnd])
+  @@index([organizationId, eventId])
+  @@index([organizationId, dateOptionId])
+  @@map("location_occupancy")
 }

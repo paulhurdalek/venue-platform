@@ -405,6 +405,7 @@ export const ModelName = {
   BootstrapToken: 'BootstrapToken',
   Organization: 'Organization',
   EventFormat: 'EventFormat',
+  Event: 'Event',
   Location: 'Location',
   Membership: 'Membership',
   Permission: 'Permission',
@@ -429,7 +430,9 @@ export const ModelName = {
   ArtistBusinessPartner: 'ArtistBusinessPartner',
   ArtistBusinessPartnerRole: 'ArtistBusinessPartnerRole',
   ArtistBusinessPartnerContact: 'ArtistBusinessPartnerContact',
-  ArtistBusinessPartnerContactRole: 'ArtistBusinessPartnerContactRole'
+  ArtistBusinessPartnerContactRole: 'ArtistBusinessPartnerContactRole',
+  VenueDateOption: 'VenueDateOption',
+  LocationOccupancy: 'LocationOccupancy'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -445,7 +448,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "session" | "account" | "verification" | "rateLimit" | "bootstrapToken" | "organization" | "eventFormat" | "location" | "membership" | "permission" | "role" | "rolePermission" | "membershipRole" | "membershipLocation" | "invitation" | "invitationRole" | "invitationLocation" | "auditLog" | "artist" | "contact" | "contactRole" | "artistContact" | "artistContactRole" | "businessPartner" | "businessPartnerRole" | "businessPartnerRoleAssignment" | "businessPartnerContact" | "businessPartnerContactRole" | "artistBusinessPartner" | "artistBusinessPartnerRole" | "artistBusinessPartnerContact" | "artistBusinessPartnerContactRole"
+    modelProps: "user" | "session" | "account" | "verification" | "rateLimit" | "bootstrapToken" | "organization" | "eventFormat" | "event" | "location" | "membership" | "permission" | "role" | "rolePermission" | "membershipRole" | "membershipLocation" | "invitation" | "invitationRole" | "invitationLocation" | "auditLog" | "artist" | "contact" | "contactRole" | "artistContact" | "artistContactRole" | "businessPartner" | "businessPartnerRole" | "businessPartnerRoleAssignment" | "businessPartnerContact" | "businessPartnerContactRole" | "artistBusinessPartner" | "artistBusinessPartnerRole" | "artistBusinessPartnerContact" | "artistBusinessPartnerContactRole" | "venueDateOption" | "locationOccupancy"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1038,6 +1041,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.EventFormatCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.EventFormatCountAggregateOutputType> | number
+        }
+      }
+    }
+    Event: {
+      payload: Prisma.$EventPayload<ExtArgs>
+      fields: Prisma.EventFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.EventFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.EventFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventPayload>
+        }
+        findFirst: {
+          args: Prisma.EventFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.EventFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventPayload>
+        }
+        findMany: {
+          args: Prisma.EventFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventPayload>[]
+        }
+        create: {
+          args: Prisma.EventCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventPayload>
+        }
+        createMany: {
+          args: Prisma.EventCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.EventCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventPayload>[]
+        }
+        delete: {
+          args: Prisma.EventDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventPayload>
+        }
+        update: {
+          args: Prisma.EventUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventPayload>
+        }
+        deleteMany: {
+          args: Prisma.EventDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.EventUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.EventUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventPayload>[]
+        }
+        upsert: {
+          args: Prisma.EventUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventPayload>
+        }
+        aggregate: {
+          args: Prisma.EventAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateEvent>
+        }
+        groupBy: {
+          args: Prisma.EventGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EventGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.EventCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EventCountAggregateOutputType> | number
         }
       }
     }
@@ -2891,6 +2968,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    VenueDateOption: {
+      payload: Prisma.$VenueDateOptionPayload<ExtArgs>
+      fields: Prisma.VenueDateOptionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.VenueDateOptionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VenueDateOptionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.VenueDateOptionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VenueDateOptionPayload>
+        }
+        findFirst: {
+          args: Prisma.VenueDateOptionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VenueDateOptionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.VenueDateOptionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VenueDateOptionPayload>
+        }
+        findMany: {
+          args: Prisma.VenueDateOptionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VenueDateOptionPayload>[]
+        }
+        create: {
+          args: Prisma.VenueDateOptionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VenueDateOptionPayload>
+        }
+        createMany: {
+          args: Prisma.VenueDateOptionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.VenueDateOptionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VenueDateOptionPayload>[]
+        }
+        delete: {
+          args: Prisma.VenueDateOptionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VenueDateOptionPayload>
+        }
+        update: {
+          args: Prisma.VenueDateOptionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VenueDateOptionPayload>
+        }
+        deleteMany: {
+          args: Prisma.VenueDateOptionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.VenueDateOptionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.VenueDateOptionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VenueDateOptionPayload>[]
+        }
+        upsert: {
+          args: Prisma.VenueDateOptionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VenueDateOptionPayload>
+        }
+        aggregate: {
+          args: Prisma.VenueDateOptionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateVenueDateOption>
+        }
+        groupBy: {
+          args: Prisma.VenueDateOptionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.VenueDateOptionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.VenueDateOptionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.VenueDateOptionCountAggregateOutputType> | number
+        }
+      }
+    }
+    LocationOccupancy: {
+      payload: Prisma.$LocationOccupancyPayload<ExtArgs>
+      fields: Prisma.LocationOccupancyFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.LocationOccupancyFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LocationOccupancyPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.LocationOccupancyFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LocationOccupancyPayload>
+        }
+        findFirst: {
+          args: Prisma.LocationOccupancyFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LocationOccupancyPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.LocationOccupancyFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LocationOccupancyPayload>
+        }
+        findMany: {
+          args: Prisma.LocationOccupancyFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LocationOccupancyPayload>[]
+        }
+        create: {
+          args: Prisma.LocationOccupancyCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LocationOccupancyPayload>
+        }
+        createMany: {
+          args: Prisma.LocationOccupancyCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.LocationOccupancyCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LocationOccupancyPayload>[]
+        }
+        delete: {
+          args: Prisma.LocationOccupancyDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LocationOccupancyPayload>
+        }
+        update: {
+          args: Prisma.LocationOccupancyUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LocationOccupancyPayload>
+        }
+        deleteMany: {
+          args: Prisma.LocationOccupancyDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.LocationOccupancyUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.LocationOccupancyUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LocationOccupancyPayload>[]
+        }
+        upsert: {
+          args: Prisma.LocationOccupancyUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LocationOccupancyPayload>
+        }
+        aggregate: {
+          args: Prisma.LocationOccupancyAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateLocationOccupancy>
+        }
+        groupBy: {
+          args: Prisma.LocationOccupancyGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LocationOccupancyGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.LocationOccupancyCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LocationOccupancyCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -3051,6 +3276,37 @@ export const EventFormatScalarFieldEnum = {
 } as const
 
 export type EventFormatScalarFieldEnum = (typeof EventFormatScalarFieldEnum)[keyof typeof EventFormatScalarFieldEnum]
+
+
+export const EventScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  locationId: 'locationId',
+  name: 'name',
+  eventDate: 'eventDate',
+  status: 'status',
+  version: 'version',
+  cancelledAt: 'cancelledAt',
+  completedAt: 'completedAt',
+  snapshotSource: 'snapshotSource',
+  sourceEventFormatId: 'sourceEventFormatId',
+  sourceEventFormatVersion: 'sourceEventFormatVersion',
+  formatNameSnapshot: 'formatNameSnapshot',
+  formatDescriptionSnapshot: 'formatDescriptionSnapshot',
+  eventKind: 'eventKind',
+  description: 'description',
+  technicalGetInMinutes: 'technicalGetInMinutes',
+  artistGetInMinutes: 'artistGetInMinutes',
+  doorsMinutes: 'doorsMinutes',
+  startMinutes: 'startMinutes',
+  endMinutes: 'endMinutes',
+  recordingSetting: 'recordingSetting',
+  timezone: 'timezone',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type EventScalarFieldEnum = (typeof EventScalarFieldEnum)[keyof typeof EventScalarFieldEnum]
 
 
 export const LocationScalarFieldEnum = {
@@ -3396,6 +3652,44 @@ export const ArtistBusinessPartnerContactRoleScalarFieldEnum = {
 export type ArtistBusinessPartnerContactRoleScalarFieldEnum = (typeof ArtistBusinessPartnerContactRoleScalarFieldEnum)[keyof typeof ArtistBusinessPartnerContactRoleScalarFieldEnum]
 
 
+export const VenueDateOptionScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  locationId: 'locationId',
+  optionDate: 'optionDate',
+  occupancyStartMinutes: 'occupancyStartMinutes',
+  occupancyEndMinutes: 'occupancyEndMinutes',
+  rank: 'rank',
+  label: 'label',
+  businessPartnerId: 'businessPartnerId',
+  contactId: 'contactId',
+  note: 'note',
+  validUntil: 'validUntil',
+  status: 'status',
+  version: 'version',
+  createdByMembershipId: 'createdByMembershipId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type VenueDateOptionScalarFieldEnum = (typeof VenueDateOptionScalarFieldEnum)[keyof typeof VenueDateOptionScalarFieldEnum]
+
+
+export const LocationOccupancyScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  locationId: 'locationId',
+  eventId: 'eventId',
+  dateOptionId: 'dateOptionId',
+  slot: 'slot',
+  occupancyStart: 'occupancyStart',
+  occupancyEnd: 'occupancyEnd',
+  createdAt: 'createdAt'
+} as const
+
+export type LocationOccupancyScalarFieldEnum = (typeof LocationOccupancyScalarFieldEnum)[keyof typeof LocationOccupancyScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -3548,6 +3842,34 @@ export type ListEnumRecordingDefaultFieldRefInput<$PrismaModel> = FieldRefInputT
 
 
 /**
+ * Reference to a field of type 'EventStatus'
+ */
+export type EnumEventStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EventStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'EventStatus[]'
+ */
+export type ListEnumEventStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EventStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'EventSnapshotSource'
+ */
+export type EnumEventSnapshotSourceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EventSnapshotSource'>
+    
+
+
+/**
+ * Reference to a field of type 'EventSnapshotSource[]'
+ */
+export type ListEnumEventSnapshotSourceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EventSnapshotSource[]'>
+    
+
+
+/**
  * Reference to a field of type 'MembershipStatus'
  */
 export type EnumMembershipStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MembershipStatus'>
@@ -3600,6 +3922,48 @@ export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'J
  * Reference to a field of type 'QueryMode'
  */
 export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
+    
+
+
+/**
+ * Reference to a field of type 'VenueDateOptionRank'
+ */
+export type EnumVenueDateOptionRankFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'VenueDateOptionRank'>
+    
+
+
+/**
+ * Reference to a field of type 'VenueDateOptionRank[]'
+ */
+export type ListEnumVenueDateOptionRankFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'VenueDateOptionRank[]'>
+    
+
+
+/**
+ * Reference to a field of type 'VenueDateOptionStatus'
+ */
+export type EnumVenueDateOptionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'VenueDateOptionStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'VenueDateOptionStatus[]'
+ */
+export type ListEnumVenueDateOptionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'VenueDateOptionStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'OccupancySlot'
+ */
+export type EnumOccupancySlotFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OccupancySlot'>
+    
+
+
+/**
+ * Reference to a field of type 'OccupancySlot[]'
+ */
+export type ListEnumOccupancySlotFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OccupancySlot[]'>
     
 
 
@@ -3775,6 +4139,7 @@ export type GlobalOmitConfig = {
   bootstrapToken?: Prisma.BootstrapTokenOmit
   organization?: Prisma.OrganizationOmit
   eventFormat?: Prisma.EventFormatOmit
+  event?: Prisma.EventOmit
   location?: Prisma.LocationOmit
   membership?: Prisma.MembershipOmit
   permission?: Prisma.PermissionOmit
@@ -3800,6 +4165,8 @@ export type GlobalOmitConfig = {
   artistBusinessPartnerRole?: Prisma.ArtistBusinessPartnerRoleOmit
   artistBusinessPartnerContact?: Prisma.ArtistBusinessPartnerContactOmit
   artistBusinessPartnerContactRole?: Prisma.ArtistBusinessPartnerContactRoleOmit
+  venueDateOption?: Prisma.VenueDateOptionOmit
+  locationOccupancy?: Prisma.LocationOccupancyOmit
 }
 
 /* Types for Logging */

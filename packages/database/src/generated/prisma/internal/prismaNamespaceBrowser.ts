@@ -59,6 +59,7 @@ export const ModelName = {
   BootstrapToken: 'BootstrapToken',
   Organization: 'Organization',
   EventFormat: 'EventFormat',
+  Event: 'Event',
   Location: 'Location',
   Membership: 'Membership',
   Permission: 'Permission',
@@ -83,7 +84,9 @@ export const ModelName = {
   ArtistBusinessPartner: 'ArtistBusinessPartner',
   ArtistBusinessPartnerRole: 'ArtistBusinessPartnerRole',
   ArtistBusinessPartnerContact: 'ArtistBusinessPartnerContact',
-  ArtistBusinessPartnerContactRole: 'ArtistBusinessPartnerContactRole'
+  ArtistBusinessPartnerContactRole: 'ArtistBusinessPartnerContactRole',
+  VenueDateOption: 'VenueDateOption',
+  LocationOccupancy: 'LocationOccupancy'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -223,6 +226,37 @@ export const EventFormatScalarFieldEnum = {
 } as const
 
 export type EventFormatScalarFieldEnum = (typeof EventFormatScalarFieldEnum)[keyof typeof EventFormatScalarFieldEnum]
+
+
+export const EventScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  locationId: 'locationId',
+  name: 'name',
+  eventDate: 'eventDate',
+  status: 'status',
+  version: 'version',
+  cancelledAt: 'cancelledAt',
+  completedAt: 'completedAt',
+  snapshotSource: 'snapshotSource',
+  sourceEventFormatId: 'sourceEventFormatId',
+  sourceEventFormatVersion: 'sourceEventFormatVersion',
+  formatNameSnapshot: 'formatNameSnapshot',
+  formatDescriptionSnapshot: 'formatDescriptionSnapshot',
+  eventKind: 'eventKind',
+  description: 'description',
+  technicalGetInMinutes: 'technicalGetInMinutes',
+  artistGetInMinutes: 'artistGetInMinutes',
+  doorsMinutes: 'doorsMinutes',
+  startMinutes: 'startMinutes',
+  endMinutes: 'endMinutes',
+  recordingSetting: 'recordingSetting',
+  timezone: 'timezone',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type EventScalarFieldEnum = (typeof EventScalarFieldEnum)[keyof typeof EventScalarFieldEnum]
 
 
 export const LocationScalarFieldEnum = {
@@ -566,6 +600,44 @@ export const ArtistBusinessPartnerContactRoleScalarFieldEnum = {
 } as const
 
 export type ArtistBusinessPartnerContactRoleScalarFieldEnum = (typeof ArtistBusinessPartnerContactRoleScalarFieldEnum)[keyof typeof ArtistBusinessPartnerContactRoleScalarFieldEnum]
+
+
+export const VenueDateOptionScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  locationId: 'locationId',
+  optionDate: 'optionDate',
+  occupancyStartMinutes: 'occupancyStartMinutes',
+  occupancyEndMinutes: 'occupancyEndMinutes',
+  rank: 'rank',
+  label: 'label',
+  businessPartnerId: 'businessPartnerId',
+  contactId: 'contactId',
+  note: 'note',
+  validUntil: 'validUntil',
+  status: 'status',
+  version: 'version',
+  createdByMembershipId: 'createdByMembershipId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type VenueDateOptionScalarFieldEnum = (typeof VenueDateOptionScalarFieldEnum)[keyof typeof VenueDateOptionScalarFieldEnum]
+
+
+export const LocationOccupancyScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  locationId: 'locationId',
+  eventId: 'eventId',
+  dateOptionId: 'dateOptionId',
+  slot: 'slot',
+  occupancyStart: 'occupancyStart',
+  occupancyEnd: 'occupancyEnd',
+  createdAt: 'createdAt'
+} as const
+
+export type LocationOccupancyScalarFieldEnum = (typeof LocationOccupancyScalarFieldEnum)[keyof typeof LocationOccupancyScalarFieldEnum]
 
 
 export const SortOrder = {

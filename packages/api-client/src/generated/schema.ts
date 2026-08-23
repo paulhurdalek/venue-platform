@@ -759,6 +759,166 @@ export interface paths {
         patch: operations["EventFormatController_setStatus_v1"];
         trace?: never;
     };
+    "/api/v1/organizations/{organizationId}/events": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["EventController_list_v1"];
+        put?: never;
+        post: operations["EventController_create_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/events/{eventId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["EventController_find_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["EventController_update_v1"];
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/events/{eventId}/status": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["EventController_setStatus_v1"];
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/date-options": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["DateOptionController_list_v1"];
+        put?: never;
+        post: operations["DateOptionController_create_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/date-options/batch": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["DateOptionController_createBatch_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/date-options/{optionId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["DateOptionController_find_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["DateOptionController_update_v1"];
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/date-options/{optionId}/release": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["DateOptionController_release_v1"];
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/date-options/{optionId}/promote": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["DateOptionController_promote_v1"];
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/date-options/{optionId}/convert": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["DateOptionController_convert_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/availability": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["AvailabilityController_availability_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/health": {
         parameters: {
             query?: never;
@@ -1442,6 +1602,262 @@ export interface components {
             version: number;
             /** @enum {string} */
             status: "ACTIVE" | "ARCHIVED";
+        };
+        EventDto: {
+            /** Format: uuid */
+            id: string;
+            /** Format: uuid */
+            organizationId: string;
+            /** Format: uuid */
+            locationId: string;
+            locationName: string;
+            name: string;
+            /** Format: date */
+            eventDate: string;
+            /** @enum {string} */
+            status: "DRAFT" | "PLANNED" | "CONFIRMED" | "COMPLETED" | "CANCELLED";
+            version: number;
+            /** Format: date-time */
+            cancelledAt?: string | null;
+            /** Format: date-time */
+            completedAt?: string | null;
+            /** @enum {string|null} */
+            snapshotSource?: "EVENT_FORMAT" | null;
+            /** Format: uuid */
+            sourceEventFormatId?: string | null;
+            sourceEventFormatVersion?: number | null;
+            formatNameSnapshot?: string | null;
+            formatDescriptionSnapshot?: string | null;
+            /** @enum {string} */
+            eventKind: "OWN_PRODUCTION" | "THIRD_PARTY_EVENT";
+            description?: string | null;
+            technicalGetInTime?: string | null;
+            artistGetInTime?: string | null;
+            doorsTime?: string | null;
+            startTime?: string | null;
+            endTime?: string | null;
+            endNextDay: boolean;
+            /** @enum {string} */
+            recordingSetting: "UNSPECIFIED" | "ENABLED" | "DISABLED";
+            /** @example Europe/Berlin */
+            timezone: string;
+            occupancyComplete: boolean;
+            /** Format: date-time */
+            createdAt: string;
+            /** Format: date-time */
+            updatedAt: string;
+        };
+        EventPageDto: {
+            items: components["schemas"]["EventDto"][];
+            total: number;
+            limit: number;
+            offset: number;
+        };
+        CreateEventDto: {
+            name?: string;
+            description?: string | null;
+            /** @example 16:00 */
+            technicalGetInTime?: string | null;
+            /** @example 17:30 */
+            artistGetInTime?: string | null;
+            /** @example 19:00 */
+            doorsTime?: string | null;
+            /** @example 20:00 */
+            startTime?: string | null;
+            /** @example 01:30 */
+            endTime?: string | null;
+            endNextDay?: boolean;
+            /** @enum {string} */
+            recordingSetting?: "UNSPECIFIED" | "ENABLED" | "DISABLED";
+            /** Format: uuid */
+            sourceEventFormatId?: string;
+            /** @enum {string} */
+            eventKind?: "OWN_PRODUCTION" | "THIRD_PARTY_EVENT";
+            /** Format: uuid */
+            locationId: string;
+            /**
+             * Format: date
+             * @example 2026-08-23
+             */
+            eventDate: string;
+        };
+        UpdateEventDto: {
+            name?: string;
+            description?: string | null;
+            /** @example 16:00 */
+            technicalGetInTime?: string | null;
+            /** @example 17:30 */
+            artistGetInTime?: string | null;
+            /** @example 19:00 */
+            doorsTime?: string | null;
+            /** @example 20:00 */
+            startTime?: string | null;
+            /** @example 01:30 */
+            endTime?: string | null;
+            endNextDay?: boolean;
+            /** @enum {string} */
+            recordingSetting?: "UNSPECIFIED" | "ENABLED" | "DISABLED";
+            version: number;
+            /** Format: uuid */
+            locationId?: string;
+            /**
+             * Format: date
+             * @example 2026-08-23
+             */
+            eventDate?: string;
+        };
+        UpdateEventStatusDto: {
+            version: number;
+            /** @enum {string} */
+            status: "DRAFT" | "PLANNED" | "CONFIRMED" | "COMPLETED" | "CANCELLED";
+        };
+        DateOptionDto: {
+            /** Format: uuid */
+            id: string;
+            /** Format: uuid */
+            organizationId: string;
+            /** Format: uuid */
+            locationId: string;
+            locationName: string;
+            /** Format: date */
+            optionDate: string;
+            occupancyStartTime: string;
+            occupancyEndTime: string;
+            occupancyEndNextDay: boolean;
+            /** @enum {string} */
+            rank: "FIRST" | "SECOND";
+            label: string;
+            /** Format: uuid */
+            businessPartnerId?: string | null;
+            businessPartnerName?: string | null;
+            /** Format: uuid */
+            contactId?: string | null;
+            contactName?: string | null;
+            note?: string | null;
+            /** Format: date-time */
+            validUntil: string;
+            /** @enum {string} */
+            status: "ACTIVE" | "CONVERTED" | "RELEASED" | "EXPIRED" | "UNAVAILABLE";
+            version: number;
+            canPromote: boolean;
+            /** Format: uuid */
+            createdByMembershipId: string;
+            /** Format: date-time */
+            createdAt: string;
+            /** Format: date-time */
+            updatedAt: string;
+        };
+        DateOptionPageDto: {
+            items: components["schemas"]["DateOptionDto"][];
+            total: number;
+            limit: number;
+            offset: number;
+        };
+        CreateDateOptionDto: {
+            /** Format: uuid */
+            locationId: string;
+            /** Format: date */
+            optionDate: string;
+            /** @example 16:00 */
+            occupancyStartTime: string;
+            /** @example 23:00 */
+            occupancyEndTime: string;
+            /** @default false */
+            occupancyEndNextDay: boolean;
+            label: string;
+            /** Format: uuid */
+            businessPartnerId?: string | null;
+            /** Format: uuid */
+            contactId?: string | null;
+            note?: string | null;
+            /** Format: date-time */
+            validUntil: string;
+        };
+        CreateDateOptionBatchItemDto: {
+            /** Format: uuid */
+            locationId: string;
+            /** Format: date */
+            optionDate: string;
+            /** @example 16:00 */
+            occupancyStartTime: string;
+            /** @example 23:00 */
+            occupancyEndTime: string;
+            /** @default false */
+            occupancyEndNextDay: boolean;
+            /** @enum {string} */
+            rank: "FIRST" | "SECOND";
+        };
+        CreateDateOptionBatchDto: {
+            label: string;
+            /** Format: uuid */
+            businessPartnerId?: string | null;
+            /** Format: uuid */
+            contactId?: string | null;
+            note?: string | null;
+            /** Format: date-time */
+            validUntil: string;
+            options: components["schemas"]["CreateDateOptionBatchItemDto"][];
+        };
+        DateOptionBatchResultDto: {
+            count: number;
+            items: components["schemas"]["DateOptionDto"][];
+        };
+        UpdateDateOptionDto: {
+            version: number;
+            /** Format: uuid */
+            locationId?: string;
+            /** Format: date */
+            optionDate?: string;
+            occupancyStartTime?: string;
+            occupancyEndTime?: string;
+            occupancyEndNextDay?: boolean;
+            label?: string;
+            /** Format: uuid */
+            businessPartnerId?: string | null;
+            /** Format: uuid */
+            contactId?: string | null;
+            note?: string | null;
+            /** Format: date-time */
+            validUntil?: string;
+        };
+        VersionDto: {
+            version: number;
+        };
+        ConvertDateOptionDto: {
+            name?: string;
+            description?: string | null;
+            /** @example 16:00 */
+            technicalGetInTime?: string | null;
+            /** @example 17:30 */
+            artistGetInTime?: string | null;
+            /** @example 19:00 */
+            doorsTime?: string | null;
+            /** @example 20:00 */
+            startTime?: string | null;
+            /** @example 01:30 */
+            endTime?: string | null;
+            endNextDay?: boolean;
+            /** @enum {string} */
+            recordingSetting?: "UNSPECIFIED" | "ENABLED" | "DISABLED";
+            version: number;
+            /** Format: uuid */
+            sourceEventFormatId?: string;
+            /** @enum {string} */
+            eventKind?: "OWN_PRODUCTION" | "THIRD_PARTY_EVENT";
+            /** Format: uuid */
+            locationId?: string;
+            /** Format: date */
+            eventDate?: string;
+        };
+        AvailabilityResultDto: {
+            /** Format: date */
+            date: string;
+            occupancyStartTime: string;
+            occupancyEndTime: string;
+            occupancyEndNextDay: boolean;
+            /** @enum {string} */
+            state: "FREE" | "SECOND_OPTION_AVAILABLE" | "FIRST_OPTION_AVAILABLE" | "FULLY_OPTIONED" | "EVENT_OCCUPIED" | "MANUAL_REVIEW";
+            selectable: boolean;
         };
         ServiceHealthDto: {
             /** @enum {string} */
@@ -2948,6 +3364,370 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["EventFormatDto"];
+                };
+            };
+        };
+    };
+    EventController_list_v1: {
+        parameters: {
+            query?: {
+                offset?: number;
+                limit?: number;
+                locationId?: string;
+                eventKind?: "OWN_PRODUCTION" | "THIRD_PARTY_EVENT";
+                eventFormatId?: string;
+                status?: "DRAFT" | "PLANNED" | "CONFIRMED" | "COMPLETED" | "CANCELLED";
+                toDate?: string;
+                fromDate?: string;
+                q?: string;
+            };
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EventPageDto"];
+                };
+            };
+        };
+    };
+    EventController_create_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateEventDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EventDto"];
+                };
+            };
+        };
+    };
+    EventController_find_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                eventId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EventDto"];
+                };
+            };
+        };
+    };
+    EventController_update_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                eventId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateEventDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EventDto"];
+                };
+            };
+        };
+    };
+    EventController_setStatus_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                eventId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateEventStatusDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EventDto"];
+                };
+            };
+        };
+    };
+    DateOptionController_list_v1: {
+        parameters: {
+            query?: {
+                offset?: number;
+                limit?: number;
+                status?: "ACTIVE" | "CONVERTED" | "RELEASED" | "EXPIRED" | "UNAVAILABLE";
+                locationId?: string;
+                toDate?: string;
+                fromDate?: string;
+            };
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DateOptionPageDto"];
+                };
+            };
+        };
+    };
+    DateOptionController_create_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateDateOptionDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DateOptionDto"];
+                };
+            };
+        };
+    };
+    DateOptionController_createBatch_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateDateOptionBatchDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DateOptionBatchResultDto"];
+                };
+            };
+        };
+    };
+    DateOptionController_find_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                optionId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DateOptionDto"];
+                };
+            };
+        };
+    };
+    DateOptionController_update_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                optionId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateDateOptionDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DateOptionDto"];
+                };
+            };
+        };
+    };
+    DateOptionController_release_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                optionId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["VersionDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DateOptionDto"];
+                };
+            };
+        };
+    };
+    DateOptionController_promote_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                optionId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["VersionDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DateOptionDto"];
+                };
+            };
+        };
+    };
+    DateOptionController_convert_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                optionId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ConvertDateOptionDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EventDto"];
+                };
+            };
+        };
+    };
+    AvailabilityController_availability_v1: {
+        parameters: {
+            query: {
+                resultFilter?: "FREE_ONLY" | "FREE_AND_SECOND_OPTION";
+                weekdays?: string;
+                occupancyEndNextDay?: boolean;
+                occupancyEndTime: string;
+                occupancyStartTime: string;
+                toDate: string;
+                fromDate: string;
+                locationId: string;
+            };
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AvailabilityResultDto"][];
                 };
             };
         };

@@ -1,6 +1,9 @@
 import type { DatabaseClient } from './index.js';
 
 const TEST_SCOPED_TABLES = [
+  'location_occupancy',
+  'venue_date_option',
+  'event',
   'event_format',
   'artist_business_partner_contact_role',
   'artist_business_partner_contact',

@@ -230,6 +230,99 @@ describeWithDatabase('PostgreSQL connection', () => {
     expect(migration).toHaveLength(1);
   });
 
+  it('has the additive Phase 5 event schema, snapshot keys and relational invariants', async () => {
+    client = createDatabaseClient(testDatabaseUrl!);
+    const table = await client.$queryRaw<Array<{ table_name: string }>>`
+      SELECT table_name
+      FROM information_schema.tables
+      WHERE table_schema = 'public' AND table_name = 'event'
+    `;
+    expect(table).toHaveLength(1);
+
+    const checks = await client.$queryRaw<Array<{ constraint_name: string }>>`
+      SELECT conname AS constraint_name
+      FROM pg_constraint
+      WHERE contype = 'c'
+        AND conname IN (
+          'event_name_not_blank',
+          'event_format_name_snapshot_not_blank',
+          'event_timezone_snapshot_not_blank',
+          'event_version_positive',
+          'event_source_format_version_positive',
+          'event_status_timestamps_consistent',
+          'event_technical_get_in_range',
+          'event_artist_get_in_range',
+          'event_doors_range',
+          'event_start_range',
+          'event_end_range',
+          'event_doors_before_start',
+          'event_technical_get_in_before_start',
+          'event_artist_get_in_before_start',
+          'event_end_after_start'
+        )
+    `;
+    expect(checks).toHaveLength(15);
+
+    const tenantForeignKeys = await client.$queryRaw<Array<{ constraint_name: string }>>`
+      SELECT conname AS constraint_name
+      FROM pg_constraint
+      WHERE contype = 'f'
+        AND conname IN ('event_location_tenant_fkey', 'event_source_format_tenant_fkey')
+    `;
+    expect(tenantForeignKeys).toHaveLength(2);
+    expect(await client.permission.count({ where: { key: { startsWith: 'events.' } } })).toBe(3);
+
+    const migration = await client.$queryRaw<Array<{ migration_name: string }>>`
+      SELECT migration_name
+      FROM _prisma_migrations
+      WHERE migration_name = '20260823000100_phase_5_events'
+        AND finished_at IS NOT NULL
+        AND rolled_back_at IS NULL
+    `;
+    expect(migration).toHaveLength(1);
+  });
+
+  it('has the additive Phase 5 occupancy follow-up without rewriting the base migration', async () => {
+    client = createDatabaseClient(testDatabaseUrl!);
+    const tables = await client.$queryRaw<Array<{ table_name: string }>>`
+      SELECT table_name
+      FROM information_schema.tables
+      WHERE table_schema = 'public'
+        AND table_name IN ('venue_date_option', 'location_occupancy')
+      ORDER BY table_name
+    `;
+    expect(tables.map(({ table_name }) => table_name)).toEqual([
+      'location_occupancy',
+      'venue_date_option',
+    ]);
+    const constraints = await client.$queryRaw<Array<{ constraint_name: string }>>`
+      SELECT conname AS constraint_name
+      FROM pg_constraint
+      WHERE conname IN (
+        'event_snapshot_source_consistent',
+        'venue_date_option_end_after_start',
+        'venue_date_option_location_tenant_fkey',
+        'location_occupancy_one_source',
+        'location_occupancy_no_overlap'
+      )
+    `;
+    expect(constraints).toHaveLength(5);
+    expect(await client.permission.count({ where: { key: { startsWith: 'date_options.' } } })).toBe(
+      3,
+    );
+    const migrations = await client.$queryRaw<Array<{ migration_name: string }>>`
+      SELECT migration_name
+      FROM _prisma_migrations
+      WHERE migration_name IN (
+        '20260823000100_phase_5_events',
+        '20260823000200_phase_5_occupancy_options'
+      )
+        AND finished_at IS NOT NULL
+        AND rolled_back_at IS NULL
+    `;
+    expect(migrations).toHaveLength(2);
+  });
+
   it('preserves migration-owned permissions while clearing tenant authorization data', async () => {
     client = createDatabaseClient(testDatabaseUrl!);
     await cleanTestDatabase(client);
@@ -264,5 +357,9 @@ describeWithDatabase('PostgreSQL connection', () => {
     expect(
       await client.permission.count({ where: { key: { startsWith: 'event_formats.' } } }),
     ).toBe(3);
+    expect(await client.permission.count({ where: { key: { startsWith: 'events.' } } })).toBe(3);
+    expect(await client.permission.count({ where: { key: { startsWith: 'date_options.' } } })).toBe(
+      3,
+    );
   });
 });
