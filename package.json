@@ -15,7 +15,7 @@
     "lint": "eslint . --max-warnings=0",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "test": "pnpm api:generate && pnpm test:e2e:setup && pnpm -r --if-present test",
+    "test": "pnpm api:generate && pnpm test:e2e:setup && pnpm -r --workspace-concurrency=1 --if-present test",
     "test:unit": "pnpm --filter @venue/api test:unit && pnpm --filter @venue/worker test:unit",
     "test:integration": "pnpm --filter @venue/api test:integration",
     "test:db": "node scripts/require-test-database.mjs && pnpm --filter @venue/database test:db",

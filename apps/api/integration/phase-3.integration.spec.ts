@@ -1,4 +1,5 @@
 import type { INestApplication } from '@nestjs/common';
+import { cleanTestDatabase } from '@venue/database/testing';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import request from 'supertest';
 
@@ -56,7 +57,7 @@ describeWithDatabase('Phase 3 master-data integration', () => {
     setup = application.get(SetupService);
     auth = application.get(AuthService);
     repository = application.get(MASTER_DATA_REPOSITORY);
-    await cleanDatabase(prisma);
+    await cleanTestDatabase(prisma.database);
 
     const bootstrap = await setup.createBootstrapLink();
     const token = new URL(bootstrap.link).searchParams.get('token');
@@ -96,7 +97,7 @@ describeWithDatabase('Phase 3 master-data integration', () => {
   });
 
   afterAll(async () => {
-    if (prisma) await cleanDatabase(prisma);
+    if (prisma) await cleanTestDatabase(prisma.database);
     await application?.close();
   });
 
@@ -1036,20 +1037,4 @@ async function signInAs(agent: ReturnType<typeof request.agent>, email: string, 
     .post('/api/auth/sign-in/email')
     .set('Origin', origin)
     .send({ email, password, rememberMe: true });
-}
-
-async function cleanDatabase(prisma: PrismaService): Promise<void> {
-  await prisma.database.$executeRawUnsafe(`
-    TRUNCATE TABLE
-      "artist_business_partner_contact_role", "artist_business_partner_contact",
-      "artist_business_partner_role", "artist_business_partner",
-      "business_partner_contact_role", "business_partner_contact",
-      "business_partner_role_assignment", "artist_contact_role", "artist_contact",
-      "business_partner", "artist", "contact", "audit_log",
-      "invitation_location", "invitation_role", "invitation",
-      "membership_location", "membership_role", "role_permission", "role", "permission",
-      "membership", "location", "organization", "bootstrap_token", "auth_rate_limit",
-      "auth_verification", "auth_session", "auth_account", "auth_user"
-    RESTART IDENTITY CASCADE
-  `);
 }

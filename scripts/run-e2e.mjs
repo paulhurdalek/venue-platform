@@ -5,6 +5,7 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { createDatabaseClient } from '../packages/database/dist/index.js';
+import { cleanTestDatabase } from '../packages/database/dist/testing.js';
 import {
   createE2eNextDistDirectoryName,
   createE2eTypeScriptConfig,
@@ -230,20 +231,7 @@ async function createBootstrapLink(environment) {
 async function cleanDatabase(connectionString) {
   const database = createDatabaseClient(connectionString);
   try {
-    await database.$executeRawUnsafe(`
-      TRUNCATE TABLE
-        "event_format",
-        "artist_business_partner_contact_role", "artist_business_partner_contact",
-        "artist_business_partner_role", "artist_business_partner",
-        "business_partner_contact_role", "business_partner_contact",
-        "business_partner_role_assignment", "artist_contact_role", "artist_contact",
-        "business_partner", "artist", "contact", "audit_log",
-        "invitation_location", "invitation_role", "invitation",
-        "membership_location", "membership_role", "role_permission", "role", "permission",
-        "membership", "location", "organization", "bootstrap_token", "auth_rate_limit",
-        "auth_verification", "auth_session", "auth_account", "auth_user"
-      RESTART IDENTITY CASCADE
-    `);
+    await cleanTestDatabase(database);
   } finally {
     await database.$disconnect();
   }

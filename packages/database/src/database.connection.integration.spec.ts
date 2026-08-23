@@ -1,6 +1,7 @@
 import { afterAll, describe, expect, it } from 'vitest';
 
 import { createDatabaseClient, type DatabaseClient } from './index.js';
+import { cleanTestDatabase } from './testing.js';
 
 const testDatabaseUrl = process.env.TEST_DATABASE_URL;
 const describeWithDatabase = testDatabaseUrl ? describe : describe.skip;
@@ -227,5 +228,41 @@ describeWithDatabase('PostgreSQL connection', () => {
         AND rolled_back_at IS NULL
     `;
     expect(migration).toHaveLength(1);
+  });
+
+  it('preserves migration-owned permissions while clearing tenant authorization data', async () => {
+    client = createDatabaseClient(testDatabaseUrl!);
+    await cleanTestDatabase(client);
+    const permissionCountBefore = await client.permission.count();
+    const eventFormatPermission = await client.permission.findUniqueOrThrow({
+      where: { key: 'event_formats.read' },
+    });
+    const organization = await client.organization.create({
+      data: { name: 'Cleanup regression venue' },
+    });
+    const role = await client.role.create({
+      data: {
+        organizationId: organization.id,
+        key: 'cleanup_regression',
+        name: 'Cleanup regression',
+      },
+    });
+    await client.rolePermission.create({
+      data: {
+        organizationId: organization.id,
+        roleId: role.id,
+        permissionId: eventFormatPermission.id,
+      },
+    });
+
+    await cleanTestDatabase(client);
+
+    expect(await client.organization.count({ where: { id: organization.id } })).toBe(0);
+    expect(await client.role.count({ where: { id: role.id } })).toBe(0);
+    expect(await client.rolePermission.count({ where: { roleId: role.id } })).toBe(0);
+    expect(await client.permission.count()).toBe(permissionCountBefore);
+    expect(
+      await client.permission.count({ where: { key: { startsWith: 'event_formats.' } } }),
+    ).toBe(3);
   });
 });

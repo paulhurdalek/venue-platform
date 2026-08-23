@@ -4,7 +4,7 @@
 | -------------- | ------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
 | Unit           | `pnpm test:unit`                                        | Security/master-data rules plus EventFormat normalization, local times and ordering                               |
 | API/PostgreSQL | `pnpm test:integration`                                 | Phase-1/3 regression, isolated sign-in rate-limit boundary, and Phase-4 CRUD, lifecycle, permissions and tenancy  |
-| Migration      | `pnpm test:db`                                          | real driver, applied Phase-1/3/4 migrations, tenant keys, relational time checks and dictionaries                 |
+| Migration      | `pnpm test:db`                                          | real driver, applied Phase-1/3/4 migrations, tenant keys, relational time checks, dictionaries and cleanup safety |
 | E2E setup      | `pnpm test:e2e:setup`                                   | canonical test environment, isolated Next paths, guarded cleanup and preservation of the development cache        |
 | Browser E2E    | `pnpm test:e2e`                                         | Seven serial, focused Phase-1/3/4 browser scenarios with a controlled administrator session and read-only context |
 | Static/build   | `pnpm verify`                                           | formatting, lint, TypeScript, generated OpenAPI client, tests, production builds                                  |
@@ -12,9 +12,20 @@
 | Supply chain   | `pnpm security:audit`; `pnpm install --frozen-lockfile` | production advisories and peer/lock consistency                                                                   |
 
 Database-bearing suites require `TEST_DATABASE_URL`, deliberately refuse a development URL, and
-clean only their isolated test tables. The ordinary test suite skips real-DB cases when the
-variable is absent; the explicit DB command and E2E runner fail instead. CI always provisions
-PostgreSQL 18.4, deploys the reviewed migrations, and supplies the variable.
+clean only their isolated test tables through the shared `@venue/database/testing` helper. Tenant
+and authorization assignments, including `role_permission` and `role`, are cleared, while the
+migration-owned global `permission`, `contact_role` and `business_partner_role` catalogs remain
+intact. A database regression creates tenant authorization data, invokes the same cleanup, and
+asserts that the tenant data is gone, the overall permission count is unchanged and exactly three
+`event_formats.*` permissions remain. The ordinary test suite skips real-DB cases when the variable
+is absent; the explicit DB command and E2E runner fail instead. CI always provisions PostgreSQL
+18.4, deploys the reviewed migrations, and supplies the variable.
+
+GitHub Actions runs migration deployment, `pnpm verify` and the explicit post-integration
+`pnpm test:db` step sequentially. Workspace test scripts inside `verify` use a concurrency of one,
+and API Vitest files have `fileParallelism: false`; database-bearing suites therefore cannot race
+each other's cleanup. The named post-integration CI step proves once more that API cleanup did not
+remove migration-managed catalog rows.
 
 The repository-level E2E and container runners load the complete `.env.test` configuration,
 falling back to `.env.test.example` in a clean checkout. These test values override inherited
