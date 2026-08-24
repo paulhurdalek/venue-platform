@@ -40,12 +40,24 @@ export class MasterDataService {
     private readonly repository: MasterDataRepository,
   ) {}
 
-  listArtists(organizationId: string, query: ListQuery): Promise<PageResult<ArtistRecord>> {
-    return this.repository.listArtists(organizationId, query);
+  async listArtists(
+    organizationId: string,
+    query: ListQuery,
+    access?: AccessContext,
+  ): Promise<PageResult<ArtistRecord>> {
+    const result = await this.repository.listArtists(organizationId, query);
+    return access
+      ? { ...result, items: result.items.map((artist) => this.redactArtist(access, artist)) }
+      : result;
   }
 
-  async artist(organizationId: string, artistId: string): Promise<ArtistRecord> {
-    return this.requireRecord(await this.repository.artist(organizationId, artistId));
+  async artist(
+    organizationId: string,
+    artistId: string,
+    access?: AccessContext,
+  ): Promise<ArtistRecord> {
+    const artist = this.requireRecord(await this.repository.artist(organizationId, artistId));
+    return access ? this.redactArtist(access, artist) : artist;
   }
 
   async createArtist(access: AccessContext, input: Partial<ArtistValues>): Promise<ArtistRecord> {
@@ -880,6 +892,21 @@ export class MasterDataService {
         message: 'Für diese Aktion fehlt die erforderliche Berechtigung',
       });
     }
+  }
+
+  private redactArtist(access: AccessContext, artist: ArtistRecord): ArtistRecord {
+    const canReadContacts = access.permissions.includes(PERMISSIONS.CONTACTS_READ);
+    const canReadPartners = access.permissions.includes(PERMISSIONS.BUSINESS_PARTNERS_READ);
+    return {
+      ...artist,
+      contacts: canReadContacts ? artist.contacts : [],
+      businessPartners: canReadPartners
+        ? artist.businessPartners.map((association) => ({
+            ...association,
+            representatives: canReadContacts ? association.representatives : [],
+          }))
+        : [],
+    };
   }
 
   private requireActiveRelationshipTargets(...statuses: EntityStatus[]): void {

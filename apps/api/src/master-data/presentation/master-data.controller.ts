@@ -77,7 +77,7 @@ export class MasterDataController {
     @CurrentAccess() access: AccessContext,
     @Query(createDtoValidationPipe(MasterDataListQueryDto)) query: MasterDataListQueryDto,
   ): Promise<ArtistPageDto> {
-    return this.masterData.listArtists(access.organizationId, query);
+    return this.masterData.listArtists(access.organizationId, query, access);
   }
 
   @Post('artists')
@@ -99,7 +99,7 @@ export class MasterDataController {
     @CurrentAccess() access: AccessContext,
     @Param('artistId', ParseUUIDPipe) artistId: string,
   ): Promise<ArtistDto> {
-    return this.masterData.artist(access.organizationId, artistId);
+    return this.masterData.artist(access.organizationId, artistId, access);
   }
 
   @Patch('artists/:artistId')

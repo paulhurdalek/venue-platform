@@ -26,7 +26,21 @@ import type {
 import { formatLocalTime } from '../domain/event.rules.js';
 
 type Database = DatabaseClient | TransactionClient;
-const eventInclude = { location: { select: { id: true, name: true } } } as const;
+const eventInclude = {
+  location: { select: { id: true, name: true } },
+  lineupRequirements: {
+    where: { status: 'ACTIVE' },
+    select: {
+      role: true,
+      normalizedCustomRoleLabel: true,
+      requiredCount: true,
+    },
+  },
+  bookings: {
+    where: { status: { in: ['SHORTLISTED', 'REQUESTED', 'OPTION', 'CONFIRMED'] } },
+    select: { role: true, normalizedCustomRoleLabel: true, status: true },
+  },
+} satisfies Prisma.EventInclude;
 type EventRow = Prisma.EventGetPayload<{ include: typeof eventInclude }>;
 
 @Injectable()
@@ -43,13 +57,22 @@ export class PrismaEventRepository implements EventRepository {
     query: EventListQuery,
     locationIds?: string[],
   ): Promise<EventPage> {
+    const progressIds =
+      query.booking === 'INCOMPLETE' ||
+      query.booking === 'MODERATOR_MISSING' ||
+      query.booking === 'FULLY_CONFIRMED'
+        ? await this.bookingFilterIds(organizationId, query.booking)
+        : undefined;
     const where: Prisma.EventWhereInput = {
       organizationId,
+      ...(progressIds ? { id: { in: progressIds } } : {}),
       ...(locationIds ? { locationId: { in: locationIds } } : {}),
       ...(query.locationId ? { locationId: query.locationId } : {}),
       ...(query.status ? { status: query.status } : {}),
       ...(query.eventFormatId ? { sourceEventFormatId: query.eventFormatId } : {}),
       ...(query.eventKind ? { eventKind: query.eventKind } : {}),
+      ...(query.booking === 'OPEN_REQUESTS' ? { bookings: { some: { status: 'REQUESTED' } } } : {}),
+      ...(query.booking === 'HAS_OPTIONS' ? { bookings: { some: { status: 'OPTION' } } } : {}),
       ...(query.fromDate || query.toDate
         ? {
             eventDate: {
@@ -167,6 +190,33 @@ export class PrismaEventRepository implements EventRepository {
           data: { organizationId, ...data, eventDate: databaseDate(eventDate) },
           include: eventInclude,
         });
+        if (values.sourceEventFormatId) {
+          const requirements = await database.eventFormatLineupRequirement.findMany({
+            where: {
+              organizationId,
+              eventFormatId: values.sourceEventFormatId,
+              status: 'ACTIVE',
+            },
+            orderBy: [{ sortOrder: 'asc' }, { id: 'asc' }],
+          });
+          if (requirements.length > 0) {
+            await database.eventLineupRequirement.createMany({
+              data: requirements.map((requirement) => ({
+                organizationId,
+                eventId: row.id,
+                sourceEventFormatRequirementId: requirement.id,
+                sourceEventFormatRequirementVersion: requirement.version,
+                role: requirement.role,
+                customRoleLabel: requirement.customRoleLabel,
+                normalizedCustomRoleLabel: requirement.normalizedCustomRoleLabel,
+                requiredCount: requirement.requiredCount,
+                defaultFeeMinor: requirement.defaultFeeMinor,
+                defaultFeeCurrency: requirement.defaultFeeCurrency,
+                sortOrder: requirement.sortOrder,
+              })),
+            });
+          }
+        }
         await replaceEventOccupancy(
           database,
           organizationId,
@@ -175,7 +225,7 @@ export class PrismaEventRepository implements EventRepository {
           eventOccupancyInterval(eventDate, values),
           true,
         );
-        return this.map(row);
+        return (await this.findWith(database, organizationId, row.id))!;
       },
       update: async (access, eventId, version, values) => {
         const organizationId = access.organizationId;
@@ -281,6 +331,7 @@ export class PrismaEventRepository implements EventRepository {
   }
 
   private map(row: EventRow): EventRecord {
+    const bookingSummary = summarizeBookings(row.lineupRequirements, row.bookings);
     return {
       id: row.id,
       organizationId: row.organizationId,
@@ -309,12 +360,93 @@ export class PrismaEventRepository implements EventRepository {
       timezone: row.timezone,
       occupancyComplete:
         eventOccupancyInterval(row.eventDate.toISOString().slice(0, 10), row) !== undefined,
+      bookingSummary,
       createdAt: row.createdAt.toISOString(),
       updatedAt: row.updatedAt.toISOString(),
     };
+  }
+
+  private async bookingFilterIds(
+    organizationId: string,
+    filter: 'INCOMPLETE' | 'MODERATOR_MISSING' | 'FULLY_CONFIRMED',
+  ): Promise<string[]> {
+    const incomplete = Prisma.sql`
+      EXISTS (
+        SELECT 1
+        FROM "event_lineup_requirement" requirement
+        WHERE requirement."organization_id" = event."organization_id"
+          AND requirement."event_id" = event."id"
+          AND requirement."status" = 'ACTIVE'
+          ${filter === 'MODERATOR_MISSING' ? Prisma.sql`AND requirement."role" = 'MODERATOR'` : Prisma.empty}
+          AND (
+            SELECT COUNT(*)
+            FROM "booking" booking
+            WHERE booking."organization_id" = event."organization_id"
+              AND booking."event_id" = event."id"
+              AND booking."role" = requirement."role"
+              AND booking."normalized_custom_role_label" IS NOT DISTINCT FROM requirement."normalized_custom_role_label"
+              AND booking."status" = 'CONFIRMED'
+          ) < requirement."required_count"
+      )
+    `;
+    const condition =
+      filter === 'FULLY_CONFIRMED'
+        ? Prisma.sql`
+            EXISTS (
+              SELECT 1 FROM "event_lineup_requirement" requirement
+              WHERE requirement."organization_id" = event."organization_id"
+                AND requirement."event_id" = event."id"
+                AND requirement."status" = 'ACTIVE'
+            )
+            AND NOT (${incomplete})
+          `
+        : incomplete;
+    const rows = await this.prisma.database.$queryRaw<Array<{ id: string }>>(Prisma.sql`
+      SELECT event."id"
+      FROM "event" event
+      WHERE event."organization_id" = ${organizationId}::uuid
+        AND ${condition}
+    `);
+    return rows.map((row) => row.id);
   }
 }
 
 function databaseDate(value: string): Date {
   return new Date(`${value}T00:00:00.000Z`);
+}
+
+function summarizeBookings(
+  requirements: Array<{
+    role: 'ARTIST' | 'MODERATOR' | 'OTHER';
+    normalizedCustomRoleLabel: string | null;
+    requiredCount: number;
+  }>,
+  bookings: Array<{
+    role: 'ARTIST' | 'MODERATOR' | 'OTHER';
+    normalizedCustomRoleLabel: string | null;
+    status: 'SHORTLISTED' | 'REQUESTED' | 'OPTION' | 'CONFIRMED' | 'DECLINED' | 'CANCELLED';
+  }>,
+) {
+  const confirmedFor = (requirement: (typeof requirements)[number]) =>
+    bookings.filter(
+      (booking) =>
+        booking.status === 'CONFIRMED' &&
+        booking.role === requirement.role &&
+        booking.normalizedCustomRoleLabel === requirement.normalizedCustomRoleLabel,
+    ).length;
+  const artist = requirements.find((requirement) => requirement.role === 'ARTIST');
+  const moderator = requirements.find((requirement) => requirement.role === 'MODERATOR');
+  const incomplete = requirements.some(
+    (requirement) => confirmedFor(requirement) < requirement.requiredCount,
+  );
+  return {
+    artistRequiredCount: artist?.requiredCount ?? 0,
+    artistConfirmedCount: artist ? confirmedFor(artist) : 0,
+    moderatorRequired: Boolean(moderator && moderator.requiredCount > 0),
+    moderatorConfirmed: Boolean(moderator && confirmedFor(moderator) >= moderator.requiredCount),
+    openRequestCount: bookings.filter((booking) => booking.status === 'REQUESTED').length,
+    optionCount: bookings.filter((booking) => booking.status === 'OPTION').length,
+    incomplete: requirements.length > 0 && incomplete,
+    fullyConfirmed: requirements.length > 0 && !incomplete,
+  };
 }

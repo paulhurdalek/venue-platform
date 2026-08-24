@@ -69,6 +69,32 @@ enum OccupancySlot {
   SECOND
 }
 
+enum LineupRole {
+  ARTIST
+  MODERATOR
+  OTHER
+}
+
+enum BookingStatus {
+  SHORTLISTED
+  REQUESTED
+  OPTION
+  CONFIRMED
+  DECLINED
+  CANCELLED
+}
+
+enum HotelArrangement {
+  NONE
+  REQUIRED
+  BUYOUT
+}
+
+enum ProgramItemKind {
+  PERFORMANCE
+  BREAK
+}
+
 model User {
   id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name          String
@@ -88,6 +114,7 @@ model User {
   acceptedInvitations     Invitation[]     @relation("InvitationAcceptedBy")
   consumedBootstrapTokens BootstrapToken[]
   auditEntries            AuditLog[]       @relation("AuditActorUser")
+  bookingStatusChanges    BookingStatusHistory[] @relation("BookingStatusActorUser")
 
   @@map("auth_user")
 }
@@ -187,6 +214,11 @@ model Organization {
   events       Event[]
   dateOptions  VenueDateOption[]
   occupancies  LocationOccupancy[]
+  eventFormatLineupRequirements EventFormatLineupRequirement[]
+  eventLineupRequirements EventLineupRequirement[]
+  bookings Booking[]
+  bookingStatusHistory BookingStatusHistory[]
+  eventProgramItems EventProgramItem[]
 
   @@index([status])
   @@map("organization")
@@ -212,6 +244,7 @@ model EventFormat {
   updatedAt             DateTime         @updatedAt @map("updated_at")
   organization          Organization     @relation(fields: [organizationId], references: [id], onDelete: Restrict)
   sourceEvents          Event[]
+  lineupRequirements    EventFormatLineupRequirement[]
 
   @@unique([id, organizationId])
   @@unique([organizationId, normalizedName])
@@ -250,6 +283,9 @@ model Event {
   location              Location            @relation(fields: [locationId, organizationId], references: [id, organizationId], onDelete: Restrict)
   sourceEventFormat     EventFormat?        @relation(fields: [sourceEventFormatId, organizationId], references: [id, organizationId], onDelete: Restrict)
   occupancies           LocationOccupancy[]
+  lineupRequirements    EventLineupRequirement[]
+  bookings              Booking[]
+  programItems           EventProgramItem[]
 
   @@unique([id, organizationId])
   @@index([organizationId, eventDate, startMinutes, id])
@@ -307,6 +343,7 @@ model Membership {
   sentInvitations Invitation[]         @relation("InvitationInviter")
   auditEntries    AuditLog[]           @relation("AuditActorMembership")
   createdDateOptions VenueDateOption[]  @relation("DateOptionCreator")
+  bookingStatusChanges BookingStatusHistory[] @relation("BookingStatusActorMembership")
 
   @@unique([organizationId, userId])
   @@unique([id, organizationId])
@@ -483,6 +520,7 @@ model Artist {
   organization     Organization            @relation(fields: [organizationId], references: [id], onDelete: Restrict)
   contacts         ArtistContact[]
   businessPartners ArtistBusinessPartner[]
+  bookings         Booking[]
 
   @@unique([id, organizationId])
   @@index([organizationId, status])
@@ -509,6 +547,7 @@ model Contact {
   artistLinks          ArtistContact[]
   businessPartnerLinks BusinessPartnerContact[]
   dateOptions          VenueDateOption[]
+  bookings             Booking[]
 
   @@unique([id, organizationId])
   @@index([organizationId, status])
@@ -591,6 +630,7 @@ model BusinessPartner {
   roles               BusinessPartnerRoleAssignment[]
   artistLinks         ArtistBusinessPartner[]
   dateOptions         VenueDateOption[]
+  bookings            Booking[]
 
   @@unique([id, organizationId])
   @@index([organizationId, status])
@@ -725,6 +765,148 @@ model ArtistBusinessPartnerContactRole {
   @@index([organizationId], map: "artist_partner_contact_role_tenant_idx")
   @@index([roleId], map: "artist_partner_contact_role_role_idx")
   @@map("artist_business_partner_contact_role")
+}
+
+model EventFormatLineupRequirement {
+  id                        String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId            String       @map("organization_id") @db.Uuid
+  eventFormatId             String       @map("event_format_id") @db.Uuid
+  role                      LineupRole
+  customRoleLabel           String?      @map("custom_role_label") @db.VarChar(120)
+  normalizedCustomRoleLabel String?      @map("normalized_custom_role_label") @db.VarChar(120)
+  requiredCount             Int          @map("required_count")
+  defaultFeeMinor           BigInt?      @map("default_fee_minor")
+  defaultFeeCurrency        String?      @map("default_fee_currency") @db.Char(3)
+  sortOrder                 Int          @map("sort_order")
+  status                    EntityStatus @default(ACTIVE)
+  version                   Int          @default(1)
+  archivedAt                DateTime?     @map("archived_at")
+  createdAt                 DateTime      @default(now()) @map("created_at")
+  updatedAt                 DateTime      @updatedAt @map("updated_at")
+  organization              Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  eventFormat               EventFormat  @relation(fields: [eventFormatId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  eventSnapshots            EventLineupRequirement[]
+
+  @@unique([id, organizationId])
+  @@index([organizationId, eventFormatId, status, sortOrder, id])
+  @@map("event_format_lineup_requirement")
+}
+
+model EventLineupRequirement {
+  id                              String                        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId                  String                        @map("organization_id") @db.Uuid
+  eventId                         String                        @map("event_id") @db.Uuid
+  sourceEventFormatRequirementId  String?                       @map("source_event_format_requirement_id") @db.Uuid
+  sourceEventFormatRequirementVersion Int?                      @map("source_event_format_requirement_version")
+  role                            LineupRole
+  customRoleLabel                 String?                       @map("custom_role_label") @db.VarChar(120)
+  normalizedCustomRoleLabel       String?                       @map("normalized_custom_role_label") @db.VarChar(120)
+  requiredCount                   Int                           @map("required_count")
+  defaultFeeMinor                 BigInt?                       @map("default_fee_minor")
+  defaultFeeCurrency              String?                       @map("default_fee_currency") @db.Char(3)
+  sortOrder                       Int                           @map("sort_order")
+  status                          EntityStatus                  @default(ACTIVE)
+  version                         Int                           @default(1)
+  archivedAt                      DateTime?                      @map("archived_at")
+  createdAt                       DateTime                       @default(now()) @map("created_at")
+  updatedAt                       DateTime                       @updatedAt @map("updated_at")
+  organization                    Organization                  @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  event                           Event                         @relation(fields: [eventId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  sourceEventFormatRequirement    EventFormatLineupRequirement? @relation(fields: [sourceEventFormatRequirementId, organizationId], references: [id, organizationId], onDelete: Restrict)
+
+  @@unique([id, organizationId])
+  @@index([organizationId, eventId, status, sortOrder, id])
+  @@index([organizationId, sourceEventFormatRequirementId])
+  @@map("event_lineup_requirement")
+}
+
+model Booking {
+  id                        String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId            String          @map("organization_id") @db.Uuid
+  eventId                   String          @map("event_id") @db.Uuid
+  artistId                  String          @map("artist_id") @db.Uuid
+  role                      LineupRole
+  customRoleLabel           String?         @map("custom_role_label") @db.VarChar(120)
+  normalizedCustomRoleLabel String?         @map("normalized_custom_role_label") @db.VarChar(120)
+  status                    BookingStatus   @default(SHORTLISTED)
+  lineupOrder               Int             @map("lineup_order")
+  performanceStartMinutes   Int?            @map("performance_start_minutes")
+  performanceDurationMinutes Int?           @map("performance_duration_minutes")
+  internalNote              String?         @map("internal_note")
+  businessPartnerId         String?         @map("business_partner_id") @db.Uuid
+  contactId                 String?         @map("contact_id") @db.Uuid
+  agreedFeeMinor            BigInt?         @map("agreed_fee_minor")
+  agreedFeeCurrency         String?         @map("agreed_fee_currency") @db.Char(3)
+  travelArrangement         String?         @map("travel_arrangement")
+  travelCostMinor           BigInt?         @map("travel_cost_minor")
+  travelCostCurrency        String?         @map("travel_cost_currency") @db.Char(3)
+  hotelRequired             Boolean         @default(false) @map("hotel_required")
+  hotelArrangement          HotelArrangement @default(NONE) @map("hotel_arrangement")
+  hotelBuyoutMinor          BigInt?          @map("hotel_buyout_minor")
+  hotelBuyoutCurrency       String?          @map("hotel_buyout_currency") @db.Char(3)
+  hotelNote                 String?         @map("hotel_note")
+  version                   Int             @default(1)
+  createdAt                 DateTime        @default(now()) @map("created_at")
+  updatedAt                 DateTime        @updatedAt @map("updated_at")
+  organization              Organization    @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  event                     Event           @relation(fields: [eventId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  artist                    Artist          @relation(fields: [artistId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  businessPartner           BusinessPartner? @relation(fields: [businessPartnerId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  contact                   Contact?        @relation(fields: [contactId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  statusHistory             BookingStatusHistory[]
+  programItems              EventProgramItem[]
+
+  @@unique([id, organizationId])
+  @@unique([id, organizationId, eventId])
+  @@index([organizationId, eventId, status, lineupOrder, id])
+  @@index([organizationId, artistId, status])
+  @@index([organizationId, businessPartnerId])
+  @@index([organizationId, contactId])
+  @@map("booking")
+}
+
+model EventProgramItem {
+  id              String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId  String          @map("organization_id") @db.Uuid
+  eventId         String          @map("event_id") @db.Uuid
+  bookingId       String?         @map("booking_id") @db.Uuid
+  kind            ProgramItemKind
+  sortOrder       Int             @map("sort_order")
+  label           String?         @db.VarChar(120)
+  durationMinutes Int?            @map("duration_minutes")
+  version         Int             @default(1)
+  createdAt       DateTime        @default(now()) @map("created_at")
+  updatedAt       DateTime        @updatedAt @map("updated_at")
+  organization    Organization    @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  event           Event           @relation(fields: [eventId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  booking         Booking?        @relation(fields: [bookingId, organizationId, eventId], references: [id, organizationId, eventId], onDelete: Restrict)
+
+  @@unique([id, organizationId])
+  @@index([organizationId, eventId, sortOrder, id])
+  @@index([organizationId, bookingId])
+  @@map("event_program_item")
+}
+
+model BookingStatusHistory {
+  id                        String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId            String        @map("organization_id") @db.Uuid
+  bookingId                 String        @map("booking_id") @db.Uuid
+  previousStatus            BookingStatus @map("previous_status")
+  newStatus                 BookingStatus @map("new_status")
+  actorUserId               String        @map("actor_user_id") @db.Uuid
+  actorMembershipId         String        @map("actor_membership_id") @db.Uuid
+  note                      String?
+  changedAt                 DateTime      @default(now()) @map("changed_at")
+  organization              Organization  @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  booking                   Booking       @relation(fields: [bookingId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  actorUser                 User          @relation("BookingStatusActorUser", fields: [actorUserId], references: [id], onDelete: Restrict)
+  actorMembership           Membership    @relation("BookingStatusActorMembership", fields: [actorMembershipId, organizationId], references: [id, organizationId], onDelete: Restrict)
+
+  @@unique([id, organizationId])
+  @@index([organizationId, bookingId, changedAt, id])
+  @@index([actorUserId])
+  @@index([actorMembershipId])
+  @@map("booking_status_history")
 }
 
 model VenueDateOption {

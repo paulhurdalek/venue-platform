@@ -381,6 +381,7 @@ export type BusinessPartnerWhereInput = {
   roles?: Prisma.BusinessPartnerRoleAssignmentListRelationFilter
   artistLinks?: Prisma.ArtistBusinessPartnerListRelationFilter
   dateOptions?: Prisma.VenueDateOptionListRelationFilter
+  bookings?: Prisma.BookingListRelationFilter
 }
 
 export type BusinessPartnerOrderByWithRelationInput = {
@@ -414,6 +415,7 @@ export type BusinessPartnerOrderByWithRelationInput = {
   roles?: Prisma.BusinessPartnerRoleAssignmentOrderByRelationAggregateInput
   artistLinks?: Prisma.ArtistBusinessPartnerOrderByRelationAggregateInput
   dateOptions?: Prisma.VenueDateOptionOrderByRelationAggregateInput
+  bookings?: Prisma.BookingOrderByRelationAggregateInput
 }
 
 export type BusinessPartnerWhereUniqueInput = Prisma.AtLeast<{
@@ -451,6 +453,7 @@ export type BusinessPartnerWhereUniqueInput = Prisma.AtLeast<{
   roles?: Prisma.BusinessPartnerRoleAssignmentListRelationFilter
   artistLinks?: Prisma.ArtistBusinessPartnerListRelationFilter
   dateOptions?: Prisma.VenueDateOptionListRelationFilter
+  bookings?: Prisma.BookingListRelationFilter
 }, "id" | "id_organizationId">
 
 export type BusinessPartnerOrderByWithAggregationInput = {
@@ -547,6 +550,7 @@ export type BusinessPartnerCreateInput = {
   roles?: Prisma.BusinessPartnerRoleAssignmentCreateNestedManyWithoutBusinessPartnerInput
   artistLinks?: Prisma.ArtistBusinessPartnerCreateNestedManyWithoutBusinessPartnerInput
   dateOptions?: Prisma.VenueDateOptionCreateNestedManyWithoutBusinessPartnerInput
+  bookings?: Prisma.BookingCreateNestedManyWithoutBusinessPartnerInput
 }
 
 export type BusinessPartnerUncheckedCreateInput = {
@@ -579,6 +583,7 @@ export type BusinessPartnerUncheckedCreateInput = {
   roles?: Prisma.BusinessPartnerRoleAssignmentUncheckedCreateNestedManyWithoutBusinessPartnerInput
   artistLinks?: Prisma.ArtistBusinessPartnerUncheckedCreateNestedManyWithoutBusinessPartnerInput
   dateOptions?: Prisma.VenueDateOptionUncheckedCreateNestedManyWithoutBusinessPartnerInput
+  bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutBusinessPartnerInput
 }
 
 export type BusinessPartnerUpdateInput = {
@@ -611,6 +616,7 @@ export type BusinessPartnerUpdateInput = {
   roles?: Prisma.BusinessPartnerRoleAssignmentUpdateManyWithoutBusinessPartnerNestedInput
   artistLinks?: Prisma.ArtistBusinessPartnerUpdateManyWithoutBusinessPartnerNestedInput
   dateOptions?: Prisma.VenueDateOptionUpdateManyWithoutBusinessPartnerNestedInput
+  bookings?: Prisma.BookingUpdateManyWithoutBusinessPartnerNestedInput
 }
 
 export type BusinessPartnerUncheckedUpdateInput = {
@@ -643,6 +649,7 @@ export type BusinessPartnerUncheckedUpdateInput = {
   roles?: Prisma.BusinessPartnerRoleAssignmentUncheckedUpdateManyWithoutBusinessPartnerNestedInput
   artistLinks?: Prisma.ArtistBusinessPartnerUncheckedUpdateManyWithoutBusinessPartnerNestedInput
   dateOptions?: Prisma.VenueDateOptionUncheckedUpdateManyWithoutBusinessPartnerNestedInput
+  bookings?: Prisma.BookingUncheckedUpdateManyWithoutBusinessPartnerNestedInput
 }
 
 export type BusinessPartnerCreateManyInput = {
@@ -929,6 +936,22 @@ export type BusinessPartnerUpdateOneRequiredWithoutArtistLinksNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.BusinessPartnerUpdateToOneWithWhereWithoutArtistLinksInput, Prisma.BusinessPartnerUpdateWithoutArtistLinksInput>, Prisma.BusinessPartnerUncheckedUpdateWithoutArtistLinksInput>
 }
 
+export type BusinessPartnerCreateNestedOneWithoutBookingsInput = {
+  create?: Prisma.XOR<Prisma.BusinessPartnerCreateWithoutBookingsInput, Prisma.BusinessPartnerUncheckedCreateWithoutBookingsInput>
+  connectOrCreate?: Prisma.BusinessPartnerCreateOrConnectWithoutBookingsInput
+  connect?: Prisma.BusinessPartnerWhereUniqueInput
+}
+
+export type BusinessPartnerUpdateOneWithoutBookingsNestedInput = {
+  create?: Prisma.XOR<Prisma.BusinessPartnerCreateWithoutBookingsInput, Prisma.BusinessPartnerUncheckedCreateWithoutBookingsInput>
+  connectOrCreate?: Prisma.BusinessPartnerCreateOrConnectWithoutBookingsInput
+  upsert?: Prisma.BusinessPartnerUpsertWithoutBookingsInput
+  disconnect?: Prisma.BusinessPartnerWhereInput | boolean
+  delete?: Prisma.BusinessPartnerWhereInput | boolean
+  connect?: Prisma.BusinessPartnerWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BusinessPartnerUpdateToOneWithWhereWithoutBookingsInput, Prisma.BusinessPartnerUpdateWithoutBookingsInput>, Prisma.BusinessPartnerUncheckedUpdateWithoutBookingsInput>
+}
+
 export type BusinessPartnerCreateNestedOneWithoutDateOptionsInput = {
   create?: Prisma.XOR<Prisma.BusinessPartnerCreateWithoutDateOptionsInput, Prisma.BusinessPartnerUncheckedCreateWithoutDateOptionsInput>
   connectOrCreate?: Prisma.BusinessPartnerCreateOrConnectWithoutDateOptionsInput
@@ -974,6 +997,7 @@ export type BusinessPartnerCreateWithoutOrganizationInput = {
   roles?: Prisma.BusinessPartnerRoleAssignmentCreateNestedManyWithoutBusinessPartnerInput
   artistLinks?: Prisma.ArtistBusinessPartnerCreateNestedManyWithoutBusinessPartnerInput
   dateOptions?: Prisma.VenueDateOptionCreateNestedManyWithoutBusinessPartnerInput
+  bookings?: Prisma.BookingCreateNestedManyWithoutBusinessPartnerInput
 }
 
 export type BusinessPartnerUncheckedCreateWithoutOrganizationInput = {
@@ -1005,6 +1029,7 @@ export type BusinessPartnerUncheckedCreateWithoutOrganizationInput = {
   roles?: Prisma.BusinessPartnerRoleAssignmentUncheckedCreateNestedManyWithoutBusinessPartnerInput
   artistLinks?: Prisma.ArtistBusinessPartnerUncheckedCreateNestedManyWithoutBusinessPartnerInput
   dateOptions?: Prisma.VenueDateOptionUncheckedCreateNestedManyWithoutBusinessPartnerInput
+  bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutBusinessPartnerInput
 }
 
 export type BusinessPartnerCreateOrConnectWithoutOrganizationInput = {
@@ -1093,6 +1118,7 @@ export type BusinessPartnerCreateWithoutRolesInput = {
   contacts?: Prisma.BusinessPartnerContactCreateNestedManyWithoutBusinessPartnerInput
   artistLinks?: Prisma.ArtistBusinessPartnerCreateNestedManyWithoutBusinessPartnerInput
   dateOptions?: Prisma.VenueDateOptionCreateNestedManyWithoutBusinessPartnerInput
+  bookings?: Prisma.BookingCreateNestedManyWithoutBusinessPartnerInput
 }
 
 export type BusinessPartnerUncheckedCreateWithoutRolesInput = {
@@ -1124,6 +1150,7 @@ export type BusinessPartnerUncheckedCreateWithoutRolesInput = {
   contacts?: Prisma.BusinessPartnerContactUncheckedCreateNestedManyWithoutBusinessPartnerInput
   artistLinks?: Prisma.ArtistBusinessPartnerUncheckedCreateNestedManyWithoutBusinessPartnerInput
   dateOptions?: Prisma.VenueDateOptionUncheckedCreateNestedManyWithoutBusinessPartnerInput
+  bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutBusinessPartnerInput
 }
 
 export type BusinessPartnerCreateOrConnectWithoutRolesInput = {
@@ -1171,6 +1198,7 @@ export type BusinessPartnerUpdateWithoutRolesInput = {
   contacts?: Prisma.BusinessPartnerContactUpdateManyWithoutBusinessPartnerNestedInput
   artistLinks?: Prisma.ArtistBusinessPartnerUpdateManyWithoutBusinessPartnerNestedInput
   dateOptions?: Prisma.VenueDateOptionUpdateManyWithoutBusinessPartnerNestedInput
+  bookings?: Prisma.BookingUpdateManyWithoutBusinessPartnerNestedInput
 }
 
 export type BusinessPartnerUncheckedUpdateWithoutRolesInput = {
@@ -1202,6 +1230,7 @@ export type BusinessPartnerUncheckedUpdateWithoutRolesInput = {
   contacts?: Prisma.BusinessPartnerContactUncheckedUpdateManyWithoutBusinessPartnerNestedInput
   artistLinks?: Prisma.ArtistBusinessPartnerUncheckedUpdateManyWithoutBusinessPartnerNestedInput
   dateOptions?: Prisma.VenueDateOptionUncheckedUpdateManyWithoutBusinessPartnerNestedInput
+  bookings?: Prisma.BookingUncheckedUpdateManyWithoutBusinessPartnerNestedInput
 }
 
 export type BusinessPartnerCreateWithoutContactsInput = {
@@ -1233,6 +1262,7 @@ export type BusinessPartnerCreateWithoutContactsInput = {
   roles?: Prisma.BusinessPartnerRoleAssignmentCreateNestedManyWithoutBusinessPartnerInput
   artistLinks?: Prisma.ArtistBusinessPartnerCreateNestedManyWithoutBusinessPartnerInput
   dateOptions?: Prisma.VenueDateOptionCreateNestedManyWithoutBusinessPartnerInput
+  bookings?: Prisma.BookingCreateNestedManyWithoutBusinessPartnerInput
 }
 
 export type BusinessPartnerUncheckedCreateWithoutContactsInput = {
@@ -1264,6 +1294,7 @@ export type BusinessPartnerUncheckedCreateWithoutContactsInput = {
   roles?: Prisma.BusinessPartnerRoleAssignmentUncheckedCreateNestedManyWithoutBusinessPartnerInput
   artistLinks?: Prisma.ArtistBusinessPartnerUncheckedCreateNestedManyWithoutBusinessPartnerInput
   dateOptions?: Prisma.VenueDateOptionUncheckedCreateNestedManyWithoutBusinessPartnerInput
+  bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutBusinessPartnerInput
 }
 
 export type BusinessPartnerCreateOrConnectWithoutContactsInput = {
@@ -1311,6 +1342,7 @@ export type BusinessPartnerUpdateWithoutContactsInput = {
   roles?: Prisma.BusinessPartnerRoleAssignmentUpdateManyWithoutBusinessPartnerNestedInput
   artistLinks?: Prisma.ArtistBusinessPartnerUpdateManyWithoutBusinessPartnerNestedInput
   dateOptions?: Prisma.VenueDateOptionUpdateManyWithoutBusinessPartnerNestedInput
+  bookings?: Prisma.BookingUpdateManyWithoutBusinessPartnerNestedInput
 }
 
 export type BusinessPartnerUncheckedUpdateWithoutContactsInput = {
@@ -1342,6 +1374,7 @@ export type BusinessPartnerUncheckedUpdateWithoutContactsInput = {
   roles?: Prisma.BusinessPartnerRoleAssignmentUncheckedUpdateManyWithoutBusinessPartnerNestedInput
   artistLinks?: Prisma.ArtistBusinessPartnerUncheckedUpdateManyWithoutBusinessPartnerNestedInput
   dateOptions?: Prisma.VenueDateOptionUncheckedUpdateManyWithoutBusinessPartnerNestedInput
+  bookings?: Prisma.BookingUncheckedUpdateManyWithoutBusinessPartnerNestedInput
 }
 
 export type BusinessPartnerCreateWithoutArtistLinksInput = {
@@ -1373,6 +1406,7 @@ export type BusinessPartnerCreateWithoutArtistLinksInput = {
   contacts?: Prisma.BusinessPartnerContactCreateNestedManyWithoutBusinessPartnerInput
   roles?: Prisma.BusinessPartnerRoleAssignmentCreateNestedManyWithoutBusinessPartnerInput
   dateOptions?: Prisma.VenueDateOptionCreateNestedManyWithoutBusinessPartnerInput
+  bookings?: Prisma.BookingCreateNestedManyWithoutBusinessPartnerInput
 }
 
 export type BusinessPartnerUncheckedCreateWithoutArtistLinksInput = {
@@ -1404,6 +1438,7 @@ export type BusinessPartnerUncheckedCreateWithoutArtistLinksInput = {
   contacts?: Prisma.BusinessPartnerContactUncheckedCreateNestedManyWithoutBusinessPartnerInput
   roles?: Prisma.BusinessPartnerRoleAssignmentUncheckedCreateNestedManyWithoutBusinessPartnerInput
   dateOptions?: Prisma.VenueDateOptionUncheckedCreateNestedManyWithoutBusinessPartnerInput
+  bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutBusinessPartnerInput
 }
 
 export type BusinessPartnerCreateOrConnectWithoutArtistLinksInput = {
@@ -1451,6 +1486,7 @@ export type BusinessPartnerUpdateWithoutArtistLinksInput = {
   contacts?: Prisma.BusinessPartnerContactUpdateManyWithoutBusinessPartnerNestedInput
   roles?: Prisma.BusinessPartnerRoleAssignmentUpdateManyWithoutBusinessPartnerNestedInput
   dateOptions?: Prisma.VenueDateOptionUpdateManyWithoutBusinessPartnerNestedInput
+  bookings?: Prisma.BookingUpdateManyWithoutBusinessPartnerNestedInput
 }
 
 export type BusinessPartnerUncheckedUpdateWithoutArtistLinksInput = {
@@ -1481,6 +1517,151 @@ export type BusinessPartnerUncheckedUpdateWithoutArtistLinksInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   contacts?: Prisma.BusinessPartnerContactUncheckedUpdateManyWithoutBusinessPartnerNestedInput
   roles?: Prisma.BusinessPartnerRoleAssignmentUncheckedUpdateManyWithoutBusinessPartnerNestedInput
+  dateOptions?: Prisma.VenueDateOptionUncheckedUpdateManyWithoutBusinessPartnerNestedInput
+  bookings?: Prisma.BookingUncheckedUpdateManyWithoutBusinessPartnerNestedInput
+}
+
+export type BusinessPartnerCreateWithoutBookingsInput = {
+  id?: string
+  companyName: string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  postalCode?: string | null
+  city?: string | null
+  state?: string | null
+  countryCode?: string | null
+  billingAddressLine1?: string | null
+  billingAddressLine2?: string | null
+  billingPostalCode?: string | null
+  billingCity?: string | null
+  billingState?: string | null
+  billingCountryCode?: string | null
+  vatId?: string | null
+  email?: string | null
+  phone?: string | null
+  website?: string | null
+  notes?: string | null
+  status?: $Enums.EntityStatus
+  version?: number
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organization: Prisma.OrganizationCreateNestedOneWithoutPartnersInput
+  contacts?: Prisma.BusinessPartnerContactCreateNestedManyWithoutBusinessPartnerInput
+  roles?: Prisma.BusinessPartnerRoleAssignmentCreateNestedManyWithoutBusinessPartnerInput
+  artistLinks?: Prisma.ArtistBusinessPartnerCreateNestedManyWithoutBusinessPartnerInput
+  dateOptions?: Prisma.VenueDateOptionCreateNestedManyWithoutBusinessPartnerInput
+}
+
+export type BusinessPartnerUncheckedCreateWithoutBookingsInput = {
+  id?: string
+  organizationId: string
+  companyName: string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  postalCode?: string | null
+  city?: string | null
+  state?: string | null
+  countryCode?: string | null
+  billingAddressLine1?: string | null
+  billingAddressLine2?: string | null
+  billingPostalCode?: string | null
+  billingCity?: string | null
+  billingState?: string | null
+  billingCountryCode?: string | null
+  vatId?: string | null
+  email?: string | null
+  phone?: string | null
+  website?: string | null
+  notes?: string | null
+  status?: $Enums.EntityStatus
+  version?: number
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  contacts?: Prisma.BusinessPartnerContactUncheckedCreateNestedManyWithoutBusinessPartnerInput
+  roles?: Prisma.BusinessPartnerRoleAssignmentUncheckedCreateNestedManyWithoutBusinessPartnerInput
+  artistLinks?: Prisma.ArtistBusinessPartnerUncheckedCreateNestedManyWithoutBusinessPartnerInput
+  dateOptions?: Prisma.VenueDateOptionUncheckedCreateNestedManyWithoutBusinessPartnerInput
+}
+
+export type BusinessPartnerCreateOrConnectWithoutBookingsInput = {
+  where: Prisma.BusinessPartnerWhereUniqueInput
+  create: Prisma.XOR<Prisma.BusinessPartnerCreateWithoutBookingsInput, Prisma.BusinessPartnerUncheckedCreateWithoutBookingsInput>
+}
+
+export type BusinessPartnerUpsertWithoutBookingsInput = {
+  update: Prisma.XOR<Prisma.BusinessPartnerUpdateWithoutBookingsInput, Prisma.BusinessPartnerUncheckedUpdateWithoutBookingsInput>
+  create: Prisma.XOR<Prisma.BusinessPartnerCreateWithoutBookingsInput, Prisma.BusinessPartnerUncheckedCreateWithoutBookingsInput>
+  where?: Prisma.BusinessPartnerWhereInput
+}
+
+export type BusinessPartnerUpdateToOneWithWhereWithoutBookingsInput = {
+  where?: Prisma.BusinessPartnerWhereInput
+  data: Prisma.XOR<Prisma.BusinessPartnerUpdateWithoutBookingsInput, Prisma.BusinessPartnerUncheckedUpdateWithoutBookingsInput>
+}
+
+export type BusinessPartnerUpdateWithoutBookingsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  companyName?: Prisma.StringFieldUpdateOperationsInput | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  countryCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingState?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingCountryCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vatId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutPartnersNestedInput
+  contacts?: Prisma.BusinessPartnerContactUpdateManyWithoutBusinessPartnerNestedInput
+  roles?: Prisma.BusinessPartnerRoleAssignmentUpdateManyWithoutBusinessPartnerNestedInput
+  artistLinks?: Prisma.ArtistBusinessPartnerUpdateManyWithoutBusinessPartnerNestedInput
+  dateOptions?: Prisma.VenueDateOptionUpdateManyWithoutBusinessPartnerNestedInput
+}
+
+export type BusinessPartnerUncheckedUpdateWithoutBookingsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  companyName?: Prisma.StringFieldUpdateOperationsInput | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  countryCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingState?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingCountryCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vatId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  contacts?: Prisma.BusinessPartnerContactUncheckedUpdateManyWithoutBusinessPartnerNestedInput
+  roles?: Prisma.BusinessPartnerRoleAssignmentUncheckedUpdateManyWithoutBusinessPartnerNestedInput
+  artistLinks?: Prisma.ArtistBusinessPartnerUncheckedUpdateManyWithoutBusinessPartnerNestedInput
   dateOptions?: Prisma.VenueDateOptionUncheckedUpdateManyWithoutBusinessPartnerNestedInput
 }
 
@@ -1513,6 +1694,7 @@ export type BusinessPartnerCreateWithoutDateOptionsInput = {
   contacts?: Prisma.BusinessPartnerContactCreateNestedManyWithoutBusinessPartnerInput
   roles?: Prisma.BusinessPartnerRoleAssignmentCreateNestedManyWithoutBusinessPartnerInput
   artistLinks?: Prisma.ArtistBusinessPartnerCreateNestedManyWithoutBusinessPartnerInput
+  bookings?: Prisma.BookingCreateNestedManyWithoutBusinessPartnerInput
 }
 
 export type BusinessPartnerUncheckedCreateWithoutDateOptionsInput = {
@@ -1544,6 +1726,7 @@ export type BusinessPartnerUncheckedCreateWithoutDateOptionsInput = {
   contacts?: Prisma.BusinessPartnerContactUncheckedCreateNestedManyWithoutBusinessPartnerInput
   roles?: Prisma.BusinessPartnerRoleAssignmentUncheckedCreateNestedManyWithoutBusinessPartnerInput
   artistLinks?: Prisma.ArtistBusinessPartnerUncheckedCreateNestedManyWithoutBusinessPartnerInput
+  bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutBusinessPartnerInput
 }
 
 export type BusinessPartnerCreateOrConnectWithoutDateOptionsInput = {
@@ -1591,6 +1774,7 @@ export type BusinessPartnerUpdateWithoutDateOptionsInput = {
   contacts?: Prisma.BusinessPartnerContactUpdateManyWithoutBusinessPartnerNestedInput
   roles?: Prisma.BusinessPartnerRoleAssignmentUpdateManyWithoutBusinessPartnerNestedInput
   artistLinks?: Prisma.ArtistBusinessPartnerUpdateManyWithoutBusinessPartnerNestedInput
+  bookings?: Prisma.BookingUpdateManyWithoutBusinessPartnerNestedInput
 }
 
 export type BusinessPartnerUncheckedUpdateWithoutDateOptionsInput = {
@@ -1622,6 +1806,7 @@ export type BusinessPartnerUncheckedUpdateWithoutDateOptionsInput = {
   contacts?: Prisma.BusinessPartnerContactUncheckedUpdateManyWithoutBusinessPartnerNestedInput
   roles?: Prisma.BusinessPartnerRoleAssignmentUncheckedUpdateManyWithoutBusinessPartnerNestedInput
   artistLinks?: Prisma.ArtistBusinessPartnerUncheckedUpdateManyWithoutBusinessPartnerNestedInput
+  bookings?: Prisma.BookingUncheckedUpdateManyWithoutBusinessPartnerNestedInput
 }
 
 export type BusinessPartnerCreateManyOrganizationInput = {
@@ -1680,6 +1865,7 @@ export type BusinessPartnerUpdateWithoutOrganizationInput = {
   roles?: Prisma.BusinessPartnerRoleAssignmentUpdateManyWithoutBusinessPartnerNestedInput
   artistLinks?: Prisma.ArtistBusinessPartnerUpdateManyWithoutBusinessPartnerNestedInput
   dateOptions?: Prisma.VenueDateOptionUpdateManyWithoutBusinessPartnerNestedInput
+  bookings?: Prisma.BookingUpdateManyWithoutBusinessPartnerNestedInput
 }
 
 export type BusinessPartnerUncheckedUpdateWithoutOrganizationInput = {
@@ -1711,6 +1897,7 @@ export type BusinessPartnerUncheckedUpdateWithoutOrganizationInput = {
   roles?: Prisma.BusinessPartnerRoleAssignmentUncheckedUpdateManyWithoutBusinessPartnerNestedInput
   artistLinks?: Prisma.ArtistBusinessPartnerUncheckedUpdateManyWithoutBusinessPartnerNestedInput
   dateOptions?: Prisma.VenueDateOptionUncheckedUpdateManyWithoutBusinessPartnerNestedInput
+  bookings?: Prisma.BookingUncheckedUpdateManyWithoutBusinessPartnerNestedInput
 }
 
 export type BusinessPartnerUncheckedUpdateManyWithoutOrganizationInput = {
@@ -1750,6 +1937,7 @@ export type BusinessPartnerCountOutputType = {
   roles: number
   artistLinks: number
   dateOptions: number
+  bookings: number
 }
 
 export type BusinessPartnerCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1757,6 +1945,7 @@ export type BusinessPartnerCountOutputTypeSelect<ExtArgs extends runtime.Types.E
   roles?: boolean | BusinessPartnerCountOutputTypeCountRolesArgs
   artistLinks?: boolean | BusinessPartnerCountOutputTypeCountArtistLinksArgs
   dateOptions?: boolean | BusinessPartnerCountOutputTypeCountDateOptionsArgs
+  bookings?: boolean | BusinessPartnerCountOutputTypeCountBookingsArgs
 }
 
 /**
@@ -1797,6 +1986,13 @@ export type BusinessPartnerCountOutputTypeCountDateOptionsArgs<ExtArgs extends r
   where?: Prisma.VenueDateOptionWhereInput
 }
 
+/**
+ * BusinessPartnerCountOutputType without action
+ */
+export type BusinessPartnerCountOutputTypeCountBookingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BookingWhereInput
+}
+
 
 export type BusinessPartnerSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1829,6 +2025,7 @@ export type BusinessPartnerSelect<ExtArgs extends runtime.Types.Extensions.Inter
   roles?: boolean | Prisma.BusinessPartner$rolesArgs<ExtArgs>
   artistLinks?: boolean | Prisma.BusinessPartner$artistLinksArgs<ExtArgs>
   dateOptions?: boolean | Prisma.BusinessPartner$dateOptionsArgs<ExtArgs>
+  bookings?: boolean | Prisma.BusinessPartner$bookingsArgs<ExtArgs>
   _count?: boolean | Prisma.BusinessPartnerCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["businessPartner"]>
 
@@ -1925,6 +2122,7 @@ export type BusinessPartnerInclude<ExtArgs extends runtime.Types.Extensions.Inte
   roles?: boolean | Prisma.BusinessPartner$rolesArgs<ExtArgs>
   artistLinks?: boolean | Prisma.BusinessPartner$artistLinksArgs<ExtArgs>
   dateOptions?: boolean | Prisma.BusinessPartner$dateOptionsArgs<ExtArgs>
+  bookings?: boolean | Prisma.BusinessPartner$bookingsArgs<ExtArgs>
   _count?: boolean | Prisma.BusinessPartnerCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type BusinessPartnerIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1942,6 +2140,7 @@ export type $BusinessPartnerPayload<ExtArgs extends runtime.Types.Extensions.Int
     roles: Prisma.$BusinessPartnerRoleAssignmentPayload<ExtArgs>[]
     artistLinks: Prisma.$ArtistBusinessPartnerPayload<ExtArgs>[]
     dateOptions: Prisma.$VenueDateOptionPayload<ExtArgs>[]
+    bookings: Prisma.$BookingPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2368,6 +2567,7 @@ export interface Prisma__BusinessPartnerClient<T, Null = never, ExtArgs extends 
   roles<T extends Prisma.BusinessPartner$rolesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BusinessPartner$rolesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BusinessPartnerRoleAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   artistLinks<T extends Prisma.BusinessPartner$artistLinksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BusinessPartner$artistLinksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ArtistBusinessPartnerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   dateOptions<T extends Prisma.BusinessPartner$dateOptionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BusinessPartner$dateOptionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VenueDateOptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  bookings<T extends Prisma.BusinessPartner$bookingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BusinessPartner$bookingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BookingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2916,6 +3116,30 @@ export type BusinessPartner$dateOptionsArgs<ExtArgs extends runtime.Types.Extens
   take?: number
   skip?: number
   distinct?: Prisma.VenueDateOptionScalarFieldEnum | Prisma.VenueDateOptionScalarFieldEnum[]
+}
+
+/**
+ * BusinessPartner.bookings
+ */
+export type BusinessPartner$bookingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Booking
+   */
+  select?: Prisma.BookingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Booking
+   */
+  omit?: Prisma.BookingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BookingInclude<ExtArgs> | null
+  where?: Prisma.BookingWhereInput
+  orderBy?: Prisma.BookingOrderByWithRelationInput | Prisma.BookingOrderByWithRelationInput[]
+  cursor?: Prisma.BookingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BookingScalarFieldEnum | Prisma.BookingScalarFieldEnum[]
 }
 
 /**

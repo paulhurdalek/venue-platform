@@ -109,7 +109,7 @@ async function exerciseLifecycle(
   await expect(page.getByText(`${entityArticle} ${entityLabel} wurde reaktiviert.`)).toBeVisible();
 }
 
-test.describe.serial('Phase 1, Phase 3, Phase 4 and Phase 5 browser acceptance', () => {
+test.describe.serial('Phase 1 through Phase 6 browser acceptance', () => {
   // Database reset and the one-time bootstrap link make the complete E2E command the retry boundary.
   test.describe.configure({ retries: 0, timeout: focusedScenarioTimeout });
 
@@ -807,9 +807,363 @@ test.describe.serial('Phase 1, Phase 3, Phase 4 and Phase 5 browser acceptance',
     await exerciseLifecycle(page, 'Geschäftspartner');
   });
 
-  test('Phase 1, Phase 3, Phase 4 and Phase 5: read-only authorization and logout', async ({
-    browser,
-  }) => {
+  test('Phase 6: line-up requirements, booking workflow, ordering and finance', async () => {
+    await page.goto(eventDetailPath);
+    await expect(
+      page.getByRole('heading', { name: 'Besetzung im Blick', exact: true }),
+    ).toBeVisible();
+
+    const requirements = page.locator('.lineup-requirements');
+    await requirements.getByRole('button', { name: 'Vorgaben bearbeiten', exact: true }).click();
+    await requirements.getByRole('button', { name: 'Position hinzufügen', exact: true }).click();
+    await requirements.getByRole('button', { name: 'Position hinzufügen', exact: true }).click();
+    await requirements.getByRole('button', { name: 'Position hinzufügen', exact: true }).click();
+    await requirements
+      .getByRole('group', { name: 'Position 2', exact: true })
+      .getByRole('combobox', { name: 'Rolle', exact: true })
+      .selectOption('MODERATOR');
+    const headlinerRequirement = requirements.getByRole('group', {
+      name: 'Position 3',
+      exact: true,
+    });
+    await headlinerRequirement
+      .getByRole('combobox', { name: 'Rolle', exact: true })
+      .selectOption('OTHER');
+    await headlinerRequirement
+      .getByRole('textbox', { name: 'Rollenbezeichnung', exact: true })
+      .fill('Headliner');
+    await headlinerRequirement
+      .getByRole('textbox', { name: 'Standardgage optional', exact: true })
+      .fill('650,00');
+    await requirements
+      .getByRole('group', { name: 'Position 1', exact: true })
+      .getByRole('textbox', { name: 'Standardgage optional', exact: true })
+      .fill('880,00');
+    await requirements.getByRole('button', { name: 'Vorgaben speichern', exact: true }).click();
+    await expect(page.getByText('Die Line-up-Vorgaben wurden gespeichert.')).toBeVisible();
+    await expect(requirements.getByText('Artists', { exact: true })).toHaveCount(0);
+    await requirements.getByRole('button', { name: '3 Vorgaben anzeigen', exact: true }).click();
+    await expect(requirements.getByText('Artists', { exact: true })).toBeVisible();
+    await expect(requirements.getByText('Moderator', { exact: true })).toBeVisible();
+    await expect(requirements.getByText('Headliner', { exact: true })).toBeVisible();
+    await expect(requirements).toContainText('Standardgage: 650,00 €');
+
+    const bookingPanel = page.locator('.booking-panel');
+    await bookingPanel
+      .getByRole('button', { name: 'Ersten Artist hinzufügen', exact: true })
+      .first()
+      .click();
+    let bookingEditor = bookingPanel.locator('.booking-editor');
+    const artistSearch = bookingEditor.getByRole('combobox', {
+      name: 'Artist suchen und auswählen',
+      exact: true,
+    });
+    await artistSearch.fill('E2E');
+    await expect(bookingEditor.getByRole('option', { name: /E2E Echo Unit/ })).toBeVisible();
+    await artistSearch.fill('Echo Unit');
+    await artistSearch.press('ArrowDown');
+    await artistSearch.press('Enter');
+    await expect(bookingEditor.getByText(/Ausgewählt:.*E2E Echo Unit/)).toBeVisible();
+    await expect(
+      bookingEditor.getByRole('textbox', { name: 'Vereinbarte Gage optional / keine Gage' }),
+    ).toHaveValue('880,00');
+    await expect(
+      bookingEditor.getByText('Automatisch aus dem Artistprofil übernommen'),
+    ).toBeVisible();
+    await expect(
+      bookingEditor
+        .getByRole('combobox', { name: 'Agentur / Management optional', exact: true })
+        .locator('option:checked'),
+    ).toHaveText('E2E Kulturservice GmbH');
+    await expect(
+      bookingEditor
+        .getByRole('combobox', { name: 'Ansprechpartner optional', exact: true })
+        .locator('option:checked'),
+    ).toHaveText('Juno E2E · juno.e2e@example.test');
+    await bookingEditor
+      .getByRole('textbox', { name: 'Vereinbarte Gage optional / keine Gage' })
+      .fill('1250,00');
+    await bookingEditor.getByRole('textbox', { name: 'Reisekosten optional' }).fill('25.00');
+    await bookingEditor
+      .getByRole('textbox', { name: 'Interne Bookingnotiz optional', exact: true })
+      .fill('E2E Booking mit produktionsnahen Kontaktdaten');
+    await bookingEditor.getByRole('button', { name: 'Booking anlegen', exact: true }).click();
+    await expect(page.getByText('Das Booking wurde angelegt.')).toBeVisible();
+
+    const artistBooking = bookingPanel.locator('.booking-card').filter({
+      has: page.getByText('Artist', { exact: true }),
+    });
+    await expect(artistBooking).toContainText('Gage: 1.250,00 €');
+    await expect(artistBooking).toContainText('Reisekosten: 25,00 €');
+    await expect(artistBooking).toContainText('E2E Kulturservice GmbH');
+    await expect(artistBooking).toContainText('Juno E2E');
+    await expect(
+      artistBooking.locator('a[href="mailto:juno.e2e@example.test"]').first(),
+    ).toBeVisible();
+    await expect(artistBooking.getByRole('button', { name: 'Status ändern' })).toHaveCount(0);
+    await artistBooking
+      .getByRole('combobox', { name: 'Status von E2E Echo Unit', exact: true })
+      .selectOption('CONFIRMED');
+    await expect(page.getByText('Status geändert: Bestätigt.', { exact: true })).toBeVisible();
+    await expect(
+      artistBooking.getByRole('combobox', { name: 'Status von E2E Echo Unit', exact: true }),
+    ).toHaveValue('CONFIRMED');
+    await artistBooking.getByText('Kontakte aufklappen', { exact: true }).click();
+    await expect(
+      artistBooking.getByRole('link', { name: 'E2E Kulturservice GmbH', exact: true }),
+    ).toBeVisible();
+    await expect(artistBooking.getByRole('link', { name: 'Juno E2E', exact: true })).toBeVisible();
+    await expect(
+      artistBooking.getByText(/Juno E2E · Management · Primärer Ansprechpartner · Booking/),
+    ).toBeVisible();
+    await expect(artistBooking.getByText('Weitere Ansprechpartner', { exact: true })).toBeVisible();
+    await expect(
+      artistBooking.getByRole('link', { name: 'Nova Inline', exact: true }),
+    ).toBeVisible();
+    await expect(
+      page.locator('.booking-progress-card').filter({
+        has: page.getByText('Artists', { exact: true }),
+      }),
+    ).toContainText('1/1 bestätigt');
+
+    await bookingPanel.getByRole('button', { name: 'Artist hinzufügen', exact: true }).click();
+    bookingEditor = bookingPanel.locator('.booking-editor');
+    const duplicateArtistSearch = bookingEditor.getByRole('combobox', {
+      name: 'Artist suchen und auswählen',
+      exact: true,
+    });
+    await duplicateArtistSearch.fill('Echo Unit');
+    await duplicateArtistSearch.press('ArrowDown');
+    await duplicateArtistSearch.press('Enter');
+    await bookingEditor.getByRole('button', { name: 'Booking anlegen', exact: true }).click();
+    const duplicateBookingDialog = page.getByRole('dialog', {
+      name: 'Dieser Artist ist für diese Veranstaltung bereits gebucht.',
+    });
+    await expect(duplicateBookingDialog).toContainText('Artist · Bestätigt');
+    await duplicateBookingDialog
+      .getByRole('button', {
+        name: /Weiteren Auftritt zum bestehenden Booking hinzufügen/,
+      })
+      .click();
+    await expect(
+      page.getByText('Ein weiterer Auftritt wurde dem bestehenden Booking hinzugefügt.'),
+    ).toBeVisible();
+
+    const performanceOrder = bookingPanel.locator('.performance-order');
+    let echoProgramRows = performanceOrder.locator('.program-row').filter({
+      has: page.getByText('E2E Echo Unit', { exact: true }),
+    });
+    await expect(echoProgramRows).toHaveCount(2);
+    const firstEchoProgramRow = performanceOrder.locator('.program-row').nth(0);
+    await firstEchoProgramRow.getByRole('button', { name: 'Bearbeiten', exact: true }).click();
+    await firstEchoProgramRow.getByLabel('Bezeichnung optional').fill('Set 1');
+    await firstEchoProgramRow.getByLabel('Dauer in Minuten optional').fill('10');
+    await firstEchoProgramRow.getByRole('button', { name: 'Speichern', exact: true }).click();
+    echoProgramRows = performanceOrder.locator('.program-row').filter({
+      has: page.getByText('E2E Echo Unit', { exact: true }),
+    });
+    await expect(echoProgramRows).toHaveCount(2);
+    const secondEchoProgramRow = performanceOrder.locator('.program-row').nth(1);
+    await secondEchoProgramRow.getByRole('button', { name: 'Bearbeiten', exact: true }).click();
+    await secondEchoProgramRow.getByLabel('Bezeichnung optional').fill('Set 2');
+    await secondEchoProgramRow.getByLabel('Dauer in Minuten optional').fill('10');
+    await secondEchoProgramRow.getByRole('button', { name: 'Speichern', exact: true }).click();
+    await performanceOrder.getByRole('button', { name: 'Pause / Umbauzeit', exact: true }).click();
+    await performanceOrder.getByLabel('Bezeichnung optional').fill('Umbaupause');
+    await performanceOrder.getByLabel('Dauer in Minuten optional').fill('20');
+    await performanceOrder
+      .getByRole('button', { name: 'Programmpunkt anlegen', exact: true })
+      .click();
+    await expect(performanceOrder).toContainText('bekannte Gesamtdauer 40 Minuten');
+
+    let breakRow = performanceOrder.locator('.program-row').filter({
+      has: page.getByText('Umbaupause', { exact: true }),
+    });
+    await page.route('**/program/order', async (route) => {
+      await route.fulfill({
+        body: JSON.stringify({ code: 'VERSION_CONFLICT', message: 'Sortierung blockiert' }),
+        contentType: 'application/json',
+        status: 409,
+      });
+    });
+    await breakRow.getByRole('button', { name: 'Umbaupause nach oben', exact: true }).click();
+    await expect(page.getByText(/Die vorherige Reihenfolge wurde wiederhergestellt/)).toBeVisible();
+    await expect(performanceOrder.locator('.program-row').nth(1)).toContainText('Set 2');
+    await page.unroute('**/program/order');
+
+    breakRow = performanceOrder.locator('.program-row').filter({
+      has: page.getByText('Umbaupause', { exact: true }),
+    });
+    let secondSetRow = performanceOrder.locator('.program-row').filter({ hasText: 'Set 2' });
+    await breakRow.getByRole('button', { name: /Umbaupause ziehen/ }).dragTo(secondSetRow);
+    await expect(page.getByText('Die Auftrittsreihenfolge wurde gespeichert.')).toBeVisible();
+    secondSetRow = performanceOrder.locator('.program-row').filter({ hasText: 'Set 2' });
+    const secondSetHandle = secondSetRow.getByRole('button', { name: /E2E Echo Unit ziehen/ });
+    await secondSetHandle.focus();
+    await secondSetHandle.press('ArrowUp');
+    await expect(performanceOrder.locator('.program-row').nth(1)).toContainText('Set 2');
+    const movedSecondSetHandle = secondSetRow.getByRole('button', {
+      name: /E2E Echo Unit ziehen/,
+    });
+    await expect(movedSecondSetHandle).toBeEnabled();
+    await movedSecondSetHandle.press('ArrowDown');
+    await expect(performanceOrder.locator('.program-row').nth(1)).toContainText('Umbaupause');
+
+    await page.reload();
+    await expect(
+      page.getByRole('heading', { name: 'Auftrittsreihenfolge', exact: true }),
+    ).toBeVisible();
+    const persistedProgram = page.locator('.performance-order');
+    await expect(persistedProgram.locator('.program-row').nth(0)).toContainText('Set 1');
+    await expect(persistedProgram.locator('.program-row').nth(1)).toContainText('Umbaupause');
+    await expect(persistedProgram.locator('.program-row').nth(2)).toContainText('Set 2');
+
+    await bookingPanel.getByRole('button', { name: 'Artist hinzufügen', exact: true }).click();
+    bookingEditor = bookingPanel.locator('.booking-editor');
+    await bookingEditor
+      .getByRole('textbox', { name: 'Interne Bookingnotiz optional', exact: true })
+      .fill('Bleibt bei der Schnellanlage erhalten');
+    await bookingEditor.getByRole('button', { name: 'Artist neu anlegen', exact: true }).click();
+    let quickArtistDialog = page.getByRole('dialog', { name: 'Artist neu anlegen' });
+    await quickArtistDialog.getByLabel('Künstlername', { exact: true }).fill('E2E Echo Unit');
+    await quickArtistDialog
+      .getByRole('button', { name: 'Prüfen und anlegen', exact: true })
+      .click();
+    await expect(quickArtistDialog.getByText('Mögliche Dubletten', { exact: true })).toBeVisible();
+    await expect(
+      quickArtistDialog.getByRole('button', { name: 'Diesen auswählen', exact: true }),
+    ).toBeVisible();
+    await quickArtistDialog.getByRole('button', { name: 'Abbrechen', exact: true }).click();
+    await expect(
+      bookingEditor.getByRole('textbox', { name: 'Interne Bookingnotiz optional', exact: true }),
+    ).toHaveValue('Bleibt bei der Schnellanlage erhalten');
+    await bookingEditor.getByRole('button', { name: 'Artist neu anlegen', exact: true }).click();
+    quickArtistDialog = page.getByRole('dialog', { name: 'Artist neu anlegen' });
+    await quickArtistDialog.getByLabel('Künstlername', { exact: true }).fill('E2E Newcomer');
+    await quickArtistDialog.getByLabel('Vorname optional', { exact: true }).fill('Nika');
+    await quickArtistDialog.getByLabel('Nachname optional', { exact: true }).fill('Neu');
+    await quickArtistDialog
+      .getByLabel('E-Mail optional', { exact: true })
+      .fill('nika.neu@example.test');
+    await quickArtistDialog.getByLabel('Telefon optional', { exact: true }).fill('+49 170 1002003');
+    await quickArtistDialog
+      .getByRole('button', { name: 'Prüfen und anlegen', exact: true })
+      .click();
+    await expect(bookingEditor.getByText(/Ausgewählt:.*E2E Newcomer/)).toBeVisible();
+    await expect(bookingEditor.getByText('Artist angelegt.')).toBeVisible();
+    await bookingEditor
+      .getByRole('combobox', { name: 'Rolle', exact: true })
+      .selectOption({ label: 'Headliner' });
+    await expect(
+      bookingEditor.getByRole('textbox', { name: 'Vereinbarte Gage optional / keine Gage' }),
+    ).toHaveValue('650,00');
+    await bookingEditor
+      .getByRole('combobox', { name: 'Anfangsstatus', exact: true })
+      .selectOption('CONFIRMED');
+    await bookingEditor
+      .getByRole('textbox', { name: 'Vereinbarte Gage optional / keine Gage' })
+      .fill('650.00');
+    await bookingEditor
+      .getByRole('combobox', { name: 'Hotelregelung', exact: true })
+      .selectOption('BUYOUT');
+    await bookingEditor
+      .getByRole('textbox', { name: 'Buy-out-Betrag optional', exact: true })
+      .fill('100,00');
+    await bookingEditor
+      .getByRole('textbox', { name: 'Hotelnotiz optional', exact: true })
+      .fill('Eigenständig organisiert');
+    await bookingEditor.getByRole('button', { name: 'Booking anlegen', exact: true }).click();
+    await expect(page.getByText('Das Booking wurde angelegt.')).toBeVisible();
+
+    const headlinerBooking = bookingPanel.locator('.booking-card').filter({
+      has: page.getByText('Headliner', { exact: true }),
+    });
+    await expect(headlinerBooking).toContainText('E2E Newcomer');
+    await expect(headlinerBooking).toContainText('Gage: 650,00 €');
+    await expect(headlinerBooking).toContainText('Eigenvertretung · Direktkontakt');
+    await expect(
+      headlinerBooking.locator('a[href="mailto:nika.neu@example.test"]').first(),
+    ).toBeVisible();
+    await expect(headlinerBooking.locator('a[href="tel:+49 170 1002003"]').first()).toBeVisible();
+    await headlinerBooking.getByText('Bookingdetails und Statushistorie', { exact: true }).click();
+    await expect(headlinerBooking).toContainText('Hotel-Buy-out');
+    await expect(headlinerBooking).toContainText('100,00 €');
+    await expect(headlinerBooking).toContainText('Eigenständig organisiert');
+    await headlinerBooking.getByRole('button', { name: 'Booking bearbeiten', exact: true }).click();
+    await expect(
+      headlinerBooking.getByRole('combobox', { name: 'Hotelregelung', exact: true }),
+    ).toHaveValue('BUYOUT');
+    await expect(
+      headlinerBooking.getByRole('textbox', { name: 'Buy-out-Betrag optional', exact: true }),
+    ).toHaveValue('100,00');
+    await headlinerBooking.getByRole('button', { name: 'Abbrechen', exact: true }).click();
+    await expect(
+      page.locator('.booking-progress-card').filter({
+        has: page.getByText('Headliner', { exact: true }),
+      }),
+    ).toContainText('1/1 bestätigt');
+
+    await page.route('**/bookings/*/status', async (route) => {
+      await route.fulfill({
+        body: JSON.stringify({
+          code: 'VERSION_CONFLICT',
+          message: 'Simulierter Versionskonflikt',
+        }),
+        contentType: 'application/json',
+        status: 409,
+      });
+    });
+    const headlinerStatus = headlinerBooking.getByRole('combobox', {
+      name: 'Status von E2E Newcomer',
+      exact: true,
+    });
+    await headlinerStatus.selectOption('OPTION');
+    await expect(page.getByText('Simulierter Versionskonflikt', { exact: true })).toBeVisible();
+    await expect(headlinerStatus).toHaveValue('CONFIRMED');
+    await page.unroute('**/bookings/*/status');
+
+    await artistBooking
+      .getByRole('combobox', { name: 'Status von E2E Echo Unit', exact: true })
+      .selectOption('CANCELLED');
+    const statusDialog = page.getByRole('dialog', { name: /Status auf „Storniert“ setzen/ });
+    await statusDialog.getByLabel('Statusnotiz optional').fill('E2E Statuskorrektur');
+    await statusDialog.getByRole('button', { name: 'Änderung bestätigen', exact: true }).click();
+    await expect(page.getByText('Status geändert: Storniert.', { exact: true })).toBeVisible();
+    await expect(artistBooking).toHaveCount(0);
+    await bookingPanel
+      .getByRole('checkbox', { name: 'Historische einblenden', exact: true })
+      .check();
+    const historicalArtistBooking = bookingPanel.locator('.booking-card').filter({
+      has: page.getByText('Artist', { exact: true }),
+    });
+    await expect(
+      historicalArtistBooking.getByRole('combobox', { name: 'Status von E2E Echo Unit' }),
+    ).toHaveValue('CANCELLED');
+    await historicalArtistBooking
+      .getByText('Bookingdetails und Statushistorie', { exact: true })
+      .click();
+    await expect(historicalArtistBooking).toContainText('Bestätigt → Storniert');
+    await expect(historicalArtistBooking).toContainText('E2E Statuskorrektur');
+    await historicalArtistBooking
+      .getByRole('combobox', { name: 'Status von E2E Echo Unit' })
+      .selectOption('REQUESTED');
+    let reactivationDialog = page.getByRole('dialog', { name: 'Booking reaktivieren?' });
+    await reactivationDialog.getByRole('button', { name: 'Abbrechen', exact: true }).click();
+    await expect(
+      historicalArtistBooking.getByRole('combobox', { name: 'Status von E2E Echo Unit' }),
+    ).toHaveValue('CANCELLED');
+    await historicalArtistBooking
+      .getByRole('combobox', { name: 'Status von E2E Echo Unit' })
+      .selectOption('REQUESTED');
+    reactivationDialog = page.getByRole('dialog', { name: 'Booking reaktivieren?' });
+    await reactivationDialog.getByLabel('Statusnotiz optional').fill('Wieder angefragt');
+    await reactivationDialog
+      .getByRole('button', { name: 'Änderung bestätigen', exact: true })
+      .click();
+    await expect(page.getByText('Status geändert: Angefragt.', { exact: true })).toBeVisible();
+  });
+
+  test('Phase 1 through Phase 6: read-only authorization and logout', async ({ browser }) => {
     await openOrganizationHome(page, organizationId);
     await page.getByRole('link', { name: 'Team', exact: true }).click();
     await page.getByLabel('E-Mail-Adresse').fill(invitedEmail);
@@ -905,6 +1259,25 @@ test.describe.serial('Phase 1, Phase 3, Phase 4 and Phase 5 browser acceptance',
         invitedPage.getByRole('button', { name: 'Bearbeiten', exact: true }),
       ).toHaveCount(0);
       await expect(invitedPage.getByLabel('Status ändern')).toHaveCount(0);
+      const readOnlyBookingPanel = invitedPage.locator('.booking-panel');
+      await expect(
+        readOnlyBookingPanel
+          .locator('.booking-card')
+          .getByRole('link', { name: 'E2E Echo Unit', exact: true }),
+      ).toBeVisible();
+      await expect(
+        readOnlyBookingPanel.getByRole('button', { name: 'Artist hinzufügen', exact: true }),
+      ).toHaveCount(0);
+      await expect(
+        readOnlyBookingPanel.getByRole('button', { name: 'Vorgaben bearbeiten', exact: true }),
+      ).toHaveCount(0);
+      await expect(
+        readOnlyBookingPanel.getByRole('button', { name: 'Auftritt hinzufügen', exact: true }),
+      ).toHaveCount(0);
+      await expect(
+        readOnlyBookingPanel.getByRole('button', { name: 'Bearbeiten', exact: true }),
+      ).toHaveCount(0);
+      await expect(readOnlyBookingPanel.getByText(/Gage:/)).toHaveCount(0);
       const eventId = eventDetailPath.split('/').at(-1)!;
       const forbiddenEvent = await invitedContext.request.patch(
         new URL(

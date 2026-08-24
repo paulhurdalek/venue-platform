@@ -18,6 +18,7 @@ export function EventFilters({
     eventFormatId?: string | undefined;
     eventKind?: string | undefined;
     locationId?: string | undefined;
+    booking?: string | undefined;
     showOptions?: string | undefined;
   };
   eventFormats: EventFormat[];
@@ -90,6 +91,17 @@ export function EventFilters({
           </select>
         </label>
       ) : null}
+      <label>
+        Booking
+        <select defaultValue={values.booking ?? ''} name="booking">
+          <option value="">Alle Bookingstände</option>
+          <option value="INCOMPLETE">Booking unvollständig</option>
+          <option value="MODERATOR_MISSING">Moderator fehlt</option>
+          <option value="OPEN_REQUESTS">Offene Anfragen</option>
+          <option value="HAS_OPTIONS">Optionen vorhanden</option>
+          <option value="FULLY_CONFIRMED">Vollständig bestätigt</option>
+        </select>
+      </label>
       <label>
         Terminoptionen
         <select defaultValue={values.showOptions ?? '1'} name="showOptions">

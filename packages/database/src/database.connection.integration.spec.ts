@@ -1,3 +1,5 @@
+import { readFile } from 'node:fs/promises';
+
 import { afterAll, describe, expect, it } from 'vitest';
 
 import { createDatabaseClient, type DatabaseClient } from './index.js';
@@ -321,6 +323,107 @@ describeWithDatabase('PostgreSQL connection', () => {
         AND rolled_back_at IS NULL
     `;
     expect(migrations).toHaveLength(2);
+  });
+
+  it('has the additive Phase 6 follow-up and executes its legacy Booking backfill losslessly', async () => {
+    client = createDatabaseClient(testDatabaseUrl!);
+    await cleanTestDatabase(client);
+    const migrationSql = await readFile(
+      new URL(
+        '../prisma/migrations/20260824000100_phase_6_booking_performances/migration.sql',
+        import.meta.url,
+      ),
+      'utf8',
+    );
+    const hotelBackfill = migrationSql.match(/UPDATE "booking"[\s\S]+?END;/)?.[0];
+    const performanceBackfill = migrationSql.match(
+      /INSERT INTO "event_program_item"[\s\S]+?FROM "booking";/,
+    )?.[0];
+    expect(hotelBackfill).toBeTruthy();
+    expect(performanceBackfill).toBeTruthy();
+
+    const organization = await client.organization.create({
+      data: { name: 'Phase 6 migration venue' },
+    });
+    const location = await client.location.create({
+      data: {
+        organizationId: organization.id,
+        name: 'Migration Hall',
+        timezone: 'Europe/Berlin',
+      },
+    });
+    const event = await client.event.create({
+      data: {
+        organizationId: organization.id,
+        locationId: location.id,
+        name: 'Migration Event',
+        eventDate: new Date('2026-10-15T00:00:00Z'),
+        eventKind: 'OWN_PRODUCTION',
+        timezone: 'Europe/Berlin',
+      },
+    });
+    const artist = await client.artist.create({
+      data: { organizationId: organization.id, stageName: 'Legacy Artist' },
+    });
+    const booking = await client.booking.create({
+      data: {
+        organizationId: organization.id,
+        eventId: event.id,
+        artistId: artist.id,
+        role: 'ARTIST',
+        lineupOrder: 7,
+        performanceDurationMinutes: 10,
+        hotelRequired: true,
+      },
+    });
+
+    await client.$executeRawUnsafe(hotelBackfill!);
+    await client.$executeRawUnsafe(performanceBackfill!);
+
+    expect(await client.booking.findUniqueOrThrow({ where: { id: booking.id } })).toMatchObject({
+      hotelRequired: true,
+      hotelArrangement: 'REQUIRED',
+      performanceDurationMinutes: 10,
+      lineupOrder: 7,
+    });
+    expect(await client.eventProgramItem.findMany({ where: { bookingId: booking.id } })).toEqual([
+      expect.objectContaining({
+        organizationId: organization.id,
+        eventId: event.id,
+        kind: 'PERFORMANCE',
+        sortOrder: 1,
+        durationMinutes: 10,
+        version: 1,
+      }),
+    ]);
+
+    const constraints = await client.$queryRaw<Array<{ constraint_name: string }>>`
+      SELECT conname AS constraint_name
+      FROM pg_constraint
+      WHERE conname IN (
+        'booking_hotel_buyout_pair',
+        'event_program_item_kind_booking',
+        'event_program_item_order_positive',
+        'event_program_item_duration_positive',
+        'event_program_item_version_positive',
+        'event_program_item_event_tenant_fkey',
+        'event_program_item_booking_tenant_event_fkey'
+      )
+    `;
+    expect(constraints).toHaveLength(7);
+    const obsoleteIndex = await client.$queryRaw<Array<{ indexname: string }>>`
+      SELECT indexname FROM pg_indexes
+      WHERE schemaname = 'public' AND indexname = 'booking_active_artist_role_key'
+    `;
+    expect(obsoleteIndex).toHaveLength(0);
+    const migration = await client.$queryRaw<Array<{ migration_name: string }>>`
+      SELECT migration_name
+      FROM _prisma_migrations
+      WHERE migration_name = '20260824000100_phase_6_booking_performances'
+        AND finished_at IS NOT NULL
+        AND rolled_back_at IS NULL
+    `;
+    expect(migration).toHaveLength(1);
   });
 
   it('preserves migration-owned permissions while clearing tenant authorization data', async () => {

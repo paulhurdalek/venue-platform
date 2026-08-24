@@ -61,6 +61,11 @@ export class EventController {
     enum: ['OWN_PRODUCTION', 'THIRD_PARTY_EVENT'],
   })
   @ApiQuery({ name: 'locationId', required: false, type: String, format: 'uuid' })
+  @ApiQuery({
+    name: 'booking',
+    required: false,
+    enum: ['INCOMPLETE', 'MODERATOR_MISSING', 'OPEN_REQUESTS', 'HAS_OPTIONS', 'FULLY_CONFIRMED'],
+  })
   @ApiQuery({ name: 'limit', required: false, type: Number, minimum: 1, maximum: 100 })
   @ApiQuery({ name: 'offset', required: false, type: Number, minimum: 0 })
   @ApiOkResponse({ type: EventPageDto })

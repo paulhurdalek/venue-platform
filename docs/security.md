@@ -89,6 +89,29 @@ one invalid, duplicate or occupied entry rolls back the complete request. Confli
 only the affected Batch index/date/Location/rank and already-authorized occupancy targets, never
 raw Prisma/PostgreSQL errors or foreign-tenant data. The request DTO accepts 1–50 nested entries.
 
+Phase 6 adds `bookings.read`, `bookings.write`, `bookings.status`, `bookings.finance` and
+`lineup.write`. Controllers authorize only these concrete keys (format-requirement reads retain
+`event_formats.read`). Booking services additionally resolve the owning Event and apply its
+Location scope to list, detail, mutation, progress, requirements and order operations. Tenant,
+unknown and inaccessible IDs remain indistinguishable 404 responses.
+
+Booking/Event/Artist and optional partner/Contact foreign keys repeat `organization_id`. New or
+changed partner/Contact choices must be active and belong to the Artist's existing structured
+relationships; an archived record already referenced by a historical Booking remains readable and
+is marked archived. No Contact details are copied to Artist free text.
+
+Finance authorization is a response and mutation boundary, not only a UI choice. Without
+`bookings.finance`, fee and travel-cost fields are omitted by the server-side Booking and
+requirement projection, and a write that attempts financial fields is rejected. Audit metadata is
+allowlisted to technical IDs, versions, statuses, changed field names, order IDs and counts; it
+does not contain internal notes, fees, travel/hotel text, Artist names or Contact data. Status
+history stores only the explicit optional status note required by the business record.
+
+Administrator, Management & Finances and Booking receive all five Phase-6 permissions. Production
+and Read-only receive `bookings.read` only. Status changes, requirement replacement and Line-up
+ordering remain separate permissions and all mutations use optimistic versions plus a single
+transaction for state, history and audit.
+
 ## Dependency checks
 
 `pnpm security:audit` blocks high/critical production advisories. `pnpm install --frozen-lockfile`

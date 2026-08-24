@@ -2,6 +2,20 @@ import type { EventKind, EventStatus, RecordingSetting } from '../domain/event.r
 
 export type EventSnapshotSource = 'EVENT_FORMAT' | null;
 
+export type EventBookingFilter =
+  'INCOMPLETE' | 'MODERATOR_MISSING' | 'OPEN_REQUESTS' | 'HAS_OPTIONS' | 'FULLY_CONFIRMED';
+
+export interface EventBookingSummary {
+  artistRequiredCount: number;
+  artistConfirmedCount: number;
+  moderatorRequired: boolean;
+  moderatorConfirmed: boolean;
+  openRequestCount: number;
+  optionCount: number;
+  incomplete: boolean;
+  fullyConfirmed: boolean;
+}
+
 export interface EventRecord {
   id: string;
   organizationId: string;
@@ -29,6 +43,7 @@ export interface EventRecord {
   recordingSetting: RecordingSetting;
   timezone: string;
   occupancyComplete: boolean;
+  bookingSummary: EventBookingSummary;
   createdAt: string;
   updatedAt: string;
 }
@@ -91,6 +106,7 @@ export interface EventListQuery {
   eventFormatId?: string;
   eventKind?: EventKind;
   locationId?: string;
+  booking?: EventBookingFilter;
   limit: number;
   offset: number;
 }

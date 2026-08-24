@@ -10,6 +10,8 @@ import { hasPermission, serverApiClient, unwrap } from '../../../../src/api/serv
 type Event = components['schemas']['EventDto'];
 type EventStatus = Event['status'];
 type EventKind = Event['eventKind'];
+type EventBookingFilter =
+  'INCOMPLETE' | 'MODERATOR_MISSING' | 'OPEN_REQUESTS' | 'HAS_OPTIONS' | 'FULLY_CONFIRMED';
 type DateOption = components['schemas']['DateOptionDto'];
 type BusinessPartner = components['schemas']['BusinessPartnerDto'];
 type Contact = components['schemas']['ContactDto'];
@@ -54,6 +56,7 @@ export default async function EventsPage({
     eventFormatId: first(search.eventFormatId),
     eventKind: eventKind(first(search.eventKind)),
     locationId: first(search.locationId),
+    booking: bookingFilter(first(search.booking)),
     showOptions: first(search.showOptions) === '0' ? '0' : '1',
   };
   const offset = nonNegative(first(search.offset));
@@ -72,6 +75,7 @@ export default async function EventsPage({
     ...(values.eventFormatId ? { eventFormatId: values.eventFormatId } : {}),
     ...(values.eventKind ? { eventKind: values.eventKind } : {}),
     ...(values.locationId ? { locationId: values.locationId } : {}),
+    ...(values.booking ? { booking: values.booking } : {}),
   };
   const canReadOptions = hasPermission(membership, 'date_options.read');
   const canWriteOptions = hasPermission(membership, 'date_options.write');
@@ -328,6 +332,7 @@ function CalendarView({
                     <span>{event.startTime ?? '–'}</span>
                     <strong>{event.name}</strong>
                     <small>{statusLabel(event.status)}</small>
+                    <small>{bookingSummaryLabel(event)}</small>
                   </Link>
                 ))}
                 {dayOptions.map((option) => (
@@ -376,6 +381,7 @@ function CalendarView({
                       {item.event.startTime ? `${item.event.startTime} Uhr` : 'Ohne Beginn'} ·{' '}
                       {statusLabel(item.event.status)}
                     </small>
+                    <small>{bookingSummaryLabel(item.event)}</small>
                   </span>
                 </Link>
               ) : (
@@ -437,6 +443,7 @@ function ListView({
             <th>Veranstaltungsart</th>
             <th>Location</th>
             <th>Status</th>
+            <th>Booking</th>
           </tr>
         </thead>
         <tbody>
@@ -456,6 +463,9 @@ function ListView({
                 <span className={`status-badge status-badge--event-${event.status.toLowerCase()}`}>
                   {statusLabel(event.status)}
                 </span>
+              </td>
+              <td data-label="Booking">
+                <span className="event-booking-summary">{bookingSummaryLabel(event)}</span>
               </td>
             </tr>
           ))}
@@ -479,6 +489,7 @@ function ListView({
                   {option.rank === 'FIRST' ? '1. Option' : '2. Option'}
                 </span>
               </td>
+              <td data-label="Booking">–</td>
             </tr>
           ))}
         </tbody>
@@ -529,6 +540,7 @@ function commonQuery(values: {
   eventFormatId?: string | undefined;
   eventKind?: string | undefined;
   locationId?: string | undefined;
+  booking?: string | undefined;
   showOptions?: string | undefined;
 }) {
   return Object.fromEntries(
@@ -575,6 +587,30 @@ function statusLabel(status: EventStatus) {
 
 function kindLabel(kind: EventKind) {
   return kind === 'OWN_PRODUCTION' ? 'Eigenproduktion' : 'Fremdveranstaltung / Vermietung';
+}
+
+function bookingSummaryLabel(event: Event) {
+  const summary = event.bookingSummary;
+  const parts: string[] = [];
+  if (summary.artistRequiredCount > 0) {
+    parts.push(`${summary.artistConfirmedCount}/${summary.artistRequiredCount} Artists`);
+  }
+  if (summary.moderatorRequired) {
+    parts.push(summary.moderatorConfirmed ? 'Moderator bestätigt' : 'Moderator fehlt');
+  }
+  if (summary.openRequestCount > 0) parts.push(`${summary.openRequestCount} Anfragen offen`);
+  if (summary.optionCount > 0) parts.push(`${summary.optionCount} Optionen`);
+  return parts.join(' · ') || 'Keine Vorgaben';
+}
+
+function bookingFilter(value?: string): EventBookingFilter | undefined {
+  return value === 'INCOMPLETE' ||
+    value === 'MODERATOR_MISSING' ||
+    value === 'OPEN_REQUESTS' ||
+    value === 'HAS_OPTIONS' ||
+    value === 'FULLY_CONFIRMED'
+    ? value
+    : undefined;
 }
 
 function first(value: string | string[] | undefined) {

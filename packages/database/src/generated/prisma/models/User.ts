@@ -236,6 +236,7 @@ export type UserWhereInput = {
   acceptedInvitations?: Prisma.InvitationListRelationFilter
   consumedBootstrapTokens?: Prisma.BootstrapTokenListRelationFilter
   auditEntries?: Prisma.AuditLogListRelationFilter
+  bookingStatusChanges?: Prisma.BookingStatusHistoryListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -256,6 +257,7 @@ export type UserOrderByWithRelationInput = {
   acceptedInvitations?: Prisma.InvitationOrderByRelationAggregateInput
   consumedBootstrapTokens?: Prisma.BootstrapTokenOrderByRelationAggregateInput
   auditEntries?: Prisma.AuditLogOrderByRelationAggregateInput
+  bookingStatusChanges?: Prisma.BookingStatusHistoryOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -279,6 +281,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   acceptedInvitations?: Prisma.InvitationListRelationFilter
   consumedBootstrapTokens?: Prisma.BootstrapTokenListRelationFilter
   auditEntries?: Prisma.AuditLogListRelationFilter
+  bookingStatusChanges?: Prisma.BookingStatusHistoryListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -333,6 +336,7 @@ export type UserCreateInput = {
   acceptedInvitations?: Prisma.InvitationCreateNestedManyWithoutAcceptedByUserInput
   consumedBootstrapTokens?: Prisma.BootstrapTokenCreateNestedManyWithoutConsumedByUserInput
   auditEntries?: Prisma.AuditLogCreateNestedManyWithoutActorUserInput
+  bookingStatusChanges?: Prisma.BookingStatusHistoryCreateNestedManyWithoutActorUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -353,6 +357,7 @@ export type UserUncheckedCreateInput = {
   acceptedInvitations?: Prisma.InvitationUncheckedCreateNestedManyWithoutAcceptedByUserInput
   consumedBootstrapTokens?: Prisma.BootstrapTokenUncheckedCreateNestedManyWithoutConsumedByUserInput
   auditEntries?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorUserInput
+  bookingStatusChanges?: Prisma.BookingStatusHistoryUncheckedCreateNestedManyWithoutActorUserInput
 }
 
 export type UserUpdateInput = {
@@ -373,6 +378,7 @@ export type UserUpdateInput = {
   acceptedInvitations?: Prisma.InvitationUpdateManyWithoutAcceptedByUserNestedInput
   consumedBootstrapTokens?: Prisma.BootstrapTokenUpdateManyWithoutConsumedByUserNestedInput
   auditEntries?: Prisma.AuditLogUpdateManyWithoutActorUserNestedInput
+  bookingStatusChanges?: Prisma.BookingStatusHistoryUpdateManyWithoutActorUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -393,6 +399,7 @@ export type UserUncheckedUpdateInput = {
   acceptedInvitations?: Prisma.InvitationUncheckedUpdateManyWithoutAcceptedByUserNestedInput
   consumedBootstrapTokens?: Prisma.BootstrapTokenUncheckedUpdateManyWithoutConsumedByUserNestedInput
   auditEntries?: Prisma.AuditLogUncheckedUpdateManyWithoutActorUserNestedInput
+  bookingStatusChanges?: Prisma.BookingStatusHistoryUncheckedUpdateManyWithoutActorUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -599,6 +606,20 @@ export type UserUpdateOneWithoutAuditEntriesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAuditEntriesInput, Prisma.UserUpdateWithoutAuditEntriesInput>, Prisma.UserUncheckedUpdateWithoutAuditEntriesInput>
 }
 
+export type UserCreateNestedOneWithoutBookingStatusChangesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutBookingStatusChangesInput, Prisma.UserUncheckedCreateWithoutBookingStatusChangesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutBookingStatusChangesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutBookingStatusChangesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutBookingStatusChangesInput, Prisma.UserUncheckedCreateWithoutBookingStatusChangesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutBookingStatusChangesInput
+  upsert?: Prisma.UserUpsertWithoutBookingStatusChangesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutBookingStatusChangesInput, Prisma.UserUpdateWithoutBookingStatusChangesInput>, Prisma.UserUncheckedUpdateWithoutBookingStatusChangesInput>
+}
+
 export type UserCreateWithoutSessionsInput = {
   id?: string
   name: string
@@ -616,6 +637,7 @@ export type UserCreateWithoutSessionsInput = {
   acceptedInvitations?: Prisma.InvitationCreateNestedManyWithoutAcceptedByUserInput
   consumedBootstrapTokens?: Prisma.BootstrapTokenCreateNestedManyWithoutConsumedByUserInput
   auditEntries?: Prisma.AuditLogCreateNestedManyWithoutActorUserInput
+  bookingStatusChanges?: Prisma.BookingStatusHistoryCreateNestedManyWithoutActorUserInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -635,6 +657,7 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   acceptedInvitations?: Prisma.InvitationUncheckedCreateNestedManyWithoutAcceptedByUserInput
   consumedBootstrapTokens?: Prisma.BootstrapTokenUncheckedCreateNestedManyWithoutConsumedByUserInput
   auditEntries?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorUserInput
+  bookingStatusChanges?: Prisma.BookingStatusHistoryUncheckedCreateNestedManyWithoutActorUserInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -670,6 +693,7 @@ export type UserUpdateWithoutSessionsInput = {
   acceptedInvitations?: Prisma.InvitationUpdateManyWithoutAcceptedByUserNestedInput
   consumedBootstrapTokens?: Prisma.BootstrapTokenUpdateManyWithoutConsumedByUserNestedInput
   auditEntries?: Prisma.AuditLogUpdateManyWithoutActorUserNestedInput
+  bookingStatusChanges?: Prisma.BookingStatusHistoryUpdateManyWithoutActorUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -689,6 +713,7 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   acceptedInvitations?: Prisma.InvitationUncheckedUpdateManyWithoutAcceptedByUserNestedInput
   consumedBootstrapTokens?: Prisma.BootstrapTokenUncheckedUpdateManyWithoutConsumedByUserNestedInput
   auditEntries?: Prisma.AuditLogUncheckedUpdateManyWithoutActorUserNestedInput
+  bookingStatusChanges?: Prisma.BookingStatusHistoryUncheckedUpdateManyWithoutActorUserNestedInput
 }
 
 export type UserCreateWithoutAccountsInput = {
@@ -708,6 +733,7 @@ export type UserCreateWithoutAccountsInput = {
   acceptedInvitations?: Prisma.InvitationCreateNestedManyWithoutAcceptedByUserInput
   consumedBootstrapTokens?: Prisma.BootstrapTokenCreateNestedManyWithoutConsumedByUserInput
   auditEntries?: Prisma.AuditLogCreateNestedManyWithoutActorUserInput
+  bookingStatusChanges?: Prisma.BookingStatusHistoryCreateNestedManyWithoutActorUserInput
 }
 
 export type UserUncheckedCreateWithoutAccountsInput = {
@@ -727,6 +753,7 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   acceptedInvitations?: Prisma.InvitationUncheckedCreateNestedManyWithoutAcceptedByUserInput
   consumedBootstrapTokens?: Prisma.BootstrapTokenUncheckedCreateNestedManyWithoutConsumedByUserInput
   auditEntries?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorUserInput
+  bookingStatusChanges?: Prisma.BookingStatusHistoryUncheckedCreateNestedManyWithoutActorUserInput
 }
 
 export type UserCreateOrConnectWithoutAccountsInput = {
@@ -762,6 +789,7 @@ export type UserUpdateWithoutAccountsInput = {
   acceptedInvitations?: Prisma.InvitationUpdateManyWithoutAcceptedByUserNestedInput
   consumedBootstrapTokens?: Prisma.BootstrapTokenUpdateManyWithoutConsumedByUserNestedInput
   auditEntries?: Prisma.AuditLogUpdateManyWithoutActorUserNestedInput
+  bookingStatusChanges?: Prisma.BookingStatusHistoryUpdateManyWithoutActorUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -781,6 +809,7 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   acceptedInvitations?: Prisma.InvitationUncheckedUpdateManyWithoutAcceptedByUserNestedInput
   consumedBootstrapTokens?: Prisma.BootstrapTokenUncheckedUpdateManyWithoutConsumedByUserNestedInput
   auditEntries?: Prisma.AuditLogUncheckedUpdateManyWithoutActorUserNestedInput
+  bookingStatusChanges?: Prisma.BookingStatusHistoryUncheckedUpdateManyWithoutActorUserNestedInput
 }
 
 export type UserCreateWithoutConsumedBootstrapTokensInput = {
@@ -800,6 +829,7 @@ export type UserCreateWithoutConsumedBootstrapTokensInput = {
   memberships?: Prisma.MembershipCreateNestedManyWithoutUserInput
   acceptedInvitations?: Prisma.InvitationCreateNestedManyWithoutAcceptedByUserInput
   auditEntries?: Prisma.AuditLogCreateNestedManyWithoutActorUserInput
+  bookingStatusChanges?: Prisma.BookingStatusHistoryCreateNestedManyWithoutActorUserInput
 }
 
 export type UserUncheckedCreateWithoutConsumedBootstrapTokensInput = {
@@ -819,6 +849,7 @@ export type UserUncheckedCreateWithoutConsumedBootstrapTokensInput = {
   memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutUserInput
   acceptedInvitations?: Prisma.InvitationUncheckedCreateNestedManyWithoutAcceptedByUserInput
   auditEntries?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorUserInput
+  bookingStatusChanges?: Prisma.BookingStatusHistoryUncheckedCreateNestedManyWithoutActorUserInput
 }
 
 export type UserCreateOrConnectWithoutConsumedBootstrapTokensInput = {
@@ -854,6 +885,7 @@ export type UserUpdateWithoutConsumedBootstrapTokensInput = {
   memberships?: Prisma.MembershipUpdateManyWithoutUserNestedInput
   acceptedInvitations?: Prisma.InvitationUpdateManyWithoutAcceptedByUserNestedInput
   auditEntries?: Prisma.AuditLogUpdateManyWithoutActorUserNestedInput
+  bookingStatusChanges?: Prisma.BookingStatusHistoryUpdateManyWithoutActorUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutConsumedBootstrapTokensInput = {
@@ -873,6 +905,7 @@ export type UserUncheckedUpdateWithoutConsumedBootstrapTokensInput = {
   memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserNestedInput
   acceptedInvitations?: Prisma.InvitationUncheckedUpdateManyWithoutAcceptedByUserNestedInput
   auditEntries?: Prisma.AuditLogUncheckedUpdateManyWithoutActorUserNestedInput
+  bookingStatusChanges?: Prisma.BookingStatusHistoryUncheckedUpdateManyWithoutActorUserNestedInput
 }
 
 export type UserCreateWithoutMembershipsInput = {
@@ -892,6 +925,7 @@ export type UserCreateWithoutMembershipsInput = {
   acceptedInvitations?: Prisma.InvitationCreateNestedManyWithoutAcceptedByUserInput
   consumedBootstrapTokens?: Prisma.BootstrapTokenCreateNestedManyWithoutConsumedByUserInput
   auditEntries?: Prisma.AuditLogCreateNestedManyWithoutActorUserInput
+  bookingStatusChanges?: Prisma.BookingStatusHistoryCreateNestedManyWithoutActorUserInput
 }
 
 export type UserUncheckedCreateWithoutMembershipsInput = {
@@ -911,6 +945,7 @@ export type UserUncheckedCreateWithoutMembershipsInput = {
   acceptedInvitations?: Prisma.InvitationUncheckedCreateNestedManyWithoutAcceptedByUserInput
   consumedBootstrapTokens?: Prisma.BootstrapTokenUncheckedCreateNestedManyWithoutConsumedByUserInput
   auditEntries?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorUserInput
+  bookingStatusChanges?: Prisma.BookingStatusHistoryUncheckedCreateNestedManyWithoutActorUserInput
 }
 
 export type UserCreateOrConnectWithoutMembershipsInput = {
@@ -946,6 +981,7 @@ export type UserUpdateWithoutMembershipsInput = {
   acceptedInvitations?: Prisma.InvitationUpdateManyWithoutAcceptedByUserNestedInput
   consumedBootstrapTokens?: Prisma.BootstrapTokenUpdateManyWithoutConsumedByUserNestedInput
   auditEntries?: Prisma.AuditLogUpdateManyWithoutActorUserNestedInput
+  bookingStatusChanges?: Prisma.BookingStatusHistoryUpdateManyWithoutActorUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMembershipsInput = {
@@ -965,6 +1001,7 @@ export type UserUncheckedUpdateWithoutMembershipsInput = {
   acceptedInvitations?: Prisma.InvitationUncheckedUpdateManyWithoutAcceptedByUserNestedInput
   consumedBootstrapTokens?: Prisma.BootstrapTokenUncheckedUpdateManyWithoutConsumedByUserNestedInput
   auditEntries?: Prisma.AuditLogUncheckedUpdateManyWithoutActorUserNestedInput
+  bookingStatusChanges?: Prisma.BookingStatusHistoryUncheckedUpdateManyWithoutActorUserNestedInput
 }
 
 export type UserCreateWithoutAcceptedInvitationsInput = {
@@ -984,6 +1021,7 @@ export type UserCreateWithoutAcceptedInvitationsInput = {
   memberships?: Prisma.MembershipCreateNestedManyWithoutUserInput
   consumedBootstrapTokens?: Prisma.BootstrapTokenCreateNestedManyWithoutConsumedByUserInput
   auditEntries?: Prisma.AuditLogCreateNestedManyWithoutActorUserInput
+  bookingStatusChanges?: Prisma.BookingStatusHistoryCreateNestedManyWithoutActorUserInput
 }
 
 export type UserUncheckedCreateWithoutAcceptedInvitationsInput = {
@@ -1003,6 +1041,7 @@ export type UserUncheckedCreateWithoutAcceptedInvitationsInput = {
   memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutUserInput
   consumedBootstrapTokens?: Prisma.BootstrapTokenUncheckedCreateNestedManyWithoutConsumedByUserInput
   auditEntries?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorUserInput
+  bookingStatusChanges?: Prisma.BookingStatusHistoryUncheckedCreateNestedManyWithoutActorUserInput
 }
 
 export type UserCreateOrConnectWithoutAcceptedInvitationsInput = {
@@ -1038,6 +1077,7 @@ export type UserUpdateWithoutAcceptedInvitationsInput = {
   memberships?: Prisma.MembershipUpdateManyWithoutUserNestedInput
   consumedBootstrapTokens?: Prisma.BootstrapTokenUpdateManyWithoutConsumedByUserNestedInput
   auditEntries?: Prisma.AuditLogUpdateManyWithoutActorUserNestedInput
+  bookingStatusChanges?: Prisma.BookingStatusHistoryUpdateManyWithoutActorUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAcceptedInvitationsInput = {
@@ -1057,6 +1097,7 @@ export type UserUncheckedUpdateWithoutAcceptedInvitationsInput = {
   memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserNestedInput
   consumedBootstrapTokens?: Prisma.BootstrapTokenUncheckedUpdateManyWithoutConsumedByUserNestedInput
   auditEntries?: Prisma.AuditLogUncheckedUpdateManyWithoutActorUserNestedInput
+  bookingStatusChanges?: Prisma.BookingStatusHistoryUncheckedUpdateManyWithoutActorUserNestedInput
 }
 
 export type UserCreateWithoutAuditEntriesInput = {
@@ -1076,6 +1117,7 @@ export type UserCreateWithoutAuditEntriesInput = {
   memberships?: Prisma.MembershipCreateNestedManyWithoutUserInput
   acceptedInvitations?: Prisma.InvitationCreateNestedManyWithoutAcceptedByUserInput
   consumedBootstrapTokens?: Prisma.BootstrapTokenCreateNestedManyWithoutConsumedByUserInput
+  bookingStatusChanges?: Prisma.BookingStatusHistoryCreateNestedManyWithoutActorUserInput
 }
 
 export type UserUncheckedCreateWithoutAuditEntriesInput = {
@@ -1095,6 +1137,7 @@ export type UserUncheckedCreateWithoutAuditEntriesInput = {
   memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutUserInput
   acceptedInvitations?: Prisma.InvitationUncheckedCreateNestedManyWithoutAcceptedByUserInput
   consumedBootstrapTokens?: Prisma.BootstrapTokenUncheckedCreateNestedManyWithoutConsumedByUserInput
+  bookingStatusChanges?: Prisma.BookingStatusHistoryUncheckedCreateNestedManyWithoutActorUserInput
 }
 
 export type UserCreateOrConnectWithoutAuditEntriesInput = {
@@ -1130,6 +1173,7 @@ export type UserUpdateWithoutAuditEntriesInput = {
   memberships?: Prisma.MembershipUpdateManyWithoutUserNestedInput
   acceptedInvitations?: Prisma.InvitationUpdateManyWithoutAcceptedByUserNestedInput
   consumedBootstrapTokens?: Prisma.BootstrapTokenUpdateManyWithoutConsumedByUserNestedInput
+  bookingStatusChanges?: Prisma.BookingStatusHistoryUpdateManyWithoutActorUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAuditEntriesInput = {
@@ -1149,6 +1193,103 @@ export type UserUncheckedUpdateWithoutAuditEntriesInput = {
   memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserNestedInput
   acceptedInvitations?: Prisma.InvitationUncheckedUpdateManyWithoutAcceptedByUserNestedInput
   consumedBootstrapTokens?: Prisma.BootstrapTokenUncheckedUpdateManyWithoutConsumedByUserNestedInput
+  bookingStatusChanges?: Prisma.BookingStatusHistoryUncheckedUpdateManyWithoutActorUserNestedInput
+}
+
+export type UserCreateWithoutBookingStatusChangesInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string | null
+  banned?: boolean
+  banReason?: string | null
+  banExpires?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  memberships?: Prisma.MembershipCreateNestedManyWithoutUserInput
+  acceptedInvitations?: Prisma.InvitationCreateNestedManyWithoutAcceptedByUserInput
+  consumedBootstrapTokens?: Prisma.BootstrapTokenCreateNestedManyWithoutConsumedByUserInput
+  auditEntries?: Prisma.AuditLogCreateNestedManyWithoutActorUserInput
+}
+
+export type UserUncheckedCreateWithoutBookingStatusChangesInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string | null
+  banned?: boolean
+  banReason?: string | null
+  banExpires?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutUserInput
+  acceptedInvitations?: Prisma.InvitationUncheckedCreateNestedManyWithoutAcceptedByUserInput
+  consumedBootstrapTokens?: Prisma.BootstrapTokenUncheckedCreateNestedManyWithoutConsumedByUserInput
+  auditEntries?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorUserInput
+}
+
+export type UserCreateOrConnectWithoutBookingStatusChangesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutBookingStatusChangesInput, Prisma.UserUncheckedCreateWithoutBookingStatusChangesInput>
+}
+
+export type UserUpsertWithoutBookingStatusChangesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutBookingStatusChangesInput, Prisma.UserUncheckedUpdateWithoutBookingStatusChangesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutBookingStatusChangesInput, Prisma.UserUncheckedCreateWithoutBookingStatusChangesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutBookingStatusChangesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutBookingStatusChangesInput, Prisma.UserUncheckedUpdateWithoutBookingStatusChangesInput>
+}
+
+export type UserUpdateWithoutBookingStatusChangesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  banExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  memberships?: Prisma.MembershipUpdateManyWithoutUserNestedInput
+  acceptedInvitations?: Prisma.InvitationUpdateManyWithoutAcceptedByUserNestedInput
+  consumedBootstrapTokens?: Prisma.BootstrapTokenUpdateManyWithoutConsumedByUserNestedInput
+  auditEntries?: Prisma.AuditLogUpdateManyWithoutActorUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutBookingStatusChangesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  banned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  banExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserNestedInput
+  acceptedInvitations?: Prisma.InvitationUncheckedUpdateManyWithoutAcceptedByUserNestedInput
+  consumedBootstrapTokens?: Prisma.BootstrapTokenUncheckedUpdateManyWithoutConsumedByUserNestedInput
+  auditEntries?: Prisma.AuditLogUncheckedUpdateManyWithoutActorUserNestedInput
 }
 
 
@@ -1163,6 +1304,7 @@ export type UserCountOutputType = {
   acceptedInvitations: number
   consumedBootstrapTokens: number
   auditEntries: number
+  bookingStatusChanges: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1172,6 +1314,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   acceptedInvitations?: boolean | UserCountOutputTypeCountAcceptedInvitationsArgs
   consumedBootstrapTokens?: boolean | UserCountOutputTypeCountConsumedBootstrapTokensArgs
   auditEntries?: boolean | UserCountOutputTypeCountAuditEntriesArgs
+  bookingStatusChanges?: boolean | UserCountOutputTypeCountBookingStatusChangesArgs
 }
 
 /**
@@ -1226,6 +1369,13 @@ export type UserCountOutputTypeCountAuditEntriesArgs<ExtArgs extends runtime.Typ
   where?: Prisma.AuditLogWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountBookingStatusChangesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BookingStatusHistoryWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1245,6 +1395,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   acceptedInvitations?: boolean | Prisma.User$acceptedInvitationsArgs<ExtArgs>
   consumedBootstrapTokens?: boolean | Prisma.User$consumedBootstrapTokensArgs<ExtArgs>
   auditEntries?: boolean | Prisma.User$auditEntriesArgs<ExtArgs>
+  bookingStatusChanges?: boolean | Prisma.User$bookingStatusChangesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1298,6 +1449,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   acceptedInvitations?: boolean | Prisma.User$acceptedInvitationsArgs<ExtArgs>
   consumedBootstrapTokens?: boolean | Prisma.User$consumedBootstrapTokensArgs<ExtArgs>
   auditEntries?: boolean | Prisma.User$auditEntriesArgs<ExtArgs>
+  bookingStatusChanges?: boolean | Prisma.User$bookingStatusChangesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1312,6 +1464,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     acceptedInvitations: Prisma.$InvitationPayload<ExtArgs>[]
     consumedBootstrapTokens: Prisma.$BootstrapTokenPayload<ExtArgs>[]
     auditEntries: Prisma.$AuditLogPayload<ExtArgs>[]
+    bookingStatusChanges: Prisma.$BookingStatusHistoryPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1725,6 +1878,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   acceptedInvitations<T extends Prisma.User$acceptedInvitationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$acceptedInvitationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InvitationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   consumedBootstrapTokens<T extends Prisma.User$consumedBootstrapTokensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$consumedBootstrapTokensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BootstrapTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   auditEntries<T extends Prisma.User$auditEntriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$auditEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AuditLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  bookingStatusChanges<T extends Prisma.User$bookingStatusChangesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$bookingStatusChangesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BookingStatusHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2299,6 +2453,30 @@ export type User$auditEntriesArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   distinct?: Prisma.AuditLogScalarFieldEnum | Prisma.AuditLogScalarFieldEnum[]
+}
+
+/**
+ * User.bookingStatusChanges
+ */
+export type User$bookingStatusChangesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BookingStatusHistory
+   */
+  select?: Prisma.BookingStatusHistorySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BookingStatusHistory
+   */
+  omit?: Prisma.BookingStatusHistoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BookingStatusHistoryInclude<ExtArgs> | null
+  where?: Prisma.BookingStatusHistoryWhereInput
+  orderBy?: Prisma.BookingStatusHistoryOrderByWithRelationInput | Prisma.BookingStatusHistoryOrderByWithRelationInput[]
+  cursor?: Prisma.BookingStatusHistoryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BookingStatusHistoryScalarFieldEnum | Prisma.BookingStatusHistoryScalarFieldEnum[]
 }
 
 /**
