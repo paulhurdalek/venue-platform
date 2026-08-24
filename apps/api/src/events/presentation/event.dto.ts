@@ -57,6 +57,14 @@ export class EventListQueryDto {
   @IsUUID('4')
   locationId?: string;
 
+  @ApiPropertyOptional({
+    enum: ['INCOMPLETE', 'MODERATOR_MISSING', 'OPEN_REQUESTS', 'HAS_OPTIONS', 'FULLY_CONFIRMED'],
+  })
+  @IsOptional()
+  @IsIn(['INCOMPLETE', 'MODERATOR_MISSING', 'OPEN_REQUESTS', 'HAS_OPTIONS', 'FULLY_CONFIRMED'])
+  booking?:
+    'INCOMPLETE' | 'MODERATOR_MISSING' | 'OPEN_REQUESTS' | 'HAS_OPTIONS' | 'FULLY_CONFIRMED';
+
   @ApiPropertyOptional({ type: Number, minimum: 1, maximum: 100, default: 50 })
   @Type(() => Number)
   @IsOptional()
@@ -173,6 +181,17 @@ export class UpdateEventStatusDto {
   status!: 'DRAFT' | 'PLANNED' | 'CONFIRMED' | 'COMPLETED' | 'CANCELLED';
 }
 
+export class EventBookingSummaryDto {
+  @ApiProperty({ type: Number }) artistRequiredCount!: number;
+  @ApiProperty({ type: Number }) artistConfirmedCount!: number;
+  @ApiProperty({ type: Boolean }) moderatorRequired!: boolean;
+  @ApiProperty({ type: Boolean }) moderatorConfirmed!: boolean;
+  @ApiProperty({ type: Number }) openRequestCount!: number;
+  @ApiProperty({ type: Number }) optionCount!: number;
+  @ApiProperty({ type: Boolean }) incomplete!: boolean;
+  @ApiProperty({ type: Boolean }) fullyConfirmed!: boolean;
+}
+
 export class EventDto {
   @ApiProperty({ type: String, format: 'uuid' }) id!: string;
   @ApiProperty({ type: String, format: 'uuid' }) organizationId!: string;
@@ -208,6 +227,7 @@ export class EventDto {
   recordingSetting!: 'UNSPECIFIED' | 'ENABLED' | 'DISABLED';
   @ApiProperty({ type: String, example: 'Europe/Berlin' }) timezone!: string;
   @ApiProperty({ type: Boolean }) occupancyComplete!: boolean;
+  @ApiProperty({ type: () => EventBookingSummaryDto }) bookingSummary!: EventBookingSummaryDto;
   @ApiProperty({ type: String, format: 'date-time' }) createdAt!: string;
   @ApiProperty({ type: String, format: 'date-time' }) updatedAt!: string;
 }

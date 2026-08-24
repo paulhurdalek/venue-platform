@@ -106,3 +106,59 @@ The later Phase-5 batch-option and contrast refinement changes no schema. It reu
 `venue_date_option` rows, the existing audit log, sorted Location locks and the exclusion
 constraint in one transaction. Because `20260823000200_phase_5_occupancy_options` had already been
 applied, it remains byte-for-byte unchanged and no additional migration is required.
+
+## Phase 6 migration
+
+`20260823000300_phase_6_booking_lineup` is strictly additive and leaves every Phase-0 through
+Phase-5 migration unchanged. It creates the `LineupRole` (`ARTIST`, `MODERATOR`, `OTHER`) and
+`BookingStatus` (`SHORTLISTED`, `REQUESTED`, `OPTION`, `CONFIRMED`, `DECLINED`, `CANCELLED`) enums
+and four organization-owned tables:
+
+- `event_format_lineup_requirement` stores the active relational template positions, counts,
+  order and optional Minor-Unit default fee;
+- `event_lineup_requirement` stores the independently editable Event snapshot plus optional source
+  requirement ID/version;
+- `booking` links exactly one Event and Artist and owns role, status, order, performance data,
+  company/Contact references, agreements, finance fields, hotel data and optimistic version;
+- `booking_status_history` stores each explicit transition with previous/new status, actor
+  membership/user, timestamp and optional note.
+
+UUID defaults, tenant-composite foreign keys and restrictive deletes preserve organization
+isolation and history. Checks enforce positive counts, order and versions, bounded performance
+minutes, non-empty custom labels and paired non-negative `BIGINT` Minor Units with uppercase
+three-letter currencies. A null amount and null currency represent the valid “no fee” state.
+
+Partial unique indexes protect only the active (`SHORTLISTED`, `REQUESTED`, `OPTION`, `CONFIRMED`)
+Line-up: an Artist cannot have the same active role twice in one Event and each active order is
+unique. Declined/cancelled history therefore remains stored without blocking a later new request.
+Requirement replacement archives prior rows and creates a new active set; it never cascades away
+historical Bookings.
+
+The migration inserts the five stable permissions `bookings.read`, `bookings.write`,
+`bookings.status`, `bookings.finance` and `lineup.write` and conflict-safely backfills every
+organization's standard roles. Setup uses the same catalog for future organizations. Existing
+Artists, formats and Events are left untouched, receive no invented requirements and need no
+backfill rows. No example or dummy business data is inserted.
+
+`20260824000100_phase_6_booking_performances` is the strictly additive Phase-6 follow-up. It leaves
+the deployed `20260823000300_phase_6_booking_lineup` and every earlier migration unchanged. The
+migration adds:
+
+- `HotelArrangement` with `NONE`, `REQUIRED` and `BUYOUT`, paired optional `BIGINT`/ISO-currency
+  Buy-out columns and a lossless `hotel_required → hotel_arrangement` data mapping;
+- `ProgramItemKind` with `PERFORMANCE` and `BREAK` plus the organization-owned, versioned
+  `event_program_item` table;
+- composite Event and Booking foreign keys that enforce organization and Event consistency at the
+  database boundary;
+- positive order, duration and version checks plus tenant-first Event/Booking indexes.
+
+Every existing Booking is backfilled into exactly one `PERFORMANCE` item. `ROW_NUMBER()` preserves
+the old per-Event `lineup_order` ordering, and the old performance duration plus original creation/
+update timestamps are copied. The previous Booking columns and `hotel_required` remain in place as
+deprecated compatibility data; nothing is dropped or rewritten destructively.
+
+The obsolete `booking_active_artist_role_key` is removed because a user may explicitly confirm two
+active Bookings of the same Artist, even with the same role. Duplicate prevention is now a
+transactional application invariant: creation acquires the existing per-Event lock, checks every
+active role for the Artist and requires an explicit confirmation flag. The new composite unique
+Booking key exists only to support the tenant-and-Event-safe program-item foreign key.

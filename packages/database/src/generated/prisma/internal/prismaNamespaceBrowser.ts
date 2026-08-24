@@ -85,6 +85,11 @@ export const ModelName = {
   ArtistBusinessPartnerRole: 'ArtistBusinessPartnerRole',
   ArtistBusinessPartnerContact: 'ArtistBusinessPartnerContact',
   ArtistBusinessPartnerContactRole: 'ArtistBusinessPartnerContactRole',
+  EventFormatLineupRequirement: 'EventFormatLineupRequirement',
+  EventLineupRequirement: 'EventLineupRequirement',
+  Booking: 'Booking',
+  EventProgramItem: 'EventProgramItem',
+  BookingStatusHistory: 'BookingStatusHistory',
   VenueDateOption: 'VenueDateOption',
   LocationOccupancy: 'LocationOccupancy'
 } as const
@@ -600,6 +605,115 @@ export const ArtistBusinessPartnerContactRoleScalarFieldEnum = {
 } as const
 
 export type ArtistBusinessPartnerContactRoleScalarFieldEnum = (typeof ArtistBusinessPartnerContactRoleScalarFieldEnum)[keyof typeof ArtistBusinessPartnerContactRoleScalarFieldEnum]
+
+
+export const EventFormatLineupRequirementScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  eventFormatId: 'eventFormatId',
+  role: 'role',
+  customRoleLabel: 'customRoleLabel',
+  normalizedCustomRoleLabel: 'normalizedCustomRoleLabel',
+  requiredCount: 'requiredCount',
+  defaultFeeMinor: 'defaultFeeMinor',
+  defaultFeeCurrency: 'defaultFeeCurrency',
+  sortOrder: 'sortOrder',
+  status: 'status',
+  version: 'version',
+  archivedAt: 'archivedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type EventFormatLineupRequirementScalarFieldEnum = (typeof EventFormatLineupRequirementScalarFieldEnum)[keyof typeof EventFormatLineupRequirementScalarFieldEnum]
+
+
+export const EventLineupRequirementScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  eventId: 'eventId',
+  sourceEventFormatRequirementId: 'sourceEventFormatRequirementId',
+  sourceEventFormatRequirementVersion: 'sourceEventFormatRequirementVersion',
+  role: 'role',
+  customRoleLabel: 'customRoleLabel',
+  normalizedCustomRoleLabel: 'normalizedCustomRoleLabel',
+  requiredCount: 'requiredCount',
+  defaultFeeMinor: 'defaultFeeMinor',
+  defaultFeeCurrency: 'defaultFeeCurrency',
+  sortOrder: 'sortOrder',
+  status: 'status',
+  version: 'version',
+  archivedAt: 'archivedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type EventLineupRequirementScalarFieldEnum = (typeof EventLineupRequirementScalarFieldEnum)[keyof typeof EventLineupRequirementScalarFieldEnum]
+
+
+export const BookingScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  eventId: 'eventId',
+  artistId: 'artistId',
+  role: 'role',
+  customRoleLabel: 'customRoleLabel',
+  normalizedCustomRoleLabel: 'normalizedCustomRoleLabel',
+  status: 'status',
+  lineupOrder: 'lineupOrder',
+  performanceStartMinutes: 'performanceStartMinutes',
+  performanceDurationMinutes: 'performanceDurationMinutes',
+  internalNote: 'internalNote',
+  businessPartnerId: 'businessPartnerId',
+  contactId: 'contactId',
+  agreedFeeMinor: 'agreedFeeMinor',
+  agreedFeeCurrency: 'agreedFeeCurrency',
+  travelArrangement: 'travelArrangement',
+  travelCostMinor: 'travelCostMinor',
+  travelCostCurrency: 'travelCostCurrency',
+  hotelRequired: 'hotelRequired',
+  hotelArrangement: 'hotelArrangement',
+  hotelBuyoutMinor: 'hotelBuyoutMinor',
+  hotelBuyoutCurrency: 'hotelBuyoutCurrency',
+  hotelNote: 'hotelNote',
+  version: 'version',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BookingScalarFieldEnum = (typeof BookingScalarFieldEnum)[keyof typeof BookingScalarFieldEnum]
+
+
+export const EventProgramItemScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  eventId: 'eventId',
+  bookingId: 'bookingId',
+  kind: 'kind',
+  sortOrder: 'sortOrder',
+  label: 'label',
+  durationMinutes: 'durationMinutes',
+  version: 'version',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type EventProgramItemScalarFieldEnum = (typeof EventProgramItemScalarFieldEnum)[keyof typeof EventProgramItemScalarFieldEnum]
+
+
+export const BookingStatusHistoryScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  bookingId: 'bookingId',
+  previousStatus: 'previousStatus',
+  newStatus: 'newStatus',
+  actorUserId: 'actorUserId',
+  actorMembershipId: 'actorMembershipId',
+  note: 'note',
+  changedAt: 'changedAt'
+} as const
+
+export type BookingStatusHistoryScalarFieldEnum = (typeof BookingStatusHistoryScalarFieldEnum)[keyof typeof BookingStatusHistoryScalarFieldEnum]
 
 
 export const VenueDateOptionScalarFieldEnum = {

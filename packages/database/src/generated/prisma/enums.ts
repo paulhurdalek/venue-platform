@@ -102,3 +102,41 @@ export const OccupancySlot = {
 } as const
 
 export type OccupancySlot = (typeof OccupancySlot)[keyof typeof OccupancySlot]
+
+
+export const LineupRole = {
+  ARTIST: 'ARTIST',
+  MODERATOR: 'MODERATOR',
+  OTHER: 'OTHER'
+} as const
+
+export type LineupRole = (typeof LineupRole)[keyof typeof LineupRole]
+
+
+export const BookingStatus = {
+  SHORTLISTED: 'SHORTLISTED',
+  REQUESTED: 'REQUESTED',
+  OPTION: 'OPTION',
+  CONFIRMED: 'CONFIRMED',
+  DECLINED: 'DECLINED',
+  CANCELLED: 'CANCELLED'
+} as const
+
+export type BookingStatus = (typeof BookingStatus)[keyof typeof BookingStatus]
+
+
+export const HotelArrangement = {
+  NONE: 'NONE',
+  REQUIRED: 'REQUIRED',
+  BUYOUT: 'BUYOUT'
+} as const
+
+export type HotelArrangement = (typeof HotelArrangement)[keyof typeof HotelArrangement]
+
+
+export const ProgramItemKind = {
+  PERFORMANCE: 'PERFORMANCE',
+  BREAK: 'BREAK'
+} as const
+
+export type ProgramItemKind = (typeof ProgramItemKind)[keyof typeof ProgramItemKind]

@@ -212,6 +212,31 @@ export type ArtistBusinessPartnerContact = Prisma.ArtistBusinessPartnerContactMo
  */
 export type ArtistBusinessPartnerContactRole = Prisma.ArtistBusinessPartnerContactRoleModel
 /**
+ * Model EventFormatLineupRequirement
+ * 
+ */
+export type EventFormatLineupRequirement = Prisma.EventFormatLineupRequirementModel
+/**
+ * Model EventLineupRequirement
+ * 
+ */
+export type EventLineupRequirement = Prisma.EventLineupRequirementModel
+/**
+ * Model Booking
+ * 
+ */
+export type Booking = Prisma.BookingModel
+/**
+ * Model EventProgramItem
+ * 
+ */
+export type EventProgramItem = Prisma.EventProgramItemModel
+/**
+ * Model BookingStatusHistory
+ * 
+ */
+export type BookingStatusHistory = Prisma.BookingStatusHistoryModel
+/**
  * Model VenueDateOption
  * 
  */

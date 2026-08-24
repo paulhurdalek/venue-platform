@@ -9,7 +9,8 @@ representatives point to existing company-Contact associations; it is never infe
 Contacts. Phase 4 adds organization-wide EventFormats whose V1 data is the concrete fachliche
 Formatvorlage for concrete events. Phase 5 adds Location-scoped Events with optional EventFormat
 provenance, independent VenueDateOptions and calculated availability. A central relational
-occupancy model coordinates all three. Bookings, line-ups, calculations, documents, invoices and
+occupancy model coordinates all three. Phase 6 adds event-specific Bookings, relational Line-up requirements and
+their template-to-Event snapshot boundary. Calculations, deals, ticketing, documents, invoices and
 rooms remain absent.
 
 ## Runtime view
@@ -38,6 +39,12 @@ calendar/list read models stay in their owning use cases. Date-option batch crea
 application-level transaction over ordinary option aggregates; it deliberately introduces no
 batch aggregate or persistence table. The worker is a separate process so
 long-running work cannot consume API request capacity.
+
+The Phase-6 `bookings` module follows the same four-layer boundary. A global Artist remains master
+data; a Booking is a separate versioned Event aggregate relation with its own role, status,
+agreement and ordering data. Format and Event Line-up requirements are relational children, not a
+JSON/EAV configuration engine. Booking services own transition validation, progress calculation,
+financial projection and transactional mutations; Prisma remains in the infrastructure adapter.
 
 ## Workspace components
 
@@ -88,7 +95,9 @@ configuration engine exists.
 
 The event boundary supports two explicit creation paths. A template-backed Event copies current
 EventFormat values inside its creation transaction and retains source format ID/version plus
-provenance snapshots. A free Event has all source/snapshot columns null and requires its own
+provenance snapshots. In the same transaction it also copies each active format Line-up
+requirement, including its source ID/version and optional Minor-Unit default fee. A free Event has
+all source/snapshot columns null and requires its own
 EventKind; it never creates a placeholder format. Both paths store independently editable values.
 EventFormat updates never mutate existing Events, and archived formats remain historically
 referencable but cannot create new Events.
@@ -107,10 +116,24 @@ availability, Event mutations and option mutations all call this same boundary. 
 remain valid business records but deliberately have no exact occupancy row and force manual review
 for their local date.
 
-`VenueDateOption` remains separate from Event and future Booking aggregates. It owns rank, expiry,
+`VenueDateOption` remains separate from Event and Booking aggregates. It owns rank, expiry,
 status, version and optional master-data references. Release, manual promotion and conversion are
 atomic repository transactions. Conversion replaces the option occupancy with the final Event
-occupancy and marks overlapping second options unavailable without deleting their history.
+occupancy, snapshots active format Line-up requirements when a format is selected and marks
+overlapping second options unavailable without deleting their history.
+
+Booking reads and writes repeat organization and Event ownership and reuse the Event's Location
+scope. Optional company and Contact references use tenant-composite keys; new assignments must be
+active and valid for the Artist, while already referenced archived records remain readable and
+labelled. The active Line-up is guarded by partial unique indexes for Artist/role and order.
+Declined and cancelled rows remain historical and no longer occupy either key.
+
+Status changes follow one explicit domain graph, increment the optimistic version and append both
+status history and allowlisted audit metadata inside one transaction. Reordering requires the
+complete active set with the current version of every Booking. Progress and Event-list summaries
+load requirements and Bookings in batches; list filtering uses aggregate SQL rather than one API
+or database query per Event. The `bookings.finance` permission is applied to the server-side DTO
+projection, so financial fields never reach unauthorized clients.
 
 Authentication answers “who is this user?” and remains owned by Better Auth. Authorization
 answers “what may this membership do in this organization?” and remains owned by the platform.

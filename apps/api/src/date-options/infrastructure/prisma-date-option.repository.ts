@@ -376,6 +376,33 @@ export class PrismaDateOptionRepository implements DateOptionRepository {
       data: { organizationId: access.organizationId, ...data, eventDate: databaseDate(eventDate) },
       include: eventInclude,
     });
+    if (values.sourceEventFormatId) {
+      const requirements = await database.eventFormatLineupRequirement.findMany({
+        where: {
+          organizationId: access.organizationId,
+          eventFormatId: values.sourceEventFormatId,
+          status: 'ACTIVE',
+        },
+        orderBy: [{ sortOrder: 'asc' }, { id: 'asc' }],
+      });
+      if (requirements.length > 0) {
+        await database.eventLineupRequirement.createMany({
+          data: requirements.map((requirement) => ({
+            organizationId: access.organizationId,
+            eventId: event.id,
+            sourceEventFormatRequirementId: requirement.id,
+            sourceEventFormatRequirementVersion: requirement.version,
+            role: requirement.role,
+            customRoleLabel: requirement.customRoleLabel,
+            normalizedCustomRoleLabel: requirement.normalizedCustomRoleLabel,
+            requiredCount: requirement.requiredCount,
+            defaultFeeMinor: requirement.defaultFeeMinor,
+            defaultFeeCurrency: requirement.defaultFeeCurrency,
+            sortOrder: requirement.sortOrder,
+          })),
+        });
+      }
+    }
     await replaceEventOccupancy(
       database,
       access.organizationId,
@@ -527,6 +554,16 @@ function mapEvent(row: EventRow): EventRecord {
     timezone: row.timezone,
     occupancyComplete:
       eventOccupancyInterval(row.eventDate.toISOString().slice(0, 10), row) !== undefined,
+    bookingSummary: {
+      artistRequiredCount: 0,
+      artistConfirmedCount: 0,
+      moderatorRequired: false,
+      moderatorConfirmed: false,
+      openRequestCount: 0,
+      optionCount: 0,
+      incomplete: false,
+      fullyConfirmed: false,
+    },
     createdAt: row.createdAt.toISOString(),
     updatedAt: row.updatedAt.toISOString(),
   };

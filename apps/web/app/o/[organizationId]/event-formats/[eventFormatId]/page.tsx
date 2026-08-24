@@ -2,6 +2,7 @@ import type { components } from '@venue/api-client';
 import { notFound } from 'next/navigation';
 
 import { EventFormatForm } from '../../../../components/event-formats/event-format-form';
+import { LineupRequirements } from '../../../../components/bookings/lineup-requirements';
 import {
   CompactEmpty,
   DetailField,
@@ -53,37 +54,57 @@ export default async function EventFormatDetailPage({
   }
   const canWrite = hasPermission(membership, 'event_formats.write');
   const canArchive = hasPermission(membership, 'event_formats.archive');
+  const canWriteLineup = hasPermission(membership, 'lineup.write');
+  const canFinance = hasPermission(membership, 'bookings.finance');
+  const lineupRequirements = unwrap(
+    await client.GET(
+      '/api/v1/organizations/{organizationId}/event-formats/{eventFormatId}/lineup-requirements',
+      { params: { path: { organizationId, eventFormatId } } },
+    ),
+  );
   return (
-    <EditableDetail
-      badges={
-        <span className={`status-badge status-badge--${eventFormat.status.toLowerCase()}`}>
-          {eventFormat.status === 'ACTIVE' ? 'Aktiv' : 'Archiviert'}
-        </span>
-      }
-      canEdit={canWrite}
-      editTitle="Veranstaltungsformat bearbeiten"
-      eyebrow="Veranstaltungsformat"
-      id="event-format-detail"
-      sectionTitle="Formatvorlage"
-      secondaryActions={
-        canArchive ? (
-          <LifecycleAction
-            entityId={eventFormat.id}
-            kind="event-format"
-            organizationId={organizationId}
-            status={eventFormat.status}
-            version={eventFormat.version}
-          />
-        ) : null
-      }
-      title={eventFormat.name}
-      updatedLabel={`Zuletzt geändert: ${new Date(eventFormat.updatedAt).toLocaleString('de-DE')}`}
-      view={<EventFormatDetails eventFormat={eventFormat} />}
-    >
-      {canWrite ? (
-        <EventFormatForm eventFormat={eventFormat} organizationId={organizationId} />
-      ) : null}
-    </EditableDetail>
+    <>
+      <EditableDetail
+        badges={
+          <span className={`status-badge status-badge--${eventFormat.status.toLowerCase()}`}>
+            {eventFormat.status === 'ACTIVE' ? 'Aktiv' : 'Archiviert'}
+          </span>
+        }
+        canEdit={canWrite}
+        editTitle="Veranstaltungsformat bearbeiten"
+        eyebrow="Veranstaltungsformat"
+        id="event-format-detail"
+        sectionTitle="Formatvorlage"
+        secondaryActions={
+          canArchive ? (
+            <LifecycleAction
+              entityId={eventFormat.id}
+              kind="event-format"
+              organizationId={organizationId}
+              status={eventFormat.status}
+              version={eventFormat.version}
+            />
+          ) : null
+        }
+        title={eventFormat.name}
+        updatedLabel={`Zuletzt geändert: ${new Date(eventFormat.updatedAt).toLocaleString('de-DE')}`}
+        view={<EventFormatDetails eventFormat={eventFormat} />}
+      >
+        {canWrite ? (
+          <EventFormatForm eventFormat={eventFormat} organizationId={organizationId} />
+        ) : null}
+      </EditableDetail>
+      <section className="booking-panel event-format-lineup-panel">
+        <LineupRequirements
+          canFinance={canFinance}
+          canWrite={canWriteLineup}
+          initial={lineupRequirements}
+          organizationId={organizationId}
+          resourceId={eventFormatId}
+          resourceType="event-format"
+        />
+      </section>
+    </>
   );
 }
 

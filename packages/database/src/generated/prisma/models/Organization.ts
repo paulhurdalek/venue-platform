@@ -268,6 +268,11 @@ export type OrganizationWhereInput = {
   events?: Prisma.EventListRelationFilter
   dateOptions?: Prisma.VenueDateOptionListRelationFilter
   occupancies?: Prisma.LocationOccupancyListRelationFilter
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementListRelationFilter
+  eventLineupRequirements?: Prisma.EventLineupRequirementListRelationFilter
+  bookings?: Prisma.BookingListRelationFilter
+  bookingStatusHistory?: Prisma.BookingStatusHistoryListRelationFilter
+  eventProgramItems?: Prisma.EventProgramItemListRelationFilter
 }
 
 export type OrganizationOrderByWithRelationInput = {
@@ -293,6 +298,11 @@ export type OrganizationOrderByWithRelationInput = {
   events?: Prisma.EventOrderByRelationAggregateInput
   dateOptions?: Prisma.VenueDateOptionOrderByRelationAggregateInput
   occupancies?: Prisma.LocationOccupancyOrderByRelationAggregateInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementOrderByRelationAggregateInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementOrderByRelationAggregateInput
+  bookings?: Prisma.BookingOrderByRelationAggregateInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryOrderByRelationAggregateInput
+  eventProgramItems?: Prisma.EventProgramItemOrderByRelationAggregateInput
 }
 
 export type OrganizationWhereUniqueInput = Prisma.AtLeast<{
@@ -321,6 +331,11 @@ export type OrganizationWhereUniqueInput = Prisma.AtLeast<{
   events?: Prisma.EventListRelationFilter
   dateOptions?: Prisma.VenueDateOptionListRelationFilter
   occupancies?: Prisma.LocationOccupancyListRelationFilter
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementListRelationFilter
+  eventLineupRequirements?: Prisma.EventLineupRequirementListRelationFilter
+  bookings?: Prisma.BookingListRelationFilter
+  bookingStatusHistory?: Prisma.BookingStatusHistoryListRelationFilter
+  eventProgramItems?: Prisma.EventProgramItemListRelationFilter
 }, "id">
 
 export type OrganizationOrderByWithAggregationInput = {
@@ -380,6 +395,11 @@ export type OrganizationCreateInput = {
   events?: Prisma.EventCreateNestedManyWithoutOrganizationInput
   dateOptions?: Prisma.VenueDateOptionCreateNestedManyWithoutOrganizationInput
   occupancies?: Prisma.LocationOccupancyCreateNestedManyWithoutOrganizationInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementCreateNestedManyWithoutOrganizationInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementCreateNestedManyWithoutOrganizationInput
+  bookings?: Prisma.BookingCreateNestedManyWithoutOrganizationInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryCreateNestedManyWithoutOrganizationInput
+  eventProgramItems?: Prisma.EventProgramItemCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateInput = {
@@ -405,6 +425,11 @@ export type OrganizationUncheckedCreateInput = {
   events?: Prisma.EventUncheckedCreateNestedManyWithoutOrganizationInput
   dateOptions?: Prisma.VenueDateOptionUncheckedCreateNestedManyWithoutOrganizationInput
   occupancies?: Prisma.LocationOccupancyUncheckedCreateNestedManyWithoutOrganizationInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUncheckedCreateNestedManyWithoutOrganizationInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUncheckedCreateNestedManyWithoutOrganizationInput
+  bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutOrganizationInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
+  eventProgramItems?: Prisma.EventProgramItemUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUpdateInput = {
@@ -430,6 +455,11 @@ export type OrganizationUpdateInput = {
   events?: Prisma.EventUpdateManyWithoutOrganizationNestedInput
   dateOptions?: Prisma.VenueDateOptionUpdateManyWithoutOrganizationNestedInput
   occupancies?: Prisma.LocationOccupancyUpdateManyWithoutOrganizationNestedInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUpdateManyWithoutOrganizationNestedInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUpdateManyWithoutOrganizationNestedInput
+  bookings?: Prisma.BookingUpdateManyWithoutOrganizationNestedInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUpdateManyWithoutOrganizationNestedInput
+  eventProgramItems?: Prisma.EventProgramItemUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateInput = {
@@ -455,6 +485,11 @@ export type OrganizationUncheckedUpdateInput = {
   events?: Prisma.EventUncheckedUpdateManyWithoutOrganizationNestedInput
   dateOptions?: Prisma.VenueDateOptionUncheckedUpdateManyWithoutOrganizationNestedInput
   occupancies?: Prisma.LocationOccupancyUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUncheckedUpdateManyWithoutOrganizationNestedInput
+  bookings?: Prisma.BookingUncheckedUpdateManyWithoutOrganizationNestedInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventProgramItems?: Prisma.EventProgramItemUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateManyInput = {
@@ -699,6 +734,76 @@ export type OrganizationUpdateOneRequiredWithoutPartnersNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutPartnersInput, Prisma.OrganizationUpdateWithoutPartnersInput>, Prisma.OrganizationUncheckedUpdateWithoutPartnersInput>
 }
 
+export type OrganizationCreateNestedOneWithoutEventFormatLineupRequirementsInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutEventFormatLineupRequirementsInput, Prisma.OrganizationUncheckedCreateWithoutEventFormatLineupRequirementsInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutEventFormatLineupRequirementsInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+}
+
+export type OrganizationUpdateOneRequiredWithoutEventFormatLineupRequirementsNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutEventFormatLineupRequirementsInput, Prisma.OrganizationUncheckedCreateWithoutEventFormatLineupRequirementsInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutEventFormatLineupRequirementsInput
+  upsert?: Prisma.OrganizationUpsertWithoutEventFormatLineupRequirementsInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutEventFormatLineupRequirementsInput, Prisma.OrganizationUpdateWithoutEventFormatLineupRequirementsInput>, Prisma.OrganizationUncheckedUpdateWithoutEventFormatLineupRequirementsInput>
+}
+
+export type OrganizationCreateNestedOneWithoutEventLineupRequirementsInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutEventLineupRequirementsInput, Prisma.OrganizationUncheckedCreateWithoutEventLineupRequirementsInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutEventLineupRequirementsInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+}
+
+export type OrganizationUpdateOneRequiredWithoutEventLineupRequirementsNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutEventLineupRequirementsInput, Prisma.OrganizationUncheckedCreateWithoutEventLineupRequirementsInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutEventLineupRequirementsInput
+  upsert?: Prisma.OrganizationUpsertWithoutEventLineupRequirementsInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutEventLineupRequirementsInput, Prisma.OrganizationUpdateWithoutEventLineupRequirementsInput>, Prisma.OrganizationUncheckedUpdateWithoutEventLineupRequirementsInput>
+}
+
+export type OrganizationCreateNestedOneWithoutBookingsInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutBookingsInput, Prisma.OrganizationUncheckedCreateWithoutBookingsInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutBookingsInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+}
+
+export type OrganizationUpdateOneRequiredWithoutBookingsNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutBookingsInput, Prisma.OrganizationUncheckedCreateWithoutBookingsInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutBookingsInput
+  upsert?: Prisma.OrganizationUpsertWithoutBookingsInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutBookingsInput, Prisma.OrganizationUpdateWithoutBookingsInput>, Prisma.OrganizationUncheckedUpdateWithoutBookingsInput>
+}
+
+export type OrganizationCreateNestedOneWithoutEventProgramItemsInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutEventProgramItemsInput, Prisma.OrganizationUncheckedCreateWithoutEventProgramItemsInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutEventProgramItemsInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+}
+
+export type OrganizationUpdateOneRequiredWithoutEventProgramItemsNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutEventProgramItemsInput, Prisma.OrganizationUncheckedCreateWithoutEventProgramItemsInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutEventProgramItemsInput
+  upsert?: Prisma.OrganizationUpsertWithoutEventProgramItemsInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutEventProgramItemsInput, Prisma.OrganizationUpdateWithoutEventProgramItemsInput>, Prisma.OrganizationUncheckedUpdateWithoutEventProgramItemsInput>
+}
+
+export type OrganizationCreateNestedOneWithoutBookingStatusHistoryInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutBookingStatusHistoryInput, Prisma.OrganizationUncheckedCreateWithoutBookingStatusHistoryInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutBookingStatusHistoryInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+}
+
+export type OrganizationUpdateOneRequiredWithoutBookingStatusHistoryNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutBookingStatusHistoryInput, Prisma.OrganizationUncheckedCreateWithoutBookingStatusHistoryInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutBookingStatusHistoryInput
+  upsert?: Prisma.OrganizationUpsertWithoutBookingStatusHistoryInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutBookingStatusHistoryInput, Prisma.OrganizationUpdateWithoutBookingStatusHistoryInput>, Prisma.OrganizationUncheckedUpdateWithoutBookingStatusHistoryInput>
+}
+
 export type OrganizationCreateNestedOneWithoutDateOptionsInput = {
   create?: Prisma.XOR<Prisma.OrganizationCreateWithoutDateOptionsInput, Prisma.OrganizationUncheckedCreateWithoutDateOptionsInput>
   connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutDateOptionsInput
@@ -749,6 +854,11 @@ export type OrganizationCreateWithoutEventFormatsInput = {
   events?: Prisma.EventCreateNestedManyWithoutOrganizationInput
   dateOptions?: Prisma.VenueDateOptionCreateNestedManyWithoutOrganizationInput
   occupancies?: Prisma.LocationOccupancyCreateNestedManyWithoutOrganizationInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementCreateNestedManyWithoutOrganizationInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementCreateNestedManyWithoutOrganizationInput
+  bookings?: Prisma.BookingCreateNestedManyWithoutOrganizationInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryCreateNestedManyWithoutOrganizationInput
+  eventProgramItems?: Prisma.EventProgramItemCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutEventFormatsInput = {
@@ -773,6 +883,11 @@ export type OrganizationUncheckedCreateWithoutEventFormatsInput = {
   events?: Prisma.EventUncheckedCreateNestedManyWithoutOrganizationInput
   dateOptions?: Prisma.VenueDateOptionUncheckedCreateNestedManyWithoutOrganizationInput
   occupancies?: Prisma.LocationOccupancyUncheckedCreateNestedManyWithoutOrganizationInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUncheckedCreateNestedManyWithoutOrganizationInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUncheckedCreateNestedManyWithoutOrganizationInput
+  bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutOrganizationInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
+  eventProgramItems?: Prisma.EventProgramItemUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutEventFormatsInput = {
@@ -813,6 +928,11 @@ export type OrganizationUpdateWithoutEventFormatsInput = {
   events?: Prisma.EventUpdateManyWithoutOrganizationNestedInput
   dateOptions?: Prisma.VenueDateOptionUpdateManyWithoutOrganizationNestedInput
   occupancies?: Prisma.LocationOccupancyUpdateManyWithoutOrganizationNestedInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUpdateManyWithoutOrganizationNestedInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUpdateManyWithoutOrganizationNestedInput
+  bookings?: Prisma.BookingUpdateManyWithoutOrganizationNestedInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUpdateManyWithoutOrganizationNestedInput
+  eventProgramItems?: Prisma.EventProgramItemUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutEventFormatsInput = {
@@ -837,6 +957,11 @@ export type OrganizationUncheckedUpdateWithoutEventFormatsInput = {
   events?: Prisma.EventUncheckedUpdateManyWithoutOrganizationNestedInput
   dateOptions?: Prisma.VenueDateOptionUncheckedUpdateManyWithoutOrganizationNestedInput
   occupancies?: Prisma.LocationOccupancyUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUncheckedUpdateManyWithoutOrganizationNestedInput
+  bookings?: Prisma.BookingUncheckedUpdateManyWithoutOrganizationNestedInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventProgramItems?: Prisma.EventProgramItemUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutEventsInput = {
@@ -861,6 +986,11 @@ export type OrganizationCreateWithoutEventsInput = {
   eventFormats?: Prisma.EventFormatCreateNestedManyWithoutOrganizationInput
   dateOptions?: Prisma.VenueDateOptionCreateNestedManyWithoutOrganizationInput
   occupancies?: Prisma.LocationOccupancyCreateNestedManyWithoutOrganizationInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementCreateNestedManyWithoutOrganizationInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementCreateNestedManyWithoutOrganizationInput
+  bookings?: Prisma.BookingCreateNestedManyWithoutOrganizationInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryCreateNestedManyWithoutOrganizationInput
+  eventProgramItems?: Prisma.EventProgramItemCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutEventsInput = {
@@ -885,6 +1015,11 @@ export type OrganizationUncheckedCreateWithoutEventsInput = {
   eventFormats?: Prisma.EventFormatUncheckedCreateNestedManyWithoutOrganizationInput
   dateOptions?: Prisma.VenueDateOptionUncheckedCreateNestedManyWithoutOrganizationInput
   occupancies?: Prisma.LocationOccupancyUncheckedCreateNestedManyWithoutOrganizationInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUncheckedCreateNestedManyWithoutOrganizationInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUncheckedCreateNestedManyWithoutOrganizationInput
+  bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutOrganizationInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
+  eventProgramItems?: Prisma.EventProgramItemUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutEventsInput = {
@@ -925,6 +1060,11 @@ export type OrganizationUpdateWithoutEventsInput = {
   eventFormats?: Prisma.EventFormatUpdateManyWithoutOrganizationNestedInput
   dateOptions?: Prisma.VenueDateOptionUpdateManyWithoutOrganizationNestedInput
   occupancies?: Prisma.LocationOccupancyUpdateManyWithoutOrganizationNestedInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUpdateManyWithoutOrganizationNestedInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUpdateManyWithoutOrganizationNestedInput
+  bookings?: Prisma.BookingUpdateManyWithoutOrganizationNestedInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUpdateManyWithoutOrganizationNestedInput
+  eventProgramItems?: Prisma.EventProgramItemUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutEventsInput = {
@@ -949,6 +1089,11 @@ export type OrganizationUncheckedUpdateWithoutEventsInput = {
   eventFormats?: Prisma.EventFormatUncheckedUpdateManyWithoutOrganizationNestedInput
   dateOptions?: Prisma.VenueDateOptionUncheckedUpdateManyWithoutOrganizationNestedInput
   occupancies?: Prisma.LocationOccupancyUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUncheckedUpdateManyWithoutOrganizationNestedInput
+  bookings?: Prisma.BookingUncheckedUpdateManyWithoutOrganizationNestedInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventProgramItems?: Prisma.EventProgramItemUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutLocationsInput = {
@@ -973,6 +1118,11 @@ export type OrganizationCreateWithoutLocationsInput = {
   events?: Prisma.EventCreateNestedManyWithoutOrganizationInput
   dateOptions?: Prisma.VenueDateOptionCreateNestedManyWithoutOrganizationInput
   occupancies?: Prisma.LocationOccupancyCreateNestedManyWithoutOrganizationInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementCreateNestedManyWithoutOrganizationInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementCreateNestedManyWithoutOrganizationInput
+  bookings?: Prisma.BookingCreateNestedManyWithoutOrganizationInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryCreateNestedManyWithoutOrganizationInput
+  eventProgramItems?: Prisma.EventProgramItemCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutLocationsInput = {
@@ -997,6 +1147,11 @@ export type OrganizationUncheckedCreateWithoutLocationsInput = {
   events?: Prisma.EventUncheckedCreateNestedManyWithoutOrganizationInput
   dateOptions?: Prisma.VenueDateOptionUncheckedCreateNestedManyWithoutOrganizationInput
   occupancies?: Prisma.LocationOccupancyUncheckedCreateNestedManyWithoutOrganizationInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUncheckedCreateNestedManyWithoutOrganizationInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUncheckedCreateNestedManyWithoutOrganizationInput
+  bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutOrganizationInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
+  eventProgramItems?: Prisma.EventProgramItemUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutLocationsInput = {
@@ -1037,6 +1192,11 @@ export type OrganizationUpdateWithoutLocationsInput = {
   events?: Prisma.EventUpdateManyWithoutOrganizationNestedInput
   dateOptions?: Prisma.VenueDateOptionUpdateManyWithoutOrganizationNestedInput
   occupancies?: Prisma.LocationOccupancyUpdateManyWithoutOrganizationNestedInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUpdateManyWithoutOrganizationNestedInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUpdateManyWithoutOrganizationNestedInput
+  bookings?: Prisma.BookingUpdateManyWithoutOrganizationNestedInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUpdateManyWithoutOrganizationNestedInput
+  eventProgramItems?: Prisma.EventProgramItemUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutLocationsInput = {
@@ -1061,6 +1221,11 @@ export type OrganizationUncheckedUpdateWithoutLocationsInput = {
   events?: Prisma.EventUncheckedUpdateManyWithoutOrganizationNestedInput
   dateOptions?: Prisma.VenueDateOptionUncheckedUpdateManyWithoutOrganizationNestedInput
   occupancies?: Prisma.LocationOccupancyUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUncheckedUpdateManyWithoutOrganizationNestedInput
+  bookings?: Prisma.BookingUncheckedUpdateManyWithoutOrganizationNestedInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventProgramItems?: Prisma.EventProgramItemUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutMembershipsInput = {
@@ -1085,6 +1250,11 @@ export type OrganizationCreateWithoutMembershipsInput = {
   events?: Prisma.EventCreateNestedManyWithoutOrganizationInput
   dateOptions?: Prisma.VenueDateOptionCreateNestedManyWithoutOrganizationInput
   occupancies?: Prisma.LocationOccupancyCreateNestedManyWithoutOrganizationInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementCreateNestedManyWithoutOrganizationInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementCreateNestedManyWithoutOrganizationInput
+  bookings?: Prisma.BookingCreateNestedManyWithoutOrganizationInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryCreateNestedManyWithoutOrganizationInput
+  eventProgramItems?: Prisma.EventProgramItemCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutMembershipsInput = {
@@ -1109,6 +1279,11 @@ export type OrganizationUncheckedCreateWithoutMembershipsInput = {
   events?: Prisma.EventUncheckedCreateNestedManyWithoutOrganizationInput
   dateOptions?: Prisma.VenueDateOptionUncheckedCreateNestedManyWithoutOrganizationInput
   occupancies?: Prisma.LocationOccupancyUncheckedCreateNestedManyWithoutOrganizationInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUncheckedCreateNestedManyWithoutOrganizationInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUncheckedCreateNestedManyWithoutOrganizationInput
+  bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutOrganizationInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
+  eventProgramItems?: Prisma.EventProgramItemUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutMembershipsInput = {
@@ -1149,6 +1324,11 @@ export type OrganizationUpdateWithoutMembershipsInput = {
   events?: Prisma.EventUpdateManyWithoutOrganizationNestedInput
   dateOptions?: Prisma.VenueDateOptionUpdateManyWithoutOrganizationNestedInput
   occupancies?: Prisma.LocationOccupancyUpdateManyWithoutOrganizationNestedInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUpdateManyWithoutOrganizationNestedInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUpdateManyWithoutOrganizationNestedInput
+  bookings?: Prisma.BookingUpdateManyWithoutOrganizationNestedInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUpdateManyWithoutOrganizationNestedInput
+  eventProgramItems?: Prisma.EventProgramItemUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutMembershipsInput = {
@@ -1173,6 +1353,11 @@ export type OrganizationUncheckedUpdateWithoutMembershipsInput = {
   events?: Prisma.EventUncheckedUpdateManyWithoutOrganizationNestedInput
   dateOptions?: Prisma.VenueDateOptionUncheckedUpdateManyWithoutOrganizationNestedInput
   occupancies?: Prisma.LocationOccupancyUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUncheckedUpdateManyWithoutOrganizationNestedInput
+  bookings?: Prisma.BookingUncheckedUpdateManyWithoutOrganizationNestedInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventProgramItems?: Prisma.EventProgramItemUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutRolesInput = {
@@ -1197,6 +1382,11 @@ export type OrganizationCreateWithoutRolesInput = {
   events?: Prisma.EventCreateNestedManyWithoutOrganizationInput
   dateOptions?: Prisma.VenueDateOptionCreateNestedManyWithoutOrganizationInput
   occupancies?: Prisma.LocationOccupancyCreateNestedManyWithoutOrganizationInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementCreateNestedManyWithoutOrganizationInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementCreateNestedManyWithoutOrganizationInput
+  bookings?: Prisma.BookingCreateNestedManyWithoutOrganizationInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryCreateNestedManyWithoutOrganizationInput
+  eventProgramItems?: Prisma.EventProgramItemCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutRolesInput = {
@@ -1221,6 +1411,11 @@ export type OrganizationUncheckedCreateWithoutRolesInput = {
   events?: Prisma.EventUncheckedCreateNestedManyWithoutOrganizationInput
   dateOptions?: Prisma.VenueDateOptionUncheckedCreateNestedManyWithoutOrganizationInput
   occupancies?: Prisma.LocationOccupancyUncheckedCreateNestedManyWithoutOrganizationInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUncheckedCreateNestedManyWithoutOrganizationInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUncheckedCreateNestedManyWithoutOrganizationInput
+  bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutOrganizationInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
+  eventProgramItems?: Prisma.EventProgramItemUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutRolesInput = {
@@ -1261,6 +1456,11 @@ export type OrganizationUpdateWithoutRolesInput = {
   events?: Prisma.EventUpdateManyWithoutOrganizationNestedInput
   dateOptions?: Prisma.VenueDateOptionUpdateManyWithoutOrganizationNestedInput
   occupancies?: Prisma.LocationOccupancyUpdateManyWithoutOrganizationNestedInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUpdateManyWithoutOrganizationNestedInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUpdateManyWithoutOrganizationNestedInput
+  bookings?: Prisma.BookingUpdateManyWithoutOrganizationNestedInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUpdateManyWithoutOrganizationNestedInput
+  eventProgramItems?: Prisma.EventProgramItemUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutRolesInput = {
@@ -1285,6 +1485,11 @@ export type OrganizationUncheckedUpdateWithoutRolesInput = {
   events?: Prisma.EventUncheckedUpdateManyWithoutOrganizationNestedInput
   dateOptions?: Prisma.VenueDateOptionUncheckedUpdateManyWithoutOrganizationNestedInput
   occupancies?: Prisma.LocationOccupancyUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUncheckedUpdateManyWithoutOrganizationNestedInput
+  bookings?: Prisma.BookingUncheckedUpdateManyWithoutOrganizationNestedInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventProgramItems?: Prisma.EventProgramItemUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutInvitationsInput = {
@@ -1309,6 +1514,11 @@ export type OrganizationCreateWithoutInvitationsInput = {
   events?: Prisma.EventCreateNestedManyWithoutOrganizationInput
   dateOptions?: Prisma.VenueDateOptionCreateNestedManyWithoutOrganizationInput
   occupancies?: Prisma.LocationOccupancyCreateNestedManyWithoutOrganizationInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementCreateNestedManyWithoutOrganizationInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementCreateNestedManyWithoutOrganizationInput
+  bookings?: Prisma.BookingCreateNestedManyWithoutOrganizationInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryCreateNestedManyWithoutOrganizationInput
+  eventProgramItems?: Prisma.EventProgramItemCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutInvitationsInput = {
@@ -1333,6 +1543,11 @@ export type OrganizationUncheckedCreateWithoutInvitationsInput = {
   events?: Prisma.EventUncheckedCreateNestedManyWithoutOrganizationInput
   dateOptions?: Prisma.VenueDateOptionUncheckedCreateNestedManyWithoutOrganizationInput
   occupancies?: Prisma.LocationOccupancyUncheckedCreateNestedManyWithoutOrganizationInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUncheckedCreateNestedManyWithoutOrganizationInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUncheckedCreateNestedManyWithoutOrganizationInput
+  bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutOrganizationInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
+  eventProgramItems?: Prisma.EventProgramItemUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutInvitationsInput = {
@@ -1373,6 +1588,11 @@ export type OrganizationUpdateWithoutInvitationsInput = {
   events?: Prisma.EventUpdateManyWithoutOrganizationNestedInput
   dateOptions?: Prisma.VenueDateOptionUpdateManyWithoutOrganizationNestedInput
   occupancies?: Prisma.LocationOccupancyUpdateManyWithoutOrganizationNestedInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUpdateManyWithoutOrganizationNestedInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUpdateManyWithoutOrganizationNestedInput
+  bookings?: Prisma.BookingUpdateManyWithoutOrganizationNestedInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUpdateManyWithoutOrganizationNestedInput
+  eventProgramItems?: Prisma.EventProgramItemUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutInvitationsInput = {
@@ -1397,6 +1617,11 @@ export type OrganizationUncheckedUpdateWithoutInvitationsInput = {
   events?: Prisma.EventUncheckedUpdateManyWithoutOrganizationNestedInput
   dateOptions?: Prisma.VenueDateOptionUncheckedUpdateManyWithoutOrganizationNestedInput
   occupancies?: Prisma.LocationOccupancyUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUncheckedUpdateManyWithoutOrganizationNestedInput
+  bookings?: Prisma.BookingUncheckedUpdateManyWithoutOrganizationNestedInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventProgramItems?: Prisma.EventProgramItemUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutAuditEntriesInput = {
@@ -1421,6 +1646,11 @@ export type OrganizationCreateWithoutAuditEntriesInput = {
   events?: Prisma.EventCreateNestedManyWithoutOrganizationInput
   dateOptions?: Prisma.VenueDateOptionCreateNestedManyWithoutOrganizationInput
   occupancies?: Prisma.LocationOccupancyCreateNestedManyWithoutOrganizationInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementCreateNestedManyWithoutOrganizationInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementCreateNestedManyWithoutOrganizationInput
+  bookings?: Prisma.BookingCreateNestedManyWithoutOrganizationInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryCreateNestedManyWithoutOrganizationInput
+  eventProgramItems?: Prisma.EventProgramItemCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutAuditEntriesInput = {
@@ -1445,6 +1675,11 @@ export type OrganizationUncheckedCreateWithoutAuditEntriesInput = {
   events?: Prisma.EventUncheckedCreateNestedManyWithoutOrganizationInput
   dateOptions?: Prisma.VenueDateOptionUncheckedCreateNestedManyWithoutOrganizationInput
   occupancies?: Prisma.LocationOccupancyUncheckedCreateNestedManyWithoutOrganizationInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUncheckedCreateNestedManyWithoutOrganizationInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUncheckedCreateNestedManyWithoutOrganizationInput
+  bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutOrganizationInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
+  eventProgramItems?: Prisma.EventProgramItemUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutAuditEntriesInput = {
@@ -1485,6 +1720,11 @@ export type OrganizationUpdateWithoutAuditEntriesInput = {
   events?: Prisma.EventUpdateManyWithoutOrganizationNestedInput
   dateOptions?: Prisma.VenueDateOptionUpdateManyWithoutOrganizationNestedInput
   occupancies?: Prisma.LocationOccupancyUpdateManyWithoutOrganizationNestedInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUpdateManyWithoutOrganizationNestedInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUpdateManyWithoutOrganizationNestedInput
+  bookings?: Prisma.BookingUpdateManyWithoutOrganizationNestedInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUpdateManyWithoutOrganizationNestedInput
+  eventProgramItems?: Prisma.EventProgramItemUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutAuditEntriesInput = {
@@ -1509,6 +1749,11 @@ export type OrganizationUncheckedUpdateWithoutAuditEntriesInput = {
   events?: Prisma.EventUncheckedUpdateManyWithoutOrganizationNestedInput
   dateOptions?: Prisma.VenueDateOptionUncheckedUpdateManyWithoutOrganizationNestedInput
   occupancies?: Prisma.LocationOccupancyUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUncheckedUpdateManyWithoutOrganizationNestedInput
+  bookings?: Prisma.BookingUncheckedUpdateManyWithoutOrganizationNestedInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventProgramItems?: Prisma.EventProgramItemUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutArtistsInput = {
@@ -1533,6 +1778,11 @@ export type OrganizationCreateWithoutArtistsInput = {
   events?: Prisma.EventCreateNestedManyWithoutOrganizationInput
   dateOptions?: Prisma.VenueDateOptionCreateNestedManyWithoutOrganizationInput
   occupancies?: Prisma.LocationOccupancyCreateNestedManyWithoutOrganizationInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementCreateNestedManyWithoutOrganizationInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementCreateNestedManyWithoutOrganizationInput
+  bookings?: Prisma.BookingCreateNestedManyWithoutOrganizationInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryCreateNestedManyWithoutOrganizationInput
+  eventProgramItems?: Prisma.EventProgramItemCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutArtistsInput = {
@@ -1557,6 +1807,11 @@ export type OrganizationUncheckedCreateWithoutArtistsInput = {
   events?: Prisma.EventUncheckedCreateNestedManyWithoutOrganizationInput
   dateOptions?: Prisma.VenueDateOptionUncheckedCreateNestedManyWithoutOrganizationInput
   occupancies?: Prisma.LocationOccupancyUncheckedCreateNestedManyWithoutOrganizationInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUncheckedCreateNestedManyWithoutOrganizationInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUncheckedCreateNestedManyWithoutOrganizationInput
+  bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutOrganizationInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
+  eventProgramItems?: Prisma.EventProgramItemUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutArtistsInput = {
@@ -1597,6 +1852,11 @@ export type OrganizationUpdateWithoutArtistsInput = {
   events?: Prisma.EventUpdateManyWithoutOrganizationNestedInput
   dateOptions?: Prisma.VenueDateOptionUpdateManyWithoutOrganizationNestedInput
   occupancies?: Prisma.LocationOccupancyUpdateManyWithoutOrganizationNestedInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUpdateManyWithoutOrganizationNestedInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUpdateManyWithoutOrganizationNestedInput
+  bookings?: Prisma.BookingUpdateManyWithoutOrganizationNestedInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUpdateManyWithoutOrganizationNestedInput
+  eventProgramItems?: Prisma.EventProgramItemUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutArtistsInput = {
@@ -1621,6 +1881,11 @@ export type OrganizationUncheckedUpdateWithoutArtistsInput = {
   events?: Prisma.EventUncheckedUpdateManyWithoutOrganizationNestedInput
   dateOptions?: Prisma.VenueDateOptionUncheckedUpdateManyWithoutOrganizationNestedInput
   occupancies?: Prisma.LocationOccupancyUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUncheckedUpdateManyWithoutOrganizationNestedInput
+  bookings?: Prisma.BookingUncheckedUpdateManyWithoutOrganizationNestedInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventProgramItems?: Prisma.EventProgramItemUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutContactsInput = {
@@ -1645,6 +1910,11 @@ export type OrganizationCreateWithoutContactsInput = {
   events?: Prisma.EventCreateNestedManyWithoutOrganizationInput
   dateOptions?: Prisma.VenueDateOptionCreateNestedManyWithoutOrganizationInput
   occupancies?: Prisma.LocationOccupancyCreateNestedManyWithoutOrganizationInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementCreateNestedManyWithoutOrganizationInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementCreateNestedManyWithoutOrganizationInput
+  bookings?: Prisma.BookingCreateNestedManyWithoutOrganizationInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryCreateNestedManyWithoutOrganizationInput
+  eventProgramItems?: Prisma.EventProgramItemCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutContactsInput = {
@@ -1669,6 +1939,11 @@ export type OrganizationUncheckedCreateWithoutContactsInput = {
   events?: Prisma.EventUncheckedCreateNestedManyWithoutOrganizationInput
   dateOptions?: Prisma.VenueDateOptionUncheckedCreateNestedManyWithoutOrganizationInput
   occupancies?: Prisma.LocationOccupancyUncheckedCreateNestedManyWithoutOrganizationInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUncheckedCreateNestedManyWithoutOrganizationInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUncheckedCreateNestedManyWithoutOrganizationInput
+  bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutOrganizationInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
+  eventProgramItems?: Prisma.EventProgramItemUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutContactsInput = {
@@ -1709,6 +1984,11 @@ export type OrganizationUpdateWithoutContactsInput = {
   events?: Prisma.EventUpdateManyWithoutOrganizationNestedInput
   dateOptions?: Prisma.VenueDateOptionUpdateManyWithoutOrganizationNestedInput
   occupancies?: Prisma.LocationOccupancyUpdateManyWithoutOrganizationNestedInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUpdateManyWithoutOrganizationNestedInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUpdateManyWithoutOrganizationNestedInput
+  bookings?: Prisma.BookingUpdateManyWithoutOrganizationNestedInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUpdateManyWithoutOrganizationNestedInput
+  eventProgramItems?: Prisma.EventProgramItemUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutContactsInput = {
@@ -1733,6 +2013,11 @@ export type OrganizationUncheckedUpdateWithoutContactsInput = {
   events?: Prisma.EventUncheckedUpdateManyWithoutOrganizationNestedInput
   dateOptions?: Prisma.VenueDateOptionUncheckedUpdateManyWithoutOrganizationNestedInput
   occupancies?: Prisma.LocationOccupancyUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUncheckedUpdateManyWithoutOrganizationNestedInput
+  bookings?: Prisma.BookingUncheckedUpdateManyWithoutOrganizationNestedInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventProgramItems?: Prisma.EventProgramItemUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutPartnersInput = {
@@ -1757,6 +2042,11 @@ export type OrganizationCreateWithoutPartnersInput = {
   events?: Prisma.EventCreateNestedManyWithoutOrganizationInput
   dateOptions?: Prisma.VenueDateOptionCreateNestedManyWithoutOrganizationInput
   occupancies?: Prisma.LocationOccupancyCreateNestedManyWithoutOrganizationInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementCreateNestedManyWithoutOrganizationInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementCreateNestedManyWithoutOrganizationInput
+  bookings?: Prisma.BookingCreateNestedManyWithoutOrganizationInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryCreateNestedManyWithoutOrganizationInput
+  eventProgramItems?: Prisma.EventProgramItemCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutPartnersInput = {
@@ -1781,6 +2071,11 @@ export type OrganizationUncheckedCreateWithoutPartnersInput = {
   events?: Prisma.EventUncheckedCreateNestedManyWithoutOrganizationInput
   dateOptions?: Prisma.VenueDateOptionUncheckedCreateNestedManyWithoutOrganizationInput
   occupancies?: Prisma.LocationOccupancyUncheckedCreateNestedManyWithoutOrganizationInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUncheckedCreateNestedManyWithoutOrganizationInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUncheckedCreateNestedManyWithoutOrganizationInput
+  bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutOrganizationInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
+  eventProgramItems?: Prisma.EventProgramItemUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutPartnersInput = {
@@ -1821,6 +2116,11 @@ export type OrganizationUpdateWithoutPartnersInput = {
   events?: Prisma.EventUpdateManyWithoutOrganizationNestedInput
   dateOptions?: Prisma.VenueDateOptionUpdateManyWithoutOrganizationNestedInput
   occupancies?: Prisma.LocationOccupancyUpdateManyWithoutOrganizationNestedInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUpdateManyWithoutOrganizationNestedInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUpdateManyWithoutOrganizationNestedInput
+  bookings?: Prisma.BookingUpdateManyWithoutOrganizationNestedInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUpdateManyWithoutOrganizationNestedInput
+  eventProgramItems?: Prisma.EventProgramItemUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutPartnersInput = {
@@ -1845,6 +2145,671 @@ export type OrganizationUncheckedUpdateWithoutPartnersInput = {
   events?: Prisma.EventUncheckedUpdateManyWithoutOrganizationNestedInput
   dateOptions?: Prisma.VenueDateOptionUncheckedUpdateManyWithoutOrganizationNestedInput
   occupancies?: Prisma.LocationOccupancyUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUncheckedUpdateManyWithoutOrganizationNestedInput
+  bookings?: Prisma.BookingUncheckedUpdateManyWithoutOrganizationNestedInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventProgramItems?: Prisma.EventProgramItemUncheckedUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationCreateWithoutEventFormatLineupRequirementsInput = {
+  id?: string
+  name: string
+  legalName?: string | null
+  email?: string | null
+  phone?: string | null
+  status?: $Enums.EntityStatus
+  version?: number
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  locations?: Prisma.LocationCreateNestedManyWithoutOrganizationInput
+  memberships?: Prisma.MembershipCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
+  invitations?: Prisma.InvitationCreateNestedManyWithoutOrganizationInput
+  auditEntries?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
+  artists?: Prisma.ArtistCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutOrganizationInput
+  partners?: Prisma.BusinessPartnerCreateNestedManyWithoutOrganizationInput
+  eventFormats?: Prisma.EventFormatCreateNestedManyWithoutOrganizationInput
+  events?: Prisma.EventCreateNestedManyWithoutOrganizationInput
+  dateOptions?: Prisma.VenueDateOptionCreateNestedManyWithoutOrganizationInput
+  occupancies?: Prisma.LocationOccupancyCreateNestedManyWithoutOrganizationInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementCreateNestedManyWithoutOrganizationInput
+  bookings?: Prisma.BookingCreateNestedManyWithoutOrganizationInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryCreateNestedManyWithoutOrganizationInput
+  eventProgramItems?: Prisma.EventProgramItemCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationUncheckedCreateWithoutEventFormatLineupRequirementsInput = {
+  id?: string
+  name: string
+  legalName?: string | null
+  email?: string | null
+  phone?: string | null
+  status?: $Enums.EntityStatus
+  version?: number
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  locations?: Prisma.LocationUncheckedCreateNestedManyWithoutOrganizationInput
+  memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
+  invitations?: Prisma.InvitationUncheckedCreateNestedManyWithoutOrganizationInput
+  auditEntries?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
+  artists?: Prisma.ArtistUncheckedCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOrganizationInput
+  partners?: Prisma.BusinessPartnerUncheckedCreateNestedManyWithoutOrganizationInput
+  eventFormats?: Prisma.EventFormatUncheckedCreateNestedManyWithoutOrganizationInput
+  events?: Prisma.EventUncheckedCreateNestedManyWithoutOrganizationInput
+  dateOptions?: Prisma.VenueDateOptionUncheckedCreateNestedManyWithoutOrganizationInput
+  occupancies?: Prisma.LocationOccupancyUncheckedCreateNestedManyWithoutOrganizationInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUncheckedCreateNestedManyWithoutOrganizationInput
+  bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutOrganizationInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
+  eventProgramItems?: Prisma.EventProgramItemUncheckedCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationCreateOrConnectWithoutEventFormatLineupRequirementsInput = {
+  where: Prisma.OrganizationWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutEventFormatLineupRequirementsInput, Prisma.OrganizationUncheckedCreateWithoutEventFormatLineupRequirementsInput>
+}
+
+export type OrganizationUpsertWithoutEventFormatLineupRequirementsInput = {
+  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutEventFormatLineupRequirementsInput, Prisma.OrganizationUncheckedUpdateWithoutEventFormatLineupRequirementsInput>
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutEventFormatLineupRequirementsInput, Prisma.OrganizationUncheckedCreateWithoutEventFormatLineupRequirementsInput>
+  where?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationUpdateToOneWithWhereWithoutEventFormatLineupRequirementsInput = {
+  where?: Prisma.OrganizationWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutEventFormatLineupRequirementsInput, Prisma.OrganizationUncheckedUpdateWithoutEventFormatLineupRequirementsInput>
+}
+
+export type OrganizationUpdateWithoutEventFormatLineupRequirementsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  legalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  locations?: Prisma.LocationUpdateManyWithoutOrganizationNestedInput
+  memberships?: Prisma.MembershipUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
+  invitations?: Prisma.InvitationUpdateManyWithoutOrganizationNestedInput
+  auditEntries?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
+  artists?: Prisma.ArtistUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutOrganizationNestedInput
+  partners?: Prisma.BusinessPartnerUpdateManyWithoutOrganizationNestedInput
+  eventFormats?: Prisma.EventFormatUpdateManyWithoutOrganizationNestedInput
+  events?: Prisma.EventUpdateManyWithoutOrganizationNestedInput
+  dateOptions?: Prisma.VenueDateOptionUpdateManyWithoutOrganizationNestedInput
+  occupancies?: Prisma.LocationOccupancyUpdateManyWithoutOrganizationNestedInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUpdateManyWithoutOrganizationNestedInput
+  bookings?: Prisma.BookingUpdateManyWithoutOrganizationNestedInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUpdateManyWithoutOrganizationNestedInput
+  eventProgramItems?: Prisma.EventProgramItemUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationUncheckedUpdateWithoutEventFormatLineupRequirementsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  legalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  locations?: Prisma.LocationUncheckedUpdateManyWithoutOrganizationNestedInput
+  memberships?: Prisma.MembershipUncheckedUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
+  invitations?: Prisma.InvitationUncheckedUpdateManyWithoutOrganizationNestedInput
+  auditEntries?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
+  artists?: Prisma.ArtistUncheckedUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutOrganizationNestedInput
+  partners?: Prisma.BusinessPartnerUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventFormats?: Prisma.EventFormatUncheckedUpdateManyWithoutOrganizationNestedInput
+  events?: Prisma.EventUncheckedUpdateManyWithoutOrganizationNestedInput
+  dateOptions?: Prisma.VenueDateOptionUncheckedUpdateManyWithoutOrganizationNestedInput
+  occupancies?: Prisma.LocationOccupancyUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUncheckedUpdateManyWithoutOrganizationNestedInput
+  bookings?: Prisma.BookingUncheckedUpdateManyWithoutOrganizationNestedInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventProgramItems?: Prisma.EventProgramItemUncheckedUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationCreateWithoutEventLineupRequirementsInput = {
+  id?: string
+  name: string
+  legalName?: string | null
+  email?: string | null
+  phone?: string | null
+  status?: $Enums.EntityStatus
+  version?: number
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  locations?: Prisma.LocationCreateNestedManyWithoutOrganizationInput
+  memberships?: Prisma.MembershipCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
+  invitations?: Prisma.InvitationCreateNestedManyWithoutOrganizationInput
+  auditEntries?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
+  artists?: Prisma.ArtistCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutOrganizationInput
+  partners?: Prisma.BusinessPartnerCreateNestedManyWithoutOrganizationInput
+  eventFormats?: Prisma.EventFormatCreateNestedManyWithoutOrganizationInput
+  events?: Prisma.EventCreateNestedManyWithoutOrganizationInput
+  dateOptions?: Prisma.VenueDateOptionCreateNestedManyWithoutOrganizationInput
+  occupancies?: Prisma.LocationOccupancyCreateNestedManyWithoutOrganizationInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementCreateNestedManyWithoutOrganizationInput
+  bookings?: Prisma.BookingCreateNestedManyWithoutOrganizationInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryCreateNestedManyWithoutOrganizationInput
+  eventProgramItems?: Prisma.EventProgramItemCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationUncheckedCreateWithoutEventLineupRequirementsInput = {
+  id?: string
+  name: string
+  legalName?: string | null
+  email?: string | null
+  phone?: string | null
+  status?: $Enums.EntityStatus
+  version?: number
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  locations?: Prisma.LocationUncheckedCreateNestedManyWithoutOrganizationInput
+  memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
+  invitations?: Prisma.InvitationUncheckedCreateNestedManyWithoutOrganizationInput
+  auditEntries?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
+  artists?: Prisma.ArtistUncheckedCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOrganizationInput
+  partners?: Prisma.BusinessPartnerUncheckedCreateNestedManyWithoutOrganizationInput
+  eventFormats?: Prisma.EventFormatUncheckedCreateNestedManyWithoutOrganizationInput
+  events?: Prisma.EventUncheckedCreateNestedManyWithoutOrganizationInput
+  dateOptions?: Prisma.VenueDateOptionUncheckedCreateNestedManyWithoutOrganizationInput
+  occupancies?: Prisma.LocationOccupancyUncheckedCreateNestedManyWithoutOrganizationInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUncheckedCreateNestedManyWithoutOrganizationInput
+  bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutOrganizationInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
+  eventProgramItems?: Prisma.EventProgramItemUncheckedCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationCreateOrConnectWithoutEventLineupRequirementsInput = {
+  where: Prisma.OrganizationWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutEventLineupRequirementsInput, Prisma.OrganizationUncheckedCreateWithoutEventLineupRequirementsInput>
+}
+
+export type OrganizationUpsertWithoutEventLineupRequirementsInput = {
+  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutEventLineupRequirementsInput, Prisma.OrganizationUncheckedUpdateWithoutEventLineupRequirementsInput>
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutEventLineupRequirementsInput, Prisma.OrganizationUncheckedCreateWithoutEventLineupRequirementsInput>
+  where?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationUpdateToOneWithWhereWithoutEventLineupRequirementsInput = {
+  where?: Prisma.OrganizationWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutEventLineupRequirementsInput, Prisma.OrganizationUncheckedUpdateWithoutEventLineupRequirementsInput>
+}
+
+export type OrganizationUpdateWithoutEventLineupRequirementsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  legalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  locations?: Prisma.LocationUpdateManyWithoutOrganizationNestedInput
+  memberships?: Prisma.MembershipUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
+  invitations?: Prisma.InvitationUpdateManyWithoutOrganizationNestedInput
+  auditEntries?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
+  artists?: Prisma.ArtistUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutOrganizationNestedInput
+  partners?: Prisma.BusinessPartnerUpdateManyWithoutOrganizationNestedInput
+  eventFormats?: Prisma.EventFormatUpdateManyWithoutOrganizationNestedInput
+  events?: Prisma.EventUpdateManyWithoutOrganizationNestedInput
+  dateOptions?: Prisma.VenueDateOptionUpdateManyWithoutOrganizationNestedInput
+  occupancies?: Prisma.LocationOccupancyUpdateManyWithoutOrganizationNestedInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUpdateManyWithoutOrganizationNestedInput
+  bookings?: Prisma.BookingUpdateManyWithoutOrganizationNestedInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUpdateManyWithoutOrganizationNestedInput
+  eventProgramItems?: Prisma.EventProgramItemUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationUncheckedUpdateWithoutEventLineupRequirementsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  legalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  locations?: Prisma.LocationUncheckedUpdateManyWithoutOrganizationNestedInput
+  memberships?: Prisma.MembershipUncheckedUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
+  invitations?: Prisma.InvitationUncheckedUpdateManyWithoutOrganizationNestedInput
+  auditEntries?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
+  artists?: Prisma.ArtistUncheckedUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutOrganizationNestedInput
+  partners?: Prisma.BusinessPartnerUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventFormats?: Prisma.EventFormatUncheckedUpdateManyWithoutOrganizationNestedInput
+  events?: Prisma.EventUncheckedUpdateManyWithoutOrganizationNestedInput
+  dateOptions?: Prisma.VenueDateOptionUncheckedUpdateManyWithoutOrganizationNestedInput
+  occupancies?: Prisma.LocationOccupancyUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUncheckedUpdateManyWithoutOrganizationNestedInput
+  bookings?: Prisma.BookingUncheckedUpdateManyWithoutOrganizationNestedInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventProgramItems?: Prisma.EventProgramItemUncheckedUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationCreateWithoutBookingsInput = {
+  id?: string
+  name: string
+  legalName?: string | null
+  email?: string | null
+  phone?: string | null
+  status?: $Enums.EntityStatus
+  version?: number
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  locations?: Prisma.LocationCreateNestedManyWithoutOrganizationInput
+  memberships?: Prisma.MembershipCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
+  invitations?: Prisma.InvitationCreateNestedManyWithoutOrganizationInput
+  auditEntries?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
+  artists?: Prisma.ArtistCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutOrganizationInput
+  partners?: Prisma.BusinessPartnerCreateNestedManyWithoutOrganizationInput
+  eventFormats?: Prisma.EventFormatCreateNestedManyWithoutOrganizationInput
+  events?: Prisma.EventCreateNestedManyWithoutOrganizationInput
+  dateOptions?: Prisma.VenueDateOptionCreateNestedManyWithoutOrganizationInput
+  occupancies?: Prisma.LocationOccupancyCreateNestedManyWithoutOrganizationInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementCreateNestedManyWithoutOrganizationInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementCreateNestedManyWithoutOrganizationInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryCreateNestedManyWithoutOrganizationInput
+  eventProgramItems?: Prisma.EventProgramItemCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationUncheckedCreateWithoutBookingsInput = {
+  id?: string
+  name: string
+  legalName?: string | null
+  email?: string | null
+  phone?: string | null
+  status?: $Enums.EntityStatus
+  version?: number
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  locations?: Prisma.LocationUncheckedCreateNestedManyWithoutOrganizationInput
+  memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
+  invitations?: Prisma.InvitationUncheckedCreateNestedManyWithoutOrganizationInput
+  auditEntries?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
+  artists?: Prisma.ArtistUncheckedCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOrganizationInput
+  partners?: Prisma.BusinessPartnerUncheckedCreateNestedManyWithoutOrganizationInput
+  eventFormats?: Prisma.EventFormatUncheckedCreateNestedManyWithoutOrganizationInput
+  events?: Prisma.EventUncheckedCreateNestedManyWithoutOrganizationInput
+  dateOptions?: Prisma.VenueDateOptionUncheckedCreateNestedManyWithoutOrganizationInput
+  occupancies?: Prisma.LocationOccupancyUncheckedCreateNestedManyWithoutOrganizationInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUncheckedCreateNestedManyWithoutOrganizationInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUncheckedCreateNestedManyWithoutOrganizationInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
+  eventProgramItems?: Prisma.EventProgramItemUncheckedCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationCreateOrConnectWithoutBookingsInput = {
+  where: Prisma.OrganizationWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutBookingsInput, Prisma.OrganizationUncheckedCreateWithoutBookingsInput>
+}
+
+export type OrganizationUpsertWithoutBookingsInput = {
+  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutBookingsInput, Prisma.OrganizationUncheckedUpdateWithoutBookingsInput>
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutBookingsInput, Prisma.OrganizationUncheckedCreateWithoutBookingsInput>
+  where?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationUpdateToOneWithWhereWithoutBookingsInput = {
+  where?: Prisma.OrganizationWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutBookingsInput, Prisma.OrganizationUncheckedUpdateWithoutBookingsInput>
+}
+
+export type OrganizationUpdateWithoutBookingsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  legalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  locations?: Prisma.LocationUpdateManyWithoutOrganizationNestedInput
+  memberships?: Prisma.MembershipUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
+  invitations?: Prisma.InvitationUpdateManyWithoutOrganizationNestedInput
+  auditEntries?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
+  artists?: Prisma.ArtistUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutOrganizationNestedInput
+  partners?: Prisma.BusinessPartnerUpdateManyWithoutOrganizationNestedInput
+  eventFormats?: Prisma.EventFormatUpdateManyWithoutOrganizationNestedInput
+  events?: Prisma.EventUpdateManyWithoutOrganizationNestedInput
+  dateOptions?: Prisma.VenueDateOptionUpdateManyWithoutOrganizationNestedInput
+  occupancies?: Prisma.LocationOccupancyUpdateManyWithoutOrganizationNestedInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUpdateManyWithoutOrganizationNestedInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUpdateManyWithoutOrganizationNestedInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUpdateManyWithoutOrganizationNestedInput
+  eventProgramItems?: Prisma.EventProgramItemUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationUncheckedUpdateWithoutBookingsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  legalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  locations?: Prisma.LocationUncheckedUpdateManyWithoutOrganizationNestedInput
+  memberships?: Prisma.MembershipUncheckedUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
+  invitations?: Prisma.InvitationUncheckedUpdateManyWithoutOrganizationNestedInput
+  auditEntries?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
+  artists?: Prisma.ArtistUncheckedUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutOrganizationNestedInput
+  partners?: Prisma.BusinessPartnerUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventFormats?: Prisma.EventFormatUncheckedUpdateManyWithoutOrganizationNestedInput
+  events?: Prisma.EventUncheckedUpdateManyWithoutOrganizationNestedInput
+  dateOptions?: Prisma.VenueDateOptionUncheckedUpdateManyWithoutOrganizationNestedInput
+  occupancies?: Prisma.LocationOccupancyUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUncheckedUpdateManyWithoutOrganizationNestedInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventProgramItems?: Prisma.EventProgramItemUncheckedUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationCreateWithoutEventProgramItemsInput = {
+  id?: string
+  name: string
+  legalName?: string | null
+  email?: string | null
+  phone?: string | null
+  status?: $Enums.EntityStatus
+  version?: number
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  locations?: Prisma.LocationCreateNestedManyWithoutOrganizationInput
+  memberships?: Prisma.MembershipCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
+  invitations?: Prisma.InvitationCreateNestedManyWithoutOrganizationInput
+  auditEntries?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
+  artists?: Prisma.ArtistCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutOrganizationInput
+  partners?: Prisma.BusinessPartnerCreateNestedManyWithoutOrganizationInput
+  eventFormats?: Prisma.EventFormatCreateNestedManyWithoutOrganizationInput
+  events?: Prisma.EventCreateNestedManyWithoutOrganizationInput
+  dateOptions?: Prisma.VenueDateOptionCreateNestedManyWithoutOrganizationInput
+  occupancies?: Prisma.LocationOccupancyCreateNestedManyWithoutOrganizationInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementCreateNestedManyWithoutOrganizationInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementCreateNestedManyWithoutOrganizationInput
+  bookings?: Prisma.BookingCreateNestedManyWithoutOrganizationInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationUncheckedCreateWithoutEventProgramItemsInput = {
+  id?: string
+  name: string
+  legalName?: string | null
+  email?: string | null
+  phone?: string | null
+  status?: $Enums.EntityStatus
+  version?: number
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  locations?: Prisma.LocationUncheckedCreateNestedManyWithoutOrganizationInput
+  memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
+  invitations?: Prisma.InvitationUncheckedCreateNestedManyWithoutOrganizationInput
+  auditEntries?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
+  artists?: Prisma.ArtistUncheckedCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOrganizationInput
+  partners?: Prisma.BusinessPartnerUncheckedCreateNestedManyWithoutOrganizationInput
+  eventFormats?: Prisma.EventFormatUncheckedCreateNestedManyWithoutOrganizationInput
+  events?: Prisma.EventUncheckedCreateNestedManyWithoutOrganizationInput
+  dateOptions?: Prisma.VenueDateOptionUncheckedCreateNestedManyWithoutOrganizationInput
+  occupancies?: Prisma.LocationOccupancyUncheckedCreateNestedManyWithoutOrganizationInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUncheckedCreateNestedManyWithoutOrganizationInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUncheckedCreateNestedManyWithoutOrganizationInput
+  bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutOrganizationInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationCreateOrConnectWithoutEventProgramItemsInput = {
+  where: Prisma.OrganizationWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutEventProgramItemsInput, Prisma.OrganizationUncheckedCreateWithoutEventProgramItemsInput>
+}
+
+export type OrganizationUpsertWithoutEventProgramItemsInput = {
+  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutEventProgramItemsInput, Prisma.OrganizationUncheckedUpdateWithoutEventProgramItemsInput>
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutEventProgramItemsInput, Prisma.OrganizationUncheckedCreateWithoutEventProgramItemsInput>
+  where?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationUpdateToOneWithWhereWithoutEventProgramItemsInput = {
+  where?: Prisma.OrganizationWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutEventProgramItemsInput, Prisma.OrganizationUncheckedUpdateWithoutEventProgramItemsInput>
+}
+
+export type OrganizationUpdateWithoutEventProgramItemsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  legalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  locations?: Prisma.LocationUpdateManyWithoutOrganizationNestedInput
+  memberships?: Prisma.MembershipUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
+  invitations?: Prisma.InvitationUpdateManyWithoutOrganizationNestedInput
+  auditEntries?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
+  artists?: Prisma.ArtistUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutOrganizationNestedInput
+  partners?: Prisma.BusinessPartnerUpdateManyWithoutOrganizationNestedInput
+  eventFormats?: Prisma.EventFormatUpdateManyWithoutOrganizationNestedInput
+  events?: Prisma.EventUpdateManyWithoutOrganizationNestedInput
+  dateOptions?: Prisma.VenueDateOptionUpdateManyWithoutOrganizationNestedInput
+  occupancies?: Prisma.LocationOccupancyUpdateManyWithoutOrganizationNestedInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUpdateManyWithoutOrganizationNestedInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUpdateManyWithoutOrganizationNestedInput
+  bookings?: Prisma.BookingUpdateManyWithoutOrganizationNestedInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationUncheckedUpdateWithoutEventProgramItemsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  legalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  locations?: Prisma.LocationUncheckedUpdateManyWithoutOrganizationNestedInput
+  memberships?: Prisma.MembershipUncheckedUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
+  invitations?: Prisma.InvitationUncheckedUpdateManyWithoutOrganizationNestedInput
+  auditEntries?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
+  artists?: Prisma.ArtistUncheckedUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutOrganizationNestedInput
+  partners?: Prisma.BusinessPartnerUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventFormats?: Prisma.EventFormatUncheckedUpdateManyWithoutOrganizationNestedInput
+  events?: Prisma.EventUncheckedUpdateManyWithoutOrganizationNestedInput
+  dateOptions?: Prisma.VenueDateOptionUncheckedUpdateManyWithoutOrganizationNestedInput
+  occupancies?: Prisma.LocationOccupancyUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUncheckedUpdateManyWithoutOrganizationNestedInput
+  bookings?: Prisma.BookingUncheckedUpdateManyWithoutOrganizationNestedInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationCreateWithoutBookingStatusHistoryInput = {
+  id?: string
+  name: string
+  legalName?: string | null
+  email?: string | null
+  phone?: string | null
+  status?: $Enums.EntityStatus
+  version?: number
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  locations?: Prisma.LocationCreateNestedManyWithoutOrganizationInput
+  memberships?: Prisma.MembershipCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
+  invitations?: Prisma.InvitationCreateNestedManyWithoutOrganizationInput
+  auditEntries?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
+  artists?: Prisma.ArtistCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutOrganizationInput
+  partners?: Prisma.BusinessPartnerCreateNestedManyWithoutOrganizationInput
+  eventFormats?: Prisma.EventFormatCreateNestedManyWithoutOrganizationInput
+  events?: Prisma.EventCreateNestedManyWithoutOrganizationInput
+  dateOptions?: Prisma.VenueDateOptionCreateNestedManyWithoutOrganizationInput
+  occupancies?: Prisma.LocationOccupancyCreateNestedManyWithoutOrganizationInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementCreateNestedManyWithoutOrganizationInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementCreateNestedManyWithoutOrganizationInput
+  bookings?: Prisma.BookingCreateNestedManyWithoutOrganizationInput
+  eventProgramItems?: Prisma.EventProgramItemCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationUncheckedCreateWithoutBookingStatusHistoryInput = {
+  id?: string
+  name: string
+  legalName?: string | null
+  email?: string | null
+  phone?: string | null
+  status?: $Enums.EntityStatus
+  version?: number
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  locations?: Prisma.LocationUncheckedCreateNestedManyWithoutOrganizationInput
+  memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
+  invitations?: Prisma.InvitationUncheckedCreateNestedManyWithoutOrganizationInput
+  auditEntries?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
+  artists?: Prisma.ArtistUncheckedCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOrganizationInput
+  partners?: Prisma.BusinessPartnerUncheckedCreateNestedManyWithoutOrganizationInput
+  eventFormats?: Prisma.EventFormatUncheckedCreateNestedManyWithoutOrganizationInput
+  events?: Prisma.EventUncheckedCreateNestedManyWithoutOrganizationInput
+  dateOptions?: Prisma.VenueDateOptionUncheckedCreateNestedManyWithoutOrganizationInput
+  occupancies?: Prisma.LocationOccupancyUncheckedCreateNestedManyWithoutOrganizationInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUncheckedCreateNestedManyWithoutOrganizationInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUncheckedCreateNestedManyWithoutOrganizationInput
+  bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutOrganizationInput
+  eventProgramItems?: Prisma.EventProgramItemUncheckedCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationCreateOrConnectWithoutBookingStatusHistoryInput = {
+  where: Prisma.OrganizationWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutBookingStatusHistoryInput, Prisma.OrganizationUncheckedCreateWithoutBookingStatusHistoryInput>
+}
+
+export type OrganizationUpsertWithoutBookingStatusHistoryInput = {
+  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutBookingStatusHistoryInput, Prisma.OrganizationUncheckedUpdateWithoutBookingStatusHistoryInput>
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutBookingStatusHistoryInput, Prisma.OrganizationUncheckedCreateWithoutBookingStatusHistoryInput>
+  where?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationUpdateToOneWithWhereWithoutBookingStatusHistoryInput = {
+  where?: Prisma.OrganizationWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutBookingStatusHistoryInput, Prisma.OrganizationUncheckedUpdateWithoutBookingStatusHistoryInput>
+}
+
+export type OrganizationUpdateWithoutBookingStatusHistoryInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  legalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  locations?: Prisma.LocationUpdateManyWithoutOrganizationNestedInput
+  memberships?: Prisma.MembershipUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
+  invitations?: Prisma.InvitationUpdateManyWithoutOrganizationNestedInput
+  auditEntries?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
+  artists?: Prisma.ArtistUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutOrganizationNestedInput
+  partners?: Prisma.BusinessPartnerUpdateManyWithoutOrganizationNestedInput
+  eventFormats?: Prisma.EventFormatUpdateManyWithoutOrganizationNestedInput
+  events?: Prisma.EventUpdateManyWithoutOrganizationNestedInput
+  dateOptions?: Prisma.VenueDateOptionUpdateManyWithoutOrganizationNestedInput
+  occupancies?: Prisma.LocationOccupancyUpdateManyWithoutOrganizationNestedInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUpdateManyWithoutOrganizationNestedInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUpdateManyWithoutOrganizationNestedInput
+  bookings?: Prisma.BookingUpdateManyWithoutOrganizationNestedInput
+  eventProgramItems?: Prisma.EventProgramItemUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationUncheckedUpdateWithoutBookingStatusHistoryInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  legalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  locations?: Prisma.LocationUncheckedUpdateManyWithoutOrganizationNestedInput
+  memberships?: Prisma.MembershipUncheckedUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
+  invitations?: Prisma.InvitationUncheckedUpdateManyWithoutOrganizationNestedInput
+  auditEntries?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
+  artists?: Prisma.ArtistUncheckedUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutOrganizationNestedInput
+  partners?: Prisma.BusinessPartnerUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventFormats?: Prisma.EventFormatUncheckedUpdateManyWithoutOrganizationNestedInput
+  events?: Prisma.EventUncheckedUpdateManyWithoutOrganizationNestedInput
+  dateOptions?: Prisma.VenueDateOptionUncheckedUpdateManyWithoutOrganizationNestedInput
+  occupancies?: Prisma.LocationOccupancyUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUncheckedUpdateManyWithoutOrganizationNestedInput
+  bookings?: Prisma.BookingUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventProgramItems?: Prisma.EventProgramItemUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutDateOptionsInput = {
@@ -1869,6 +2834,11 @@ export type OrganizationCreateWithoutDateOptionsInput = {
   eventFormats?: Prisma.EventFormatCreateNestedManyWithoutOrganizationInput
   events?: Prisma.EventCreateNestedManyWithoutOrganizationInput
   occupancies?: Prisma.LocationOccupancyCreateNestedManyWithoutOrganizationInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementCreateNestedManyWithoutOrganizationInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementCreateNestedManyWithoutOrganizationInput
+  bookings?: Prisma.BookingCreateNestedManyWithoutOrganizationInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryCreateNestedManyWithoutOrganizationInput
+  eventProgramItems?: Prisma.EventProgramItemCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutDateOptionsInput = {
@@ -1893,6 +2863,11 @@ export type OrganizationUncheckedCreateWithoutDateOptionsInput = {
   eventFormats?: Prisma.EventFormatUncheckedCreateNestedManyWithoutOrganizationInput
   events?: Prisma.EventUncheckedCreateNestedManyWithoutOrganizationInput
   occupancies?: Prisma.LocationOccupancyUncheckedCreateNestedManyWithoutOrganizationInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUncheckedCreateNestedManyWithoutOrganizationInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUncheckedCreateNestedManyWithoutOrganizationInput
+  bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutOrganizationInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
+  eventProgramItems?: Prisma.EventProgramItemUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutDateOptionsInput = {
@@ -1933,6 +2908,11 @@ export type OrganizationUpdateWithoutDateOptionsInput = {
   eventFormats?: Prisma.EventFormatUpdateManyWithoutOrganizationNestedInput
   events?: Prisma.EventUpdateManyWithoutOrganizationNestedInput
   occupancies?: Prisma.LocationOccupancyUpdateManyWithoutOrganizationNestedInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUpdateManyWithoutOrganizationNestedInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUpdateManyWithoutOrganizationNestedInput
+  bookings?: Prisma.BookingUpdateManyWithoutOrganizationNestedInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUpdateManyWithoutOrganizationNestedInput
+  eventProgramItems?: Prisma.EventProgramItemUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutDateOptionsInput = {
@@ -1957,6 +2937,11 @@ export type OrganizationUncheckedUpdateWithoutDateOptionsInput = {
   eventFormats?: Prisma.EventFormatUncheckedUpdateManyWithoutOrganizationNestedInput
   events?: Prisma.EventUncheckedUpdateManyWithoutOrganizationNestedInput
   occupancies?: Prisma.LocationOccupancyUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUncheckedUpdateManyWithoutOrganizationNestedInput
+  bookings?: Prisma.BookingUncheckedUpdateManyWithoutOrganizationNestedInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventProgramItems?: Prisma.EventProgramItemUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutOccupanciesInput = {
@@ -1981,6 +2966,11 @@ export type OrganizationCreateWithoutOccupanciesInput = {
   eventFormats?: Prisma.EventFormatCreateNestedManyWithoutOrganizationInput
   events?: Prisma.EventCreateNestedManyWithoutOrganizationInput
   dateOptions?: Prisma.VenueDateOptionCreateNestedManyWithoutOrganizationInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementCreateNestedManyWithoutOrganizationInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementCreateNestedManyWithoutOrganizationInput
+  bookings?: Prisma.BookingCreateNestedManyWithoutOrganizationInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryCreateNestedManyWithoutOrganizationInput
+  eventProgramItems?: Prisma.EventProgramItemCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutOccupanciesInput = {
@@ -2005,6 +2995,11 @@ export type OrganizationUncheckedCreateWithoutOccupanciesInput = {
   eventFormats?: Prisma.EventFormatUncheckedCreateNestedManyWithoutOrganizationInput
   events?: Prisma.EventUncheckedCreateNestedManyWithoutOrganizationInput
   dateOptions?: Prisma.VenueDateOptionUncheckedCreateNestedManyWithoutOrganizationInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUncheckedCreateNestedManyWithoutOrganizationInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUncheckedCreateNestedManyWithoutOrganizationInput
+  bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutOrganizationInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
+  eventProgramItems?: Prisma.EventProgramItemUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutOccupanciesInput = {
@@ -2045,6 +3040,11 @@ export type OrganizationUpdateWithoutOccupanciesInput = {
   eventFormats?: Prisma.EventFormatUpdateManyWithoutOrganizationNestedInput
   events?: Prisma.EventUpdateManyWithoutOrganizationNestedInput
   dateOptions?: Prisma.VenueDateOptionUpdateManyWithoutOrganizationNestedInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUpdateManyWithoutOrganizationNestedInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUpdateManyWithoutOrganizationNestedInput
+  bookings?: Prisma.BookingUpdateManyWithoutOrganizationNestedInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUpdateManyWithoutOrganizationNestedInput
+  eventProgramItems?: Prisma.EventProgramItemUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutOccupanciesInput = {
@@ -2069,6 +3069,11 @@ export type OrganizationUncheckedUpdateWithoutOccupanciesInput = {
   eventFormats?: Prisma.EventFormatUncheckedUpdateManyWithoutOrganizationNestedInput
   events?: Prisma.EventUncheckedUpdateManyWithoutOrganizationNestedInput
   dateOptions?: Prisma.VenueDateOptionUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUncheckedUpdateManyWithoutOrganizationNestedInput
+  bookings?: Prisma.BookingUncheckedUpdateManyWithoutOrganizationNestedInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventProgramItems?: Prisma.EventProgramItemUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 
@@ -2089,6 +3094,11 @@ export type OrganizationCountOutputType = {
   events: number
   dateOptions: number
   occupancies: number
+  eventFormatLineupRequirements: number
+  eventLineupRequirements: number
+  bookings: number
+  bookingStatusHistory: number
+  eventProgramItems: number
 }
 
 export type OrganizationCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2104,6 +3114,11 @@ export type OrganizationCountOutputTypeSelect<ExtArgs extends runtime.Types.Exte
   events?: boolean | OrganizationCountOutputTypeCountEventsArgs
   dateOptions?: boolean | OrganizationCountOutputTypeCountDateOptionsArgs
   occupancies?: boolean | OrganizationCountOutputTypeCountOccupanciesArgs
+  eventFormatLineupRequirements?: boolean | OrganizationCountOutputTypeCountEventFormatLineupRequirementsArgs
+  eventLineupRequirements?: boolean | OrganizationCountOutputTypeCountEventLineupRequirementsArgs
+  bookings?: boolean | OrganizationCountOutputTypeCountBookingsArgs
+  bookingStatusHistory?: boolean | OrganizationCountOutputTypeCountBookingStatusHistoryArgs
+  eventProgramItems?: boolean | OrganizationCountOutputTypeCountEventProgramItemsArgs
 }
 
 /**
@@ -2200,6 +3215,41 @@ export type OrganizationCountOutputTypeCountOccupanciesArgs<ExtArgs extends runt
   where?: Prisma.LocationOccupancyWhereInput
 }
 
+/**
+ * OrganizationCountOutputType without action
+ */
+export type OrganizationCountOutputTypeCountEventFormatLineupRequirementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EventFormatLineupRequirementWhereInput
+}
+
+/**
+ * OrganizationCountOutputType without action
+ */
+export type OrganizationCountOutputTypeCountEventLineupRequirementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EventLineupRequirementWhereInput
+}
+
+/**
+ * OrganizationCountOutputType without action
+ */
+export type OrganizationCountOutputTypeCountBookingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BookingWhereInput
+}
+
+/**
+ * OrganizationCountOutputType without action
+ */
+export type OrganizationCountOutputTypeCountBookingStatusHistoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BookingStatusHistoryWhereInput
+}
+
+/**
+ * OrganizationCountOutputType without action
+ */
+export type OrganizationCountOutputTypeCountEventProgramItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EventProgramItemWhereInput
+}
+
 
 export type OrganizationSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -2224,6 +3274,11 @@ export type OrganizationSelect<ExtArgs extends runtime.Types.Extensions.Internal
   events?: boolean | Prisma.Organization$eventsArgs<ExtArgs>
   dateOptions?: boolean | Prisma.Organization$dateOptionsArgs<ExtArgs>
   occupancies?: boolean | Prisma.Organization$occupanciesArgs<ExtArgs>
+  eventFormatLineupRequirements?: boolean | Prisma.Organization$eventFormatLineupRequirementsArgs<ExtArgs>
+  eventLineupRequirements?: boolean | Prisma.Organization$eventLineupRequirementsArgs<ExtArgs>
+  bookings?: boolean | Prisma.Organization$bookingsArgs<ExtArgs>
+  bookingStatusHistory?: boolean | Prisma.Organization$bookingStatusHistoryArgs<ExtArgs>
+  eventProgramItems?: boolean | Prisma.Organization$eventProgramItemsArgs<ExtArgs>
   _count?: boolean | Prisma.OrganizationCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["organization"]>
 
@@ -2280,6 +3335,11 @@ export type OrganizationInclude<ExtArgs extends runtime.Types.Extensions.Interna
   events?: boolean | Prisma.Organization$eventsArgs<ExtArgs>
   dateOptions?: boolean | Prisma.Organization$dateOptionsArgs<ExtArgs>
   occupancies?: boolean | Prisma.Organization$occupanciesArgs<ExtArgs>
+  eventFormatLineupRequirements?: boolean | Prisma.Organization$eventFormatLineupRequirementsArgs<ExtArgs>
+  eventLineupRequirements?: boolean | Prisma.Organization$eventLineupRequirementsArgs<ExtArgs>
+  bookings?: boolean | Prisma.Organization$bookingsArgs<ExtArgs>
+  bookingStatusHistory?: boolean | Prisma.Organization$bookingStatusHistoryArgs<ExtArgs>
+  eventProgramItems?: boolean | Prisma.Organization$eventProgramItemsArgs<ExtArgs>
   _count?: boolean | Prisma.OrganizationCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type OrganizationIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -2300,6 +3360,11 @@ export type $OrganizationPayload<ExtArgs extends runtime.Types.Extensions.Intern
     events: Prisma.$EventPayload<ExtArgs>[]
     dateOptions: Prisma.$VenueDateOptionPayload<ExtArgs>[]
     occupancies: Prisma.$LocationOccupancyPayload<ExtArgs>[]
+    eventFormatLineupRequirements: Prisma.$EventFormatLineupRequirementPayload<ExtArgs>[]
+    eventLineupRequirements: Prisma.$EventLineupRequirementPayload<ExtArgs>[]
+    bookings: Prisma.$BookingPayload<ExtArgs>[]
+    bookingStatusHistory: Prisma.$BookingStatusHistoryPayload<ExtArgs>[]
+    eventProgramItems: Prisma.$EventProgramItemPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2718,6 +3783,11 @@ export interface Prisma__OrganizationClient<T, Null = never, ExtArgs extends run
   events<T extends Prisma.Organization$eventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$eventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   dateOptions<T extends Prisma.Organization$dateOptionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$dateOptionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VenueDateOptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   occupancies<T extends Prisma.Organization$occupanciesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$occupanciesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LocationOccupancyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  eventFormatLineupRequirements<T extends Prisma.Organization$eventFormatLineupRequirementsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$eventFormatLineupRequirementsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EventFormatLineupRequirementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  eventLineupRequirements<T extends Prisma.Organization$eventLineupRequirementsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$eventLineupRequirementsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EventLineupRequirementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  bookings<T extends Prisma.Organization$bookingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$bookingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BookingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  bookingStatusHistory<T extends Prisma.Organization$bookingStatusHistoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$bookingStatusHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BookingStatusHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  eventProgramItems<T extends Prisma.Organization$eventProgramItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$eventProgramItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EventProgramItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3435,6 +4505,126 @@ export type Organization$occupanciesArgs<ExtArgs extends runtime.Types.Extension
   take?: number
   skip?: number
   distinct?: Prisma.LocationOccupancyScalarFieldEnum | Prisma.LocationOccupancyScalarFieldEnum[]
+}
+
+/**
+ * Organization.eventFormatLineupRequirements
+ */
+export type Organization$eventFormatLineupRequirementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the EventFormatLineupRequirement
+   */
+  select?: Prisma.EventFormatLineupRequirementSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the EventFormatLineupRequirement
+   */
+  omit?: Prisma.EventFormatLineupRequirementOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EventFormatLineupRequirementInclude<ExtArgs> | null
+  where?: Prisma.EventFormatLineupRequirementWhereInput
+  orderBy?: Prisma.EventFormatLineupRequirementOrderByWithRelationInput | Prisma.EventFormatLineupRequirementOrderByWithRelationInput[]
+  cursor?: Prisma.EventFormatLineupRequirementWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.EventFormatLineupRequirementScalarFieldEnum | Prisma.EventFormatLineupRequirementScalarFieldEnum[]
+}
+
+/**
+ * Organization.eventLineupRequirements
+ */
+export type Organization$eventLineupRequirementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the EventLineupRequirement
+   */
+  select?: Prisma.EventLineupRequirementSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the EventLineupRequirement
+   */
+  omit?: Prisma.EventLineupRequirementOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EventLineupRequirementInclude<ExtArgs> | null
+  where?: Prisma.EventLineupRequirementWhereInput
+  orderBy?: Prisma.EventLineupRequirementOrderByWithRelationInput | Prisma.EventLineupRequirementOrderByWithRelationInput[]
+  cursor?: Prisma.EventLineupRequirementWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.EventLineupRequirementScalarFieldEnum | Prisma.EventLineupRequirementScalarFieldEnum[]
+}
+
+/**
+ * Organization.bookings
+ */
+export type Organization$bookingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Booking
+   */
+  select?: Prisma.BookingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Booking
+   */
+  omit?: Prisma.BookingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BookingInclude<ExtArgs> | null
+  where?: Prisma.BookingWhereInput
+  orderBy?: Prisma.BookingOrderByWithRelationInput | Prisma.BookingOrderByWithRelationInput[]
+  cursor?: Prisma.BookingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BookingScalarFieldEnum | Prisma.BookingScalarFieldEnum[]
+}
+
+/**
+ * Organization.bookingStatusHistory
+ */
+export type Organization$bookingStatusHistoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BookingStatusHistory
+   */
+  select?: Prisma.BookingStatusHistorySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BookingStatusHistory
+   */
+  omit?: Prisma.BookingStatusHistoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BookingStatusHistoryInclude<ExtArgs> | null
+  where?: Prisma.BookingStatusHistoryWhereInput
+  orderBy?: Prisma.BookingStatusHistoryOrderByWithRelationInput | Prisma.BookingStatusHistoryOrderByWithRelationInput[]
+  cursor?: Prisma.BookingStatusHistoryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BookingStatusHistoryScalarFieldEnum | Prisma.BookingStatusHistoryScalarFieldEnum[]
+}
+
+/**
+ * Organization.eventProgramItems
+ */
+export type Organization$eventProgramItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the EventProgramItem
+   */
+  select?: Prisma.EventProgramItemSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the EventProgramItem
+   */
+  omit?: Prisma.EventProgramItemOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EventProgramItemInclude<ExtArgs> | null
+  where?: Prisma.EventProgramItemWhereInput
+  orderBy?: Prisma.EventProgramItemOrderByWithRelationInput | Prisma.EventProgramItemOrderByWithRelationInput[]
+  cursor?: Prisma.EventProgramItemWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.EventProgramItemScalarFieldEnum | Prisma.EventProgramItemScalarFieldEnum[]
 }
 
 /**

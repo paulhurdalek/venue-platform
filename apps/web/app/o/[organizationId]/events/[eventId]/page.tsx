@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 
 import { EventForm } from '../../../../components/events/event-form';
 import { EventStatusAction } from '../../../../components/events/event-status-action';
+import { BookingLineupPanel } from '../../../../components/bookings/booking-lineup-panel';
 import {
   CompactEmpty,
   DetailField,
@@ -59,38 +60,91 @@ export default async function EventDetailPage({
   );
   const canWrite = hasPermission(membership, 'events.write');
   const canChangeStatus = hasPermission(membership, 'events.status');
+  const canReadBookings = hasPermission(membership, 'bookings.read');
+  const canWriteBookings = hasPermission(membership, 'bookings.write');
+  const canReadArtists = hasPermission(membership, 'artists.read');
+  const canCreateArtist = hasPermission(membership, 'artists.write');
+  const canChangeBookingStatus = hasPermission(membership, 'bookings.status');
+  const canFinanceBookings = hasPermission(membership, 'bookings.finance');
+  const canWriteLineup = hasPermission(membership, 'lineup.write');
+  const bookingData = canReadBookings
+    ? await Promise.all([
+        client.GET('/api/v1/organizations/{organizationId}/events/{eventId}/bookings', {
+          params: {
+            path: { organizationId, eventId },
+            query: { includeHistorical: false },
+          },
+        }),
+        client.GET('/api/v1/organizations/{organizationId}/events/{eventId}/booking-progress', {
+          params: { path: { organizationId, eventId } },
+        }),
+        client.GET('/api/v1/organizations/{organizationId}/events/{eventId}/lineup-requirements', {
+          params: { path: { organizationId, eventId } },
+        }),
+        client.GET('/api/v1/organizations/{organizationId}/events/{eventId}/program-items', {
+          params: { path: { organizationId, eventId } },
+        }),
+        canWriteBookings && canReadArtists
+          ? client.GET('/api/v1/organizations/{organizationId}/artists', {
+              params: {
+                path: { organizationId },
+                query: { status: 'ACTIVE', limit: 25, offset: 0 },
+              },
+            })
+          : Promise.resolve(undefined),
+      ])
+    : undefined;
 
   return (
-    <EditableDetail
-      badges={
-        <span className={`status-badge status-badge--event-${event.status.toLowerCase()}`}>
-          {statusLabel(event.status)}
-        </span>
-      }
-      canEdit={canWrite}
-      editTitle="Veranstaltung bearbeiten"
-      eyebrow="Veranstaltung"
-      id="event-detail"
-      sectionTitle="Veranstaltungsdaten"
-      secondaryActions={
-        canChangeStatus ? (
-          <EventStatusAction
-            eventId={event.id}
-            organizationId={organizationId}
-            status={event.status}
-            version={event.version}
-          />
-        ) : null
-      }
-      summary={`${formatDate(event.eventDate)} · ${event.locationName}`}
-      title={event.name}
-      updatedLabel={`Zuletzt geändert: ${new Date(event.updatedAt).toLocaleString('de-DE')}`}
-      view={<EventDetails event={event} />}
-    >
-      {canWrite ? (
-        <EventForm event={event} locations={locations} organizationId={organizationId} />
+    <>
+      <EditableDetail
+        badges={
+          <span className={`status-badge status-badge--event-${event.status.toLowerCase()}`}>
+            {statusLabel(event.status)}
+          </span>
+        }
+        canEdit={canWrite}
+        editTitle="Veranstaltung bearbeiten"
+        eyebrow="Veranstaltung"
+        id="event-detail"
+        sectionTitle="Veranstaltungsdaten"
+        secondaryActions={
+          canChangeStatus ? (
+            <EventStatusAction
+              eventId={event.id}
+              organizationId={organizationId}
+              status={event.status}
+              version={event.version}
+            />
+          ) : null
+        }
+        summary={`${formatDate(event.eventDate)} · ${event.locationName}`}
+        title={event.name}
+        updatedLabel={`Zuletzt geändert: ${new Date(event.updatedAt).toLocaleString('de-DE')}`}
+        view={<EventDetails event={event} />}
+      >
+        {canWrite ? (
+          <EventForm event={event} locations={locations} organizationId={organizationId} />
+        ) : null}
+      </EditableDetail>
+      {bookingData ? (
+        <BookingLineupPanel
+          artists={bookingData[4] ? unwrap(bookingData[4]).items : []}
+          canCreateArtist={canCreateArtist}
+          canEditArtist={canCreateArtist}
+          canFinance={canFinanceBookings}
+          canLineupWrite={canWriteLineup}
+          canStatus={canChangeBookingStatus}
+          canWrite={canWriteBookings}
+          eventId={eventId}
+          initialBookings={unwrap(bookingData[0])}
+          initialProgress={unwrap(bookingData[1])}
+          initialProgramItems={unwrap(bookingData[3])}
+          initialRequirements={unwrap(bookingData[2])}
+          organizationId={organizationId}
+        />
       ) : null}
-    </EditableDetail>
+    </>
   );
 }
 

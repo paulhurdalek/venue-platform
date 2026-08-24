@@ -1,15 +1,15 @@
 # Test strategy
 
-| Layer          | Command                                                 | Evidence                                                                                                         |
-| -------------- | ------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| Unit           | `pnpm test:unit`                                        | Security/master-data plus Event, occupancy, option, availability and snapshot rules                              |
-| API/PostgreSQL | `pnpm test:integration`                                 | Phase-1/3/4 regressions plus free Events, occupancy concurrency, options, availability, conversion and isolation |
-| Migration      | `pnpm test:db`                                          | base/follow-up migrations, tenant keys, exclusion constraints, catalogs and cleanup safety                       |
-| E2E setup      | `pnpm test:e2e:setup`                                   | canonical test environment, isolated Next paths, guarded cleanup and preservation of the development cache       |
-| Browser E2E    | `pnpm test:e2e`                                         | Thirteen serial focused scenarios with administrator and isolated read-only contexts                             |
-| Static/build   | `pnpm verify`                                           | formatting, lint, TypeScript, generated OpenAPI client, tests, production builds                                 |
-| Delivery       | `pnpm test:containers`                                  | fresh migrations, DB/API integration, volume persistence, all three images                                       |
-| Supply chain   | `pnpm security:audit`; `pnpm install --frozen-lockfile` | production advisories and peer/lock consistency                                                                  |
+| Layer          | Command                                                 | Evidence                                                                                                   |
+| -------------- | ------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| Unit           | `pnpm test:unit`; Web workspace test                    | Security/master-data, Event/occupancy/option, Booking rules plus exact amount/prefill helpers              |
+| API/PostgreSQL | `pnpm test:integration`                                 | Phase-1–6 regressions, Booking/program/history/progress, concurrency, redaction and isolation              |
+| Migration      | `pnpm test:db`                                          | all additive migrations, backfills, tenant keys, constraints, catalogs and cleanup safety                  |
+| E2E setup      | `pnpm test:e2e:setup`                                   | canonical test environment, isolated Next paths, guarded cleanup and preservation of the development cache |
+| Browser E2E    | `pnpm test:e2e`                                         | Fifteen serial focused scenarios with administrator and isolated read-only contexts                        |
+| Static/build   | `pnpm verify`                                           | formatting, lint, TypeScript, generated OpenAPI client, tests, production builds                           |
+| Delivery       | `pnpm test:containers`                                  | fresh migrations, DB/API integration, volume persistence, all three images                                 |
+| Supply chain   | `pnpm security:audit`; `pnpm install --frozen-lockfile` | production advisories and peer/lock consistency                                                            |
 
 Database-bearing suites require `TEST_DATABASE_URL`, deliberately refuse a development URL, and
 clean only their isolated test tables through the shared `@venue/database/testing` helper. Tenant
@@ -17,9 +17,11 @@ and authorization assignments, including `role_permission` and `role`, are clear
 migration-owned global `permission`, `contact_role` and `business_partner_role` catalogs remain
 intact. A database regression creates tenant authorization data, invokes the same cleanup, and
 asserts that the tenant data is gone, the overall permission count is unchanged and exactly three
-`event_formats.*`, three `events.*` and three `date_options.*` permissions remain. Cleanup orders
-the relational occupancy and option tables before Events, while global permission and role
-dictionaries survive. The ordinary test suite skips real-DB cases when the variable is absent; the
+`event_formats.*`, three `events.*`, three `date_options.*`, four `bookings.*` and one
+`lineup.write` permissions remain. Cleanup orders Booking history, Event program items, Bookings,
+Line-up requirements, relational occupancy and option tables before Events and formats, while
+global permission and role dictionaries survive. The ordinary test suite skips real-DB cases when
+the variable is absent; the
 explicit DB command and E2E runner fail instead. CI always provisions PostgreSQL 18.4, deploys the
 reviewed migrations, and supplies the variable.
 
@@ -39,9 +41,9 @@ suites cannot inherit them.
 
 The E2E runner starts the real Nest API and Next web app, creates a bootstrap link through the same
 workspace CLI used by operators, and passes that link to Playwright without printing its token.
-Playwright runs fourteen serial scenarios with an individual 90-second limit. A browser context created
+Playwright runs fifteen serial scenarios with an individual 90-second limit. A browser context created
 in `beforeAll` deliberately carries the administrator session and organization ID across the
-focused Phase-1, Phase-3 and Phase-4 scenarios; the invited read-only user receives a separately
+focused Phase-1, Phase-3, Phase-4, Phase-5 and Phase-6 scenarios; the invited read-only user receives a separately
 owned context that is always closed.
 Every run assigns the web process a unique project-local `.next-e2e-*` directory, so an E2E value
 of `NEXT_PUBLIC_API_BASE_URL` can never be compiled into the normal `apps/web/.next` development
@@ -68,3 +70,26 @@ availability, clipboard text, keyboard multi-selection, automatic rank proposals
 contrast checks for the shared inactive/hover/selected/focus/disabled control states. The
 isolated Read-only context verifies that Event and DateOption mutations are absent in both UI and
 API.
+
+Phase-6 unit tests pin exactly six stable statuses, direct corrections, confirmed reactivation,
+active/historical semantics, optional internal Minor-Unit fees and relational custom roles. Eleven
+Web unit tests cover comma/point Euro input including `100,00 → 10000`, very large exact conversions
+without floating point, localized output, no fee and deterministic Booking/Management/Agency plus
+primary-contact prefill.
+PostgreSQL/API scenarios prove format-to-Event requirement and fee snapshots, later template
+independence, Artist/Booking separation, tenant-safe structured contacts, direct Artist fallback
+with and without channels, representative priority, all three hotel arrangements, exact Buy-out
+money and finance/contact redaction. They additionally cover role-independent duplicate conflicts,
+one-winner parallel creation, explicit separate creation, declined/cancelled history, multiple
+performances per Booking, another Artist between sets, breaks, atomic/versioned reorder and rollback
+preconditions, audits, progress-by-Booking and Location/tenant/permission boundaries. Existing
+status, history, pagination, snapshot, summary/filter and concurrency regressions remain selected.
+The database suite executes the exact follow-up migration's hotel mapping and performance backfill
+against a legacy-style Booking and verifies all new constraints, tenant foreign keys and removal of
+the obsolete partial index.
+
+Browser coverage executes the real search/autoprefill → duplicate warning → recommended second
+performance path, edits two ten-minute sets, inserts an Umbaupause, proves simulated 409 rollback,
+then uses drag-and-drop and arrow-key ordering and verifies persistence after reload. The same flow
+checks an Artist direct contact and stores/reopens a German `100,00` Hotel-Buy-out. The isolated
+Read-only context sees both Booking and program but no financial or mutation controls.

@@ -2885,6 +2885,21 @@
             }
           },
           {
+            "name": "booking",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "INCOMPLETE",
+                "MODERATOR_MISSING",
+                "OPEN_REQUESTS",
+                "HAS_OPTIONS",
+                "FULLY_CONFIRMED"
+              ],
+              "type": "string"
+            }
+          },
+          {
             "name": "locationId",
             "required": false,
             "in": "query",
@@ -3669,6 +3684,745 @@
         },
         "tags": [
           "availability"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/events/{eventId}/bookings": {
+      "get": {
+        "operationId": "EventBookingsController_list_v1",
+        "parameters": [
+          {
+            "name": "includeHistorical",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "eventId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BookingDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "bookings and lineup"
+        ]
+      },
+      "post": {
+        "operationId": "EventBookingsController_create_v1",
+        "parameters": [
+          {
+            "name": "eventId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBookingDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BookingDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "bookings and lineup"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/events/{eventId}/program-items": {
+      "get": {
+        "operationId": "EventBookingsController_programItems_v1",
+        "parameters": [
+          {
+            "name": "eventId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EventProgramItemDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "bookings and lineup"
+        ]
+      },
+      "post": {
+        "operationId": "EventBookingsController_createProgramItem_v1",
+        "parameters": [
+          {
+            "name": "eventId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateEventProgramItemDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventProgramItemDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "bookings and lineup"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/events/{eventId}/program/order": {
+      "put": {
+        "operationId": "EventBookingsController_reorderProgramItems_v1",
+        "parameters": [
+          {
+            "name": "eventId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEventProgramOrderDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EventProgramItemDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "bookings and lineup"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/events/{eventId}/booking-progress": {
+      "get": {
+        "operationId": "EventBookingsController_progress_v1",
+        "parameters": [
+          {
+            "name": "eventId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BookingProgressDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "bookings and lineup"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/events/{eventId}/lineup/order": {
+      "put": {
+        "operationId": "EventBookingsController_reorder_v1",
+        "parameters": [
+          {
+            "name": "eventId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateLineupOrderDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BookingDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "bookings and lineup"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/events/{eventId}/lineup-requirements": {
+      "get": {
+        "operationId": "EventBookingsController_requirements_v1",
+        "parameters": [
+          {
+            "name": "eventId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LineupRequirementSetDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "bookings and lineup"
+        ]
+      },
+      "put": {
+        "operationId": "EventBookingsController_replaceRequirements_v1",
+        "parameters": [
+          {
+            "name": "eventId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReplaceLineupRequirementsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LineupRequirementSetDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "bookings and lineup"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/bookings/{bookingId}": {
+      "get": {
+        "operationId": "BookingController_find_v1",
+        "parameters": [
+          {
+            "name": "bookingId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BookingDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "bookings and lineup"
+        ]
+      },
+      "patch": {
+        "operationId": "BookingController_update_v1",
+        "parameters": [
+          {
+            "name": "bookingId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateBookingDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BookingDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "bookings and lineup"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/bookings/{bookingId}/status": {
+      "patch": {
+        "operationId": "BookingController_status_v1",
+        "parameters": [
+          {
+            "name": "bookingId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateBookingStatusDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BookingDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "bookings and lineup"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/event-formats/{eventFormatId}/lineup-requirements": {
+      "get": {
+        "operationId": "EventFormatLineupController_requirements_v1",
+        "parameters": [
+          {
+            "name": "eventFormatId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LineupRequirementSetDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "bookings and lineup"
+        ]
+      },
+      "put": {
+        "operationId": "EventFormatLineupController_replace_v1",
+        "parameters": [
+          {
+            "name": "eventFormatId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReplaceLineupRequirementsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LineupRequirementSetDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "bookings and lineup"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/program-items/{itemId}": {
+      "patch": {
+        "operationId": "EventProgramItemController_update_v1",
+        "parameters": [
+          {
+            "name": "itemId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEventProgramItemDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventProgramItemDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "bookings and lineup"
+        ]
+      },
+      "delete": {
+        "operationId": "EventProgramItemController_remove_v1",
+        "parameters": [
+          {
+            "name": "version",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "itemId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "bookings and lineup"
         ]
       }
     },
@@ -6136,6 +6890,45 @@
           "status"
         ]
       },
+      "EventBookingSummaryDto": {
+        "type": "object",
+        "properties": {
+          "artistRequiredCount": {
+            "type": "number"
+          },
+          "artistConfirmedCount": {
+            "type": "number"
+          },
+          "moderatorRequired": {
+            "type": "boolean"
+          },
+          "moderatorConfirmed": {
+            "type": "boolean"
+          },
+          "openRequestCount": {
+            "type": "number"
+          },
+          "optionCount": {
+            "type": "number"
+          },
+          "incomplete": {
+            "type": "boolean"
+          },
+          "fullyConfirmed": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "artistRequiredCount",
+          "artistConfirmedCount",
+          "moderatorRequired",
+          "moderatorConfirmed",
+          "openRequestCount",
+          "optionCount",
+          "incomplete",
+          "fullyConfirmed"
+        ]
+      },
       "EventDto": {
         "type": "object",
         "properties": {
@@ -6257,6 +7050,9 @@
           "occupancyComplete": {
             "type": "boolean"
           },
+          "bookingSummary": {
+            "$ref": "#/components/schemas/EventBookingSummaryDto"
+          },
           "createdAt": {
             "type": "string",
             "format": "date-time"
@@ -6280,6 +7076,7 @@
           "recordingSetting",
           "timezone",
           "occupancyComplete",
+          "bookingSummary",
           "createdAt",
           "updatedAt"
         ]
@@ -6949,6 +7746,1048 @@
           "occupancyEndNextDay",
           "state",
           "selectable"
+        ]
+      },
+      "BookingContactDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "functionLabel": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "ARCHIVED"
+            ]
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "phone": {
+            "type": "string",
+            "nullable": true
+          },
+          "mobile": {
+            "type": "string",
+            "nullable": true
+          },
+          "roleNames": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "isPrimary": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "status",
+          "roleNames",
+          "isPrimary"
+        ]
+      },
+      "BookingStatusHistoryDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "previousStatus": {
+            "type": "string",
+            "enum": [
+              "SHORTLISTED",
+              "REQUESTED",
+              "OPTION",
+              "CONFIRMED",
+              "DECLINED",
+              "CANCELLED"
+            ]
+          },
+          "newStatus": {
+            "type": "string",
+            "enum": [
+              "SHORTLISTED",
+              "REQUESTED",
+              "OPTION",
+              "CONFIRMED",
+              "DECLINED",
+              "CANCELLED"
+            ]
+          },
+          "changedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "actorUserId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "actorName": {
+            "type": "string"
+          },
+          "note": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "id",
+          "previousStatus",
+          "newStatus",
+          "changedAt",
+          "actorUserId",
+          "actorName"
+        ]
+      },
+      "BookingDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "organizationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "eventId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "artistId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "artistName": {
+            "type": "string"
+          },
+          "artistStatus": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "ARCHIVED"
+            ]
+          },
+          "artistEmail": {
+            "type": "string",
+            "nullable": true
+          },
+          "artistPhone": {
+            "type": "string",
+            "nullable": true
+          },
+          "hasActiveRepresentation": {
+            "type": "boolean"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "ARTIST",
+              "MODERATOR",
+              "OTHER"
+            ]
+          },
+          "customRoleLabel": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "SHORTLISTED",
+              "REQUESTED",
+              "OPTION",
+              "CONFIRMED",
+              "DECLINED",
+              "CANCELLED"
+            ]
+          },
+          "lineupOrder": {
+            "type": "number"
+          },
+          "performanceStartMinutes": {
+            "type": "number",
+            "nullable": true,
+            "deprecated": true
+          },
+          "performanceDurationMinutes": {
+            "type": "number",
+            "nullable": true,
+            "deprecated": true
+          },
+          "internalNote": {
+            "type": "string",
+            "nullable": true
+          },
+          "businessPartnerId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "businessPartnerName": {
+            "type": "string",
+            "nullable": true
+          },
+          "businessPartnerStatus": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "ARCHIVED"
+            ],
+            "nullable": true
+          },
+          "businessPartnerRoleNames": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "contactId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "contactName": {
+            "type": "string",
+            "nullable": true
+          },
+          "contactFunctionLabel": {
+            "type": "string",
+            "nullable": true
+          },
+          "contactStatus": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "ARCHIVED"
+            ],
+            "nullable": true
+          },
+          "contactEmail": {
+            "type": "string",
+            "nullable": true
+          },
+          "contactPhone": {
+            "type": "string",
+            "nullable": true
+          },
+          "contactMobile": {
+            "type": "string",
+            "nullable": true
+          },
+          "contactRoleNames": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "contactIsPrimary": {
+            "type": "boolean"
+          },
+          "additionalContacts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BookingContactDto"
+            }
+          },
+          "agreedFeeMinor": {
+            "type": "string",
+            "nullable": true
+          },
+          "agreedFeeCurrency": {
+            "type": "string",
+            "nullable": true
+          },
+          "travelArrangement": {
+            "type": "string",
+            "nullable": true
+          },
+          "travelCostMinor": {
+            "type": "string",
+            "nullable": true
+          },
+          "travelCostCurrency": {
+            "type": "string",
+            "nullable": true
+          },
+          "hotelRequired": {
+            "type": "boolean",
+            "deprecated": true
+          },
+          "hotelArrangement": {
+            "type": "string",
+            "enum": [
+              "NONE",
+              "REQUIRED",
+              "BUYOUT"
+            ]
+          },
+          "hotelBuyoutMinor": {
+            "type": "string",
+            "nullable": true
+          },
+          "hotelBuyoutCurrency": {
+            "type": "string",
+            "nullable": true
+          },
+          "hotelNote": {
+            "type": "string",
+            "nullable": true
+          },
+          "version": {
+            "type": "number"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "statusHistory": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BookingStatusHistoryDto"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "organizationId",
+          "eventId",
+          "artistId",
+          "artistName",
+          "artistStatus",
+          "hasActiveRepresentation",
+          "role",
+          "status",
+          "lineupOrder",
+          "hotelRequired",
+          "hotelArrangement",
+          "version",
+          "createdAt",
+          "updatedAt",
+          "statusHistory"
+        ]
+      },
+      "CreateBookingDto": {
+        "type": "object",
+        "properties": {
+          "artistId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "ARTIST",
+              "MODERATOR",
+              "OTHER"
+            ]
+          },
+          "customRoleLabel": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 120
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "SHORTLISTED",
+              "REQUESTED",
+              "OPTION",
+              "CONFIRMED",
+              "DECLINED",
+              "CANCELLED"
+            ],
+            "default": "SHORTLISTED"
+          },
+          "performanceStartMinutes": {
+            "type": "number",
+            "nullable": true,
+            "minimum": 0,
+            "maximum": 2879,
+            "deprecated": true
+          },
+          "performanceDurationMinutes": {
+            "type": "number",
+            "nullable": true,
+            "minimum": 1,
+            "maximum": 1440,
+            "deprecated": true
+          },
+          "internalNote": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 5000
+          },
+          "businessPartnerId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "contactId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "agreedFeeMinor": {
+            "type": "string",
+            "nullable": true,
+            "pattern": "^\\d+$"
+          },
+          "agreedFeeCurrency": {
+            "type": "string",
+            "nullable": true,
+            "pattern": "^[A-Z]{3}$"
+          },
+          "travelArrangement": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 5000
+          },
+          "travelCostMinor": {
+            "type": "string",
+            "nullable": true,
+            "pattern": "^\\d+$"
+          },
+          "travelCostCurrency": {
+            "type": "string",
+            "nullable": true,
+            "pattern": "^[A-Z]{3}$"
+          },
+          "hotelRequired": {
+            "type": "boolean",
+            "deprecated": true
+          },
+          "hotelArrangement": {
+            "type": "string",
+            "enum": [
+              "NONE",
+              "REQUIRED",
+              "BUYOUT"
+            ]
+          },
+          "hotelBuyoutMinor": {
+            "type": "string",
+            "nullable": true,
+            "pattern": "^\\d+$"
+          },
+          "hotelBuyoutCurrency": {
+            "type": "string",
+            "nullable": true,
+            "pattern": "^[A-Z]{3}$"
+          },
+          "hotelNote": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 2000
+          },
+          "confirmDuplicateArtist": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "artistId",
+          "role"
+        ]
+      },
+      "EventProgramItemDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "organizationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "eventId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "bookingId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "PERFORMANCE",
+              "BREAK"
+            ]
+          },
+          "sortOrder": {
+            "type": "number"
+          },
+          "label": {
+            "type": "string",
+            "nullable": true
+          },
+          "durationMinutes": {
+            "type": "number",
+            "nullable": true
+          },
+          "version": {
+            "type": "number"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "artistName": {
+            "type": "string",
+            "nullable": true
+          },
+          "bookingRole": {
+            "type": "string",
+            "enum": [
+              "ARTIST",
+              "MODERATOR",
+              "OTHER"
+            ],
+            "nullable": true
+          },
+          "bookingCustomRoleLabel": {
+            "type": "string",
+            "nullable": true
+          },
+          "bookingStatus": {
+            "type": "string",
+            "enum": [
+              "SHORTLISTED",
+              "REQUESTED",
+              "OPTION",
+              "CONFIRMED",
+              "DECLINED",
+              "CANCELLED"
+            ],
+            "nullable": true
+          }
+        },
+        "required": [
+          "id",
+          "organizationId",
+          "eventId",
+          "kind",
+          "sortOrder",
+          "version",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "CreateEventProgramItemDto": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "PERFORMANCE",
+              "BREAK"
+            ]
+          },
+          "bookingId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "label": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 120
+          },
+          "durationMinutes": {
+            "type": "number",
+            "nullable": true,
+            "minimum": 1,
+            "maximum": 1440
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "EventProgramOrderItemDto": {
+        "type": "object",
+        "properties": {
+          "itemId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "version": {
+            "type": "number",
+            "minimum": 1
+          }
+        },
+        "required": [
+          "itemId",
+          "version"
+        ]
+      },
+      "UpdateEventProgramOrderDto": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EventProgramOrderItemDto"
+            }
+          }
+        },
+        "required": [
+          "items"
+        ]
+      },
+      "BookingProgressRoleDto": {
+        "type": "object",
+        "properties": {
+          "role": {
+            "type": "string",
+            "enum": [
+              "ARTIST",
+              "MODERATOR",
+              "OTHER"
+            ]
+          },
+          "customRoleLabel": {
+            "type": "string",
+            "nullable": true
+          },
+          "label": {
+            "type": "string"
+          },
+          "requiredCount": {
+            "type": "number"
+          },
+          "shortlistedCount": {
+            "type": "number"
+          },
+          "requestedCount": {
+            "type": "number"
+          },
+          "optionCount": {
+            "type": "number"
+          },
+          "confirmedCount": {
+            "type": "number"
+          },
+          "missingCount": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "role",
+          "label",
+          "requiredCount",
+          "shortlistedCount",
+          "requestedCount",
+          "optionCount",
+          "confirmedCount",
+          "missingCount"
+        ]
+      },
+      "BookingProgressDto": {
+        "type": "object",
+        "properties": {
+          "eventId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BookingProgressRoleDto"
+            }
+          },
+          "totalOpenRequests": {
+            "type": "number"
+          },
+          "totalOptions": {
+            "type": "number"
+          },
+          "complete": {
+            "type": "boolean"
+          },
+          "moderatorRequired": {
+            "type": "boolean"
+          },
+          "moderatorConfirmed": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "eventId",
+          "roles",
+          "totalOpenRequests",
+          "totalOptions",
+          "complete",
+          "moderatorRequired",
+          "moderatorConfirmed"
+        ]
+      },
+      "LineupOrderItemDto": {
+        "type": "object",
+        "properties": {
+          "bookingId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "version": {
+            "type": "number",
+            "minimum": 1
+          }
+        },
+        "required": [
+          "bookingId",
+          "version"
+        ]
+      },
+      "UpdateLineupOrderDto": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LineupOrderItemDto"
+            }
+          }
+        },
+        "required": [
+          "items"
+        ]
+      },
+      "LineupRequirementDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "organizationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "ARTIST",
+              "MODERATOR",
+              "OTHER"
+            ]
+          },
+          "customRoleLabel": {
+            "type": "string",
+            "nullable": true
+          },
+          "requiredCount": {
+            "type": "number"
+          },
+          "defaultFeeMinor": {
+            "type": "string",
+            "nullable": true
+          },
+          "defaultFeeCurrency": {
+            "type": "string",
+            "nullable": true
+          },
+          "sortOrder": {
+            "type": "number"
+          },
+          "version": {
+            "type": "number"
+          },
+          "sourceEventFormatRequirementId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "sourceEventFormatRequirementVersion": {
+            "type": "number",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "id",
+          "organizationId",
+          "role",
+          "requiredCount",
+          "sortOrder",
+          "version",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "LineupRequirementSetDto": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "number"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LineupRequirementDto"
+            }
+          }
+        },
+        "required": [
+          "version",
+          "items"
+        ]
+      },
+      "LineupRequirementInputDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "version": {
+            "type": "number",
+            "minimum": 1
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "ARTIST",
+              "MODERATOR",
+              "OTHER"
+            ]
+          },
+          "customRoleLabel": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 120
+          },
+          "requiredCount": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 1000
+          },
+          "defaultFeeMinor": {
+            "type": "string",
+            "nullable": true,
+            "pattern": "^\\d+$"
+          },
+          "defaultFeeCurrency": {
+            "type": "string",
+            "nullable": true,
+            "pattern": "^[A-Z]{3}$"
+          }
+        },
+        "required": [
+          "role",
+          "requiredCount"
+        ]
+      },
+      "ReplaceLineupRequirementsDto": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "number",
+            "minimum": 1
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LineupRequirementInputDto"
+            }
+          }
+        },
+        "required": [
+          "version",
+          "items"
+        ]
+      },
+      "UpdateBookingDto": {
+        "type": "object",
+        "properties": {
+          "role": {
+            "type": "string",
+            "enum": [
+              "ARTIST",
+              "MODERATOR",
+              "OTHER"
+            ]
+          },
+          "customRoleLabel": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 120
+          },
+          "performanceStartMinutes": {
+            "type": "number",
+            "nullable": true,
+            "minimum": 0,
+            "maximum": 2879,
+            "deprecated": true
+          },
+          "performanceDurationMinutes": {
+            "type": "number",
+            "nullable": true,
+            "minimum": 1,
+            "maximum": 1440,
+            "deprecated": true
+          },
+          "internalNote": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 5000
+          },
+          "businessPartnerId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "contactId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "agreedFeeMinor": {
+            "type": "string",
+            "nullable": true,
+            "pattern": "^\\d+$"
+          },
+          "agreedFeeCurrency": {
+            "type": "string",
+            "nullable": true,
+            "pattern": "^[A-Z]{3}$"
+          },
+          "travelArrangement": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 5000
+          },
+          "travelCostMinor": {
+            "type": "string",
+            "nullable": true,
+            "pattern": "^\\d+$"
+          },
+          "travelCostCurrency": {
+            "type": "string",
+            "nullable": true,
+            "pattern": "^[A-Z]{3}$"
+          },
+          "hotelRequired": {
+            "type": "boolean",
+            "deprecated": true
+          },
+          "hotelArrangement": {
+            "type": "string",
+            "enum": [
+              "NONE",
+              "REQUIRED",
+              "BUYOUT"
+            ]
+          },
+          "hotelBuyoutMinor": {
+            "type": "string",
+            "nullable": true,
+            "pattern": "^\\d+$"
+          },
+          "hotelBuyoutCurrency": {
+            "type": "string",
+            "nullable": true,
+            "pattern": "^[A-Z]{3}$"
+          },
+          "hotelNote": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 2000
+          },
+          "version": {
+            "type": "number",
+            "minimum": 1
+          }
+        },
+        "required": [
+          "version"
+        ]
+      },
+      "UpdateBookingStatusDto": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "number",
+            "minimum": 1
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "SHORTLISTED",
+              "REQUESTED",
+              "OPTION",
+              "CONFIRMED",
+              "DECLINED",
+              "CANCELLED"
+            ]
+          },
+          "note": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 2000
+          },
+          "confirmReactivation": {
+            "type": "boolean",
+            "default": false
+          }
+        },
+        "required": [
+          "version",
+          "status"
+        ]
+      },
+      "UpdateEventProgramItemDto": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 120
+          },
+          "durationMinutes": {
+            "type": "number",
+            "nullable": true,
+            "minimum": 1,
+            "maximum": 1440
+          },
+          "version": {
+            "type": "number",
+            "minimum": 1
+          }
+        },
+        "required": [
+          "version"
         ]
       },
       "ServiceHealthDto": {

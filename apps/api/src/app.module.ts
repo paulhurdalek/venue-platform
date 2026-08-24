@@ -13,6 +13,7 @@ import { MasterDataModule } from './master-data/master-data.module.js';
 import { SecurityModule } from './security/security.module.js';
 import { SetupModule } from './setup/setup.module.js';
 import { PlatformModule } from './platform/platform.module.js';
+import { BookingsModule } from './bookings/bookings.module.js';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { PlatformModule } from './platform/platform.module.js';
     EventFormatsModule,
     EventsModule,
     DateOptionsModule,
+    BookingsModule,
     HealthModule,
   ],
 })

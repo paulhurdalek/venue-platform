@@ -29,6 +29,11 @@ export const PERMISSIONS = {
   DATE_OPTIONS_READ: 'date_options.read',
   DATE_OPTIONS_WRITE: 'date_options.write',
   DATE_OPTIONS_CONVERT: 'date_options.convert',
+  BOOKINGS_READ: 'bookings.read',
+  BOOKINGS_WRITE: 'bookings.write',
+  BOOKINGS_STATUS: 'bookings.status',
+  BOOKINGS_FINANCE: 'bookings.finance',
+  LINEUP_WRITE: 'lineup.write',
 } as const;
 
 export type PermissionKey = (typeof PERMISSIONS)[keyof typeof PERMISSIONS];
@@ -91,6 +96,14 @@ export const PERMISSION_CATALOG: ReadonlyArray<{
     key: PERMISSIONS.DATE_OPTIONS_CONVERT,
     description: 'Terminoptionen in Veranstaltungen umwandeln',
   },
+  { key: PERMISSIONS.BOOKINGS_READ, description: 'Booking- und Line-up-Grunddaten ansehen' },
+  { key: PERMISSIONS.BOOKINGS_WRITE, description: 'Bookings anlegen und bearbeiten' },
+  { key: PERMISSIONS.BOOKINGS_STATUS, description: 'Bookingstatus ändern' },
+  {
+    key: PERMISSIONS.BOOKINGS_FINANCE,
+    description: 'Booking-Gagen und Reisekosten ansehen und bearbeiten',
+  },
+  { key: PERMISSIONS.LINEUP_WRITE, description: 'Line-up-Vorgaben und Reihenfolge bearbeiten' },
 ];
 
 export const STANDARD_ROLES = [
@@ -118,6 +131,11 @@ export const STANDARD_ROLES = [
       PERMISSIONS.DATE_OPTIONS_READ,
       PERMISSIONS.DATE_OPTIONS_WRITE,
       PERMISSIONS.DATE_OPTIONS_CONVERT,
+      PERMISSIONS.BOOKINGS_READ,
+      PERMISSIONS.BOOKINGS_WRITE,
+      PERMISSIONS.BOOKINGS_STATUS,
+      PERMISSIONS.BOOKINGS_FINANCE,
+      PERMISSIONS.LINEUP_WRITE,
     ],
   },
   {
@@ -141,6 +159,11 @@ export const STANDARD_ROLES = [
       PERMISSIONS.DATE_OPTIONS_READ,
       PERMISSIONS.DATE_OPTIONS_WRITE,
       PERMISSIONS.DATE_OPTIONS_CONVERT,
+      PERMISSIONS.BOOKINGS_READ,
+      PERMISSIONS.BOOKINGS_WRITE,
+      PERMISSIONS.BOOKINGS_STATUS,
+      PERMISSIONS.BOOKINGS_FINANCE,
+      PERMISSIONS.LINEUP_WRITE,
     ],
   },
   {
@@ -158,6 +181,7 @@ export const STANDARD_ROLES = [
       PERMISSIONS.EVENTS_READ,
       PERMISSIONS.EVENTS_WRITE,
       PERMISSIONS.DATE_OPTIONS_READ,
+      PERMISSIONS.BOOKINGS_READ,
     ],
   },
   {
@@ -173,6 +197,7 @@ export const STANDARD_ROLES = [
       PERMISSIONS.EVENT_FORMATS_READ,
       PERMISSIONS.EVENTS_READ,
       PERMISSIONS.DATE_OPTIONS_READ,
+      PERMISSIONS.BOOKINGS_READ,
     ],
   },
 ] as const;

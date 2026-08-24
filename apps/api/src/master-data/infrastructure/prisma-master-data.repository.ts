@@ -101,17 +101,20 @@ export class PrismaMasterDataRepository implements MasterDataRepository {
   ) {}
 
   async listArtists(organizationId: string, query: ListQuery): Promise<PageResult<ArtistRecord>> {
+    const searchTokens = query.q?.split(/\s+/).filter(Boolean) ?? [];
     const where: Prisma.ArtistWhereInput = {
       organizationId,
       ...(query.status === 'ALL' ? {} : { status: query.status }),
-      ...(query.q
+      ...(searchTokens.length
         ? {
-            OR: [
-              { stageName: { contains: query.q, mode: 'insensitive' } },
-              { firstName: { contains: query.q, mode: 'insensitive' } },
-              { lastName: { contains: query.q, mode: 'insensitive' } },
-              { email: { contains: query.q, mode: 'insensitive' } },
-            ],
+            AND: searchTokens.map((token) => ({
+              OR: [
+                { stageName: { contains: token, mode: 'insensitive' } },
+                { firstName: { contains: token, mode: 'insensitive' } },
+                { lastName: { contains: token, mode: 'insensitive' } },
+                { email: { contains: token, mode: 'insensitive' } },
+              ],
+            })),
           }
         : {}),
       ...(query.incomplete === undefined

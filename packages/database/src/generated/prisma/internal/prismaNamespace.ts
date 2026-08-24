@@ -431,6 +431,11 @@ export const ModelName = {
   ArtistBusinessPartnerRole: 'ArtistBusinessPartnerRole',
   ArtistBusinessPartnerContact: 'ArtistBusinessPartnerContact',
   ArtistBusinessPartnerContactRole: 'ArtistBusinessPartnerContactRole',
+  EventFormatLineupRequirement: 'EventFormatLineupRequirement',
+  EventLineupRequirement: 'EventLineupRequirement',
+  Booking: 'Booking',
+  EventProgramItem: 'EventProgramItem',
+  BookingStatusHistory: 'BookingStatusHistory',
   VenueDateOption: 'VenueDateOption',
   LocationOccupancy: 'LocationOccupancy'
 } as const
@@ -448,7 +453,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "session" | "account" | "verification" | "rateLimit" | "bootstrapToken" | "organization" | "eventFormat" | "event" | "location" | "membership" | "permission" | "role" | "rolePermission" | "membershipRole" | "membershipLocation" | "invitation" | "invitationRole" | "invitationLocation" | "auditLog" | "artist" | "contact" | "contactRole" | "artistContact" | "artistContactRole" | "businessPartner" | "businessPartnerRole" | "businessPartnerRoleAssignment" | "businessPartnerContact" | "businessPartnerContactRole" | "artistBusinessPartner" | "artistBusinessPartnerRole" | "artistBusinessPartnerContact" | "artistBusinessPartnerContactRole" | "venueDateOption" | "locationOccupancy"
+    modelProps: "user" | "session" | "account" | "verification" | "rateLimit" | "bootstrapToken" | "organization" | "eventFormat" | "event" | "location" | "membership" | "permission" | "role" | "rolePermission" | "membershipRole" | "membershipLocation" | "invitation" | "invitationRole" | "invitationLocation" | "auditLog" | "artist" | "contact" | "contactRole" | "artistContact" | "artistContactRole" | "businessPartner" | "businessPartnerRole" | "businessPartnerRoleAssignment" | "businessPartnerContact" | "businessPartnerContactRole" | "artistBusinessPartner" | "artistBusinessPartnerRole" | "artistBusinessPartnerContact" | "artistBusinessPartnerContactRole" | "eventFormatLineupRequirement" | "eventLineupRequirement" | "booking" | "eventProgramItem" | "bookingStatusHistory" | "venueDateOption" | "locationOccupancy"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2968,6 +2973,376 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    EventFormatLineupRequirement: {
+      payload: Prisma.$EventFormatLineupRequirementPayload<ExtArgs>
+      fields: Prisma.EventFormatLineupRequirementFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.EventFormatLineupRequirementFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventFormatLineupRequirementPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.EventFormatLineupRequirementFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventFormatLineupRequirementPayload>
+        }
+        findFirst: {
+          args: Prisma.EventFormatLineupRequirementFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventFormatLineupRequirementPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.EventFormatLineupRequirementFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventFormatLineupRequirementPayload>
+        }
+        findMany: {
+          args: Prisma.EventFormatLineupRequirementFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventFormatLineupRequirementPayload>[]
+        }
+        create: {
+          args: Prisma.EventFormatLineupRequirementCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventFormatLineupRequirementPayload>
+        }
+        createMany: {
+          args: Prisma.EventFormatLineupRequirementCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.EventFormatLineupRequirementCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventFormatLineupRequirementPayload>[]
+        }
+        delete: {
+          args: Prisma.EventFormatLineupRequirementDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventFormatLineupRequirementPayload>
+        }
+        update: {
+          args: Prisma.EventFormatLineupRequirementUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventFormatLineupRequirementPayload>
+        }
+        deleteMany: {
+          args: Prisma.EventFormatLineupRequirementDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.EventFormatLineupRequirementUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.EventFormatLineupRequirementUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventFormatLineupRequirementPayload>[]
+        }
+        upsert: {
+          args: Prisma.EventFormatLineupRequirementUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventFormatLineupRequirementPayload>
+        }
+        aggregate: {
+          args: Prisma.EventFormatLineupRequirementAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateEventFormatLineupRequirement>
+        }
+        groupBy: {
+          args: Prisma.EventFormatLineupRequirementGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EventFormatLineupRequirementGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.EventFormatLineupRequirementCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EventFormatLineupRequirementCountAggregateOutputType> | number
+        }
+      }
+    }
+    EventLineupRequirement: {
+      payload: Prisma.$EventLineupRequirementPayload<ExtArgs>
+      fields: Prisma.EventLineupRequirementFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.EventLineupRequirementFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventLineupRequirementPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.EventLineupRequirementFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventLineupRequirementPayload>
+        }
+        findFirst: {
+          args: Prisma.EventLineupRequirementFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventLineupRequirementPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.EventLineupRequirementFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventLineupRequirementPayload>
+        }
+        findMany: {
+          args: Prisma.EventLineupRequirementFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventLineupRequirementPayload>[]
+        }
+        create: {
+          args: Prisma.EventLineupRequirementCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventLineupRequirementPayload>
+        }
+        createMany: {
+          args: Prisma.EventLineupRequirementCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.EventLineupRequirementCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventLineupRequirementPayload>[]
+        }
+        delete: {
+          args: Prisma.EventLineupRequirementDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventLineupRequirementPayload>
+        }
+        update: {
+          args: Prisma.EventLineupRequirementUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventLineupRequirementPayload>
+        }
+        deleteMany: {
+          args: Prisma.EventLineupRequirementDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.EventLineupRequirementUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.EventLineupRequirementUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventLineupRequirementPayload>[]
+        }
+        upsert: {
+          args: Prisma.EventLineupRequirementUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventLineupRequirementPayload>
+        }
+        aggregate: {
+          args: Prisma.EventLineupRequirementAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateEventLineupRequirement>
+        }
+        groupBy: {
+          args: Prisma.EventLineupRequirementGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EventLineupRequirementGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.EventLineupRequirementCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EventLineupRequirementCountAggregateOutputType> | number
+        }
+      }
+    }
+    Booking: {
+      payload: Prisma.$BookingPayload<ExtArgs>
+      fields: Prisma.BookingFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BookingFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BookingFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingPayload>
+        }
+        findFirst: {
+          args: Prisma.BookingFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BookingFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingPayload>
+        }
+        findMany: {
+          args: Prisma.BookingFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingPayload>[]
+        }
+        create: {
+          args: Prisma.BookingCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingPayload>
+        }
+        createMany: {
+          args: Prisma.BookingCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.BookingCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingPayload>[]
+        }
+        delete: {
+          args: Prisma.BookingDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingPayload>
+        }
+        update: {
+          args: Prisma.BookingUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingPayload>
+        }
+        deleteMany: {
+          args: Prisma.BookingDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BookingUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.BookingUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingPayload>[]
+        }
+        upsert: {
+          args: Prisma.BookingUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingPayload>
+        }
+        aggregate: {
+          args: Prisma.BookingAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBooking>
+        }
+        groupBy: {
+          args: Prisma.BookingGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BookingGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BookingCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BookingCountAggregateOutputType> | number
+        }
+      }
+    }
+    EventProgramItem: {
+      payload: Prisma.$EventProgramItemPayload<ExtArgs>
+      fields: Prisma.EventProgramItemFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.EventProgramItemFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventProgramItemPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.EventProgramItemFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventProgramItemPayload>
+        }
+        findFirst: {
+          args: Prisma.EventProgramItemFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventProgramItemPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.EventProgramItemFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventProgramItemPayload>
+        }
+        findMany: {
+          args: Prisma.EventProgramItemFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventProgramItemPayload>[]
+        }
+        create: {
+          args: Prisma.EventProgramItemCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventProgramItemPayload>
+        }
+        createMany: {
+          args: Prisma.EventProgramItemCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.EventProgramItemCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventProgramItemPayload>[]
+        }
+        delete: {
+          args: Prisma.EventProgramItemDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventProgramItemPayload>
+        }
+        update: {
+          args: Prisma.EventProgramItemUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventProgramItemPayload>
+        }
+        deleteMany: {
+          args: Prisma.EventProgramItemDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.EventProgramItemUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.EventProgramItemUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventProgramItemPayload>[]
+        }
+        upsert: {
+          args: Prisma.EventProgramItemUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EventProgramItemPayload>
+        }
+        aggregate: {
+          args: Prisma.EventProgramItemAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateEventProgramItem>
+        }
+        groupBy: {
+          args: Prisma.EventProgramItemGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EventProgramItemGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.EventProgramItemCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EventProgramItemCountAggregateOutputType> | number
+        }
+      }
+    }
+    BookingStatusHistory: {
+      payload: Prisma.$BookingStatusHistoryPayload<ExtArgs>
+      fields: Prisma.BookingStatusHistoryFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BookingStatusHistoryFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingStatusHistoryPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BookingStatusHistoryFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingStatusHistoryPayload>
+        }
+        findFirst: {
+          args: Prisma.BookingStatusHistoryFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingStatusHistoryPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BookingStatusHistoryFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingStatusHistoryPayload>
+        }
+        findMany: {
+          args: Prisma.BookingStatusHistoryFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingStatusHistoryPayload>[]
+        }
+        create: {
+          args: Prisma.BookingStatusHistoryCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingStatusHistoryPayload>
+        }
+        createMany: {
+          args: Prisma.BookingStatusHistoryCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.BookingStatusHistoryCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingStatusHistoryPayload>[]
+        }
+        delete: {
+          args: Prisma.BookingStatusHistoryDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingStatusHistoryPayload>
+        }
+        update: {
+          args: Prisma.BookingStatusHistoryUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingStatusHistoryPayload>
+        }
+        deleteMany: {
+          args: Prisma.BookingStatusHistoryDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BookingStatusHistoryUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.BookingStatusHistoryUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingStatusHistoryPayload>[]
+        }
+        upsert: {
+          args: Prisma.BookingStatusHistoryUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingStatusHistoryPayload>
+        }
+        aggregate: {
+          args: Prisma.BookingStatusHistoryAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBookingStatusHistory>
+        }
+        groupBy: {
+          args: Prisma.BookingStatusHistoryGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BookingStatusHistoryGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BookingStatusHistoryCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BookingStatusHistoryCountAggregateOutputType> | number
+        }
+      }
+    }
     VenueDateOption: {
       payload: Prisma.$VenueDateOptionPayload<ExtArgs>
       fields: Prisma.VenueDateOptionFieldRefs
@@ -3652,6 +4027,115 @@ export const ArtistBusinessPartnerContactRoleScalarFieldEnum = {
 export type ArtistBusinessPartnerContactRoleScalarFieldEnum = (typeof ArtistBusinessPartnerContactRoleScalarFieldEnum)[keyof typeof ArtistBusinessPartnerContactRoleScalarFieldEnum]
 
 
+export const EventFormatLineupRequirementScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  eventFormatId: 'eventFormatId',
+  role: 'role',
+  customRoleLabel: 'customRoleLabel',
+  normalizedCustomRoleLabel: 'normalizedCustomRoleLabel',
+  requiredCount: 'requiredCount',
+  defaultFeeMinor: 'defaultFeeMinor',
+  defaultFeeCurrency: 'defaultFeeCurrency',
+  sortOrder: 'sortOrder',
+  status: 'status',
+  version: 'version',
+  archivedAt: 'archivedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type EventFormatLineupRequirementScalarFieldEnum = (typeof EventFormatLineupRequirementScalarFieldEnum)[keyof typeof EventFormatLineupRequirementScalarFieldEnum]
+
+
+export const EventLineupRequirementScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  eventId: 'eventId',
+  sourceEventFormatRequirementId: 'sourceEventFormatRequirementId',
+  sourceEventFormatRequirementVersion: 'sourceEventFormatRequirementVersion',
+  role: 'role',
+  customRoleLabel: 'customRoleLabel',
+  normalizedCustomRoleLabel: 'normalizedCustomRoleLabel',
+  requiredCount: 'requiredCount',
+  defaultFeeMinor: 'defaultFeeMinor',
+  defaultFeeCurrency: 'defaultFeeCurrency',
+  sortOrder: 'sortOrder',
+  status: 'status',
+  version: 'version',
+  archivedAt: 'archivedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type EventLineupRequirementScalarFieldEnum = (typeof EventLineupRequirementScalarFieldEnum)[keyof typeof EventLineupRequirementScalarFieldEnum]
+
+
+export const BookingScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  eventId: 'eventId',
+  artistId: 'artistId',
+  role: 'role',
+  customRoleLabel: 'customRoleLabel',
+  normalizedCustomRoleLabel: 'normalizedCustomRoleLabel',
+  status: 'status',
+  lineupOrder: 'lineupOrder',
+  performanceStartMinutes: 'performanceStartMinutes',
+  performanceDurationMinutes: 'performanceDurationMinutes',
+  internalNote: 'internalNote',
+  businessPartnerId: 'businessPartnerId',
+  contactId: 'contactId',
+  agreedFeeMinor: 'agreedFeeMinor',
+  agreedFeeCurrency: 'agreedFeeCurrency',
+  travelArrangement: 'travelArrangement',
+  travelCostMinor: 'travelCostMinor',
+  travelCostCurrency: 'travelCostCurrency',
+  hotelRequired: 'hotelRequired',
+  hotelArrangement: 'hotelArrangement',
+  hotelBuyoutMinor: 'hotelBuyoutMinor',
+  hotelBuyoutCurrency: 'hotelBuyoutCurrency',
+  hotelNote: 'hotelNote',
+  version: 'version',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BookingScalarFieldEnum = (typeof BookingScalarFieldEnum)[keyof typeof BookingScalarFieldEnum]
+
+
+export const EventProgramItemScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  eventId: 'eventId',
+  bookingId: 'bookingId',
+  kind: 'kind',
+  sortOrder: 'sortOrder',
+  label: 'label',
+  durationMinutes: 'durationMinutes',
+  version: 'version',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type EventProgramItemScalarFieldEnum = (typeof EventProgramItemScalarFieldEnum)[keyof typeof EventProgramItemScalarFieldEnum]
+
+
+export const BookingStatusHistoryScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  bookingId: 'bookingId',
+  previousStatus: 'previousStatus',
+  newStatus: 'newStatus',
+  actorUserId: 'actorUserId',
+  actorMembershipId: 'actorMembershipId',
+  note: 'note',
+  changedAt: 'changedAt'
+} as const
+
+export type BookingStatusHistoryScalarFieldEnum = (typeof BookingStatusHistoryScalarFieldEnum)[keyof typeof BookingStatusHistoryScalarFieldEnum]
+
+
 export const VenueDateOptionScalarFieldEnum = {
   id: 'id',
   organizationId: 'organizationId',
@@ -3926,6 +4410,62 @@ export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$Prisma
 
 
 /**
+ * Reference to a field of type 'LineupRole'
+ */
+export type EnumLineupRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LineupRole'>
+    
+
+
+/**
+ * Reference to a field of type 'LineupRole[]'
+ */
+export type ListEnumLineupRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LineupRole[]'>
+    
+
+
+/**
+ * Reference to a field of type 'BookingStatus'
+ */
+export type EnumBookingStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BookingStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'BookingStatus[]'
+ */
+export type ListEnumBookingStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BookingStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'HotelArrangement'
+ */
+export type EnumHotelArrangementFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'HotelArrangement'>
+    
+
+
+/**
+ * Reference to a field of type 'HotelArrangement[]'
+ */
+export type ListEnumHotelArrangementFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'HotelArrangement[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ProgramItemKind'
+ */
+export type EnumProgramItemKindFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProgramItemKind'>
+    
+
+
+/**
+ * Reference to a field of type 'ProgramItemKind[]'
+ */
+export type ListEnumProgramItemKindFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProgramItemKind[]'>
+    
+
+
+/**
  * Reference to a field of type 'VenueDateOptionRank'
  */
 export type EnumVenueDateOptionRankFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'VenueDateOptionRank'>
@@ -4165,6 +4705,11 @@ export type GlobalOmitConfig = {
   artistBusinessPartnerRole?: Prisma.ArtistBusinessPartnerRoleOmit
   artistBusinessPartnerContact?: Prisma.ArtistBusinessPartnerContactOmit
   artistBusinessPartnerContactRole?: Prisma.ArtistBusinessPartnerContactRoleOmit
+  eventFormatLineupRequirement?: Prisma.EventFormatLineupRequirementOmit
+  eventLineupRequirement?: Prisma.EventLineupRequirementOmit
+  booking?: Prisma.BookingOmit
+  eventProgramItem?: Prisma.EventProgramItemOmit
+  bookingStatusHistory?: Prisma.BookingStatusHistoryOmit
   venueDateOption?: Prisma.VenueDateOptionOmit
   locationOccupancy?: Prisma.LocationOccupancyOmit
 }

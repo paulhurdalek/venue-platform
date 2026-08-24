@@ -919,6 +919,166 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/organizations/{organizationId}/events/{eventId}/bookings": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["EventBookingsController_list_v1"];
+        put?: never;
+        post: operations["EventBookingsController_create_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/events/{eventId}/program-items": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["EventBookingsController_programItems_v1"];
+        put?: never;
+        post: operations["EventBookingsController_createProgramItem_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/events/{eventId}/program/order": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put: operations["EventBookingsController_reorderProgramItems_v1"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/events/{eventId}/booking-progress": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["EventBookingsController_progress_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/events/{eventId}/lineup/order": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put: operations["EventBookingsController_reorder_v1"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/events/{eventId}/lineup-requirements": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["EventBookingsController_requirements_v1"];
+        put: operations["EventBookingsController_replaceRequirements_v1"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/bookings/{bookingId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["BookingController_find_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["BookingController_update_v1"];
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/bookings/{bookingId}/status": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["BookingController_status_v1"];
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/event-formats/{eventFormatId}/lineup-requirements": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["EventFormatLineupController_requirements_v1"];
+        put: operations["EventFormatLineupController_replace_v1"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/program-items/{itemId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete: operations["EventProgramItemController_remove_v1"];
+        options?: never;
+        head?: never;
+        patch: operations["EventProgramItemController_update_v1"];
+        trace?: never;
+    };
     "/api/v1/health": {
         parameters: {
             query?: never;
@@ -1603,6 +1763,16 @@ export interface components {
             /** @enum {string} */
             status: "ACTIVE" | "ARCHIVED";
         };
+        EventBookingSummaryDto: {
+            artistRequiredCount: number;
+            artistConfirmedCount: number;
+            moderatorRequired: boolean;
+            moderatorConfirmed: boolean;
+            openRequestCount: number;
+            optionCount: number;
+            incomplete: boolean;
+            fullyConfirmed: boolean;
+        };
         EventDto: {
             /** Format: uuid */
             id: string;
@@ -1642,6 +1812,7 @@ export interface components {
             /** @example Europe/Berlin */
             timezone: string;
             occupancyComplete: boolean;
+            bookingSummary: components["schemas"]["EventBookingSummaryDto"];
             /** Format: date-time */
             createdAt: string;
             /** Format: date-time */
@@ -1858,6 +2029,282 @@ export interface components {
             /** @enum {string} */
             state: "FREE" | "SECOND_OPTION_AVAILABLE" | "FIRST_OPTION_AVAILABLE" | "FULLY_OPTIONED" | "EVENT_OCCUPIED" | "MANUAL_REVIEW";
             selectable: boolean;
+        };
+        BookingContactDto: {
+            /** Format: uuid */
+            id: string;
+            name: string;
+            functionLabel?: string | null;
+            /** @enum {string} */
+            status: "ACTIVE" | "ARCHIVED";
+            email?: string | null;
+            phone?: string | null;
+            mobile?: string | null;
+            roleNames: string[];
+            isPrimary: boolean;
+        };
+        BookingStatusHistoryDto: {
+            /** Format: uuid */
+            id: string;
+            /** @enum {string} */
+            previousStatus: "SHORTLISTED" | "REQUESTED" | "OPTION" | "CONFIRMED" | "DECLINED" | "CANCELLED";
+            /** @enum {string} */
+            newStatus: "SHORTLISTED" | "REQUESTED" | "OPTION" | "CONFIRMED" | "DECLINED" | "CANCELLED";
+            /** Format: date-time */
+            changedAt: string;
+            /** Format: uuid */
+            actorUserId: string;
+            actorName: string;
+            note?: string | null;
+        };
+        BookingDto: {
+            /** Format: uuid */
+            id: string;
+            /** Format: uuid */
+            organizationId: string;
+            /** Format: uuid */
+            eventId: string;
+            /** Format: uuid */
+            artistId: string;
+            artistName: string;
+            /** @enum {string} */
+            artistStatus: "ACTIVE" | "ARCHIVED";
+            artistEmail?: string | null;
+            artistPhone?: string | null;
+            hasActiveRepresentation: boolean;
+            /** @enum {string} */
+            role: "ARTIST" | "MODERATOR" | "OTHER";
+            customRoleLabel?: string | null;
+            /** @enum {string} */
+            status: "SHORTLISTED" | "REQUESTED" | "OPTION" | "CONFIRMED" | "DECLINED" | "CANCELLED";
+            lineupOrder: number;
+            /** @deprecated */
+            performanceStartMinutes?: number | null;
+            /** @deprecated */
+            performanceDurationMinutes?: number | null;
+            internalNote?: string | null;
+            /** Format: uuid */
+            businessPartnerId?: string | null;
+            businessPartnerName?: string | null;
+            /** @enum {string|null} */
+            businessPartnerStatus?: "ACTIVE" | "ARCHIVED" | null;
+            businessPartnerRoleNames?: string[];
+            /** Format: uuid */
+            contactId?: string | null;
+            contactName?: string | null;
+            contactFunctionLabel?: string | null;
+            /** @enum {string|null} */
+            contactStatus?: "ACTIVE" | "ARCHIVED" | null;
+            contactEmail?: string | null;
+            contactPhone?: string | null;
+            contactMobile?: string | null;
+            contactRoleNames?: string[];
+            contactIsPrimary?: boolean;
+            additionalContacts?: components["schemas"]["BookingContactDto"][];
+            agreedFeeMinor?: string | null;
+            agreedFeeCurrency?: string | null;
+            travelArrangement?: string | null;
+            travelCostMinor?: string | null;
+            travelCostCurrency?: string | null;
+            /** @deprecated */
+            hotelRequired: boolean;
+            /** @enum {string} */
+            hotelArrangement: "NONE" | "REQUIRED" | "BUYOUT";
+            hotelBuyoutMinor?: string | null;
+            hotelBuyoutCurrency?: string | null;
+            hotelNote?: string | null;
+            version: number;
+            /** Format: date-time */
+            createdAt: string;
+            /** Format: date-time */
+            updatedAt: string;
+            statusHistory: components["schemas"]["BookingStatusHistoryDto"][];
+        };
+        CreateBookingDto: {
+            /** Format: uuid */
+            artistId: string;
+            /** @enum {string} */
+            role: "ARTIST" | "MODERATOR" | "OTHER";
+            customRoleLabel?: string | null;
+            /**
+             * @default SHORTLISTED
+             * @enum {string}
+             */
+            status: "SHORTLISTED" | "REQUESTED" | "OPTION" | "CONFIRMED" | "DECLINED" | "CANCELLED";
+            /** @deprecated */
+            performanceStartMinutes?: number | null;
+            /** @deprecated */
+            performanceDurationMinutes?: number | null;
+            internalNote?: string | null;
+            /** Format: uuid */
+            businessPartnerId?: string | null;
+            /** Format: uuid */
+            contactId?: string | null;
+            agreedFeeMinor?: string | null;
+            agreedFeeCurrency?: string | null;
+            travelArrangement?: string | null;
+            travelCostMinor?: string | null;
+            travelCostCurrency?: string | null;
+            /** @deprecated */
+            hotelRequired?: boolean;
+            /** @enum {string} */
+            hotelArrangement?: "NONE" | "REQUIRED" | "BUYOUT";
+            hotelBuyoutMinor?: string | null;
+            hotelBuyoutCurrency?: string | null;
+            hotelNote?: string | null;
+            confirmDuplicateArtist?: boolean;
+        };
+        EventProgramItemDto: {
+            /** Format: uuid */
+            id: string;
+            /** Format: uuid */
+            organizationId: string;
+            /** Format: uuid */
+            eventId: string;
+            /** Format: uuid */
+            bookingId?: string | null;
+            /** @enum {string} */
+            kind: "PERFORMANCE" | "BREAK";
+            sortOrder: number;
+            label?: string | null;
+            durationMinutes?: number | null;
+            version: number;
+            /** Format: date-time */
+            createdAt: string;
+            /** Format: date-time */
+            updatedAt: string;
+            artistName?: string | null;
+            /** @enum {string|null} */
+            bookingRole?: "ARTIST" | "MODERATOR" | "OTHER" | null;
+            bookingCustomRoleLabel?: string | null;
+            /** @enum {string|null} */
+            bookingStatus?: "SHORTLISTED" | "REQUESTED" | "OPTION" | "CONFIRMED" | "DECLINED" | "CANCELLED" | null;
+        };
+        CreateEventProgramItemDto: {
+            /** @enum {string} */
+            kind: "PERFORMANCE" | "BREAK";
+            /** Format: uuid */
+            bookingId?: string | null;
+            label?: string | null;
+            durationMinutes?: number | null;
+        };
+        EventProgramOrderItemDto: {
+            /** Format: uuid */
+            itemId: string;
+            version: number;
+        };
+        UpdateEventProgramOrderDto: {
+            items: components["schemas"]["EventProgramOrderItemDto"][];
+        };
+        BookingProgressRoleDto: {
+            /** @enum {string} */
+            role: "ARTIST" | "MODERATOR" | "OTHER";
+            customRoleLabel?: string | null;
+            label: string;
+            requiredCount: number;
+            shortlistedCount: number;
+            requestedCount: number;
+            optionCount: number;
+            confirmedCount: number;
+            missingCount: number;
+        };
+        BookingProgressDto: {
+            /** Format: uuid */
+            eventId: string;
+            roles: components["schemas"]["BookingProgressRoleDto"][];
+            totalOpenRequests: number;
+            totalOptions: number;
+            complete: boolean;
+            moderatorRequired: boolean;
+            moderatorConfirmed: boolean;
+        };
+        LineupOrderItemDto: {
+            /** Format: uuid */
+            bookingId: string;
+            version: number;
+        };
+        UpdateLineupOrderDto: {
+            items: components["schemas"]["LineupOrderItemDto"][];
+        };
+        LineupRequirementDto: {
+            /** Format: uuid */
+            id: string;
+            /** Format: uuid */
+            organizationId: string;
+            /** @enum {string} */
+            role: "ARTIST" | "MODERATOR" | "OTHER";
+            customRoleLabel?: string | null;
+            requiredCount: number;
+            defaultFeeMinor?: string | null;
+            defaultFeeCurrency?: string | null;
+            sortOrder: number;
+            version: number;
+            /** Format: uuid */
+            sourceEventFormatRequirementId?: string | null;
+            sourceEventFormatRequirementVersion?: number | null;
+            /** Format: date-time */
+            createdAt: string;
+            /** Format: date-time */
+            updatedAt: string;
+        };
+        LineupRequirementSetDto: {
+            version: number;
+            items: components["schemas"]["LineupRequirementDto"][];
+        };
+        LineupRequirementInputDto: {
+            /** Format: uuid */
+            id?: string;
+            version?: number;
+            /** @enum {string} */
+            role: "ARTIST" | "MODERATOR" | "OTHER";
+            customRoleLabel?: string | null;
+            requiredCount: number;
+            defaultFeeMinor?: string | null;
+            defaultFeeCurrency?: string | null;
+        };
+        ReplaceLineupRequirementsDto: {
+            version: number;
+            items: components["schemas"]["LineupRequirementInputDto"][];
+        };
+        UpdateBookingDto: {
+            /** @enum {string} */
+            role?: "ARTIST" | "MODERATOR" | "OTHER";
+            customRoleLabel?: string | null;
+            /** @deprecated */
+            performanceStartMinutes?: number | null;
+            /** @deprecated */
+            performanceDurationMinutes?: number | null;
+            internalNote?: string | null;
+            /** Format: uuid */
+            businessPartnerId?: string | null;
+            /** Format: uuid */
+            contactId?: string | null;
+            agreedFeeMinor?: string | null;
+            agreedFeeCurrency?: string | null;
+            travelArrangement?: string | null;
+            travelCostMinor?: string | null;
+            travelCostCurrency?: string | null;
+            /** @deprecated */
+            hotelRequired?: boolean;
+            /** @enum {string} */
+            hotelArrangement?: "NONE" | "REQUIRED" | "BUYOUT";
+            hotelBuyoutMinor?: string | null;
+            hotelBuyoutCurrency?: string | null;
+            hotelNote?: string | null;
+            version: number;
+        };
+        UpdateBookingStatusDto: {
+            version: number;
+            /** @enum {string} */
+            status: "SHORTLISTED" | "REQUESTED" | "OPTION" | "CONFIRMED" | "DECLINED" | "CANCELLED";
+            note?: string | null;
+            /** @default false */
+            confirmReactivation: boolean;
+        };
+        UpdateEventProgramItemDto: {
+            label?: string | null;
+            durationMinutes?: number | null;
+            version: number;
         };
         ServiceHealthDto: {
             /** @enum {string} */
@@ -3373,6 +3820,7 @@ export interface operations {
             query?: {
                 offset?: number;
                 limit?: number;
+                booking?: "INCOMPLETE" | "MODERATOR_MISSING" | "OPEN_REQUESTS" | "HAS_OPTIONS" | "FULLY_CONFIRMED";
                 locationId?: string;
                 eventKind?: "OWN_PRODUCTION" | "THIRD_PARTY_EVENT";
                 eventFormatId?: string;
@@ -3728,6 +4176,396 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["AvailabilityResultDto"][];
+                };
+            };
+        };
+    };
+    EventBookingsController_list_v1: {
+        parameters: {
+            query?: {
+                includeHistorical?: boolean;
+            };
+            header?: never;
+            path: {
+                eventId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BookingDto"][];
+                };
+            };
+        };
+    };
+    EventBookingsController_create_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                eventId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateBookingDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BookingDto"];
+                };
+            };
+        };
+    };
+    EventBookingsController_programItems_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                eventId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EventProgramItemDto"][];
+                };
+            };
+        };
+    };
+    EventBookingsController_createProgramItem_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                eventId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateEventProgramItemDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EventProgramItemDto"];
+                };
+            };
+        };
+    };
+    EventBookingsController_reorderProgramItems_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                eventId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateEventProgramOrderDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EventProgramItemDto"][];
+                };
+            };
+        };
+    };
+    EventBookingsController_progress_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                eventId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BookingProgressDto"];
+                };
+            };
+        };
+    };
+    EventBookingsController_reorder_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                eventId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateLineupOrderDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BookingDto"][];
+                };
+            };
+        };
+    };
+    EventBookingsController_requirements_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                eventId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["LineupRequirementSetDto"];
+                };
+            };
+        };
+    };
+    EventBookingsController_replaceRequirements_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                eventId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ReplaceLineupRequirementsDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["LineupRequirementSetDto"];
+                };
+            };
+        };
+    };
+    BookingController_find_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                bookingId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BookingDto"];
+                };
+            };
+        };
+    };
+    BookingController_update_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                bookingId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateBookingDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BookingDto"];
+                };
+            };
+        };
+    };
+    BookingController_status_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                bookingId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateBookingStatusDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BookingDto"];
+                };
+            };
+        };
+    };
+    EventFormatLineupController_requirements_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                eventFormatId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["LineupRequirementSetDto"];
+                };
+            };
+        };
+    };
+    EventFormatLineupController_replace_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                eventFormatId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ReplaceLineupRequirementsDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["LineupRequirementSetDto"];
+                };
+            };
+        };
+    };
+    EventProgramItemController_remove_v1: {
+        parameters: {
+            query: {
+                version: number;
+            };
+            header?: never;
+            path: {
+                itemId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    EventProgramItemController_update_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                itemId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateEventProgramItemDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EventProgramItemDto"];
                 };
             };
         };
