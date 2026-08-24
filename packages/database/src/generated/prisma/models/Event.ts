@@ -407,6 +407,8 @@ export type EventWhereInput = {
   lineupRequirements?: Prisma.EventLineupRequirementListRelationFilter
   bookings?: Prisma.BookingListRelationFilter
   programItems?: Prisma.EventProgramItemListRelationFilter
+  calculation?: Prisma.XOR<Prisma.EventCalculationNullableScalarRelationFilter, Prisma.EventCalculationWhereInput> | null
+  servicePositions?: Prisma.EventServicePositionListRelationFilter
 }
 
 export type EventOrderByWithRelationInput = {
@@ -442,6 +444,8 @@ export type EventOrderByWithRelationInput = {
   lineupRequirements?: Prisma.EventLineupRequirementOrderByRelationAggregateInput
   bookings?: Prisma.BookingOrderByRelationAggregateInput
   programItems?: Prisma.EventProgramItemOrderByRelationAggregateInput
+  calculation?: Prisma.EventCalculationOrderByWithRelationInput
+  servicePositions?: Prisma.EventServicePositionOrderByRelationAggregateInput
 }
 
 export type EventWhereUniqueInput = Prisma.AtLeast<{
@@ -481,6 +485,8 @@ export type EventWhereUniqueInput = Prisma.AtLeast<{
   lineupRequirements?: Prisma.EventLineupRequirementListRelationFilter
   bookings?: Prisma.BookingListRelationFilter
   programItems?: Prisma.EventProgramItemListRelationFilter
+  calculation?: Prisma.XOR<Prisma.EventCalculationNullableScalarRelationFilter, Prisma.EventCalculationWhereInput> | null
+  servicePositions?: Prisma.EventServicePositionListRelationFilter
 }, "id" | "id_organizationId">
 
 export type EventOrderByWithAggregationInput = {
@@ -577,6 +583,8 @@ export type EventCreateInput = {
   lineupRequirements?: Prisma.EventLineupRequirementCreateNestedManyWithoutEventInput
   bookings?: Prisma.BookingCreateNestedManyWithoutEventInput
   programItems?: Prisma.EventProgramItemCreateNestedManyWithoutEventInput
+  calculation?: Prisma.EventCalculationCreateNestedOneWithoutEventInput
+  servicePositions?: Prisma.EventServicePositionCreateNestedManyWithoutEventInput
 }
 
 export type EventUncheckedCreateInput = {
@@ -609,6 +617,8 @@ export type EventUncheckedCreateInput = {
   lineupRequirements?: Prisma.EventLineupRequirementUncheckedCreateNestedManyWithoutEventInput
   bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutEventInput
   programItems?: Prisma.EventProgramItemUncheckedCreateNestedManyWithoutEventInput
+  calculation?: Prisma.EventCalculationUncheckedCreateNestedOneWithoutEventInput
+  servicePositions?: Prisma.EventServicePositionUncheckedCreateNestedManyWithoutEventInput
 }
 
 export type EventUpdateInput = {
@@ -641,6 +651,8 @@ export type EventUpdateInput = {
   lineupRequirements?: Prisma.EventLineupRequirementUpdateManyWithoutEventNestedInput
   bookings?: Prisma.BookingUpdateManyWithoutEventNestedInput
   programItems?: Prisma.EventProgramItemUpdateManyWithoutEventNestedInput
+  calculation?: Prisma.EventCalculationUpdateOneWithoutEventNestedInput
+  servicePositions?: Prisma.EventServicePositionUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateInput = {
@@ -673,6 +685,8 @@ export type EventUncheckedUpdateInput = {
   lineupRequirements?: Prisma.EventLineupRequirementUncheckedUpdateManyWithoutEventNestedInput
   bookings?: Prisma.BookingUncheckedUpdateManyWithoutEventNestedInput
   programItems?: Prisma.EventProgramItemUncheckedUpdateManyWithoutEventNestedInput
+  calculation?: Prisma.EventCalculationUncheckedUpdateOneWithoutEventNestedInput
+  servicePositions?: Prisma.EventServicePositionUncheckedUpdateManyWithoutEventNestedInput
 }
 
 export type EventCreateManyInput = {
@@ -1061,6 +1075,34 @@ export type EventUpdateOneRequiredWithoutProgramItemsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.EventUpdateToOneWithWhereWithoutProgramItemsInput, Prisma.EventUpdateWithoutProgramItemsInput>, Prisma.EventUncheckedUpdateWithoutProgramItemsInput>
 }
 
+export type EventCreateNestedOneWithoutCalculationInput = {
+  create?: Prisma.XOR<Prisma.EventCreateWithoutCalculationInput, Prisma.EventUncheckedCreateWithoutCalculationInput>
+  connectOrCreate?: Prisma.EventCreateOrConnectWithoutCalculationInput
+  connect?: Prisma.EventWhereUniqueInput
+}
+
+export type EventUpdateOneRequiredWithoutCalculationNestedInput = {
+  create?: Prisma.XOR<Prisma.EventCreateWithoutCalculationInput, Prisma.EventUncheckedCreateWithoutCalculationInput>
+  connectOrCreate?: Prisma.EventCreateOrConnectWithoutCalculationInput
+  upsert?: Prisma.EventUpsertWithoutCalculationInput
+  connect?: Prisma.EventWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.EventUpdateToOneWithWhereWithoutCalculationInput, Prisma.EventUpdateWithoutCalculationInput>, Prisma.EventUncheckedUpdateWithoutCalculationInput>
+}
+
+export type EventCreateNestedOneWithoutServicePositionsInput = {
+  create?: Prisma.XOR<Prisma.EventCreateWithoutServicePositionsInput, Prisma.EventUncheckedCreateWithoutServicePositionsInput>
+  connectOrCreate?: Prisma.EventCreateOrConnectWithoutServicePositionsInput
+  connect?: Prisma.EventWhereUniqueInput
+}
+
+export type EventUpdateOneRequiredWithoutServicePositionsNestedInput = {
+  create?: Prisma.XOR<Prisma.EventCreateWithoutServicePositionsInput, Prisma.EventUncheckedCreateWithoutServicePositionsInput>
+  connectOrCreate?: Prisma.EventCreateOrConnectWithoutServicePositionsInput
+  upsert?: Prisma.EventUpsertWithoutServicePositionsInput
+  connect?: Prisma.EventWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.EventUpdateToOneWithWhereWithoutServicePositionsInput, Prisma.EventUpdateWithoutServicePositionsInput>, Prisma.EventUncheckedUpdateWithoutServicePositionsInput>
+}
+
 export type EventCreateNestedOneWithoutOccupanciesInput = {
   create?: Prisma.XOR<Prisma.EventCreateWithoutOccupanciesInput, Prisma.EventUncheckedCreateWithoutOccupanciesInput>
   connectOrCreate?: Prisma.EventCreateOrConnectWithoutOccupanciesInput
@@ -1106,6 +1148,8 @@ export type EventCreateWithoutOrganizationInput = {
   lineupRequirements?: Prisma.EventLineupRequirementCreateNestedManyWithoutEventInput
   bookings?: Prisma.BookingCreateNestedManyWithoutEventInput
   programItems?: Prisma.EventProgramItemCreateNestedManyWithoutEventInput
+  calculation?: Prisma.EventCalculationCreateNestedOneWithoutEventInput
+  servicePositions?: Prisma.EventServicePositionCreateNestedManyWithoutEventInput
 }
 
 export type EventUncheckedCreateWithoutOrganizationInput = {
@@ -1137,6 +1181,8 @@ export type EventUncheckedCreateWithoutOrganizationInput = {
   lineupRequirements?: Prisma.EventLineupRequirementUncheckedCreateNestedManyWithoutEventInput
   bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutEventInput
   programItems?: Prisma.EventProgramItemUncheckedCreateNestedManyWithoutEventInput
+  calculation?: Prisma.EventCalculationUncheckedCreateNestedOneWithoutEventInput
+  servicePositions?: Prisma.EventServicePositionUncheckedCreateNestedManyWithoutEventInput
 }
 
 export type EventCreateOrConnectWithoutOrganizationInput = {
@@ -1225,6 +1271,8 @@ export type EventCreateWithoutSourceEventFormatInput = {
   lineupRequirements?: Prisma.EventLineupRequirementCreateNestedManyWithoutEventInput
   bookings?: Prisma.BookingCreateNestedManyWithoutEventInput
   programItems?: Prisma.EventProgramItemCreateNestedManyWithoutEventInput
+  calculation?: Prisma.EventCalculationCreateNestedOneWithoutEventInput
+  servicePositions?: Prisma.EventServicePositionCreateNestedManyWithoutEventInput
 }
 
 export type EventUncheckedCreateWithoutSourceEventFormatInput = {
@@ -1255,6 +1303,8 @@ export type EventUncheckedCreateWithoutSourceEventFormatInput = {
   lineupRequirements?: Prisma.EventLineupRequirementUncheckedCreateNestedManyWithoutEventInput
   bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutEventInput
   programItems?: Prisma.EventProgramItemUncheckedCreateNestedManyWithoutEventInput
+  calculation?: Prisma.EventCalculationUncheckedCreateNestedOneWithoutEventInput
+  servicePositions?: Prisma.EventServicePositionUncheckedCreateNestedManyWithoutEventInput
 }
 
 export type EventCreateOrConnectWithoutSourceEventFormatInput = {
@@ -1312,6 +1362,8 @@ export type EventCreateWithoutLocationInput = {
   lineupRequirements?: Prisma.EventLineupRequirementCreateNestedManyWithoutEventInput
   bookings?: Prisma.BookingCreateNestedManyWithoutEventInput
   programItems?: Prisma.EventProgramItemCreateNestedManyWithoutEventInput
+  calculation?: Prisma.EventCalculationCreateNestedOneWithoutEventInput
+  servicePositions?: Prisma.EventServicePositionCreateNestedManyWithoutEventInput
 }
 
 export type EventUncheckedCreateWithoutLocationInput = {
@@ -1342,6 +1394,8 @@ export type EventUncheckedCreateWithoutLocationInput = {
   lineupRequirements?: Prisma.EventLineupRequirementUncheckedCreateNestedManyWithoutEventInput
   bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutEventInput
   programItems?: Prisma.EventProgramItemUncheckedCreateNestedManyWithoutEventInput
+  calculation?: Prisma.EventCalculationUncheckedCreateNestedOneWithoutEventInput
+  servicePositions?: Prisma.EventServicePositionUncheckedCreateNestedManyWithoutEventInput
 }
 
 export type EventCreateOrConnectWithoutLocationInput = {
@@ -1399,6 +1453,8 @@ export type EventCreateWithoutLineupRequirementsInput = {
   occupancies?: Prisma.LocationOccupancyCreateNestedManyWithoutEventInput
   bookings?: Prisma.BookingCreateNestedManyWithoutEventInput
   programItems?: Prisma.EventProgramItemCreateNestedManyWithoutEventInput
+  calculation?: Prisma.EventCalculationCreateNestedOneWithoutEventInput
+  servicePositions?: Prisma.EventServicePositionCreateNestedManyWithoutEventInput
 }
 
 export type EventUncheckedCreateWithoutLineupRequirementsInput = {
@@ -1430,6 +1486,8 @@ export type EventUncheckedCreateWithoutLineupRequirementsInput = {
   occupancies?: Prisma.LocationOccupancyUncheckedCreateNestedManyWithoutEventInput
   bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutEventInput
   programItems?: Prisma.EventProgramItemUncheckedCreateNestedManyWithoutEventInput
+  calculation?: Prisma.EventCalculationUncheckedCreateNestedOneWithoutEventInput
+  servicePositions?: Prisma.EventServicePositionUncheckedCreateNestedManyWithoutEventInput
 }
 
 export type EventCreateOrConnectWithoutLineupRequirementsInput = {
@@ -1477,6 +1535,8 @@ export type EventUpdateWithoutLineupRequirementsInput = {
   occupancies?: Prisma.LocationOccupancyUpdateManyWithoutEventNestedInput
   bookings?: Prisma.BookingUpdateManyWithoutEventNestedInput
   programItems?: Prisma.EventProgramItemUpdateManyWithoutEventNestedInput
+  calculation?: Prisma.EventCalculationUpdateOneWithoutEventNestedInput
+  servicePositions?: Prisma.EventServicePositionUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateWithoutLineupRequirementsInput = {
@@ -1508,6 +1568,8 @@ export type EventUncheckedUpdateWithoutLineupRequirementsInput = {
   occupancies?: Prisma.LocationOccupancyUncheckedUpdateManyWithoutEventNestedInput
   bookings?: Prisma.BookingUncheckedUpdateManyWithoutEventNestedInput
   programItems?: Prisma.EventProgramItemUncheckedUpdateManyWithoutEventNestedInput
+  calculation?: Prisma.EventCalculationUncheckedUpdateOneWithoutEventNestedInput
+  servicePositions?: Prisma.EventServicePositionUncheckedUpdateManyWithoutEventNestedInput
 }
 
 export type EventCreateWithoutBookingsInput = {
@@ -1539,6 +1601,8 @@ export type EventCreateWithoutBookingsInput = {
   occupancies?: Prisma.LocationOccupancyCreateNestedManyWithoutEventInput
   lineupRequirements?: Prisma.EventLineupRequirementCreateNestedManyWithoutEventInput
   programItems?: Prisma.EventProgramItemCreateNestedManyWithoutEventInput
+  calculation?: Prisma.EventCalculationCreateNestedOneWithoutEventInput
+  servicePositions?: Prisma.EventServicePositionCreateNestedManyWithoutEventInput
 }
 
 export type EventUncheckedCreateWithoutBookingsInput = {
@@ -1570,6 +1634,8 @@ export type EventUncheckedCreateWithoutBookingsInput = {
   occupancies?: Prisma.LocationOccupancyUncheckedCreateNestedManyWithoutEventInput
   lineupRequirements?: Prisma.EventLineupRequirementUncheckedCreateNestedManyWithoutEventInput
   programItems?: Prisma.EventProgramItemUncheckedCreateNestedManyWithoutEventInput
+  calculation?: Prisma.EventCalculationUncheckedCreateNestedOneWithoutEventInput
+  servicePositions?: Prisma.EventServicePositionUncheckedCreateNestedManyWithoutEventInput
 }
 
 export type EventCreateOrConnectWithoutBookingsInput = {
@@ -1617,6 +1683,8 @@ export type EventUpdateWithoutBookingsInput = {
   occupancies?: Prisma.LocationOccupancyUpdateManyWithoutEventNestedInput
   lineupRequirements?: Prisma.EventLineupRequirementUpdateManyWithoutEventNestedInput
   programItems?: Prisma.EventProgramItemUpdateManyWithoutEventNestedInput
+  calculation?: Prisma.EventCalculationUpdateOneWithoutEventNestedInput
+  servicePositions?: Prisma.EventServicePositionUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateWithoutBookingsInput = {
@@ -1648,6 +1716,8 @@ export type EventUncheckedUpdateWithoutBookingsInput = {
   occupancies?: Prisma.LocationOccupancyUncheckedUpdateManyWithoutEventNestedInput
   lineupRequirements?: Prisma.EventLineupRequirementUncheckedUpdateManyWithoutEventNestedInput
   programItems?: Prisma.EventProgramItemUncheckedUpdateManyWithoutEventNestedInput
+  calculation?: Prisma.EventCalculationUncheckedUpdateOneWithoutEventNestedInput
+  servicePositions?: Prisma.EventServicePositionUncheckedUpdateManyWithoutEventNestedInput
 }
 
 export type EventCreateWithoutProgramItemsInput = {
@@ -1679,6 +1749,8 @@ export type EventCreateWithoutProgramItemsInput = {
   occupancies?: Prisma.LocationOccupancyCreateNestedManyWithoutEventInput
   lineupRequirements?: Prisma.EventLineupRequirementCreateNestedManyWithoutEventInput
   bookings?: Prisma.BookingCreateNestedManyWithoutEventInput
+  calculation?: Prisma.EventCalculationCreateNestedOneWithoutEventInput
+  servicePositions?: Prisma.EventServicePositionCreateNestedManyWithoutEventInput
 }
 
 export type EventUncheckedCreateWithoutProgramItemsInput = {
@@ -1710,6 +1782,8 @@ export type EventUncheckedCreateWithoutProgramItemsInput = {
   occupancies?: Prisma.LocationOccupancyUncheckedCreateNestedManyWithoutEventInput
   lineupRequirements?: Prisma.EventLineupRequirementUncheckedCreateNestedManyWithoutEventInput
   bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutEventInput
+  calculation?: Prisma.EventCalculationUncheckedCreateNestedOneWithoutEventInput
+  servicePositions?: Prisma.EventServicePositionUncheckedCreateNestedManyWithoutEventInput
 }
 
 export type EventCreateOrConnectWithoutProgramItemsInput = {
@@ -1757,6 +1831,8 @@ export type EventUpdateWithoutProgramItemsInput = {
   occupancies?: Prisma.LocationOccupancyUpdateManyWithoutEventNestedInput
   lineupRequirements?: Prisma.EventLineupRequirementUpdateManyWithoutEventNestedInput
   bookings?: Prisma.BookingUpdateManyWithoutEventNestedInput
+  calculation?: Prisma.EventCalculationUpdateOneWithoutEventNestedInput
+  servicePositions?: Prisma.EventServicePositionUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateWithoutProgramItemsInput = {
@@ -1788,6 +1864,304 @@ export type EventUncheckedUpdateWithoutProgramItemsInput = {
   occupancies?: Prisma.LocationOccupancyUncheckedUpdateManyWithoutEventNestedInput
   lineupRequirements?: Prisma.EventLineupRequirementUncheckedUpdateManyWithoutEventNestedInput
   bookings?: Prisma.BookingUncheckedUpdateManyWithoutEventNestedInput
+  calculation?: Prisma.EventCalculationUncheckedUpdateOneWithoutEventNestedInput
+  servicePositions?: Prisma.EventServicePositionUncheckedUpdateManyWithoutEventNestedInput
+}
+
+export type EventCreateWithoutCalculationInput = {
+  id?: string
+  name: string
+  eventDate: Date | string
+  status?: $Enums.EventStatus
+  version?: number
+  cancelledAt?: Date | string | null
+  completedAt?: Date | string | null
+  snapshotSource?: $Enums.EventSnapshotSource | null
+  sourceEventFormatVersion?: number | null
+  formatNameSnapshot?: string | null
+  formatDescriptionSnapshot?: string | null
+  eventKind: $Enums.EventKind
+  description?: string | null
+  technicalGetInMinutes?: number | null
+  artistGetInMinutes?: number | null
+  doorsMinutes?: number | null
+  startMinutes?: number | null
+  endMinutes?: number | null
+  recordingSetting?: $Enums.RecordingDefault
+  timezone: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organization: Prisma.OrganizationCreateNestedOneWithoutEventsInput
+  location: Prisma.LocationCreateNestedOneWithoutEventsInput
+  sourceEventFormat?: Prisma.EventFormatCreateNestedOneWithoutSourceEventsInput
+  occupancies?: Prisma.LocationOccupancyCreateNestedManyWithoutEventInput
+  lineupRequirements?: Prisma.EventLineupRequirementCreateNestedManyWithoutEventInput
+  bookings?: Prisma.BookingCreateNestedManyWithoutEventInput
+  programItems?: Prisma.EventProgramItemCreateNestedManyWithoutEventInput
+  servicePositions?: Prisma.EventServicePositionCreateNestedManyWithoutEventInput
+}
+
+export type EventUncheckedCreateWithoutCalculationInput = {
+  id?: string
+  organizationId: string
+  locationId: string
+  name: string
+  eventDate: Date | string
+  status?: $Enums.EventStatus
+  version?: number
+  cancelledAt?: Date | string | null
+  completedAt?: Date | string | null
+  snapshotSource?: $Enums.EventSnapshotSource | null
+  sourceEventFormatId?: string | null
+  sourceEventFormatVersion?: number | null
+  formatNameSnapshot?: string | null
+  formatDescriptionSnapshot?: string | null
+  eventKind: $Enums.EventKind
+  description?: string | null
+  technicalGetInMinutes?: number | null
+  artistGetInMinutes?: number | null
+  doorsMinutes?: number | null
+  startMinutes?: number | null
+  endMinutes?: number | null
+  recordingSetting?: $Enums.RecordingDefault
+  timezone: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  occupancies?: Prisma.LocationOccupancyUncheckedCreateNestedManyWithoutEventInput
+  lineupRequirements?: Prisma.EventLineupRequirementUncheckedCreateNestedManyWithoutEventInput
+  bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutEventInput
+  programItems?: Prisma.EventProgramItemUncheckedCreateNestedManyWithoutEventInput
+  servicePositions?: Prisma.EventServicePositionUncheckedCreateNestedManyWithoutEventInput
+}
+
+export type EventCreateOrConnectWithoutCalculationInput = {
+  where: Prisma.EventWhereUniqueInput
+  create: Prisma.XOR<Prisma.EventCreateWithoutCalculationInput, Prisma.EventUncheckedCreateWithoutCalculationInput>
+}
+
+export type EventUpsertWithoutCalculationInput = {
+  update: Prisma.XOR<Prisma.EventUpdateWithoutCalculationInput, Prisma.EventUncheckedUpdateWithoutCalculationInput>
+  create: Prisma.XOR<Prisma.EventCreateWithoutCalculationInput, Prisma.EventUncheckedCreateWithoutCalculationInput>
+  where?: Prisma.EventWhereInput
+}
+
+export type EventUpdateToOneWithWhereWithoutCalculationInput = {
+  where?: Prisma.EventWhereInput
+  data: Prisma.XOR<Prisma.EventUpdateWithoutCalculationInput, Prisma.EventUncheckedUpdateWithoutCalculationInput>
+}
+
+export type EventUpdateWithoutCalculationInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  eventDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  snapshotSource?: Prisma.NullableEnumEventSnapshotSourceFieldUpdateOperationsInput | $Enums.EventSnapshotSource | null
+  sourceEventFormatVersion?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  formatNameSnapshot?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  formatDescriptionSnapshot?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  eventKind?: Prisma.EnumEventKindFieldUpdateOperationsInput | $Enums.EventKind
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  technicalGetInMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  artistGetInMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  doorsMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  endMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  recordingSetting?: Prisma.EnumRecordingDefaultFieldUpdateOperationsInput | $Enums.RecordingDefault
+  timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutEventsNestedInput
+  location?: Prisma.LocationUpdateOneRequiredWithoutEventsNestedInput
+  sourceEventFormat?: Prisma.EventFormatUpdateOneWithoutSourceEventsNestedInput
+  occupancies?: Prisma.LocationOccupancyUpdateManyWithoutEventNestedInput
+  lineupRequirements?: Prisma.EventLineupRequirementUpdateManyWithoutEventNestedInput
+  bookings?: Prisma.BookingUpdateManyWithoutEventNestedInput
+  programItems?: Prisma.EventProgramItemUpdateManyWithoutEventNestedInput
+  servicePositions?: Prisma.EventServicePositionUpdateManyWithoutEventNestedInput
+}
+
+export type EventUncheckedUpdateWithoutCalculationInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  locationId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  eventDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  snapshotSource?: Prisma.NullableEnumEventSnapshotSourceFieldUpdateOperationsInput | $Enums.EventSnapshotSource | null
+  sourceEventFormatId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceEventFormatVersion?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  formatNameSnapshot?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  formatDescriptionSnapshot?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  eventKind?: Prisma.EnumEventKindFieldUpdateOperationsInput | $Enums.EventKind
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  technicalGetInMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  artistGetInMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  doorsMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  endMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  recordingSetting?: Prisma.EnumRecordingDefaultFieldUpdateOperationsInput | $Enums.RecordingDefault
+  timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  occupancies?: Prisma.LocationOccupancyUncheckedUpdateManyWithoutEventNestedInput
+  lineupRequirements?: Prisma.EventLineupRequirementUncheckedUpdateManyWithoutEventNestedInput
+  bookings?: Prisma.BookingUncheckedUpdateManyWithoutEventNestedInput
+  programItems?: Prisma.EventProgramItemUncheckedUpdateManyWithoutEventNestedInput
+  servicePositions?: Prisma.EventServicePositionUncheckedUpdateManyWithoutEventNestedInput
+}
+
+export type EventCreateWithoutServicePositionsInput = {
+  id?: string
+  name: string
+  eventDate: Date | string
+  status?: $Enums.EventStatus
+  version?: number
+  cancelledAt?: Date | string | null
+  completedAt?: Date | string | null
+  snapshotSource?: $Enums.EventSnapshotSource | null
+  sourceEventFormatVersion?: number | null
+  formatNameSnapshot?: string | null
+  formatDescriptionSnapshot?: string | null
+  eventKind: $Enums.EventKind
+  description?: string | null
+  technicalGetInMinutes?: number | null
+  artistGetInMinutes?: number | null
+  doorsMinutes?: number | null
+  startMinutes?: number | null
+  endMinutes?: number | null
+  recordingSetting?: $Enums.RecordingDefault
+  timezone: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organization: Prisma.OrganizationCreateNestedOneWithoutEventsInput
+  location: Prisma.LocationCreateNestedOneWithoutEventsInput
+  sourceEventFormat?: Prisma.EventFormatCreateNestedOneWithoutSourceEventsInput
+  occupancies?: Prisma.LocationOccupancyCreateNestedManyWithoutEventInput
+  lineupRequirements?: Prisma.EventLineupRequirementCreateNestedManyWithoutEventInput
+  bookings?: Prisma.BookingCreateNestedManyWithoutEventInput
+  programItems?: Prisma.EventProgramItemCreateNestedManyWithoutEventInput
+  calculation?: Prisma.EventCalculationCreateNestedOneWithoutEventInput
+}
+
+export type EventUncheckedCreateWithoutServicePositionsInput = {
+  id?: string
+  organizationId: string
+  locationId: string
+  name: string
+  eventDate: Date | string
+  status?: $Enums.EventStatus
+  version?: number
+  cancelledAt?: Date | string | null
+  completedAt?: Date | string | null
+  snapshotSource?: $Enums.EventSnapshotSource | null
+  sourceEventFormatId?: string | null
+  sourceEventFormatVersion?: number | null
+  formatNameSnapshot?: string | null
+  formatDescriptionSnapshot?: string | null
+  eventKind: $Enums.EventKind
+  description?: string | null
+  technicalGetInMinutes?: number | null
+  artistGetInMinutes?: number | null
+  doorsMinutes?: number | null
+  startMinutes?: number | null
+  endMinutes?: number | null
+  recordingSetting?: $Enums.RecordingDefault
+  timezone: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  occupancies?: Prisma.LocationOccupancyUncheckedCreateNestedManyWithoutEventInput
+  lineupRequirements?: Prisma.EventLineupRequirementUncheckedCreateNestedManyWithoutEventInput
+  bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutEventInput
+  programItems?: Prisma.EventProgramItemUncheckedCreateNestedManyWithoutEventInput
+  calculation?: Prisma.EventCalculationUncheckedCreateNestedOneWithoutEventInput
+}
+
+export type EventCreateOrConnectWithoutServicePositionsInput = {
+  where: Prisma.EventWhereUniqueInput
+  create: Prisma.XOR<Prisma.EventCreateWithoutServicePositionsInput, Prisma.EventUncheckedCreateWithoutServicePositionsInput>
+}
+
+export type EventUpsertWithoutServicePositionsInput = {
+  update: Prisma.XOR<Prisma.EventUpdateWithoutServicePositionsInput, Prisma.EventUncheckedUpdateWithoutServicePositionsInput>
+  create: Prisma.XOR<Prisma.EventCreateWithoutServicePositionsInput, Prisma.EventUncheckedCreateWithoutServicePositionsInput>
+  where?: Prisma.EventWhereInput
+}
+
+export type EventUpdateToOneWithWhereWithoutServicePositionsInput = {
+  where?: Prisma.EventWhereInput
+  data: Prisma.XOR<Prisma.EventUpdateWithoutServicePositionsInput, Prisma.EventUncheckedUpdateWithoutServicePositionsInput>
+}
+
+export type EventUpdateWithoutServicePositionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  eventDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  snapshotSource?: Prisma.NullableEnumEventSnapshotSourceFieldUpdateOperationsInput | $Enums.EventSnapshotSource | null
+  sourceEventFormatVersion?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  formatNameSnapshot?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  formatDescriptionSnapshot?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  eventKind?: Prisma.EnumEventKindFieldUpdateOperationsInput | $Enums.EventKind
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  technicalGetInMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  artistGetInMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  doorsMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  endMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  recordingSetting?: Prisma.EnumRecordingDefaultFieldUpdateOperationsInput | $Enums.RecordingDefault
+  timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutEventsNestedInput
+  location?: Prisma.LocationUpdateOneRequiredWithoutEventsNestedInput
+  sourceEventFormat?: Prisma.EventFormatUpdateOneWithoutSourceEventsNestedInput
+  occupancies?: Prisma.LocationOccupancyUpdateManyWithoutEventNestedInput
+  lineupRequirements?: Prisma.EventLineupRequirementUpdateManyWithoutEventNestedInput
+  bookings?: Prisma.BookingUpdateManyWithoutEventNestedInput
+  programItems?: Prisma.EventProgramItemUpdateManyWithoutEventNestedInput
+  calculation?: Prisma.EventCalculationUpdateOneWithoutEventNestedInput
+}
+
+export type EventUncheckedUpdateWithoutServicePositionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  locationId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  eventDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  snapshotSource?: Prisma.NullableEnumEventSnapshotSourceFieldUpdateOperationsInput | $Enums.EventSnapshotSource | null
+  sourceEventFormatId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceEventFormatVersion?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  formatNameSnapshot?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  formatDescriptionSnapshot?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  eventKind?: Prisma.EnumEventKindFieldUpdateOperationsInput | $Enums.EventKind
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  technicalGetInMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  artistGetInMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  doorsMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  endMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  recordingSetting?: Prisma.EnumRecordingDefaultFieldUpdateOperationsInput | $Enums.RecordingDefault
+  timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  occupancies?: Prisma.LocationOccupancyUncheckedUpdateManyWithoutEventNestedInput
+  lineupRequirements?: Prisma.EventLineupRequirementUncheckedUpdateManyWithoutEventNestedInput
+  bookings?: Prisma.BookingUncheckedUpdateManyWithoutEventNestedInput
+  programItems?: Prisma.EventProgramItemUncheckedUpdateManyWithoutEventNestedInput
+  calculation?: Prisma.EventCalculationUncheckedUpdateOneWithoutEventNestedInput
 }
 
 export type EventCreateWithoutOccupanciesInput = {
@@ -1819,6 +2193,8 @@ export type EventCreateWithoutOccupanciesInput = {
   lineupRequirements?: Prisma.EventLineupRequirementCreateNestedManyWithoutEventInput
   bookings?: Prisma.BookingCreateNestedManyWithoutEventInput
   programItems?: Prisma.EventProgramItemCreateNestedManyWithoutEventInput
+  calculation?: Prisma.EventCalculationCreateNestedOneWithoutEventInput
+  servicePositions?: Prisma.EventServicePositionCreateNestedManyWithoutEventInput
 }
 
 export type EventUncheckedCreateWithoutOccupanciesInput = {
@@ -1850,6 +2226,8 @@ export type EventUncheckedCreateWithoutOccupanciesInput = {
   lineupRequirements?: Prisma.EventLineupRequirementUncheckedCreateNestedManyWithoutEventInput
   bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutEventInput
   programItems?: Prisma.EventProgramItemUncheckedCreateNestedManyWithoutEventInput
+  calculation?: Prisma.EventCalculationUncheckedCreateNestedOneWithoutEventInput
+  servicePositions?: Prisma.EventServicePositionUncheckedCreateNestedManyWithoutEventInput
 }
 
 export type EventCreateOrConnectWithoutOccupanciesInput = {
@@ -1897,6 +2275,8 @@ export type EventUpdateWithoutOccupanciesInput = {
   lineupRequirements?: Prisma.EventLineupRequirementUpdateManyWithoutEventNestedInput
   bookings?: Prisma.BookingUpdateManyWithoutEventNestedInput
   programItems?: Prisma.EventProgramItemUpdateManyWithoutEventNestedInput
+  calculation?: Prisma.EventCalculationUpdateOneWithoutEventNestedInput
+  servicePositions?: Prisma.EventServicePositionUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateWithoutOccupanciesInput = {
@@ -1928,6 +2308,8 @@ export type EventUncheckedUpdateWithoutOccupanciesInput = {
   lineupRequirements?: Prisma.EventLineupRequirementUncheckedUpdateManyWithoutEventNestedInput
   bookings?: Prisma.BookingUncheckedUpdateManyWithoutEventNestedInput
   programItems?: Prisma.EventProgramItemUncheckedUpdateManyWithoutEventNestedInput
+  calculation?: Prisma.EventCalculationUncheckedUpdateOneWithoutEventNestedInput
+  servicePositions?: Prisma.EventServicePositionUncheckedUpdateManyWithoutEventNestedInput
 }
 
 export type EventCreateManyOrganizationInput = {
@@ -1986,6 +2368,8 @@ export type EventUpdateWithoutOrganizationInput = {
   lineupRequirements?: Prisma.EventLineupRequirementUpdateManyWithoutEventNestedInput
   bookings?: Prisma.BookingUpdateManyWithoutEventNestedInput
   programItems?: Prisma.EventProgramItemUpdateManyWithoutEventNestedInput
+  calculation?: Prisma.EventCalculationUpdateOneWithoutEventNestedInput
+  servicePositions?: Prisma.EventServicePositionUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateWithoutOrganizationInput = {
@@ -2017,6 +2401,8 @@ export type EventUncheckedUpdateWithoutOrganizationInput = {
   lineupRequirements?: Prisma.EventLineupRequirementUncheckedUpdateManyWithoutEventNestedInput
   bookings?: Prisma.BookingUncheckedUpdateManyWithoutEventNestedInput
   programItems?: Prisma.EventProgramItemUncheckedUpdateManyWithoutEventNestedInput
+  calculation?: Prisma.EventCalculationUncheckedUpdateOneWithoutEventNestedInput
+  servicePositions?: Prisma.EventServicePositionUncheckedUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateManyWithoutOrganizationInput = {
@@ -2101,6 +2487,8 @@ export type EventUpdateWithoutSourceEventFormatInput = {
   lineupRequirements?: Prisma.EventLineupRequirementUpdateManyWithoutEventNestedInput
   bookings?: Prisma.BookingUpdateManyWithoutEventNestedInput
   programItems?: Prisma.EventProgramItemUpdateManyWithoutEventNestedInput
+  calculation?: Prisma.EventCalculationUpdateOneWithoutEventNestedInput
+  servicePositions?: Prisma.EventServicePositionUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateWithoutSourceEventFormatInput = {
@@ -2131,6 +2519,8 @@ export type EventUncheckedUpdateWithoutSourceEventFormatInput = {
   lineupRequirements?: Prisma.EventLineupRequirementUncheckedUpdateManyWithoutEventNestedInput
   bookings?: Prisma.BookingUncheckedUpdateManyWithoutEventNestedInput
   programItems?: Prisma.EventProgramItemUncheckedUpdateManyWithoutEventNestedInput
+  calculation?: Prisma.EventCalculationUncheckedUpdateOneWithoutEventNestedInput
+  servicePositions?: Prisma.EventServicePositionUncheckedUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateManyWithoutSourceEventFormatInput = {
@@ -2214,6 +2604,8 @@ export type EventUpdateWithoutLocationInput = {
   lineupRequirements?: Prisma.EventLineupRequirementUpdateManyWithoutEventNestedInput
   bookings?: Prisma.BookingUpdateManyWithoutEventNestedInput
   programItems?: Prisma.EventProgramItemUpdateManyWithoutEventNestedInput
+  calculation?: Prisma.EventCalculationUpdateOneWithoutEventNestedInput
+  servicePositions?: Prisma.EventServicePositionUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateWithoutLocationInput = {
@@ -2244,6 +2636,8 @@ export type EventUncheckedUpdateWithoutLocationInput = {
   lineupRequirements?: Prisma.EventLineupRequirementUncheckedUpdateManyWithoutEventNestedInput
   bookings?: Prisma.BookingUncheckedUpdateManyWithoutEventNestedInput
   programItems?: Prisma.EventProgramItemUncheckedUpdateManyWithoutEventNestedInput
+  calculation?: Prisma.EventCalculationUncheckedUpdateOneWithoutEventNestedInput
+  servicePositions?: Prisma.EventServicePositionUncheckedUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateManyWithoutLocationInput = {
@@ -2282,6 +2676,7 @@ export type EventCountOutputType = {
   lineupRequirements: number
   bookings: number
   programItems: number
+  servicePositions: number
 }
 
 export type EventCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2289,6 +2684,7 @@ export type EventCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.
   lineupRequirements?: boolean | EventCountOutputTypeCountLineupRequirementsArgs
   bookings?: boolean | EventCountOutputTypeCountBookingsArgs
   programItems?: boolean | EventCountOutputTypeCountProgramItemsArgs
+  servicePositions?: boolean | EventCountOutputTypeCountServicePositionsArgs
 }
 
 /**
@@ -2329,6 +2725,13 @@ export type EventCountOutputTypeCountProgramItemsArgs<ExtArgs extends runtime.Ty
   where?: Prisma.EventProgramItemWhereInput
 }
 
+/**
+ * EventCountOutputType without action
+ */
+export type EventCountOutputTypeCountServicePositionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EventServicePositionWhereInput
+}
+
 
 export type EventSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -2363,6 +2766,8 @@ export type EventSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   lineupRequirements?: boolean | Prisma.Event$lineupRequirementsArgs<ExtArgs>
   bookings?: boolean | Prisma.Event$bookingsArgs<ExtArgs>
   programItems?: boolean | Prisma.Event$programItemsArgs<ExtArgs>
+  calculation?: boolean | Prisma.Event$calculationArgs<ExtArgs>
+  servicePositions?: boolean | Prisma.Event$servicePositionsArgs<ExtArgs>
   _count?: boolean | Prisma.EventCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["event"]>
 
@@ -2465,6 +2870,8 @@ export type EventInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   lineupRequirements?: boolean | Prisma.Event$lineupRequirementsArgs<ExtArgs>
   bookings?: boolean | Prisma.Event$bookingsArgs<ExtArgs>
   programItems?: boolean | Prisma.Event$programItemsArgs<ExtArgs>
+  calculation?: boolean | Prisma.Event$calculationArgs<ExtArgs>
+  servicePositions?: boolean | Prisma.Event$servicePositionsArgs<ExtArgs>
   _count?: boolean | Prisma.EventCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type EventIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2488,6 +2895,8 @@ export type $EventPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     lineupRequirements: Prisma.$EventLineupRequirementPayload<ExtArgs>[]
     bookings: Prisma.$BookingPayload<ExtArgs>[]
     programItems: Prisma.$EventProgramItemPayload<ExtArgs>[]
+    calculation: Prisma.$EventCalculationPayload<ExtArgs> | null
+    servicePositions: Prisma.$EventServicePositionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2916,6 +3325,8 @@ export interface Prisma__EventClient<T, Null = never, ExtArgs extends runtime.Ty
   lineupRequirements<T extends Prisma.Event$lineupRequirementsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Event$lineupRequirementsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EventLineupRequirementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   bookings<T extends Prisma.Event$bookingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Event$bookingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BookingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   programItems<T extends Prisma.Event$programItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Event$programItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EventProgramItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  calculation<T extends Prisma.Event$calculationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Event$calculationArgs<ExtArgs>>): Prisma.Prisma__EventCalculationClient<runtime.Types.Result.GetResult<Prisma.$EventCalculationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  servicePositions<T extends Prisma.Event$servicePositionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Event$servicePositionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EventServicePositionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3483,6 +3894,49 @@ export type Event$programItemsArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.EventProgramItemScalarFieldEnum | Prisma.EventProgramItemScalarFieldEnum[]
+}
+
+/**
+ * Event.calculation
+ */
+export type Event$calculationArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the EventCalculation
+   */
+  select?: Prisma.EventCalculationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the EventCalculation
+   */
+  omit?: Prisma.EventCalculationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EventCalculationInclude<ExtArgs> | null
+  where?: Prisma.EventCalculationWhereInput
+}
+
+/**
+ * Event.servicePositions
+ */
+export type Event$servicePositionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the EventServicePosition
+   */
+  select?: Prisma.EventServicePositionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the EventServicePosition
+   */
+  omit?: Prisma.EventServicePositionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EventServicePositionInclude<ExtArgs> | null
+  where?: Prisma.EventServicePositionWhereInput
+  orderBy?: Prisma.EventServicePositionOrderByWithRelationInput | Prisma.EventServicePositionOrderByWithRelationInput[]
+  cursor?: Prisma.EventServicePositionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.EventServicePositionScalarFieldEnum | Prisma.EventServicePositionScalarFieldEnum[]
 }
 
 /**

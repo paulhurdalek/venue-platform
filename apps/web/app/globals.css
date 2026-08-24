@@ -706,6 +706,142 @@ fieldset:disabled {
   grid-template-columns: minmax(12rem, 1fr) minmax(7rem, 0.35fr);
 }
 
+.currency-fixed {
+  align-items: center;
+  background: var(--surface-subtle, #f7f7f5);
+  border: 1px solid var(--border, #d8d8d2);
+  border-radius: 0.45rem;
+  display: flex;
+  min-height: 2.65rem;
+  padding: 0 0.75rem;
+}
+
+.service-manager,
+.service-position-list,
+.calculation-group,
+.calculation-panel {
+  display: grid;
+  gap: 1rem;
+}
+
+.compact-create-form,
+.compact-provider-form {
+  align-items: end;
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: minmax(12rem, 2fr) minmax(8rem, 1fr) auto auto auto;
+}
+
+.compact-create-form {
+  grid-template-columns: minmax(14rem, 1fr) auto;
+  max-width: 34rem;
+}
+
+.service-position-card,
+.calculation-row {
+  align-items: center;
+  background: var(--surface-subtle, #f7f7f5);
+  border: 1px solid var(--border, #d8d8d2);
+  border-radius: 0.75rem;
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: minmax(12rem, 2fr) minmax(12rem, 1.4fr) auto;
+  padding: 0.85rem 1rem;
+}
+
+.service-position-card > div,
+.calculation-row > div,
+.calculation-row__values {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.service-position-card small,
+.calculation-row small {
+  color: var(--text-muted, #60605b);
+}
+
+.service-position-edit,
+.calculation-row--editing > form {
+  grid-column: 1 / -1;
+  width: 100%;
+}
+
+.inline-editor {
+  border: 1px solid var(--border, #d8d8d2);
+  border-radius: 0.75rem;
+  padding: 0.85rem 1rem;
+}
+
+.inline-editor > summary {
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.inline-editor[open] > summary {
+  margin-bottom: 1rem;
+}
+
+.calculation-summary {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(5, minmax(9rem, 1fr));
+  margin: 0;
+}
+
+.calculation-summary > div {
+  background: var(--surface-subtle, #f7f7f5);
+  border-radius: 0.75rem;
+  padding: 0.85rem;
+}
+
+.calculation-summary dt {
+  color: var(--text-muted, #60605b);
+  font-size: 0.8rem;
+}
+
+.calculation-summary dd {
+  font-size: 1.1rem;
+  font-weight: 750;
+  margin: 0.25rem 0 0;
+}
+
+.calculation-group {
+  border-top: 1px solid var(--border, #d8d8d2);
+  padding-top: 1rem;
+}
+
+.calculation-group h3 {
+  margin: 0;
+}
+
+.calculation-row--readonly {
+  border-style: dashed;
+}
+
+.calculation-add-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.history-panel ol {
+  color: var(--text-muted, #60605b);
+  display: grid;
+  gap: 0.4rem;
+  padding-left: 1.4rem;
+}
+
+@media (max-width: 900px) {
+  .compact-provider-form,
+  .calculation-summary,
+  .calculation-add-grid,
+  .service-position-card,
+  .calculation-row {
+    grid-template-columns: 1fr;
+  }
+}
+
 .performance-order {
   display: grid;
   gap: 0.8rem;

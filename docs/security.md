@@ -112,6 +112,29 @@ and Read-only receive `bookings.read` only. Status changes, requirement replacem
 ordering remain separate permissions and all mutations use optimistic versions plus a single
 transaction for state, history and audit.
 
+Phase 7 adds `services.read`, `services.write`, `services.archive`, `calculations.read`,
+`calculations.write`, `calculations.purchase`, `calculations.sales` and `calculations.approve`.
+Controllers use only these keys. Administrator and Management/Finances receive all eight; Booking
+receives only `services.read`; Production and Read-only receive `services.read` plus
+`calculations.read`.
+
+Catalog data is organization-wide. Calculation reads and Event-position mutations additionally
+resolve the owning Event and apply membership Location scope; a foreign organization, unknown Event
+or inaccessible Location yields the same 404. Every new relation repeats `organization_id` and
+uses tenant-composite foreign keys, including optional providers and approval memberships.
+
+Financial authorization is enforced in the Application projection. Without
+`calculations.purchase`, provider prices, position purchase values, Booking amounts and all cost
+totals are omitted from JSON. Without `calculations.sales`, sales prices, sales totals and margin
+are omitted. Without `services.write`, internal catalog/provider notes are omitted. Attempts to
+write purchase or sales fields require the matching finance key even when structural write is
+present. Approval independently requires `calculations.approve` and a complete price set.
+
+All catalog, position and calculation mutations are optimistic and append allowlisted audit
+metadata in their database transaction. Status history records the actor and optional business
+note. Automatic approved-to-Draft resets record source type/ID and a bounded reason; audit metadata
+contains IDs, versions and state only, not names, notes or financial amounts.
+
 ## Dependency checks
 
 `pnpm security:audit` blocks high/critical production advisories. `pnpm install --frozen-lockfile`

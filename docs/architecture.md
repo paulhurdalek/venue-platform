@@ -9,9 +9,11 @@ representatives point to existing company-Contact associations; it is never infe
 Contacts. Phase 4 adds organization-wide EventFormats whose V1 data is the concrete fachliche
 Formatvorlage for concrete events. Phase 5 adds Location-scoped Events with optional EventFormat
 provenance, independent VenueDateOptions and calculated availability. A central relational
-occupancy model coordinates all three. Phase 6 adds event-specific Bookings, relational Line-up requirements and
-their template-to-Event snapshot boundary. Calculations, deals, ticketing, documents, invoices and
-rooms remain absent.
+occupancy model coordinates all three. Phase 6 adds event-specific Bookings, relational Line-up
+requirements and their template-to-Event snapshot boundary. Phase 7 adds organization-wide service
+master data, relational format requirements, immutable Event service snapshots and one versioned
+calculation per Event. Deals, ticketing, revenue recognition, documents, invoices and rooms remain
+absent.
 
 ## Runtime view
 
@@ -45,6 +47,13 @@ data; a Booking is a separate versioned Event aggregate relation with its own ro
 agreement and ordering data. Format and Event Line-up requirements are relational children, not a
 JSON/EAV configuration engine. Booking services own transition validation, progress calculation,
 financial projection and transactional mutations; Prisma remains in the infrastructure adapter.
+
+The Phase-7 `services` module owns service categories, catalog items, provider prices, format
+requirements and calculation use cases through presentation, application, domain and infrastructure
+layers. Prisma is confined to its infrastructure repository. Event creation calls one shared
+infrastructure snapshot function inside the Event/DateOption transaction. Booking reports relevant
+source changes through an application port whose adapter participates in the Booking transaction;
+neither application service reaches into another module's Prisma repository.
 
 ## Workspace components
 
@@ -134,6 +143,14 @@ complete active set with the current version of every Booking. Progress and Even
 load requirements and Bookings in batches; list filtering uses aggregate SQL rather than one API
 or database query per Event. The `bookings.finance` permission is applied to the server-side DTO
 projection, so financial fields never reach unauthorized clients.
+
+Every Event has exactly one `EventCalculation`. Format-backed creation copies service requirements
+and resolved prices into relational Event positions in the Event transaction; free Events create an
+empty calculation. Snapshot names, categories, units, providers, source versions and prices remain
+stable on later catalog edits. Calculation reads load positions, eligible Bookings and history as
+bounded relation queries. Dynamic Booking costs have no duplicate persistence row. Position or
+Booking financial changes lock and version the calculation, and atomically retain an approved-to-
+Draft transition in history and audit.
 
 Authentication answers “who is this user?” and remains owned by Better Auth. Authorization
 answers “what may this membership do in this organization?” and remains owned by the platform.

@@ -18,6 +18,7 @@ import {
   parseLocalTime,
 } from '../../events/domain/event.rules.js';
 import { LocationOccupancyConflictError } from '../../occupancy/infrastructure/database-occupancy.js';
+import { EventServiceSnapshotError } from '../../services/infrastructure/event-service-snapshot.js';
 import type { AccessContext } from '../../security/access.types.js';
 import { hasLocationAccess } from '../../security/security.functions.js';
 import {
@@ -606,6 +607,9 @@ export class DateOptionService {
     }
     if (error instanceof LocationOccupancyConflictError) {
       this.occupancyConflict(error.conflicts);
+    }
+    if (error instanceof EventServiceSnapshotError) {
+      throw new UnprocessableEntityException({ code: error.code, message: error.message });
     }
     throw error;
   }

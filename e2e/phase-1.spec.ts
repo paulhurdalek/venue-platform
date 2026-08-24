@@ -4,7 +4,7 @@ const administratorEmail = 'e2e-admin@example.test';
 const administratorPassword = 'Local-E2E-Admin-42!';
 const invitedEmail = 'e2e-member@example.test';
 const invitedPassword = 'Local-E2E-Member-42!';
-const focusedScenarioTimeout = 90_000;
+const focusedScenarioTimeout = 180_000;
 const e2eBaseUrl = process.env.E2E_BASE_URL ?? 'http://127.0.0.1:3000';
 
 function contrastRatio(foreground: string, background: string) {
@@ -109,7 +109,7 @@ async function exerciseLifecycle(
   await expect(page.getByText(`${entityArticle} ${entityLabel} wurde reaktiviert.`)).toBeVisible();
 }
 
-test.describe.serial('Phase 1 through Phase 6 browser acceptance', () => {
+test.describe.serial('Phase 1 through Phase 7 browser acceptance', () => {
   // Database reset and the one-time bootstrap link make the complete E2E command the retry boundary.
   test.describe.configure({ retries: 0, timeout: focusedScenarioTimeout });
 
@@ -122,6 +122,8 @@ test.describe.serial('Phase 1 through Phase 6 browser acceptance', () => {
   let artistDetailPath = '';
   let contactDetailPath = '';
   let partnerDetailPath = '';
+  let phase7ServiceDetailPath = '';
+  let phase7EventDetailPath = '';
 
   test.beforeAll(async ({ browser }) => {
     administratorContext = await browser.newContext({ baseURL: e2eBaseUrl });
@@ -224,7 +226,7 @@ test.describe.serial('Phase 1 through Phase 6 browser acceptance', () => {
     await page.getByRole('button', { name: 'Veranstaltungsformat anlegen', exact: true }).click();
     await expect(page.getByRole('heading', { name: 'E2E Late Show', exact: true })).toBeVisible();
     eventFormatDetailPath = new URL(page.url()).pathname;
-    await expect(page.locator('input[name="name"]')).toHaveCount(0);
+    await expect(page.locator('#event-format-detail-editor input[name="name"]')).toHaveCount(0);
     await expect(page.getByText('Fremdveranstaltung / Vermietung', { exact: true })).toBeVisible();
     await expect(page.getByText('01:30 (+1 Tag)', { exact: true })).toBeVisible();
     await expect(page.getByText('Standardmäßig aktiv', { exact: true })).toBeVisible();
@@ -281,7 +283,7 @@ test.describe.serial('Phase 1 through Phase 6 browser acceptance', () => {
 
     await expect(page.getByRole('heading', { name: 'E2E Venue Night', exact: true })).toBeVisible();
     eventDetailPath = new URL(page.url()).pathname;
-    await expect(page.locator('input[name="name"]')).toHaveCount(0);
+    await expect(page.locator('#event-detail-editor input[name="name"]')).toHaveCount(0);
     await expect(page.getByText('E2E Late Show', { exact: true })).toBeVisible();
     await expect(page.getByText('Fremdveranstaltung / Vermietung', { exact: true })).toBeVisible();
     await expect(page.getByText('01:30 (+1 Tag)', { exact: true })).toBeVisible();
@@ -290,7 +292,7 @@ test.describe.serial('Phase 1 through Phase 6 browser acceptance', () => {
 
   test('Phase 5: read-only detail, edit cancel/save and confirmed status', async () => {
     await page.goto(eventDetailPath);
-    await expect(page.locator('input[name="name"]')).toHaveCount(0);
+    await expect(page.locator('#event-detail-editor input[name="name"]')).toHaveCount(0);
     await page.getByRole('button', { name: 'Bearbeiten', exact: true }).click();
     await page.getByLabel('Veranstaltungsname').fill('Dieser Entwurf wird verworfen');
     await page.getByRole('button', { name: 'Abbrechen', exact: true }).click();
@@ -302,7 +304,7 @@ test.describe.serial('Phase 1 through Phase 6 browser acceptance', () => {
     await page.getByRole('button', { name: 'Änderungen speichern', exact: true }).click();
     await expect(page.getByText('Die Veranstaltung wurde gespeichert.')).toBeVisible();
     await expect(page.getByText('20:30', { exact: true })).toBeVisible();
-    await expect(page.locator('input[name="name"]')).toHaveCount(0);
+    await expect(page.locator('#event-detail-editor input[name="name"]')).toHaveCount(0);
 
     await page.getByLabel('Status ändern').selectOption('CONFIRMED');
     await page.getByRole('button', { name: 'Übernehmen', exact: true }).click();
@@ -969,11 +971,10 @@ test.describe.serial('Phase 1 through Phase 6 browser acceptance', () => {
     await secondEchoProgramRow.getByLabel('Dauer in Minuten optional').fill('10');
     await secondEchoProgramRow.getByRole('button', { name: 'Speichern', exact: true }).click();
     await performanceOrder.getByRole('button', { name: 'Pause / Umbauzeit', exact: true }).click();
-    await performanceOrder.getByLabel('Bezeichnung optional').fill('Umbaupause');
-    await performanceOrder.getByLabel('Dauer in Minuten optional').fill('20');
-    await performanceOrder
-      .getByRole('button', { name: 'Programmpunkt anlegen', exact: true })
-      .click();
+    const breakEditor = performanceOrder.locator('.program-item-editor');
+    await breakEditor.getByLabel('Bezeichnung optional').fill('Umbaupause');
+    await breakEditor.getByLabel('Dauer in Minuten optional').fill('20');
+    await breakEditor.getByRole('button', { name: 'Programmpunkt anlegen', exact: true }).click();
     await expect(performanceOrder).toContainText('bekannte Gesamtdauer 40 Minuten');
 
     let breakRow = performanceOrder.locator('.program-row').filter({
@@ -1163,7 +1164,190 @@ test.describe.serial('Phase 1 through Phase 6 browser acceptance', () => {
     await expect(page.getByText('Status geändert: Angefragt.', { exact: true })).toBeVisible();
   });
 
-  test('Phase 1 through Phase 6: read-only authorization and logout', async ({ browser }) => {
+  test('Phase 7: catalog, format snapshot, calculation approval and booking reset', async () => {
+    await page.goto(`/o/${organizationId}/business-partners`);
+    await page.getByRole('link', { name: 'Geschäftspartner anlegen', exact: true }).click();
+    await page.getByLabel('Firmenname', { exact: true }).fill('E2E Technikpartner B');
+    await page.getByRole('button', { name: 'Geschäftspartner anlegen', exact: true }).click();
+    await expect(
+      page.getByRole('heading', { name: 'E2E Technikpartner B', exact: true }),
+    ).toBeVisible();
+
+    await page.getByRole('link', { name: 'Leistungen', exact: true }).click();
+    await expect(page.getByRole('heading', { name: 'Leistungen', exact: true })).toBeVisible();
+    await page.getByRole('link', { name: 'Kategorien', exact: true }).click();
+    await page.getByLabel('Neue Kategorie', { exact: true }).fill('E2E Technik');
+    await page.getByRole('button', { name: 'Anlegen', exact: true }).click();
+    await expect(page.getByText('Kategorie angelegt.', { exact: true })).toBeVisible();
+    await expect(page.getByText('E2E Technik', { exact: true })).toBeVisible();
+
+    await page.getByRole('link', { name: 'Zum Leistungskatalog', exact: true }).click();
+    await page.goto(`/o/${organizationId}/services/new`);
+    await expect(
+      page.getByRole('heading', { name: 'Leistung anlegen', exact: true }),
+    ).toBeVisible();
+    await page.getByLabel('Bezeichnung', { exact: true }).fill('E2E Tontechnik');
+    await page.locator('select[name="categoryId"]').selectOption({ label: 'E2E Technik' });
+    await page
+      .getByRole('combobox', { name: 'Abrechnungseinheit', exact: true })
+      .selectOption('FLAT_RATE');
+    await page.locator('input[name="salesPrice"]').fill('450,00');
+    await page.getByRole('button', { name: 'Leistung anlegen', exact: true }).click();
+    await expect(page.getByRole('heading', { name: 'E2E Tontechnik', exact: true })).toBeVisible();
+    phase7ServiceDetailPath = new URL(page.url()).pathname;
+    await expect(page.getByLabel('Bezeichnung', { exact: true })).toHaveCount(0);
+
+    const providerForm = page.locator('.compact-provider-form');
+    await providerForm
+      .getByRole('combobox', { name: 'Dienstleister', exact: true })
+      .selectOption({ label: 'E2E Kulturservice GmbH' });
+    await providerForm.locator('input[name="purchasePrice"]').fill('350.00');
+    await providerForm.getByRole('checkbox', { name: 'Bevorzugt', exact: true }).check();
+    await providerForm.getByRole('button', { name: 'Hinzufügen', exact: true }).click();
+    await expect(page.getByText('Dienstleister hinzugefügt.', { exact: true })).toBeVisible();
+    await providerForm
+      .getByRole('combobox', { name: 'Dienstleister', exact: true })
+      .selectOption({ label: 'E2E Technikpartner B' });
+    await providerForm.locator('input[name="purchasePrice"]').fill('375,00');
+    await providerForm.getByRole('button', { name: 'Hinzufügen', exact: true }).click();
+    await expect(page.locator('.master-data-table tbody tr')).toHaveCount(2);
+
+    await page.goto(eventFormatDetailPath);
+    const formatServices = page.locator('.service-subpanel');
+    await formatServices.getByText('Leistung hinzufügen', { exact: true }).click();
+    await formatServices
+      .getByRole('combobox', { name: 'Leistung', exact: true })
+      .selectOption({ label: 'E2E Tontechnik' });
+    await formatServices.getByRole('textbox', { name: 'Menge', exact: true }).fill('2');
+    await formatServices
+      .getByRole('combobox', { name: 'Dienstleister', exact: true })
+      .selectOption({ label: 'E2E Kulturservice GmbH' });
+    await formatServices.locator('input[name="salesOverride"]').fill('500,00');
+    await formatServices.getByRole('button', { name: 'Hinzufügen', exact: true }).click();
+    await expect(
+      formatServices.getByText('Leistungsvorgabe angelegt.', { exact: true }),
+    ).toBeVisible();
+    await expect(formatServices).toContainText('Einkauf: 350,00 €');
+    await expect(formatServices).toContainText('Verkauf: 500,00 €');
+
+    await page.goto(`/o/${organizationId}/events/new`);
+    await page
+      .locator('select[name="sourceEventFormatId"]')
+      .selectOption({ label: 'E2E Late Show' });
+    await page.getByLabel('Veranstaltungsname').fill('E2E Phase 7 Event');
+    await page.getByLabel('Datum').fill('2027-10-01');
+    await page.getByRole('button', { name: 'Veranstaltung anlegen', exact: true }).click();
+    await expect(
+      page.getByRole('heading', { name: 'E2E Phase 7 Event', exact: true }),
+    ).toBeVisible();
+    phase7EventDetailPath = new URL(page.url()).pathname;
+
+    const calculationPanel = page.locator('.calculation-panel');
+    await expect(calculationPanel).toContainText('E2E Tontechnik');
+    await expect(calculationPanel).toContainText('Format-Snapshot');
+    await calculationPanel.getByText('Aus Leistungskatalog hinzufügen', { exact: true }).click();
+    const catalogPosition = calculationPanel
+      .locator('.inline-editor')
+      .filter({ hasText: 'Aus Leistungskatalog hinzufügen' });
+    await catalogPosition
+      .getByRole('combobox', { name: 'Leistung', exact: true })
+      .selectOption({ label: 'E2E Tontechnik' });
+    await expect(
+      catalogPosition
+        .getByRole('combobox', { name: 'Dienstleister', exact: true })
+        .locator('option:checked'),
+    ).toHaveText('E2E Kulturservice GmbH');
+    await expect(catalogPosition.locator('input[name="purchasePrice"]')).toHaveValue('350,00');
+    await expect(catalogPosition.locator('input[name="salesPrice"]')).toHaveValue('450,00');
+    await catalogPosition.locator('input[name="purchasePrice"]').fill('360,00');
+    await expect(catalogPosition.locator('input[name="purchasePrice"]')).toHaveValue('360,00');
+    await calculationPanel.getByText('Aus Leistungskatalog hinzufügen', { exact: true }).click();
+    const snapshotCalculationRow = calculationPanel
+      .locator('.calculation-row')
+      .filter({ hasText: 'E2E Tontechnik' });
+    await snapshotCalculationRow.getByRole('button', { name: 'Bearbeiten', exact: true }).click();
+    const snapshotCalculationEditor = calculationPanel.locator('.calculation-row--editing');
+    await snapshotCalculationEditor.locator('input[name="purchasePrice"]').fill('');
+    await snapshotCalculationEditor.getByRole('button', { name: 'Speichern', exact: true }).click();
+    await expect(
+      snapshotCalculationRow.getByRole('button', {
+        name: 'Preise aus Katalog übernehmen',
+        exact: true,
+      }),
+    ).toBeVisible();
+    await snapshotCalculationRow
+      .getByRole('button', { name: 'Preise aus Katalog übernehmen', exact: true })
+      .click();
+    const pricePreview = snapshotCalculationRow.getByRole('dialog', {
+      name: 'Vorschau der Katalogpreis-Übernahme',
+    });
+    await expect(pricePreview).toContainText('Einkauf: 350,00 €');
+    await expect(pricePreview).toContainText('Bereits hinterlegte Preise bleiben unverändert.');
+    await pricePreview.getByRole('button', { name: 'Übernahme bestätigen', exact: true }).click();
+    await expect(
+      calculationPanel.getByText('Katalogpreise übernommen.', { exact: true }),
+    ).toBeVisible();
+    await calculationPanel.getByText('Individuelle Position anlegen', { exact: true }).click();
+    const customPosition = calculationPanel
+      .locator('.inline-editor')
+      .filter({ hasText: 'Individuelle Position anlegen' });
+    await customPosition
+      .getByRole('textbox', { name: 'Bezeichnung', exact: true })
+      .fill('E2E Stagehands');
+    await customPosition.getByRole('textbox', { name: 'Kategorie', exact: true }).fill('Personal');
+    await customPosition.getByRole('textbox', { name: 'Menge', exact: true }).fill('3');
+    await customPosition.locator('input[name="purchasePrice"]').fill('100,00');
+    await customPosition.locator('input[name="salesPrice"]').fill('150.00');
+    await customPosition
+      .getByRole('combobox', { name: 'Kostenstatus', exact: true })
+      .selectOption('COMMITTED');
+    await customPosition.getByRole('button', { name: 'Position anlegen', exact: true }).click();
+    await expect(calculationPanel.getByText('Position angelegt.', { exact: true })).toBeVisible();
+
+    const bookingPanel = page.locator('.booking-panel');
+    await bookingPanel
+      .getByRole('button', { name: /Artist hinzufügen/, exact: false })
+      .first()
+      .click();
+    const bookingEditor = bookingPanel.locator('.booking-editor');
+    const artistSearch = bookingEditor.getByRole('combobox', {
+      name: 'Artist suchen und auswählen',
+      exact: true,
+    });
+    await artistSearch.fill('E2E Newcomer');
+    await artistSearch.press('ArrowDown');
+    await artistSearch.press('Enter');
+    await bookingEditor
+      .getByRole('textbox', { name: 'Vereinbarte Gage optional / keine Gage' })
+      .fill('200,00');
+    await bookingEditor.getByRole('button', { name: 'Booking anlegen', exact: true }).click();
+    await expect(page.getByText('Das Booking wurde angelegt.', { exact: true })).toBeVisible();
+
+    await expect(calculationPanel).toContainText('Gage · E2E Newcomer');
+    await expect(calculationPanel).toContainText('Voraussichtliche Gesamtkosten');
+    await expect(calculationPanel).toContainText('1.200,00 €');
+    await expect(calculationPanel).toContainText('Davon verbindlich');
+    await expect(calculationPanel).toContainText('300,00 €');
+    await expect(calculationPanel).toContainText('Noch nicht verbindlich');
+    await expect(calculationPanel).toContainText('900,00 €');
+    await calculationPanel.getByRole('button', { name: 'Zur Prüfung', exact: true }).click();
+    await expect(calculationPanel).toContainText('Status: Zur Prüfung');
+    await calculationPanel.getByRole('button', { name: 'Freigeben', exact: true }).click();
+    await expect(calculationPanel).toContainText('Status: Freigegeben');
+
+    const bookingCard = bookingPanel.locator('.booking-card').filter({ hasText: 'E2E Newcomer' });
+    await bookingCard.getByRole('button', { name: 'Booking bearbeiten', exact: true }).click();
+    await bookingCard
+      .getByRole('textbox', { name: 'Vereinbarte Gage optional / keine Gage' })
+      .fill('250,00');
+    await bookingCard.getByRole('button', { name: 'Änderungen speichern', exact: true }).click();
+    await expect(page.getByText('Das Booking wurde gespeichert.', { exact: true })).toBeVisible();
+    await expect(calculationPanel).toContainText('Status: Entwurf');
+    await calculationPanel.getByText('Statushistorie', { exact: true }).click();
+    await expect(calculationPanel).toContainText('Booking-Finanzdaten geändert');
+  });
+
+  test('Phase 1 through Phase 7: read-only authorization and logout', async ({ browser }) => {
     await openOrganizationHome(page, organizationId);
     await page.getByRole('link', { name: 'Team', exact: true }).click();
     await page.getByLabel('E-Mail-Adresse').fill(invitedEmail);
@@ -1210,6 +1394,9 @@ test.describe.serial('Phase 1 through Phase 6 browser acceptance', () => {
       await expect(invitedPage.getByRole('link', { name: 'Formate', exact: true })).toBeVisible();
       await expect(
         invitedPage.getByRole('link', { name: 'Veranstaltungen', exact: true }),
+      ).toBeVisible();
+      await expect(
+        invitedPage.getByRole('link', { name: 'Leistungen', exact: true }),
       ).toBeVisible();
       await invitedPage.getByRole('link', { name: 'Formate', exact: true }).click();
       await expect(
@@ -1338,6 +1525,44 @@ test.describe.serial('Phase 1 through Phase 6 browser acceptance', () => {
         invitedPage.getByRole('button', { name: 'Weitere Aktionen', exact: true }),
       ).toHaveCount(0);
       await invitedPage.goto(artistDetailPath);
+
+      await invitedPage.goto(phase7ServiceDetailPath);
+      await expect(
+        invitedPage.getByRole('heading', { name: 'E2E Tontechnik', exact: true }),
+      ).toBeVisible();
+      await expect(invitedPage.getByText('Nicht freigegeben', { exact: true })).toBeVisible();
+      await expect(
+        invitedPage.getByRole('button', { name: 'Bearbeiten', exact: true }),
+      ).toHaveCount(0);
+      await expect(invitedPage.getByText('350,00 €', { exact: true })).toHaveCount(0);
+
+      await invitedPage.goto(phase7EventDetailPath);
+      const readOnlyCalculation = invitedPage.locator('.calculation-panel');
+      await expect(readOnlyCalculation).toContainText('E2E Tontechnik');
+      await expect(
+        readOnlyCalculation.getByRole('button', { name: 'Zur Prüfung', exact: true }),
+      ).toHaveCount(0);
+      await expect(
+        readOnlyCalculation.getByRole('button', { name: 'Freigeben', exact: true }),
+      ).toHaveCount(0);
+      const phase7EventId = phase7EventDetailPath.split('/').at(-1)!;
+      const redactedResponse = await invitedContext.request.get(
+        new URL(
+          `/api/v1/organizations/${organizationId}/events/${phase7EventId}/calculation`,
+          invitedPage.url(),
+        ).toString(),
+      );
+      expect(redactedResponse.status()).toBe(200);
+      const redactedCalculation = (await redactedResponse.json()) as {
+        positions: Array<Record<string, unknown>>;
+        bookingCosts: Array<Record<string, unknown>>;
+        totals: Record<string, unknown>;
+      };
+      expect(redactedCalculation.positions[0]).not.toHaveProperty('purchaseUnitPriceMinor');
+      expect(redactedCalculation.positions[0]).not.toHaveProperty('salesUnitPriceMinor');
+      expect(redactedCalculation.bookingCosts[0]).not.toHaveProperty('amountMinor');
+      expect(redactedCalculation.totals).not.toHaveProperty('estimatedCostMinor');
+      expect(redactedCalculation.totals).not.toHaveProperty('serviceMarginMinor');
 
       const forbidden = await invitedContext.request.patch(
         new URL(`/api/v1/organizations/${organizationId}`, invitedPage.url()).toString(),

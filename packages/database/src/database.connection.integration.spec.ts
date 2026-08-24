@@ -426,6 +426,136 @@ describeWithDatabase('PostgreSQL connection', () => {
     expect(migration).toHaveLength(1);
   });
 
+  it('has the additive Phase 7 calculation schema, EUR checks and lossless event backfill', async () => {
+    client = createDatabaseClient(testDatabaseUrl!);
+    await cleanTestDatabase(client);
+
+    const tables = await client.$queryRaw<Array<{ table_name: string }>>`
+      SELECT table_name
+      FROM information_schema.tables
+      WHERE table_schema = 'public'
+        AND table_name IN (
+          'service_category', 'service', 'service_provider_price', 'event_format_service',
+          'event_calculation', 'event_calculation_status_history', 'event_service_position'
+        )
+      ORDER BY table_name
+    `;
+    expect(tables).toHaveLength(7);
+
+    const constraints = await client.$queryRaw<Array<{ constraint_name: string }>>`
+      SELECT conname AS constraint_name
+      FROM pg_constraint
+      WHERE conname IN (
+        'service_category_version_positive',
+        'service_currency_eur',
+        'service_sales_price_nonnegative',
+        'service_category_tenant_fkey',
+        'service_provider_price_currency_eur',
+        'service_provider_price_service_tenant_fkey',
+        'service_provider_price_partner_tenant_fkey',
+        'event_format_service_quantity_positive',
+        'event_format_service_currency_eur',
+        'event_format_service_format_tenant_fkey',
+        'event_calculation_event_tenant_fkey',
+        'event_calculation_approval_consistent',
+        'event_service_position_source_consistent',
+        'event_service_position_quantity_positive',
+        'event_service_position_currency_eur',
+        'event_service_position_calculation_tenant_event_fkey'
+      )
+    `;
+    expect(constraints).toHaveLength(16);
+
+    const uniqueIndexes = await client.$queryRaw<Array<{ indexname: string }>>`
+      SELECT indexname
+      FROM pg_indexes
+      WHERE schemaname = 'public'
+        AND indexname IN (
+          'service_category_organization_id_normalized_name_key',
+          'service_organization_id_normalized_name_key',
+          'service_provider_price_active_partner_key',
+          'service_provider_price_one_preferred_key',
+          'event_format_service_active_service_key',
+          'event_calculation_event_id_key'
+        )
+    `;
+    expect(uniqueIndexes).toHaveLength(6);
+    expect(
+      await client.permission.count({
+        where: { key: { in: ['services.read', 'services.write', 'services.archive'] } },
+      }),
+    ).toBe(3);
+    expect(await client.permission.count({ where: { key: { startsWith: 'calculations.' } } })).toBe(
+      5,
+    );
+
+    const migrationSql = await readFile(
+      new URL(
+        '../prisma/migrations/20260824000200_phase_7_services_calculation/migration.sql',
+        import.meta.url,
+      ),
+      'utf8',
+    );
+    const backfill = migrationSql.match(
+      /INSERT INTO "event_calculation"[\s\S]+?ON CONFLICT \("event_id"\) DO NOTHING;/,
+    )?.[0];
+    expect(backfill).toBeTruthy();
+
+    const organization = await client.organization.create({
+      data: { name: 'Phase 7 migration venue' },
+    });
+    const location = await client.location.create({
+      data: {
+        organizationId: organization.id,
+        name: 'Calculation Hall',
+        timezone: 'Europe/Berlin',
+      },
+    });
+    const event = await client.event.create({
+      data: {
+        organizationId: organization.id,
+        locationId: location.id,
+        name: 'Existing Event',
+        eventDate: new Date('2026-11-01T00:00:00.000Z'),
+        eventKind: 'OWN_PRODUCTION',
+        timezone: 'Europe/Berlin',
+      },
+    });
+    expect(await client.eventCalculation.count({ where: { eventId: event.id } })).toBe(0);
+    await client.$executeRawUnsafe(backfill!);
+    expect(
+      await client.eventCalculation.findUniqueOrThrow({ where: { eventId: event.id } }),
+    ).toMatchObject({ organizationId: organization.id, status: 'DRAFT', version: 1 });
+    expect(await client.eventServicePosition.count({ where: { eventId: event.id } })).toBe(0);
+
+    const foreignOrganization = await client.organization.create({
+      data: { name: 'Foreign Phase 7 venue' },
+    });
+    const category = await client.serviceCategory.create({
+      data: { organizationId: organization.id, name: 'Technik', normalizedName: 'technik' },
+    });
+    await expect(
+      client.service.create({
+        data: {
+          organizationId: foreignOrganization.id,
+          categoryId: category.id,
+          name: 'Cross tenant service',
+          normalizedName: 'cross tenant service',
+          unit: 'PIECE',
+        },
+      }),
+    ).rejects.toThrow();
+
+    const migration = await client.$queryRaw<Array<{ migration_name: string }>>`
+      SELECT migration_name
+      FROM _prisma_migrations
+      WHERE migration_name = '20260824000200_phase_7_services_calculation'
+        AND finished_at IS NOT NULL
+        AND rolled_back_at IS NULL
+    `;
+    expect(migration).toHaveLength(1);
+  });
+
   it('preserves migration-owned permissions while clearing tenant authorization data', async () => {
     client = createDatabaseClient(testDatabaseUrl!);
     await cleanTestDatabase(client);

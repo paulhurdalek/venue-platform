@@ -109,11 +109,11 @@ describeWithDatabase('Phase 1 PostgreSQL and API integration', () => {
     expect(roles.map((role) => role.name).sort()).toEqual(
       ['Administrator', 'Booking', 'Lesend', 'Management & Finanzen', 'Produktion'].sort(),
     );
-    expect(roles.find((role) => role.key === 'administrator')?.permissions).toHaveLength(35);
-    expect(roles.find((role) => role.key === 'management_finance')?.permissions).toHaveLength(23);
-    expect(roles.find((role) => role.key === 'booking')?.permissions).toHaveLength(21);
-    expect(roles.find((role) => role.key === 'production')?.permissions).toHaveLength(11);
-    expect(roles.find((role) => role.key === 'read_only')?.permissions).toHaveLength(9);
+    expect(roles.find((role) => role.key === 'administrator')?.permissions).toHaveLength(43);
+    expect(roles.find((role) => role.key === 'management_finance')?.permissions).toHaveLength(31);
+    expect(roles.find((role) => role.key === 'booking')?.permissions).toHaveLength(22);
+    expect(roles.find((role) => role.key === 'production')?.permissions).toHaveLength(13);
+    expect(roles.find((role) => role.key === 'read_only')?.permissions).toHaveLength(11);
     readOnlyRoleId = roles.find((role) => role.key === 'read_only')!.id;
   });
 

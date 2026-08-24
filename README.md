@@ -1,4 +1,4 @@
-# Venue Platform — Phase 6
+# Venue Platform — Phase 7
 
 This repository contains the secure identity and tenant foundation plus organization-owned Artist,
 central Contact and Business Partner master data, organization-wide EventFormat templates and
@@ -8,7 +8,9 @@ includes normalized role-bearing relations, permission-aware
 administration, optional immutable EventFormat provenance, concurrency-safe relational occupancy
 and privacy-conscious audit records. Phase 6 adds event-specific Bookings, relational Line-up
 requirements and snapshots, explicit status history, accessible ordering, role-based progress and
-server-side financial redaction.
+server-side financial redaction. Phase 7 adds a relational service catalog, provider prices,
+EventFormat service requirements, immutable Event snapshots, automatic Booking-cost projection and
+versioned approval-ready Event calculations in EUR.
 
 ## Quick start
 
@@ -34,11 +36,12 @@ setup link.
 
 Read [the Phase 1 guide](docs/phase-1.md), [the Phase 2 decision](docs/phase-2-decision.md),
 [the Phase 3 guide](docs/phase-3.md), [the Phase 4 guide](docs/phase-4.md),
-[the Phase 5 guide](docs/phase-5.md), [the Phase 6 guide](docs/phase-6.md), and
+[the Phase 5 guide](docs/phase-5.md), [the Phase 6 guide](docs/phase-6.md),
+[the Phase 7 guide](docs/phase-7.md), and
 [the local development guide](docs/local-development.md) before making changes.
 The complete pinned toolchain is listed in [versions](docs/versions.md).
 Phase-specific local verification evidence and remaining host-only gates are recorded in the
-corresponding verification documents, including [Phase 6 verification](docs/phase-6-verification.md).
+corresponding verification documents, including [Phase 7 verification](docs/phase-7-verification.md).
 
 ## Repository map
 

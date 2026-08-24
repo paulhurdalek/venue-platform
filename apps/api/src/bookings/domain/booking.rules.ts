@@ -106,10 +106,16 @@ export function normalizeMoney(
   const minor = parseMinorUnits(minorValue, field);
   if (minor === null) return { minor: null, currency: null };
   const currency = currencyValue?.trim().toUpperCase() ?? '';
-  if (!/^[A-Z]{3}$/.test(currency)) {
+  if (!currency) {
     throw new BookingValidationError(
       'INVALID_CURRENCY',
-      `${field} benötigt einen dreistelligen ISO-Währungscode`,
+      `${field} benötigt bei einem Betrag die Währung EUR`,
+    );
+  }
+  if (currency !== 'EUR') {
+    throw new BookingValidationError(
+      'CURRENCY_NOT_SUPPORTED',
+      `${field} kann ab Phase 7 ausschließlich in EUR hinterlegt werden`,
     );
   }
   return { minor, currency };

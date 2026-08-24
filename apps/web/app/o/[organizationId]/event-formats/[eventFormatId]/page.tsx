@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 
 import { EventFormatForm } from '../../../../components/event-formats/event-format-form';
 import { LineupRequirements } from '../../../../components/bookings/lineup-requirements';
+import { FormatServicesPanel } from '../../../../components/services/format-calculation-panels';
 import {
   CompactEmpty,
   DetailField,
@@ -62,6 +63,20 @@ export default async function EventFormatDetailPage({
       { params: { path: { organizationId, eventFormatId } } },
     ),
   );
+  const canReadServices = hasPermission(membership, 'services.read');
+  const serviceData = canReadServices
+    ? await Promise.all([
+        client.GET(
+          '/api/v1/organizations/{organizationId}/event-formats/{eventFormatId}/services',
+          {
+            params: { path: { organizationId, eventFormatId }, query: { includeArchived: true } },
+          },
+        ),
+        client.GET('/api/v1/organizations/{organizationId}/services', {
+          params: { path: { organizationId }, query: { status: 'ACTIVE', limit: 100, offset: 0 } },
+        }),
+      ])
+    : undefined;
   return (
     <>
       <EditableDetail
@@ -104,6 +119,18 @@ export default async function EventFormatDetailPage({
           resourceType="event-format"
         />
       </section>
+      {serviceData ? (
+        <FormatServicesPanel
+          canArchive={hasPermission(membership, 'services.archive')}
+          canPurchase={hasPermission(membership, 'calculations.purchase')}
+          canSales={hasPermission(membership, 'calculations.sales')}
+          canWrite={hasPermission(membership, 'services.write')}
+          eventFormatId={eventFormatId}
+          initial={unwrap(serviceData[0])}
+          organizationId={organizationId}
+          services={unwrap(serviceData[1]).items}
+        />
+      ) : null}
     </>
   );
 }

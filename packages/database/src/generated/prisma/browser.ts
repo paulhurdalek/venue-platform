@@ -213,6 +213,41 @@ export type EventProgramItem = Prisma.EventProgramItemModel
  */
 export type BookingStatusHistory = Prisma.BookingStatusHistoryModel
 /**
+ * Model ServiceCategory
+ * 
+ */
+export type ServiceCategory = Prisma.ServiceCategoryModel
+/**
+ * Model Service
+ * 
+ */
+export type Service = Prisma.ServiceModel
+/**
+ * Model ServiceProviderPrice
+ * 
+ */
+export type ServiceProviderPrice = Prisma.ServiceProviderPriceModel
+/**
+ * Model EventFormatService
+ * 
+ */
+export type EventFormatService = Prisma.EventFormatServiceModel
+/**
+ * Model EventCalculation
+ * 
+ */
+export type EventCalculation = Prisma.EventCalculationModel
+/**
+ * Model EventCalculationStatusHistory
+ * 
+ */
+export type EventCalculationStatusHistory = Prisma.EventCalculationStatusHistoryModel
+/**
+ * Model EventServicePosition
+ * 
+ */
+export type EventServicePosition = Prisma.EventServicePositionModel
+/**
  * Model VenueDateOption
  * 
  */

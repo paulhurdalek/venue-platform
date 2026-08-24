@@ -2,6 +2,7 @@
 
 import type { components } from '@venue/api-client';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { apiErrorMessage, createBrowserApiClient } from '../../../src/api/browser';
@@ -94,6 +95,7 @@ export function BookingLineupPanel({
   initialRequirements: Requirements;
   organizationId: string;
 }) {
+  const router = useRouter();
   const [bookings, setBookings] = useState(initialBookings);
   const [progress, setProgress] = useState(initialProgress);
   const [programItems, setProgramItems] = useState(initialProgramItems);
@@ -282,6 +284,7 @@ export function BookingLineupPanel({
     setAdding(false);
     setMessage('Das Booking wurde angelegt.');
     await refresh();
+    router.refresh();
     setPending(false);
   }
 
@@ -361,6 +364,7 @@ export function BookingLineupPanel({
     setEditingId(undefined);
     setMessage('Das Booking wurde gespeichert.');
     await refresh();
+    router.refresh();
     setPending(false);
   }
 
@@ -412,6 +416,7 @@ export function BookingLineupPanel({
     setMessage(`Status geändert: ${statusLabel(status)}.`);
     setStatusPendingId(undefined);
     await refresh();
+    router.refresh();
   }
 
   const activeBookings = bookings.filter((booking) => isActive(booking.status));
@@ -945,13 +950,7 @@ function BookingFields({
           </label>
           <label>
             Währung
-            <input
-              disabled={!draft.agreedFeeAmount}
-              maxLength={3}
-              minLength={3}
-              onChange={(event) => setValue('agreedFeeCurrency', event.target.value)}
-              value={draft.agreedFeeCurrency}
-            />
+            <span className="currency-fixed">EUR (€)</span>
           </label>
           <label>
             Reisekosten <span className="optional">optional</span>
@@ -964,13 +963,7 @@ function BookingFields({
           </label>
           <label>
             Währung
-            <input
-              disabled={!draft.travelCostAmount}
-              maxLength={3}
-              minLength={3}
-              onChange={(event) => setValue('travelCostCurrency', event.target.value)}
-              value={draft.travelCostCurrency}
-            />
+            <span className="currency-fixed">EUR (€)</span>
           </label>
         </div>
       ) : null}
@@ -1007,17 +1000,7 @@ function BookingFields({
           </label>
           <label>
             Währung
-            <select
-              disabled={!draft.hotelBuyoutAmount}
-              onChange={(event) => setValue('hotelBuyoutCurrency', event.target.value)}
-              value={draft.hotelBuyoutCurrency}
-            >
-              {['EUR', 'CHF', 'GBP', 'USD'].map((currency) => (
-                <option key={currency} value={currency}>
-                  {currency}
-                </option>
-              ))}
-            </select>
+            <span className="currency-fixed">EUR (€)</span>
           </label>
         </div>
       ) : null}
@@ -1313,8 +1296,8 @@ function bookingBody(
     ...(canFinance
       ? draft.agreedFeeAmount
         ? {
-            agreedFeeMinor: majorAmountToMinor(draft.agreedFeeAmount, draft.agreedFeeCurrency),
-            agreedFeeCurrency: draft.agreedFeeCurrency.toUpperCase(),
+            agreedFeeMinor: majorAmountToMinor(draft.agreedFeeAmount, 'EUR'),
+            agreedFeeCurrency: 'EUR',
           }
         : { agreedFeeMinor: null, agreedFeeCurrency: null }
       : {}),
@@ -1322,8 +1305,8 @@ function bookingBody(
     ...(canFinance
       ? draft.travelCostAmount
         ? {
-            travelCostMinor: majorAmountToMinor(draft.travelCostAmount, draft.travelCostCurrency),
-            travelCostCurrency: draft.travelCostCurrency.toUpperCase(),
+            travelCostMinor: majorAmountToMinor(draft.travelCostAmount, 'EUR'),
+            travelCostCurrency: 'EUR',
           }
         : { travelCostMinor: null, travelCostCurrency: null }
       : {}),
@@ -1332,11 +1315,8 @@ function bookingBody(
     ...(canFinance
       ? draft.hotelArrangement === 'BUYOUT' && draft.hotelBuyoutAmount
         ? {
-            hotelBuyoutMinor: majorAmountToMinor(
-              draft.hotelBuyoutAmount,
-              draft.hotelBuyoutCurrency,
-            ),
-            hotelBuyoutCurrency: draft.hotelBuyoutCurrency,
+            hotelBuyoutMinor: majorAmountToMinor(draft.hotelBuyoutAmount, 'EUR'),
+            hotelBuyoutCurrency: 'EUR',
           }
         : { hotelBuyoutMinor: null, hotelBuyoutCurrency: null }
       : {}),

@@ -1,7 +1,7 @@
 'use client';
 
 import type { ReactNode } from 'react';
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 
 import { FormMessage } from '../form-message';
 
@@ -42,8 +42,11 @@ export function EditableDetail({
   children?: ReactNode;
 }) {
   const [editing, setEditing] = useState(false);
+  const [hydrated, setHydrated] = useState(false);
   const [success, setSuccess] = useState<string>();
   const editorId = `${id}-editor`;
+
+  useEffect(() => setHydrated(true), []);
 
   function cancel() {
     setEditing(false);
@@ -69,6 +72,7 @@ export function EditableDetail({
               aria-controls={editorId}
               aria-expanded={false}
               className="button"
+              disabled={!hydrated}
               onClick={() => {
                 setSuccess(undefined);
                 setEditing(true);
