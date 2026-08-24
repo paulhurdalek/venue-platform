@@ -10,6 +10,7 @@ import {
   replaceEventOccupancy,
 } from '../../occupancy/infrastructure/database-occupancy.js';
 import type { AccessContext } from '../../security/access.types.js';
+import { createEventServiceSnapshot } from '../../services/infrastructure/event-service-snapshot.js';
 import type {
   EventFormatSource,
   EventListQuery,
@@ -190,6 +191,12 @@ export class PrismaEventRepository implements EventRepository {
           data: { organizationId, ...data, eventDate: databaseDate(eventDate) },
           include: eventInclude,
         });
+        await createEventServiceSnapshot(
+          database,
+          organizationId,
+          row.id,
+          values.sourceEventFormatId,
+        );
         if (values.sourceEventFormatId) {
           const requirements = await database.eventFormatLineupRequirement.findMany({
             where: {

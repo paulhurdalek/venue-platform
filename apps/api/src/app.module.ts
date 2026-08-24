@@ -14,6 +14,7 @@ import { SecurityModule } from './security/security.module.js';
 import { SetupModule } from './setup/setup.module.js';
 import { PlatformModule } from './platform/platform.module.js';
 import { BookingsModule } from './bookings/bookings.module.js';
+import { ServicesModule } from './services/services.module.js';
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import { BookingsModule } from './bookings/bookings.module.js';
     EventsModule,
     DateOptionsModule,
     BookingsModule,
+    ServicesModule,
     HealthModule,
   ],
 })

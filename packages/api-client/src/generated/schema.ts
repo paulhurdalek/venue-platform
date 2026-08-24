@@ -1079,6 +1079,310 @@ export interface paths {
         patch: operations["EventProgramItemController_update_v1"];
         trace?: never;
     };
+    "/api/v1/organizations/{organizationId}/service-categories": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["ServiceCategoryController_list_v1"];
+        put?: never;
+        post: operations["ServiceCategoryController_create_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/service-categories/{categoryId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["ServiceCategoryController_find_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["ServiceCategoryController_update_v1"];
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/service-categories/{categoryId}/status": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["ServiceCategoryController_setStatus_v1"];
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/services": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["ServiceCatalogController_list_v1"];
+        put?: never;
+        post: operations["ServiceCatalogController_create_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/services/{serviceId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["ServiceCatalogController_find_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["ServiceCatalogController_update_v1"];
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/services/{serviceId}/status": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["ServiceCatalogController_setStatus_v1"];
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/services/{serviceId}/provider-prices": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["ServiceCatalogController_createProvider_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/service-provider-prices/{providerPriceId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["ServiceProviderPriceController_update_v1"];
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/service-provider-prices/{providerPriceId}/status": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["ServiceProviderPriceController_setStatus_v1"];
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/event-formats/{eventFormatId}/services": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["EventFormatServiceController_list_v1"];
+        put?: never;
+        post: operations["EventFormatServiceController_create_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/event-format-services/{formatServiceId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["EventFormatServiceItemController_update_v1"];
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/event-format-services/{formatServiceId}/status": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["EventFormatServiceItemController_setStatus_v1"];
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/events/{eventId}/calculation": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["EventCalculationController_get_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/events/{eventId}/calculation/positions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["EventCalculationController_addPosition_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/events/{eventId}/calculation/status": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["EventCalculationController_setStatus_v1"];
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/event-service-positions/{positionId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["EventServicePositionController_update_v1"];
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/event-service-positions/{positionId}/catalog-price-preview": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["EventServicePositionController_previewCatalogPrices_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/event-service-positions/{positionId}/catalog-prices": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["EventServicePositionController_applyCatalogPrices_v1"];
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/event-service-positions/{positionId}/status": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["EventServicePositionController_setStatus_v1"];
+        trace?: never;
+    };
     "/api/v1/health": {
         parameters: {
             query?: never;
@@ -1456,9 +1760,9 @@ export interface components {
             version: number;
         };
         UpdateEntityStatusDto: {
+            version: number;
             /** @enum {string} */
             status: "ACTIVE" | "ARCHIVED";
-            version: number;
         };
         CreateContactAssociationDto: {
             /** Format: uuid */
@@ -2304,6 +2608,369 @@ export interface components {
         UpdateEventProgramItemDto: {
             label?: string | null;
             durationMinutes?: number | null;
+            version: number;
+        };
+        ServiceCategoryDto: {
+            /** Format: uuid */
+            id: string;
+            /** Format: uuid */
+            organizationId: string;
+            name: string;
+            normalizedName: string;
+            /** @enum {string} */
+            status: "ACTIVE" | "ARCHIVED";
+            version: number;
+            /** Format: date-time */
+            archivedAt?: string | null;
+            /** Format: date-time */
+            createdAt: string;
+            /** Format: date-time */
+            updatedAt: string;
+        };
+        ServiceCategoryPageDto: {
+            items: components["schemas"]["ServiceCategoryDto"][];
+            total: number;
+            limit: number;
+            offset: number;
+        };
+        CreateServiceCategoryDto: {
+            name: string;
+        };
+        UpdateServiceCategoryDto: {
+            version: number;
+            name?: string;
+        };
+        ServiceProviderPriceDto: {
+            /** Format: uuid */
+            id: string;
+            /** Format: uuid */
+            organizationId: string;
+            /** Format: uuid */
+            serviceId: string;
+            /** Format: uuid */
+            businessPartnerId: string;
+            businessPartnerName: string;
+            /** @enum {string} */
+            businessPartnerStatus: "ACTIVE" | "ARCHIVED";
+            purchasePriceMinor?: string | null;
+            /** @enum {string} */
+            currency?: "EUR";
+            preferred: boolean;
+            internalNote?: string | null;
+            /** @enum {string} */
+            status: "ACTIVE" | "ARCHIVED";
+            version: number;
+            /** Format: date-time */
+            archivedAt?: string | null;
+            /** Format: date-time */
+            createdAt: string;
+            /** Format: date-time */
+            updatedAt: string;
+        };
+        ServiceDto: {
+            /** Format: uuid */
+            id: string;
+            /** Format: uuid */
+            organizationId: string;
+            /** Format: uuid */
+            categoryId: string;
+            categoryName: string;
+            /** @enum {string} */
+            categoryStatus: "ACTIVE" | "ARCHIVED";
+            name: string;
+            normalizedName: string;
+            /** @enum {string} */
+            unit: "PIECE" | "HOUR" | "DAY" | "PERSON" | "FLAT_RATE" | "PER_GUEST" | "PER_TICKET";
+            defaultSalesPriceMinor?: string | null;
+            /** @enum {string} */
+            currency?: "EUR";
+            internalNote?: string | null;
+            preferredProvider?: components["schemas"]["ServiceProviderPriceDto"] | null;
+            providerPrices?: components["schemas"]["ServiceProviderPriceDto"][];
+            /** @enum {string} */
+            status: "ACTIVE" | "ARCHIVED";
+            version: number;
+            /** Format: date-time */
+            archivedAt?: string | null;
+            /** Format: date-time */
+            createdAt: string;
+            /** Format: date-time */
+            updatedAt: string;
+        };
+        ServicePageDto: {
+            items: components["schemas"]["ServiceDto"][];
+            total: number;
+            limit: number;
+            offset: number;
+        };
+        CreateServiceDto: {
+            /** Format: uuid */
+            categoryId: string;
+            name: string;
+            /** @enum {string} */
+            unit: "PIECE" | "HOUR" | "DAY" | "PERSON" | "FLAT_RATE" | "PER_GUEST" | "PER_TICKET";
+            defaultSalesPriceMinor?: string | null;
+            internalNote?: string | null;
+        };
+        UpdateServiceDto: {
+            version: number;
+            /** Format: uuid */
+            categoryId?: string;
+            name?: string;
+            /** @enum {string} */
+            unit?: "PIECE" | "HOUR" | "DAY" | "PERSON" | "FLAT_RATE" | "PER_GUEST" | "PER_TICKET";
+            defaultSalesPriceMinor?: string | null;
+            internalNote?: string | null;
+        };
+        CreateProviderPriceDto: {
+            /** Format: uuid */
+            businessPartnerId: string;
+            purchasePriceMinor?: string | null;
+            /** @default false */
+            preferred: boolean;
+            internalNote?: string | null;
+        };
+        UpdateProviderPriceDto: {
+            /** Format: uuid */
+            businessPartnerId?: string;
+            purchasePriceMinor?: string | null;
+            /** @default false */
+            preferred: boolean;
+            internalNote?: string | null;
+            version: number;
+        };
+        EventFormatServiceDto: {
+            /** Format: uuid */
+            id: string;
+            /** Format: uuid */
+            organizationId: string;
+            /** Format: uuid */
+            eventFormatId: string;
+            /** Format: uuid */
+            serviceId: string;
+            serviceName: string;
+            /** @enum {string} */
+            serviceStatus: "ACTIVE" | "ARCHIVED";
+            serviceVersion: number;
+            categoryName: string;
+            /** @enum {string} */
+            unit: "PIECE" | "HOUR" | "DAY" | "PERSON" | "FLAT_RATE" | "PER_GUEST" | "PER_TICKET";
+            quantity: string;
+            /** Format: uuid */
+            providerBusinessPartnerId?: string | null;
+            providerName?: string | null;
+            /** @enum {string|null} */
+            providerStatus?: "ACTIVE" | "ARCHIVED" | null;
+            purchasePriceOverrideMinor?: string | null;
+            salesPriceOverrideMinor?: string | null;
+            resolvedPurchasePriceMinor?: string | null;
+            resolvedSalesPriceMinor?: string | null;
+            /** @enum {string} */
+            currency?: "EUR";
+            sortOrder: number;
+            /** @enum {string} */
+            status: "ACTIVE" | "ARCHIVED";
+            version: number;
+            /** Format: date-time */
+            archivedAt?: string | null;
+            /** Format: date-time */
+            createdAt: string;
+            /** Format: date-time */
+            updatedAt: string;
+        };
+        CreateFormatServiceDto: {
+            /** Format: uuid */
+            serviceId: string;
+            quantity: string;
+            /** Format: uuid */
+            providerBusinessPartnerId?: string | null;
+            purchasePriceOverrideMinor?: string | null;
+            salesPriceOverrideMinor?: string | null;
+            sortOrder?: number;
+        };
+        UpdateFormatServiceDto: {
+            version: number;
+            /** Format: uuid */
+            serviceId?: string;
+            quantity?: string;
+            /** Format: uuid */
+            providerBusinessPartnerId?: string | null;
+            purchasePriceOverrideMinor?: string | null;
+            salesPriceOverrideMinor?: string | null;
+            sortOrder?: number;
+        };
+        EventServicePositionDto: {
+            /** Format: uuid */
+            id: string;
+            /** Format: uuid */
+            organizationId: string;
+            /** Format: uuid */
+            eventId: string;
+            /** Format: uuid */
+            calculationId: string;
+            /** @enum {string} */
+            source: "EVENT_FORMAT" | "SERVICE_CATALOG" | "CUSTOM";
+            /** Format: uuid */
+            sourceServiceId?: string | null;
+            sourceServiceVersion?: number | null;
+            /** Format: uuid */
+            sourceEventFormatServiceId?: string | null;
+            sourceEventFormatServiceVersion?: number | null;
+            name: string;
+            categoryName: string;
+            /** @enum {string} */
+            unit: "PIECE" | "HOUR" | "DAY" | "PERSON" | "FLAT_RATE" | "PER_GUEST" | "PER_TICKET";
+            quantity: string;
+            /** Format: uuid */
+            providerBusinessPartnerId?: string | null;
+            providerName?: string | null;
+            purchaseUnitPriceMinor?: string | null;
+            purchaseTotalMinor?: string | null;
+            salesUnitPriceMinor?: string | null;
+            salesTotalMinor?: string | null;
+            /** @enum {string} */
+            currency?: "EUR";
+            /** @enum {string} */
+            costStatus: "PLANNED" | "COMMITTED";
+            sortOrder: number;
+            note?: string | null;
+            /** @enum {string} */
+            status: "ACTIVE" | "ARCHIVED";
+            version: number;
+            /** Format: date-time */
+            archivedAt?: string | null;
+            /** Format: date-time */
+            createdAt: string;
+            /** Format: date-time */
+            updatedAt: string;
+        };
+        BookingCostDto: {
+            id: string;
+            /** Format: uuid */
+            bookingId: string;
+            /** @enum {string} */
+            kind: "FEE" | "TRAVEL" | "HOTEL_BUYOUT";
+            label: string;
+            artistName: string;
+            bookingStatus: string;
+            /** @enum {string} */
+            costStatus: "PLANNED" | "COMMITTED";
+            amountMinor?: string;
+            /** @enum {string} */
+            currency?: "EUR";
+        };
+        CalculationTotalsDto: {
+            estimatedCostMinor?: string;
+            committedCostMinor?: string;
+            plannedCostMinor?: string;
+            servicePurchaseValueMinor?: string;
+            serviceSalesValueMinor?: string;
+            serviceMarginMinor?: string;
+            incomplete: boolean;
+            missingPurchasePricePositionIds: string[];
+            missingSalesPricePositionIds: string[];
+        };
+        CalculationStatusHistoryDto: {
+            /** Format: uuid */
+            id: string;
+            /** @enum {string} */
+            previousStatus: "DRAFT" | "REVIEW" | "APPROVED";
+            /** @enum {string} */
+            newStatus: "DRAFT" | "REVIEW" | "APPROVED";
+            actorName: string;
+            note?: string | null;
+            reason?: string | null;
+            changedSourceType?: string | null;
+            /** Format: uuid */
+            changedSourceId?: string | null;
+            /** Format: date-time */
+            changedAt: string;
+        };
+        EventCalculationDto: {
+            /** Format: uuid */
+            id: string;
+            /** Format: uuid */
+            organizationId: string;
+            /** Format: uuid */
+            eventId: string;
+            eventName: string;
+            /** Format: uuid */
+            locationId: string;
+            /** @enum {string} */
+            status: "DRAFT" | "REVIEW" | "APPROVED";
+            version: number;
+            /** Format: date-time */
+            approvedAt?: string | null;
+            approvedByName?: string | null;
+            positions: components["schemas"]["EventServicePositionDto"][];
+            bookingCosts: components["schemas"]["BookingCostDto"][];
+            totals: components["schemas"]["CalculationTotalsDto"];
+            history: components["schemas"]["CalculationStatusHistoryDto"][];
+            /** Format: date-time */
+            createdAt: string;
+            /** Format: date-time */
+            updatedAt: string;
+        };
+        CreateEventPositionDto: {
+            /** Format: uuid */
+            sourceServiceId?: string | null;
+            name?: string;
+            categoryName?: string;
+            /** @enum {string} */
+            unit?: "PIECE" | "HOUR" | "DAY" | "PERSON" | "FLAT_RATE" | "PER_GUEST" | "PER_TICKET";
+            quantity: string;
+            /** Format: uuid */
+            providerBusinessPartnerId?: string | null;
+            purchaseUnitPriceMinor?: string | null;
+            salesUnitPriceMinor?: string | null;
+            /**
+             * @default PLANNED
+             * @enum {string}
+             */
+            costStatus: "PLANNED" | "COMMITTED";
+            sortOrder?: number;
+            note?: string | null;
+        };
+        UpdateCalculationStatusDto: {
+            version: number;
+            /** @enum {string} */
+            status: "DRAFT" | "REVIEW" | "APPROVED";
+            note?: string | null;
+        };
+        UpdateEventPositionDto: {
+            version: number;
+            /** Format: uuid */
+            sourceServiceId?: string | null;
+            name?: string;
+            categoryName?: string;
+            /** @enum {string} */
+            unit?: "PIECE" | "HOUR" | "DAY" | "PERSON" | "FLAT_RATE" | "PER_GUEST" | "PER_TICKET";
+            quantity?: string;
+            /** Format: uuid */
+            providerBusinessPartnerId?: string | null;
+            purchaseUnitPriceMinor?: string | null;
+            salesUnitPriceMinor?: string | null;
+            /** @enum {string} */
+            costStatus?: "PLANNED" | "COMMITTED";
+            sortOrder?: number;
+            note?: string | null;
+        };
+        EventPositionCatalogPricePreviewDto: {
+            /** Format: uuid */
+            positionId: string;
+            positionVersion: number;
+            /** @enum {string} */
+            source: "EVENT_FORMAT" | "SERVICE_CATALOG";
+            /** Format: uuid */
+            providerBusinessPartnerId?: string | null;
+            providerName?: string | null;
+            providerWillBeApplied: boolean;
+            purchaseUnitPriceMinor?: string | null;
+            purchaseWillBeApplied?: boolean;
+            salesUnitPriceMinor?: string | null;
+            salesWillBeApplied?: boolean;
+        };
+        ApplyEventPositionCatalogPricesDto: {
             version: number;
         };
         ServiceHealthDto: {
@@ -4566,6 +5233,611 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["EventProgramItemDto"];
+                };
+            };
+        };
+    };
+    ServiceCategoryController_list_v1: {
+        parameters: {
+            query?: {
+                offset?: number;
+                limit?: number;
+                status?: "ACTIVE" | "ARCHIVED" | "ALL";
+                q?: string;
+            };
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ServiceCategoryPageDto"];
+                };
+            };
+        };
+    };
+    ServiceCategoryController_create_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateServiceCategoryDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ServiceCategoryDto"];
+                };
+            };
+        };
+    };
+    ServiceCategoryController_find_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                categoryId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ServiceCategoryDto"];
+                };
+            };
+        };
+    };
+    ServiceCategoryController_update_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                categoryId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateServiceCategoryDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ServiceCategoryDto"];
+                };
+            };
+        };
+    };
+    ServiceCategoryController_setStatus_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                categoryId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateEntityStatusDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ServiceCategoryDto"];
+                };
+            };
+        };
+    };
+    ServiceCatalogController_list_v1: {
+        parameters: {
+            query?: {
+                offset?: number;
+                limit?: number;
+                categoryId?: string;
+                status?: "ACTIVE" | "ARCHIVED" | "ALL";
+                q?: string;
+            };
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ServicePageDto"];
+                };
+            };
+        };
+    };
+    ServiceCatalogController_create_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateServiceDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ServiceDto"];
+                };
+            };
+        };
+    };
+    ServiceCatalogController_find_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                serviceId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ServiceDto"];
+                };
+            };
+        };
+    };
+    ServiceCatalogController_update_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                serviceId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateServiceDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ServiceDto"];
+                };
+            };
+        };
+    };
+    ServiceCatalogController_setStatus_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                serviceId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateEntityStatusDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ServiceDto"];
+                };
+            };
+        };
+    };
+    ServiceCatalogController_createProvider_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                serviceId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateProviderPriceDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ServiceProviderPriceDto"];
+                };
+            };
+        };
+    };
+    ServiceProviderPriceController_update_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                providerPriceId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateProviderPriceDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ServiceProviderPriceDto"];
+                };
+            };
+        };
+    };
+    ServiceProviderPriceController_setStatus_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                providerPriceId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateEntityStatusDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ServiceProviderPriceDto"];
+                };
+            };
+        };
+    };
+    EventFormatServiceController_list_v1: {
+        parameters: {
+            query?: {
+                includeArchived?: boolean;
+            };
+            header?: never;
+            path: {
+                eventFormatId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EventFormatServiceDto"][];
+                };
+            };
+        };
+    };
+    EventFormatServiceController_create_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                eventFormatId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateFormatServiceDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EventFormatServiceDto"];
+                };
+            };
+        };
+    };
+    EventFormatServiceItemController_update_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                formatServiceId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateFormatServiceDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EventFormatServiceDto"];
+                };
+            };
+        };
+    };
+    EventFormatServiceItemController_setStatus_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                formatServiceId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateEntityStatusDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EventFormatServiceDto"];
+                };
+            };
+        };
+    };
+    EventCalculationController_get_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                eventId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EventCalculationDto"];
+                };
+            };
+        };
+    };
+    EventCalculationController_addPosition_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                eventId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateEventPositionDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EventServicePositionDto"];
+                };
+            };
+        };
+    };
+    EventCalculationController_setStatus_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                eventId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateCalculationStatusDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EventCalculationDto"];
+                };
+            };
+        };
+    };
+    EventServicePositionController_update_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                positionId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateEventPositionDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EventServicePositionDto"];
+                };
+            };
+        };
+    };
+    EventServicePositionController_previewCatalogPrices_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                positionId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EventPositionCatalogPricePreviewDto"];
+                };
+            };
+        };
+    };
+    EventServicePositionController_applyCatalogPrices_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                positionId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ApplyEventPositionCatalogPricesDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EventServicePositionDto"];
+                };
+            };
+        };
+    };
+    EventServicePositionController_setStatus_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                positionId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateEntityStatusDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EventServicePositionDto"];
                 };
             };
         };

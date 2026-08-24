@@ -95,6 +95,33 @@ enum ProgramItemKind {
   BREAK
 }
 
+enum ServiceUnit {
+  PIECE
+  HOUR
+  DAY
+  PERSON
+  FLAT_RATE
+  PER_GUEST
+  PER_TICKET
+}
+
+enum CalculationStatus {
+  DRAFT
+  REVIEW
+  APPROVED
+}
+
+enum EventServicePositionSource {
+  EVENT_FORMAT
+  SERVICE_CATALOG
+  CUSTOM
+}
+
+enum CostStatus {
+  PLANNED
+  COMMITTED
+}
+
 model User {
   id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name          String
@@ -115,6 +142,8 @@ model User {
   consumedBootstrapTokens BootstrapToken[]
   auditEntries            AuditLog[]       @relation("AuditActorUser")
   bookingStatusChanges    BookingStatusHistory[] @relation("BookingStatusActorUser")
+  approvedCalculations    EventCalculation[] @relation("CalculationApproverUser")
+  calculationStatusChanges EventCalculationStatusHistory[] @relation("CalculationStatusActorUser")
 
   @@map("auth_user")
 }
@@ -219,6 +248,13 @@ model Organization {
   bookings Booking[]
   bookingStatusHistory BookingStatusHistory[]
   eventProgramItems EventProgramItem[]
+  serviceCategories ServiceCategory[]
+  services Service[]
+  serviceProviderPrices ServiceProviderPrice[]
+  eventFormatServices EventFormatService[]
+  eventCalculations EventCalculation[]
+  calculationStatusHistory EventCalculationStatusHistory[]
+  eventServicePositions EventServicePosition[]
 
   @@index([status])
   @@map("organization")
@@ -245,6 +281,7 @@ model EventFormat {
   organization          Organization     @relation(fields: [organizationId], references: [id], onDelete: Restrict)
   sourceEvents          Event[]
   lineupRequirements    EventFormatLineupRequirement[]
+  serviceRequirements   EventFormatService[]
 
   @@unique([id, organizationId])
   @@unique([organizationId, normalizedName])
@@ -286,6 +323,8 @@ model Event {
   lineupRequirements    EventLineupRequirement[]
   bookings              Booking[]
   programItems           EventProgramItem[]
+  calculation            EventCalculation?
+  servicePositions       EventServicePosition[]
 
   @@unique([id, organizationId])
   @@index([organizationId, eventDate, startMinutes, id])
@@ -344,6 +383,8 @@ model Membership {
   auditEntries    AuditLog[]           @relation("AuditActorMembership")
   createdDateOptions VenueDateOption[]  @relation("DateOptionCreator")
   bookingStatusChanges BookingStatusHistory[] @relation("BookingStatusActorMembership")
+  approvedCalculations EventCalculation[] @relation("CalculationApproverMembership")
+  calculationStatusChanges EventCalculationStatusHistory[] @relation("CalculationStatusActorMembership")
 
   @@unique([organizationId, userId])
   @@unique([id, organizationId])
@@ -631,6 +672,9 @@ model BusinessPartner {
   artistLinks         ArtistBusinessPartner[]
   dateOptions         VenueDateOption[]
   bookings            Booking[]
+  serviceProviderPrices ServiceProviderPrice[]
+  formatServiceAssignments EventFormatService[] @relation("EventFormatServiceProvider")
+  eventServicePositions EventServicePosition[] @relation("EventServicePositionProvider")
 
   @@unique([id, organizationId])
   @@index([organizationId, status])
@@ -907,6 +951,201 @@ model BookingStatusHistory {
   @@index([actorUserId])
   @@index([actorMembershipId])
   @@map("booking_status_history")
+}
+
+model ServiceCategory {
+  id             String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId String       @map("organization_id") @db.Uuid
+  name           String       @db.VarChar(160)
+  normalizedName String       @map("normalized_name") @db.VarChar(160)
+  status         EntityStatus @default(ACTIVE)
+  version        Int          @default(1)
+  archivedAt     DateTime?    @map("archived_at")
+  createdAt      DateTime     @default(now()) @map("created_at")
+  updatedAt      DateTime     @updatedAt @map("updated_at")
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  services       Service[]
+
+  @@unique([id, organizationId])
+  @@unique([organizationId, normalizedName])
+  @@index([organizationId, status, name, id])
+  @@map("service_category")
+}
+
+model Service {
+  id                        String                 @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId            String                 @map("organization_id") @db.Uuid
+  categoryId                String                 @map("category_id") @db.Uuid
+  name                      String                 @db.VarChar(200)
+  normalizedName            String                 @map("normalized_name") @db.VarChar(200)
+  unit                      ServiceUnit
+  defaultSalesPriceMinor    BigInt?                @map("default_sales_price_minor")
+  currency                  String                 @default("EUR") @db.Char(3)
+  internalNote              String?                @map("internal_note")
+  status                    EntityStatus           @default(ACTIVE)
+  version                   Int                    @default(1)
+  archivedAt                DateTime?              @map("archived_at")
+  createdAt                 DateTime               @default(now()) @map("created_at")
+  updatedAt                 DateTime               @updatedAt @map("updated_at")
+  organization              Organization           @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  category                  ServiceCategory        @relation(fields: [categoryId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  providerPrices            ServiceProviderPrice[]
+  formatRequirements        EventFormatService[]
+  eventPositions            EventServicePosition[]
+
+  @@unique([id, organizationId])
+  @@unique([organizationId, normalizedName])
+  @@index([organizationId, categoryId, status, name, id])
+  @@index([organizationId, status, name, id])
+  @@map("service")
+}
+
+model ServiceProviderPrice {
+  id                String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId    String          @map("organization_id") @db.Uuid
+  serviceId         String          @map("service_id") @db.Uuid
+  businessPartnerId String          @map("business_partner_id") @db.Uuid
+  purchasePriceMinor BigInt?        @map("purchase_price_minor")
+  currency          String          @default("EUR") @db.Char(3)
+  preferred         Boolean         @default(false)
+  internalNote      String?         @map("internal_note")
+  status            EntityStatus    @default(ACTIVE)
+  version           Int             @default(1)
+  archivedAt        DateTime?       @map("archived_at")
+  createdAt         DateTime        @default(now()) @map("created_at")
+  updatedAt         DateTime        @updatedAt @map("updated_at")
+  organization      Organization    @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  service           Service         @relation(fields: [serviceId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  businessPartner   BusinessPartner @relation(fields: [businessPartnerId, organizationId], references: [id, organizationId], onDelete: Restrict)
+
+  @@unique([id, organizationId])
+  @@index([organizationId, serviceId, status, preferred, id])
+  @@index([organizationId, businessPartnerId, status])
+  @@map("service_provider_price")
+}
+
+model EventFormatService {
+  id                        String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId            String           @map("organization_id") @db.Uuid
+  eventFormatId             String           @map("event_format_id") @db.Uuid
+  serviceId                 String           @map("service_id") @db.Uuid
+  quantity                  Decimal          @db.Decimal(18, 4)
+  providerBusinessPartnerId String?          @map("provider_business_partner_id") @db.Uuid
+  purchasePriceOverrideMinor BigInt?         @map("purchase_price_override_minor")
+  salesPriceOverrideMinor   BigInt?          @map("sales_price_override_minor")
+  currency                  String           @default("EUR") @db.Char(3)
+  sortOrder                 Int              @map("sort_order")
+  status                    EntityStatus     @default(ACTIVE)
+  version                   Int              @default(1)
+  archivedAt                DateTime?        @map("archived_at")
+  createdAt                 DateTime         @default(now()) @map("created_at")
+  updatedAt                 DateTime         @updatedAt @map("updated_at")
+  organization              Organization     @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  eventFormat               EventFormat      @relation(fields: [eventFormatId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  service                   Service          @relation(fields: [serviceId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  providerBusinessPartner   BusinessPartner? @relation("EventFormatServiceProvider", fields: [providerBusinessPartnerId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  eventSnapshots            EventServicePosition[]
+
+  @@unique([id, organizationId])
+  @@index([organizationId, eventFormatId, status, sortOrder, id])
+  @@index([organizationId, serviceId, status])
+  @@index([organizationId, providerBusinessPartnerId])
+  @@map("event_format_service")
+}
+
+model EventCalculation {
+  id             String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId String            @map("organization_id") @db.Uuid
+  eventId        String            @unique @map("event_id") @db.Uuid
+  status         CalculationStatus @default(DRAFT)
+  version        Int               @default(1)
+  approvedAt     DateTime?         @map("approved_at")
+  approvedByUserId String?         @map("approved_by_user_id") @db.Uuid
+  approvedByMembershipId String?   @map("approved_by_membership_id") @db.Uuid
+  createdAt      DateTime          @default(now()) @map("created_at")
+  updatedAt      DateTime          @updatedAt @map("updated_at")
+  organization   Organization      @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  event          Event             @relation(fields: [eventId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  approvedByUser User?             @relation("CalculationApproverUser", fields: [approvedByUserId], references: [id], onDelete: Restrict)
+  approvedByMembership Membership? @relation("CalculationApproverMembership", fields: [approvedByMembershipId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  positions      EventServicePosition[]
+  statusHistory  EventCalculationStatusHistory[]
+
+  @@unique([id, organizationId])
+  @@unique([id, organizationId, eventId])
+  @@unique([eventId, organizationId])
+  @@index([organizationId, eventId, status])
+  @@index([approvedByUserId])
+  @@index([approvedByMembershipId])
+  @@map("event_calculation")
+}
+
+model EventCalculationStatusHistory {
+  id                String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId    String            @map("organization_id") @db.Uuid
+  calculationId     String            @map("calculation_id") @db.Uuid
+  previousStatus    CalculationStatus @map("previous_status")
+  newStatus         CalculationStatus @map("new_status")
+  actorUserId       String            @map("actor_user_id") @db.Uuid
+  actorMembershipId String            @map("actor_membership_id") @db.Uuid
+  note              String?
+  reason            String?           @db.VarChar(200)
+  changedSourceType String?            @map("changed_source_type") @db.VarChar(80)
+  changedSourceId   String?            @map("changed_source_id") @db.Uuid
+  changedAt         DateTime           @default(now()) @map("changed_at")
+  organization      Organization       @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  calculation       EventCalculation   @relation(fields: [calculationId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  actorUser         User               @relation("CalculationStatusActorUser", fields: [actorUserId], references: [id], onDelete: Restrict)
+  actorMembership   Membership         @relation("CalculationStatusActorMembership", fields: [actorMembershipId, organizationId], references: [id, organizationId], onDelete: Restrict)
+
+  @@unique([id, organizationId])
+  @@index([organizationId, calculationId, changedAt, id])
+  @@index([actorUserId])
+  @@index([actorMembershipId])
+  @@map("event_calculation_status_history")
+}
+
+model EventServicePosition {
+  id                           String                     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId               String                     @map("organization_id") @db.Uuid
+  eventId                      String                     @map("event_id") @db.Uuid
+  calculationId                String                     @map("calculation_id") @db.Uuid
+  source                       EventServicePositionSource
+  sourceServiceId              String?                    @map("source_service_id") @db.Uuid
+  sourceServiceVersion         Int?                       @map("source_service_version")
+  sourceEventFormatServiceId   String?                    @map("source_event_format_service_id") @db.Uuid
+  sourceEventFormatServiceVersion Int?                    @map("source_event_format_service_version")
+  nameSnapshot                 String                     @map("name_snapshot") @db.VarChar(200)
+  categoryNameSnapshot         String                     @map("category_name_snapshot") @db.VarChar(160)
+  unit                         ServiceUnit
+  quantity                     Decimal                    @db.Decimal(18, 4)
+  providerBusinessPartnerId    String?                    @map("provider_business_partner_id") @db.Uuid
+  providerNameSnapshot         String?                    @map("provider_name_snapshot") @db.VarChar(200)
+  purchaseUnitPriceMinor       BigInt?                    @map("purchase_unit_price_minor")
+  salesUnitPriceMinor          BigInt?                    @map("sales_unit_price_minor")
+  currency                     String                     @default("EUR") @db.Char(3)
+  costStatus                   CostStatus                 @default(PLANNED) @map("cost_status")
+  sortOrder                    Int                        @map("sort_order")
+  note                         String?
+  status                       EntityStatus               @default(ACTIVE)
+  version                      Int                        @default(1)
+  archivedAt                   DateTime?                  @map("archived_at")
+  createdAt                    DateTime                   @default(now()) @map("created_at")
+  updatedAt                    DateTime                   @updatedAt @map("updated_at")
+  organization                 Organization               @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  event                        Event                      @relation(fields: [eventId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  calculation                  EventCalculation           @relation(fields: [calculationId, organizationId, eventId], references: [id, organizationId, eventId], onDelete: Restrict)
+  sourceService                Service?                   @relation(fields: [sourceServiceId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  sourceEventFormatService     EventFormatService?        @relation(fields: [sourceEventFormatServiceId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  providerBusinessPartner      BusinessPartner?           @relation("EventServicePositionProvider", fields: [providerBusinessPartnerId, organizationId], references: [id, organizationId], onDelete: Restrict)
+
+  @@unique([id, organizationId])
+  @@index([organizationId, eventId, status, sortOrder, id])
+  @@index([organizationId, calculationId, status, sortOrder, id])
+  @@index([organizationId, sourceServiceId])
+  @@index([organizationId, sourceEventFormatServiceId])
+  @@index([organizationId, providerBusinessPartnerId])
+  @@map("event_service_position")
 }
 
 model VenueDateOption {

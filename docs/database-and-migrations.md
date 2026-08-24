@@ -162,3 +162,28 @@ active Bookings of the same Artist, even with the same role. Duplicate preventio
 transactional application invariant: creation acquires the existing per-Event lock, checks every
 active role for the Artist and requires an explicit confirmation flag. The new composite unique
 Booking key exists only to support the tenant-and-Event-safe program-item foreign key.
+
+## Phase 7 migration
+
+`20260824000200_phase_7_services_calculation` is strictly additive and leaves all earlier migration
+directories unchanged. It adds `ServiceUnit`, `CalculationStatus`, `EventServicePositionSource` and
+`CostStatus` plus seven organization-owned tables:
+
+- `service_category`, `service` and `service_provider_price` for the catalog;
+- `event_format_service` for ordered relational format defaults;
+- `event_calculation`, `event_calculation_status_history` and `event_service_position` for the
+  Event snapshot, workflow and audit-supporting history.
+
+Checks enforce nonblank snapshot/name values, positive versions/order/quantities, nonnegative
+optional Minor Units, EUR, consistent archive timestamps, position provenance and approval actor/
+timestamp consistency. Quantities use `DECIMAL(18,4)` and money uses `BIGINT`; zero is permitted and
+distinct from null. Tenant-composite foreign keys cover categories, services, Events, formats,
+partners, calculations and memberships. Partial unique indexes enforce one active provider
+relationship per partner, one active preferred provider and one active service/order per format.
+Tenant-first indexes support list and calculation reads.
+
+The migration conflict-safely inserts eight concrete permissions and backfills the five standard
+roles with the same matrix as `SetupService`. It creates one empty Draft calculation for every
+existing Event using `ON CONFLICT (event_id) DO NOTHING`; it creates no service position, category,
+provider or example data. New Events receive their calculation through the same transaction as
+Event creation rather than a database trigger.

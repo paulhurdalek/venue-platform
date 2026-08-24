@@ -22,6 +22,7 @@ import {
   type EventStatus,
 } from '../domain/event.rules.js';
 import { LocationOccupancyConflictError } from '../../occupancy/infrastructure/database-occupancy.js';
+import { EventServiceSnapshotError } from '../../services/infrastructure/event-service-snapshot.js';
 import type {
   CreateEventInput,
   EventListQuery,
@@ -346,6 +347,9 @@ export class EventService {
         message: error.message,
         details: { conflicts: error.conflicts },
       });
+    }
+    if (error instanceof EventServiceSnapshotError) {
+      throw new UnprocessableEntityException({ code: error.code, message: error.message });
     }
     throw error;
   }

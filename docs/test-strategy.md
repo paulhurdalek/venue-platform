@@ -3,10 +3,10 @@
 | Layer          | Command                                                 | Evidence                                                                                                   |
 | -------------- | ------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
 | Unit           | `pnpm test:unit`; Web workspace test                    | Security/master-data, Event/occupancy/option, Booking rules plus exact amount/prefill helpers              |
-| API/PostgreSQL | `pnpm test:integration`                                 | Phase-1–6 regressions, Booking/program/history/progress, concurrency, redaction and isolation              |
+| API/PostgreSQL | `pnpm test:integration`                                 | Phase-1–7 regressions, snapshots/calculations, concurrency, redaction and isolation                        |
 | Migration      | `pnpm test:db`                                          | all additive migrations, backfills, tenant keys, constraints, catalogs and cleanup safety                  |
 | E2E setup      | `pnpm test:e2e:setup`                                   | canonical test environment, isolated Next paths, guarded cleanup and preservation of the development cache |
-| Browser E2E    | `pnpm test:e2e`                                         | Fifteen serial focused scenarios with administrator and isolated read-only contexts                        |
+| Browser E2E    | `pnpm test:e2e`                                         | Serial Phase-1–7 workflow with administrator and isolated read-only contexts                               |
 | Static/build   | `pnpm verify`                                           | formatting, lint, TypeScript, generated OpenAPI client, tests, production builds                           |
 | Delivery       | `pnpm test:containers`                                  | fresh migrations, DB/API integration, volume persistence, all three images                                 |
 | Supply chain   | `pnpm security:audit`; `pnpm install --frozen-lockfile` | production advisories and peer/lock consistency                                                            |
@@ -93,3 +93,19 @@ performance path, edits two ten-minute sets, inserts an Umbaupause, proves simul
 then uses drag-and-drop and arrow-key ordering and verifies persistence after reload. The same flow
 checks an Artist direct contact and stores/reopens a German `100,00` Hotel-Buy-out. The isolated
 Read-only context sees both Booking and program but no financial or mutation controls.
+
+Phase-7 domain and application tests cover normalized duplicates, exact Euro parsing, explicit
+zero/null, four-decimal quantities, deterministic `HALF_UP` rounding, transitions, independent
+financial write permissions and server-side response redaction. Database tests verify the seven
+tables, provenance/EUR/amount/version constraints, tenant keys, partial uniqueness, eight
+permissions and existing-Event calculation backfill. Shared cleanup truncates calculation history,
+positions, calculations, format services and catalog tables before their parent Events, formats,
+partners and organizations while preserving the migration-owned permission catalog.
+
+The Phase-7 PostgreSQL/API scenario covers category/provider lifecycle, duplicate and preferred
+provider conflicts, catalog versus override resolution, Event and DateOption conversion snapshots,
+snapshot independence after catalog edits, free Events, individual positions, missing-price
+approval denial, exact planned/committed totals, all three Booking money sources, terminal Booking
+exclusion, optimistic conflicts, audit/history, automatic approval reset and Location/tenant/
+permission boundaries. The Playwright continuation exercises the same operator journey and checks
+the restricted-role JSON response directly for absent financial fields.

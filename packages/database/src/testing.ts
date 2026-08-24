@@ -1,6 +1,13 @@
 import type { DatabaseClient } from './index.js';
 
 const TEST_SCOPED_TABLES = [
+  'event_calculation_status_history',
+  'event_service_position',
+  'event_calculation',
+  'event_format_service',
+  'service_provider_price',
+  'service',
+  'service_category',
   'booking_status_history',
   'event_program_item',
   'booking',

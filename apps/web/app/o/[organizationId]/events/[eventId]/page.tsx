@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { EventForm } from '../../../../components/events/event-form';
 import { EventStatusAction } from '../../../../components/events/event-status-action';
 import { BookingLineupPanel } from '../../../../components/bookings/booking-lineup-panel';
+import { CalculationPanel } from '../../../../components/services/format-calculation-panels';
 import {
   CompactEmpty,
   DetailField,
@@ -94,6 +95,32 @@ export default async function EventDetailPage({
           : Promise.resolve(undefined),
       ])
     : undefined;
+  const canReadCalculation = hasPermission(membership, 'calculations.read');
+  const calculationData = canReadCalculation
+    ? await Promise.all([
+        client.GET('/api/v1/organizations/{organizationId}/events/{eventId}/calculation', {
+          params: { path: { organizationId, eventId } },
+        }),
+        hasPermission(membership, 'calculations.write') &&
+        hasPermission(membership, 'services.read')
+          ? client.GET('/api/v1/organizations/{organizationId}/services', {
+              params: {
+                path: { organizationId },
+                query: { status: 'ACTIVE', limit: 100, offset: 0 },
+              },
+            })
+          : Promise.resolve(undefined),
+        hasPermission(membership, 'calculations.write') &&
+        hasPermission(membership, 'business_partners.read')
+          ? client.GET('/api/v1/organizations/{organizationId}/business-partners', {
+              params: {
+                path: { organizationId },
+                query: { status: 'ACTIVE', limit: 100, offset: 0 },
+              },
+            })
+          : Promise.resolve(undefined),
+      ])
+    : undefined;
 
   return (
     <>
@@ -142,6 +169,18 @@ export default async function EventDetailPage({
           initialProgramItems={unwrap(bookingData[3])}
           initialRequirements={unwrap(bookingData[2])}
           organizationId={organizationId}
+        />
+      ) : null}
+      {calculationData ? (
+        <CalculationPanel
+          calculation={unwrap(calculationData[0])}
+          canApprove={hasPermission(membership, 'calculations.approve')}
+          canPurchase={hasPermission(membership, 'calculations.purchase')}
+          canSales={hasPermission(membership, 'calculations.sales')}
+          canWrite={hasPermission(membership, 'calculations.write')}
+          organizationId={organizationId}
+          partners={calculationData[2] ? unwrap(calculationData[2]).items : []}
+          services={calculationData[1] ? unwrap(calculationData[1]).items : []}
         />
       ) : null}
     </>

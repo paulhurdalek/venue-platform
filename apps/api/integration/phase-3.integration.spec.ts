@@ -113,7 +113,7 @@ describeWithDatabase('Phase 3 master-data integration', () => {
       ]),
     );
 
-    expect(keysByRole.administrator).toHaveLength(35);
+    expect(keysByRole.administrator).toHaveLength(43);
     expect(keysByRole.management_finance).toEqual(
       [
         'artists.read',
@@ -124,6 +124,11 @@ describeWithDatabase('Phase 3 master-data integration', () => {
         'business_partners.archive',
         'business_partners.read',
         'business_partners.write',
+        'calculations.approve',
+        'calculations.purchase',
+        'calculations.read',
+        'calculations.sales',
+        'calculations.write',
         'contacts.archive',
         'contacts.read',
         'contacts.write',
@@ -139,6 +144,9 @@ describeWithDatabase('Phase 3 master-data integration', () => {
         'location.read',
         'lineup.write',
         'organization.read',
+        'services.archive',
+        'services.read',
+        'services.write',
       ].sort(),
     );
     expect(keysByRole.booking).toEqual(
@@ -164,6 +172,7 @@ describeWithDatabase('Phase 3 master-data integration', () => {
         'location.read',
         'lineup.write',
         'organization.read',
+        'services.read',
       ].sort(),
     );
     expect(keysByRole.production).toEqual(
@@ -179,6 +188,8 @@ describeWithDatabase('Phase 3 master-data integration', () => {
         'events.write',
         'location.read',
         'organization.read',
+        'calculations.read',
+        'services.read',
       ].sort(),
     );
     expect(keysByRole.read_only).toEqual(
@@ -192,6 +203,8 @@ describeWithDatabase('Phase 3 master-data integration', () => {
         'events.read',
         'location.read',
         'organization.read',
+        'calculations.read',
+        'services.read',
       ].sort(),
     );
 

@@ -4426,6 +4426,1192 @@
         ]
       }
     },
+    "/api/v1/organizations/{organizationId}/service-categories": {
+      "get": {
+        "operationId": "ServiceCategoryController_list_v1",
+        "parameters": [
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 0,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "maximum": 100,
+              "type": "number"
+            }
+          },
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "ACTIVE",
+                "ARCHIVED",
+                "ALL"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "q",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "maxLength": 160,
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServiceCategoryPageDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "service categories"
+        ]
+      },
+      "post": {
+        "operationId": "ServiceCategoryController_create_v1",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateServiceCategoryDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServiceCategoryDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "service categories"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/service-categories/{categoryId}": {
+      "get": {
+        "operationId": "ServiceCategoryController_find_v1",
+        "parameters": [
+          {
+            "name": "categoryId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServiceCategoryDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "service categories"
+        ]
+      },
+      "patch": {
+        "operationId": "ServiceCategoryController_update_v1",
+        "parameters": [
+          {
+            "name": "categoryId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateServiceCategoryDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServiceCategoryDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "service categories"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/service-categories/{categoryId}/status": {
+      "patch": {
+        "operationId": "ServiceCategoryController_setStatus_v1",
+        "parameters": [
+          {
+            "name": "categoryId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEntityStatusDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServiceCategoryDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "service categories"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/services": {
+      "get": {
+        "operationId": "ServiceCatalogController_list_v1",
+        "parameters": [
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 0,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "maximum": 100,
+              "type": "number"
+            }
+          },
+          {
+            "name": "categoryId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "ACTIVE",
+                "ARCHIVED",
+                "ALL"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "q",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "maxLength": 160,
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServicePageDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "services"
+        ]
+      },
+      "post": {
+        "operationId": "ServiceCatalogController_create_v1",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateServiceDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServiceDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "services"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/services/{serviceId}": {
+      "get": {
+        "operationId": "ServiceCatalogController_find_v1",
+        "parameters": [
+          {
+            "name": "serviceId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServiceDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "services"
+        ]
+      },
+      "patch": {
+        "operationId": "ServiceCatalogController_update_v1",
+        "parameters": [
+          {
+            "name": "serviceId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateServiceDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServiceDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "services"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/services/{serviceId}/status": {
+      "patch": {
+        "operationId": "ServiceCatalogController_setStatus_v1",
+        "parameters": [
+          {
+            "name": "serviceId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEntityStatusDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServiceDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "services"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/services/{serviceId}/provider-prices": {
+      "post": {
+        "operationId": "ServiceCatalogController_createProvider_v1",
+        "parameters": [
+          {
+            "name": "serviceId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateProviderPriceDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServiceProviderPriceDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "services"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/service-provider-prices/{providerPriceId}": {
+      "patch": {
+        "operationId": "ServiceProviderPriceController_update_v1",
+        "parameters": [
+          {
+            "name": "providerPriceId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateProviderPriceDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServiceProviderPriceDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "service provider prices"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/service-provider-prices/{providerPriceId}/status": {
+      "patch": {
+        "operationId": "ServiceProviderPriceController_setStatus_v1",
+        "parameters": [
+          {
+            "name": "providerPriceId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEntityStatusDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServiceProviderPriceDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "service provider prices"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/event-formats/{eventFormatId}/services": {
+      "get": {
+        "operationId": "EventFormatServiceController_list_v1",
+        "parameters": [
+          {
+            "name": "includeArchived",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "eventFormatId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EventFormatServiceDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "event format services"
+        ]
+      },
+      "post": {
+        "operationId": "EventFormatServiceController_create_v1",
+        "parameters": [
+          {
+            "name": "eventFormatId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateFormatServiceDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventFormatServiceDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "event format services"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/event-format-services/{formatServiceId}": {
+      "patch": {
+        "operationId": "EventFormatServiceItemController_update_v1",
+        "parameters": [
+          {
+            "name": "formatServiceId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateFormatServiceDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventFormatServiceDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "event format services"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/event-format-services/{formatServiceId}/status": {
+      "patch": {
+        "operationId": "EventFormatServiceItemController_setStatus_v1",
+        "parameters": [
+          {
+            "name": "formatServiceId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEntityStatusDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventFormatServiceDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "event format services"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/events/{eventId}/calculation": {
+      "get": {
+        "operationId": "EventCalculationController_get_v1",
+        "parameters": [
+          {
+            "name": "eventId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventCalculationDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "event calculations"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/events/{eventId}/calculation/positions": {
+      "post": {
+        "operationId": "EventCalculationController_addPosition_v1",
+        "parameters": [
+          {
+            "name": "eventId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateEventPositionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventServicePositionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "event calculations"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/events/{eventId}/calculation/status": {
+      "patch": {
+        "operationId": "EventCalculationController_setStatus_v1",
+        "parameters": [
+          {
+            "name": "eventId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCalculationStatusDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventCalculationDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "event calculations"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/event-service-positions/{positionId}": {
+      "patch": {
+        "operationId": "EventServicePositionController_update_v1",
+        "parameters": [
+          {
+            "name": "positionId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEventPositionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventServicePositionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "event calculation positions"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/event-service-positions/{positionId}/catalog-price-preview": {
+      "get": {
+        "operationId": "EventServicePositionController_previewCatalogPrices_v1",
+        "parameters": [
+          {
+            "name": "positionId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventPositionCatalogPricePreviewDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "event calculation positions"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/event-service-positions/{positionId}/catalog-prices": {
+      "patch": {
+        "operationId": "EventServicePositionController_applyCatalogPrices_v1",
+        "parameters": [
+          {
+            "name": "positionId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApplyEventPositionCatalogPricesDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventServicePositionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "event calculation positions"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/event-service-positions/{positionId}/status": {
+      "patch": {
+        "operationId": "EventServicePositionController_setStatus_v1",
+        "parameters": [
+          {
+            "name": "positionId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEntityStatusDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventServicePositionDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "event calculation positions"
+        ]
+      }
+    },
     "/api/v1/health": {
       "get": {
         "operationId": "HealthController_get_v1",
@@ -5772,20 +6958,21 @@
       "UpdateEntityStatusDto": {
         "type": "object",
         "properties": {
+          "version": {
+            "type": "number",
+            "minimum": 1
+          },
           "status": {
             "type": "string",
             "enum": [
               "ACTIVE",
               "ARCHIVED"
             ]
-          },
-          "version": {
-            "type": "number"
           }
         },
         "required": [
-          "status",
-          "version"
+          "version",
+          "status"
         ]
       },
       "CreateContactAssociationDto": {
@@ -8781,6 +9968,1304 @@
             "minimum": 1,
             "maximum": 1440
           },
+          "version": {
+            "type": "number",
+            "minimum": 1
+          }
+        },
+        "required": [
+          "version"
+        ]
+      },
+      "ServiceCategoryDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "organizationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "normalizedName": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "ARCHIVED"
+            ]
+          },
+          "version": {
+            "type": "number"
+          },
+          "archivedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "id",
+          "organizationId",
+          "name",
+          "normalizedName",
+          "status",
+          "version",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "ServiceCategoryPageDto": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ServiceCategoryDto"
+            }
+          },
+          "total": {
+            "type": "number"
+          },
+          "limit": {
+            "type": "number"
+          },
+          "offset": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "items",
+          "total",
+          "limit",
+          "offset"
+        ]
+      },
+      "CreateServiceCategoryDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 160
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "UpdateServiceCategoryDto": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "number",
+            "minimum": 1
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 160
+          }
+        },
+        "required": [
+          "version"
+        ]
+      },
+      "ServiceProviderPriceDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "organizationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "serviceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "businessPartnerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "businessPartnerName": {
+            "type": "string"
+          },
+          "businessPartnerStatus": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "ARCHIVED"
+            ]
+          },
+          "purchasePriceMinor": {
+            "type": "string",
+            "nullable": true
+          },
+          "currency": {
+            "type": "string",
+            "enum": [
+              "EUR"
+            ]
+          },
+          "preferred": {
+            "type": "boolean"
+          },
+          "internalNote": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "ARCHIVED"
+            ]
+          },
+          "version": {
+            "type": "number"
+          },
+          "archivedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "id",
+          "organizationId",
+          "serviceId",
+          "businessPartnerId",
+          "businessPartnerName",
+          "businessPartnerStatus",
+          "preferred",
+          "status",
+          "version",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "ServiceDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "organizationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "categoryId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "categoryName": {
+            "type": "string"
+          },
+          "categoryStatus": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "ARCHIVED"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "normalizedName": {
+            "type": "string"
+          },
+          "unit": {
+            "type": "string",
+            "enum": [
+              "PIECE",
+              "HOUR",
+              "DAY",
+              "PERSON",
+              "FLAT_RATE",
+              "PER_GUEST",
+              "PER_TICKET"
+            ]
+          },
+          "defaultSalesPriceMinor": {
+            "type": "string",
+            "nullable": true
+          },
+          "currency": {
+            "type": "string",
+            "enum": [
+              "EUR"
+            ]
+          },
+          "internalNote": {
+            "type": "string",
+            "nullable": true
+          },
+          "preferredProvider": {
+            "nullable": true,
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ServiceProviderPriceDto"
+              }
+            ]
+          },
+          "providerPrices": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ServiceProviderPriceDto"
+            }
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "ARCHIVED"
+            ]
+          },
+          "version": {
+            "type": "number"
+          },
+          "archivedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "id",
+          "organizationId",
+          "categoryId",
+          "categoryName",
+          "categoryStatus",
+          "name",
+          "normalizedName",
+          "unit",
+          "status",
+          "version",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "ServicePageDto": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ServiceDto"
+            }
+          },
+          "total": {
+            "type": "number"
+          },
+          "limit": {
+            "type": "number"
+          },
+          "offset": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "items",
+          "total",
+          "limit",
+          "offset"
+        ]
+      },
+      "CreateServiceDto": {
+        "type": "object",
+        "properties": {
+          "categoryId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 200
+          },
+          "unit": {
+            "type": "string",
+            "enum": [
+              "PIECE",
+              "HOUR",
+              "DAY",
+              "PERSON",
+              "FLAT_RATE",
+              "PER_GUEST",
+              "PER_TICKET"
+            ]
+          },
+          "defaultSalesPriceMinor": {
+            "type": "string",
+            "nullable": true,
+            "pattern": "^\\d+$"
+          },
+          "internalNote": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 5000
+          }
+        },
+        "required": [
+          "categoryId",
+          "name",
+          "unit"
+        ]
+      },
+      "UpdateServiceDto": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "number",
+            "minimum": 1
+          },
+          "categoryId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 200
+          },
+          "unit": {
+            "type": "string",
+            "enum": [
+              "PIECE",
+              "HOUR",
+              "DAY",
+              "PERSON",
+              "FLAT_RATE",
+              "PER_GUEST",
+              "PER_TICKET"
+            ]
+          },
+          "defaultSalesPriceMinor": {
+            "type": "string",
+            "nullable": true,
+            "pattern": "^\\d+$"
+          },
+          "internalNote": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 5000
+          }
+        },
+        "required": [
+          "version"
+        ]
+      },
+      "CreateProviderPriceDto": {
+        "type": "object",
+        "properties": {
+          "businessPartnerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "purchasePriceMinor": {
+            "type": "string",
+            "nullable": true,
+            "pattern": "^\\d+$"
+          },
+          "preferred": {
+            "type": "boolean",
+            "default": false
+          },
+          "internalNote": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 5000
+          }
+        },
+        "required": [
+          "businessPartnerId"
+        ]
+      },
+      "UpdateProviderPriceDto": {
+        "type": "object",
+        "properties": {
+          "businessPartnerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "purchasePriceMinor": {
+            "type": "string",
+            "nullable": true,
+            "pattern": "^\\d+$"
+          },
+          "preferred": {
+            "type": "boolean",
+            "default": false
+          },
+          "internalNote": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 5000
+          },
+          "version": {
+            "type": "number",
+            "minimum": 1
+          }
+        },
+        "required": [
+          "version"
+        ]
+      },
+      "EventFormatServiceDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "organizationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "eventFormatId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "serviceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "serviceName": {
+            "type": "string"
+          },
+          "serviceStatus": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "ARCHIVED"
+            ]
+          },
+          "serviceVersion": {
+            "type": "number"
+          },
+          "categoryName": {
+            "type": "string"
+          },
+          "unit": {
+            "type": "string",
+            "enum": [
+              "PIECE",
+              "HOUR",
+              "DAY",
+              "PERSON",
+              "FLAT_RATE",
+              "PER_GUEST",
+              "PER_TICKET"
+            ]
+          },
+          "quantity": {
+            "type": "string"
+          },
+          "providerBusinessPartnerId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "providerName": {
+            "type": "string",
+            "nullable": true
+          },
+          "providerStatus": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "ARCHIVED"
+            ],
+            "nullable": true
+          },
+          "purchasePriceOverrideMinor": {
+            "type": "string",
+            "nullable": true
+          },
+          "salesPriceOverrideMinor": {
+            "type": "string",
+            "nullable": true
+          },
+          "resolvedPurchasePriceMinor": {
+            "type": "string",
+            "nullable": true
+          },
+          "resolvedSalesPriceMinor": {
+            "type": "string",
+            "nullable": true
+          },
+          "currency": {
+            "type": "string",
+            "enum": [
+              "EUR"
+            ]
+          },
+          "sortOrder": {
+            "type": "number"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "ARCHIVED"
+            ]
+          },
+          "version": {
+            "type": "number"
+          },
+          "archivedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "id",
+          "organizationId",
+          "eventFormatId",
+          "serviceId",
+          "serviceName",
+          "serviceStatus",
+          "serviceVersion",
+          "categoryName",
+          "unit",
+          "quantity",
+          "sortOrder",
+          "status",
+          "version",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "CreateFormatServiceDto": {
+        "type": "object",
+        "properties": {
+          "serviceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "quantity": {
+            "type": "string",
+            "pattern": "^\\d+(?:[.,]\\d{1,4})?$"
+          },
+          "providerBusinessPartnerId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "purchasePriceOverrideMinor": {
+            "type": "string",
+            "nullable": true,
+            "pattern": "^\\d+$"
+          },
+          "salesPriceOverrideMinor": {
+            "type": "string",
+            "nullable": true,
+            "pattern": "^\\d+$"
+          },
+          "sortOrder": {
+            "type": "number",
+            "minimum": 1
+          }
+        },
+        "required": [
+          "serviceId",
+          "quantity"
+        ]
+      },
+      "UpdateFormatServiceDto": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "number",
+            "minimum": 1
+          },
+          "serviceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "quantity": {
+            "type": "string",
+            "pattern": "^\\d+(?:[.,]\\d{1,4})?$"
+          },
+          "providerBusinessPartnerId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "purchasePriceOverrideMinor": {
+            "type": "string",
+            "nullable": true,
+            "pattern": "^\\d+$"
+          },
+          "salesPriceOverrideMinor": {
+            "type": "string",
+            "nullable": true,
+            "pattern": "^\\d+$"
+          },
+          "sortOrder": {
+            "type": "number",
+            "minimum": 1
+          }
+        },
+        "required": [
+          "version"
+        ]
+      },
+      "EventServicePositionDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "organizationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "eventId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "calculationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "source": {
+            "type": "string",
+            "enum": [
+              "EVENT_FORMAT",
+              "SERVICE_CATALOG",
+              "CUSTOM"
+            ]
+          },
+          "sourceServiceId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "sourceServiceVersion": {
+            "type": "number",
+            "nullable": true
+          },
+          "sourceEventFormatServiceId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "sourceEventFormatServiceVersion": {
+            "type": "number",
+            "nullable": true
+          },
+          "name": {
+            "type": "string"
+          },
+          "categoryName": {
+            "type": "string"
+          },
+          "unit": {
+            "type": "string",
+            "enum": [
+              "PIECE",
+              "HOUR",
+              "DAY",
+              "PERSON",
+              "FLAT_RATE",
+              "PER_GUEST",
+              "PER_TICKET"
+            ]
+          },
+          "quantity": {
+            "type": "string"
+          },
+          "providerBusinessPartnerId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "providerName": {
+            "type": "string",
+            "nullable": true
+          },
+          "purchaseUnitPriceMinor": {
+            "type": "string",
+            "nullable": true
+          },
+          "purchaseTotalMinor": {
+            "type": "string",
+            "nullable": true
+          },
+          "salesUnitPriceMinor": {
+            "type": "string",
+            "nullable": true
+          },
+          "salesTotalMinor": {
+            "type": "string",
+            "nullable": true
+          },
+          "currency": {
+            "type": "string",
+            "enum": [
+              "EUR"
+            ]
+          },
+          "costStatus": {
+            "type": "string",
+            "enum": [
+              "PLANNED",
+              "COMMITTED"
+            ]
+          },
+          "sortOrder": {
+            "type": "number"
+          },
+          "note": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "ARCHIVED"
+            ]
+          },
+          "version": {
+            "type": "number"
+          },
+          "archivedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "id",
+          "organizationId",
+          "eventId",
+          "calculationId",
+          "source",
+          "name",
+          "categoryName",
+          "unit",
+          "quantity",
+          "costStatus",
+          "sortOrder",
+          "status",
+          "version",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "BookingCostDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "bookingId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "FEE",
+              "TRAVEL",
+              "HOTEL_BUYOUT"
+            ]
+          },
+          "label": {
+            "type": "string"
+          },
+          "artistName": {
+            "type": "string"
+          },
+          "bookingStatus": {
+            "type": "string"
+          },
+          "costStatus": {
+            "type": "string",
+            "enum": [
+              "PLANNED",
+              "COMMITTED"
+            ]
+          },
+          "amountMinor": {
+            "type": "string"
+          },
+          "currency": {
+            "type": "string",
+            "enum": [
+              "EUR"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "bookingId",
+          "kind",
+          "label",
+          "artistName",
+          "bookingStatus",
+          "costStatus"
+        ]
+      },
+      "CalculationTotalsDto": {
+        "type": "object",
+        "properties": {
+          "estimatedCostMinor": {
+            "type": "string"
+          },
+          "committedCostMinor": {
+            "type": "string"
+          },
+          "plannedCostMinor": {
+            "type": "string"
+          },
+          "servicePurchaseValueMinor": {
+            "type": "string"
+          },
+          "serviceSalesValueMinor": {
+            "type": "string"
+          },
+          "serviceMarginMinor": {
+            "type": "string"
+          },
+          "incomplete": {
+            "type": "boolean"
+          },
+          "missingPurchasePricePositionIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "missingSalesPricePositionIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "incomplete",
+          "missingPurchasePricePositionIds",
+          "missingSalesPricePositionIds"
+        ]
+      },
+      "CalculationStatusHistoryDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "previousStatus": {
+            "type": "string",
+            "enum": [
+              "DRAFT",
+              "REVIEW",
+              "APPROVED"
+            ]
+          },
+          "newStatus": {
+            "type": "string",
+            "enum": [
+              "DRAFT",
+              "REVIEW",
+              "APPROVED"
+            ]
+          },
+          "actorName": {
+            "type": "string"
+          },
+          "note": {
+            "type": "string",
+            "nullable": true
+          },
+          "reason": {
+            "type": "string",
+            "nullable": true
+          },
+          "changedSourceType": {
+            "type": "string",
+            "nullable": true
+          },
+          "changedSourceId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "changedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "id",
+          "previousStatus",
+          "newStatus",
+          "actorName",
+          "changedAt"
+        ]
+      },
+      "EventCalculationDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "organizationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "eventId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "eventName": {
+            "type": "string"
+          },
+          "locationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "DRAFT",
+              "REVIEW",
+              "APPROVED"
+            ]
+          },
+          "version": {
+            "type": "number"
+          },
+          "approvedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "approvedByName": {
+            "type": "string",
+            "nullable": true
+          },
+          "positions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EventServicePositionDto"
+            }
+          },
+          "bookingCosts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BookingCostDto"
+            }
+          },
+          "totals": {
+            "$ref": "#/components/schemas/CalculationTotalsDto"
+          },
+          "history": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CalculationStatusHistoryDto"
+            }
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "id",
+          "organizationId",
+          "eventId",
+          "eventName",
+          "locationId",
+          "status",
+          "version",
+          "positions",
+          "bookingCosts",
+          "totals",
+          "history",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "CreateEventPositionDto": {
+        "type": "object",
+        "properties": {
+          "sourceServiceId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 200
+          },
+          "categoryName": {
+            "type": "string",
+            "maxLength": 160
+          },
+          "unit": {
+            "type": "string",
+            "enum": [
+              "PIECE",
+              "HOUR",
+              "DAY",
+              "PERSON",
+              "FLAT_RATE",
+              "PER_GUEST",
+              "PER_TICKET"
+            ]
+          },
+          "quantity": {
+            "type": "string",
+            "pattern": "^\\d+(?:[.,]\\d{1,4})?$"
+          },
+          "providerBusinessPartnerId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "purchaseUnitPriceMinor": {
+            "type": "string",
+            "nullable": true,
+            "pattern": "^\\d+$"
+          },
+          "salesUnitPriceMinor": {
+            "type": "string",
+            "nullable": true,
+            "pattern": "^\\d+$"
+          },
+          "costStatus": {
+            "type": "string",
+            "enum": [
+              "PLANNED",
+              "COMMITTED"
+            ],
+            "default": "PLANNED"
+          },
+          "sortOrder": {
+            "type": "number",
+            "minimum": 1
+          },
+          "note": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 5000
+          }
+        },
+        "required": [
+          "quantity"
+        ]
+      },
+      "UpdateCalculationStatusDto": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "number",
+            "minimum": 1
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "DRAFT",
+              "REVIEW",
+              "APPROVED"
+            ]
+          },
+          "note": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 2000
+          }
+        },
+        "required": [
+          "version",
+          "status"
+        ]
+      },
+      "UpdateEventPositionDto": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "number",
+            "minimum": 1
+          },
+          "sourceServiceId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 200
+          },
+          "categoryName": {
+            "type": "string",
+            "maxLength": 160
+          },
+          "unit": {
+            "type": "string",
+            "enum": [
+              "PIECE",
+              "HOUR",
+              "DAY",
+              "PERSON",
+              "FLAT_RATE",
+              "PER_GUEST",
+              "PER_TICKET"
+            ]
+          },
+          "quantity": {
+            "type": "string",
+            "pattern": "^\\d+(?:[.,]\\d{1,4})?$"
+          },
+          "providerBusinessPartnerId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "purchaseUnitPriceMinor": {
+            "type": "string",
+            "nullable": true,
+            "pattern": "^\\d+$"
+          },
+          "salesUnitPriceMinor": {
+            "type": "string",
+            "nullable": true,
+            "pattern": "^\\d+$"
+          },
+          "costStatus": {
+            "type": "string",
+            "enum": [
+              "PLANNED",
+              "COMMITTED"
+            ]
+          },
+          "sortOrder": {
+            "type": "number",
+            "minimum": 1
+          },
+          "note": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 5000
+          }
+        },
+        "required": [
+          "version"
+        ]
+      },
+      "EventPositionCatalogPricePreviewDto": {
+        "type": "object",
+        "properties": {
+          "positionId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "positionVersion": {
+            "type": "number"
+          },
+          "source": {
+            "type": "string",
+            "enum": [
+              "EVENT_FORMAT",
+              "SERVICE_CATALOG"
+            ]
+          },
+          "providerBusinessPartnerId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "providerName": {
+            "type": "string",
+            "nullable": true
+          },
+          "providerWillBeApplied": {
+            "type": "boolean"
+          },
+          "purchaseUnitPriceMinor": {
+            "type": "string",
+            "nullable": true
+          },
+          "purchaseWillBeApplied": {
+            "type": "boolean"
+          },
+          "salesUnitPriceMinor": {
+            "type": "string",
+            "nullable": true
+          },
+          "salesWillBeApplied": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "positionId",
+          "positionVersion",
+          "source",
+          "providerWillBeApplied"
+        ]
+      },
+      "ApplyEventPositionCatalogPricesDto": {
+        "type": "object",
+        "properties": {
           "version": {
             "type": "number",
             "minimum": 1

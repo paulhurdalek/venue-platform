@@ -2,6 +2,10 @@ import { Inject, Injectable } from '@nestjs/common';
 import { Prisma, type DatabaseClient, type TransactionClient } from '@venue/database';
 
 import { AuditWriter } from '../../audit/audit-writer.service.js';
+import {
+  BOOKING_CALCULATION_PROJECTION,
+  type BookingCalculationProjectionPort,
+} from '../application/booking-calculation-projection.port.js';
 import { PrismaService } from '../../database/prisma.service.js';
 import type { AccessContext } from '../../security/access.types.js';
 import type {
@@ -101,6 +105,8 @@ export class PrismaBookingRepository implements BookingRepository {
     private readonly prisma: PrismaService,
     @Inject(AuditWriter)
     private readonly audit: AuditWriter,
+    @Inject(BOOKING_CALCULATION_PROJECTION)
+    private readonly calculationProjection: BookingCalculationProjectionPort,
   ) {}
 
   async event(organizationId: string, eventId: string, locationIds?: string[]) {
@@ -301,6 +307,19 @@ export class PrismaBookingRepository implements BookingRepository {
           programItemId: programItem.id,
           newVersion: row.version,
         });
+        if (
+          values.agreedFeeMinor !== null ||
+          values.travelCostMinor !== null ||
+          values.hotelBuyoutMinor !== null
+        ) {
+          await this.calculationProjection.sourceChanged(
+            database,
+            access,
+            eventId,
+            row.id,
+            'Bookingkosten angelegt',
+          );
+        }
         return this.mapBooking(row);
       } catch (error) {
         return this.rethrowUnique(error);
@@ -330,6 +349,27 @@ export class PrismaBookingRepository implements BookingRepository {
           previousVersion: version,
           newVersion: version + 1,
         });
+        if (
+          changedFields.some((field) =>
+            [
+              'agreedFeeMinor',
+              'agreedFeeCurrency',
+              'travelCostMinor',
+              'travelCostCurrency',
+              'hotelArrangement',
+              'hotelBuyoutMinor',
+              'hotelBuyoutCurrency',
+            ].includes(field),
+          )
+        ) {
+          await this.calculationProjection.sourceChanged(
+            database,
+            access,
+            current.eventId,
+            bookingId,
+            'Booking-Finanzdaten geändert',
+          );
+        }
         return this.findWith(database, access.organizationId, bookingId);
       } catch (error) {
         return this.rethrowUnique(error);
@@ -396,6 +436,19 @@ export class PrismaBookingRepository implements BookingRepository {
           previousVersion: version,
           newVersion: version + 1,
         });
+        if (
+          current.agreedFeeMinor !== null ||
+          current.travelCostMinor !== null ||
+          current.hotelBuyoutMinor !== null
+        ) {
+          await this.calculationProjection.sourceChanged(
+            database,
+            access,
+            current.eventId,
+            bookingId,
+            'Bookingstatus geändert',
+          );
+        }
         return this.findWith(database, access.organizationId, bookingId);
       } catch (error) {
         return this.rethrowUnique(error);
@@ -957,9 +1010,15 @@ export class PrismaBookingRepository implements BookingRepository {
         version: number;
         status: BookingStatus;
         lineupOrder: number;
+        agreedFeeMinor: bigint | null;
+        travelCostMinor: bigint | null;
+        hotelBuyoutMinor: bigint | null;
       }>
     >(Prisma.sql`
-      SELECT "id", "event_id" AS "eventId", "version", "status", "lineup_order" AS "lineupOrder"
+      SELECT "id", "event_id" AS "eventId", "version", "status", "lineup_order" AS "lineupOrder",
+        "agreed_fee_minor" AS "agreedFeeMinor",
+        "travel_cost_minor" AS "travelCostMinor",
+        "hotel_buyout_minor" AS "hotelBuyoutMinor"
       FROM "booking"
       WHERE "id" = ${bookingId}::uuid AND "organization_id" = ${organizationId}::uuid
       FOR UPDATE

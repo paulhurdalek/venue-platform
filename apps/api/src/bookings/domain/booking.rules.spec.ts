@@ -64,6 +64,10 @@ describe('booking rules', () => {
     );
   });
 
+  it('rejects foreign currencies for calculation-relevant booking sources', () => {
+    expect(() => normalizeMoney('100', 'USD', 'Die Gage')).toThrow(/ausschließlich in EUR/);
+  });
+
   it('requires a relational role plus a bounded label only for custom roles', () => {
     expect(normalizeCustomRole('ARTIST', 'ignored')).toEqual({
       customRoleLabel: null,

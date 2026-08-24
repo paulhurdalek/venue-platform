@@ -34,6 +34,14 @@ export const PERMISSIONS = {
   BOOKINGS_STATUS: 'bookings.status',
   BOOKINGS_FINANCE: 'bookings.finance',
   LINEUP_WRITE: 'lineup.write',
+  SERVICES_READ: 'services.read',
+  SERVICES_WRITE: 'services.write',
+  SERVICES_ARCHIVE: 'services.archive',
+  CALCULATIONS_READ: 'calculations.read',
+  CALCULATIONS_WRITE: 'calculations.write',
+  CALCULATIONS_PURCHASE: 'calculations.purchase',
+  CALCULATIONS_SALES: 'calculations.sales',
+  CALCULATIONS_APPROVE: 'calculations.approve',
 } as const;
 
 export type PermissionKey = (typeof PERMISSIONS)[keyof typeof PERMISSIONS];
@@ -104,6 +112,26 @@ export const PERMISSION_CATALOG: ReadonlyArray<{
     description: 'Booking-Gagen und Reisekosten ansehen und bearbeiten',
   },
   { key: PERMISSIONS.LINEUP_WRITE, description: 'Line-up-Vorgaben und Reihenfolge bearbeiten' },
+  {
+    key: PERMISSIONS.SERVICES_READ,
+    description: 'Leistungskategorien und Leistungskatalog ansehen',
+  },
+  { key: PERMISSIONS.SERVICES_WRITE, description: 'Leistungen und Dienstleisterpreise bearbeiten' },
+  { key: PERMISSIONS.SERVICES_ARCHIVE, description: 'Leistungsdaten archivieren und reaktivieren' },
+  { key: PERMISSIONS.CALCULATIONS_READ, description: 'Kalkulationsstruktur ansehen' },
+  {
+    key: PERMISSIONS.CALCULATIONS_WRITE,
+    description: 'Veranstaltungspositionen und Kalkulationen bearbeiten',
+  },
+  {
+    key: PERMISSIONS.CALCULATIONS_PURCHASE,
+    description: 'Einkaufspreise und Kosten ansehen und bearbeiten',
+  },
+  {
+    key: PERMISSIONS.CALCULATIONS_SALES,
+    description: 'Verkaufspreise und Marge ansehen und bearbeiten',
+  },
+  { key: PERMISSIONS.CALCULATIONS_APPROVE, description: 'Kalkulationen freigeben' },
 ];
 
 export const STANDARD_ROLES = [
@@ -136,6 +164,14 @@ export const STANDARD_ROLES = [
       PERMISSIONS.BOOKINGS_STATUS,
       PERMISSIONS.BOOKINGS_FINANCE,
       PERMISSIONS.LINEUP_WRITE,
+      PERMISSIONS.SERVICES_READ,
+      PERMISSIONS.SERVICES_WRITE,
+      PERMISSIONS.SERVICES_ARCHIVE,
+      PERMISSIONS.CALCULATIONS_READ,
+      PERMISSIONS.CALCULATIONS_WRITE,
+      PERMISSIONS.CALCULATIONS_PURCHASE,
+      PERMISSIONS.CALCULATIONS_SALES,
+      PERMISSIONS.CALCULATIONS_APPROVE,
     ],
   },
   {
@@ -164,6 +200,7 @@ export const STANDARD_ROLES = [
       PERMISSIONS.BOOKINGS_STATUS,
       PERMISSIONS.BOOKINGS_FINANCE,
       PERMISSIONS.LINEUP_WRITE,
+      PERMISSIONS.SERVICES_READ,
     ],
   },
   {
@@ -182,6 +219,8 @@ export const STANDARD_ROLES = [
       PERMISSIONS.EVENTS_WRITE,
       PERMISSIONS.DATE_OPTIONS_READ,
       PERMISSIONS.BOOKINGS_READ,
+      PERMISSIONS.SERVICES_READ,
+      PERMISSIONS.CALCULATIONS_READ,
     ],
   },
   {
@@ -198,6 +237,8 @@ export const STANDARD_ROLES = [
       PERMISSIONS.EVENTS_READ,
       PERMISSIONS.DATE_OPTIONS_READ,
       PERMISSIONS.BOOKINGS_READ,
+      PERMISSIONS.SERVICES_READ,
+      PERMISSIONS.CALCULATIONS_READ,
     ],
   },
 ] as const;

@@ -49,6 +49,7 @@ export function PerformanceOrder({
   const knownDuration = items.reduce((sum, item) => sum + (item.durationMinutes ?? 0), 0);
 
   function beginCreate(kind: ProgramKind) {
+    setEditingId(undefined);
     setAdding(kind);
     setBookingId(kind === 'PERFORMANCE' ? (bookings[0]?.id ?? '') : '');
     setLabel(kind === 'BREAK' ? 'Umbaupause' : '');
@@ -91,6 +92,7 @@ export function PerformanceOrder({
   }
 
   function beginEdit(item: ProgramItem) {
+    setAdding(undefined);
     setEditingId(item.id);
     setLabel(item.label ?? '');
     setDuration(item.durationMinutes?.toString() ?? '');

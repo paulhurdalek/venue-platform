@@ -90,6 +90,13 @@ export const ModelName = {
   Booking: 'Booking',
   EventProgramItem: 'EventProgramItem',
   BookingStatusHistory: 'BookingStatusHistory',
+  ServiceCategory: 'ServiceCategory',
+  Service: 'Service',
+  ServiceProviderPrice: 'ServiceProviderPrice',
+  EventFormatService: 'EventFormatService',
+  EventCalculation: 'EventCalculation',
+  EventCalculationStatusHistory: 'EventCalculationStatusHistory',
+  EventServicePosition: 'EventServicePosition',
   VenueDateOption: 'VenueDateOption',
   LocationOccupancy: 'LocationOccupancy'
 } as const
@@ -714,6 +721,147 @@ export const BookingStatusHistoryScalarFieldEnum = {
 } as const
 
 export type BookingStatusHistoryScalarFieldEnum = (typeof BookingStatusHistoryScalarFieldEnum)[keyof typeof BookingStatusHistoryScalarFieldEnum]
+
+
+export const ServiceCategoryScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  name: 'name',
+  normalizedName: 'normalizedName',
+  status: 'status',
+  version: 'version',
+  archivedAt: 'archivedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ServiceCategoryScalarFieldEnum = (typeof ServiceCategoryScalarFieldEnum)[keyof typeof ServiceCategoryScalarFieldEnum]
+
+
+export const ServiceScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  categoryId: 'categoryId',
+  name: 'name',
+  normalizedName: 'normalizedName',
+  unit: 'unit',
+  defaultSalesPriceMinor: 'defaultSalesPriceMinor',
+  currency: 'currency',
+  internalNote: 'internalNote',
+  status: 'status',
+  version: 'version',
+  archivedAt: 'archivedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ServiceScalarFieldEnum = (typeof ServiceScalarFieldEnum)[keyof typeof ServiceScalarFieldEnum]
+
+
+export const ServiceProviderPriceScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  serviceId: 'serviceId',
+  businessPartnerId: 'businessPartnerId',
+  purchasePriceMinor: 'purchasePriceMinor',
+  currency: 'currency',
+  preferred: 'preferred',
+  internalNote: 'internalNote',
+  status: 'status',
+  version: 'version',
+  archivedAt: 'archivedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ServiceProviderPriceScalarFieldEnum = (typeof ServiceProviderPriceScalarFieldEnum)[keyof typeof ServiceProviderPriceScalarFieldEnum]
+
+
+export const EventFormatServiceScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  eventFormatId: 'eventFormatId',
+  serviceId: 'serviceId',
+  quantity: 'quantity',
+  providerBusinessPartnerId: 'providerBusinessPartnerId',
+  purchasePriceOverrideMinor: 'purchasePriceOverrideMinor',
+  salesPriceOverrideMinor: 'salesPriceOverrideMinor',
+  currency: 'currency',
+  sortOrder: 'sortOrder',
+  status: 'status',
+  version: 'version',
+  archivedAt: 'archivedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type EventFormatServiceScalarFieldEnum = (typeof EventFormatServiceScalarFieldEnum)[keyof typeof EventFormatServiceScalarFieldEnum]
+
+
+export const EventCalculationScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  eventId: 'eventId',
+  status: 'status',
+  version: 'version',
+  approvedAt: 'approvedAt',
+  approvedByUserId: 'approvedByUserId',
+  approvedByMembershipId: 'approvedByMembershipId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type EventCalculationScalarFieldEnum = (typeof EventCalculationScalarFieldEnum)[keyof typeof EventCalculationScalarFieldEnum]
+
+
+export const EventCalculationStatusHistoryScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  calculationId: 'calculationId',
+  previousStatus: 'previousStatus',
+  newStatus: 'newStatus',
+  actorUserId: 'actorUserId',
+  actorMembershipId: 'actorMembershipId',
+  note: 'note',
+  reason: 'reason',
+  changedSourceType: 'changedSourceType',
+  changedSourceId: 'changedSourceId',
+  changedAt: 'changedAt'
+} as const
+
+export type EventCalculationStatusHistoryScalarFieldEnum = (typeof EventCalculationStatusHistoryScalarFieldEnum)[keyof typeof EventCalculationStatusHistoryScalarFieldEnum]
+
+
+export const EventServicePositionScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  eventId: 'eventId',
+  calculationId: 'calculationId',
+  source: 'source',
+  sourceServiceId: 'sourceServiceId',
+  sourceServiceVersion: 'sourceServiceVersion',
+  sourceEventFormatServiceId: 'sourceEventFormatServiceId',
+  sourceEventFormatServiceVersion: 'sourceEventFormatServiceVersion',
+  nameSnapshot: 'nameSnapshot',
+  categoryNameSnapshot: 'categoryNameSnapshot',
+  unit: 'unit',
+  quantity: 'quantity',
+  providerBusinessPartnerId: 'providerBusinessPartnerId',
+  providerNameSnapshot: 'providerNameSnapshot',
+  purchaseUnitPriceMinor: 'purchaseUnitPriceMinor',
+  salesUnitPriceMinor: 'salesUnitPriceMinor',
+  currency: 'currency',
+  costStatus: 'costStatus',
+  sortOrder: 'sortOrder',
+  note: 'note',
+  status: 'status',
+  version: 'version',
+  archivedAt: 'archivedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type EventServicePositionScalarFieldEnum = (typeof EventServicePositionScalarFieldEnum)[keyof typeof EventServicePositionScalarFieldEnum]
 
 
 export const VenueDateOptionScalarFieldEnum = {

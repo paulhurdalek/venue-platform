@@ -10,7 +10,7 @@
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run",
     "test:unit": "vitest run src --exclude src/**/*.integration.spec.ts",
-    "test:integration": "vitest run src/health/health.integration.spec.ts integration/phase-1.integration.spec.ts integration/phase-3.integration.spec.ts integration/phase-4.integration.spec.ts integration/phase-5.integration.spec.ts integration/phase-6.integration.spec.ts"
+    "test:integration": "vitest run src/health/health.integration.spec.ts integration/phase-1.integration.spec.ts integration/phase-3.integration.spec.ts integration/phase-4.integration.spec.ts integration/phase-5.integration.spec.ts integration/phase-6.integration.spec.ts integration/phase-7.integration.spec.ts"
   },
   "dependencies": {
     "@better-auth/prisma-adapter": "1.6.25",

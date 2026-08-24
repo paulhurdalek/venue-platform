@@ -140,3 +140,42 @@ export const ProgramItemKind = {
 } as const
 
 export type ProgramItemKind = (typeof ProgramItemKind)[keyof typeof ProgramItemKind]
+
+
+export const ServiceUnit = {
+  PIECE: 'PIECE',
+  HOUR: 'HOUR',
+  DAY: 'DAY',
+  PERSON: 'PERSON',
+  FLAT_RATE: 'FLAT_RATE',
+  PER_GUEST: 'PER_GUEST',
+  PER_TICKET: 'PER_TICKET'
+} as const
+
+export type ServiceUnit = (typeof ServiceUnit)[keyof typeof ServiceUnit]
+
+
+export const CalculationStatus = {
+  DRAFT: 'DRAFT',
+  REVIEW: 'REVIEW',
+  APPROVED: 'APPROVED'
+} as const
+
+export type CalculationStatus = (typeof CalculationStatus)[keyof typeof CalculationStatus]
+
+
+export const EventServicePositionSource = {
+  EVENT_FORMAT: 'EVENT_FORMAT',
+  SERVICE_CATALOG: 'SERVICE_CATALOG',
+  CUSTOM: 'CUSTOM'
+} as const
+
+export type EventServicePositionSource = (typeof EventServicePositionSource)[keyof typeof EventServicePositionSource]
+
+
+export const CostStatus = {
+  PLANNED: 'PLANNED',
+  COMMITTED: 'COMMITTED'
+} as const
+
+export type CostStatus = (typeof CostStatus)[keyof typeof CostStatus]

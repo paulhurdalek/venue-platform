@@ -22,6 +22,7 @@ import {
   replaceEventOccupancy,
 } from '../../occupancy/infrastructure/database-occupancy.js';
 import type { AccessContext } from '../../security/access.types.js';
+import { createEventServiceSnapshot } from '../../services/infrastructure/event-service-snapshot.js';
 import type { DateOptionRecord, DateOptionValues } from '../application/date-option.models.js';
 import type {
   DateOptionRepository,
@@ -376,6 +377,12 @@ export class PrismaDateOptionRepository implements DateOptionRepository {
       data: { organizationId: access.organizationId, ...data, eventDate: databaseDate(eventDate) },
       include: eventInclude,
     });
+    await createEventServiceSnapshot(
+      database,
+      access.organizationId,
+      event.id,
+      values.sourceEventFormatId,
+    );
     if (values.sourceEventFormatId) {
       const requirements = await database.eventFormatLineupRequirement.findMany({
         where: {

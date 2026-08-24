@@ -335,6 +335,7 @@ export type EventFormatWhereInput = {
   organization?: Prisma.XOR<Prisma.OrganizationScalarRelationFilter, Prisma.OrganizationWhereInput>
   sourceEvents?: Prisma.EventListRelationFilter
   lineupRequirements?: Prisma.EventFormatLineupRequirementListRelationFilter
+  serviceRequirements?: Prisma.EventFormatServiceListRelationFilter
 }
 
 export type EventFormatOrderByWithRelationInput = {
@@ -358,6 +359,7 @@ export type EventFormatOrderByWithRelationInput = {
   organization?: Prisma.OrganizationOrderByWithRelationInput
   sourceEvents?: Prisma.EventOrderByRelationAggregateInput
   lineupRequirements?: Prisma.EventFormatLineupRequirementOrderByRelationAggregateInput
+  serviceRequirements?: Prisma.EventFormatServiceOrderByRelationAggregateInput
 }
 
 export type EventFormatWhereUniqueInput = Prisma.AtLeast<{
@@ -386,6 +388,7 @@ export type EventFormatWhereUniqueInput = Prisma.AtLeast<{
   organization?: Prisma.XOR<Prisma.OrganizationScalarRelationFilter, Prisma.OrganizationWhereInput>
   sourceEvents?: Prisma.EventListRelationFilter
   lineupRequirements?: Prisma.EventFormatLineupRequirementListRelationFilter
+  serviceRequirements?: Prisma.EventFormatServiceListRelationFilter
 }, "id" | "id_organizationId" | "organizationId_normalizedName">
 
 export type EventFormatOrderByWithAggregationInput = {
@@ -456,6 +459,7 @@ export type EventFormatCreateInput = {
   organization: Prisma.OrganizationCreateNestedOneWithoutEventFormatsInput
   sourceEvents?: Prisma.EventCreateNestedManyWithoutSourceEventFormatInput
   lineupRequirements?: Prisma.EventFormatLineupRequirementCreateNestedManyWithoutEventFormatInput
+  serviceRequirements?: Prisma.EventFormatServiceCreateNestedManyWithoutEventFormatInput
 }
 
 export type EventFormatUncheckedCreateInput = {
@@ -478,6 +482,7 @@ export type EventFormatUncheckedCreateInput = {
   updatedAt?: Date | string
   sourceEvents?: Prisma.EventUncheckedCreateNestedManyWithoutSourceEventFormatInput
   lineupRequirements?: Prisma.EventFormatLineupRequirementUncheckedCreateNestedManyWithoutEventFormatInput
+  serviceRequirements?: Prisma.EventFormatServiceUncheckedCreateNestedManyWithoutEventFormatInput
 }
 
 export type EventFormatUpdateInput = {
@@ -500,6 +505,7 @@ export type EventFormatUpdateInput = {
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutEventFormatsNestedInput
   sourceEvents?: Prisma.EventUpdateManyWithoutSourceEventFormatNestedInput
   lineupRequirements?: Prisma.EventFormatLineupRequirementUpdateManyWithoutEventFormatNestedInput
+  serviceRequirements?: Prisma.EventFormatServiceUpdateManyWithoutEventFormatNestedInput
 }
 
 export type EventFormatUncheckedUpdateInput = {
@@ -522,6 +528,7 @@ export type EventFormatUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sourceEvents?: Prisma.EventUncheckedUpdateManyWithoutSourceEventFormatNestedInput
   lineupRequirements?: Prisma.EventFormatLineupRequirementUncheckedUpdateManyWithoutEventFormatNestedInput
+  serviceRequirements?: Prisma.EventFormatServiceUncheckedUpdateManyWithoutEventFormatNestedInput
 }
 
 export type EventFormatCreateManyInput = {
@@ -779,6 +786,20 @@ export type EventFormatUpdateOneRequiredWithoutLineupRequirementsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.EventFormatUpdateToOneWithWhereWithoutLineupRequirementsInput, Prisma.EventFormatUpdateWithoutLineupRequirementsInput>, Prisma.EventFormatUncheckedUpdateWithoutLineupRequirementsInput>
 }
 
+export type EventFormatCreateNestedOneWithoutServiceRequirementsInput = {
+  create?: Prisma.XOR<Prisma.EventFormatCreateWithoutServiceRequirementsInput, Prisma.EventFormatUncheckedCreateWithoutServiceRequirementsInput>
+  connectOrCreate?: Prisma.EventFormatCreateOrConnectWithoutServiceRequirementsInput
+  connect?: Prisma.EventFormatWhereUniqueInput
+}
+
+export type EventFormatUpdateOneRequiredWithoutServiceRequirementsNestedInput = {
+  create?: Prisma.XOR<Prisma.EventFormatCreateWithoutServiceRequirementsInput, Prisma.EventFormatUncheckedCreateWithoutServiceRequirementsInput>
+  connectOrCreate?: Prisma.EventFormatCreateOrConnectWithoutServiceRequirementsInput
+  upsert?: Prisma.EventFormatUpsertWithoutServiceRequirementsInput
+  connect?: Prisma.EventFormatWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.EventFormatUpdateToOneWithWhereWithoutServiceRequirementsInput, Prisma.EventFormatUpdateWithoutServiceRequirementsInput>, Prisma.EventFormatUncheckedUpdateWithoutServiceRequirementsInput>
+}
+
 export type EventFormatCreateWithoutOrganizationInput = {
   id?: string
   name: string
@@ -798,6 +819,7 @@ export type EventFormatCreateWithoutOrganizationInput = {
   updatedAt?: Date | string
   sourceEvents?: Prisma.EventCreateNestedManyWithoutSourceEventFormatInput
   lineupRequirements?: Prisma.EventFormatLineupRequirementCreateNestedManyWithoutEventFormatInput
+  serviceRequirements?: Prisma.EventFormatServiceCreateNestedManyWithoutEventFormatInput
 }
 
 export type EventFormatUncheckedCreateWithoutOrganizationInput = {
@@ -819,6 +841,7 @@ export type EventFormatUncheckedCreateWithoutOrganizationInput = {
   updatedAt?: Date | string
   sourceEvents?: Prisma.EventUncheckedCreateNestedManyWithoutSourceEventFormatInput
   lineupRequirements?: Prisma.EventFormatLineupRequirementUncheckedCreateNestedManyWithoutEventFormatInput
+  serviceRequirements?: Prisma.EventFormatServiceUncheckedCreateNestedManyWithoutEventFormatInput
 }
 
 export type EventFormatCreateOrConnectWithoutOrganizationInput = {
@@ -889,6 +912,7 @@ export type EventFormatCreateWithoutSourceEventsInput = {
   updatedAt?: Date | string
   organization: Prisma.OrganizationCreateNestedOneWithoutEventFormatsInput
   lineupRequirements?: Prisma.EventFormatLineupRequirementCreateNestedManyWithoutEventFormatInput
+  serviceRequirements?: Prisma.EventFormatServiceCreateNestedManyWithoutEventFormatInput
 }
 
 export type EventFormatUncheckedCreateWithoutSourceEventsInput = {
@@ -910,6 +934,7 @@ export type EventFormatUncheckedCreateWithoutSourceEventsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   lineupRequirements?: Prisma.EventFormatLineupRequirementUncheckedCreateNestedManyWithoutEventFormatInput
+  serviceRequirements?: Prisma.EventFormatServiceUncheckedCreateNestedManyWithoutEventFormatInput
 }
 
 export type EventFormatCreateOrConnectWithoutSourceEventsInput = {
@@ -947,6 +972,7 @@ export type EventFormatUpdateWithoutSourceEventsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutEventFormatsNestedInput
   lineupRequirements?: Prisma.EventFormatLineupRequirementUpdateManyWithoutEventFormatNestedInput
+  serviceRequirements?: Prisma.EventFormatServiceUpdateManyWithoutEventFormatNestedInput
 }
 
 export type EventFormatUncheckedUpdateWithoutSourceEventsInput = {
@@ -968,6 +994,7 @@ export type EventFormatUncheckedUpdateWithoutSourceEventsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lineupRequirements?: Prisma.EventFormatLineupRequirementUncheckedUpdateManyWithoutEventFormatNestedInput
+  serviceRequirements?: Prisma.EventFormatServiceUncheckedUpdateManyWithoutEventFormatNestedInput
 }
 
 export type EventFormatCreateWithoutLineupRequirementsInput = {
@@ -989,6 +1016,7 @@ export type EventFormatCreateWithoutLineupRequirementsInput = {
   updatedAt?: Date | string
   organization: Prisma.OrganizationCreateNestedOneWithoutEventFormatsInput
   sourceEvents?: Prisma.EventCreateNestedManyWithoutSourceEventFormatInput
+  serviceRequirements?: Prisma.EventFormatServiceCreateNestedManyWithoutEventFormatInput
 }
 
 export type EventFormatUncheckedCreateWithoutLineupRequirementsInput = {
@@ -1010,6 +1038,7 @@ export type EventFormatUncheckedCreateWithoutLineupRequirementsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   sourceEvents?: Prisma.EventUncheckedCreateNestedManyWithoutSourceEventFormatInput
+  serviceRequirements?: Prisma.EventFormatServiceUncheckedCreateNestedManyWithoutEventFormatInput
 }
 
 export type EventFormatCreateOrConnectWithoutLineupRequirementsInput = {
@@ -1047,6 +1076,7 @@ export type EventFormatUpdateWithoutLineupRequirementsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutEventFormatsNestedInput
   sourceEvents?: Prisma.EventUpdateManyWithoutSourceEventFormatNestedInput
+  serviceRequirements?: Prisma.EventFormatServiceUpdateManyWithoutEventFormatNestedInput
 }
 
 export type EventFormatUncheckedUpdateWithoutLineupRequirementsInput = {
@@ -1068,6 +1098,111 @@ export type EventFormatUncheckedUpdateWithoutLineupRequirementsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sourceEvents?: Prisma.EventUncheckedUpdateManyWithoutSourceEventFormatNestedInput
+  serviceRequirements?: Prisma.EventFormatServiceUncheckedUpdateManyWithoutEventFormatNestedInput
+}
+
+export type EventFormatCreateWithoutServiceRequirementsInput = {
+  id?: string
+  name: string
+  normalizedName: string
+  description?: string | null
+  eventKind: $Enums.EventKind
+  technicalGetInMinutes?: number | null
+  artistGetInMinutes?: number | null
+  doorsMinutes?: number | null
+  startMinutes?: number | null
+  endMinutes?: number | null
+  recordingDefault?: $Enums.RecordingDefault
+  status?: $Enums.EntityStatus
+  archivedAt?: Date | string | null
+  version?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organization: Prisma.OrganizationCreateNestedOneWithoutEventFormatsInput
+  sourceEvents?: Prisma.EventCreateNestedManyWithoutSourceEventFormatInput
+  lineupRequirements?: Prisma.EventFormatLineupRequirementCreateNestedManyWithoutEventFormatInput
+}
+
+export type EventFormatUncheckedCreateWithoutServiceRequirementsInput = {
+  id?: string
+  organizationId: string
+  name: string
+  normalizedName: string
+  description?: string | null
+  eventKind: $Enums.EventKind
+  technicalGetInMinutes?: number | null
+  artistGetInMinutes?: number | null
+  doorsMinutes?: number | null
+  startMinutes?: number | null
+  endMinutes?: number | null
+  recordingDefault?: $Enums.RecordingDefault
+  status?: $Enums.EntityStatus
+  archivedAt?: Date | string | null
+  version?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sourceEvents?: Prisma.EventUncheckedCreateNestedManyWithoutSourceEventFormatInput
+  lineupRequirements?: Prisma.EventFormatLineupRequirementUncheckedCreateNestedManyWithoutEventFormatInput
+}
+
+export type EventFormatCreateOrConnectWithoutServiceRequirementsInput = {
+  where: Prisma.EventFormatWhereUniqueInput
+  create: Prisma.XOR<Prisma.EventFormatCreateWithoutServiceRequirementsInput, Prisma.EventFormatUncheckedCreateWithoutServiceRequirementsInput>
+}
+
+export type EventFormatUpsertWithoutServiceRequirementsInput = {
+  update: Prisma.XOR<Prisma.EventFormatUpdateWithoutServiceRequirementsInput, Prisma.EventFormatUncheckedUpdateWithoutServiceRequirementsInput>
+  create: Prisma.XOR<Prisma.EventFormatCreateWithoutServiceRequirementsInput, Prisma.EventFormatUncheckedCreateWithoutServiceRequirementsInput>
+  where?: Prisma.EventFormatWhereInput
+}
+
+export type EventFormatUpdateToOneWithWhereWithoutServiceRequirementsInput = {
+  where?: Prisma.EventFormatWhereInput
+  data: Prisma.XOR<Prisma.EventFormatUpdateWithoutServiceRequirementsInput, Prisma.EventFormatUncheckedUpdateWithoutServiceRequirementsInput>
+}
+
+export type EventFormatUpdateWithoutServiceRequirementsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  normalizedName?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  eventKind?: Prisma.EnumEventKindFieldUpdateOperationsInput | $Enums.EventKind
+  technicalGetInMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  artistGetInMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  doorsMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  endMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  recordingDefault?: Prisma.EnumRecordingDefaultFieldUpdateOperationsInput | $Enums.RecordingDefault
+  status?: Prisma.EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutEventFormatsNestedInput
+  sourceEvents?: Prisma.EventUpdateManyWithoutSourceEventFormatNestedInput
+  lineupRequirements?: Prisma.EventFormatLineupRequirementUpdateManyWithoutEventFormatNestedInput
+}
+
+export type EventFormatUncheckedUpdateWithoutServiceRequirementsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  normalizedName?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  eventKind?: Prisma.EnumEventKindFieldUpdateOperationsInput | $Enums.EventKind
+  technicalGetInMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  artistGetInMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  doorsMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  endMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  recordingDefault?: Prisma.EnumRecordingDefaultFieldUpdateOperationsInput | $Enums.RecordingDefault
+  status?: Prisma.EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sourceEvents?: Prisma.EventUncheckedUpdateManyWithoutSourceEventFormatNestedInput
+  lineupRequirements?: Prisma.EventFormatLineupRequirementUncheckedUpdateManyWithoutEventFormatNestedInput
 }
 
 export type EventFormatCreateManyOrganizationInput = {
@@ -1108,6 +1243,7 @@ export type EventFormatUpdateWithoutOrganizationInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sourceEvents?: Prisma.EventUpdateManyWithoutSourceEventFormatNestedInput
   lineupRequirements?: Prisma.EventFormatLineupRequirementUpdateManyWithoutEventFormatNestedInput
+  serviceRequirements?: Prisma.EventFormatServiceUpdateManyWithoutEventFormatNestedInput
 }
 
 export type EventFormatUncheckedUpdateWithoutOrganizationInput = {
@@ -1129,6 +1265,7 @@ export type EventFormatUncheckedUpdateWithoutOrganizationInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sourceEvents?: Prisma.EventUncheckedUpdateManyWithoutSourceEventFormatNestedInput
   lineupRequirements?: Prisma.EventFormatLineupRequirementUncheckedUpdateManyWithoutEventFormatNestedInput
+  serviceRequirements?: Prisma.EventFormatServiceUncheckedUpdateManyWithoutEventFormatNestedInput
 }
 
 export type EventFormatUncheckedUpdateManyWithoutOrganizationInput = {
@@ -1158,11 +1295,13 @@ export type EventFormatUncheckedUpdateManyWithoutOrganizationInput = {
 export type EventFormatCountOutputType = {
   sourceEvents: number
   lineupRequirements: number
+  serviceRequirements: number
 }
 
 export type EventFormatCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   sourceEvents?: boolean | EventFormatCountOutputTypeCountSourceEventsArgs
   lineupRequirements?: boolean | EventFormatCountOutputTypeCountLineupRequirementsArgs
+  serviceRequirements?: boolean | EventFormatCountOutputTypeCountServiceRequirementsArgs
 }
 
 /**
@@ -1189,6 +1328,13 @@ export type EventFormatCountOutputTypeCountLineupRequirementsArgs<ExtArgs extend
   where?: Prisma.EventFormatLineupRequirementWhereInput
 }
 
+/**
+ * EventFormatCountOutputType without action
+ */
+export type EventFormatCountOutputTypeCountServiceRequirementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EventFormatServiceWhereInput
+}
+
 
 export type EventFormatSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1211,6 +1357,7 @@ export type EventFormatSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
   sourceEvents?: boolean | Prisma.EventFormat$sourceEventsArgs<ExtArgs>
   lineupRequirements?: boolean | Prisma.EventFormat$lineupRequirementsArgs<ExtArgs>
+  serviceRequirements?: boolean | Prisma.EventFormat$serviceRequirementsArgs<ExtArgs>
   _count?: boolean | Prisma.EventFormatCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["eventFormat"]>
 
@@ -1281,6 +1428,7 @@ export type EventFormatInclude<ExtArgs extends runtime.Types.Extensions.Internal
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
   sourceEvents?: boolean | Prisma.EventFormat$sourceEventsArgs<ExtArgs>
   lineupRequirements?: boolean | Prisma.EventFormat$lineupRequirementsArgs<ExtArgs>
+  serviceRequirements?: boolean | Prisma.EventFormat$serviceRequirementsArgs<ExtArgs>
   _count?: boolean | Prisma.EventFormatCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type EventFormatIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1296,6 +1444,7 @@ export type $EventFormatPayload<ExtArgs extends runtime.Types.Extensions.Interna
     organization: Prisma.$OrganizationPayload<ExtArgs>
     sourceEvents: Prisma.$EventPayload<ExtArgs>[]
     lineupRequirements: Prisma.$EventFormatLineupRequirementPayload<ExtArgs>[]
+    serviceRequirements: Prisma.$EventFormatServicePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1712,6 +1861,7 @@ export interface Prisma__EventFormatClient<T, Null = never, ExtArgs extends runt
   organization<T extends Prisma.OrganizationDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationDefaultArgs<ExtArgs>>): Prisma.Prisma__OrganizationClient<runtime.Types.Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   sourceEvents<T extends Prisma.EventFormat$sourceEventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EventFormat$sourceEventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   lineupRequirements<T extends Prisma.EventFormat$lineupRequirementsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EventFormat$lineupRequirementsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EventFormatLineupRequirementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  serviceRequirements<T extends Prisma.EventFormat$serviceRequirementsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EventFormat$serviceRequirementsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EventFormatServicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2204,6 +2354,30 @@ export type EventFormat$lineupRequirementsArgs<ExtArgs extends runtime.Types.Ext
   take?: number
   skip?: number
   distinct?: Prisma.EventFormatLineupRequirementScalarFieldEnum | Prisma.EventFormatLineupRequirementScalarFieldEnum[]
+}
+
+/**
+ * EventFormat.serviceRequirements
+ */
+export type EventFormat$serviceRequirementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the EventFormatService
+   */
+  select?: Prisma.EventFormatServiceSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the EventFormatService
+   */
+  omit?: Prisma.EventFormatServiceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EventFormatServiceInclude<ExtArgs> | null
+  where?: Prisma.EventFormatServiceWhereInput
+  orderBy?: Prisma.EventFormatServiceOrderByWithRelationInput | Prisma.EventFormatServiceOrderByWithRelationInput[]
+  cursor?: Prisma.EventFormatServiceWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.EventFormatServiceScalarFieldEnum | Prisma.EventFormatServiceScalarFieldEnum[]
 }
 
 /**
