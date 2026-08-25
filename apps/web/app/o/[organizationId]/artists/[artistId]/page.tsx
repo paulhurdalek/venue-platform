@@ -105,14 +105,14 @@ export default async function ArtistDetailPage({
     <>
       <EditableDetail
         badges={
-          <>
+          <span className="heading-badges__group">
             <span className={`status-badge status-badge--${artist.status.toLowerCase()}`}>
               {artist.status === 'ACTIVE' ? 'Aktiv' : 'Archiviert'}
             </span>
             {artist.incomplete ? (
               <span className="status-badge status-badge--warning">Unvollständig</span>
             ) : null}
-          </>
+          </span>
         }
         canEdit={canWrite}
         editTitle="Artist bearbeiten"

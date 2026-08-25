@@ -6,6 +6,8 @@ import { useState } from 'react';
 
 import { apiErrorMessage, createBrowserApiClient } from '../../../../../src/api/browser';
 import { FormMessage } from '../../../../components/form-message';
+import { ActionMenu } from '../../../../components/ui/action-menu';
+import { Dialog } from '../../../../components/ui/dialog';
 
 type Invitation = components['schemas']['InvitationDto'];
 type Location = components['schemas']['LocationDto'];
@@ -36,6 +38,7 @@ export function InvitationManager({
   const [message, setMessage] = useState<string>();
   const [invitationLink, setInvitationLink] = useState<string>();
   const [pending, setPending] = useState(false);
+  const [adding, setAdding] = useState(false);
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -78,6 +81,7 @@ export function InvitationManager({
   }
 
   async function revoke(invitationId: string) {
+    if (!window.confirm('Diese offene Einladung wirklich widerrufen?')) return;
     setPending(true);
     setMessage(undefined);
     const client = createBrowserApiClient();
@@ -103,73 +107,90 @@ export function InvitationManager({
           <h2>Einladungen</h2>
           <p>Links werden manuell übertragen; es wird keine E-Mail versendet.</p>
         </div>
+        {permissions.canInvite ? (
+          <button
+            className="button button--secondary"
+            onClick={() => setAdding(true)}
+            type="button"
+          >
+            Einladung erstellen
+          </button>
+        ) : null}
       </div>
       {permissions.canInvite ? (
-        <form className="form-stack invitation-form" onSubmit={submit}>
-          <label>
-            E-Mail-Adresse
-            <input autoComplete="email" name="email" required type="email" />
-          </label>
-          <fieldset>
-            <legend>Rollen</legend>
-            <div className="choice-grid">
-              {roles.map((role) => (
-                <label className="choice" key={role.id}>
-                  <input name="roleIds" type="checkbox" value={role.id} />
-                  <span>
-                    <strong>{role.name}</strong>
-                    <small>{role.permissions.map((item) => item.description).join(', ')}</small>
-                  </span>
-                </label>
-              ))}
-            </div>
-          </fieldset>
-          <fieldset>
-            <legend>Location-Zugriff</legend>
-            <label className="inline-choice">
-              <input defaultChecked name="locationScope" type="radio" value="ALL" /> Alle Locations
+        <Dialog
+          eyebrow="Team"
+          onClose={() => setAdding(false)}
+          open={adding}
+          title="Einladung erstellen"
+        >
+          <form className="form-stack invitation-form" onSubmit={submit}>
+            <label>
+              E-Mail-Adresse
+              <input autoComplete="email" name="email" required type="email" />
             </label>
-            <label className="inline-choice">
-              <input name="locationScope" type="radio" value="SELECTED" /> Ausgewählte Locations
-            </label>
-            <div className="choice-grid choice-grid--locations">
-              {locations.map((location) => (
-                <label className="choice" key={location.id}>
-                  <input name="locationIds" type="checkbox" value={location.id} />
-                  <span>
-                    <strong>{location.name}</strong>
-                    <small>{location.timezone}</small>
-                  </span>
-                </label>
-              ))}
-            </div>
-          </fieldset>
-          <FormMessage message={message} />
-          {invitationLink ? (
-            <div className="copy-box">
-              <label htmlFor="invitation-link">Einladungslink</label>
-              <div>
-                <input id="invitation-link" readOnly value={invitationLink} />
-                <button
-                  className="button button--secondary"
-                  onClick={async () => {
-                    await navigator.clipboard.writeText(invitationLink);
-                    setMessage('Der Einladungslink wurde kopiert.');
-                  }}
-                  type="button"
-                >
-                  Link kopieren
-                </button>
+            <fieldset>
+              <legend>Rollen</legend>
+              <div className="choice-grid">
+                {roles.map((role) => (
+                  <label className="choice" key={role.id}>
+                    <input name="roleIds" type="checkbox" value={role.id} />
+                    <span>
+                      <strong>{role.name}</strong>
+                      <small>{role.permissions.map((item) => item.description).join(', ')}</small>
+                    </span>
+                  </label>
+                ))}
               </div>
-            </div>
-          ) : null}
-          <button className="button" disabled={pending} type="submit">
-            {pending ? 'Einladung wird erstellt …' : 'Einladungslink erstellen'}
-          </button>
-        </form>
+            </fieldset>
+            <fieldset>
+              <legend>Location-Zugriff</legend>
+              <label className="inline-choice">
+                <input defaultChecked name="locationScope" type="radio" value="ALL" /> Alle
+                Locations
+              </label>
+              <label className="inline-choice">
+                <input name="locationScope" type="radio" value="SELECTED" /> Ausgewählte Locations
+              </label>
+              <div className="choice-grid choice-grid--locations">
+                {locations.map((location) => (
+                  <label className="choice" key={location.id}>
+                    <input name="locationIds" type="checkbox" value={location.id} />
+                    <span>
+                      <strong>{location.name}</strong>
+                      <small>{location.timezone}</small>
+                    </span>
+                  </label>
+                ))}
+              </div>
+            </fieldset>
+            <FormMessage message={message} />
+            {invitationLink ? (
+              <div className="copy-box">
+                <label htmlFor="invitation-link">Einladungslink</label>
+                <div>
+                  <input id="invitation-link" readOnly value={invitationLink} />
+                  <button
+                    className="button button--secondary"
+                    onClick={async () => {
+                      await navigator.clipboard.writeText(invitationLink);
+                      setMessage('Der Einladungslink wurde kopiert.');
+                    }}
+                    type="button"
+                  >
+                    Link kopieren
+                  </button>
+                </div>
+              </div>
+            ) : null}
+            <button className="button" disabled={pending} type="submit">
+              {pending ? 'Einladung wird erstellt …' : 'Einladungslink erstellen'}
+            </button>
+          </form>
+        </Dialog>
       ) : null}
 
-      <div className="table-wrap">
+      <div className="table-wrap table-wrap--scroll-mobile">
         <table>
           <thead>
             <tr>
@@ -193,14 +214,19 @@ export function InvitationManager({
                 <td>{new Date(invitation.expiresAt).toLocaleString('de-DE')}</td>
                 <td>
                   {permissions.canRevoke && invitation.status === 'PENDING' ? (
-                    <button
-                      className="text-button text-button--danger"
-                      disabled={pending}
-                      onClick={() => revoke(invitation.id)}
-                      type="button"
-                    >
-                      Widerrufen
-                    </button>
+                    <ActionMenu
+                      compact
+                      items={[
+                        {
+                          id: 'revoke',
+                          label: 'Widerrufen',
+                          danger: true,
+                          disabled: pending,
+                          onSelect: () => void revoke(invitation.id),
+                        },
+                      ]}
+                      label={`Aktionen für Einladung ${invitation.email}`}
+                    />
                   ) : null}
                 </td>
               </tr>
@@ -232,8 +258,15 @@ export function MemberManager({
 }) {
   const [message, setMessage] = useState<string>();
   const [pendingId, setPendingId] = useState<string>();
+  const [editingId, setEditingId] = useState<string>();
 
   async function changeStatus(member: Membership) {
+    if (
+      member.status === 'ACTIVE' &&
+      !window.confirm(`Mitgliedschaft von ${member.name} wirklich sperren?`)
+    ) {
+      return;
+    }
     setPendingId(member.id);
     setMessage(undefined);
     const client = createBrowserApiClient();
@@ -327,80 +360,131 @@ export function MemberManager({
                 {member.status === 'ACTIVE' ? 'Aktiv' : 'Gesperrt'}
               </span>
             </header>
-            <div className="member-card__columns">
-              <form onSubmit={(event) => assignRoles(event, member)}>
-                <fieldset disabled={!permissions.canAssignRoles || pendingId === member.id}>
-                  <legend>Rollen</legend>
-                  {roles.map((role) => (
-                    <label className="inline-choice" key={role.id}>
+            {editingId === member.id ? (
+              <div className="member-card__columns member-card__columns--editing">
+                <form onSubmit={(event) => assignRoles(event, member)}>
+                  <fieldset disabled={!permissions.canAssignRoles || pendingId === member.id}>
+                    <legend>Rollen</legend>
+                    {roles.map((role) => (
+                      <label className="inline-choice" key={role.id}>
+                        <input
+                          defaultChecked={member.roles.some((item) => item.id === role.id)}
+                          name="roleIds"
+                          type="checkbox"
+                          value={role.id}
+                        />{' '}
+                        {role.name}
+                      </label>
+                    ))}
+                  </fieldset>
+                  {permissions.canAssignRoles ? (
+                    <button className="button button--small button--secondary" type="submit">
+                      Rollen speichern
+                    </button>
+                  ) : null}
+                </form>
+                <form onSubmit={(event) => assignLocations(event, member)}>
+                  <fieldset disabled={!permissions.canAssignLocations || pendingId === member.id}>
+                    <legend>Location-Zugriff</legend>
+                    <label className="inline-choice">
                       <input
-                        defaultChecked={member.roles.some((item) => item.id === role.id)}
-                        name="roleIds"
-                        type="checkbox"
-                        value={role.id}
+                        defaultChecked={member.locationScope === 'ALL'}
+                        name="scope"
+                        type="radio"
+                        value="ALL"
                       />{' '}
-                      {role.name}
+                      Alle Locations
                     </label>
-                  ))}
-                </fieldset>
-                {permissions.canAssignRoles ? (
-                  <button className="button button--small button--secondary" type="submit">
-                    Rollen speichern
-                  </button>
-                ) : null}
-              </form>
-              <form onSubmit={(event) => assignLocations(event, member)}>
-                <fieldset disabled={!permissions.canAssignLocations || pendingId === member.id}>
-                  <legend>Location-Zugriff</legend>
-                  <label className="inline-choice">
-                    <input
-                      defaultChecked={member.locationScope === 'ALL'}
-                      name="scope"
-                      type="radio"
-                      value="ALL"
-                    />{' '}
-                    Alle Locations
-                  </label>
-                  <label className="inline-choice">
-                    <input
-                      defaultChecked={member.locationScope === 'SELECTED'}
-                      name="scope"
-                      type="radio"
-                      value="SELECTED"
-                    />{' '}
-                    Ausgewählt
-                  </label>
-                  {locations.map((location) => (
-                    <label className="inline-choice inline-choice--nested" key={location.id}>
+                    <label className="inline-choice">
                       <input
-                        defaultChecked={member.locationIds.includes(location.id)}
-                        name="locationIds"
-                        type="checkbox"
-                        value={location.id}
+                        defaultChecked={member.locationScope === 'SELECTED'}
+                        name="scope"
+                        type="radio"
+                        value="SELECTED"
                       />{' '}
-                      {location.name}
+                      Ausgewählt
                     </label>
-                  ))}
-                </fieldset>
-                {permissions.canAssignLocations ? (
-                  <button className="button button--small button--secondary" type="submit">
-                    Zugriff speichern
-                  </button>
-                ) : null}
-              </form>
-            </div>
-            {permissions.canChangeStatus ? (
+                    {locations.map((location) => (
+                      <label className="inline-choice inline-choice--nested" key={location.id}>
+                        <input
+                          defaultChecked={member.locationIds.includes(location.id)}
+                          name="locationIds"
+                          type="checkbox"
+                          value={location.id}
+                        />{' '}
+                        {location.name}
+                      </label>
+                    ))}
+                  </fieldset>
+                  {permissions.canAssignLocations ? (
+                    <button className="button button--small button--secondary" type="submit">
+                      Zugriff speichern
+                    </button>
+                  ) : null}
+                </form>
+              </div>
+            ) : (
+              <dl className="member-summary">
+                <div>
+                  <dt>Rollen</dt>
+                  <dd>{member.roles.map((role) => role.name).join(', ') || 'Keine Rollen'}</dd>
+                </div>
+                <div>
+                  <dt>Location-Zugriff</dt>
+                  <dd>
+                    {member.locationScope === 'ALL'
+                      ? 'Alle Locations'
+                      : locations
+                          .filter((location) => member.locationIds.includes(location.id))
+                          .map((location) => location.name)
+                          .join(', ') || 'Keine Location'}
+                  </dd>
+                </div>
+              </dl>
+            )}
+            {permissions.canChangeStatus ||
+            permissions.canAssignRoles ||
+            permissions.canAssignLocations ? (
               <footer>
-                <button
-                  className="text-button text-button--danger"
-                  disabled={pendingId === member.id}
-                  onClick={() => changeStatus(member)}
-                  type="button"
-                >
-                  {member.status === 'ACTIVE'
-                    ? 'Mitgliedschaft sperren'
-                    : 'Mitgliedschaft reaktivieren'}
-                </button>
+                {editingId === member.id ? (
+                  <button
+                    className="button button--secondary button--small"
+                    onClick={() => setEditingId(undefined)}
+                    type="button"
+                  >
+                    Bearbeitung schließen
+                  </button>
+                ) : (
+                  <ActionMenu
+                    compact
+                    items={[
+                      ...(permissions.canAssignRoles || permissions.canAssignLocations
+                        ? [
+                            {
+                              id: 'edit',
+                              label: 'Zugriffe bearbeiten',
+                              onSelect: () => setEditingId(member.id),
+                            },
+                          ]
+                        : []),
+                      ...(permissions.canChangeStatus
+                        ? [
+                            {
+                              id: 'status',
+                              label:
+                                member.status === 'ACTIVE'
+                                  ? 'Mitgliedschaft sperren'
+                                  : 'Mitgliedschaft reaktivieren',
+                              danger: member.status === 'ACTIVE',
+                              disabled: pendingId === member.id,
+                              onSelect: () => void changeStatus(member),
+                            },
+                          ]
+                        : []),
+                    ]}
+                    label={`Aktionen für ${member.name}`}
+                  />
+                )}
               </footer>
             ) : null}
           </article>

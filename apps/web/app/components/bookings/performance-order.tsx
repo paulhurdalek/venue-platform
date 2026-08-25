@@ -6,6 +6,8 @@ import { useEffect, useRef, useState } from 'react';
 
 import { apiErrorMessage, createBrowserApiClient } from '../../../src/api/browser';
 import { FormMessage } from '../form-message';
+import { ActionMenu } from '../ui/action-menu';
+import { Dialog } from '../ui/dialog';
 
 type Booking = components['schemas']['BookingDto'];
 type ProgramItem = components['schemas']['EventProgramItemDto'];
@@ -48,11 +50,11 @@ export function PerformanceOrder({
 
   const knownDuration = items.reduce((sum, item) => sum + (item.durationMinutes ?? 0), 0);
 
-  function beginCreate(kind: ProgramKind) {
+  function beginCreate(kind: ProgramKind, defaultLabel = '') {
     setEditingId(undefined);
     setAdding(kind);
     setBookingId(kind === 'PERFORMANCE' ? (bookings[0]?.id ?? '') : '');
-    setLabel(kind === 'BREAK' ? 'Umbaupause' : '');
+    setLabel(defaultLabel);
     setDuration('');
     setMessage('');
   }
@@ -97,6 +99,13 @@ export function PerformanceOrder({
     setLabel(item.label ?? '');
     setDuration(item.durationMinutes?.toString() ?? '');
     setMessage('');
+    requestAnimationFrame(() =>
+      requestAnimationFrame(() =>
+        section.current
+          ?.querySelector<HTMLElement>(`.program-row[data-program-item="${item.id}"] input`)
+          ?.focus(),
+      ),
+    );
   }
 
   async function saveItem(item: ProgramItem) {
@@ -208,83 +217,94 @@ export function PerformanceOrder({
           </p>
         </div>
         {canWrite && !adding ? (
-          <div className="button-row">
-            <button
-              className="button button--compact"
-              onClick={() => beginCreate('PERFORMANCE')}
-              type="button"
-            >
-              Auftritt hinzufügen
-            </button>
-            <button
-              className="button button--ghost button--compact"
-              onClick={() => beginCreate('BREAK')}
-              type="button"
-            >
-              Pause / Umbauzeit
-            </button>
-          </div>
+          <ActionMenu
+            items={[
+              { id: 'performance', label: 'Auftritt', onSelect: () => beginCreate('PERFORMANCE') },
+              { id: 'break', label: 'Pause', onSelect: () => beginCreate('BREAK', 'Pause') },
+              {
+                id: 'changeover',
+                label: 'Umbauzeit',
+                onSelect: () => beginCreate('BREAK', 'Umbauzeit'),
+              },
+            ]}
+            label="Art des neuen Programmpunkts auswählen"
+            triggerContent={
+              <>
+                Programmpunkt hinzufügen <span aria-hidden="true">▾</span>
+              </>
+            }
+          />
         ) : null}
       </div>
 
-      {adding ? (
-        <form className="program-item-editor form-grid" onSubmit={createItem}>
-          {adding === 'PERFORMANCE' ? (
+      {canWrite ? (
+        <Dialog
+          eyebrow="Auftrittsplan"
+          onClose={() => setAdding(undefined)}
+          open={Boolean(adding)}
+          title={adding === 'PERFORMANCE' ? 'Auftritt hinzufügen' : 'Programmpunkt hinzufügen'}
+        >
+          <form className="program-item-editor form-grid" onSubmit={createItem}>
+            {adding === 'PERFORMANCE' ? (
+              <label>
+                Booking
+                <select
+                  onChange={(event) => setBookingId(event.target.value)}
+                  required
+                  value={bookingId}
+                >
+                  <option value="">Booking auswählen</option>
+                  {bookings.map((booking) => (
+                    <option key={booking.id} value={booking.id}>
+                      {booking.artistName} · {bookingRoleLabel(booking)}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            ) : null}
             <label>
-              Booking
-              <select
-                onChange={(event) => setBookingId(event.target.value)}
-                required
-                value={bookingId}
-              >
-                <option value="">Booking auswählen</option>
-                {bookings.map((booking) => (
-                  <option key={booking.id} value={booking.id}>
-                    {booking.artistName} · {bookingRoleLabel(booking)}
-                  </option>
-                ))}
-              </select>
+              Bezeichnung <span className="optional">optional</span>
+              <input
+                aria-label="Bezeichnung optional"
+                maxLength={120}
+                onChange={(event) => setLabel(event.target.value)}
+                value={label}
+              />
             </label>
-          ) : null}
-          <label>
-            Bezeichnung <span className="optional">optional</span>
-            <input
-              maxLength={120}
-              onChange={(event) => setLabel(event.target.value)}
-              value={label}
-            />
-          </label>
-          <label>
-            Dauer in Minuten <span className="optional">optional</span>
-            <input
-              max={1440}
-              min={1}
-              onChange={(event) => setDuration(event.target.value)}
-              type="number"
-              value={duration}
-            />
-          </label>
-          <div className="form-span button-row">
-            <button className="button" disabled={pending} type="submit">
-              Programmpunkt anlegen
-            </button>
-            <button
-              className="button button--ghost"
-              disabled={pending}
-              onClick={() => setAdding(undefined)}
-              type="button"
-            >
-              Abbrechen
-            </button>
-          </div>
-        </form>
+            <label>
+              Dauer in Minuten <span className="optional">optional</span>
+              <input
+                aria-label="Dauer in Minuten optional"
+                max={1440}
+                min={1}
+                onChange={(event) => setDuration(event.target.value)}
+                type="number"
+                value={duration}
+              />
+            </label>
+            <div className="form-span button-row">
+              <button className="button" disabled={pending} type="submit">
+                Programmpunkt anlegen
+              </button>
+              <button
+                className="button button--ghost"
+                disabled={pending}
+                onClick={() => setAdding(undefined)}
+                type="button"
+              >
+                Abbrechen
+              </button>
+            </div>
+          </form>
+        </Dialog>
       ) : null}
 
       {items.length ? (
         <ol aria-label="Gespeicherte Auftrittsreihenfolge" className="program-list">
           {items.map((item, index) => (
             <li
-              className={`program-row ${dropTargetId === item.id ? 'program-row--drop-target' : ''}`}
+              className={`program-row program-row--${item.kind.toLowerCase()} ${dropTargetId === item.id ? 'program-row--drop-target' : ''}`}
+              data-program-item={item.id}
               key={item.id}
               onDragOver={(event) => {
                 if (!draggedId || draggedId === item.id) return;
@@ -339,6 +359,7 @@ export function PerformanceOrder({
                     <label>
                       Bezeichnung <span className="optional">optional</span>
                       <input
+                        aria-label="Bezeichnung optional"
                         maxLength={120}
                         onChange={(event) => setLabel(event.target.value)}
                         value={label}
@@ -347,6 +368,7 @@ export function PerformanceOrder({
                     <label>
                       Dauer in Minuten <span className="optional">optional</span>
                       <input
+                        aria-label="Dauer in Minuten optional"
                         max={1440}
                         min={1}
                         onChange={(event) => setDuration(event.target.value)}
@@ -381,47 +403,44 @@ export function PerformanceOrder({
                       {item.durationMinutes ? `${item.durationMinutes} Minuten` : 'Dauer offen'}
                     </span>
                     {item.bookingId ? (
-                      <Link href={`#booking-${item.bookingId}`}>Zum Booking</Link>
+                      <Link href={`?tab=bookings#booking-${item.bookingId}`}>Zum Booking</Link>
                     ) : null}
                   </>
                 )}
               </div>
               {canWrite && editingId !== item.id ? (
                 <div className="program-actions">
-                  <button
-                    aria-label={`${itemTitle(item)} nach oben`}
-                    className="button button--ghost button--compact"
-                    disabled={pending || index === 0}
-                    onClick={() => void moveItem(item.id, index - 1)}
-                    type="button"
-                  >
-                    Nach oben
-                  </button>
-                  <button
-                    aria-label={`${itemTitle(item)} nach unten`}
-                    className="button button--ghost button--compact"
-                    disabled={pending || index === items.length - 1}
-                    onClick={() => void moveItem(item.id, index + 1)}
-                    type="button"
-                  >
-                    Nach unten
-                  </button>
-                  <button
-                    className="button button--secondary button--compact"
-                    disabled={pending}
-                    onClick={() => beginEdit(item)}
-                    type="button"
-                  >
-                    Bearbeiten
-                  </button>
-                  <button
-                    className="button button--ghost button--compact"
-                    disabled={pending}
-                    onClick={() => void removeItem(item)}
-                    type="button"
-                  >
-                    Entfernen
-                  </button>
+                  <ActionMenu
+                    compact
+                    items={[
+                      {
+                        id: 'edit',
+                        label: 'Bearbeiten',
+                        disabled: pending,
+                        onSelect: () => beginEdit(item),
+                      },
+                      {
+                        id: 'up',
+                        label: 'Nach oben',
+                        disabled: pending || index === 0,
+                        onSelect: () => void moveItem(item.id, index - 1),
+                      },
+                      {
+                        id: 'down',
+                        label: 'Nach unten',
+                        disabled: pending || index === items.length - 1,
+                        onSelect: () => void moveItem(item.id, index + 1),
+                      },
+                      {
+                        id: 'remove',
+                        label: 'Entfernen',
+                        danger: true,
+                        disabled: pending,
+                        onSelect: () => void removeItem(item),
+                      },
+                    ]}
+                    label={`Aktionen für ${itemTitle(item)}`}
+                  />
                 </div>
               ) : null}
             </li>

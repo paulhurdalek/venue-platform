@@ -13,6 +13,7 @@ import {
   DetailSections,
 } from '../../../../components/master-data/detail-display';
 import { EditableDetail } from '../../../../components/master-data/editable-detail';
+import { Tabs } from '../../../../components/ui/compact-ui';
 import { activePageMembership } from '../../../../../src/api/page-access';
 import {
   ApiResponseError,
@@ -22,13 +23,18 @@ import {
 } from '../../../../../src/api/server';
 
 type Event = components['schemas']['EventDto'];
+type Calculation = components['schemas']['EventCalculationDto'];
+type EventTab = 'overview' | 'bookings' | 'lineup' | 'calculation';
 
 export default async function EventDetailPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ organizationId: string; eventId: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
   const { organizationId, eventId } = await params;
+  const search = await searchParams;
   const membership = await activePageMembership(
     organizationId,
     `/o/${organizationId}/events/${eventId}`,
@@ -121,6 +127,27 @@ export default async function EventDetailPage({
           : Promise.resolve(undefined),
       ])
     : undefined;
+  const bookings = bookingData ? unwrap(bookingData[0]) : [];
+  const progress = bookingData ? unwrap(bookingData[1]) : undefined;
+  const requirements = bookingData ? unwrap(bookingData[2]) : undefined;
+  const programItems = bookingData ? unwrap(bookingData[3]) : [];
+  const calculation = calculationData ? unwrap(calculationData[0]) : undefined;
+  const availableTabs: EventTab[] = [
+    'overview',
+    ...(canReadBookings ? (['bookings', 'lineup'] as const) : []),
+    ...(canReadCalculation ? (['calculation'] as const) : []),
+  ];
+  const requestedTab = first(search.tab) as EventTab | undefined;
+  const activeTab =
+    requestedTab && availableTabs.includes(requestedTab) ? requestedTab : 'overview';
+  const activeBookings = bookings.filter(
+    (booking) => booking.status !== 'DECLINED' && booking.status !== 'CANCELLED',
+  );
+  const knownDuration = programItems.reduce(
+    (total, item) => total + (item.durationMinutes ?? 0),
+    0,
+  );
+  const eventHref = `/o/${organizationId}/events/${eventId}`;
 
   return (
     <>
@@ -145,16 +172,45 @@ export default async function EventDetailPage({
             />
           ) : null
         }
-        summary={`${formatDate(event.eventDate)} · ${event.locationName}`}
+        summary={
+          <div className="event-heading-summary">
+            <span>{formatDate(event.eventDate)}</span>
+            {event.doorsTime ? <span>Einlass {event.doorsTime}</span> : null}
+            {event.startTime ? <span>Beginn {event.startTime}</span> : null}
+            <span>{event.locationName}</span>
+            {event.formatNameSnapshot ? <span>{event.formatNameSnapshot}</span> : null}
+          </div>
+        }
         title={event.name}
         updatedLabel={`Zuletzt geändert: ${new Date(event.updatedAt).toLocaleString('de-DE')}`}
-        view={<EventDetails event={event} />}
+        view={
+          activeTab === 'overview' ? (
+            <EventOverview
+              bookingCount={activeBookings.length}
+              {...(calculation ? { calculation } : {})}
+              event={event}
+              knownDuration={knownDuration}
+            />
+          ) : undefined
+        }
       >
         {canWrite ? (
           <EventForm event={event} locations={locations} organizationId={organizationId} />
         ) : null}
       </EditableDetail>
-      {bookingData ? (
+      <Tabs
+        label="Veranstaltungsbereiche"
+        tabs={availableTabs.map((tab) => ({
+          id: tab,
+          label: eventTabLabel(tab),
+          href: `${eventHref}?tab=${tab}`,
+          active: activeTab === tab,
+        }))}
+      />
+      {bookingData &&
+      progress &&
+      requirements &&
+      (activeTab === 'bookings' || activeTab === 'lineup') ? (
         <BookingLineupPanel
           artists={bookingData[4] ? unwrap(bookingData[4]).items : []}
           canCreateArtist={canCreateArtist}
@@ -164,16 +220,17 @@ export default async function EventDetailPage({
           canStatus={canChangeBookingStatus}
           canWrite={canWriteBookings}
           eventId={eventId}
-          initialBookings={unwrap(bookingData[0])}
-          initialProgress={unwrap(bookingData[1])}
-          initialProgramItems={unwrap(bookingData[3])}
-          initialRequirements={unwrap(bookingData[2])}
+          initialBookings={bookings}
+          initialProgress={progress}
+          initialProgramItems={programItems}
+          initialRequirements={requirements}
           organizationId={organizationId}
+          view={activeTab}
         />
       ) : null}
-      {calculationData ? (
+      {calculationData && calculation && activeTab === 'calculation' ? (
         <CalculationPanel
-          calculation={unwrap(calculationData[0])}
+          calculation={calculation}
           canApprove={hasPermission(membership, 'calculations.approve')}
           canPurchase={hasPermission(membership, 'calculations.purchase')}
           canSales={hasPermission(membership, 'calculations.sales')}
@@ -187,7 +244,17 @@ export default async function EventDetailPage({
   );
 }
 
-function EventDetails({ event }: { event: Event }) {
+function EventOverview({
+  event,
+  bookingCount,
+  knownDuration,
+  calculation,
+}: {
+  event: Event;
+  bookingCount: number;
+  knownDuration: number;
+  calculation?: Calculation;
+}) {
   const hasTimes = Boolean(
     event.technicalGetInTime ||
     event.artistGetInTime ||
@@ -205,15 +272,20 @@ function EventDetails({ event }: { event: Event }) {
             {event.formatNameSnapshot ?? 'Ohne Vorlage'}
           </DetailField>
           <DetailField label="Veranstaltungsart">{kindLabel(event.eventKind)}</DetailField>
+          <DetailField label="Eventstatus">{statusLabel(event.status)}</DetailField>
+          <DetailField label="Bookings">{bookingCount}</DetailField>
+          <DetailField label="Bekannte Gesamtdauer">
+            {knownDuration ? `${knownDuration} Minuten` : 'Noch offen'}
+          </DetailField>
+          {calculation ? (
+            <DetailField label="Kalkulation">
+              {calculationStatusLabel(calculation.status)}
+            </DetailField>
+          ) : null}
           {event.sourceEventFormatVersion ? (
             <DetailField label="Quellversion">Version {event.sourceEventFormatVersion}</DetailField>
           ) : null}
           <DetailField label="Zeitzone">{event.timezone}</DetailField>
-          {event.description ? (
-            <DetailField label="Beschreibung" wide>
-              <span className="pre-wrap">{event.description}</span>
-            </DetailField>
-          ) : null}
         </DetailFields>
       </DetailSection>
       <DetailSection title="Lokale Zeiten">
@@ -242,6 +314,11 @@ function EventDetails({ event }: { event: Event }) {
       <DetailSection title="Aufzeichnung" wide>
         <DetailFields>
           <DetailField label="Einstellung">{recordingLabel(event.recordingSetting)}</DetailField>
+          {event.description ? (
+            <DetailField label="Wichtige Hinweise" wide>
+              <span className="pre-wrap">{event.description}</span>
+            </DetailField>
+          ) : null}
         </DetailFields>
       </DetailSection>
     </DetailSections>
@@ -276,4 +353,21 @@ function statusLabel(status: Event['status']) {
     COMPLETED: 'Durchgeführt',
     CANCELLED: 'Abgesagt',
   }[status];
+}
+
+function calculationStatusLabel(status: Calculation['status']) {
+  return { DRAFT: 'Entwurf', REVIEW: 'Zur Prüfung', APPROVED: 'Freigegeben' }[status];
+}
+
+function eventTabLabel(tab: EventTab) {
+  return {
+    overview: 'Übersicht',
+    bookings: 'Bookings',
+    lineup: 'Auftrittsplan',
+    calculation: 'Kalkulation',
+  }[tab];
+}
+
+function first(value: string | string[] | undefined) {
+  return Array.isArray(value) ? value[0] : value;
 }

@@ -284,7 +284,9 @@ test.describe.serial('Phase 1 through Phase 7 browser acceptance', () => {
     await expect(page.getByRole('heading', { name: 'E2E Venue Night', exact: true })).toBeVisible();
     eventDetailPath = new URL(page.url()).pathname;
     await expect(page.locator('#event-detail-editor input[name="name"]')).toHaveCount(0);
-    await expect(page.getByText('E2E Late Show', { exact: true })).toBeVisible();
+    await expect(
+      page.locator('#event-detail-editor').getByText('E2E Late Show', { exact: true }),
+    ).toBeVisible();
     await expect(page.getByText('Fremdveranstaltung / Vermietung', { exact: true })).toBeVisible();
     await expect(page.getByText('01:30 (+1 Tag)', { exact: true })).toBeVisible();
     await expect(page.getByText('Inaktiv', { exact: true })).toBeVisible();
@@ -306,12 +308,22 @@ test.describe.serial('Phase 1 through Phase 7 browser acceptance', () => {
     await expect(page.getByText('20:30', { exact: true })).toBeVisible();
     await expect(page.locator('#event-detail-editor input[name="name"]')).toHaveCount(0);
 
-    await page.getByLabel('Status ändern').selectOption('CONFIRMED');
-    await page.getByRole('button', { name: 'Übernehmen', exact: true }).click();
+    await page.getByRole('button', { name: 'Weitere Veranstaltungsaktionen' }).click();
+    await page.getByRole('menuitem', { name: 'Status bearbeiten', exact: true }).click();
+    let statusDialog = page.getByRole('dialog', { name: 'Status bearbeiten', exact: true });
+    await statusDialog
+      .getByRole('combobox', { name: 'Status', exact: true })
+      .selectOption('CONFIRMED');
+    await statusDialog.getByRole('button', { name: 'Status übernehmen', exact: true }).click();
     await expect(page.locator('.page-heading .status-badge')).toHaveText('Bestätigt');
 
-    await page.getByLabel('Status ändern').selectOption('CANCELLED');
-    await page.getByRole('button', { name: 'Übernehmen', exact: true }).click();
+    await page.getByRole('button', { name: 'Weitere Veranstaltungsaktionen' }).click();
+    await page.getByRole('menuitem', { name: 'Status bearbeiten', exact: true }).click();
+    statusDialog = page.getByRole('dialog', { name: 'Status bearbeiten', exact: true });
+    await statusDialog
+      .getByRole('combobox', { name: 'Status', exact: true })
+      .selectOption('CANCELLED');
+    await statusDialog.getByRole('button', { name: 'Änderung prüfen', exact: true }).click();
     const cancellation = page.getByRole('dialog', { name: 'Abgesagt bestätigen?', exact: true });
     await expect(cancellation).toBeVisible();
     await cancellation.getByRole('button', { name: 'Abbrechen', exact: true }).click();
@@ -612,8 +624,8 @@ test.describe.serial('Phase 1 through Phase 7 browser acceptance', () => {
 
     await page.getByRole('link', { name: 'Artists', exact: true }).click();
     await page.getByRole('link', { name: 'E2E Echo Unit', exact: true }).click();
-    await expect(page.locator('.association-create')).toHaveCount(0);
-    await page.getByRole('button', { name: 'Direkte Kontakte bearbeiten', exact: true }).click();
+    await expect(page.locator('.association-create')).toBeHidden();
+    await page.getByRole('button', { name: 'Direkten Kontakt hinzufügen', exact: true }).click();
     const artistContactForm = page.locator('.association-create');
     const artistContactSelect = page.getByRole('combobox', {
       name: 'Kontakt auswählen',
@@ -627,6 +639,7 @@ test.describe.serial('Phase 1 through Phase 7 browser acceptance', () => {
       .click();
     await expect(page.getByText('Unvollständig', { exact: true })).toHaveCount(0);
     await expect(page.getByRole('heading', { name: 'Mara E2E', exact: true })).toBeVisible();
+    await page.getByRole('button', { name: 'Direkten Kontakt hinzufügen', exact: true }).click();
     await artistContactForm
       .getByRole('button', { name: 'Neuen Ansprechpartner anlegen', exact: true })
       .click();
@@ -655,13 +668,13 @@ test.describe.serial('Phase 1 through Phase 7 browser acceptance', () => {
     ).toBeVisible();
     partnerDetailPath = new URL(page.url()).pathname;
     await expect(page.locator('input[name="companyName"]')).toHaveCount(0);
-    await expect(page.getByText('Agentur', { exact: true })).toBeVisible();
-    await expect(page.getByText('Kunde', { exact: true })).toBeVisible();
+    await expect(page.locator('.page-heading')).toContainText('Agentur');
+    await expect(page.locator('.page-heading')).toContainText('Kunde');
     await page.getByRole('button', { name: 'Bearbeiten', exact: true }).click();
     await expect(page.locator('input[name="companyName"]')).toHaveValue('E2E Kulturservice GmbH');
     await page.getByRole('button', { name: 'Abbrechen', exact: true }).click();
     await expect(page.locator('input[name="companyName"]')).toHaveCount(0);
-    await expect(page.locator('.association-create')).toHaveCount(0);
+    await expect(page.locator('.association-create')).toBeHidden();
     await page.getByRole('button', { name: 'Ansprechpartner hinzufügen', exact: true }).click();
     const partnerContactForm = page.locator('.association-create');
     const partnerContactSelect = page.getByRole('combobox', {
@@ -675,6 +688,7 @@ test.describe.serial('Phase 1 through Phase 7 browser acceptance', () => {
       .getByRole('button', { name: 'Kontakt verknüpfen', exact: true })
       .click();
     await expect(page.getByRole('heading', { name: 'Mara E2E', exact: true })).toBeVisible();
+    await page.getByRole('button', { name: 'Ansprechpartner hinzufügen', exact: true }).click();
     await partnerContactSelect.selectOption({ label: 'Juno E2E' });
     await partnerContactForm.getByRole('checkbox', { name: 'Booking', exact: true }).uncheck();
     await partnerContactForm.getByRole('checkbox', { name: 'Management', exact: true }).check();
@@ -682,6 +696,7 @@ test.describe.serial('Phase 1 through Phase 7 browser acceptance', () => {
       .getByRole('button', { name: 'Kontakt verknüpfen', exact: true })
       .click();
     await expect(page.getByRole('heading', { name: 'Juno E2E', exact: true })).toBeVisible();
+    await page.getByRole('button', { name: 'Ansprechpartner hinzufügen', exact: true }).click();
     await partnerContactForm
       .getByRole('button', { name: 'Neuen Ansprechpartner anlegen', exact: true })
       .click();
@@ -811,9 +826,17 @@ test.describe.serial('Phase 1 through Phase 7 browser acceptance', () => {
 
   test('Phase 6: line-up requirements, booking workflow, ordering and finance', async () => {
     await page.goto(eventDetailPath);
-    await expect(
-      page.getByRole('heading', { name: 'Besetzung im Blick', exact: true }),
-    ).toBeVisible();
+    await expect(page.getByRole('tab', { name: 'Übersicht', exact: true })).toHaveAttribute(
+      'aria-selected',
+      'true',
+    );
+    await page.getByRole('tab', { name: 'Auftrittsplan', exact: true }).click();
+    await expect(page).toHaveURL(/\?tab=lineup$/);
+    await page.reload();
+    await expect(page.getByRole('tab', { name: 'Auftrittsplan', exact: true })).toHaveAttribute(
+      'aria-selected',
+      'true',
+    );
 
     const requirements = page.locator('.lineup-requirements');
     await requirements.getByRole('button', { name: 'Vorgaben bearbeiten', exact: true }).click();
@@ -850,6 +873,12 @@ test.describe.serial('Phase 1 through Phase 7 browser acceptance', () => {
     await expect(requirements.getByText('Headliner', { exact: true })).toBeVisible();
     await expect(requirements).toContainText('Standardgage: 650,00 €');
 
+    await page.getByRole('tab', { name: 'Bookings', exact: true }).click();
+    await expect(page).toHaveURL(/\?tab=bookings$/);
+    await page.goBack();
+    await expect(page).toHaveURL(/\?tab=lineup$/);
+    await page.goForward();
+    await expect(page).toHaveURL(/\?tab=bookings$/);
     const bookingPanel = page.locator('.booking-panel');
     await bookingPanel
       .getByRole('button', { name: 'Ersten Artist hinzufügen', exact: true })
@@ -904,12 +933,14 @@ test.describe.serial('Phase 1 through Phase 7 browser acceptance', () => {
     ).toBeVisible();
     await expect(artistBooking.getByRole('button', { name: 'Status ändern' })).toHaveCount(0);
     await artistBooking
+      .getByRole('button', { name: 'Aktionen für Booking E2E Echo Unit', exact: true })
+      .click();
+    await page.getByRole('menuitem', { name: 'Status bearbeiten', exact: true }).click();
+    await artistBooking
       .getByRole('combobox', { name: 'Status von E2E Echo Unit', exact: true })
       .selectOption('CONFIRMED');
     await expect(page.getByText('Status geändert: Bestätigt.', { exact: true })).toBeVisible();
-    await expect(
-      artistBooking.getByRole('combobox', { name: 'Status von E2E Echo Unit', exact: true }),
-    ).toHaveValue('CONFIRMED');
+    await expect(artistBooking.getByText('Bestätigt', { exact: true })).toBeVisible();
     await artistBooking.getByText('Kontakte aufklappen', { exact: true }).click();
     await expect(
       artistBooking.getByRole('link', { name: 'E2E Kulturservice GmbH', exact: true }),
@@ -951,29 +982,47 @@ test.describe.serial('Phase 1 through Phase 7 browser acceptance', () => {
       page.getByText('Ein weiterer Auftritt wurde dem bestehenden Booking hinzugefügt.'),
     ).toBeVisible();
 
+    await page.getByRole('tab', { name: 'Auftrittsplan', exact: true }).click();
     const performanceOrder = bookingPanel.locator('.performance-order');
     let echoProgramRows = performanceOrder.locator('.program-row').filter({
       has: page.getByText('E2E Echo Unit', { exact: true }),
     });
     await expect(echoProgramRows).toHaveCount(2);
     const firstEchoProgramRow = performanceOrder.locator('.program-row').nth(0);
-    await firstEchoProgramRow.getByRole('button', { name: 'Bearbeiten', exact: true }).click();
-    await firstEchoProgramRow.getByLabel('Bezeichnung optional').fill('Set 1');
-    await firstEchoProgramRow.getByLabel('Dauer in Minuten optional').fill('10');
+    await firstEchoProgramRow.getByRole('button', { name: /Aktionen für E2E Echo Unit/ }).click();
+    await page.getByRole('menuitem', { name: 'Bearbeiten', exact: true }).click();
+    await firstEchoProgramRow
+      .getByRole('textbox', { name: 'Bezeichnung optional', exact: true })
+      .fill('Set 1');
+    await firstEchoProgramRow
+      .getByRole('spinbutton', { name: 'Dauer in Minuten optional', exact: true })
+      .fill('10');
     await firstEchoProgramRow.getByRole('button', { name: 'Speichern', exact: true }).click();
     echoProgramRows = performanceOrder.locator('.program-row').filter({
       has: page.getByText('E2E Echo Unit', { exact: true }),
     });
     await expect(echoProgramRows).toHaveCount(2);
     const secondEchoProgramRow = performanceOrder.locator('.program-row').nth(1);
-    await secondEchoProgramRow.getByRole('button', { name: 'Bearbeiten', exact: true }).click();
-    await secondEchoProgramRow.getByLabel('Bezeichnung optional').fill('Set 2');
-    await secondEchoProgramRow.getByLabel('Dauer in Minuten optional').fill('10');
+    await secondEchoProgramRow.getByRole('button', { name: /Aktionen für E2E Echo Unit/ }).click();
+    await page.getByRole('menuitem', { name: 'Bearbeiten', exact: true }).click();
+    await secondEchoProgramRow
+      .getByRole('textbox', { name: 'Bezeichnung optional', exact: true })
+      .fill('Set 2');
+    await secondEchoProgramRow
+      .getByRole('spinbutton', { name: 'Dauer in Minuten optional', exact: true })
+      .fill('10');
     await secondEchoProgramRow.getByRole('button', { name: 'Speichern', exact: true }).click();
-    await performanceOrder.getByRole('button', { name: 'Pause / Umbauzeit', exact: true }).click();
+    await performanceOrder
+      .getByRole('button', { name: 'Art des neuen Programmpunkts auswählen', exact: true })
+      .click();
+    await page.getByRole('menuitem', { name: 'Umbauzeit', exact: true }).click();
     const breakEditor = performanceOrder.locator('.program-item-editor');
-    await breakEditor.getByLabel('Bezeichnung optional').fill('Umbaupause');
-    await breakEditor.getByLabel('Dauer in Minuten optional').fill('20');
+    await breakEditor
+      .getByRole('textbox', { name: 'Bezeichnung optional', exact: true })
+      .fill('Umbaupause');
+    await breakEditor
+      .getByRole('spinbutton', { name: 'Dauer in Minuten optional', exact: true })
+      .fill('20');
     await breakEditor.getByRole('button', { name: 'Programmpunkt anlegen', exact: true }).click();
     await expect(performanceOrder).toContainText('bekannte Gesamtdauer 40 Minuten');
 
@@ -987,7 +1036,8 @@ test.describe.serial('Phase 1 through Phase 7 browser acceptance', () => {
         status: 409,
       });
     });
-    await breakRow.getByRole('button', { name: 'Umbaupause nach oben', exact: true }).click();
+    await breakRow.getByRole('button', { name: 'Aktionen für Umbaupause', exact: true }).click();
+    await page.getByRole('menuitem', { name: 'Nach oben', exact: true }).click();
     await expect(page.getByText(/Die vorherige Reihenfolge wurde wiederhergestellt/)).toBeVisible();
     await expect(performanceOrder.locator('.program-row').nth(1)).toContainText('Set 2');
     await page.unroute('**/program/order');
@@ -1019,6 +1069,7 @@ test.describe.serial('Phase 1 through Phase 7 browser acceptance', () => {
     await expect(persistedProgram.locator('.program-row').nth(1)).toContainText('Umbaupause');
     await expect(persistedProgram.locator('.program-row').nth(2)).toContainText('Set 2');
 
+    await page.getByRole('tab', { name: 'Bookings', exact: true }).click();
     await bookingPanel.getByRole('button', { name: 'Artist hinzufügen', exact: true }).click();
     bookingEditor = bookingPanel.locator('.booking-editor');
     await bookingEditor
@@ -1090,7 +1141,10 @@ test.describe.serial('Phase 1 through Phase 7 browser acceptance', () => {
     await expect(headlinerBooking).toContainText('Hotel-Buy-out');
     await expect(headlinerBooking).toContainText('100,00 €');
     await expect(headlinerBooking).toContainText('Eigenständig organisiert');
-    await headlinerBooking.getByRole('button', { name: 'Booking bearbeiten', exact: true }).click();
+    await headlinerBooking
+      .getByRole('button', { name: 'Aktionen für Booking E2E Newcomer', exact: true })
+      .click();
+    await page.getByRole('menuitem', { name: 'Booking bearbeiten', exact: true }).click();
     await expect(
       headlinerBooking.getByRole('combobox', { name: 'Hotelregelung', exact: true }),
     ).toHaveValue('BUYOUT');
@@ -1114,15 +1168,23 @@ test.describe.serial('Phase 1 through Phase 7 browser acceptance', () => {
         status: 409,
       });
     });
+    await headlinerBooking
+      .getByRole('button', { name: 'Aktionen für Booking E2E Newcomer', exact: true })
+      .click();
+    await page.getByRole('menuitem', { name: 'Status bearbeiten', exact: true }).click();
     const headlinerStatus = headlinerBooking.getByRole('combobox', {
       name: 'Status von E2E Newcomer',
       exact: true,
     });
     await headlinerStatus.selectOption('OPTION');
     await expect(page.getByText('Simulierter Versionskonflikt', { exact: true })).toBeVisible();
-    await expect(headlinerStatus).toHaveValue('CONFIRMED');
+    await expect(headlinerBooking.getByText('Bestätigt', { exact: true })).toBeVisible();
     await page.unroute('**/bookings/*/status');
 
+    await artistBooking
+      .getByRole('button', { name: 'Aktionen für Booking E2E Echo Unit', exact: true })
+      .click();
+    await page.getByRole('menuitem', { name: 'Status bearbeiten', exact: true }).click();
     await artistBooking
       .getByRole('combobox', { name: 'Status von E2E Echo Unit', exact: true })
       .selectOption('CANCELLED');
@@ -1137,22 +1199,26 @@ test.describe.serial('Phase 1 through Phase 7 browser acceptance', () => {
     const historicalArtistBooking = bookingPanel.locator('.booking-card').filter({
       has: page.getByText('Artist', { exact: true }),
     });
-    await expect(
-      historicalArtistBooking.getByRole('combobox', { name: 'Status von E2E Echo Unit' }),
-    ).toHaveValue('CANCELLED');
+    await expect(historicalArtistBooking.getByText('Storniert', { exact: true })).toBeVisible();
     await historicalArtistBooking
       .getByText('Bookingdetails und Statushistorie', { exact: true })
       .click();
     await expect(historicalArtistBooking).toContainText('Bestätigt → Storniert');
     await expect(historicalArtistBooking).toContainText('E2E Statuskorrektur');
     await historicalArtistBooking
+      .getByRole('button', { name: 'Aktionen für Booking E2E Echo Unit', exact: true })
+      .click();
+    await page.getByRole('menuitem', { name: 'Status bearbeiten', exact: true }).click();
+    await historicalArtistBooking
       .getByRole('combobox', { name: 'Status von E2E Echo Unit' })
       .selectOption('REQUESTED');
     let reactivationDialog = page.getByRole('dialog', { name: 'Booking reaktivieren?' });
     await reactivationDialog.getByRole('button', { name: 'Abbrechen', exact: true }).click();
-    await expect(
-      historicalArtistBooking.getByRole('combobox', { name: 'Status von E2E Echo Unit' }),
-    ).toHaveValue('CANCELLED');
+    await expect(historicalArtistBooking.getByText('Storniert', { exact: true })).toBeVisible();
+    await historicalArtistBooking
+      .getByRole('button', { name: 'Aktionen für Booking E2E Echo Unit', exact: true })
+      .click();
+    await page.getByRole('menuitem', { name: 'Status bearbeiten', exact: true }).click();
     await historicalArtistBooking
       .getByRole('combobox', { name: 'Status von E2E Echo Unit' })
       .selectOption('REQUESTED');
@@ -1197,14 +1263,17 @@ test.describe.serial('Phase 1 through Phase 7 browser acceptance', () => {
     phase7ServiceDetailPath = new URL(page.url()).pathname;
     await expect(page.getByLabel('Bezeichnung', { exact: true })).toHaveCount(0);
 
-    const providerForm = page.locator('.compact-provider-form');
+    await page.getByRole('button', { name: 'Dienstleisterpreis hinzufügen', exact: true }).click();
+    let providerForm = page.locator('.compact-provider-form');
     await providerForm
       .getByRole('combobox', { name: 'Dienstleister', exact: true })
       .selectOption({ label: 'E2E Kulturservice GmbH' });
     await providerForm.locator('input[name="purchasePrice"]').fill('350.00');
     await providerForm.getByRole('checkbox', { name: 'Bevorzugt', exact: true }).check();
     await providerForm.getByRole('button', { name: 'Hinzufügen', exact: true }).click();
-    await expect(page.getByText('Dienstleister hinzugefügt.', { exact: true })).toBeVisible();
+    await expect(page.locator('.master-data-table tbody tr')).toHaveCount(1);
+    await page.getByRole('button', { name: 'Dienstleisterpreis hinzufügen', exact: true }).click();
+    providerForm = page.locator('.compact-provider-form');
     await providerForm
       .getByRole('combobox', { name: 'Dienstleister', exact: true })
       .selectOption({ label: 'E2E Technikpartner B' });
@@ -1214,7 +1283,7 @@ test.describe.serial('Phase 1 through Phase 7 browser acceptance', () => {
 
     await page.goto(eventFormatDetailPath);
     const formatServices = page.locator('.service-subpanel');
-    await formatServices.getByText('Leistung hinzufügen', { exact: true }).click();
+    await formatServices.getByRole('button', { name: 'Leistung hinzufügen', exact: true }).click();
     await formatServices
       .getByRole('combobox', { name: 'Leistung', exact: true })
       .selectOption({ label: 'E2E Tontechnik' });
@@ -1242,13 +1311,15 @@ test.describe.serial('Phase 1 through Phase 7 browser acceptance', () => {
     ).toBeVisible();
     phase7EventDetailPath = new URL(page.url()).pathname;
 
+    await page.getByRole('tab', { name: 'Kalkulation', exact: true }).click();
     const calculationPanel = page.locator('.calculation-panel');
     await expect(calculationPanel).toContainText('E2E Tontechnik');
     await expect(calculationPanel).toContainText('Format-Snapshot');
-    await calculationPanel.getByText('Aus Leistungskatalog hinzufügen', { exact: true }).click();
-    const catalogPosition = calculationPanel
-      .locator('.inline-editor')
-      .filter({ hasText: 'Aus Leistungskatalog hinzufügen' });
+    await calculationPanel
+      .getByRole('button', { name: 'Neue Kalkulationsposition auswählen', exact: true })
+      .click();
+    await page.getByRole('menuitem', { name: 'Aus Leistungskatalog', exact: true }).click();
+    const catalogPosition = page.getByRole('dialog', { name: 'Aus Leistungskatalog', exact: true });
     await catalogPosition
       .getByRole('combobox', { name: 'Leistung', exact: true })
       .selectOption({ label: 'E2E Tontechnik' });
@@ -1261,36 +1332,57 @@ test.describe.serial('Phase 1 through Phase 7 browser acceptance', () => {
     await expect(catalogPosition.locator('input[name="salesPrice"]')).toHaveValue('450,00');
     await catalogPosition.locator('input[name="purchasePrice"]').fill('360,00');
     await expect(catalogPosition.locator('input[name="purchasePrice"]')).toHaveValue('360,00');
-    await calculationPanel.getByText('Aus Leistungskatalog hinzufügen', { exact: true }).click();
-    const snapshotCalculationRow = calculationPanel
-      .locator('.calculation-row')
-      .filter({ hasText: 'E2E Tontechnik' });
-    await snapshotCalculationRow.getByRole('button', { name: 'Bearbeiten', exact: true }).click();
-    const snapshotCalculationEditor = calculationPanel.locator('.calculation-row--editing');
-    await snapshotCalculationEditor.locator('input[name="purchasePrice"]').fill('');
-    await snapshotCalculationEditor.getByRole('button', { name: 'Speichern', exact: true }).click();
-    await expect(
-      snapshotCalculationRow.getByRole('button', {
-        name: 'Preise aus Katalog übernehmen',
-        exact: true,
-      }),
-    ).toBeVisible();
-    await snapshotCalculationRow
-      .getByRole('button', { name: 'Preise aus Katalog übernehmen', exact: true })
+    await catalogPosition
+      .getByRole('button', { name: 'Aus Leistungskatalog schließen', exact: true })
       .click();
-    const pricePreview = snapshotCalculationRow.getByRole('dialog', {
+    const snapshotCalculationRow = calculationPanel
+      .locator('tr[data-position-id]')
+      .filter({ hasText: 'E2E Tontechnik' });
+    await calculationPanel.getByRole('button', { name: 'Bearbeiten', exact: true }).click();
+    await snapshotCalculationRow
+      .getByRole('textbox', { name: 'Menge für E2E Tontechnik', exact: true })
+      .fill('3');
+    await expect(
+      calculationPanel.getByText(/1 Position geändert · nicht gespeichert/),
+    ).toBeVisible();
+    await calculationPanel.getByRole('button', { name: 'Abbrechen', exact: true }).click();
+    await expect(
+      snapshotCalculationRow.getByRole('textbox', { name: 'Menge für E2E Tontechnik' }),
+    ).toHaveCount(0);
+    await calculationPanel.getByRole('button', { name: 'Bearbeiten', exact: true }).click();
+    await expect(snapshotCalculationRow.locator('td[data-label="EK gesamt"] input')).toHaveCount(0);
+    await snapshotCalculationRow
+      .getByRole('textbox', { name: 'Einkaufspreis pro Einheit für E2E Tontechnik' })
+      .fill('');
+    await calculationPanel.getByRole('button', { name: 'Speichern', exact: true }).click();
+    const missingPriceNotice = calculationPanel.getByRole('button', { name: /benötigt noch/ });
+    await missingPriceNotice.click();
+    await expect(snapshotCalculationRow.locator('.missing-price-cell')).toBeFocused();
+    await snapshotCalculationRow
+      .getByRole('button', { name: 'Aktionen für E2E Tontechnik', exact: true })
+      .click();
+    await page
+      .getByRole('menuitem', { name: 'Preise aus Katalog übernehmen', exact: true })
+      .click();
+    const pricePreview = calculationPanel.getByRole('dialog', {
       name: 'Vorschau der Katalogpreis-Übernahme',
     });
-    await expect(pricePreview).toContainText('Einkauf: 350,00 €');
+    await expect(pricePreview).toContainText('EK 350,00 €');
     await expect(pricePreview).toContainText('Bereits hinterlegte Preise bleiben unverändert.');
-    await pricePreview.getByRole('button', { name: 'Übernahme bestätigen', exact: true }).click();
+    await pricePreview.getByRole('button', { name: 'Übernehmen', exact: true }).click();
     await expect(
       calculationPanel.getByText('Katalogpreise übernommen.', { exact: true }),
     ).toBeVisible();
-    await calculationPanel.getByText('Individuelle Position anlegen', { exact: true }).click();
-    const customPosition = calculationPanel
-      .locator('.inline-editor')
-      .filter({ hasText: 'Individuelle Position anlegen' });
+    const techniqueGroup = calculationPanel.getByRole('button', { name: /E2E Technik/ });
+    await techniqueGroup.click();
+    await expect(snapshotCalculationRow).toBeHidden();
+    await techniqueGroup.click();
+    await expect(snapshotCalculationRow).toBeVisible();
+    await calculationPanel
+      .getByRole('button', { name: 'Neue Kalkulationsposition auswählen', exact: true })
+      .click();
+    await page.getByRole('menuitem', { name: 'Individuelle Position', exact: true }).click();
+    const customPosition = page.getByRole('dialog', { name: 'Individuelle Position', exact: true });
     await customPosition
       .getByRole('textbox', { name: 'Bezeichnung', exact: true })
       .fill('E2E Stagehands');
@@ -1304,6 +1396,7 @@ test.describe.serial('Phase 1 through Phase 7 browser acceptance', () => {
     await customPosition.getByRole('button', { name: 'Position anlegen', exact: true }).click();
     await expect(calculationPanel.getByText('Position angelegt.', { exact: true })).toBeVisible();
 
+    await page.getByRole('tab', { name: 'Bookings', exact: true }).click();
     const bookingPanel = page.locator('.booking-panel');
     await bookingPanel
       .getByRole('button', { name: /Artist hinzufügen/, exact: false })
@@ -1323,26 +1416,39 @@ test.describe.serial('Phase 1 through Phase 7 browser acceptance', () => {
     await bookingEditor.getByRole('button', { name: 'Booking anlegen', exact: true }).click();
     await expect(page.getByText('Das Booking wurde angelegt.', { exact: true })).toBeVisible();
 
-    await expect(calculationPanel).toContainText('Gage · E2E Newcomer');
+    await page.getByRole('tab', { name: 'Kalkulation', exact: true }).click();
+    const newcomerCostRow = calculationPanel.locator('tr').filter({ hasText: 'E2E Newcomer' });
+    await expect(newcomerCostRow).toContainText('Gage');
     await expect(calculationPanel).toContainText('Voraussichtliche Gesamtkosten');
     await expect(calculationPanel).toContainText('1.200,00 €');
     await expect(calculationPanel).toContainText('Davon verbindlich');
     await expect(calculationPanel).toContainText('300,00 €');
     await expect(calculationPanel).toContainText('Noch nicht verbindlich');
     await expect(calculationPanel).toContainText('900,00 €');
-    await calculationPanel.getByRole('button', { name: 'Zur Prüfung', exact: true }).click();
-    await expect(calculationPanel).toContainText('Status: Zur Prüfung');
-    await calculationPanel.getByRole('button', { name: 'Freigeben', exact: true }).click();
-    await expect(calculationPanel).toContainText('Status: Freigegeben');
+    await calculationPanel
+      .getByRole('button', { name: 'Weitere Kalkulationsaktionen', exact: true })
+      .click();
+    await page.getByRole('menuitem', { name: 'Zur Prüfung geben', exact: true }).click();
+    await expect(calculationPanel.getByText('Zur Prüfung', { exact: true })).toBeVisible();
+    await calculationPanel
+      .getByRole('button', { name: 'Weitere Kalkulationsaktionen', exact: true })
+      .click();
+    await page.getByRole('menuitem', { name: 'Freigeben', exact: true }).click();
+    await expect(calculationPanel.getByText('Freigegeben', { exact: true })).toBeVisible();
 
+    await page.getByRole('tab', { name: 'Bookings', exact: true }).click();
     const bookingCard = bookingPanel.locator('.booking-card').filter({ hasText: 'E2E Newcomer' });
-    await bookingCard.getByRole('button', { name: 'Booking bearbeiten', exact: true }).click();
+    await bookingCard
+      .getByRole('button', { name: 'Aktionen für Booking E2E Newcomer', exact: true })
+      .click();
+    await page.getByRole('menuitem', { name: 'Booking bearbeiten', exact: true }).click();
     await bookingCard
       .getByRole('textbox', { name: 'Vereinbarte Gage optional / keine Gage' })
       .fill('250,00');
     await bookingCard.getByRole('button', { name: 'Änderungen speichern', exact: true }).click();
     await expect(page.getByText('Das Booking wurde gespeichert.', { exact: true })).toBeVisible();
-    await expect(calculationPanel).toContainText('Status: Entwurf');
+    await page.getByRole('tab', { name: 'Kalkulation', exact: true }).click();
+    await expect(calculationPanel.getByText('Entwurf', { exact: true })).toBeVisible();
     await calculationPanel.getByText('Statushistorie', { exact: true }).click();
     await expect(calculationPanel).toContainText('Booking-Finanzdaten geändert');
   });
@@ -1350,6 +1456,7 @@ test.describe.serial('Phase 1 through Phase 7 browser acceptance', () => {
   test('Phase 1 through Phase 7: read-only authorization and logout', async ({ browser }) => {
     await openOrganizationHome(page, organizationId);
     await page.getByRole('link', { name: 'Team', exact: true }).click();
+    await page.getByRole('button', { name: 'Einladung erstellen', exact: true }).click();
     await page.getByLabel('E-Mail-Adresse').fill(invitedEmail);
     await page
       .locator('.invitation-form')
@@ -1446,6 +1553,7 @@ test.describe.serial('Phase 1 through Phase 7 browser acceptance', () => {
         invitedPage.getByRole('button', { name: 'Bearbeiten', exact: true }),
       ).toHaveCount(0);
       await expect(invitedPage.getByLabel('Status ändern')).toHaveCount(0);
+      await invitedPage.getByRole('tab', { name: 'Bookings', exact: true }).click();
       const readOnlyBookingPanel = invitedPage.locator('.booking-panel');
       await expect(
         readOnlyBookingPanel
@@ -1456,15 +1564,19 @@ test.describe.serial('Phase 1 through Phase 7 browser acceptance', () => {
         readOnlyBookingPanel.getByRole('button', { name: 'Artist hinzufügen', exact: true }),
       ).toHaveCount(0);
       await expect(
-        readOnlyBookingPanel.getByRole('button', { name: 'Vorgaben bearbeiten', exact: true }),
-      ).toHaveCount(0);
-      await expect(
-        readOnlyBookingPanel.getByRole('button', { name: 'Auftritt hinzufügen', exact: true }),
-      ).toHaveCount(0);
-      await expect(
         readOnlyBookingPanel.getByRole('button', { name: 'Bearbeiten', exact: true }),
       ).toHaveCount(0);
       await expect(readOnlyBookingPanel.getByText(/Gage:/)).toHaveCount(0);
+      await invitedPage.getByRole('tab', { name: 'Auftrittsplan', exact: true }).click();
+      await expect(
+        readOnlyBookingPanel.getByRole('button', { name: 'Vorgaben bearbeiten', exact: true }),
+      ).toHaveCount(0);
+      await expect(
+        readOnlyBookingPanel.getByRole('button', {
+          name: 'Art des neuen Programmpunkts auswählen',
+          exact: true,
+        }),
+      ).toHaveCount(0);
       const eventId = eventDetailPath.split('/').at(-1)!;
       const forbiddenEvent = await invitedContext.request.patch(
         new URL(
@@ -1500,7 +1612,7 @@ test.describe.serial('Phase 1 through Phase 7 browser acceptance', () => {
         invitedPage.getByRole('button', { name: 'Vertretungen bearbeiten', exact: true }),
       ).toHaveCount(0);
       await expect(
-        invitedPage.getByRole('button', { name: 'Direkte Kontakte bearbeiten', exact: true }),
+        invitedPage.getByRole('button', { name: 'Direkten Kontakt hinzufügen', exact: true }),
       ).toHaveCount(0);
       await expect(invitedPage.locator('input[name="stageName"]')).toHaveCount(0);
       await expect(
@@ -1537,6 +1649,7 @@ test.describe.serial('Phase 1 through Phase 7 browser acceptance', () => {
       await expect(invitedPage.getByText('350,00 €', { exact: true })).toHaveCount(0);
 
       await invitedPage.goto(phase7EventDetailPath);
+      await invitedPage.getByRole('tab', { name: 'Kalkulation', exact: true }).click();
       const readOnlyCalculation = invitedPage.locator('.calculation-panel');
       await expect(readOnlyCalculation).toContainText('E2E Tontechnik');
       await expect(

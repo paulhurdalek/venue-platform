@@ -38,7 +38,7 @@ export function EditableDetail({
   updatedLabel?: string;
   priorityContent?: ReactNode;
   secondaryActions?: ReactNode;
-  view: ReactNode;
+  view?: ReactNode;
   children?: ReactNode;
 }) {
   const [editing, setEditing] = useState(false);
@@ -91,15 +91,17 @@ export function EditableDetail({
         </div>
       ) : null}
       {priorityContent}
-      <section className="panel detail-panel" id={editorId}>
-        <div className="panel__heading panel__heading--compact">
-          <div>
-            <h2>{editing ? editTitle : sectionTitle}</h2>
-            {updatedLabel ? <p>{updatedLabel}</p> : null}
+      {editing || view ? (
+        <section className="panel detail-panel" id={editorId}>
+          <div className="panel__heading panel__heading--compact">
+            <div>
+              <h2>{editing ? editTitle : sectionTitle}</h2>
+              {updatedLabel ? <p>{updatedLabel}</p> : null}
+            </div>
           </div>
-        </div>
-        {editing ? children : view}
-      </section>
+          {editing ? children : view}
+        </section>
+      ) : null}
     </EditContext.Provider>
   );
 }

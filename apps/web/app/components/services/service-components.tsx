@@ -13,6 +13,8 @@ import {
 } from '../../../src/booking-utils';
 import { serviceUnitOptions, unitLabel } from '../../../src/services/service-unit-labels';
 import { FormMessage } from '../form-message';
+import { ActionMenu } from '../ui/action-menu';
+import { Dialog } from '../ui/dialog';
 
 type Category = components['schemas']['ServiceCategoryDto'];
 type Service = components['schemas']['ServiceDto'];
@@ -366,10 +368,13 @@ export function ServiceDetailManager({
 }) {
   const router = useRouter();
   const [editing, setEditing] = useState(false);
+  const [addingProvider, setAddingProvider] = useState(false);
   const [message, setMessage] = useState<string>();
   const [pending, setPending] = useState(false);
 
   async function setServiceStatus() {
+    if (service.status === 'ACTIVE' && !window.confirm('Diese Leistung wirklich archivieren?'))
+      return;
     setPending(true);
     const result = await createBrowserApiClient().PATCH(
       '/api/v1/organizations/{organizationId}/services/{serviceId}/status',
@@ -393,31 +398,43 @@ export function ServiceDetailManager({
 
   return (
     <>
-      <section className="detail-card">
-        <header className="detail-card__header">
+      <header className="page-heading page-heading--detail">
+        <div>
+          <p className="eyebrow">Leistung</p>
+          <h1>{service.name}</h1>
+          <p className="page-heading__summary">
+            {service.categoryName} · {unitLabel(service.unit)}
+          </p>
+        </div>
+        <div className="detail-heading-actions">
+          <span className={`status-badge status-badge--${service.status.toLowerCase()}`}>
+            {service.status === 'ACTIVE' ? 'Aktiv' : 'Archiviert'}
+          </span>
+          {canWrite && service.status === 'ACTIVE' && !editing ? (
+            <button className="button" onClick={() => setEditing(true)} type="button">
+              Bearbeiten
+            </button>
+          ) : null}
+          {canArchive ? (
+            <ActionMenu
+              items={[
+                {
+                  id: 'status',
+                  label: service.status === 'ACTIVE' ? 'Archivieren' : 'Reaktivieren',
+                  danger: service.status === 'ACTIVE',
+                  disabled: pending,
+                  onSelect: () => void setServiceStatus(),
+                },
+              ]}
+              label={`Weitere Aktionen für ${service.name}`}
+            />
+          ) : null}
+        </div>
+      </header>
+      <section className="panel detail-panel">
+        <header className="panel__heading panel__heading--compact">
           <div>
-            <p className="eyebrow">Leistung</p>
-            <h1>{service.name}</h1>
-            <p>
-              {service.categoryName} · {unitLabel(service.unit)}
-            </p>
-          </div>
-          <div className="button-row">
-            {canWrite && service.status === 'ACTIVE' && !editing ? (
-              <button className="button" onClick={() => setEditing(true)} type="button">
-                Bearbeiten
-              </button>
-            ) : null}
-            {canArchive ? (
-              <button
-                className="button button--secondary"
-                disabled={pending}
-                onClick={() => void setServiceStatus()}
-                type="button"
-              >
-                {service.status === 'ACTIVE' ? 'Archivieren' : 'Reaktivieren'}
-              </button>
-            ) : null}
+            <h2>{editing ? 'Leistung bearbeiten' : 'Leistungsdaten'}</h2>
           </div>
         </header>
         <FormMessage
@@ -425,7 +442,7 @@ export function ServiceDetailManager({
           success={message?.includes('archiviert') || message?.includes('reaktiviert')}
         />
         {editing ? (
-          <div className="detail-card__body">
+          <div>
             <ServiceForm
               categories={categories}
               organizationId={organizationId}
@@ -440,7 +457,7 @@ export function ServiceDetailManager({
             </button>
           </div>
         ) : (
-          <div className="detail-card__body">
+          <div>
             <dl className="detail-fields">
               <div>
                 <dt>Status</dt>
@@ -475,13 +492,30 @@ export function ServiceDetailManager({
             <p className="eyebrow">Einkauf</p>
             <h2>Dienstleisterpreise</h2>
           </div>
+          {canWrite && canPurchase && service.status === 'ACTIVE' ? (
+            <button
+              className="button button--secondary"
+              onClick={() => setAddingProvider(true)}
+              type="button"
+            >
+              Dienstleisterpreis hinzufügen
+            </button>
+          ) : null}
         </header>
         {canWrite && canPurchase && service.status === 'ACTIVE' ? (
-          <ProviderForm
-            organizationId={organizationId}
-            partners={partners}
-            serviceId={service.id}
-          />
+          <Dialog
+            eyebrow="Leistung"
+            onClose={() => setAddingProvider(false)}
+            open={addingProvider}
+            title="Dienstleisterpreis hinzufügen"
+          >
+            <ProviderForm
+              onComplete={() => setAddingProvider(false)}
+              organizationId={organizationId}
+              partners={partners}
+              serviceId={service.id}
+            />
+          </Dialog>
         ) : null}
         <ProviderTable
           canArchive={canArchive && canPurchase}
@@ -498,10 +532,12 @@ function ProviderForm({
   organizationId,
   serviceId,
   partners,
+  onComplete,
 }: {
   organizationId: string;
   serviceId: string;
   partners: Partner[];
+  onComplete: () => void;
 }) {
   const router = useRouter();
   const hydrated = useHydrated();
@@ -533,6 +569,7 @@ function ProviderForm({
       else {
         setMessage('Dienstleister hinzugefügt.');
         formElement.reset();
+        onComplete();
         router.refresh();
       }
     } catch (error) {
@@ -631,13 +668,18 @@ function ProviderTable({
                 <td>{provider.status === 'ACTIVE' ? 'Aktiv' : 'Archiviert'}</td>
                 <td>
                   {canArchive ? (
-                    <button
-                      className="button button--quiet"
-                      onClick={() => void status(provider)}
-                      type="button"
-                    >
-                      {provider.status === 'ACTIVE' ? 'Archivieren' : 'Reaktivieren'}
-                    </button>
+                    <ActionMenu
+                      compact
+                      items={[
+                        {
+                          id: 'status',
+                          label: provider.status === 'ACTIVE' ? 'Archivieren' : 'Reaktivieren',
+                          danger: provider.status === 'ACTIVE',
+                          onSelect: () => void status(provider),
+                        },
+                      ]}
+                      label={`Aktionen für Dienstleisterpreis ${provider.businessPartnerName}`}
+                    />
                   ) : null}
                 </td>
               </tr>
