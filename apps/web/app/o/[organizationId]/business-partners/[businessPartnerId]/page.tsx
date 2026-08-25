@@ -21,7 +21,6 @@ import {
 } from '../../../../components/master-data/detail-display';
 import { EditableDetail } from '../../../../components/master-data/editable-detail';
 import {
-  BusinessPartnerRoleManager,
   ContactAssociationManager,
   LifecycleAction,
 } from '../../../../components/master-data/entity-actions';
@@ -131,13 +130,6 @@ export default async function BusinessPartnerDetailPage({
           />
         ) : null}
       </EditableDetail>
-      {canWrite ? (
-        <BusinessPartnerRoleManager
-          organizationId={organizationId}
-          partner={partner}
-          roles={partnerRoles}
-        />
-      ) : null}
       <ContactAssociationManager
         associations={partner.contacts}
         canWrite={canWrite}

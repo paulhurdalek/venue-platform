@@ -2,7 +2,7 @@
 
 import type { components } from '@venue/api-client';
 import { useRouter } from 'next/navigation';
-import { useId, useRef, useState } from 'react';
+import { useState } from 'react';
 
 import {
   apiErrorMessage,
@@ -11,6 +11,8 @@ import {
   type OccupancyConflictTarget,
 } from '../../../src/api/browser';
 import { FormMessage } from '../form-message';
+import { ActionMenu } from '../ui/action-menu';
+import { Dialog } from '../ui/dialog';
 import { OccupancyConflictLinks } from './occupancy-conflict-links';
 
 type EventStatus = components['schemas']['UpdateEventStatusDto']['status'];
@@ -35,15 +37,16 @@ export function EventStatusAction({
   status: EventStatus;
 }) {
   const router = useRouter();
-  const dialogRef = useRef<HTMLDialogElement>(null);
-  const titleId = useId();
   const [selected, setSelected] = useState<EventStatus>(status);
+  const [editing, setEditing] = useState(false);
+  const [confirming, setConfirming] = useState(false);
   const [message, setMessage] = useState<string>();
   const [conflicts, setConflicts] = useState<OccupancyConflictTarget[]>([]);
   const [pending, setPending] = useState(false);
 
   function cancelConfirmation() {
-    dialogRef.current?.close();
+    setEditing(false);
+    setConfirming(false);
     setSelected(status);
     setMessage(undefined);
     setConflicts([]);
@@ -57,7 +60,7 @@ export function EventStatusAction({
       return;
     }
     if (selected === 'CANCELLED' || selected === 'COMPLETED') {
-      dialogRef.current?.showModal();
+      setConfirming(true);
       return;
     }
     void changeStatus();
@@ -82,57 +85,54 @@ export function EventStatusAction({
       setPending(false);
       return;
     }
-    dialogRef.current?.close();
+    setEditing(false);
+    setConfirming(false);
     setPending(false);
     router.refresh();
   }
 
   return (
-    <div className="event-status-action">
-      <label>
-        Status ändern
-        <select
-          onChange={(event) => setSelected(event.target.value as EventStatus)}
-          value={selected}
-        >
-          {(Object.keys(labels) as EventStatus[]).map((value) => (
-            <option key={value} value={value}>
-              {labels[value]}
-            </option>
-          ))}
-        </select>
-      </label>
-      <button
-        className="button button--quiet"
-        disabled={pending}
-        onClick={requestChange}
-        type="button"
+    <>
+      <ActionMenu
+        items={[
+          {
+            id: 'status',
+            label: 'Status bearbeiten',
+            onSelect: () => setEditing(true),
+          },
+        ]}
+        label="Weitere Veranstaltungsaktionen"
+      />
+      <Dialog
+        eyebrow="Veranstaltungsstatus"
+        onClose={cancelConfirmation}
+        open={editing}
+        title={confirming ? `${labels[selected]} bestätigen?` : 'Status bearbeiten'}
       >
-        Übernehmen
-      </button>
-      <FormMessage message={message} />
-      <OccupancyConflictLinks conflicts={conflicts} organizationId={organizationId} />
-      <dialog
-        aria-labelledby={titleId}
-        className="confirmation-dialog"
-        onCancel={(event) => {
-          event.preventDefault();
-          cancelConfirmation();
-        }}
-        ref={dialogRef}
-      >
-        <div className="confirmation-dialog__content">
-          <div>
-            <p className="eyebrow">Veranstaltungsstatus</p>
-            <h2 id={titleId}>{labels[selected]} bestätigen?</h2>
-          </div>
-          <p>
-            Die Veranstaltung bleibt historisch sichtbar. Der Status kann bei einer fehlerhaften
-            Zuordnung später kontrolliert korrigiert werden.
-          </p>
+        <div className="event-status-action">
+          {confirming ? (
+            <p>
+              Die Veranstaltung bleibt historisch sichtbar. Der Status kann bei einer fehlerhaften
+              Zuordnung später kontrolliert korrigiert werden.
+            </p>
+          ) : (
+            <label>
+              Status
+              <select
+                onChange={(event) => setSelected(event.target.value as EventStatus)}
+                value={selected}
+              >
+                {(Object.keys(labels) as EventStatus[]).map((value) => (
+                  <option key={value} value={value}>
+                    {labels[value]}
+                  </option>
+                ))}
+              </select>
+            </label>
+          )}
           <FormMessage message={message} />
           <OccupancyConflictLinks conflicts={conflicts} organizationId={organizationId} />
-          <div className="button-row confirmation-dialog__actions">
+          <div className="button-row app-dialog__actions">
             <button
               className="button button--secondary"
               disabled={pending}
@@ -144,14 +144,20 @@ export function EventStatusAction({
             <button
               className={selected === 'CANCELLED' ? 'button button--danger' : 'button'}
               disabled={pending}
-              onClick={() => void changeStatus()}
+              onClick={confirming ? () => void changeStatus() : requestChange}
               type="button"
             >
-              {pending ? 'Status wird geändert …' : `${labels[selected]} setzen`}
+              {pending
+                ? 'Status wird geändert …'
+                : confirming
+                  ? `${labels[selected]} setzen`
+                  : selected === 'CANCELLED' || selected === 'COMPLETED'
+                    ? 'Änderung prüfen'
+                    : 'Status übernehmen'}
             </button>
           </div>
         </div>
-      </dialog>
-    </div>
+      </Dialog>
+    </>
   );
 }

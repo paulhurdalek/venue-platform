@@ -8,6 +8,8 @@ import { useEffect, useId, useRef, useState } from 'react';
 
 import { apiErrorMessage, createBrowserApiClient } from '../../../src/api/browser';
 import { FormMessage } from '../form-message';
+import { ActionMenu } from '../ui/action-menu';
+import { Dialog } from '../ui/dialog';
 import { ContactChannels } from './detail-display';
 import {
   ContactFields,
@@ -187,7 +189,8 @@ export function LifecycleAction({
         aria-controls={menuId}
         aria-expanded={menuOpen}
         aria-haspopup="menu"
-        className="button button--quiet detail-actions-menu__trigger"
+        aria-label="Weitere Aktionen"
+        className="action-menu__trigger detail-actions-menu__trigger"
         id={triggerId}
         onClick={() => {
           setMessage(undefined);
@@ -200,9 +203,10 @@ export function LifecycleAction({
           setMenuOpen(true);
         }}
         ref={triggerRef}
+        title="Weitere Aktionen"
         type="button"
       >
-        Weitere Aktionen
+        <span aria-hidden="true">⋯</span>
       </button>
       {menuOpen ? (
         <div
@@ -316,6 +320,7 @@ export function ContactAssociationManager({
   const [message, setMessage] = useState<string>();
   const [pendingId, setPendingId] = useState<string>();
   const [editing, setEditing] = useState(false);
+  const [editingAssociationId, setEditingAssociationId] = useState<string>();
   const [mode, setMode] = useState<'existing' | 'new'>('existing');
   const [matches, setMatches] = useState<ContactMatch[]>([]);
   const [pendingDraft, setPendingDraft] = useState<ContactDraft>();
@@ -541,6 +546,8 @@ export function ContactAssociationManager({
       return;
     }
     setPendingId(undefined);
+    setEditing(false);
+    setEditingAssociationId(undefined);
     router.refresh();
   }
 
@@ -569,128 +576,131 @@ export function ContactAssociationManager({
             }}
             type="button"
           >
-            {editing
-              ? 'Bearbeitung schließen'
-              : owner.kind === 'artist'
-                ? 'Direkte Kontakte bearbeiten'
-                : associations.length > 0
-                  ? 'Ansprechpartner bearbeiten'
-                  : 'Ansprechpartner hinzufügen'}
+            {owner.kind === 'artist' ? 'Direkten Kontakt hinzufügen' : 'Ansprechpartner hinzufügen'}
           </button>
         ) : null}
       </div>
       <FormMessage message={message} />
-      {editing && canManage ? (
-        <div className="association-create">
-          <div className="mode-switch" role="group" aria-label="Art des Ansprechpartners">
-            <button
-              aria-pressed={mode === 'existing'}
-              className="button button--small button--secondary"
-              onClick={() => {
-                setMode('existing');
-                setMatches([]);
-              }}
-              type="button"
-            >
-              Vorhandenen Kontakt auswählen
-            </button>
-            {canCreateContacts ? (
+      {canManage ? (
+        <Dialog
+          eyebrow={owner.kind === 'artist' ? 'Direkter Kontakt' : 'Geschäftspartner'}
+          onClose={() => setEditing(false)}
+          open={editing}
+          title={
+            owner.kind === 'artist' ? 'Direkten Kontakt hinzufügen' : 'Ansprechpartner hinzufügen'
+          }
+        >
+          <div className="association-create">
+            <div className="mode-switch" role="group" aria-label="Art des Ansprechpartners">
               <button
-                aria-pressed={mode === 'new'}
+                aria-pressed={mode === 'existing'}
                 className="button button--small button--secondary"
                 onClick={() => {
-                  setMode('new');
+                  setMode('existing');
                   setMatches([]);
                 }}
                 type="button"
               >
-                Neuen Ansprechpartner anlegen
+                Vorhandenen Kontakt auswählen
               </button>
-            ) : null}
-          </div>
-          {mode === 'existing' ? (
-            <>
-              <form className="association-search" method="get">
-                <label>
-                  Kontakte durchsuchen
-                  <input
-                    defaultValue={contactSearch}
-                    name="contactQ"
-                    placeholder="Name oder Kontaktdaten"
-                    type="search"
-                  />
-                </label>
-                <button className="button button--secondary" type="submit">
-                  Suchen
-                </button>
-              </form>
-              {availableContacts.length > 0 ? (
-                <form className="form-stack" onSubmit={link}>
-                  <label>
-                    Kontakt auswählen
-                    <select name="contactId" required>
-                      <option value="">Bitte auswählen</option>
-                      {availableContacts.map((contact) => (
-                        <option key={contact.id} value={contact.id}>
-                          {contactName(contact)}
-                        </option>
-                      ))}
-                    </select>
-                  </label>
-                  <RoleChoices name="roleIds" roles={roles} />
-                  <button className="button" disabled={pendingId === 'new'} type="submit">
-                    Kontakt verknüpfen
-                  </button>
-                </form>
-              ) : (
-                <p className="muted">
-                  {contactSearch
-                    ? 'Kein noch nicht verknüpfter Kontakt passt zur Suche.'
-                    : 'Kein weiterer aktiver Kontakt verfügbar.'}
-                </p>
-              )}
-              {owner.kind === 'artist' && blocked.size > 0 ? (
-                <p className="permission-note">
-                  Kontakte aus Firmenvertretungen werden hier nicht erneut angeboten.
-                </p>
-              ) : null}
-            </>
-          ) : canCreateContacts ? (
-            <form className="form-stack" onChange={() => setMatches([])} onSubmit={createNew}>
-              <ContactFields />
-              <RoleChoices name="roleIds" roles={roles} />
-              <ContactMatches
-                matches={matches}
-                onCreateAnyway={
-                  pendingDraft ? () => persistNew(pendingDraft, pendingRoles, true) : undefined
-                }
-                onReuse={(contactId) => linkContact(contactId, pendingRoles)}
-                pending={Boolean(pendingId)}
-              />
-              <div className="button-row">
+              {canCreateContacts ? (
                 <button
-                  className="button"
-                  disabled={pendingId === 'new-contact' || matches.length > 0}
-                  type="submit"
-                >
-                  {pendingId === 'new-contact'
-                    ? 'Ansprechpartner wird angelegt …'
-                    : 'Ansprechpartner anlegen'}
-                </button>
-                <button
-                  className="text-button"
+                  aria-pressed={mode === 'new'}
+                  className="button button--small button--secondary"
                   onClick={() => {
-                    setMode('existing');
+                    setMode('new');
                     setMatches([]);
                   }}
                   type="button"
                 >
-                  Abbrechen
+                  Neuen Ansprechpartner anlegen
                 </button>
-              </div>
-            </form>
-          ) : null}
-        </div>
+              ) : null}
+            </div>
+            {mode === 'existing' ? (
+              <>
+                <form className="association-search" method="get">
+                  <label>
+                    Kontakte durchsuchen
+                    <input
+                      defaultValue={contactSearch}
+                      name="contactQ"
+                      placeholder="Name oder Kontaktdaten"
+                      type="search"
+                    />
+                  </label>
+                  <button className="button button--secondary" type="submit">
+                    Suchen
+                  </button>
+                </form>
+                {availableContacts.length > 0 ? (
+                  <form className="form-stack" onSubmit={link}>
+                    <label>
+                      Kontakt auswählen
+                      <select name="contactId" required>
+                        <option value="">Bitte auswählen</option>
+                        {availableContacts.map((contact) => (
+                          <option key={contact.id} value={contact.id}>
+                            {contactName(contact)}
+                          </option>
+                        ))}
+                      </select>
+                    </label>
+                    <RoleChoices name="roleIds" roles={roles} />
+                    <button className="button" disabled={pendingId === 'new'} type="submit">
+                      Kontakt verknüpfen
+                    </button>
+                  </form>
+                ) : (
+                  <p className="muted">
+                    {contactSearch
+                      ? 'Kein noch nicht verknüpfter Kontakt passt zur Suche.'
+                      : 'Kein weiterer aktiver Kontakt verfügbar.'}
+                  </p>
+                )}
+                {owner.kind === 'artist' && blocked.size > 0 ? (
+                  <p className="permission-note">
+                    Kontakte aus Firmenvertretungen werden hier nicht erneut angeboten.
+                  </p>
+                ) : null}
+              </>
+            ) : canCreateContacts ? (
+              <form className="form-stack" onChange={() => setMatches([])} onSubmit={createNew}>
+                <ContactFields />
+                <RoleChoices name="roleIds" roles={roles} />
+                <ContactMatches
+                  matches={matches}
+                  onCreateAnyway={
+                    pendingDraft ? () => persistNew(pendingDraft, pendingRoles, true) : undefined
+                  }
+                  onReuse={(contactId) => linkContact(contactId, pendingRoles)}
+                  pending={Boolean(pendingId)}
+                />
+                <div className="button-row">
+                  <button
+                    className="button"
+                    disabled={pendingId === 'new-contact' || matches.length > 0}
+                    type="submit"
+                  >
+                    {pendingId === 'new-contact'
+                      ? 'Ansprechpartner wird angelegt …'
+                      : 'Ansprechpartner anlegen'}
+                  </button>
+                  <button
+                    className="text-button"
+                    onClick={() => {
+                      setMode('existing');
+                      setMatches([]);
+                    }}
+                    type="button"
+                  >
+                    Abbrechen
+                  </button>
+                </div>
+              </form>
+            ) : null}
+          </div>
+        </Dialog>
       ) : null}
       <div className="association-list">
         {associations.map((association) => (
@@ -721,7 +731,7 @@ export function ContactAssociationManager({
               </div>
             ) : null}
             <ContactChannels contact={association.contact} />
-            {editing && canWrite ? (
+            {editingAssociationId === association.id && canWrite ? (
               <form onSubmit={(event) => updateRoles(event, association)}>
                 <RoleChoices
                   checkedIds={association.roles.map((role) => role.id)}
@@ -737,15 +747,34 @@ export function ContactAssociationManager({
                     Rollen speichern
                   </button>
                   <button
-                    className="text-button text-button--danger"
-                    disabled={pendingId === association.id}
-                    onClick={() => unlink(association)}
+                    className="text-button"
+                    onClick={() => setEditingAssociationId(undefined)}
                     type="button"
                   >
-                    Zuordnung lösen
+                    Abbrechen
                   </button>
                 </div>
               </form>
+            ) : null}
+            {canWrite && editingAssociationId !== association.id ? (
+              <ActionMenu
+                compact
+                items={[
+                  {
+                    id: 'edit',
+                    label: 'Rollen bearbeiten',
+                    onSelect: () => setEditingAssociationId(association.id),
+                  },
+                  {
+                    id: 'unlink',
+                    label: 'Zuordnung lösen',
+                    danger: true,
+                    disabled: pendingId === association.id,
+                    onSelect: () => void unlink(association),
+                  },
+                ]}
+                label={`Aktionen für ${contactName(association.contact)}`}
+              />
             ) : null}
           </article>
         ))}

@@ -3,6 +3,7 @@ import { notFound, redirect } from 'next/navigation';
 
 import { ApiResponseError, getSessionContext, hasPermission } from '../../../src/api/server';
 import { SignOutButton } from '../../components/sign-out-button';
+import { WorkspaceNavigation } from '../../components/workspace-navigation';
 
 export const dynamic = 'force-dynamic';
 
@@ -57,22 +58,35 @@ export default async function OrganizationLayout({
               <small>Verwaltung</small>
             </span>
           </a>
-          <nav aria-label="Hauptnavigation" className="workspace-nav">
-            <a href={`/o/${organizationId}`}>Übersicht</a>
-            {canViewArtists ? <a href={`/o/${organizationId}/artists`}>Artists</a> : null}
-            {canViewContacts ? <a href={`/o/${organizationId}/contacts`}>Kontakte</a> : null}
-            {canViewBusinessPartners ? (
-              <a href={`/o/${organizationId}/business-partners`}>Geschäftspartner</a>
-            ) : null}
-            {canViewEventFormats ? (
-              <a href={`/o/${organizationId}/event-formats`}>Formate</a>
-            ) : null}
-            {canViewEvents ? <a href={`/o/${organizationId}/events`}>Veranstaltungen</a> : null}
-            {canViewServices ? <a href={`/o/${organizationId}/services`}>Leistungen</a> : null}
-            <a href={`/o/${organizationId}/settings/organization`}>Organisation</a>
-            <a href={`/o/${organizationId}/settings/location`}>Location</a>
-            {canViewTeam ? <a href={`/o/${organizationId}/settings/team`}>Team</a> : null}
-          </nav>
+          <WorkspaceNavigation
+            organizationId={organizationId}
+            sections={[
+              { href: `/o/${organizationId}`, label: 'Übersicht' },
+              ...(canViewArtists
+                ? [{ href: `/o/${organizationId}/artists`, label: 'Artists' }]
+                : []),
+              ...(canViewContacts
+                ? [{ href: `/o/${organizationId}/contacts`, label: 'Kontakte' }]
+                : []),
+              ...(canViewBusinessPartners
+                ? [{ href: `/o/${organizationId}/business-partners`, label: 'Geschäftspartner' }]
+                : []),
+              ...(canViewEventFormats
+                ? [{ href: `/o/${organizationId}/event-formats`, label: 'Formate' }]
+                : []),
+              ...(canViewEvents
+                ? [{ href: `/o/${organizationId}/events`, label: 'Veranstaltungen' }]
+                : []),
+              ...(canViewServices
+                ? [{ href: `/o/${organizationId}/services`, label: 'Leistungen' }]
+                : []),
+              { href: `/o/${organizationId}/settings/organization`, label: 'Organisation' },
+              { href: `/o/${organizationId}/settings/location`, label: 'Location' },
+              ...(canViewTeam
+                ? [{ href: `/o/${organizationId}/settings/team`, label: 'Team' }]
+                : []),
+            ]}
+          />
           <div className="workspace-account">
             {context.memberships.filter((item) => item.status === 'ACTIVE').length > 1 ? (
               <a className="text-link" href="/organizations">

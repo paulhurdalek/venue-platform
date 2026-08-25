@@ -13,6 +13,8 @@ import {
   prefillArtistContacts,
 } from '../../../src/booking-utils';
 import { FormMessage } from '../form-message';
+import { ActionMenu } from '../ui/action-menu';
+import { Dialog } from '../ui/dialog';
 import { ArtistCombobox } from './artist-combobox';
 import { LineupRequirements } from './lineup-requirements';
 import { PerformanceOrder } from './performance-order';
@@ -80,6 +82,7 @@ export function BookingLineupPanel({
   initialProgramItems,
   initialRequirements,
   organizationId,
+  view,
 }: {
   artists: Artist[];
   canCreateArtist: boolean;
@@ -94,8 +97,10 @@ export function BookingLineupPanel({
   initialProgramItems: ProgramItem[];
   initialRequirements: Requirements;
   organizationId: string;
+  view: 'bookings' | 'lineup';
 }) {
   const router = useRouter();
+  const panelRef = useRef<HTMLElement>(null);
   const [bookings, setBookings] = useState(initialBookings);
   const [progress, setProgress] = useState(initialProgress);
   const [programItems, setProgramItems] = useState(initialProgramItems);
@@ -105,6 +110,7 @@ export function BookingLineupPanel({
   const [editingId, setEditingId] = useState<string>();
   const [pending, setPending] = useState(false);
   const [statusPendingId, setStatusPendingId] = useState<string>();
+  const [statusEditingId, setStatusEditingId] = useState<string>();
   const [message, setMessage] = useState('');
   const [selectedStatuses, setSelectedStatuses] = useState<Record<string, BookingStatus>>({});
   const [statusConfirmation, setStatusConfirmation] = useState<StatusConfirmation>();
@@ -116,6 +122,24 @@ export function BookingLineupPanel({
   const [selectedEditArtist, setSelectedEditArtist] = useState<Artist>();
   const [automaticContact, setAutomaticContact] = useState(false);
   const [createdArtistId, setCreatedArtistId] = useState<string>();
+
+  useEffect(() => {
+    if (editingId) {
+      panelRef.current
+        ?.querySelector<HTMLElement>(`#booking-${editingId} .booking-inline-editor input`)
+        ?.focus();
+    }
+  }, [editingId]);
+
+  useEffect(() => {
+    if (statusEditingId) {
+      panelRef.current
+        ?.querySelector<HTMLSelectElement>(
+          `#booking-${statusEditingId} .booking-status-select select`,
+        )
+        ?.focus();
+    }
+  }, [statusEditingId]);
 
   async function refresh(includeHistorical = showHistorical) {
     const client = createBrowserApiClient();
@@ -369,6 +393,7 @@ export function BookingLineupPanel({
   }
 
   function requestStatusChange(booking: Booking, status: BookingStatus) {
+    setStatusEditingId(undefined);
     if (status === booking.status) return;
     setSelectedStatuses((current) => ({ ...current, [booking.id]: status }));
     if (
@@ -421,311 +446,354 @@ export function BookingLineupPanel({
 
   const activeBookings = bookings.filter((booking) => isActive(booking.status));
 
+  function cancelAdd() {
+    setAdding(false);
+    setDraft(emptyDraft());
+    setSelectedArtist(undefined);
+    setCreatedArtistId(undefined);
+  }
+
   return (
-    <section className="booking-panel" aria-labelledby="booking-lineup-heading">
+    <section aria-labelledby="booking-lineup-heading" className="booking-panel" ref={panelRef}>
       <div className="booking-panel-heading">
         <div>
-          <p className="eyebrow">Booking &amp; Line-up</p>
-          <h2 id="booking-lineup-heading">Besetzung im Blick</h2>
+          <p className="eyebrow">Veranstaltung</p>
+          <h2 id="booking-lineup-heading">{view === 'bookings' ? 'Bookings' : 'Auftrittsplan'}</h2>
         </div>
       </div>
-      <ProgressOverview progress={progress} />
-      <div className="lineup-list-heading compact-section-heading">
-        <div>
-          <h3>Aktuelles Line-up</h3>
-          <p>{activeBookings.length} aktive geschäftliche Bookings</p>
-        </div>
-        <div className="lineup-heading-actions">
-          <label className="check-row compact-check">
-            <input
-              checked={showHistorical}
-              onChange={(event) => void toggleHistorical(event.target.checked)}
-              type="checkbox"
-            />
-            Historische einblenden
-          </label>
-          {canWrite && !adding ? (
-            <button className="button button--compact" onClick={beginAdd} type="button">
-              {activeBookings.length ? 'Artist hinzufügen' : 'Ersten Artist hinzufügen'}
-            </button>
-          ) : null}
-        </div>
-      </div>
-
-      {adding ? (
-        <form className="booking-editor form-grid" onSubmit={createBooking}>
-          <div className="form-span compact-section-heading">
+      {view === 'bookings' ? (
+        <>
+          <ProgressOverview progress={progress} />
+          {!adding ? <FormMessage message={message} /> : null}
+          <div className="lineup-list-heading compact-section-heading">
             <div>
-              <h3>Artist zum Line-up hinzufügen</h3>
-              <p>Das Booking referenziert den organisationsweiten Artist-Stammdatensatz.</p>
+              <h3>Aktuelles Line-up</h3>
+              <p>{activeBookings.length} aktive geschäftliche Bookings</p>
+            </div>
+            <div className="lineup-heading-actions">
+              <label className="check-row compact-check">
+                <input
+                  checked={showHistorical}
+                  onChange={(event) => void toggleHistorical(event.target.checked)}
+                  type="checkbox"
+                />
+                Historische einblenden
+              </label>
+              {canWrite && !adding ? (
+                <button className="button button--compact" onClick={beginAdd} type="button">
+                  {activeBookings.length ? 'Artist hinzufügen' : 'Ersten Artist hinzufügen'}
+                </button>
+              ) : null}
             </div>
           </div>
-          <ArtistCombobox
-            canCreateArtist={canCreateArtist}
-            initialArtists={artists}
-            onSelect={selectArtist}
-            organizationId={organizationId}
-            selected={selectedArtist}
-          />
-          {createdArtistId ? (
-            <p className="form-span compact-success">
-              Artist angelegt.{' '}
-              <Link href={`/o/${organizationId}/artists/${createdArtistId}`}>
-                Vollständiges Profil öffnen
-              </Link>
-            </p>
-          ) : null}
-          <BookingFields
-            artist={selectedArtist}
-            automaticContact={automaticContact}
-            canFinance={canFinance}
-            draft={draft}
-            onContactManualChange={() => setAutomaticContact(false)}
-            onRoleChange={(choice) => setRole(choice)}
-            requirements={requirements.items}
-            setValue={setDraftValue}
-          />
-          <label>
-            Anfangsstatus
-            <select
-              onChange={(event) => setDraftValue('status', event.target.value as BookingStatus)}
-              value={draft.status}
-            >
-              {bookingStatuses.map((status) => (
-                <option key={status} value={status}>
-                  {statusLabel(status)}
-                </option>
-              ))}
-            </select>
-          </label>
-          <div className="form-span">
-            <FormMessage message={message} />
-            <div className="button-row">
-              <button className="button" disabled={pending || !draft.artistId} type="submit">
-                {pending ? 'Speichern …' : 'Booking anlegen'}
-              </button>
-              <button
-                className="button button--ghost"
-                disabled={pending}
-                onClick={() => {
-                  setAdding(false);
-                  setDraft(emptyDraft());
-                  setSelectedArtist(undefined);
-                }}
-                type="button"
-              >
-                Abbrechen
-              </button>
-            </div>
-          </div>
-        </form>
-      ) : null}
 
-      {bookings.length > 0 ? (
-        <div className="booking-list">
-          {bookings.map((booking) => {
-            const statusSaving = statusPendingId === booking.id;
-            return (
-              <article
-                className={`booking-card ${isActive(booking.status) ? '' : 'booking-card--historical'}`}
-                id={`booking-${booking.id}`}
-                key={booking.id}
-              >
-                <div className="booking-card-main">
-                  <div className="booking-card-copy">
-                    <div className="booking-title-row">
-                      <div>
-                        <h4>
-                          <Link href={`/o/${organizationId}/artists/${booking.artistId}`}>
-                            {booking.artistName}
-                          </Link>
-                        </h4>
-                        <p className="booking-role">{roleLabel(booking)}</p>
-                      </div>
-                      {canStatus ? (
-                        <label className="booking-status-select">
-                          <span className="sr-only">Status von {booking.artistName}</span>
-                          <select
-                            aria-label={`Status von ${booking.artistName}`}
-                            className={`status-select status-select--${booking.status.toLowerCase()}`}
-                            disabled={statusSaving}
-                            onChange={(event) =>
-                              requestStatusChange(booking, event.target.value as BookingStatus)
-                            }
-                            value={selectedStatuses[booking.id] ?? booking.status}
-                          >
-                            {bookingStatuses.map((status) => (
-                              <option key={status} value={status}>
-                                {statusLabel(status)}
-                              </option>
-                            ))}
-                          </select>
-                          {statusSaving ? <span aria-live="polite">Wird gespeichert …</span> : null}
-                        </label>
-                      ) : (
-                        <span
-                          className={`status-badge status-badge--booking-${booking.status.toLowerCase()}`}
-                        >
-                          {statusLabel(booking.status)}
-                        </span>
-                      )}
-                    </div>
-                    <BookingContactBlock
-                      booking={booking}
-                      canEditArtist={canEditArtist}
-                      organizationId={organizationId}
-                    />
-                    {canFinance ? (
-                      <div className="booking-money">
-                        <span>
-                          Gage:{' '}
-                          {formatMinorAmount(booking.agreedFeeMinor, booking.agreedFeeCurrency) ??
-                            'keine Gage'}
-                        </span>
-                        {booking.travelCostMinor ? (
-                          <span>
-                            Reisekosten:{' '}
-                            {formatMinorAmount(booking.travelCostMinor, booking.travelCostCurrency)}
-                          </span>
-                        ) : null}
-                      </div>
-                    ) : null}
-                    {booking.internalNote ? (
-                      <p className="booking-note" title={booking.internalNote}>
-                        {booking.internalNote}
-                      </p>
-                    ) : null}
+          {canWrite ? (
+            <Dialog
+              eyebrow="Booking"
+              onClose={cancelAdd}
+              open={adding}
+              size="wide"
+              title="Artist zum Line-up hinzufügen"
+            >
+              <form className="booking-editor form-grid" onSubmit={createBooking}>
+                <p className="form-span compact-note">
+                  Das Booking referenziert den organisationsweiten Artist-Stammdatensatz.
+                </p>
+                <ArtistCombobox
+                  canCreateArtist={canCreateArtist}
+                  initialArtists={artists}
+                  onSelect={selectArtist}
+                  organizationId={organizationId}
+                  selected={selectedArtist}
+                />
+                {createdArtistId ? (
+                  <p className="form-span compact-success">
+                    Artist angelegt.{' '}
+                    <Link href={`/o/${organizationId}/artists/${createdArtistId}`}>
+                      Vollständiges Profil öffnen
+                    </Link>
+                  </p>
+                ) : null}
+                <BookingFields
+                  artist={selectedArtist}
+                  automaticContact={automaticContact}
+                  canFinance={canFinance}
+                  draft={draft}
+                  onContactManualChange={() => setAutomaticContact(false)}
+                  onRoleChange={(choice) => setRole(choice)}
+                  requirements={requirements.items}
+                  setValue={setDraftValue}
+                />
+                <label>
+                  Anfangsstatus
+                  <select
+                    onChange={(event) =>
+                      setDraftValue('status', event.target.value as BookingStatus)
+                    }
+                    value={draft.status}
+                  >
+                    {bookingStatuses.map((status) => (
+                      <option key={status} value={status}>
+                        {statusLabel(status)}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                <div className="form-span">
+                  {adding ? <FormMessage message={message} /> : null}
+                  <div className="button-row">
+                    <button className="button" disabled={pending || !draft.artistId} type="submit">
+                      {pending ? 'Speichern …' : 'Booking anlegen'}
+                    </button>
+                    <button
+                      className="button button--ghost"
+                      disabled={pending}
+                      onClick={cancelAdd}
+                      type="button"
+                    >
+                      Abbrechen
+                    </button>
                   </div>
                 </div>
-                {editingId === booking.id ? (
-                  <div className="booking-inline-editor form-grid">
-                    <BookingFields
-                      artist={selectedEditArtist}
-                      automaticContact={false}
-                      canFinance={canFinance}
-                      draft={editDraft}
-                      onContactManualChange={() => undefined}
-                      onRoleChange={(choice) => setRole(choice, true)}
-                      requirements={requirements.items}
-                      setValue={setEditValue}
-                    />
-                    <div className="form-span button-row">
-                      <button
-                        className="button"
-                        disabled={pending}
-                        onClick={() => void saveBooking(booking)}
-                        type="button"
-                      >
-                        Änderungen speichern
-                      </button>
-                      <button
-                        className="button button--ghost"
-                        onClick={() => setEditingId(undefined)}
-                        type="button"
-                      >
-                        Abbrechen
-                      </button>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="booking-actions">
-                    {canWrite ? (
-                      <button
-                        className="button button--secondary button--compact"
-                        onClick={() => void beginEdit(booking)}
-                        type="button"
-                      >
-                        Booking bearbeiten
-                      </button>
-                    ) : null}
-                    <details className="booking-details">
-                      <summary>Bookingdetails und Statushistorie</summary>
-                      <dl>
-                        <div>
-                          <dt>Hotelregelung</dt>
-                          <dd>{hotelArrangementLabel(booking.hotelArrangement)}</dd>
-                        </div>
-                        {canFinance && booking.hotelArrangement === 'BUYOUT' ? (
-                          <div>
-                            <dt>Hotel-Buy-out</dt>
-                            <dd>
-                              {formatMinorAmount(
-                                booking.hotelBuyoutMinor,
-                                booking.hotelBuyoutCurrency,
-                              ) ?? 'Betrag offen'}
-                            </dd>
-                          </div>
-                        ) : null}
-                        {booking.hotelNote ? (
-                          <div>
-                            <dt>Hotelnotiz</dt>
-                            <dd>{booking.hotelNote}</dd>
-                          </div>
-                        ) : null}
-                        {booking.travelArrangement ? (
-                          <div>
-                            <dt>Reisevereinbarung</dt>
-                            <dd>{booking.travelArrangement}</dd>
-                          </div>
-                        ) : null}
-                        {canFinance && booking.travelCostMinor ? (
-                          <div>
-                            <dt>Reisekosten</dt>
-                            <dd>
-                              {formatMinorAmount(
-                                booking.travelCostMinor,
-                                booking.travelCostCurrency,
-                              )}
-                            </dd>
-                          </div>
-                        ) : null}
-                        {booking.statusHistory.map((history) => (
-                          <div key={history.id}>
-                            <dt>{new Date(history.changedAt).toLocaleString('de-DE')}</dt>
-                            <dd>
-                              {statusLabel(history.previousStatus)} →{' '}
-                              {statusLabel(history.newStatus)} · {history.actorName}
-                              {history.note ? ` · ${history.note}` : ''}
-                            </dd>
-                          </div>
-                        ))}
-                      </dl>
-                    </details>
-                  </div>
-                )}
-              </article>
-            );
-          })}
-        </div>
-      ) : (
-        <div className="lineup-empty">
-          <p>Noch keine Bookings im Line-up.</p>
-          {canWrite && !adding ? (
-            <button className="button" onClick={beginAdd} type="button">
-              Ersten Artist hinzufügen
-            </button>
+              </form>
+            </Dialog>
           ) : null}
-        </div>
-      )}
-      <PerformanceOrder
-        bookings={activeBookings}
-        canWrite={canLineupWrite}
-        eventId={eventId}
-        {...(programFocusItemId ? { focusItemId: programFocusItemId } : {})}
-        items={programItems}
-        onChange={setProgramItems}
-        organizationId={organizationId}
-      />
-      <FormMessage message={message} />
-      <LineupRequirements
-        canFinance={canFinance}
-        canWrite={canLineupWrite}
-        initial={requirements}
-        onChange={requirementsChanged}
-        organizationId={organizationId}
-        resourceId={eventId}
-        resourceType="event"
-      />
+
+          {bookings.length > 0 ? (
+            <div className="booking-list">
+              {bookings.map((booking) => {
+                const statusSaving = statusPendingId === booking.id;
+                return (
+                  <article
+                    className={`booking-card ${isActive(booking.status) ? '' : 'booking-card--historical'}`}
+                    id={`booking-${booking.id}`}
+                    key={booking.id}
+                  >
+                    <div className="booking-card-main">
+                      <div className="booking-card-copy">
+                        <div className="booking-title-row">
+                          <div>
+                            <h4>
+                              <Link href={`/o/${organizationId}/artists/${booking.artistId}`}>
+                                {booking.artistName}
+                              </Link>
+                            </h4>
+                            <p className="booking-role">{roleLabel(booking)}</p>
+                          </div>
+                          {canStatus && statusEditingId === booking.id ? (
+                            <label className="booking-status-select">
+                              <span className="sr-only">Status von {booking.artistName}</span>
+                              <select
+                                aria-label={`Status von ${booking.artistName}`}
+                                className={`status-select status-select--${booking.status.toLowerCase()}`}
+                                disabled={statusSaving}
+                                onChange={(event) =>
+                                  requestStatusChange(booking, event.target.value as BookingStatus)
+                                }
+                                value={selectedStatuses[booking.id] ?? booking.status}
+                              >
+                                {bookingStatuses.map((status) => (
+                                  <option key={status} value={status}>
+                                    {statusLabel(status)}
+                                  </option>
+                                ))}
+                              </select>
+                              {statusSaving ? (
+                                <span aria-live="polite">Wird gespeichert …</span>
+                              ) : null}
+                            </label>
+                          ) : (
+                            <span
+                              className={`status-badge status-badge--booking-${booking.status.toLowerCase()}`}
+                            >
+                              {statusLabel(booking.status)}
+                            </span>
+                          )}
+                        </div>
+                        <BookingContactBlock
+                          booking={booking}
+                          canEditArtist={canEditArtist}
+                          organizationId={organizationId}
+                        />
+                        {canFinance ? (
+                          <div className="booking-money">
+                            <span>
+                              Gage:{' '}
+                              {formatMinorAmount(
+                                booking.agreedFeeMinor,
+                                booking.agreedFeeCurrency,
+                              ) ?? 'keine Gage'}
+                            </span>
+                            {booking.travelCostMinor ? (
+                              <span>
+                                Reisekosten:{' '}
+                                {formatMinorAmount(
+                                  booking.travelCostMinor,
+                                  booking.travelCostCurrency,
+                                )}
+                              </span>
+                            ) : null}
+                          </div>
+                        ) : null}
+                        {booking.internalNote ? (
+                          <p className="booking-note" title={booking.internalNote}>
+                            {booking.internalNote}
+                          </p>
+                        ) : null}
+                      </div>
+                    </div>
+                    {editingId === booking.id ? (
+                      <div className="booking-inline-editor form-grid">
+                        <BookingFields
+                          artist={selectedEditArtist}
+                          automaticContact={false}
+                          canFinance={canFinance}
+                          draft={editDraft}
+                          onContactManualChange={() => undefined}
+                          onRoleChange={(choice) => setRole(choice, true)}
+                          requirements={requirements.items}
+                          setValue={setEditValue}
+                        />
+                        <div className="form-span button-row">
+                          <button
+                            className="button"
+                            disabled={pending}
+                            onClick={() => void saveBooking(booking)}
+                            type="button"
+                          >
+                            Änderungen speichern
+                          </button>
+                          <button
+                            className="button button--ghost"
+                            onClick={() => setEditingId(undefined)}
+                            type="button"
+                          >
+                            Abbrechen
+                          </button>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="booking-actions">
+                        <details className="booking-details">
+                          <summary>Bookingdetails und Statushistorie</summary>
+                          <dl>
+                            <div>
+                              <dt>Hotelregelung</dt>
+                              <dd>{hotelArrangementLabel(booking.hotelArrangement)}</dd>
+                            </div>
+                            {canFinance && booking.hotelArrangement === 'BUYOUT' ? (
+                              <div>
+                                <dt>Hotel-Buy-out</dt>
+                                <dd>
+                                  {formatMinorAmount(
+                                    booking.hotelBuyoutMinor,
+                                    booking.hotelBuyoutCurrency,
+                                  ) ?? 'Betrag offen'}
+                                </dd>
+                              </div>
+                            ) : null}
+                            {booking.hotelNote ? (
+                              <div>
+                                <dt>Hotelnotiz</dt>
+                                <dd>{booking.hotelNote}</dd>
+                              </div>
+                            ) : null}
+                            {booking.travelArrangement ? (
+                              <div>
+                                <dt>Reisevereinbarung</dt>
+                                <dd>{booking.travelArrangement}</dd>
+                              </div>
+                            ) : null}
+                            {canFinance && booking.travelCostMinor ? (
+                              <div>
+                                <dt>Reisekosten</dt>
+                                <dd>
+                                  {formatMinorAmount(
+                                    booking.travelCostMinor,
+                                    booking.travelCostCurrency,
+                                  )}
+                                </dd>
+                              </div>
+                            ) : null}
+                            {booking.statusHistory.map((history) => (
+                              <div key={history.id}>
+                                <dt>{new Date(history.changedAt).toLocaleString('de-DE')}</dt>
+                                <dd>
+                                  {statusLabel(history.previousStatus)} →{' '}
+                                  {statusLabel(history.newStatus)} · {history.actorName}
+                                  {history.note ? ` · ${history.note}` : ''}
+                                </dd>
+                              </div>
+                            ))}
+                          </dl>
+                        </details>
+                        {canWrite || canStatus ? (
+                          <ActionMenu
+                            compact
+                            items={[
+                              ...(canWrite
+                                ? [
+                                    {
+                                      id: 'edit',
+                                      label: 'Booking bearbeiten',
+                                      onSelect: () => void beginEdit(booking),
+                                    },
+                                  ]
+                                : []),
+                              ...(canStatus
+                                ? [
+                                    {
+                                      id: 'status',
+                                      label: 'Status bearbeiten',
+                                      onSelect: () => setStatusEditingId(booking.id),
+                                    },
+                                  ]
+                                : []),
+                            ]}
+                            label={`Aktionen für Booking ${booking.artistName}`}
+                          />
+                        ) : null}
+                      </div>
+                    )}
+                  </article>
+                );
+              })}
+            </div>
+          ) : (
+            <div className="lineup-empty">
+              <p>Noch keine Bookings im Line-up.</p>
+              {canWrite && !adding ? (
+                <button className="button" onClick={beginAdd} type="button">
+                  Ersten Artist hinzufügen
+                </button>
+              ) : null}
+            </div>
+          )}
+        </>
+      ) : null}
+      {view === 'lineup' ? (
+        <>
+          <PerformanceOrder
+            bookings={activeBookings}
+            canWrite={canLineupWrite}
+            eventId={eventId}
+            {...(programFocusItemId ? { focusItemId: programFocusItemId } : {})}
+            items={programItems}
+            onChange={setProgramItems}
+            organizationId={organizationId}
+          />
+          <FormMessage message={message} />
+          <LineupRequirements
+            canFinance={canFinance}
+            canWrite={canLineupWrite}
+            initial={requirements}
+            onChange={requirementsChanged}
+            organizationId={organizationId}
+            resourceId={eventId}
+            resourceType="event"
+          />
+        </>
+      ) : null}
       {statusConfirmation ? (
         <StatusConfirmationDialog
           change={statusConfirmation}

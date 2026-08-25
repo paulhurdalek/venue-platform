@@ -91,7 +91,7 @@ export default async function TeamSettingsPage({
               <p>Die letzten sicherheitsrelevanten Änderungen dieser Organisation.</p>
             </div>
           </div>
-          <div className="table-wrap">
+          <div className="table-wrap table-wrap--scroll-mobile">
             <table>
               <thead>
                 <tr>
