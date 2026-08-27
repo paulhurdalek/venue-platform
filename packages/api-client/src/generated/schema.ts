@@ -1383,6 +1383,454 @@ export interface paths {
         patch: operations["EventServicePositionController_setStatus_v1"];
         trace?: never;
     };
+    "/api/v1/organizations/{organizationId}/events/{eventId}/revenue-plan": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["EventRevenuePlanningController_find_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/events/{eventId}/revenue-plan/expected-guests": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["EventRevenuePlanningController_setExpectedGuests_v1"];
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/events/{eventId}/revenue-plan/calculation-template-preview": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["EventRevenuePlanningController_previewTemplate_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/events/{eventId}/revenue-plan/apply-calculation-template": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["EventRevenuePlanningController_applyTemplate_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/events/{eventId}/revenue-plan/ticket-tiers": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["EventRevenuePlanningController_createTier_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/events/{eventId}/revenue-plan/additional-revenues": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["EventRevenuePlanningController_createAdditional_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/ticket-price-tiers/{tierId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["RevenuePlanningResourcesController_updateTier_v1"];
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/ticket-price-tiers/{tierId}/status": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["RevenuePlanningResourcesController_setTierStatus_v1"];
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/ticket-price-tiers/{tierId}/order": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["RevenuePlanningResourcesController_moveTier_v1"];
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/ticket-price-tiers/{tierId}/components": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["RevenuePlanningResourcesController_createComponent_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/ticket-price-components/{componentId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["RevenuePlanningResourcesController_updateComponent_v1"];
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/ticket-price-components/{componentId}/status": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["RevenuePlanningResourcesController_setComponentStatus_v1"];
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/ticket-price-components/{componentId}/order": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["RevenuePlanningResourcesController_moveComponent_v1"];
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/additional-revenues/{revenueId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["RevenuePlanningResourcesController_updateAdditional_v1"];
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/additional-revenues/{revenueId}/status": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["RevenuePlanningResourcesController_setAdditionalStatus_v1"];
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/additional-revenues/{revenueId}/order": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["RevenuePlanningResourcesController_moveAdditional_v1"];
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/revenue-templates/tax-rates": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["RevenueTemplateController_listTaxRates_v1"];
+        put?: never;
+        post: operations["RevenueTemplateController_createTaxRate_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/revenue-templates/tax-rates/{templateId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["RevenueTemplateController_updateTaxRate_v1"];
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/revenue-templates/tax-rates/{templateId}/status": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["RevenueTemplateController_setTaxRateStatus_v1"];
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/revenue-templates/ticket-providers": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["RevenueTemplateController_listProviders_v1"];
+        put?: never;
+        post: operations["RevenueTemplateController_createProvider_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/revenue-templates/ticket-providers/{templateId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["RevenueTemplateController_findProvider_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["RevenueTemplateController_updateProvider_v1"];
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/revenue-templates/ticket-providers/{templateId}/duplicate": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["RevenueTemplateController_duplicateProvider_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/revenue-templates/ticket-providers/{templateId}/status": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["RevenueTemplateController_setProviderStatus_v1"];
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/revenue-templates/calculations": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["RevenueTemplateController_listCalculations_v1"];
+        put?: never;
+        post: operations["RevenueTemplateController_createCalculation_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/revenue-templates/calculations/{templateId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["RevenueTemplateController_findCalculation_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["RevenueTemplateController_updateCalculation_v1"];
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/revenue-templates/calculations/{templateId}/duplicate": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["RevenueTemplateController_duplicateCalculation_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/revenue-templates/calculations/{templateId}/status": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["RevenueTemplateController_setCalculationStatus_v1"];
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/revenue-templates/calculations/from-event/{eventId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["RevenueTemplateController_saveEventCalculation_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/health": {
         parameters: {
             query?: never;
@@ -1999,6 +2447,8 @@ export interface components {
             defaultEndNextDay: boolean;
             /** @enum {string} */
             recordingDefault: "UNSPECIFIED" | "ENABLED" | "DISABLED";
+            /** Format: uuid */
+            defaultCalculationTemplateId?: string | null;
             /** @enum {string} */
             status: "ACTIVE" | "ARCHIVED";
             /** Format: date-time */
@@ -2037,6 +2487,8 @@ export interface components {
              * @enum {string}
              */
             recordingDefault: "UNSPECIFIED" | "ENABLED" | "DISABLED";
+            /** Format: uuid */
+            defaultCalculationTemplateId?: string | null;
         };
         UpdateEventFormatDto: {
             name?: string;
@@ -2060,6 +2512,8 @@ export interface components {
              * @enum {string}
              */
             recordingDefault: "UNSPECIFIED" | "ENABLED" | "DISABLED";
+            /** Format: uuid */
+            defaultCalculationTemplateId?: string | null;
             version: number;
         };
         UpdateEventFormatStatusDto: {
@@ -2116,6 +2570,11 @@ export interface components {
             /** @example Europe/Berlin */
             timezone: string;
             occupancyComplete: boolean;
+            expectedGuestCount?: number | null;
+            /** Format: uuid */
+            sourceCalculationTemplateId?: string | null;
+            sourceCalculationTemplateVersion?: number | null;
+            calculationTemplateNameSnapshot?: string | null;
             bookingSummary: components["schemas"]["EventBookingSummaryDto"];
             /** Format: date-time */
             createdAt: string;
@@ -2144,8 +2603,11 @@ export interface components {
             endNextDay?: boolean;
             /** @enum {string} */
             recordingSetting?: "UNSPECIFIED" | "ENABLED" | "DISABLED";
+            expectedGuestCount?: number | null;
             /** Format: uuid */
             sourceEventFormatId?: string;
+            /** Format: uuid */
+            sourceCalculationTemplateId?: string;
             /** @enum {string} */
             eventKind?: "OWN_PRODUCTION" | "THIRD_PARTY_EVENT";
             /** Format: uuid */
@@ -2172,6 +2634,7 @@ export interface components {
             endNextDay?: boolean;
             /** @enum {string} */
             recordingSetting?: "UNSPECIFIED" | "ENABLED" | "DISABLED";
+            expectedGuestCount?: number | null;
             version: number;
             /** Format: uuid */
             locationId?: string;
@@ -2314,6 +2777,7 @@ export interface components {
             endNextDay?: boolean;
             /** @enum {string} */
             recordingSetting?: "UNSPECIFIED" | "ENABLED" | "DISABLED";
+            expectedGuestCount?: number | null;
             version: number;
             /** Format: uuid */
             sourceEventFormatId?: string;
@@ -2972,6 +3436,477 @@ export interface components {
         };
         ApplyEventPositionCatalogPricesDto: {
             version: number;
+        };
+        RevenueAllocationDto: {
+            /** Format: uuid */
+            id: string;
+            /** @enum {string} */
+            recipientType: "ORGANIZATION" | "ARTIST" | "BUSINESS_PARTNER" | "EXTERNAL";
+            /** Format: uuid */
+            recipientId?: string | null;
+            recipientName: string;
+            /** @enum {string} */
+            allocationType: "FIXED" | "PERCENTAGE";
+            percentageBasisPoints?: number | null;
+            fixedAmountMinor?: string | null;
+            resolvedNetUnitMinor?: string | null;
+            resolvedGrossUnitMinor?: string | null;
+            sortOrder: number;
+            /** @enum {string} */
+            status: "ACTIVE" | "ARCHIVED";
+            version: number;
+        };
+        TicketPriceComponentDto: {
+            /** Format: uuid */
+            id: string;
+            name: string;
+            /** @enum {string} */
+            amountType: "FIXED" | "PERCENTAGE";
+            /** @enum {string|null} */
+            percentageBasis?: "TICKET_BASE_GROSS" | null;
+            percentageRateBasisPoints?: number | null;
+            /** @enum {string} */
+            inputType: "NET" | "GROSS";
+            inputAmountMinor?: string | null;
+            taxRateBasisPoints: number;
+            /** Format: uuid */
+            taxRateTemplateId?: string | null;
+            taxRateTemplateVersion?: number | null;
+            taxRateNameSnapshot?: string | null;
+            guestPays: boolean;
+            netUnitMinor?: string | null;
+            grossUnitMinor?: string | null;
+            allocationComplete: boolean;
+            allocationDifferenceGrossMinor?: string | null;
+            allocations: components["schemas"]["RevenueAllocationDto"][];
+            sortOrder: number;
+            /** @enum {string} */
+            status: "ACTIVE" | "ARCHIVED";
+            version: number;
+        };
+        TicketPriceTierDto: {
+            /** Format: uuid */
+            id: string;
+            name: string;
+            expectedQuantity: number;
+            /** @enum {string|null} */
+            baseInputType?: "NET" | "GROSS" | null;
+            baseInputMinor?: string | null;
+            baseNetUnitMinor?: string | null;
+            baseGrossUnitMinor?: string | null;
+            baseTaxRateBasisPoints?: number | null;
+            /** Format: uuid */
+            baseTaxRateTemplateId?: string | null;
+            baseTaxRateTemplateVersion?: number | null;
+            baseTaxRateNameSnapshot?: string | null;
+            /** Format: uuid */
+            sourceTicketProviderTemplateId?: string | null;
+            sourceTicketProviderTemplateVersion?: number | null;
+            sourceTicketProviderNameSnapshot?: string | null;
+            endCustomerUnitGrossMinor?: string | null;
+            totalBaseNetMinor?: string | null;
+            totalBaseGrossMinor?: string | null;
+            totalEndCustomerGrossMinor?: string | null;
+            components: components["schemas"]["TicketPriceComponentDto"][];
+            sortOrder: number;
+            /** @enum {string} */
+            status: "ACTIVE" | "ARCHIVED";
+            version: number;
+        };
+        AdditionalRevenueDto: {
+            /** Format: uuid */
+            id: string;
+            name: string;
+            /** @enum {string} */
+            calculationType: "FIXED" | "PER_EXPECTED_GUEST" | "PER_PAYING_TICKET" | "PERCENT_TICKET_BASE_NET";
+            /** @enum {string} */
+            inputType: "NET" | "GROSS";
+            inputAmountMinor?: string | null;
+            percentageRateBasisPoints?: number | null;
+            taxRateBasisPoints: number;
+            /** Format: uuid */
+            taxRateTemplateId?: string | null;
+            taxRateTemplateVersion?: number | null;
+            taxRateNameSnapshot?: string | null;
+            /** @enum {string} */
+            confirmationStatus: "PLANNED" | "CONFIRMED";
+            note?: string | null;
+            resolvedQuantity?: number | null;
+            calculationBasisMinor?: string | null;
+            totalNetMinor?: string | null;
+            totalGrossMinor?: string | null;
+            sortOrder: number;
+            /** @enum {string} */
+            status: "ACTIVE" | "ARCHIVED";
+            version: number;
+        };
+        RevenueApprovalBlockerDto: {
+            code: string;
+            message: string;
+            /** @enum {string} */
+            targetType: "TICKET_TIER" | "TICKET_COMPONENT" | "ADDITIONAL_REVENUE" | "EVENT";
+            /** Format: uuid */
+            targetId: string;
+        };
+        RevenuePlanTotalsDto: {
+            expectedGuests?: number | null;
+            expectedTickets: number;
+            expectedPayingTickets: number;
+            ticketEndCustomerGrossMinor: string;
+            ticketBaseNetMinor: string;
+            ticketBaseGrossMinor: string;
+            ownTicketRevenueNetMinor: string;
+            ownTicketRevenueGrossMinor: string;
+            artistPartnerShareNetMinor: string;
+            artistPartnerShareGrossMinor: string;
+            externalPassThroughNetMinor: string;
+            externalPassThroughGrossMinor: string;
+            additionalRevenueNetMinor: string;
+            additionalRevenueGrossMinor: string;
+            phase7PlannedCostNetMinor: string;
+            operatingResultNetMinor: string;
+            costBasisLabel: string;
+            incomplete: boolean;
+            approvalBlockers: components["schemas"]["RevenueApprovalBlockerDto"][];
+        };
+        RevenuePlanDto: {
+            /** Format: uuid */
+            calculationId: string;
+            calculationVersion: number;
+            /** @enum {string} */
+            calculationStatus: "DRAFT" | "REVIEW" | "APPROVED";
+            /** Format: uuid */
+            eventId: string;
+            eventVersion: number;
+            eventName: string;
+            expectedGuestCount?: number | null;
+            /** @enum {string} */
+            currency: "EUR";
+            ticketTiers: components["schemas"]["TicketPriceTierDto"][];
+            additionalRevenues: components["schemas"]["AdditionalRevenueDto"][];
+            totals: components["schemas"]["RevenuePlanTotalsDto"];
+        };
+        SetExpectedGuestsDto: {
+            eventVersion: number;
+            expectedGuestCount?: number | null;
+        };
+        PreviewCalculationTemplateDto: {
+            /** Format: uuid */
+            calculationTemplateId: string;
+        };
+        CalculationTemplatePreviewDto: {
+            /** Format: uuid */
+            templateId: string;
+            templateName: string;
+            templateVersion: number;
+            expectedGuestCount?: number | null;
+            tierCount: number;
+            componentCount: number;
+            additionalRevenueCount: number;
+            existingTierCount: number;
+            existingAdditionalRevenueCount: number;
+            replacementRequired: boolean;
+            invalidRecipients: Record<string, never>[];
+        };
+        TemplateRecipientResolutionDto: {
+            /** Format: uuid */
+            allocationId: string;
+            /** @enum {string} */
+            action: "REMOVE" | "REPLACE";
+            /** @enum {string} */
+            recipientType?: "ORGANIZATION" | "ARTIST" | "BUSINESS_PARTNER" | "EXTERNAL";
+            /** Format: uuid */
+            artistId?: string | null;
+            /** Format: uuid */
+            businessPartnerId?: string | null;
+            externalRecipientName?: string | null;
+        };
+        ApplyCalculationTemplateDto: {
+            /** Format: uuid */
+            calculationTemplateId: string;
+            calculationVersion: number;
+            confirmReplacement: boolean;
+            recipientResolutions?: components["schemas"]["TemplateRecipientResolutionDto"][];
+        };
+        RevenueAllocationInputDto: {
+            /** @enum {string} */
+            recipientType: "ORGANIZATION" | "ARTIST" | "BUSINESS_PARTNER" | "EXTERNAL";
+            /** Format: uuid */
+            artistId?: string | null;
+            /** Format: uuid */
+            businessPartnerId?: string | null;
+            externalRecipientName?: string | null;
+            /** @enum {string} */
+            allocationType: "FIXED" | "PERCENTAGE";
+            percentageBasisPoints?: number | null;
+            fixedAmountMinor?: string | null;
+            /** @deprecated */
+            sortOrder?: number;
+        };
+        TicketComponentInputDto: {
+            name: string;
+            /** @enum {string} */
+            amountType: "FIXED" | "PERCENTAGE";
+            percentageRateBasisPoints?: number | null;
+            /** @enum {string} */
+            inputType: "NET" | "GROSS";
+            inputAmountMinor?: string | null;
+            /** @deprecated */
+            taxRateBasisPoints?: number;
+            /** Format: uuid */
+            taxRateTemplateId: string;
+            guestPays: boolean;
+            /** @deprecated */
+            sortOrder?: number;
+            allocations: components["schemas"]["RevenueAllocationInputDto"][];
+        };
+        TicketTierInputDto: {
+            name: string;
+            expectedQuantity: number;
+            /** @enum {string|null} */
+            baseInputType?: "NET" | "GROSS" | null;
+            baseInputMinor?: string | null;
+            baseTaxRateBasisPoints?: number | null;
+            /** Format: uuid */
+            baseTaxRateTemplateId?: string | null;
+            /** Format: uuid */
+            sourceTicketProviderTemplateId?: string | null;
+            components?: components["schemas"]["TicketComponentInputDto"][];
+            /** @deprecated */
+            sortOrder?: number;
+        };
+        AdditionalRevenueInputDto: {
+            name: string;
+            /** @enum {string} */
+            calculationType: "FIXED" | "PER_EXPECTED_GUEST" | "PER_PAYING_TICKET" | "PERCENT_TICKET_BASE_NET";
+            /** @enum {string} */
+            inputType: "NET" | "GROSS";
+            inputAmountMinor?: string | null;
+            percentageRateBasisPoints?: number | null;
+            /** @deprecated */
+            taxRateBasisPoints?: number;
+            /** Format: uuid */
+            taxRateTemplateId: string;
+            /** @enum {string} */
+            confirmationStatus: "PLANNED" | "CONFIRMED";
+            note?: string | null;
+            /** @deprecated */
+            sortOrder?: number;
+        };
+        UpdateTicketTierDto: {
+            name: string;
+            expectedQuantity: number;
+            /** @enum {string|null} */
+            baseInputType?: "NET" | "GROSS" | null;
+            baseInputMinor?: string | null;
+            baseTaxRateBasisPoints?: number | null;
+            /** Format: uuid */
+            baseTaxRateTemplateId?: string | null;
+            /** Format: uuid */
+            sourceTicketProviderTemplateId?: string | null;
+            components?: components["schemas"]["TicketComponentInputDto"][];
+            /** @deprecated */
+            sortOrder?: number;
+            version: number;
+        };
+        SetRevenueEntityStatusDto: {
+            version: number;
+            /** @enum {string} */
+            status: "ACTIVE" | "ARCHIVED";
+        };
+        MoveRevenueEntityDto: {
+            version: number;
+            /** @enum {string} */
+            direction: "UP" | "DOWN";
+        };
+        UpdateTicketComponentDto: {
+            name: string;
+            /** @enum {string} */
+            amountType: "FIXED" | "PERCENTAGE";
+            percentageRateBasisPoints?: number | null;
+            /** @enum {string} */
+            inputType: "NET" | "GROSS";
+            inputAmountMinor?: string | null;
+            /** @deprecated */
+            taxRateBasisPoints?: number;
+            /** Format: uuid */
+            taxRateTemplateId: string;
+            guestPays: boolean;
+            /** @deprecated */
+            sortOrder?: number;
+            allocations: components["schemas"]["RevenueAllocationInputDto"][];
+            version: number;
+        };
+        UpdateAdditionalRevenueDto: {
+            name: string;
+            /** @enum {string} */
+            calculationType: "FIXED" | "PER_EXPECTED_GUEST" | "PER_PAYING_TICKET" | "PERCENT_TICKET_BASE_NET";
+            /** @enum {string} */
+            inputType: "NET" | "GROSS";
+            inputAmountMinor?: string | null;
+            percentageRateBasisPoints?: number | null;
+            /** @deprecated */
+            taxRateBasisPoints?: number;
+            /** Format: uuid */
+            taxRateTemplateId: string;
+            /** @enum {string} */
+            confirmationStatus: "PLANNED" | "CONFIRMED";
+            note?: string | null;
+            /** @deprecated */
+            sortOrder?: number;
+            version: number;
+        };
+        TaxRateTemplateDto: {
+            name: string;
+            /** @description Hundertstel Prozent */
+            rateBasisPoints: number;
+            /** Format: uuid */
+            id: string;
+            /** @enum {string} */
+            status: "ACTIVE" | "ARCHIVED";
+            version: number;
+            /** Format: date-time */
+            archivedAt?: string | null;
+            /** Format: date-time */
+            createdAt: string;
+            /** Format: date-time */
+            updatedAt: string;
+        };
+        TaxRateTemplateInputDto: {
+            name: string;
+            /** @description Hundertstel Prozent */
+            rateBasisPoints: number;
+        };
+        UpdateTaxRateTemplateDto: {
+            name: string;
+            /** @description Hundertstel Prozent */
+            rateBasisPoints: number;
+            version: number;
+        };
+        UpdateRevenueTemplateStatusDto: {
+            version: number;
+            /** @enum {string} */
+            status: "ACTIVE" | "ARCHIVED";
+        };
+        TicketProviderTemplateDto: {
+            /** Format: uuid */
+            id: string;
+            name: string;
+            description?: string | null;
+            /** @enum {string} */
+            status: "ACTIVE" | "ARCHIVED";
+            version: number;
+            components: Record<string, never>[];
+            /** Format: date-time */
+            createdAt: string;
+            /** Format: date-time */
+            updatedAt: string;
+        };
+        RevenueTemplateAllocationInputDto: {
+            /** @enum {string} */
+            recipientType: "ORGANIZATION" | "ARTIST" | "BUSINESS_PARTNER" | "EXTERNAL";
+            /** Format: uuid */
+            artistId?: string | null;
+            /** Format: uuid */
+            businessPartnerId?: string | null;
+            externalRecipientName?: string | null;
+            /** @enum {string} */
+            allocationType: "FIXED" | "PERCENTAGE";
+            percentageBasisPoints?: number | null;
+            fixedAmountMinor?: string | null;
+        };
+        RevenueTemplateComponentInputDto: {
+            name: string;
+            /** @enum {string} */
+            amountType: "FIXED" | "PERCENTAGE";
+            percentageRateBasisPoints?: number | null;
+            /** @enum {string} */
+            inputType: "NET" | "GROSS";
+            inputAmountMinor?: string | null;
+            /** Format: uuid */
+            taxRateTemplateId: string;
+            /** @default true */
+            guestPays: boolean;
+            allocations?: components["schemas"]["RevenueTemplateAllocationInputDto"][];
+        };
+        TicketProviderTemplateInputDto: {
+            name: string;
+            description?: string | null;
+            components: components["schemas"]["RevenueTemplateComponentInputDto"][];
+        };
+        UpdateTicketProviderTemplateDto: {
+            name: string;
+            description?: string | null;
+            components: components["schemas"]["RevenueTemplateComponentInputDto"][];
+            version: number;
+        };
+        DuplicateRevenueTemplateDto: {
+            name?: string;
+        };
+        CalculationTemplateDto: {
+            /** Format: uuid */
+            id: string;
+            name: string;
+            description?: string | null;
+            expectedGuestCount?: number | null;
+            /** @enum {string} */
+            status: "ACTIVE" | "ARCHIVED";
+            version: number;
+            tiers: Record<string, never>[];
+            additionalRevenues: Record<string, never>[];
+            /** Format: date-time */
+            createdAt: string;
+            /** Format: date-time */
+            updatedAt: string;
+        };
+        CalculationTemplateTierInputDto: {
+            name: string;
+            /** @default 0 */
+            expectedQuantity: number;
+            /** @enum {string|null} */
+            baseInputType?: "NET" | "GROSS" | null;
+            baseInputMinor?: string | null;
+            /** Format: uuid */
+            baseTaxRateTemplateId?: string | null;
+            /** Format: uuid */
+            sourceTicketProviderTemplateId?: string | null;
+            components?: components["schemas"]["RevenueTemplateComponentInputDto"][];
+        };
+        CalculationTemplateAdditionalRevenueInputDto: {
+            name: string;
+            /** @enum {string} */
+            calculationType: "FIXED" | "PER_EXPECTED_GUEST" | "PER_PAYING_TICKET" | "PERCENT_TICKET_BASE_NET";
+            /** @enum {string} */
+            inputType: "NET" | "GROSS";
+            inputAmountMinor?: string | null;
+            percentageRateBasisPoints?: number | null;
+            /** Format: uuid */
+            taxRateTemplateId: string;
+            /**
+             * @default PLANNED
+             * @enum {string}
+             */
+            confirmationStatus: "PLANNED" | "CONFIRMED";
+            note?: string | null;
+        };
+        CalculationTemplateInputDto: {
+            name: string;
+            description?: string | null;
+            expectedGuestCount?: number | null;
+            tiers: components["schemas"]["CalculationTemplateTierInputDto"][];
+            additionalRevenues: components["schemas"]["CalculationTemplateAdditionalRevenueInputDto"][];
+        };
+        UpdateCalculationTemplateDto: {
+            name: string;
+            description?: string | null;
+            expectedGuestCount?: number | null;
+            tiers: components["schemas"]["CalculationTemplateTierInputDto"][];
+            additionalRevenues: components["schemas"]["CalculationTemplateAdditionalRevenueInputDto"][];
+            version: number;
+        };
+        SaveEventCalculationTemplateDto: {
+            name: string;
+            description?: string | null;
         };
         ServiceHealthDto: {
             /** @enum {string} */
@@ -5838,6 +6773,825 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["EventServicePositionDto"];
+                };
+            };
+        };
+    };
+    EventRevenuePlanningController_find_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                eventId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RevenuePlanDto"];
+                };
+            };
+        };
+    };
+    EventRevenuePlanningController_setExpectedGuests_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SetExpectedGuestsDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RevenuePlanDto"];
+                };
+            };
+        };
+    };
+    EventRevenuePlanningController_previewTemplate_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PreviewCalculationTemplateDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CalculationTemplatePreviewDto"];
+                };
+            };
+        };
+    };
+    EventRevenuePlanningController_applyTemplate_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ApplyCalculationTemplateDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RevenuePlanDto"];
+                };
+            };
+        };
+    };
+    EventRevenuePlanningController_createTier_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["TicketTierInputDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TicketPriceTierDto"];
+                };
+            };
+        };
+    };
+    EventRevenuePlanningController_createAdditional_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["AdditionalRevenueInputDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AdditionalRevenueDto"];
+                };
+            };
+        };
+    };
+    RevenuePlanningResourcesController_updateTier_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateTicketTierDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TicketPriceTierDto"];
+                };
+            };
+        };
+    };
+    RevenuePlanningResourcesController_setTierStatus_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SetRevenueEntityStatusDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TicketPriceTierDto"];
+                };
+            };
+        };
+    };
+    RevenuePlanningResourcesController_moveTier_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["MoveRevenueEntityDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TicketPriceTierDto"];
+                };
+            };
+        };
+    };
+    RevenuePlanningResourcesController_createComponent_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["TicketComponentInputDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TicketPriceComponentDto"];
+                };
+            };
+        };
+    };
+    RevenuePlanningResourcesController_updateComponent_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateTicketComponentDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TicketPriceComponentDto"];
+                };
+            };
+        };
+    };
+    RevenuePlanningResourcesController_setComponentStatus_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SetRevenueEntityStatusDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TicketPriceComponentDto"];
+                };
+            };
+        };
+    };
+    RevenuePlanningResourcesController_moveComponent_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["MoveRevenueEntityDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TicketPriceComponentDto"];
+                };
+            };
+        };
+    };
+    RevenuePlanningResourcesController_updateAdditional_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateAdditionalRevenueDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AdditionalRevenueDto"];
+                };
+            };
+        };
+    };
+    RevenuePlanningResourcesController_setAdditionalStatus_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SetRevenueEntityStatusDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AdditionalRevenueDto"];
+                };
+            };
+        };
+    };
+    RevenuePlanningResourcesController_moveAdditional_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["MoveRevenueEntityDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AdditionalRevenueDto"];
+                };
+            };
+        };
+    };
+    RevenueTemplateController_listTaxRates_v1: {
+        parameters: {
+            query?: {
+                status?: "ACTIVE" | "ARCHIVED" | "ALL";
+            };
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TaxRateTemplateDto"][];
+                };
+            };
+        };
+    };
+    RevenueTemplateController_createTaxRate_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["TaxRateTemplateInputDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TaxRateTemplateDto"];
+                };
+            };
+        };
+    };
+    RevenueTemplateController_updateTaxRate_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                templateId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateTaxRateTemplateDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TaxRateTemplateDto"];
+                };
+            };
+        };
+    };
+    RevenueTemplateController_setTaxRateStatus_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                templateId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateRevenueTemplateStatusDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TaxRateTemplateDto"];
+                };
+            };
+        };
+    };
+    RevenueTemplateController_listProviders_v1: {
+        parameters: {
+            query?: {
+                status?: "ACTIVE" | "ARCHIVED" | "ALL";
+            };
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TicketProviderTemplateDto"][];
+                };
+            };
+        };
+    };
+    RevenueTemplateController_createProvider_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["TicketProviderTemplateInputDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TicketProviderTemplateDto"];
+                };
+            };
+        };
+    };
+    RevenueTemplateController_findProvider_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                templateId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TicketProviderTemplateDto"];
+                };
+            };
+        };
+    };
+    RevenueTemplateController_updateProvider_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                templateId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateTicketProviderTemplateDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TicketProviderTemplateDto"];
+                };
+            };
+        };
+    };
+    RevenueTemplateController_duplicateProvider_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                templateId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["DuplicateRevenueTemplateDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TicketProviderTemplateDto"];
+                };
+            };
+        };
+    };
+    RevenueTemplateController_setProviderStatus_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                templateId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateRevenueTemplateStatusDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TicketProviderTemplateDto"];
+                };
+            };
+        };
+    };
+    RevenueTemplateController_listCalculations_v1: {
+        parameters: {
+            query?: {
+                status?: "ACTIVE" | "ARCHIVED" | "ALL";
+            };
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CalculationTemplateDto"][];
+                };
+            };
+        };
+    };
+    RevenueTemplateController_createCalculation_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CalculationTemplateInputDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CalculationTemplateDto"];
+                };
+            };
+        };
+    };
+    RevenueTemplateController_findCalculation_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                templateId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CalculationTemplateDto"];
+                };
+            };
+        };
+    };
+    RevenueTemplateController_updateCalculation_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                templateId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateCalculationTemplateDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CalculationTemplateDto"];
+                };
+            };
+        };
+    };
+    RevenueTemplateController_duplicateCalculation_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                templateId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["DuplicateRevenueTemplateDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CalculationTemplateDto"];
+                };
+            };
+        };
+    };
+    RevenueTemplateController_setCalculationStatus_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                templateId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateRevenueTemplateStatusDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CalculationTemplateDto"];
+                };
+            };
+        };
+    };
+    RevenueTemplateController_saveEventCalculation_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                eventId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SaveEventCalculationTemplateDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CalculationTemplateDto"];
                 };
             };
         };

@@ -47,6 +47,7 @@ export interface EventTransaction {
       | 'endMinutes'
       | 'recordingSetting'
       | 'timezone'
+      | 'expectedGuestCount'
     >,
   ): Promise<EventRecord | undefined>;
   setStatus(

@@ -179,3 +179,62 @@ export const CostStatus = {
 } as const
 
 export type CostStatus = (typeof CostStatus)[keyof typeof CostStatus]
+
+
+export const PriceInputType = {
+  NET: 'NET',
+  GROSS: 'GROSS'
+} as const
+
+export type PriceInputType = (typeof PriceInputType)[keyof typeof PriceInputType]
+
+
+export const RevenueAmountType = {
+  FIXED: 'FIXED',
+  PERCENTAGE: 'PERCENTAGE'
+} as const
+
+export type RevenueAmountType = (typeof RevenueAmountType)[keyof typeof RevenueAmountType]
+
+
+export const TicketPercentageBasis = {
+  TICKET_BASE_GROSS: 'TICKET_BASE_GROSS'
+} as const
+
+export type TicketPercentageBasis = (typeof TicketPercentageBasis)[keyof typeof TicketPercentageBasis]
+
+
+export const RevenueAllocationType = {
+  FIXED: 'FIXED',
+  PERCENTAGE: 'PERCENTAGE'
+} as const
+
+export type RevenueAllocationType = (typeof RevenueAllocationType)[keyof typeof RevenueAllocationType]
+
+
+export const RevenueRecipientType = {
+  ORGANIZATION: 'ORGANIZATION',
+  ARTIST: 'ARTIST',
+  BUSINESS_PARTNER: 'BUSINESS_PARTNER',
+  EXTERNAL: 'EXTERNAL'
+} as const
+
+export type RevenueRecipientType = (typeof RevenueRecipientType)[keyof typeof RevenueRecipientType]
+
+
+export const AdditionalRevenueCalculationType = {
+  FIXED: 'FIXED',
+  PER_EXPECTED_GUEST: 'PER_EXPECTED_GUEST',
+  PER_PAYING_TICKET: 'PER_PAYING_TICKET',
+  PERCENT_TICKET_BASE_NET: 'PERCENT_TICKET_BASE_NET'
+} as const
+
+export type AdditionalRevenueCalculationType = (typeof AdditionalRevenueCalculationType)[keyof typeof AdditionalRevenueCalculationType]
+
+
+export const RevenueConfirmationStatus = {
+  PLANNED: 'PLANNED',
+  CONFIRMED: 'CONFIRMED'
+} as const
+
+export type RevenueConfirmationStatus = (typeof RevenueConfirmationStatus)[keyof typeof RevenueConfirmationStatus]

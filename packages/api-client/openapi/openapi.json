@@ -5612,6 +5612,1445 @@
         ]
       }
     },
+    "/api/v1/organizations/{organizationId}/events/{eventId}/revenue-plan": {
+      "get": {
+        "operationId": "EventRevenuePlanningController_find_v1",
+        "parameters": [
+          {
+            "name": "eventId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RevenuePlanDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "revenue-planning"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/events/{eventId}/revenue-plan/expected-guests": {
+      "patch": {
+        "operationId": "EventRevenuePlanningController_setExpectedGuests_v1",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetExpectedGuestsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RevenuePlanDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "revenue-planning"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/events/{eventId}/revenue-plan/calculation-template-preview": {
+      "post": {
+        "operationId": "EventRevenuePlanningController_previewTemplate_v1",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PreviewCalculationTemplateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CalculationTemplatePreviewDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "revenue-planning"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/events/{eventId}/revenue-plan/apply-calculation-template": {
+      "post": {
+        "operationId": "EventRevenuePlanningController_applyTemplate_v1",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApplyCalculationTemplateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RevenuePlanDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "revenue-planning"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/events/{eventId}/revenue-plan/ticket-tiers": {
+      "post": {
+        "operationId": "EventRevenuePlanningController_createTier_v1",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TicketTierInputDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TicketPriceTierDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "revenue-planning"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/events/{eventId}/revenue-plan/additional-revenues": {
+      "post": {
+        "operationId": "EventRevenuePlanningController_createAdditional_v1",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdditionalRevenueInputDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdditionalRevenueDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "revenue-planning"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/ticket-price-tiers/{tierId}": {
+      "patch": {
+        "operationId": "RevenuePlanningResourcesController_updateTier_v1",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTicketTierDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TicketPriceTierDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "revenue-planning"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/ticket-price-tiers/{tierId}/status": {
+      "patch": {
+        "operationId": "RevenuePlanningResourcesController_setTierStatus_v1",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetRevenueEntityStatusDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TicketPriceTierDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "revenue-planning"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/ticket-price-tiers/{tierId}/order": {
+      "patch": {
+        "operationId": "RevenuePlanningResourcesController_moveTier_v1",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MoveRevenueEntityDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TicketPriceTierDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "revenue-planning"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/ticket-price-tiers/{tierId}/components": {
+      "post": {
+        "operationId": "RevenuePlanningResourcesController_createComponent_v1",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TicketComponentInputDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TicketPriceComponentDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "revenue-planning"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/ticket-price-components/{componentId}": {
+      "patch": {
+        "operationId": "RevenuePlanningResourcesController_updateComponent_v1",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTicketComponentDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TicketPriceComponentDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "revenue-planning"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/ticket-price-components/{componentId}/status": {
+      "patch": {
+        "operationId": "RevenuePlanningResourcesController_setComponentStatus_v1",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetRevenueEntityStatusDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TicketPriceComponentDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "revenue-planning"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/ticket-price-components/{componentId}/order": {
+      "patch": {
+        "operationId": "RevenuePlanningResourcesController_moveComponent_v1",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MoveRevenueEntityDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TicketPriceComponentDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "revenue-planning"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/additional-revenues/{revenueId}": {
+      "patch": {
+        "operationId": "RevenuePlanningResourcesController_updateAdditional_v1",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAdditionalRevenueDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdditionalRevenueDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "revenue-planning"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/additional-revenues/{revenueId}/status": {
+      "patch": {
+        "operationId": "RevenuePlanningResourcesController_setAdditionalStatus_v1",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetRevenueEntityStatusDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdditionalRevenueDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "revenue-planning"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/additional-revenues/{revenueId}/order": {
+      "patch": {
+        "operationId": "RevenuePlanningResourcesController_moveAdditional_v1",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MoveRevenueEntityDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdditionalRevenueDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "revenue-planning"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/revenue-templates/tax-rates": {
+      "get": {
+        "operationId": "RevenueTemplateController_listTaxRates_v1",
+        "parameters": [
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "ACTIVE",
+                "ARCHIVED",
+                "ALL"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TaxRateTemplateDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "revenue templates"
+        ]
+      },
+      "post": {
+        "operationId": "RevenueTemplateController_createTaxRate_v1",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TaxRateTemplateInputDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TaxRateTemplateDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "revenue templates"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/revenue-templates/tax-rates/{templateId}": {
+      "patch": {
+        "operationId": "RevenueTemplateController_updateTaxRate_v1",
+        "parameters": [
+          {
+            "name": "templateId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTaxRateTemplateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TaxRateTemplateDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "revenue templates"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/revenue-templates/tax-rates/{templateId}/status": {
+      "patch": {
+        "operationId": "RevenueTemplateController_setTaxRateStatus_v1",
+        "parameters": [
+          {
+            "name": "templateId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateRevenueTemplateStatusDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TaxRateTemplateDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "revenue templates"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/revenue-templates/ticket-providers": {
+      "get": {
+        "operationId": "RevenueTemplateController_listProviders_v1",
+        "parameters": [
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "ACTIVE",
+                "ARCHIVED",
+                "ALL"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TicketProviderTemplateDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "revenue templates"
+        ]
+      },
+      "post": {
+        "operationId": "RevenueTemplateController_createProvider_v1",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TicketProviderTemplateInputDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TicketProviderTemplateDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "revenue templates"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/revenue-templates/ticket-providers/{templateId}": {
+      "get": {
+        "operationId": "RevenueTemplateController_findProvider_v1",
+        "parameters": [
+          {
+            "name": "templateId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TicketProviderTemplateDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "revenue templates"
+        ]
+      },
+      "patch": {
+        "operationId": "RevenueTemplateController_updateProvider_v1",
+        "parameters": [
+          {
+            "name": "templateId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTicketProviderTemplateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TicketProviderTemplateDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "revenue templates"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/revenue-templates/ticket-providers/{templateId}/duplicate": {
+      "post": {
+        "operationId": "RevenueTemplateController_duplicateProvider_v1",
+        "parameters": [
+          {
+            "name": "templateId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DuplicateRevenueTemplateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TicketProviderTemplateDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "revenue templates"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/revenue-templates/ticket-providers/{templateId}/status": {
+      "patch": {
+        "operationId": "RevenueTemplateController_setProviderStatus_v1",
+        "parameters": [
+          {
+            "name": "templateId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateRevenueTemplateStatusDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TicketProviderTemplateDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "revenue templates"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/revenue-templates/calculations": {
+      "get": {
+        "operationId": "RevenueTemplateController_listCalculations_v1",
+        "parameters": [
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "ACTIVE",
+                "ARCHIVED",
+                "ALL"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CalculationTemplateDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "revenue templates"
+        ]
+      },
+      "post": {
+        "operationId": "RevenueTemplateController_createCalculation_v1",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CalculationTemplateInputDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CalculationTemplateDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "revenue templates"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/revenue-templates/calculations/{templateId}": {
+      "get": {
+        "operationId": "RevenueTemplateController_findCalculation_v1",
+        "parameters": [
+          {
+            "name": "templateId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CalculationTemplateDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "revenue templates"
+        ]
+      },
+      "patch": {
+        "operationId": "RevenueTemplateController_updateCalculation_v1",
+        "parameters": [
+          {
+            "name": "templateId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCalculationTemplateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CalculationTemplateDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "revenue templates"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/revenue-templates/calculations/{templateId}/duplicate": {
+      "post": {
+        "operationId": "RevenueTemplateController_duplicateCalculation_v1",
+        "parameters": [
+          {
+            "name": "templateId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DuplicateRevenueTemplateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CalculationTemplateDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "revenue templates"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/revenue-templates/calculations/{templateId}/status": {
+      "patch": {
+        "operationId": "RevenueTemplateController_setCalculationStatus_v1",
+        "parameters": [
+          {
+            "name": "templateId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateRevenueTemplateStatusDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CalculationTemplateDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "revenue templates"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/revenue-templates/calculations/from-event/{eventId}": {
+      "post": {
+        "operationId": "RevenueTemplateController_saveEventCalculation_v1",
+        "parameters": [
+          {
+            "name": "eventId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaveEventCalculationTemplateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CalculationTemplateDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "revenue templates"
+        ]
+      }
+    },
     "/api/v1/health": {
       "get": {
         "operationId": "HealthController_get_v1",
@@ -7864,6 +9303,11 @@
               "DISABLED"
             ]
           },
+          "defaultCalculationTemplateId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
           "status": {
             "type": "string",
             "enum": [
@@ -7984,6 +9428,11 @@
               "DISABLED"
             ],
             "default": "UNSPECIFIED"
+          },
+          "defaultCalculationTemplateId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
           }
         },
         "required": [
@@ -8047,6 +9496,11 @@
               "DISABLED"
             ],
             "default": "UNSPECIFIED"
+          },
+          "defaultCalculationTemplateId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
           },
           "version": {
             "type": "number",
@@ -8237,6 +9691,24 @@
           "occupancyComplete": {
             "type": "boolean"
           },
+          "expectedGuestCount": {
+            "type": "number",
+            "minimum": 0,
+            "nullable": true
+          },
+          "sourceCalculationTemplateId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "sourceCalculationTemplateVersion": {
+            "type": "number",
+            "nullable": true
+          },
+          "calculationTemplateNameSnapshot": {
+            "type": "string",
+            "nullable": true
+          },
           "bookingSummary": {
             "$ref": "#/components/schemas/EventBookingSummaryDto"
           },
@@ -8342,7 +9814,16 @@
               "DISABLED"
             ]
           },
+          "expectedGuestCount": {
+            "type": "number",
+            "minimum": 0,
+            "nullable": true
+          },
           "sourceEventFormatId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "sourceCalculationTemplateId": {
             "type": "string",
             "format": "uuid"
           },
@@ -8415,6 +9896,11 @@
               "ENABLED",
               "DISABLED"
             ]
+          },
+          "expectedGuestCount": {
+            "type": "number",
+            "minimum": 0,
+            "nullable": true
           },
           "version": {
             "type": "number",
@@ -8866,6 +10352,11 @@
               "ENABLED",
               "DISABLED"
             ]
+          },
+          "expectedGuestCount": {
+            "type": "number",
+            "minimum": 0,
+            "nullable": true
           },
           "version": {
             "type": "number",
@@ -11273,6 +12764,1816 @@
         },
         "required": [
           "version"
+        ]
+      },
+      "RevenueAllocationDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "recipientType": {
+            "type": "string",
+            "enum": [
+              "ORGANIZATION",
+              "ARTIST",
+              "BUSINESS_PARTNER",
+              "EXTERNAL"
+            ]
+          },
+          "recipientId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "recipientName": {
+            "type": "string"
+          },
+          "allocationType": {
+            "type": "string",
+            "enum": [
+              "FIXED",
+              "PERCENTAGE"
+            ]
+          },
+          "percentageBasisPoints": {
+            "type": "number",
+            "nullable": true
+          },
+          "fixedAmountMinor": {
+            "type": "string",
+            "nullable": true
+          },
+          "resolvedNetUnitMinor": {
+            "type": "string",
+            "nullable": true
+          },
+          "resolvedGrossUnitMinor": {
+            "type": "string",
+            "nullable": true
+          },
+          "sortOrder": {
+            "type": "number"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "ARCHIVED"
+            ]
+          },
+          "version": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "recipientType",
+          "recipientName",
+          "allocationType",
+          "sortOrder",
+          "status",
+          "version"
+        ]
+      },
+      "TicketPriceComponentDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "amountType": {
+            "type": "string",
+            "enum": [
+              "FIXED",
+              "PERCENTAGE"
+            ]
+          },
+          "percentageBasis": {
+            "type": "string",
+            "enum": [
+              "TICKET_BASE_GROSS"
+            ],
+            "nullable": true
+          },
+          "percentageRateBasisPoints": {
+            "type": "number",
+            "nullable": true
+          },
+          "inputType": {
+            "type": "string",
+            "enum": [
+              "NET",
+              "GROSS"
+            ]
+          },
+          "inputAmountMinor": {
+            "type": "string",
+            "nullable": true
+          },
+          "taxRateBasisPoints": {
+            "type": "number"
+          },
+          "taxRateTemplateId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "taxRateTemplateVersion": {
+            "type": "number",
+            "nullable": true
+          },
+          "taxRateNameSnapshot": {
+            "type": "string",
+            "nullable": true
+          },
+          "guestPays": {
+            "type": "boolean"
+          },
+          "netUnitMinor": {
+            "type": "string",
+            "nullable": true
+          },
+          "grossUnitMinor": {
+            "type": "string",
+            "nullable": true
+          },
+          "allocationComplete": {
+            "type": "boolean"
+          },
+          "allocationDifferenceGrossMinor": {
+            "type": "string",
+            "nullable": true
+          },
+          "allocations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RevenueAllocationDto"
+            }
+          },
+          "sortOrder": {
+            "type": "number"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "ARCHIVED"
+            ]
+          },
+          "version": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "amountType",
+          "inputType",
+          "taxRateBasisPoints",
+          "guestPays",
+          "allocationComplete",
+          "allocations",
+          "sortOrder",
+          "status",
+          "version"
+        ]
+      },
+      "TicketPriceTierDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "expectedQuantity": {
+            "type": "number"
+          },
+          "baseInputType": {
+            "type": "string",
+            "enum": [
+              "NET",
+              "GROSS"
+            ],
+            "nullable": true
+          },
+          "baseInputMinor": {
+            "type": "string",
+            "nullable": true
+          },
+          "baseNetUnitMinor": {
+            "type": "string",
+            "nullable": true
+          },
+          "baseGrossUnitMinor": {
+            "type": "string",
+            "nullable": true
+          },
+          "baseTaxRateBasisPoints": {
+            "type": "number",
+            "nullable": true
+          },
+          "baseTaxRateTemplateId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "baseTaxRateTemplateVersion": {
+            "type": "number",
+            "nullable": true
+          },
+          "baseTaxRateNameSnapshot": {
+            "type": "string",
+            "nullable": true
+          },
+          "sourceTicketProviderTemplateId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "sourceTicketProviderTemplateVersion": {
+            "type": "number",
+            "nullable": true
+          },
+          "sourceTicketProviderNameSnapshot": {
+            "type": "string",
+            "nullable": true
+          },
+          "endCustomerUnitGrossMinor": {
+            "type": "string",
+            "nullable": true
+          },
+          "totalBaseNetMinor": {
+            "type": "string",
+            "nullable": true
+          },
+          "totalBaseGrossMinor": {
+            "type": "string",
+            "nullable": true
+          },
+          "totalEndCustomerGrossMinor": {
+            "type": "string",
+            "nullable": true
+          },
+          "components": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TicketPriceComponentDto"
+            }
+          },
+          "sortOrder": {
+            "type": "number"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "ARCHIVED"
+            ]
+          },
+          "version": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "expectedQuantity",
+          "components",
+          "sortOrder",
+          "status",
+          "version"
+        ]
+      },
+      "AdditionalRevenueDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "calculationType": {
+            "type": "string",
+            "enum": [
+              "FIXED",
+              "PER_EXPECTED_GUEST",
+              "PER_PAYING_TICKET",
+              "PERCENT_TICKET_BASE_NET"
+            ]
+          },
+          "inputType": {
+            "type": "string",
+            "enum": [
+              "NET",
+              "GROSS"
+            ]
+          },
+          "inputAmountMinor": {
+            "type": "string",
+            "nullable": true
+          },
+          "percentageRateBasisPoints": {
+            "type": "number",
+            "nullable": true
+          },
+          "taxRateBasisPoints": {
+            "type": "number"
+          },
+          "taxRateTemplateId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "taxRateTemplateVersion": {
+            "type": "number",
+            "nullable": true
+          },
+          "taxRateNameSnapshot": {
+            "type": "string",
+            "nullable": true
+          },
+          "confirmationStatus": {
+            "type": "string",
+            "enum": [
+              "PLANNED",
+              "CONFIRMED"
+            ]
+          },
+          "note": {
+            "type": "string",
+            "nullable": true
+          },
+          "resolvedQuantity": {
+            "type": "number",
+            "nullable": true
+          },
+          "calculationBasisMinor": {
+            "type": "string",
+            "nullable": true
+          },
+          "totalNetMinor": {
+            "type": "string",
+            "nullable": true
+          },
+          "totalGrossMinor": {
+            "type": "string",
+            "nullable": true
+          },
+          "sortOrder": {
+            "type": "number"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "ARCHIVED"
+            ]
+          },
+          "version": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "calculationType",
+          "inputType",
+          "taxRateBasisPoints",
+          "confirmationStatus",
+          "sortOrder",
+          "status",
+          "version"
+        ]
+      },
+      "RevenueApprovalBlockerDto": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "targetType": {
+            "type": "string",
+            "enum": [
+              "TICKET_TIER",
+              "TICKET_COMPONENT",
+              "ADDITIONAL_REVENUE",
+              "EVENT"
+            ]
+          },
+          "targetId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "required": [
+          "code",
+          "message",
+          "targetType",
+          "targetId"
+        ]
+      },
+      "RevenuePlanTotalsDto": {
+        "type": "object",
+        "properties": {
+          "expectedGuests": {
+            "type": "number",
+            "nullable": true
+          },
+          "expectedTickets": {
+            "type": "number"
+          },
+          "expectedPayingTickets": {
+            "type": "number"
+          },
+          "ticketEndCustomerGrossMinor": {
+            "type": "string"
+          },
+          "ticketBaseNetMinor": {
+            "type": "string"
+          },
+          "ticketBaseGrossMinor": {
+            "type": "string"
+          },
+          "ownTicketRevenueNetMinor": {
+            "type": "string"
+          },
+          "ownTicketRevenueGrossMinor": {
+            "type": "string"
+          },
+          "artistPartnerShareNetMinor": {
+            "type": "string"
+          },
+          "artistPartnerShareGrossMinor": {
+            "type": "string"
+          },
+          "externalPassThroughNetMinor": {
+            "type": "string"
+          },
+          "externalPassThroughGrossMinor": {
+            "type": "string"
+          },
+          "additionalRevenueNetMinor": {
+            "type": "string"
+          },
+          "additionalRevenueGrossMinor": {
+            "type": "string"
+          },
+          "phase7PlannedCostNetMinor": {
+            "type": "string"
+          },
+          "operatingResultNetMinor": {
+            "type": "string"
+          },
+          "costBasisLabel": {
+            "type": "string"
+          },
+          "incomplete": {
+            "type": "boolean"
+          },
+          "approvalBlockers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RevenueApprovalBlockerDto"
+            }
+          }
+        },
+        "required": [
+          "expectedTickets",
+          "expectedPayingTickets",
+          "ticketEndCustomerGrossMinor",
+          "ticketBaseNetMinor",
+          "ticketBaseGrossMinor",
+          "ownTicketRevenueNetMinor",
+          "ownTicketRevenueGrossMinor",
+          "artistPartnerShareNetMinor",
+          "artistPartnerShareGrossMinor",
+          "externalPassThroughNetMinor",
+          "externalPassThroughGrossMinor",
+          "additionalRevenueNetMinor",
+          "additionalRevenueGrossMinor",
+          "phase7PlannedCostNetMinor",
+          "operatingResultNetMinor",
+          "costBasisLabel",
+          "incomplete",
+          "approvalBlockers"
+        ]
+      },
+      "RevenuePlanDto": {
+        "type": "object",
+        "properties": {
+          "calculationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "calculationVersion": {
+            "type": "number"
+          },
+          "calculationStatus": {
+            "type": "string",
+            "enum": [
+              "DRAFT",
+              "REVIEW",
+              "APPROVED"
+            ]
+          },
+          "eventId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "eventVersion": {
+            "type": "number"
+          },
+          "eventName": {
+            "type": "string"
+          },
+          "expectedGuestCount": {
+            "type": "number",
+            "nullable": true
+          },
+          "currency": {
+            "type": "string",
+            "enum": [
+              "EUR"
+            ]
+          },
+          "ticketTiers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TicketPriceTierDto"
+            }
+          },
+          "additionalRevenues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdditionalRevenueDto"
+            }
+          },
+          "totals": {
+            "$ref": "#/components/schemas/RevenuePlanTotalsDto"
+          }
+        },
+        "required": [
+          "calculationId",
+          "calculationVersion",
+          "calculationStatus",
+          "eventId",
+          "eventVersion",
+          "eventName",
+          "currency",
+          "ticketTiers",
+          "additionalRevenues",
+          "totals"
+        ]
+      },
+      "SetExpectedGuestsDto": {
+        "type": "object",
+        "properties": {
+          "eventVersion": {
+            "type": "number",
+            "minimum": 1
+          },
+          "expectedGuestCount": {
+            "type": "number",
+            "minimum": 0,
+            "nullable": true
+          }
+        },
+        "required": [
+          "eventVersion"
+        ]
+      },
+      "PreviewCalculationTemplateDto": {
+        "type": "object",
+        "properties": {
+          "calculationTemplateId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "required": [
+          "calculationTemplateId"
+        ]
+      },
+      "CalculationTemplatePreviewDto": {
+        "type": "object",
+        "properties": {
+          "templateId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "templateName": {
+            "type": "string"
+          },
+          "templateVersion": {
+            "type": "number"
+          },
+          "expectedGuestCount": {
+            "type": "number",
+            "nullable": true
+          },
+          "tierCount": {
+            "type": "number"
+          },
+          "componentCount": {
+            "type": "number"
+          },
+          "additionalRevenueCount": {
+            "type": "number"
+          },
+          "existingTierCount": {
+            "type": "number"
+          },
+          "existingAdditionalRevenueCount": {
+            "type": "number"
+          },
+          "replacementRequired": {
+            "type": "boolean"
+          },
+          "invalidRecipients": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        },
+        "required": [
+          "templateId",
+          "templateName",
+          "templateVersion",
+          "tierCount",
+          "componentCount",
+          "additionalRevenueCount",
+          "existingTierCount",
+          "existingAdditionalRevenueCount",
+          "replacementRequired",
+          "invalidRecipients"
+        ]
+      },
+      "TemplateRecipientResolutionDto": {
+        "type": "object",
+        "properties": {
+          "allocationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "action": {
+            "type": "string",
+            "enum": [
+              "REMOVE",
+              "REPLACE"
+            ]
+          },
+          "recipientType": {
+            "type": "string",
+            "enum": [
+              "ORGANIZATION",
+              "ARTIST",
+              "BUSINESS_PARTNER",
+              "EXTERNAL"
+            ]
+          },
+          "artistId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "businessPartnerId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "externalRecipientName": {
+            "type": "string",
+            "maxLength": 160,
+            "nullable": true
+          }
+        },
+        "required": [
+          "allocationId",
+          "action"
+        ]
+      },
+      "ApplyCalculationTemplateDto": {
+        "type": "object",
+        "properties": {
+          "calculationTemplateId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "calculationVersion": {
+            "type": "number",
+            "minimum": 1
+          },
+          "confirmReplacement": {
+            "type": "boolean"
+          },
+          "recipientResolutions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TemplateRecipientResolutionDto"
+            }
+          }
+        },
+        "required": [
+          "calculationTemplateId",
+          "calculationVersion",
+          "confirmReplacement"
+        ]
+      },
+      "RevenueAllocationInputDto": {
+        "type": "object",
+        "properties": {
+          "recipientType": {
+            "type": "string",
+            "enum": [
+              "ORGANIZATION",
+              "ARTIST",
+              "BUSINESS_PARTNER",
+              "EXTERNAL"
+            ]
+          },
+          "artistId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "businessPartnerId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "externalRecipientName": {
+            "type": "string",
+            "maxLength": 160,
+            "nullable": true
+          },
+          "allocationType": {
+            "type": "string",
+            "enum": [
+              "FIXED",
+              "PERCENTAGE"
+            ]
+          },
+          "percentageBasisPoints": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 10000,
+            "nullable": true
+          },
+          "fixedAmountMinor": {
+            "type": "string",
+            "pattern": "^\\d+$",
+            "nullable": true
+          },
+          "sortOrder": {
+            "type": "number",
+            "minimum": 0,
+            "deprecated": true
+          }
+        },
+        "required": [
+          "recipientType",
+          "allocationType"
+        ]
+      },
+      "TicketComponentInputDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 160
+          },
+          "amountType": {
+            "type": "string",
+            "enum": [
+              "FIXED",
+              "PERCENTAGE"
+            ]
+          },
+          "percentageRateBasisPoints": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100000,
+            "nullable": true
+          },
+          "inputType": {
+            "type": "string",
+            "enum": [
+              "NET",
+              "GROSS"
+            ]
+          },
+          "inputAmountMinor": {
+            "type": "string",
+            "pattern": "^\\d+$",
+            "nullable": true
+          },
+          "taxRateBasisPoints": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100000,
+            "deprecated": true
+          },
+          "taxRateTemplateId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "guestPays": {
+            "type": "boolean"
+          },
+          "sortOrder": {
+            "type": "number",
+            "minimum": 0,
+            "deprecated": true
+          },
+          "allocations": {
+            "maxItems": 100,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RevenueAllocationInputDto"
+            }
+          }
+        },
+        "required": [
+          "name",
+          "amountType",
+          "inputType",
+          "taxRateTemplateId",
+          "guestPays",
+          "allocations"
+        ]
+      },
+      "TicketTierInputDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 160
+          },
+          "expectedQuantity": {
+            "type": "number",
+            "minimum": 0
+          },
+          "baseInputType": {
+            "type": "string",
+            "enum": [
+              "NET",
+              "GROSS"
+            ],
+            "nullable": true
+          },
+          "baseInputMinor": {
+            "type": "string",
+            "pattern": "^\\d+$",
+            "nullable": true
+          },
+          "baseTaxRateBasisPoints": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100000,
+            "nullable": true
+          },
+          "baseTaxRateTemplateId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "sourceTicketProviderTemplateId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "components": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TicketComponentInputDto"
+            }
+          },
+          "sortOrder": {
+            "type": "number",
+            "minimum": 0,
+            "deprecated": true
+          }
+        },
+        "required": [
+          "name",
+          "expectedQuantity"
+        ]
+      },
+      "AdditionalRevenueInputDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 160
+          },
+          "calculationType": {
+            "type": "string",
+            "enum": [
+              "FIXED",
+              "PER_EXPECTED_GUEST",
+              "PER_PAYING_TICKET",
+              "PERCENT_TICKET_BASE_NET"
+            ]
+          },
+          "inputType": {
+            "type": "string",
+            "enum": [
+              "NET",
+              "GROSS"
+            ]
+          },
+          "inputAmountMinor": {
+            "type": "string",
+            "pattern": "^\\d+$",
+            "nullable": true
+          },
+          "percentageRateBasisPoints": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100000,
+            "nullable": true
+          },
+          "taxRateBasisPoints": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100000,
+            "deprecated": true
+          },
+          "taxRateTemplateId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "confirmationStatus": {
+            "type": "string",
+            "enum": [
+              "PLANNED",
+              "CONFIRMED"
+            ]
+          },
+          "note": {
+            "type": "string",
+            "maxLength": 5000,
+            "nullable": true
+          },
+          "sortOrder": {
+            "type": "number",
+            "minimum": 0,
+            "deprecated": true
+          }
+        },
+        "required": [
+          "name",
+          "calculationType",
+          "inputType",
+          "taxRateTemplateId",
+          "confirmationStatus"
+        ]
+      },
+      "UpdateTicketTierDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 160
+          },
+          "expectedQuantity": {
+            "type": "number",
+            "minimum": 0
+          },
+          "baseInputType": {
+            "type": "string",
+            "enum": [
+              "NET",
+              "GROSS"
+            ],
+            "nullable": true
+          },
+          "baseInputMinor": {
+            "type": "string",
+            "pattern": "^\\d+$",
+            "nullable": true
+          },
+          "baseTaxRateBasisPoints": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100000,
+            "nullable": true
+          },
+          "baseTaxRateTemplateId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "sourceTicketProviderTemplateId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "components": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TicketComponentInputDto"
+            }
+          },
+          "sortOrder": {
+            "type": "number",
+            "minimum": 0,
+            "deprecated": true
+          },
+          "version": {
+            "type": "number",
+            "minimum": 1
+          }
+        },
+        "required": [
+          "name",
+          "expectedQuantity",
+          "version"
+        ]
+      },
+      "SetRevenueEntityStatusDto": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "number",
+            "minimum": 1
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "ARCHIVED"
+            ]
+          }
+        },
+        "required": [
+          "version",
+          "status"
+        ]
+      },
+      "MoveRevenueEntityDto": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "number",
+            "minimum": 1
+          },
+          "direction": {
+            "type": "string",
+            "enum": [
+              "UP",
+              "DOWN"
+            ]
+          }
+        },
+        "required": [
+          "version",
+          "direction"
+        ]
+      },
+      "UpdateTicketComponentDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 160
+          },
+          "amountType": {
+            "type": "string",
+            "enum": [
+              "FIXED",
+              "PERCENTAGE"
+            ]
+          },
+          "percentageRateBasisPoints": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100000,
+            "nullable": true
+          },
+          "inputType": {
+            "type": "string",
+            "enum": [
+              "NET",
+              "GROSS"
+            ]
+          },
+          "inputAmountMinor": {
+            "type": "string",
+            "pattern": "^\\d+$",
+            "nullable": true
+          },
+          "taxRateBasisPoints": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100000,
+            "deprecated": true
+          },
+          "taxRateTemplateId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "guestPays": {
+            "type": "boolean"
+          },
+          "sortOrder": {
+            "type": "number",
+            "minimum": 0,
+            "deprecated": true
+          },
+          "allocations": {
+            "maxItems": 100,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RevenueAllocationInputDto"
+            }
+          },
+          "version": {
+            "type": "number",
+            "minimum": 1
+          }
+        },
+        "required": [
+          "name",
+          "amountType",
+          "inputType",
+          "taxRateTemplateId",
+          "guestPays",
+          "allocations",
+          "version"
+        ]
+      },
+      "UpdateAdditionalRevenueDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 160
+          },
+          "calculationType": {
+            "type": "string",
+            "enum": [
+              "FIXED",
+              "PER_EXPECTED_GUEST",
+              "PER_PAYING_TICKET",
+              "PERCENT_TICKET_BASE_NET"
+            ]
+          },
+          "inputType": {
+            "type": "string",
+            "enum": [
+              "NET",
+              "GROSS"
+            ]
+          },
+          "inputAmountMinor": {
+            "type": "string",
+            "pattern": "^\\d+$",
+            "nullable": true
+          },
+          "percentageRateBasisPoints": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100000,
+            "nullable": true
+          },
+          "taxRateBasisPoints": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100000,
+            "deprecated": true
+          },
+          "taxRateTemplateId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "confirmationStatus": {
+            "type": "string",
+            "enum": [
+              "PLANNED",
+              "CONFIRMED"
+            ]
+          },
+          "note": {
+            "type": "string",
+            "maxLength": 5000,
+            "nullable": true
+          },
+          "sortOrder": {
+            "type": "number",
+            "minimum": 0,
+            "deprecated": true
+          },
+          "version": {
+            "type": "number",
+            "minimum": 1
+          }
+        },
+        "required": [
+          "name",
+          "calculationType",
+          "inputType",
+          "taxRateTemplateId",
+          "confirmationStatus",
+          "version"
+        ]
+      },
+      "TaxRateTemplateDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 160
+          },
+          "rateBasisPoints": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Hundertstel Prozent"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "ARCHIVED"
+            ]
+          },
+          "version": {
+            "type": "number"
+          },
+          "archivedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "name",
+          "rateBasisPoints",
+          "id",
+          "status",
+          "version",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "TaxRateTemplateInputDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 160
+          },
+          "rateBasisPoints": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Hundertstel Prozent"
+          }
+        },
+        "required": [
+          "name",
+          "rateBasisPoints"
+        ]
+      },
+      "UpdateTaxRateTemplateDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 160
+          },
+          "rateBasisPoints": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Hundertstel Prozent"
+          },
+          "version": {
+            "type": "number",
+            "minimum": 1
+          }
+        },
+        "required": [
+          "name",
+          "rateBasisPoints",
+          "version"
+        ]
+      },
+      "UpdateRevenueTemplateStatusDto": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "number",
+            "minimum": 1
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "ARCHIVED"
+            ]
+          }
+        },
+        "required": [
+          "version",
+          "status"
+        ]
+      },
+      "TicketProviderTemplateDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "ARCHIVED"
+            ]
+          },
+          "version": {
+            "type": "number"
+          },
+          "components": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "status",
+          "version",
+          "components",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "RevenueTemplateAllocationInputDto": {
+        "type": "object",
+        "properties": {
+          "recipientType": {
+            "type": "string",
+            "enum": [
+              "ORGANIZATION",
+              "ARTIST",
+              "BUSINESS_PARTNER",
+              "EXTERNAL"
+            ]
+          },
+          "artistId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "businessPartnerId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "externalRecipientName": {
+            "type": "string",
+            "maxLength": 160,
+            "nullable": true
+          },
+          "allocationType": {
+            "type": "string",
+            "enum": [
+              "FIXED",
+              "PERCENTAGE"
+            ]
+          },
+          "percentageBasisPoints": {
+            "type": "number",
+            "minimum": 0,
+            "nullable": true
+          },
+          "fixedAmountMinor": {
+            "type": "string",
+            "pattern": "^\\d+$",
+            "nullable": true
+          }
+        },
+        "required": [
+          "recipientType",
+          "allocationType"
+        ]
+      },
+      "RevenueTemplateComponentInputDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 160
+          },
+          "amountType": {
+            "type": "string",
+            "enum": [
+              "FIXED",
+              "PERCENTAGE"
+            ]
+          },
+          "percentageRateBasisPoints": {
+            "type": "number",
+            "minimum": 0,
+            "nullable": true
+          },
+          "inputType": {
+            "type": "string",
+            "enum": [
+              "NET",
+              "GROSS"
+            ]
+          },
+          "inputAmountMinor": {
+            "type": "string",
+            "pattern": "^\\d+$",
+            "nullable": true
+          },
+          "taxRateTemplateId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "guestPays": {
+            "type": "boolean",
+            "default": true
+          },
+          "allocations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RevenueTemplateAllocationInputDto"
+            }
+          }
+        },
+        "required": [
+          "name",
+          "amountType",
+          "inputType",
+          "taxRateTemplateId"
+        ]
+      },
+      "TicketProviderTemplateInputDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 200
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 5000,
+            "nullable": true
+          },
+          "components": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RevenueTemplateComponentInputDto"
+            }
+          }
+        },
+        "required": [
+          "name",
+          "components"
+        ]
+      },
+      "UpdateTicketProviderTemplateDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 200
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 5000,
+            "nullable": true
+          },
+          "components": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RevenueTemplateComponentInputDto"
+            }
+          },
+          "version": {
+            "type": "number",
+            "minimum": 1
+          }
+        },
+        "required": [
+          "name",
+          "components",
+          "version"
+        ]
+      },
+      "DuplicateRevenueTemplateDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 200
+          }
+        }
+      },
+      "CalculationTemplateDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "expectedGuestCount": {
+            "type": "number",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "ARCHIVED"
+            ]
+          },
+          "version": {
+            "type": "number"
+          },
+          "tiers": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "additionalRevenues": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "status",
+          "version",
+          "tiers",
+          "additionalRevenues",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "CalculationTemplateTierInputDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 160
+          },
+          "expectedQuantity": {
+            "type": "number",
+            "minimum": 0,
+            "default": 0
+          },
+          "baseInputType": {
+            "type": "string",
+            "enum": [
+              "NET",
+              "GROSS"
+            ],
+            "nullable": true
+          },
+          "baseInputMinor": {
+            "type": "string",
+            "pattern": "^\\d+$",
+            "nullable": true
+          },
+          "baseTaxRateTemplateId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "sourceTicketProviderTemplateId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "components": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RevenueTemplateComponentInputDto"
+            }
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "CalculationTemplateAdditionalRevenueInputDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 160
+          },
+          "calculationType": {
+            "type": "string",
+            "enum": [
+              "FIXED",
+              "PER_EXPECTED_GUEST",
+              "PER_PAYING_TICKET",
+              "PERCENT_TICKET_BASE_NET"
+            ]
+          },
+          "inputType": {
+            "type": "string",
+            "enum": [
+              "NET",
+              "GROSS"
+            ]
+          },
+          "inputAmountMinor": {
+            "type": "string",
+            "pattern": "^\\d+$",
+            "nullable": true
+          },
+          "percentageRateBasisPoints": {
+            "type": "number",
+            "minimum": 0,
+            "nullable": true
+          },
+          "taxRateTemplateId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "confirmationStatus": {
+            "type": "string",
+            "enum": [
+              "PLANNED",
+              "CONFIRMED"
+            ],
+            "default": "PLANNED"
+          },
+          "note": {
+            "type": "string",
+            "maxLength": 5000,
+            "nullable": true
+          }
+        },
+        "required": [
+          "name",
+          "calculationType",
+          "inputType",
+          "taxRateTemplateId"
+        ]
+      },
+      "CalculationTemplateInputDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 200
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 5000,
+            "nullable": true
+          },
+          "expectedGuestCount": {
+            "type": "number",
+            "minimum": 0,
+            "nullable": true
+          },
+          "tiers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CalculationTemplateTierInputDto"
+            }
+          },
+          "additionalRevenues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CalculationTemplateAdditionalRevenueInputDto"
+            }
+          }
+        },
+        "required": [
+          "name",
+          "tiers",
+          "additionalRevenues"
+        ]
+      },
+      "UpdateCalculationTemplateDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 200
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 5000,
+            "nullable": true
+          },
+          "expectedGuestCount": {
+            "type": "number",
+            "minimum": 0,
+            "nullable": true
+          },
+          "tiers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CalculationTemplateTierInputDto"
+            }
+          },
+          "additionalRevenues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CalculationTemplateAdditionalRevenueInputDto"
+            }
+          },
+          "version": {
+            "type": "number",
+            "minimum": 1
+          }
+        },
+        "required": [
+          "name",
+          "tiers",
+          "additionalRevenues",
+          "version"
+        ]
+      },
+      "SaveEventCalculationTemplateDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 200
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 5000,
+            "nullable": true
+          }
+        },
+        "required": [
+          "name"
         ]
       },
       "ServiceHealthDto": {

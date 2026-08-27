@@ -7,6 +7,7 @@ import {
   IsNotEmpty,
   IsOptional,
   IsString,
+  IsUUID,
   Matches,
   Max,
   MaxLength,
@@ -104,6 +105,11 @@ export class CreateEventFormatDto {
   @IsOptional()
   @IsIn(['UNSPECIFIED', 'ENABLED', 'DISABLED'])
   recordingDefault?: 'UNSPECIFIED' | 'ENABLED' | 'DISABLED';
+
+  @ApiPropertyOptional({ type: String, format: 'uuid', nullable: true })
+  @IsOptional()
+  @IsUUID('4')
+  defaultCalculationTemplateId?: string | null;
 }
 
 export class UpdateEventFormatDto extends PartialType(CreateEventFormatDto) {
@@ -145,6 +151,8 @@ export class EventFormatDto {
   @ApiProperty({ type: Boolean }) defaultEndNextDay!: boolean;
   @ApiProperty({ enum: ['UNSPECIFIED', 'ENABLED', 'DISABLED'] })
   recordingDefault!: 'UNSPECIFIED' | 'ENABLED' | 'DISABLED';
+  @ApiPropertyOptional({ type: String, format: 'uuid', nullable: true })
+  defaultCalculationTemplateId!: string | null;
   @ApiProperty({ enum: ['ACTIVE', 'ARCHIVED'] }) status!: 'ACTIVE' | 'ARCHIVED';
   @ApiPropertyOptional({ type: String, format: 'date-time', nullable: true })
   archivedAt!: string | null;

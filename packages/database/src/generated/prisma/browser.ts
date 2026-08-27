@@ -248,6 +248,71 @@ export type EventCalculationStatusHistory = Prisma.EventCalculationStatusHistory
  */
 export type EventServicePosition = Prisma.EventServicePositionModel
 /**
+ * Model TicketPriceTier
+ * 
+ */
+export type TicketPriceTier = Prisma.TicketPriceTierModel
+/**
+ * Model TicketPriceComponent
+ * 
+ */
+export type TicketPriceComponent = Prisma.TicketPriceComponentModel
+/**
+ * Model TicketComponentAllocation
+ * 
+ */
+export type TicketComponentAllocation = Prisma.TicketComponentAllocationModel
+/**
+ * Model AdditionalRevenue
+ * 
+ */
+export type AdditionalRevenue = Prisma.AdditionalRevenueModel
+/**
+ * Model TaxRateTemplate
+ * 
+ */
+export type TaxRateTemplate = Prisma.TaxRateTemplateModel
+/**
+ * Model TicketProviderTemplate
+ * 
+ */
+export type TicketProviderTemplate = Prisma.TicketProviderTemplateModel
+/**
+ * Model TicketProviderTemplateComponent
+ * 
+ */
+export type TicketProviderTemplateComponent = Prisma.TicketProviderTemplateComponentModel
+/**
+ * Model TicketProviderTemplateAllocation
+ * 
+ */
+export type TicketProviderTemplateAllocation = Prisma.TicketProviderTemplateAllocationModel
+/**
+ * Model CalculationTemplate
+ * 
+ */
+export type CalculationTemplate = Prisma.CalculationTemplateModel
+/**
+ * Model CalculationTemplateTier
+ * 
+ */
+export type CalculationTemplateTier = Prisma.CalculationTemplateTierModel
+/**
+ * Model CalculationTemplateComponent
+ * 
+ */
+export type CalculationTemplateComponent = Prisma.CalculationTemplateComponentModel
+/**
+ * Model CalculationTemplateAllocation
+ * 
+ */
+export type CalculationTemplateAllocation = Prisma.CalculationTemplateAllocationModel
+/**
+ * Model CalculationTemplateAdditionalRevenue
+ * 
+ */
+export type CalculationTemplateAdditionalRevenue = Prisma.CalculationTemplateAdditionalRevenueModel
+/**
  * Model VenueDateOption
  * 
  */

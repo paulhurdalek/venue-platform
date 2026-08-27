@@ -63,7 +63,7 @@ try {
   run('docker', ['compose', 'version'], { capture: true });
 } catch (error) {
   const message = error instanceof Error ? error.message : String(error);
-  process.stderr.write(`Phase 7 container verification cannot start: ${message}\n`);
+  process.stderr.write(`Phase 8 container verification cannot start: ${message}\n`);
   process.exit(1);
 }
 
@@ -85,7 +85,7 @@ try {
   logStep(4, 'Building the internal workspace packages required by the API');
   pnpm(['packages:build']);
 
-  logStep(5, 'Running the real Phase 1 through Phase 7 API integration suites');
+  logStep(5, 'Running the real Phase 1 through Phase 8 API integration suites');
   pnpm(['--filter', '@venue/api', 'test:integration'], testDatabaseEnvironment);
 
   logStep(6, 'Verifying development data survives container replacement');
@@ -161,7 +161,7 @@ try {
     );
   }
 
-  process.stdout.write('\nPhase 7 container verification passed.\n');
+  process.stdout.write('\nPhase 8 container verification passed.\n');
 } finally {
   run('docker', [...composeArguments, 'down', '--volumes', '--remove-orphans'], {
     allowFailure: true,

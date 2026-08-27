@@ -113,7 +113,7 @@ describeWithDatabase('Phase 3 master-data integration', () => {
       ]),
     );
 
-    expect(keysByRole.administrator).toHaveLength(43);
+    expect(keysByRole.administrator).toHaveLength(46);
     expect(keysByRole.management_finance).toEqual(
       [
         'artists.read',
@@ -144,6 +144,9 @@ describeWithDatabase('Phase 3 master-data integration', () => {
         'location.read',
         'lineup.write',
         'organization.read',
+        'revenue_templates.archive',
+        'revenue_templates.read',
+        'revenue_templates.write',
         'services.archive',
         'services.read',
         'services.write',

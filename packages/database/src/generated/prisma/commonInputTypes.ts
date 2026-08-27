@@ -660,6 +660,142 @@ export type EnumCostStatusWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumCostStatusFilter<$PrismaModel>
 }
 
+export type EnumPriceInputTypeNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.PriceInputType | Prisma.EnumPriceInputTypeFieldRefInput<$PrismaModel> | null
+  in?: $Enums.PriceInputType[] | Prisma.ListEnumPriceInputTypeFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.PriceInputType[] | Prisma.ListEnumPriceInputTypeFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumPriceInputTypeNullableFilter<$PrismaModel> | $Enums.PriceInputType | null
+}
+
+export type EnumPriceInputTypeNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PriceInputType | Prisma.EnumPriceInputTypeFieldRefInput<$PrismaModel> | null
+  in?: $Enums.PriceInputType[] | Prisma.ListEnumPriceInputTypeFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.PriceInputType[] | Prisma.ListEnumPriceInputTypeFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumPriceInputTypeNullableWithAggregatesFilter<$PrismaModel> | $Enums.PriceInputType | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPriceInputTypeNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPriceInputTypeNullableFilter<$PrismaModel>
+}
+
+export type EnumRevenueAmountTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.RevenueAmountType | Prisma.EnumRevenueAmountTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.RevenueAmountType[] | Prisma.ListEnumRevenueAmountTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.RevenueAmountType[] | Prisma.ListEnumRevenueAmountTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumRevenueAmountTypeFilter<$PrismaModel> | $Enums.RevenueAmountType
+}
+
+export type EnumTicketPercentageBasisNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.TicketPercentageBasis | Prisma.EnumTicketPercentageBasisFieldRefInput<$PrismaModel> | null
+  in?: $Enums.TicketPercentageBasis[] | Prisma.ListEnumTicketPercentageBasisFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.TicketPercentageBasis[] | Prisma.ListEnumTicketPercentageBasisFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumTicketPercentageBasisNullableFilter<$PrismaModel> | $Enums.TicketPercentageBasis | null
+}
+
+export type EnumPriceInputTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.PriceInputType | Prisma.EnumPriceInputTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.PriceInputType[] | Prisma.ListEnumPriceInputTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PriceInputType[] | Prisma.ListEnumPriceInputTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPriceInputTypeFilter<$PrismaModel> | $Enums.PriceInputType
+}
+
+export type EnumRevenueAmountTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.RevenueAmountType | Prisma.EnumRevenueAmountTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.RevenueAmountType[] | Prisma.ListEnumRevenueAmountTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.RevenueAmountType[] | Prisma.ListEnumRevenueAmountTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumRevenueAmountTypeWithAggregatesFilter<$PrismaModel> | $Enums.RevenueAmountType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumRevenueAmountTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumRevenueAmountTypeFilter<$PrismaModel>
+}
+
+export type EnumTicketPercentageBasisNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.TicketPercentageBasis | Prisma.EnumTicketPercentageBasisFieldRefInput<$PrismaModel> | null
+  in?: $Enums.TicketPercentageBasis[] | Prisma.ListEnumTicketPercentageBasisFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.TicketPercentageBasis[] | Prisma.ListEnumTicketPercentageBasisFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumTicketPercentageBasisNullableWithAggregatesFilter<$PrismaModel> | $Enums.TicketPercentageBasis | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumTicketPercentageBasisNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumTicketPercentageBasisNullableFilter<$PrismaModel>
+}
+
+export type EnumPriceInputTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PriceInputType | Prisma.EnumPriceInputTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.PriceInputType[] | Prisma.ListEnumPriceInputTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PriceInputType[] | Prisma.ListEnumPriceInputTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPriceInputTypeWithAggregatesFilter<$PrismaModel> | $Enums.PriceInputType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPriceInputTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPriceInputTypeFilter<$PrismaModel>
+}
+
+export type EnumRevenueRecipientTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.RevenueRecipientType | Prisma.EnumRevenueRecipientTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.RevenueRecipientType[] | Prisma.ListEnumRevenueRecipientTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.RevenueRecipientType[] | Prisma.ListEnumRevenueRecipientTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumRevenueRecipientTypeFilter<$PrismaModel> | $Enums.RevenueRecipientType
+}
+
+export type EnumRevenueAllocationTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.RevenueAllocationType | Prisma.EnumRevenueAllocationTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.RevenueAllocationType[] | Prisma.ListEnumRevenueAllocationTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.RevenueAllocationType[] | Prisma.ListEnumRevenueAllocationTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumRevenueAllocationTypeFilter<$PrismaModel> | $Enums.RevenueAllocationType
+}
+
+export type EnumRevenueRecipientTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.RevenueRecipientType | Prisma.EnumRevenueRecipientTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.RevenueRecipientType[] | Prisma.ListEnumRevenueRecipientTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.RevenueRecipientType[] | Prisma.ListEnumRevenueRecipientTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumRevenueRecipientTypeWithAggregatesFilter<$PrismaModel> | $Enums.RevenueRecipientType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumRevenueRecipientTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumRevenueRecipientTypeFilter<$PrismaModel>
+}
+
+export type EnumRevenueAllocationTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.RevenueAllocationType | Prisma.EnumRevenueAllocationTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.RevenueAllocationType[] | Prisma.ListEnumRevenueAllocationTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.RevenueAllocationType[] | Prisma.ListEnumRevenueAllocationTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumRevenueAllocationTypeWithAggregatesFilter<$PrismaModel> | $Enums.RevenueAllocationType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumRevenueAllocationTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumRevenueAllocationTypeFilter<$PrismaModel>
+}
+
+export type EnumAdditionalRevenueCalculationTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.AdditionalRevenueCalculationType | Prisma.EnumAdditionalRevenueCalculationTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.AdditionalRevenueCalculationType[] | Prisma.ListEnumAdditionalRevenueCalculationTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AdditionalRevenueCalculationType[] | Prisma.ListEnumAdditionalRevenueCalculationTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAdditionalRevenueCalculationTypeFilter<$PrismaModel> | $Enums.AdditionalRevenueCalculationType
+}
+
+export type EnumRevenueConfirmationStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.RevenueConfirmationStatus | Prisma.EnumRevenueConfirmationStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.RevenueConfirmationStatus[] | Prisma.ListEnumRevenueConfirmationStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.RevenueConfirmationStatus[] | Prisma.ListEnumRevenueConfirmationStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumRevenueConfirmationStatusFilter<$PrismaModel> | $Enums.RevenueConfirmationStatus
+}
+
+export type EnumAdditionalRevenueCalculationTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.AdditionalRevenueCalculationType | Prisma.EnumAdditionalRevenueCalculationTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.AdditionalRevenueCalculationType[] | Prisma.ListEnumAdditionalRevenueCalculationTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AdditionalRevenueCalculationType[] | Prisma.ListEnumAdditionalRevenueCalculationTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAdditionalRevenueCalculationTypeWithAggregatesFilter<$PrismaModel> | $Enums.AdditionalRevenueCalculationType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumAdditionalRevenueCalculationTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumAdditionalRevenueCalculationTypeFilter<$PrismaModel>
+}
+
+export type EnumRevenueConfirmationStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.RevenueConfirmationStatus | Prisma.EnumRevenueConfirmationStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.RevenueConfirmationStatus[] | Prisma.ListEnumRevenueConfirmationStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.RevenueConfirmationStatus[] | Prisma.ListEnumRevenueConfirmationStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumRevenueConfirmationStatusWithAggregatesFilter<$PrismaModel> | $Enums.RevenueConfirmationStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumRevenueConfirmationStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumRevenueConfirmationStatusFilter<$PrismaModel>
+}
+
 export type EnumVenueDateOptionRankFilter<$PrismaModel = never> = {
   equals?: $Enums.VenueDateOptionRank | Prisma.EnumVenueDateOptionRankFieldRefInput<$PrismaModel>
   in?: $Enums.VenueDateOptionRank[] | Prisma.ListEnumVenueDateOptionRankFieldRefInput<$PrismaModel>
@@ -1337,6 +1473,142 @@ export type NestedEnumCostStatusWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumCostStatusFilter<$PrismaModel>
   _max?: Prisma.NestedEnumCostStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumPriceInputTypeNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.PriceInputType | Prisma.EnumPriceInputTypeFieldRefInput<$PrismaModel> | null
+  in?: $Enums.PriceInputType[] | Prisma.ListEnumPriceInputTypeFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.PriceInputType[] | Prisma.ListEnumPriceInputTypeFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumPriceInputTypeNullableFilter<$PrismaModel> | $Enums.PriceInputType | null
+}
+
+export type NestedEnumPriceInputTypeNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PriceInputType | Prisma.EnumPriceInputTypeFieldRefInput<$PrismaModel> | null
+  in?: $Enums.PriceInputType[] | Prisma.ListEnumPriceInputTypeFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.PriceInputType[] | Prisma.ListEnumPriceInputTypeFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumPriceInputTypeNullableWithAggregatesFilter<$PrismaModel> | $Enums.PriceInputType | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPriceInputTypeNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPriceInputTypeNullableFilter<$PrismaModel>
+}
+
+export type NestedEnumRevenueAmountTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.RevenueAmountType | Prisma.EnumRevenueAmountTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.RevenueAmountType[] | Prisma.ListEnumRevenueAmountTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.RevenueAmountType[] | Prisma.ListEnumRevenueAmountTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumRevenueAmountTypeFilter<$PrismaModel> | $Enums.RevenueAmountType
+}
+
+export type NestedEnumTicketPercentageBasisNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.TicketPercentageBasis | Prisma.EnumTicketPercentageBasisFieldRefInput<$PrismaModel> | null
+  in?: $Enums.TicketPercentageBasis[] | Prisma.ListEnumTicketPercentageBasisFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.TicketPercentageBasis[] | Prisma.ListEnumTicketPercentageBasisFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumTicketPercentageBasisNullableFilter<$PrismaModel> | $Enums.TicketPercentageBasis | null
+}
+
+export type NestedEnumPriceInputTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.PriceInputType | Prisma.EnumPriceInputTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.PriceInputType[] | Prisma.ListEnumPriceInputTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PriceInputType[] | Prisma.ListEnumPriceInputTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPriceInputTypeFilter<$PrismaModel> | $Enums.PriceInputType
+}
+
+export type NestedEnumRevenueAmountTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.RevenueAmountType | Prisma.EnumRevenueAmountTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.RevenueAmountType[] | Prisma.ListEnumRevenueAmountTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.RevenueAmountType[] | Prisma.ListEnumRevenueAmountTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumRevenueAmountTypeWithAggregatesFilter<$PrismaModel> | $Enums.RevenueAmountType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumRevenueAmountTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumRevenueAmountTypeFilter<$PrismaModel>
+}
+
+export type NestedEnumTicketPercentageBasisNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.TicketPercentageBasis | Prisma.EnumTicketPercentageBasisFieldRefInput<$PrismaModel> | null
+  in?: $Enums.TicketPercentageBasis[] | Prisma.ListEnumTicketPercentageBasisFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.TicketPercentageBasis[] | Prisma.ListEnumTicketPercentageBasisFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumTicketPercentageBasisNullableWithAggregatesFilter<$PrismaModel> | $Enums.TicketPercentageBasis | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumTicketPercentageBasisNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumTicketPercentageBasisNullableFilter<$PrismaModel>
+}
+
+export type NestedEnumPriceInputTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PriceInputType | Prisma.EnumPriceInputTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.PriceInputType[] | Prisma.ListEnumPriceInputTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PriceInputType[] | Prisma.ListEnumPriceInputTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPriceInputTypeWithAggregatesFilter<$PrismaModel> | $Enums.PriceInputType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPriceInputTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPriceInputTypeFilter<$PrismaModel>
+}
+
+export type NestedEnumRevenueRecipientTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.RevenueRecipientType | Prisma.EnumRevenueRecipientTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.RevenueRecipientType[] | Prisma.ListEnumRevenueRecipientTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.RevenueRecipientType[] | Prisma.ListEnumRevenueRecipientTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumRevenueRecipientTypeFilter<$PrismaModel> | $Enums.RevenueRecipientType
+}
+
+export type NestedEnumRevenueAllocationTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.RevenueAllocationType | Prisma.EnumRevenueAllocationTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.RevenueAllocationType[] | Prisma.ListEnumRevenueAllocationTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.RevenueAllocationType[] | Prisma.ListEnumRevenueAllocationTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumRevenueAllocationTypeFilter<$PrismaModel> | $Enums.RevenueAllocationType
+}
+
+export type NestedEnumRevenueRecipientTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.RevenueRecipientType | Prisma.EnumRevenueRecipientTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.RevenueRecipientType[] | Prisma.ListEnumRevenueRecipientTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.RevenueRecipientType[] | Prisma.ListEnumRevenueRecipientTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumRevenueRecipientTypeWithAggregatesFilter<$PrismaModel> | $Enums.RevenueRecipientType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumRevenueRecipientTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumRevenueRecipientTypeFilter<$PrismaModel>
+}
+
+export type NestedEnumRevenueAllocationTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.RevenueAllocationType | Prisma.EnumRevenueAllocationTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.RevenueAllocationType[] | Prisma.ListEnumRevenueAllocationTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.RevenueAllocationType[] | Prisma.ListEnumRevenueAllocationTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumRevenueAllocationTypeWithAggregatesFilter<$PrismaModel> | $Enums.RevenueAllocationType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumRevenueAllocationTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumRevenueAllocationTypeFilter<$PrismaModel>
+}
+
+export type NestedEnumAdditionalRevenueCalculationTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.AdditionalRevenueCalculationType | Prisma.EnumAdditionalRevenueCalculationTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.AdditionalRevenueCalculationType[] | Prisma.ListEnumAdditionalRevenueCalculationTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AdditionalRevenueCalculationType[] | Prisma.ListEnumAdditionalRevenueCalculationTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAdditionalRevenueCalculationTypeFilter<$PrismaModel> | $Enums.AdditionalRevenueCalculationType
+}
+
+export type NestedEnumRevenueConfirmationStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.RevenueConfirmationStatus | Prisma.EnumRevenueConfirmationStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.RevenueConfirmationStatus[] | Prisma.ListEnumRevenueConfirmationStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.RevenueConfirmationStatus[] | Prisma.ListEnumRevenueConfirmationStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumRevenueConfirmationStatusFilter<$PrismaModel> | $Enums.RevenueConfirmationStatus
+}
+
+export type NestedEnumAdditionalRevenueCalculationTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.AdditionalRevenueCalculationType | Prisma.EnumAdditionalRevenueCalculationTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.AdditionalRevenueCalculationType[] | Prisma.ListEnumAdditionalRevenueCalculationTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AdditionalRevenueCalculationType[] | Prisma.ListEnumAdditionalRevenueCalculationTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAdditionalRevenueCalculationTypeWithAggregatesFilter<$PrismaModel> | $Enums.AdditionalRevenueCalculationType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumAdditionalRevenueCalculationTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumAdditionalRevenueCalculationTypeFilter<$PrismaModel>
+}
+
+export type NestedEnumRevenueConfirmationStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.RevenueConfirmationStatus | Prisma.EnumRevenueConfirmationStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.RevenueConfirmationStatus[] | Prisma.ListEnumRevenueConfirmationStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.RevenueConfirmationStatus[] | Prisma.ListEnumRevenueConfirmationStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumRevenueConfirmationStatusWithAggregatesFilter<$PrismaModel> | $Enums.RevenueConfirmationStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumRevenueConfirmationStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumRevenueConfirmationStatusFilter<$PrismaModel>
 }
 
 export type NestedEnumVenueDateOptionRankFilter<$PrismaModel = never> = {

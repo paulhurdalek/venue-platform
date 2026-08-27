@@ -64,6 +64,13 @@ export default async function EventFormatDetailPage({
     ),
   );
   const canReadServices = hasPermission(membership, 'services.read');
+  const calculationTemplates = hasPermission(membership, 'revenue_templates.read')
+    ? unwrap(
+        await client.GET('/api/v1/organizations/{organizationId}/revenue-templates/calculations', {
+          params: { path: { organizationId }, query: { status: 'ACTIVE' } },
+        }),
+      )
+    : [];
   const serviceData = canReadServices
     ? await Promise.all([
         client.GET(
@@ -103,10 +110,23 @@ export default async function EventFormatDetailPage({
         }
         title={eventFormat.name}
         updatedLabel={`Zuletzt geändert: ${new Date(eventFormat.updatedAt).toLocaleString('de-DE')}`}
-        view={<EventFormatDetails eventFormat={eventFormat} />}
+        view={
+          <EventFormatDetails
+            calculationTemplateName={
+              calculationTemplates.find(
+                (template) => template.id === eventFormat.defaultCalculationTemplateId,
+              )?.name
+            }
+            eventFormat={eventFormat}
+          />
+        }
       >
         {canWrite ? (
-          <EventFormatForm eventFormat={eventFormat} organizationId={organizationId} />
+          <EventFormatForm
+            calculationTemplates={calculationTemplates}
+            eventFormat={eventFormat}
+            organizationId={organizationId}
+          />
         ) : null}
       </EditableDetail>
       <section className="booking-panel event-format-lineup-panel">
@@ -135,7 +155,13 @@ export default async function EventFormatDetailPage({
   );
 }
 
-function EventFormatDetails({ eventFormat }: { eventFormat: EventFormat }) {
+function EventFormatDetails({
+  eventFormat,
+  calculationTemplateName,
+}: {
+  eventFormat: EventFormat;
+  calculationTemplateName: string | undefined;
+}) {
   const hasTimes = Boolean(
     eventFormat.defaultTechnicalGetInTime ||
     eventFormat.defaultArtistGetInTime ||
@@ -191,6 +217,9 @@ function EventFormatDetails({ eventFormat }: { eventFormat: EventFormat }) {
         <DetailFields>
           <DetailField label="Aufzeichnung">
             {recordingLabel(eventFormat.recordingDefault)}
+          </DetailField>
+          <DetailField label="Kalkulationsvorschlag">
+            {calculationTemplateName ?? 'Keiner'}
           </DetailField>
         </DetailFields>
       </DetailSection>

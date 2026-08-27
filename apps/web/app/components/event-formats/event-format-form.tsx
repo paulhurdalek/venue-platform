@@ -11,15 +11,18 @@ import { EditCancelAction, useDetailEdit } from '../master-data/editable-detail'
 
 type EventFormat = components['schemas']['EventFormatDto'];
 type CreateEventFormat = components['schemas']['CreateEventFormatDto'];
+type CalculationTemplate = components['schemas']['CalculationTemplateDto'];
 
 const nullable = (form: FormData, name: string) => String(form.get(name) ?? '').trim() || null;
 
 export function EventFormatForm({
   organizationId,
   eventFormat,
+  calculationTemplates = [],
 }: {
   organizationId: string;
   eventFormat?: EventFormat;
+  calculationTemplates?: CalculationTemplate[];
 }) {
   const router = useRouter();
   const detailEdit = useDetailEdit();
@@ -46,6 +49,8 @@ export function EventFormatForm({
       recordingDefault: String(
         form.get('recordingDefault'),
       ) as CreateEventFormat['recordingDefault'],
+      defaultCalculationTemplateId:
+        String(form.get('defaultCalculationTemplateId') ?? '').trim() || null,
     };
     const client = createBrowserApiClient();
     const result = eventFormat
@@ -168,6 +173,23 @@ export function EventFormatForm({
             <option value="ENABLED">Standardmäßig aktiv</option>
             <option value="DISABLED">Standardmäßig inaktiv</option>
           </select>
+        </label>
+        <label>
+          Vorgeschlagene Kalkulationsvorlage <span className="optional">optional</span>
+          <select
+            defaultValue={eventFormat?.defaultCalculationTemplateId ?? ''}
+            name="defaultCalculationTemplateId"
+          >
+            <option value="">Kein Vorschlag</option>
+            {calculationTemplates.map((template) => (
+              <option key={template.id} value={template.id}>
+                {template.name}
+              </option>
+            ))}
+          </select>
+          <span className="field-hint">
+            Dieser Wert wird beim Event nur vorgeschlagen und niemals automatisch übernommen.
+          </span>
         </label>
       </fieldset>
       <div className="form-span">

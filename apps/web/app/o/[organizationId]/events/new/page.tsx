@@ -20,7 +20,7 @@ export default async function NewEventPage({
     );
   }
   const client = await serverApiClient();
-  const [formatResult, locationResult] = await Promise.all([
+  const [formatResult, locationResult, calculationTemplateResult] = await Promise.all([
     client.GET('/api/v1/organizations/{organizationId}/event-formats', {
       params: {
         path: { organizationId },
@@ -30,6 +30,11 @@ export default async function NewEventPage({
     client.GET('/api/v1/organizations/{organizationId}/locations', {
       params: { path: { organizationId } },
     }),
+    hasPermission(membership, 'revenue_templates.read')
+      ? client.GET('/api/v1/organizations/{organizationId}/revenue-templates/calculations', {
+          params: { path: { organizationId }, query: { status: 'ACTIVE' } },
+        })
+      : Promise.resolve(undefined),
   ]);
   const eventFormats = unwrap(formatResult).items;
   const locations = unwrap(locationResult).filter((location) => location.status === 'ACTIVE');
@@ -54,6 +59,9 @@ export default async function NewEventPage({
       ) : (
         <section className="panel">
           <EventForm
+            calculationTemplates={
+              calculationTemplateResult ? unwrap(calculationTemplateResult) : []
+            }
             eventFormats={eventFormats}
             initialDate={initialDate}
             locations={locations}

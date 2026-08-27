@@ -1,6 +1,6 @@
 import { EventFormatForm } from '../../../../components/event-formats/event-format-form';
 import { activePageMembership } from '../../../../../src/api/page-access';
-import { hasPermission } from '../../../../../src/api/server';
+import { hasPermission, serverApiClient, unwrap } from '../../../../../src/api/server';
 
 export default async function NewEventFormatPage({
   params,
@@ -20,6 +20,15 @@ export default async function NewEventFormatPage({
       </section>
     );
   }
+  const calculationTemplates = hasPermission(membership, 'revenue_templates.read')
+    ? unwrap(
+        await (
+          await serverApiClient()
+        ).GET('/api/v1/organizations/{organizationId}/revenue-templates/calculations', {
+          params: { path: { organizationId }, query: { status: 'ACTIVE' } },
+        }),
+      )
+    : [];
   return (
     <>
       <header className="page-heading">
@@ -33,7 +42,10 @@ export default async function NewEventFormatPage({
         </div>
       </header>
       <section className="panel">
-        <EventFormatForm organizationId={organizationId} />
+        <EventFormatForm
+          calculationTemplates={calculationTemplates}
+          organizationId={organizationId}
+        />
       </section>
     </>
   );

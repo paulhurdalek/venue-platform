@@ -43,6 +43,10 @@ export interface EventRecord {
   recordingSetting: RecordingSetting;
   timezone: string;
   occupancyComplete: boolean;
+  expectedGuestCount: number | null;
+  sourceCalculationTemplateId: string | null;
+  sourceCalculationTemplateVersion: number | null;
+  calculationTemplateNameSnapshot: string | null;
   bookingSummary: EventBookingSummary;
   createdAt: string;
   updatedAt: string;
@@ -66,10 +70,13 @@ export interface EventStoredValues {
   endMinutes: number | null;
   recordingSetting: RecordingSetting;
   timezone: string;
+  expectedGuestCount: number | null;
+  sourceCalculationTemplateId: string | null;
 }
 
 export interface CreateEventInput {
   sourceEventFormatId?: string;
+  sourceCalculationTemplateId?: string;
   eventKind?: EventKind;
   locationId: string;
   eventDate: string;
@@ -82,6 +89,7 @@ export interface CreateEventInput {
   endTime?: string | null;
   endNextDay?: boolean;
   recordingSetting?: RecordingSetting;
+  expectedGuestCount?: number | null;
 }
 
 export interface UpdateEventInput {
@@ -96,6 +104,7 @@ export interface UpdateEventInput {
   endTime?: string | null;
   endNextDay?: boolean;
   recordingSetting?: RecordingSetting;
+  expectedGuestCount?: number | null;
 }
 
 export interface EventListQuery {

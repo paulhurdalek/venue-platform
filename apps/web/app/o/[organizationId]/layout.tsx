@@ -46,47 +46,38 @@ export default async function OrganizationLayout({
     const canViewEventFormats = hasPermission(membership, 'event_formats.read');
     const canViewEvents = hasPermission(membership, 'events.read');
     const canViewServices = hasPermission(membership, 'services.read');
+    const canViewRevenueTemplates = hasPermission(membership, 'revenue_templates.read');
     return (
       <div className="workspace-shell">
-        <header className="workspace-header">
-          <a className="workspace-brand" href={`/o/${organizationId}`}>
-            <span className="brand-mark" aria-hidden="true">
-              VP
-            </span>
-            <span>
-              <strong>{membership.organizationName}</strong>
-              <small>Verwaltung</small>
-            </span>
-          </a>
-          <WorkspaceNavigation
-            organizationId={organizationId}
-            sections={[
-              { href: `/o/${organizationId}`, label: 'Übersicht' },
-              ...(canViewArtists
-                ? [{ href: `/o/${organizationId}/artists`, label: 'Artists' }]
-                : []),
-              ...(canViewContacts
-                ? [{ href: `/o/${organizationId}/contacts`, label: 'Kontakte' }]
-                : []),
-              ...(canViewBusinessPartners
-                ? [{ href: `/o/${organizationId}/business-partners`, label: 'Geschäftspartner' }]
-                : []),
-              ...(canViewEventFormats
-                ? [{ href: `/o/${organizationId}/event-formats`, label: 'Formate' }]
-                : []),
-              ...(canViewEvents
-                ? [{ href: `/o/${organizationId}/events`, label: 'Veranstaltungen' }]
-                : []),
-              ...(canViewServices
-                ? [{ href: `/o/${organizationId}/services`, label: 'Leistungen' }]
-                : []),
-              { href: `/o/${organizationId}/settings/organization`, label: 'Organisation' },
-              { href: `/o/${organizationId}/settings/location`, label: 'Location' },
-              ...(canViewTeam
-                ? [{ href: `/o/${organizationId}/settings/team`, label: 'Team' }]
-                : []),
-            ]}
-          />
+        <WorkspaceNavigation
+          organizationId={organizationId}
+          organizationName={membership.organizationName}
+          sections={[
+            { href: `/o/${organizationId}`, label: 'Übersicht' },
+            ...(canViewArtists ? [{ href: `/o/${organizationId}/artists`, label: 'Artists' }] : []),
+            ...(canViewContacts
+              ? [{ href: `/o/${organizationId}/contacts`, label: 'Kontakte' }]
+              : []),
+            ...(canViewBusinessPartners
+              ? [{ href: `/o/${organizationId}/business-partners`, label: 'Geschäftspartner' }]
+              : []),
+            ...(canViewEventFormats
+              ? [{ href: `/o/${organizationId}/event-formats`, label: 'Formate' }]
+              : []),
+            ...(canViewEvents
+              ? [{ href: `/o/${organizationId}/events`, label: 'Veranstaltungen' }]
+              : []),
+            ...(canViewServices
+              ? [{ href: `/o/${organizationId}/services`, label: 'Leistungen' }]
+              : []),
+            ...(canViewRevenueTemplates
+              ? [{ href: `/o/${organizationId}/revenue-templates`, label: 'Erlösvorlagen' }]
+              : []),
+            { href: `/o/${organizationId}/settings/organization`, label: 'Organisation' },
+            { href: `/o/${organizationId}/settings/location`, label: 'Location' },
+            ...(canViewTeam ? [{ href: `/o/${organizationId}/settings/team`, label: 'Team' }] : []),
+          ]}
+        >
           <div className="workspace-account">
             {context.memberships.filter((item) => item.status === 'ACTIVE').length > 1 ? (
               <a className="text-link" href="/organizations">
@@ -96,7 +87,7 @@ export default async function OrganizationLayout({
             <span>{context.name}</span>
             <SignOutButton />
           </div>
-        </header>
+        </WorkspaceNavigation>
         <main className="workspace-main" id="main-content">
           {children}
         </main>

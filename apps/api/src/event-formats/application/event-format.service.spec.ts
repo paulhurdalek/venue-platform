@@ -101,6 +101,7 @@ function record(): EventFormatRecord {
     defaultEndTime: '01:30',
     defaultEndNextDay: true,
     recordingDefault: 'UNSPECIFIED',
+    defaultCalculationTemplateId: null,
     status: 'ACTIVE',
     archivedAt: null,
     version: 1,

@@ -122,6 +122,44 @@ enum CostStatus {
   COMMITTED
 }
 
+enum PriceInputType {
+  NET
+  GROSS
+}
+
+enum RevenueAmountType {
+  FIXED
+  PERCENTAGE
+}
+
+enum TicketPercentageBasis {
+  TICKET_BASE_GROSS
+}
+
+enum RevenueAllocationType {
+  FIXED
+  PERCENTAGE
+}
+
+enum RevenueRecipientType {
+  ORGANIZATION
+  ARTIST
+  BUSINESS_PARTNER
+  EXTERNAL
+}
+
+enum AdditionalRevenueCalculationType {
+  FIXED
+  PER_EXPECTED_GUEST
+  PER_PAYING_TICKET
+  PERCENT_TICKET_BASE_NET
+}
+
+enum RevenueConfirmationStatus {
+  PLANNED
+  CONFIRMED
+}
+
 model User {
   id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name          String
@@ -255,6 +293,19 @@ model Organization {
   eventCalculations EventCalculation[]
   calculationStatusHistory EventCalculationStatusHistory[]
   eventServicePositions EventServicePosition[]
+  ticketPriceTiers TicketPriceTier[]
+  ticketPriceComponents TicketPriceComponent[]
+  ticketComponentAllocations TicketComponentAllocation[]
+  additionalRevenues AdditionalRevenue[]
+  taxRateTemplates TaxRateTemplate[]
+  ticketProviderTemplates TicketProviderTemplate[]
+  ticketProviderTemplateComponents TicketProviderTemplateComponent[]
+  ticketProviderTemplateAllocations TicketProviderTemplateAllocation[]
+  calculationTemplates CalculationTemplate[]
+  calculationTemplateTiers CalculationTemplateTier[]
+  calculationTemplateComponents CalculationTemplateComponent[]
+  calculationTemplateAllocations CalculationTemplateAllocation[]
+  calculationTemplateAdditionalRevenues CalculationTemplateAdditionalRevenue[]
 
   @@index([status])
   @@map("organization")
@@ -273,6 +324,7 @@ model EventFormat {
   startMinutes          Int?             @map("start_minutes")
   endMinutes            Int?             @map("end_minutes")
   recordingDefault      RecordingDefault @default(UNSPECIFIED) @map("recording_default")
+  defaultCalculationTemplateId String?    @map("default_calculation_template_id") @db.Uuid
   status                EntityStatus     @default(ACTIVE)
   archivedAt            DateTime?        @map("archived_at")
   version               Int              @default(1)
@@ -282,11 +334,13 @@ model EventFormat {
   sourceEvents          Event[]
   lineupRequirements    EventFormatLineupRequirement[]
   serviceRequirements   EventFormatService[]
+  defaultCalculationTemplate CalculationTemplate? @relation("EventFormatDefaultCalculationTemplate", fields: [defaultCalculationTemplateId, organizationId], references: [id, organizationId], onDelete: Restrict)
 
   @@unique([id, organizationId])
   @@unique([organizationId, normalizedName])
   @@index([organizationId, status, name, id])
   @@index([organizationId, eventKind, status])
+  @@index([organizationId, defaultCalculationTemplateId])
   @@map("event_format")
 }
 
@@ -314,6 +368,10 @@ model Event {
   endMinutes            Int?                @map("end_minutes")
   recordingSetting      RecordingDefault    @default(UNSPECIFIED) @map("recording_setting")
   timezone              String              @map("timezone_snapshot") @db.VarChar(100)
+  expectedGuestCount    Int?                @map("expected_guest_count")
+  sourceCalculationTemplateId String?       @map("source_calculation_template_id") @db.Uuid
+  sourceCalculationTemplateVersion Int?     @map("source_calculation_template_version")
+  calculationTemplateNameSnapshot String?   @map("calculation_template_name_snapshot") @db.VarChar(200)
   createdAt             DateTime            @default(now()) @map("created_at")
   updatedAt             DateTime            @updatedAt @map("updated_at")
   organization          Organization        @relation(fields: [organizationId], references: [id], onDelete: Restrict)
@@ -325,6 +383,9 @@ model Event {
   programItems           EventProgramItem[]
   calculation            EventCalculation?
   servicePositions       EventServicePosition[]
+  ticketPriceTiers       TicketPriceTier[]
+  additionalRevenues     AdditionalRevenue[]
+  sourceCalculationTemplate CalculationTemplate? @relation(fields: [sourceCalculationTemplateId, organizationId], references: [id, organizationId], onDelete: Restrict)
 
   @@unique([id, organizationId])
   @@index([organizationId, eventDate, startMinutes, id])
@@ -332,6 +393,7 @@ model Event {
   @@index([organizationId, status, eventDate, id])
   @@index([organizationId, sourceEventFormatId, eventDate, id])
   @@index([organizationId, eventKind, eventDate, id])
+  @@index([organizationId, sourceCalculationTemplateId, eventDate, id])
   @@map("event")
 }
 
@@ -562,6 +624,9 @@ model Artist {
   contacts         ArtistContact[]
   businessPartners ArtistBusinessPartner[]
   bookings         Booking[]
+  ticketComponentAllocations TicketComponentAllocation[]
+  ticketProviderTemplateAllocations TicketProviderTemplateAllocation[]
+  calculationTemplateAllocations CalculationTemplateAllocation[]
 
   @@unique([id, organizationId])
   @@index([organizationId, status])
@@ -675,6 +740,9 @@ model BusinessPartner {
   serviceProviderPrices ServiceProviderPrice[]
   formatServiceAssignments EventFormatService[] @relation("EventFormatServiceProvider")
   eventServicePositions EventServicePosition[] @relation("EventServicePositionProvider")
+  ticketComponentAllocations TicketComponentAllocation[]
+  ticketProviderTemplateAllocations TicketProviderTemplateAllocation[]
+  calculationTemplateAllocations CalculationTemplateAllocation[]
 
   @@unique([id, organizationId])
   @@index([organizationId, status])
@@ -1070,6 +1138,8 @@ model EventCalculation {
   approvedByMembership Membership? @relation("CalculationApproverMembership", fields: [approvedByMembershipId, organizationId], references: [id, organizationId], onDelete: Restrict)
   positions      EventServicePosition[]
   statusHistory  EventCalculationStatusHistory[]
+  ticketPriceTiers TicketPriceTier[]
+  additionalRevenues AdditionalRevenue[]
 
   @@unique([id, organizationId])
   @@unique([id, organizationId, eventId])
@@ -1146,6 +1216,401 @@ model EventServicePosition {
   @@index([organizationId, sourceEventFormatServiceId])
   @@index([organizationId, providerBusinessPartnerId])
   @@map("event_service_position")
+}
+
+model TicketPriceTier {
+  id                    String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId        String           @map("organization_id") @db.Uuid
+  eventId               String           @map("event_id") @db.Uuid
+  calculationId         String           @map("calculation_id") @db.Uuid
+  name                  String           @db.VarChar(160)
+  expectedQuantity      Int              @default(0) @map("expected_quantity")
+  baseInputType         PriceInputType?  @map("base_input_type")
+  baseInputMinor        BigInt?          @map("base_input_minor")
+  baseNetUnitMinor      BigInt?          @map("base_net_unit_minor")
+  baseGrossUnitMinor    BigInt?          @map("base_gross_unit_minor")
+  baseTaxRateBasisPoints Int?            @map("base_tax_rate_basis_points")
+  baseTaxRateTemplateId String?          @map("base_tax_rate_template_id") @db.Uuid
+  baseTaxRateTemplateVersion Int?        @map("base_tax_rate_template_version")
+  baseTaxRateNameSnapshot String?        @map("base_tax_rate_name_snapshot") @db.VarChar(160)
+  sourceTicketProviderTemplateId String? @map("source_ticket_provider_template_id") @db.Uuid
+  sourceTicketProviderTemplateVersion Int? @map("source_ticket_provider_template_version")
+  sourceTicketProviderNameSnapshot String? @map("source_ticket_provider_name_snapshot") @db.VarChar(200)
+  sortOrder             Int              @map("sort_order")
+  status                EntityStatus     @default(ACTIVE)
+  version               Int              @default(1)
+  archivedAt            DateTime?        @map("archived_at")
+  createdAt             DateTime         @default(now()) @map("created_at")
+  updatedAt             DateTime         @updatedAt @map("updated_at")
+  organization          Organization     @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  event                 Event            @relation(fields: [eventId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  calculation           EventCalculation @relation(fields: [calculationId, organizationId, eventId], references: [id, organizationId, eventId], onDelete: Restrict)
+  baseTaxRateTemplate   TaxRateTemplate? @relation("TicketTierBaseTaxRateTemplate", fields: [baseTaxRateTemplateId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  sourceTicketProviderTemplate TicketProviderTemplate? @relation(fields: [sourceTicketProviderTemplateId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  components            TicketPriceComponent[]
+
+  @@unique([id, organizationId])
+  @@index([organizationId, eventId, status, sortOrder, id])
+  @@index([organizationId, calculationId, status, sortOrder, id])
+  @@index([organizationId, baseTaxRateTemplateId])
+  @@index([organizationId, sourceTicketProviderTemplateId])
+  @@map("ticket_price_tier")
+}
+
+model TicketPriceComponent {
+  id                       String                  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId           String                  @map("organization_id") @db.Uuid
+  ticketPriceTierId        String                  @map("ticket_price_tier_id") @db.Uuid
+  name                     String                  @db.VarChar(160)
+  amountType               RevenueAmountType       @map("amount_type")
+  percentageBasis          TicketPercentageBasis?  @map("percentage_basis")
+  percentageRateBasisPoints Int?                   @map("percentage_rate_basis_points")
+  inputType                PriceInputType           @map("input_type")
+  inputAmountMinor         BigInt?                  @map("input_amount_minor")
+  taxRateBasisPoints       Int                      @map("tax_rate_basis_points")
+  taxRateTemplateId        String?                  @map("tax_rate_template_id") @db.Uuid
+  taxRateTemplateVersion   Int?                     @map("tax_rate_template_version")
+  taxRateNameSnapshot      String?                  @map("tax_rate_name_snapshot") @db.VarChar(160)
+  guestPays                Boolean                  @default(true) @map("guest_pays")
+  sortOrder                Int                      @map("sort_order")
+  status                   EntityStatus             @default(ACTIVE)
+  version                  Int                      @default(1)
+  archivedAt               DateTime?                @map("archived_at")
+  createdAt                DateTime                 @default(now()) @map("created_at")
+  updatedAt                DateTime                 @updatedAt @map("updated_at")
+  organization             Organization             @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  ticketPriceTier          TicketPriceTier           @relation(fields: [ticketPriceTierId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  taxRateTemplate          TaxRateTemplate?           @relation("TicketComponentTaxRateTemplate", fields: [taxRateTemplateId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  allocations              TicketComponentAllocation[]
+
+  @@unique([id, organizationId])
+  @@index([organizationId, ticketPriceTierId, status, sortOrder, id])
+  @@index([organizationId, taxRateTemplateId])
+  @@map("ticket_price_component")
+}
+
+model TicketComponentAllocation {
+  id                    String                    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId        String                    @map("organization_id") @db.Uuid
+  ticketPriceComponentId String                   @map("ticket_price_component_id") @db.Uuid
+  recipientType         RevenueRecipientType      @map("recipient_type")
+  artistId              String?                   @map("artist_id") @db.Uuid
+  businessPartnerId     String?                   @map("business_partner_id") @db.Uuid
+  externalRecipientName String?                   @map("external_recipient_name") @db.VarChar(160)
+  allocationType        RevenueAllocationType     @map("allocation_type")
+  percentageBasisPoints Int?                      @map("percentage_basis_points")
+  fixedAmountMinor      BigInt?                   @map("fixed_amount_minor")
+  sortOrder             Int                       @map("sort_order")
+  status                EntityStatus              @default(ACTIVE)
+  version               Int                       @default(1)
+  archivedAt            DateTime?                 @map("archived_at")
+  createdAt             DateTime                  @default(now()) @map("created_at")
+  updatedAt             DateTime                  @updatedAt @map("updated_at")
+  organization          Organization              @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  ticketPriceComponent  TicketPriceComponent      @relation(fields: [ticketPriceComponentId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  artist                Artist?                   @relation(fields: [artistId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  businessPartner       BusinessPartner?          @relation(fields: [businessPartnerId, organizationId], references: [id, organizationId], onDelete: Restrict)
+
+  @@unique([id, organizationId])
+  @@index([organizationId, ticketPriceComponentId, status, sortOrder, id])
+  @@index([organizationId, artistId])
+  @@index([organizationId, businessPartnerId])
+  @@map("ticket_component_allocation")
+}
+
+model AdditionalRevenue {
+  id                         String                           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId             String                           @map("organization_id") @db.Uuid
+  eventId                    String                           @map("event_id") @db.Uuid
+  calculationId              String                           @map("calculation_id") @db.Uuid
+  name                       String                           @db.VarChar(160)
+  calculationType            AdditionalRevenueCalculationType @map("calculation_type")
+  inputType                  PriceInputType                   @map("input_type")
+  inputAmountMinor           BigInt?                          @map("input_amount_minor")
+  percentageRateBasisPoints  Int?                             @map("percentage_rate_basis_points")
+  taxRateBasisPoints         Int                              @map("tax_rate_basis_points")
+  taxRateTemplateId          String?                          @map("tax_rate_template_id") @db.Uuid
+  taxRateTemplateVersion     Int?                             @map("tax_rate_template_version")
+  taxRateNameSnapshot        String?                          @map("tax_rate_name_snapshot") @db.VarChar(160)
+  confirmationStatus         RevenueConfirmationStatus        @default(PLANNED) @map("confirmation_status")
+  note                       String?
+  sortOrder                  Int                              @map("sort_order")
+  status                     EntityStatus                     @default(ACTIVE)
+  version                    Int                              @default(1)
+  archivedAt                 DateTime?                        @map("archived_at")
+  createdAt                  DateTime                         @default(now()) @map("created_at")
+  updatedAt                  DateTime                         @updatedAt @map("updated_at")
+  organization               Organization                     @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  event                      Event                            @relation(fields: [eventId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  calculation                EventCalculation                 @relation(fields: [calculationId, organizationId, eventId], references: [id, organizationId, eventId], onDelete: Restrict)
+  taxRateTemplate            TaxRateTemplate?                 @relation("AdditionalRevenueTaxRateTemplate", fields: [taxRateTemplateId, organizationId], references: [id, organizationId], onDelete: Restrict)
+
+  @@unique([id, organizationId])
+  @@index([organizationId, eventId, status, sortOrder, id])
+  @@index([organizationId, calculationId, status, sortOrder, id])
+  @@index([organizationId, taxRateTemplateId])
+  @@map("additional_revenue")
+}
+
+model TaxRateTemplate {
+  id              String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId  String       @map("organization_id") @db.Uuid
+  name            String       @db.VarChar(160)
+  normalizedName  String       @map("normalized_name") @db.VarChar(160)
+  rateBasisPoints Int          @map("rate_basis_points")
+  status          EntityStatus @default(ACTIVE)
+  version         Int          @default(1)
+  archivedAt      DateTime?    @map("archived_at")
+  createdAt       DateTime     @default(now()) @map("created_at")
+  updatedAt       DateTime     @updatedAt @map("updated_at")
+  organization    Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  ticketTierSnapshots TicketPriceTier[] @relation("TicketTierBaseTaxRateTemplate")
+  ticketComponentSnapshots TicketPriceComponent[] @relation("TicketComponentTaxRateTemplate")
+  additionalRevenueSnapshots AdditionalRevenue[] @relation("AdditionalRevenueTaxRateTemplate")
+  providerComponents TicketProviderTemplateComponent[]
+  calculationTierSnapshots CalculationTemplateTier[] @relation("CalculationTemplateTierBaseTaxRate")
+  calculationComponentSnapshots CalculationTemplateComponent[] @relation("CalculationTemplateComponentTaxRate")
+  calculationAdditionalRevenueSnapshots CalculationTemplateAdditionalRevenue[] @relation("CalculationTemplateAdditionalRevenueTaxRate")
+
+  @@unique([id, organizationId])
+  @@unique([organizationId, normalizedName])
+  @@index([organizationId, status, name, id])
+  @@map("tax_rate_template")
+}
+
+model TicketProviderTemplate {
+  id             String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId String       @map("organization_id") @db.Uuid
+  name           String       @db.VarChar(200)
+  normalizedName String       @map("normalized_name") @db.VarChar(200)
+  description    String?
+  status         EntityStatus @default(ACTIVE)
+  version        Int          @default(1)
+  archivedAt     DateTime?    @map("archived_at")
+  createdAt      DateTime     @default(now()) @map("created_at")
+  updatedAt      DateTime     @updatedAt @map("updated_at")
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  components     TicketProviderTemplateComponent[]
+  ticketTierSnapshots TicketPriceTier[]
+  calculationTierSources CalculationTemplateTier[]
+
+  @@unique([id, organizationId])
+  @@unique([organizationId, normalizedName])
+  @@index([organizationId, status, name, id])
+  @@map("ticket_provider_template")
+}
+
+model TicketProviderTemplateComponent {
+  id                        String                 @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId            String                 @map("organization_id") @db.Uuid
+  ticketProviderTemplateId  String                 @map("ticket_provider_template_id") @db.Uuid
+  name                      String                 @db.VarChar(160)
+  amountType                RevenueAmountType      @map("amount_type")
+  percentageBasis           TicketPercentageBasis? @map("percentage_basis")
+  percentageRateBasisPoints Int?                   @map("percentage_rate_basis_points")
+  inputType                 PriceInputType          @map("input_type")
+  inputAmountMinor          BigInt?                 @map("input_amount_minor")
+  taxRateTemplateId         String                  @map("tax_rate_template_id") @db.Uuid
+  taxRateTemplateVersion    Int                     @map("tax_rate_template_version")
+  taxRateNameSnapshot       String                  @map("tax_rate_name_snapshot") @db.VarChar(160)
+  taxRateBasisPoints        Int                     @map("tax_rate_basis_points")
+  guestPays                 Boolean                 @default(true) @map("guest_pays")
+  sortOrder                 Int                     @map("sort_order")
+  status                    EntityStatus            @default(ACTIVE)
+  version                   Int                     @default(1)
+  archivedAt                DateTime?               @map("archived_at")
+  createdAt                 DateTime                @default(now()) @map("created_at")
+  updatedAt                 DateTime                @updatedAt @map("updated_at")
+  organization              Organization            @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  ticketProviderTemplate    TicketProviderTemplate  @relation(fields: [ticketProviderTemplateId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  taxRateTemplate           TaxRateTemplate         @relation(fields: [taxRateTemplateId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  allocations               TicketProviderTemplateAllocation[]
+
+  @@unique([id, organizationId])
+  @@index([organizationId, ticketProviderTemplateId, status, sortOrder, id])
+  @@index([organizationId, taxRateTemplateId])
+  @@map("ticket_provider_template_component")
+}
+
+model TicketProviderTemplateAllocation {
+  id                                String                @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId                    String                @map("organization_id") @db.Uuid
+  ticketProviderTemplateComponentId String                @map("ticket_provider_template_component_id") @db.Uuid
+  recipientType                     RevenueRecipientType  @map("recipient_type")
+  artistId                          String?               @map("artist_id") @db.Uuid
+  businessPartnerId                 String?               @map("business_partner_id") @db.Uuid
+  externalRecipientName             String?               @map("external_recipient_name") @db.VarChar(160)
+  allocationType                    RevenueAllocationType @map("allocation_type")
+  percentageBasisPoints             Int?                  @map("percentage_basis_points")
+  fixedAmountMinor                  BigInt?                @map("fixed_amount_minor")
+  sortOrder                         Int                   @map("sort_order")
+  status                            EntityStatus          @default(ACTIVE)
+  version                           Int                   @default(1)
+  archivedAt                        DateTime?             @map("archived_at")
+  createdAt                         DateTime              @default(now()) @map("created_at")
+  updatedAt                         DateTime              @updatedAt @map("updated_at")
+  organization                      Organization          @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  component                         TicketProviderTemplateComponent @relation(fields: [ticketProviderTemplateComponentId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  artist                            Artist?               @relation(fields: [artistId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  businessPartner                   BusinessPartner?      @relation(fields: [businessPartnerId, organizationId], references: [id, organizationId], onDelete: Restrict)
+
+  @@unique([id, organizationId])
+  @@index([organizationId, ticketProviderTemplateComponentId, status, sortOrder, id])
+  @@index([organizationId, artistId])
+  @@index([organizationId, businessPartnerId])
+  @@map("ticket_provider_template_allocation")
+}
+
+model CalculationTemplate {
+  id                 String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId     String       @map("organization_id") @db.Uuid
+  name               String       @db.VarChar(200)
+  normalizedName     String       @map("normalized_name") @db.VarChar(200)
+  description        String?
+  expectedGuestCount Int?         @map("expected_guest_count")
+  status             EntityStatus @default(ACTIVE)
+  version            Int          @default(1)
+  archivedAt         DateTime?    @map("archived_at")
+  createdAt          DateTime     @default(now()) @map("created_at")
+  updatedAt          DateTime     @updatedAt @map("updated_at")
+  organization       Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  tiers              CalculationTemplateTier[]
+  additionalRevenues CalculationTemplateAdditionalRevenue[]
+  sourceEvents       Event[]
+  defaultForEventFormats EventFormat[] @relation("EventFormatDefaultCalculationTemplate")
+
+  @@unique([id, organizationId])
+  @@unique([organizationId, normalizedName])
+  @@index([organizationId, status, name, id])
+  @@map("calculation_template")
+}
+
+model CalculationTemplateTier {
+  id                           String                  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId               String                  @map("organization_id") @db.Uuid
+  calculationTemplateId        String                  @map("calculation_template_id") @db.Uuid
+  name                         String                  @db.VarChar(160)
+  expectedQuantity             Int                     @default(0) @map("expected_quantity")
+  baseInputType                PriceInputType?         @map("base_input_type")
+  baseInputMinor               BigInt?                 @map("base_input_minor")
+  baseNetUnitMinor             BigInt?                 @map("base_net_unit_minor")
+  baseGrossUnitMinor           BigInt?                 @map("base_gross_unit_minor")
+  baseTaxRateTemplateId        String?                 @map("base_tax_rate_template_id") @db.Uuid
+  baseTaxRateTemplateVersion   Int?                    @map("base_tax_rate_template_version")
+  baseTaxRateNameSnapshot      String?                 @map("base_tax_rate_name_snapshot") @db.VarChar(160)
+  baseTaxRateBasisPoints       Int?                    @map("base_tax_rate_basis_points")
+  sourceTicketProviderTemplateId String?               @map("source_ticket_provider_template_id") @db.Uuid
+  sourceTicketProviderTemplateVersion Int?             @map("source_ticket_provider_template_version")
+  sourceTicketProviderNameSnapshot String?             @map("source_ticket_provider_name_snapshot") @db.VarChar(200)
+  sortOrder                    Int                     @map("sort_order")
+  status                       EntityStatus            @default(ACTIVE)
+  version                      Int                     @default(1)
+  archivedAt                   DateTime?               @map("archived_at")
+  createdAt                    DateTime                @default(now()) @map("created_at")
+  updatedAt                    DateTime                @updatedAt @map("updated_at")
+  organization                 Organization            @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  calculationTemplate          CalculationTemplate     @relation(fields: [calculationTemplateId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  baseTaxRateTemplate          TaxRateTemplate?         @relation("CalculationTemplateTierBaseTaxRate", fields: [baseTaxRateTemplateId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  sourceTicketProviderTemplate TicketProviderTemplate? @relation(fields: [sourceTicketProviderTemplateId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  components                   CalculationTemplateComponent[]
+
+  @@unique([id, organizationId])
+  @@index([organizationId, calculationTemplateId, status, sortOrder, id])
+  @@index([organizationId, baseTaxRateTemplateId])
+  @@index([organizationId, sourceTicketProviderTemplateId])
+  @@map("calculation_template_tier")
+}
+
+model CalculationTemplateComponent {
+  id                        String                 @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId            String                 @map("organization_id") @db.Uuid
+  calculationTemplateTierId String                 @map("calculation_template_tier_id") @db.Uuid
+  name                      String                 @db.VarChar(160)
+  amountType                RevenueAmountType      @map("amount_type")
+  percentageBasis           TicketPercentageBasis? @map("percentage_basis")
+  percentageRateBasisPoints Int?                   @map("percentage_rate_basis_points")
+  inputType                 PriceInputType          @map("input_type")
+  inputAmountMinor          BigInt?                 @map("input_amount_minor")
+  taxRateTemplateId         String                 @map("tax_rate_template_id") @db.Uuid
+  taxRateTemplateVersion    Int                    @map("tax_rate_template_version")
+  taxRateNameSnapshot       String                 @map("tax_rate_name_snapshot") @db.VarChar(160)
+  taxRateBasisPoints        Int                    @map("tax_rate_basis_points")
+  guestPays                 Boolean                @default(true) @map("guest_pays")
+  sortOrder                 Int                    @map("sort_order")
+  status                    EntityStatus           @default(ACTIVE)
+  version                   Int                    @default(1)
+  archivedAt                DateTime?              @map("archived_at")
+  createdAt                 DateTime               @default(now()) @map("created_at")
+  updatedAt                 DateTime               @updatedAt @map("updated_at")
+  organization              Organization           @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  tier                      CalculationTemplateTier @relation(fields: [calculationTemplateTierId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  taxRateTemplate           TaxRateTemplate        @relation("CalculationTemplateComponentTaxRate", fields: [taxRateTemplateId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  allocations               CalculationTemplateAllocation[]
+
+  @@unique([id, organizationId])
+  @@index([organizationId, calculationTemplateTierId, status, sortOrder, id])
+  @@index([organizationId, taxRateTemplateId])
+  @@map("calculation_template_component")
+}
+
+model CalculationTemplateAllocation {
+  id                             String                @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId                 String                @map("organization_id") @db.Uuid
+  calculationTemplateComponentId String                @map("calculation_template_component_id") @db.Uuid
+  recipientType                  RevenueRecipientType  @map("recipient_type")
+  artistId                       String?               @map("artist_id") @db.Uuid
+  businessPartnerId              String?               @map("business_partner_id") @db.Uuid
+  externalRecipientName          String?               @map("external_recipient_name") @db.VarChar(160)
+  allocationType                 RevenueAllocationType @map("allocation_type")
+  percentageBasisPoints          Int?                  @map("percentage_basis_points")
+  fixedAmountMinor               BigInt?               @map("fixed_amount_minor")
+  sortOrder                      Int                   @map("sort_order")
+  status                         EntityStatus          @default(ACTIVE)
+  version                        Int                   @default(1)
+  archivedAt                     DateTime?             @map("archived_at")
+  createdAt                      DateTime              @default(now()) @map("created_at")
+  updatedAt                      DateTime              @updatedAt @map("updated_at")
+  organization                   Organization          @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  component                      CalculationTemplateComponent @relation(fields: [calculationTemplateComponentId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  artist                         Artist?               @relation(fields: [artistId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  businessPartner                BusinessPartner?      @relation(fields: [businessPartnerId, organizationId], references: [id, organizationId], onDelete: Restrict)
+
+  @@unique([id, organizationId])
+  @@index([organizationId, calculationTemplateComponentId, status, sortOrder, id])
+  @@index([organizationId, artistId])
+  @@index([organizationId, businessPartnerId])
+  @@map("calculation_template_allocation")
+}
+
+model CalculationTemplateAdditionalRevenue {
+  id                         String                           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId             String                           @map("organization_id") @db.Uuid
+  calculationTemplateId      String                           @map("calculation_template_id") @db.Uuid
+  name                       String                           @db.VarChar(160)
+  calculationType            AdditionalRevenueCalculationType @map("calculation_type")
+  inputType                  PriceInputType                   @map("input_type")
+  inputAmountMinor           BigInt?                          @map("input_amount_minor")
+  percentageRateBasisPoints  Int?                             @map("percentage_rate_basis_points")
+  taxRateTemplateId          String                           @map("tax_rate_template_id") @db.Uuid
+  taxRateTemplateVersion     Int                              @map("tax_rate_template_version")
+  taxRateNameSnapshot        String                           @map("tax_rate_name_snapshot") @db.VarChar(160)
+  taxRateBasisPoints         Int                              @map("tax_rate_basis_points")
+  confirmationStatus         RevenueConfirmationStatus        @default(PLANNED) @map("confirmation_status")
+  note                       String?
+  sortOrder                  Int                              @map("sort_order")
+  status                     EntityStatus                     @default(ACTIVE)
+  version                    Int                              @default(1)
+  archivedAt                 DateTime?                        @map("archived_at")
+  createdAt                  DateTime                         @default(now()) @map("created_at")
+  updatedAt                  DateTime                         @updatedAt @map("updated_at")
+  organization               Organization                     @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  calculationTemplate        CalculationTemplate              @relation(fields: [calculationTemplateId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  taxRateTemplate            TaxRateTemplate                  @relation("CalculationTemplateAdditionalRevenueTaxRate", fields: [taxRateTemplateId, organizationId], references: [id, organizationId], onDelete: Restrict)
+
+  @@unique([id, organizationId])
+  @@index([organizationId, calculationTemplateId, status, sortOrder, id])
+  @@index([organizationId, taxRateTemplateId])
+  @@map("calculation_template_additional_revenue")
 }
 
 model VenueDateOption {

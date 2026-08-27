@@ -109,7 +109,7 @@ async function exerciseLifecycle(
   await expect(page.getByText(`${entityArticle} ${entityLabel} wurde reaktiviert.`)).toBeVisible();
 }
 
-test.describe.serial('Phase 1 through Phase 7 browser acceptance', () => {
+test.describe.serial('Phase 1 through Phase 8 browser acceptance', () => {
   // Database reset and the one-time bootstrap link make the complete E2E command the retry boundary.
   test.describe.configure({ retries: 0, timeout: focusedScenarioTimeout });
 
@@ -161,6 +161,59 @@ test.describe.serial('Phase 1 through Phase 7 browser acceptance', () => {
     await expect(page.getByRole('heading', { name: 'E2E Venue', exact: true })).toBeVisible();
     organizationId = new URL(page.url()).pathname.split('/')[2]!;
     expect(organizationId).toBeTruthy();
+  });
+
+  test('Navigation: desktop sidebar and accessible mobile drawer', async () => {
+    await openOrganizationHome(page, organizationId);
+    await page.setViewportSize({ width: 1280, height: 900 });
+
+    const desktopSidebar = page.locator('.workspace-sidebar');
+    const desktopNavigation = desktopSidebar.getByRole('navigation', {
+      name: 'Hauptnavigation',
+      exact: true,
+    });
+    await expect(desktopSidebar).toBeVisible();
+    await expect(desktopSidebar.getByText('Venue Platform', { exact: true })).toBeVisible();
+    await expect(
+      desktopNavigation.getByRole('link', { name: 'Übersicht', exact: true }),
+    ).toHaveAttribute('aria-current', 'page');
+
+    await desktopNavigation.getByRole('link', { name: 'Artists', exact: true }).click();
+    await expect(page.getByRole('heading', { name: 'Artists', exact: true })).toBeVisible();
+    await expect(
+      desktopNavigation.getByRole('link', { name: 'Artists', exact: true }),
+    ).toHaveAttribute('aria-current', 'page');
+
+    await desktopNavigation.getByRole('link', { name: 'Veranstaltungen', exact: true }).click();
+    await expect(page.getByRole('heading', { name: 'Veranstaltungen', exact: true })).toBeVisible();
+
+    await page.setViewportSize({ width: 390, height: 844 });
+    await expect(desktopSidebar).toBeHidden();
+    const menuButton = page.getByRole('button', { name: 'Menü öffnen', exact: true });
+    await expect(menuButton).toHaveAttribute('aria-expanded', 'false');
+    await menuButton.click();
+    const drawer = page.getByRole('dialog', { name: 'Venue Platform', exact: true });
+    const closeButton = drawer.getByRole('button', { name: 'Menü schließen', exact: true });
+    await expect(drawer).toBeVisible();
+    await expect(closeButton).toBeFocused();
+    await page.keyboard.press('Escape');
+    await expect(drawer).toHaveCount(0);
+    await expect(menuButton).toBeFocused();
+
+    await menuButton.click();
+    await expect(drawer).toBeVisible();
+    await page.locator('.workspace-drawer-backdrop').click({ position: { x: 380, y: 800 } });
+    await expect(drawer).toHaveCount(0);
+
+    await menuButton.click();
+    await drawer.getByRole('link', { name: 'Übersicht', exact: true }).click();
+    await expect(drawer).toHaveCount(0);
+    await expect(page.getByRole('heading', { name: 'E2E Venue', exact: true })).toBeVisible();
+    await expect(menuButton).toHaveAttribute('aria-expanded', 'false');
+    expect(
+      await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth),
+    ).toBe(true);
+    await page.setViewportSize({ width: 1280, height: 900 });
   });
 
   test('Phase 1: organization and location administration', async () => {
@@ -249,9 +302,20 @@ test.describe.serial('Phase 1 through Phase 7 browser acceptance', () => {
     await exerciseLifecycle(page, 'Veranstaltungsformat', { cancel: true, keyboard: true });
 
     await page.setViewportSize({ width: 390, height: 844 });
-    expect(
-      await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth),
-    ).toBe(true);
+    const mobileOverflow = await page.evaluate(() => ({
+      fits: document.documentElement.scrollWidth <= window.innerWidth,
+      scrollWidth: document.documentElement.scrollWidth,
+      viewportWidth: window.innerWidth,
+      offenders: [...document.querySelectorAll<HTMLElement>('body *')]
+        .map((element) => ({
+          className: element.className,
+          right: Math.round(element.getBoundingClientRect().right),
+          tagName: element.tagName,
+        }))
+        .filter((element) => element.right > window.innerWidth + 1)
+        .slice(0, 10),
+    }));
+    expect(mobileOverflow, JSON.stringify(mobileOverflow)).toMatchObject({ fits: true });
     await page.setViewportSize({ width: 1280, height: 720 });
   });
 
@@ -266,7 +330,9 @@ test.describe.serial('Phase 1 through Phase 7 browser acceptance', () => {
     await expect(
       page.getByRole('heading', { name: 'Veranstaltung anlegen', exact: true }),
     ).toBeVisible();
-    await expect(page.getByLabel('Veranstaltungsformat')).toContainText('E2E Late Show');
+    await expect(
+      page.getByRole('combobox', { name: 'Veranstaltungsformat', exact: true }),
+    ).toContainText('E2E Late Show');
     await expect(page.getByLabel('Veranstaltungsname')).toHaveValue('E2E Late Show');
     await expect(page.getByLabel('Get-in Technik')).toHaveValue('16:00');
     await expect(page.getByLabel('Get-in Artists')).toHaveValue('17:30');
@@ -334,8 +400,10 @@ test.describe.serial('Phase 1 through Phase 7 browser acceptance', () => {
   test('Phase 5: free event creation clears template values and shows manual review', async () => {
     await page.goto(`/o/${organizationId}/events/new`);
     await expect(page.getByLabel('Veranstaltungsname')).toHaveValue('E2E Late Show');
-    await page.getByLabel('Ohne Vorlage', { exact: true }).check();
-    await expect(page.getByLabel('Veranstaltungsformat')).toHaveCount(0);
+    await page.getByRole('radio', { name: 'Ohne Veranstaltungsformat', exact: true }).check();
+    await expect(
+      page.getByRole('combobox', { name: 'Veranstaltungsformat', exact: true }),
+    ).toHaveCount(0);
     await expect(page.getByLabel('Veranstaltungsname')).toHaveValue('');
     await expect(page.getByLabel('Get-in Technik')).toHaveValue('');
     await page
@@ -1419,12 +1487,11 @@ test.describe.serial('Phase 1 through Phase 7 browser acceptance', () => {
     await page.getByRole('tab', { name: 'Kalkulation', exact: true }).click();
     const newcomerCostRow = calculationPanel.locator('tr').filter({ hasText: 'E2E Newcomer' });
     await expect(newcomerCostRow).toContainText('Gage');
-    await expect(calculationPanel).toContainText('Voraussichtliche Gesamtkosten');
+    await expect(calculationPanel).toContainText('Gesamtkosten');
     await expect(calculationPanel).toContainText('1.200,00 €');
-    await expect(calculationPanel).toContainText('Davon verbindlich');
-    await expect(calculationPanel).toContainText('300,00 €');
-    await expect(calculationPanel).toContainText('Noch nicht verbindlich');
-    await expect(calculationPanel).toContainText('900,00 €');
+    await expect(calculationPanel).toContainText('IST');
+    await expect(calculationPanel).toContainText('folgt später');
+    await expect(calculationPanel).toContainText('Verbindlich');
     await calculationPanel
       .getByRole('button', { name: 'Weitere Kalkulationsaktionen', exact: true })
       .click();
@@ -1453,7 +1520,176 @@ test.describe.serial('Phase 1 through Phase 7 browser acceptance', () => {
     await expect(calculationPanel).toContainText('Booking-Finanzdaten geändert');
   });
 
-  test('Phase 1 through Phase 7: read-only authorization and logout', async ({ browser }) => {
+  test('Navigation: event tabs stay inside the content area', async () => {
+    await page.setViewportSize({ width: 1280, height: 900 });
+    await page.goto(phase7EventDetailPath);
+    const sidebar = page.locator('.workspace-sidebar');
+    const eventNavigation = page.getByRole('navigation', {
+      name: 'Veranstaltungsbereiche',
+      exact: true,
+    });
+    await expect(eventNavigation).toBeVisible();
+    const [sidebarBox, tabsBox] = await Promise.all([
+      sidebar.boundingBox(),
+      eventNavigation.boundingBox(),
+    ]);
+    expect(sidebarBox).not.toBeNull();
+    expect(tabsBox).not.toBeNull();
+    expect(tabsBox!.x).toBeGreaterThanOrEqual(sidebarBox!.x + sidebarBox!.width);
+    const initialTabsY = tabsBox!.y;
+
+    await eventNavigation.getByRole('tab', { name: 'Bookings', exact: true }).click();
+    await expect(page.getByRole('tab', { name: 'Bookings', exact: true })).toHaveAttribute(
+      'aria-current',
+      'page',
+    );
+    expect((await eventNavigation.boundingBox())!.y).toBe(initialTabsY);
+    await eventNavigation.getByRole('tab', { name: 'Kalkulation', exact: true }).click();
+    await expect(page.getByRole('tab', { name: 'Kalkulation', exact: true })).toHaveAttribute(
+      'aria-current',
+      'page',
+    );
+    expect((await eventNavigation.boundingBox())!.y).toBe(initialTabsY);
+
+    await page.setViewportSize({ width: 390, height: 844 });
+    await expect(eventNavigation).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Menü öffnen', exact: true })).toBeVisible();
+    expect(
+      await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth),
+    ).toBe(true);
+    await page.setViewportSize({ width: 1280, height: 900 });
+  });
+
+  test('Phase 8: compact ticket prices, allocations, revenue and mobile result', async () => {
+    await page.goto(phase7EventDetailPath);
+    await page.getByRole('tab', { name: 'Kalkulation', exact: true }).click();
+    const revenue = page.locator('.revenue-workspace');
+    await expect(revenue.locator('.revenue-summary-strip')).toBeVisible();
+    const costsBox = await revenue
+      .getByRole('heading', { name: 'Kosten', exact: true })
+      .boundingBox();
+    const ticketsBox = await revenue
+      .getByRole('heading', { name: 'Tickets & Erlöse', exact: true })
+      .boundingBox();
+    expect(costsBox).not.toBeNull();
+    expect(ticketsBox).not.toBeNull();
+    expect(ticketsBox!.y).toBeGreaterThan(costsBox!.y);
+    await expect(
+      revenue.getByRole('region', {
+        name: 'Kostenkalkulation, horizontal scrollbare Tabelle',
+        exact: true,
+      }),
+    ).toBeVisible();
+
+    await revenue.getByLabel('Erwartete Gästezahl').fill('120');
+    await revenue
+      .locator('.expected-guests-form')
+      .getByRole('button', { name: 'Speichern', exact: true })
+      .click();
+    await expect(
+      revenue.getByText('Erwartete Gästezahl gespeichert.', { exact: true }),
+    ).toBeVisible();
+
+    await revenue.getByRole('button', { name: 'Ticketstufe hinzufügen', exact: true }).click();
+    let dialog = page.getByRole('dialog', { name: 'Ticketstufe anlegen', exact: true });
+    await dialog.getByLabel('Bezeichnung der Ticketstufe', { exact: true }).fill('E2E Vorverkauf');
+    await dialog.getByLabel('Erwartete Menge').fill('100');
+    await dialog.getByRole('textbox', { name: 'Ticketgrundpreis €', exact: true }).fill('20,00');
+    await dialog
+      .getByRole('combobox', { name: 'Steuersatzvorlage für Ticketgrundpreis', exact: true })
+      .selectOption({ label: 'Regulär – 19 %' });
+    await dialog.getByRole('button', { name: 'Speichern', exact: true }).click();
+    await expect(revenue.getByText('Ticketstufe angelegt.', { exact: true })).toBeVisible();
+    const tierRow = revenue.locator('tr').filter({ hasText: 'E2E Vorverkauf' }).first();
+    await expect(tierRow).toContainText('20,00');
+
+    await revenue.getByRole('button', { name: 'Aktionen für E2E Vorverkauf', exact: true }).click();
+    await page
+      .getByRole('menuitem', { name: 'Preisstruktur-Position hinzufügen', exact: true })
+      .click();
+    dialog = page.getByRole('dialog', {
+      name: 'Preisstruktur-Position anlegen',
+      exact: true,
+    });
+    await dialog.getByLabel('Bezeichnung').fill('E2E WKZ');
+    await dialog.getByRole('textbox', { name: 'Betrag €', exact: true }).fill('1,19');
+    await dialog
+      .getByRole('combobox', {
+        name: 'Steuersatzvorlage für Preisstruktur-Position',
+        exact: true,
+      })
+      .selectOption({ label: 'Regulär – 19 %' });
+    await dialog.getByRole('button', { name: 'Speichern', exact: true }).click();
+    await expect(
+      revenue.getByText('Preisstruktur-Position angelegt.', { exact: true }),
+    ).toBeVisible();
+    await revenue.getByText(/Preisstruktur-Positionen und Empfänger-Aufteilungen/).click();
+    await expect(revenue).toContainText('Eigene Organisation / Club');
+    await expect(revenue).toContainText('21,19');
+
+    await revenue
+      .getByRole('button', { name: 'Ticketing-Aufschlüsselung erstellen', exact: true })
+      .click();
+    const breakdown = page.getByRole('dialog', {
+      name: 'Ticketing-Aufschlüsselung',
+      exact: true,
+    });
+    await expect(breakdown).toContainText('E2E Phase 7 Event');
+    await expect(breakdown).toContainText('1. Oktober 2027');
+    await expect(breakdown).toContainText('E2E Vorverkauf');
+    await expect(breakdown).toContainText('Grundpreis netto');
+    await expect(breakdown).toContainText('Umsatzsteuer 19 %');
+    await expect(breakdown).toContainText('Ticketpreis für den Ticketanbieter');
+    await expect(breakdown).toContainText('21,19 €');
+    await expect(breakdown).toContainText('zzgl. Versand, sofern zutreffend');
+    await breakdown.getByRole('button', { name: 'Als Text kopieren', exact: true }).click();
+    await expect(breakdown.getByText('Aufschlüsselung kopiert.', { exact: true })).toBeVisible();
+    expect(
+      (await page.evaluate(() => navigator.clipboard.readText())).replaceAll('\u00a0', ' '),
+    ).toContain('Ticketpreis für den Ticketanbieter: 21,19 €');
+    await breakdown
+      .getByRole('button', { name: 'Ticketing-Aufschlüsselung schließen', exact: true })
+      .click();
+
+    const additionalRevenueDetails = revenue.locator('.revenue-subsection');
+    await expect(additionalRevenueDetails).not.toHaveAttribute('open', '');
+    await additionalRevenueDetails.getByText('Weitere Erlöse', { exact: true }).click();
+    await revenue.getByRole('button', { name: 'Erlös hinzufügen', exact: true }).click();
+    dialog = page.getByRole('dialog', { name: 'Weiteren Erlös anlegen', exact: true });
+    await dialog.getByLabel('Bezeichnung').fill('E2E Sponsoring');
+    await dialog.getByRole('textbox', { name: 'Betrag €', exact: true }).fill('1000,00');
+    await dialog
+      .getByRole('combobox', { name: 'Steuersatzvorlage für weiteren Erlös', exact: true })
+      .selectOption({ label: 'Steuerfrei – 0 %' });
+    await dialog.getByRole('button', { name: 'Speichern', exact: true }).click();
+    await expect(revenue.getByText('Weiterer Erlös angelegt.', { exact: true })).toBeVisible();
+    await expect(revenue).toContainText('E2E Sponsoring');
+    await expect(
+      revenue.getByText('Operatives Ergebnis netto', { exact: true }).first(),
+    ).toBeVisible();
+
+    await page.setViewportSize({ width: 390, height: 844 });
+    await expect(revenue.getByRole('heading', { name: 'Ergebnis', exact: true })).toBeVisible();
+    const phase8MobileOverflow = await page.evaluate(() => ({
+      fits: document.documentElement.scrollWidth <= window.innerWidth,
+      scrollWidth: document.documentElement.scrollWidth,
+      viewportWidth: window.innerWidth,
+      offenders: [...document.querySelectorAll<HTMLElement>('body *')]
+        .map((element) => ({
+          className: element.className,
+          right: Math.round(element.getBoundingClientRect().right),
+          tagName: element.tagName,
+        }))
+        .filter((element) => element.right > window.innerWidth + 1)
+        .slice(0, 10),
+    }));
+    expect(phase8MobileOverflow, JSON.stringify(phase8MobileOverflow)).toMatchObject({
+      fits: true,
+    });
+    await page.setViewportSize({ width: 1280, height: 900 });
+  });
+
+  test('Phase 1 through Phase 8: read-only authorization and logout', async ({ browser }) => {
     await openOrganizationHome(page, organizationId);
     await page.getByRole('link', { name: 'Team', exact: true }).click();
     await page.getByRole('button', { name: 'Einladung erstellen', exact: true }).click();
@@ -1682,8 +1918,7 @@ test.describe.serial('Phase 1 through Phase 7 browser acceptance', () => {
         { data: { version: 2, phone: '+49 30 000000' } },
       );
       expect(forbidden.status()).toBe(403);
-
-      await invitedPage.getByRole('button', { name: 'Abmelden' }).click();
+      await invitedPage.getByRole('button', { name: 'Abmelden' }).press('Enter');
       await expect(
         invitedPage.getByRole('heading', { name: 'Willkommen zurück.', exact: true }),
       ).toBeVisible();

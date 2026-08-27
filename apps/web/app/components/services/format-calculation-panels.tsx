@@ -465,6 +465,8 @@ export function CalculationPanel({
   canPurchase,
   canSales,
   canApprove,
+  approvalBlocked = false,
+  embedded = false,
 }: {
   organizationId: string;
   calculation: Calculation;
@@ -474,8 +476,11 @@ export function CalculationPanel({
   canPurchase: boolean;
   canSales: boolean;
   canApprove: boolean;
+  approvalBlocked?: boolean;
+  embedded?: boolean;
 }) {
   const router = useRouter();
+  const panelRef = useRef<HTMLElement>(null);
   const worksheetRef = useRef<HTMLFormElement>(null);
   const [message, setMessage] = useState<string>();
   const [pending, setPending] = useState(false);
@@ -600,9 +605,7 @@ export function CalculationPanel({
     setCollapsedGroups(new Set());
     requestAnimationFrame(() =>
       requestAnimationFrame(() => {
-        const target = worksheetRef.current?.querySelector<HTMLElement>(
-          '[data-missing-price="true"]',
-        );
+        const target = panelRef.current?.querySelector<HTMLElement>('[data-missing-price="true"]');
         target?.scrollIntoView({ behavior: 'smooth', block: 'center' });
         target?.querySelector<HTMLElement>('input')?.focus();
         if (!target?.contains(document.activeElement)) target?.focus();
@@ -763,8 +766,11 @@ export function CalculationPanel({
   if (calculation.status === 'REVIEW' && canApprove) {
     statusActions.push({
       id: 'approve',
-      label: calculation.totals.incomplete ? 'Freigeben (Preise fehlen)' : 'Freigeben',
-      disabled: pending || calculation.totals.incomplete,
+      label:
+        calculation.totals.incomplete || approvalBlocked
+          ? 'Freigeben (Angaben fehlen)'
+          : 'Freigeben',
+      disabled: pending || calculation.totals.incomplete || approvalBlocked,
       onSelect: () => void status('APPROVED'),
     });
   }
@@ -778,12 +784,21 @@ export function CalculationPanel({
   }
 
   return (
-    <section className="calculation-panel calculation-workspace">
-      <header className="section-heading calculation-toolbar">
-        <div>
-          <p className="eyebrow">Veranstaltung</p>
-          <h2>Kalkulation</h2>
-        </div>
+    <section className="calculation-panel calculation-workspace" ref={panelRef}>
+      <header
+        className={`section-heading calculation-toolbar${embedded ? ' calculation-toolbar--embedded' : ''}`}
+      >
+        {embedded ? (
+          <div className="calculation-toolbar__context">
+            <span className="field-hint">Kalkulierte Kosten · IST-Werte folgen später</span>
+            <span className="status-badge">{calculationStatusLabel(calculation.status)}</span>
+          </div>
+        ) : (
+          <div>
+            <p className="eyebrow">Veranstaltung</p>
+            <h2>Kalkulation</h2>
+          </div>
+        )}
         <div className="calculation-toolbar__actions">
           {canWrite && !editing ? (
             <button
@@ -844,91 +859,121 @@ export function CalculationPanel({
           Benötigte Preise fehlen. Details sind mit Ihrer Preisberechtigung nicht sichtbar.
         </CompactNotice>
       ) : null}
-      <CalculationSummary calculation={calculation} canPurchase={canPurchase} canSales={canSales} />
-      <form className="calculation-sheet-form" onSubmit={saveWorksheet} ref={worksheetRef}>
-        <div className="calculation-sheet-wrap">
-          <table className="calculation-sheet">
-            <thead>
-              <tr>
-                <th className="calculation-sheet__sticky" scope="col">
-                  Pos.
-                </th>
-                <th scope="col">Kategorie</th>
-                <th scope="col">Bezeichnung</th>
-                <th scope="col">Dienstleister / Herkunft</th>
-                <th className="numeric" scope="col">
-                  Menge
-                </th>
-                <th scope="col">Einheit</th>
-                {canPurchase ? (
-                  <th className="numeric" scope="col">
-                    EK / Einheit
+      {!embedded ? (
+        <CalculationSummary
+          calculation={calculation}
+          canPurchase={canPurchase}
+          canSales={canSales}
+        />
+      ) : null}
+      {!editing ? (
+        <CompactCostTable
+          bookingCosts={calculation.bookingCosts}
+          calculation={calculation}
+          canPurchase={canPurchase}
+          canSales={canSales}
+          canWrite={canWrite}
+          {...(catalogPricePreview ? { catalogPricePreview } : {})}
+          collapsedGroups={collapsedGroups}
+          groupedPositions={groupedPositions}
+          missingPriceIds={missingIds}
+          onArchive={(position) => void archive(position)}
+          onApplyCatalog={(position) => void applyCatalogPrices(position)}
+          onCancelCatalog={() => setCatalogPricePreview(undefined)}
+          onCatalog={(position) => void previewCatalogPrices(position)}
+          onEdit={(position) => beginWorksheetEdit(position.id)}
+          onToggle={toggleGroup}
+          pending={pending}
+        />
+      ) : (
+        <form className="calculation-sheet-form" onSubmit={saveWorksheet} ref={worksheetRef}>
+          <div
+            aria-label="Kosten bearbeiten, horizontal scrollbare Tabelle"
+            className="calculation-sheet-wrap"
+            role="region"
+            tabIndex={0}
+          >
+            <table className="calculation-sheet">
+              <thead>
+                <tr>
+                  <th className="calculation-sheet__sticky" scope="col">
+                    Pos.
                   </th>
-                ) : null}
-                {canPurchase ? (
+                  <th scope="col">Kategorie</th>
+                  <th scope="col">Bezeichnung</th>
+                  <th scope="col">Dienstleister / Herkunft</th>
                   <th className="numeric" scope="col">
-                    EK gesamt
+                    Menge
                   </th>
-                ) : null}
-                {canSales ? (
-                  <th className="numeric" scope="col">
-                    VK / Einheit
+                  <th scope="col">Einheit</th>
+                  {canPurchase ? (
+                    <th className="numeric" scope="col">
+                      EK / Einheit
+                    </th>
+                  ) : null}
+                  {canPurchase ? (
+                    <th className="numeric" scope="col">
+                      EK gesamt
+                    </th>
+                  ) : null}
+                  {canSales ? (
+                    <th className="numeric" scope="col">
+                      VK / Einheit
+                    </th>
+                  ) : null}
+                  {canSales ? (
+                    <th className="numeric" scope="col">
+                      VK gesamt
+                    </th>
+                  ) : null}
+                  <th scope="col">Kostenstatus</th>
+                  <th className="calculation-sheet__actions" scope="col">
+                    Aktionen
                   </th>
-                ) : null}
-                {canSales ? (
-                  <th className="numeric" scope="col">
-                    VK gesamt
-                  </th>
-                ) : null}
-                <th scope="col">Kostenstatus</th>
-                <th className="calculation-sheet__actions" scope="col">
-                  Aktionen
-                </th>
-              </tr>
-            </thead>
-            {calculation.bookingCosts.length ? (
-              <BookingCostRows
-                canPurchase={canPurchase}
-                canSales={canSales}
-                collapsed={collapsedGroups.has('booking-costs')}
-                costs={calculation.bookingCosts}
-                eventId={calculation.eventId}
-                onToggle={() => toggleGroup('booking-costs')}
-                organizationId={organizationId}
-              />
-            ) : null}
-            {groupedPositions.map(([group, positions]) => (
-              <PositionGroupRows
-                canPurchase={canPurchase}
-                canSales={canSales}
-                canWrite={canWrite}
-                {...(catalogPricePreview ? { catalogPricePreview } : {})}
-                collapsed={collapsedGroups.has(group)}
-                drafts={drafts}
-                editing={editing}
-                group={group}
-                key={group}
-                missingPurchaseIds={new Set(calculation.totals.missingPurchasePricePositionIds)}
-                missingSalesIds={new Set(calculation.totals.missingSalesPricePositionIds)}
-                onApplyCatalogPrices={applyCatalogPrices}
-                onArchive={archive}
-                onCancelCatalogPricePreview={() => setCatalogPricePreview(undefined)}
-                onEdit={beginWorksheetEdit}
-                onPreviewCatalogPrices={previewCatalogPrices}
-                onToggle={() => toggleGroup(group)}
-                onUpdateDraft={updateDraft}
-                partners={partners}
-                pending={pending}
-                positions={positions}
-                services={services}
-              />
-            ))}
-          </table>
-        </div>
-        {activePositions.length === 0 && calculation.bookingCosts.length === 0 ? (
-          <p className="compact-empty calculation-empty">Noch keine Kalkulationspositionen.</p>
-        ) : null}
-        {editing ? (
+                </tr>
+              </thead>
+              {calculation.bookingCosts.length ? (
+                <BookingCostRows
+                  canPurchase={canPurchase}
+                  canSales={canSales}
+                  collapsed={collapsedGroups.has('booking-costs')}
+                  costs={calculation.bookingCosts}
+                  eventId={calculation.eventId}
+                  onToggle={() => toggleGroup('booking-costs')}
+                  organizationId={organizationId}
+                />
+              ) : null}
+              {groupedPositions.map(([group, positions]) => (
+                <PositionGroupRows
+                  canPurchase={canPurchase}
+                  canSales={canSales}
+                  canWrite={canWrite}
+                  {...(catalogPricePreview ? { catalogPricePreview } : {})}
+                  collapsed={collapsedGroups.has(group)}
+                  drafts={drafts}
+                  editing={editing}
+                  group={group}
+                  key={group}
+                  missingPurchaseIds={new Set(calculation.totals.missingPurchasePricePositionIds)}
+                  missingSalesIds={new Set(calculation.totals.missingSalesPricePositionIds)}
+                  onApplyCatalogPrices={applyCatalogPrices}
+                  onArchive={archive}
+                  onCancelCatalogPricePreview={() => setCatalogPricePreview(undefined)}
+                  onEdit={beginWorksheetEdit}
+                  onPreviewCatalogPrices={previewCatalogPrices}
+                  onToggle={() => toggleGroup(group)}
+                  onUpdateDraft={updateDraft}
+                  partners={partners}
+                  pending={pending}
+                  positions={positions}
+                  services={services}
+                />
+              ))}
+            </table>
+          </div>
+          {activePositions.length === 0 && calculation.bookingCosts.length === 0 ? (
+            <p className="compact-empty calculation-empty">Noch keine Kalkulationspositionen.</p>
+          ) : null}
           <div className="calculation-edit-bar">
             <span>
               {dirtyIds.size
@@ -949,8 +994,8 @@ export function CalculationPanel({
               </button>
             </div>
           </div>
-        ) : null}
-      </form>
+        </form>
+      )}
       {canWrite ? (
         <Dialog
           eyebrow="Kalkulation"
@@ -986,6 +1031,236 @@ export function CalculationPanel({
         </details>
       ) : null}
     </section>
+  );
+}
+
+function CompactCostTable({
+  calculation,
+  bookingCosts,
+  groupedPositions,
+  collapsedGroups,
+  missingPriceIds,
+  canPurchase,
+  canSales,
+  canWrite,
+  catalogPricePreview,
+  pending,
+  onToggle,
+  onEdit,
+  onCatalog,
+  onApplyCatalog,
+  onCancelCatalog,
+  onArchive,
+}: {
+  calculation: Calculation;
+  bookingCosts: BookingCost[];
+  groupedPositions: Array<[string, Position[]]>;
+  collapsedGroups: Set<string>;
+  missingPriceIds: Set<string>;
+  canPurchase: boolean;
+  canSales: boolean;
+  canWrite: boolean;
+  catalogPricePreview?: CatalogPricePreview;
+  pending: boolean;
+  onToggle: (group: string) => void;
+  onEdit: (position: Position) => void;
+  onCatalog: (position: Position) => void;
+  onApplyCatalog: (position: Position) => void;
+  onCancelCatalog: () => void;
+  onArchive: (position: Position) => void;
+}) {
+  const bookingGroup = 'booking-costs';
+  const bookingSubtotal = sumMinor(bookingCosts.map((cost) => cost.amountMinor));
+  return (
+    <div
+      aria-label="Kostenkalkulation, horizontal scrollbare Tabelle"
+      className="compact-cost-table-wrap"
+      role="region"
+      tabIndex={0}
+    >
+      <table className="compact-cost-table">
+        <caption className="sr-only">
+          Kalkulierte Kosten nach Kategorien. IST-Werte werden in einer späteren Ausbaustufe
+          ergänzt.
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">Beschreibung</th>
+            <th className="numeric" scope="col">
+              Kalkuliert
+            </th>
+            <th className="numeric" scope="col">
+              IST <span>folgt später</span>
+            </th>
+            <th scope="col">
+              <span className="sr-only">Aktionen</span>
+            </th>
+          </tr>
+        </thead>
+        {bookingCosts.length ? (
+          <tbody>
+            <tr className="compact-cost-category-row">
+              <th colSpan={4} scope="rowgroup">
+                <button
+                  aria-expanded={!collapsedGroups.has(bookingGroup)}
+                  onClick={() => onToggle(bookingGroup)}
+                  type="button"
+                >
+                  <span aria-hidden="true">{collapsedGroups.has(bookingGroup) ? '▸' : '▾'}</span>{' '}
+                  Booking / Gagen
+                </button>
+                {canPurchase ? <strong>{formatMinorAmount(bookingSubtotal, 'EUR')}</strong> : null}
+              </th>
+            </tr>
+            {!collapsedGroups.has(bookingGroup)
+              ? bookingCosts.map((cost) => (
+                  <tr key={cost.id}>
+                    <td>
+                      <strong>{cost.label}</strong>
+                      <small>{cost.artistName} · Booking</small>
+                    </td>
+                    <td className="numeric">
+                      {canPurchase ? (formatMinorAmount(cost.amountMinor, 'EUR') ?? '—') : '—'}
+                    </td>
+                    <td className="numeric compact-cost-ist">—</td>
+                    <td>
+                      <a
+                        className="text-link"
+                        href={`/o/${calculation.organizationId}/events/${calculation.eventId}?tab=bookings#booking-${cost.bookingId}`}
+                      >
+                        Zum Booking
+                      </a>
+                    </td>
+                  </tr>
+                ))
+              : null}
+            <tr className="compact-cost-subtotal-row">
+              <th scope="row">Zwischensumme Booking / Gagen</th>
+              <td className="numeric">
+                {canPurchase ? (formatMinorAmount(bookingSubtotal, 'EUR') ?? '—') : '—'}
+              </td>
+              <td className="numeric compact-cost-ist">—</td>
+              <td />
+            </tr>
+          </tbody>
+        ) : null}
+        {groupedPositions.map(([group, positions]) => {
+          const subtotal = sumMinor(positions.map((position) => position.purchaseTotalMinor));
+          const collapsed = collapsedGroups.has(group);
+          return (
+            <tbody key={group}>
+              <tr className="compact-cost-category-row">
+                <th colSpan={4} scope="rowgroup">
+                  <button aria-expanded={!collapsed} onClick={() => onToggle(group)} type="button">
+                    <span aria-hidden="true">{collapsed ? '▸' : '▾'}</span> {group}
+                  </button>
+                  {canPurchase ? (
+                    <strong>{formatMinorAmount(subtotal, 'EUR') ?? '—'}</strong>
+                  ) : null}
+                </th>
+              </tr>
+              {!collapsed
+                ? positions.map((position) => {
+                    const priceMissing = missingPriceIds.has(position.id);
+                    const preview =
+                      catalogPricePreview?.positionId === position.id
+                        ? catalogPricePreview
+                        : undefined;
+                    const menuItems: ActionMenuItem[] = [
+                      { id: 'edit', label: 'Bearbeiten', onSelect: () => onEdit(position) },
+                      ...(position.source !== 'CUSTOM' && missingPriceIds.has(position.id)
+                        ? [
+                            {
+                              id: 'catalog',
+                              label: 'Preise aus Katalog übernehmen',
+                              onSelect: () => onCatalog(position),
+                            },
+                          ]
+                        : []),
+                      {
+                        id: 'remove',
+                        label: 'Entfernen',
+                        danger: true,
+                        onSelect: () => onArchive(position),
+                      },
+                    ];
+                    return (
+                      <Fragment key={position.id}>
+                        <tr data-position-id={position.id}>
+                          <td>
+                            <strong>{position.name}</strong>
+                            <small>
+                              {position.quantity} {unitLabel(position.unit)}
+                              {position.providerName ? ` · ${position.providerName}` : ''} ·{' '}
+                              {sourceLabel(position.source)} ·{' '}
+                              {position.costStatus === 'COMMITTED' ? 'Verbindlich' : 'Geplant'}
+                            </small>
+                          </td>
+                          <td
+                            className={`numeric${priceMissing ? ' missing-price-cell' : ''}`}
+                            data-missing-price={priceMissing ? 'true' : undefined}
+                            tabIndex={priceMissing ? -1 : undefined}
+                          >
+                            {canPurchase
+                              ? (formatMinorAmount(position.purchaseTotalMinor, 'EUR') ??
+                                'Preis fehlt')
+                              : '—'}
+                          </td>
+                          <td className="numeric compact-cost-ist">—</td>
+                          <td>
+                            {canWrite ? (
+                              <ActionMenu
+                                compact
+                                items={menuItems}
+                                label={`Aktionen für ${position.name}`}
+                              />
+                            ) : null}
+                          </td>
+                        </tr>
+                        {preview ? (
+                          <tr className="catalog-preview-row">
+                            <td colSpan={4}>
+                              <CatalogPricePreviewRow
+                                canPurchase={canPurchase}
+                                canSales={canSales}
+                                onApply={() => onApplyCatalog(position)}
+                                onCancel={onCancelCatalog}
+                                pending={pending}
+                                position={position}
+                                preview={preview}
+                              />
+                            </td>
+                          </tr>
+                        ) : null}
+                      </Fragment>
+                    );
+                  })
+                : null}
+              <tr className="compact-cost-subtotal-row">
+                <th scope="row">Zwischensumme {group}</th>
+                <td className="numeric">
+                  {canPurchase ? (formatMinorAmount(subtotal, 'EUR') ?? '—') : '—'}
+                </td>
+                <td className="numeric compact-cost-ist">—</td>
+                <td />
+              </tr>
+            </tbody>
+          );
+        })}
+        <tfoot>
+          <tr>
+            <th scope="row">Gesamtkosten</th>
+            <td className="numeric">
+              {canPurchase
+                ? (formatMinorAmount(calculation.totals.estimatedCostMinor, 'EUR') ?? '—')
+                : '—'}
+            </td>
+            <td className="numeric compact-cost-ist">Noch nicht verfügbar</td>
+            <td />
+          </tr>
+        </tfoot>
+      </table>
+    </div>
   );
 }
 

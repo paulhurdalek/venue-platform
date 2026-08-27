@@ -348,6 +348,9 @@ export type ArtistWhereInput = {
   contacts?: Prisma.ArtistContactListRelationFilter
   businessPartners?: Prisma.ArtistBusinessPartnerListRelationFilter
   bookings?: Prisma.BookingListRelationFilter
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationListRelationFilter
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationListRelationFilter
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationListRelationFilter
 }
 
 export type ArtistOrderByWithRelationInput = {
@@ -376,6 +379,9 @@ export type ArtistOrderByWithRelationInput = {
   contacts?: Prisma.ArtistContactOrderByRelationAggregateInput
   businessPartners?: Prisma.ArtistBusinessPartnerOrderByRelationAggregateInput
   bookings?: Prisma.BookingOrderByRelationAggregateInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationOrderByRelationAggregateInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationOrderByRelationAggregateInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationOrderByRelationAggregateInput
 }
 
 export type ArtistWhereUniqueInput = Prisma.AtLeast<{
@@ -408,6 +414,9 @@ export type ArtistWhereUniqueInput = Prisma.AtLeast<{
   contacts?: Prisma.ArtistContactListRelationFilter
   businessPartners?: Prisma.ArtistBusinessPartnerListRelationFilter
   bookings?: Prisma.BookingListRelationFilter
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationListRelationFilter
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationListRelationFilter
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationListRelationFilter
 }, "id" | "id_organizationId">
 
 export type ArtistOrderByWithAggregationInput = {
@@ -491,6 +500,9 @@ export type ArtistCreateInput = {
   contacts?: Prisma.ArtistContactCreateNestedManyWithoutArtistInput
   businessPartners?: Prisma.ArtistBusinessPartnerCreateNestedManyWithoutArtistInput
   bookings?: Prisma.BookingCreateNestedManyWithoutArtistInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationCreateNestedManyWithoutArtistInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationCreateNestedManyWithoutArtistInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationCreateNestedManyWithoutArtistInput
 }
 
 export type ArtistUncheckedCreateInput = {
@@ -518,6 +530,9 @@ export type ArtistUncheckedCreateInput = {
   contacts?: Prisma.ArtistContactUncheckedCreateNestedManyWithoutArtistInput
   businessPartners?: Prisma.ArtistBusinessPartnerUncheckedCreateNestedManyWithoutArtistInput
   bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutArtistInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationUncheckedCreateNestedManyWithoutArtistInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUncheckedCreateNestedManyWithoutArtistInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUncheckedCreateNestedManyWithoutArtistInput
 }
 
 export type ArtistUpdateInput = {
@@ -545,6 +560,9 @@ export type ArtistUpdateInput = {
   contacts?: Prisma.ArtistContactUpdateManyWithoutArtistNestedInput
   businessPartners?: Prisma.ArtistBusinessPartnerUpdateManyWithoutArtistNestedInput
   bookings?: Prisma.BookingUpdateManyWithoutArtistNestedInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationUpdateManyWithoutArtistNestedInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUpdateManyWithoutArtistNestedInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUpdateManyWithoutArtistNestedInput
 }
 
 export type ArtistUncheckedUpdateInput = {
@@ -572,6 +590,9 @@ export type ArtistUncheckedUpdateInput = {
   contacts?: Prisma.ArtistContactUncheckedUpdateManyWithoutArtistNestedInput
   businessPartners?: Prisma.ArtistBusinessPartnerUncheckedUpdateManyWithoutArtistNestedInput
   bookings?: Prisma.BookingUncheckedUpdateManyWithoutArtistNestedInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationUncheckedUpdateManyWithoutArtistNestedInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUncheckedUpdateManyWithoutArtistNestedInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUncheckedUpdateManyWithoutArtistNestedInput
 }
 
 export type ArtistCreateManyInput = {
@@ -745,6 +766,11 @@ export type ArtistScalarRelationFilter = {
   isNot?: Prisma.ArtistWhereInput
 }
 
+export type ArtistNullableScalarRelationFilter = {
+  is?: Prisma.ArtistWhereInput | null
+  isNot?: Prisma.ArtistWhereInput | null
+}
+
 export type ArtistCreateNestedManyWithoutOrganizationInput = {
   create?: Prisma.XOR<Prisma.ArtistCreateWithoutOrganizationInput, Prisma.ArtistUncheckedCreateWithoutOrganizationInput> | Prisma.ArtistCreateWithoutOrganizationInput[] | Prisma.ArtistUncheckedCreateWithoutOrganizationInput[]
   connectOrCreate?: Prisma.ArtistCreateOrConnectWithoutOrganizationInput | Prisma.ArtistCreateOrConnectWithoutOrganizationInput[]
@@ -829,6 +855,54 @@ export type ArtistUpdateOneRequiredWithoutBookingsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ArtistUpdateToOneWithWhereWithoutBookingsInput, Prisma.ArtistUpdateWithoutBookingsInput>, Prisma.ArtistUncheckedUpdateWithoutBookingsInput>
 }
 
+export type ArtistCreateNestedOneWithoutTicketComponentAllocationsInput = {
+  create?: Prisma.XOR<Prisma.ArtistCreateWithoutTicketComponentAllocationsInput, Prisma.ArtistUncheckedCreateWithoutTicketComponentAllocationsInput>
+  connectOrCreate?: Prisma.ArtistCreateOrConnectWithoutTicketComponentAllocationsInput
+  connect?: Prisma.ArtistWhereUniqueInput
+}
+
+export type ArtistUpdateOneWithoutTicketComponentAllocationsNestedInput = {
+  create?: Prisma.XOR<Prisma.ArtistCreateWithoutTicketComponentAllocationsInput, Prisma.ArtistUncheckedCreateWithoutTicketComponentAllocationsInput>
+  connectOrCreate?: Prisma.ArtistCreateOrConnectWithoutTicketComponentAllocationsInput
+  upsert?: Prisma.ArtistUpsertWithoutTicketComponentAllocationsInput
+  disconnect?: Prisma.ArtistWhereInput | boolean
+  delete?: Prisma.ArtistWhereInput | boolean
+  connect?: Prisma.ArtistWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ArtistUpdateToOneWithWhereWithoutTicketComponentAllocationsInput, Prisma.ArtistUpdateWithoutTicketComponentAllocationsInput>, Prisma.ArtistUncheckedUpdateWithoutTicketComponentAllocationsInput>
+}
+
+export type ArtistCreateNestedOneWithoutTicketProviderTemplateAllocationsInput = {
+  create?: Prisma.XOR<Prisma.ArtistCreateWithoutTicketProviderTemplateAllocationsInput, Prisma.ArtistUncheckedCreateWithoutTicketProviderTemplateAllocationsInput>
+  connectOrCreate?: Prisma.ArtistCreateOrConnectWithoutTicketProviderTemplateAllocationsInput
+  connect?: Prisma.ArtistWhereUniqueInput
+}
+
+export type ArtistUpdateOneWithoutTicketProviderTemplateAllocationsNestedInput = {
+  create?: Prisma.XOR<Prisma.ArtistCreateWithoutTicketProviderTemplateAllocationsInput, Prisma.ArtistUncheckedCreateWithoutTicketProviderTemplateAllocationsInput>
+  connectOrCreate?: Prisma.ArtistCreateOrConnectWithoutTicketProviderTemplateAllocationsInput
+  upsert?: Prisma.ArtistUpsertWithoutTicketProviderTemplateAllocationsInput
+  disconnect?: Prisma.ArtistWhereInput | boolean
+  delete?: Prisma.ArtistWhereInput | boolean
+  connect?: Prisma.ArtistWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ArtistUpdateToOneWithWhereWithoutTicketProviderTemplateAllocationsInput, Prisma.ArtistUpdateWithoutTicketProviderTemplateAllocationsInput>, Prisma.ArtistUncheckedUpdateWithoutTicketProviderTemplateAllocationsInput>
+}
+
+export type ArtistCreateNestedOneWithoutCalculationTemplateAllocationsInput = {
+  create?: Prisma.XOR<Prisma.ArtistCreateWithoutCalculationTemplateAllocationsInput, Prisma.ArtistUncheckedCreateWithoutCalculationTemplateAllocationsInput>
+  connectOrCreate?: Prisma.ArtistCreateOrConnectWithoutCalculationTemplateAllocationsInput
+  connect?: Prisma.ArtistWhereUniqueInput
+}
+
+export type ArtistUpdateOneWithoutCalculationTemplateAllocationsNestedInput = {
+  create?: Prisma.XOR<Prisma.ArtistCreateWithoutCalculationTemplateAllocationsInput, Prisma.ArtistUncheckedCreateWithoutCalculationTemplateAllocationsInput>
+  connectOrCreate?: Prisma.ArtistCreateOrConnectWithoutCalculationTemplateAllocationsInput
+  upsert?: Prisma.ArtistUpsertWithoutCalculationTemplateAllocationsInput
+  disconnect?: Prisma.ArtistWhereInput | boolean
+  delete?: Prisma.ArtistWhereInput | boolean
+  connect?: Prisma.ArtistWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ArtistUpdateToOneWithWhereWithoutCalculationTemplateAllocationsInput, Prisma.ArtistUpdateWithoutCalculationTemplateAllocationsInput>, Prisma.ArtistUncheckedUpdateWithoutCalculationTemplateAllocationsInput>
+}
+
 export type ArtistCreateWithoutOrganizationInput = {
   id?: string
   stageName?: string | null
@@ -853,6 +927,9 @@ export type ArtistCreateWithoutOrganizationInput = {
   contacts?: Prisma.ArtistContactCreateNestedManyWithoutArtistInput
   businessPartners?: Prisma.ArtistBusinessPartnerCreateNestedManyWithoutArtistInput
   bookings?: Prisma.BookingCreateNestedManyWithoutArtistInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationCreateNestedManyWithoutArtistInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationCreateNestedManyWithoutArtistInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationCreateNestedManyWithoutArtistInput
 }
 
 export type ArtistUncheckedCreateWithoutOrganizationInput = {
@@ -879,6 +956,9 @@ export type ArtistUncheckedCreateWithoutOrganizationInput = {
   contacts?: Prisma.ArtistContactUncheckedCreateNestedManyWithoutArtistInput
   businessPartners?: Prisma.ArtistBusinessPartnerUncheckedCreateNestedManyWithoutArtistInput
   bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutArtistInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationUncheckedCreateNestedManyWithoutArtistInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUncheckedCreateNestedManyWithoutArtistInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUncheckedCreateNestedManyWithoutArtistInput
 }
 
 export type ArtistCreateOrConnectWithoutOrganizationInput = {
@@ -958,6 +1038,9 @@ export type ArtistCreateWithoutContactsInput = {
   organization: Prisma.OrganizationCreateNestedOneWithoutArtistsInput
   businessPartners?: Prisma.ArtistBusinessPartnerCreateNestedManyWithoutArtistInput
   bookings?: Prisma.BookingCreateNestedManyWithoutArtistInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationCreateNestedManyWithoutArtistInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationCreateNestedManyWithoutArtistInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationCreateNestedManyWithoutArtistInput
 }
 
 export type ArtistUncheckedCreateWithoutContactsInput = {
@@ -984,6 +1067,9 @@ export type ArtistUncheckedCreateWithoutContactsInput = {
   updatedAt?: Date | string
   businessPartners?: Prisma.ArtistBusinessPartnerUncheckedCreateNestedManyWithoutArtistInput
   bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutArtistInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationUncheckedCreateNestedManyWithoutArtistInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUncheckedCreateNestedManyWithoutArtistInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUncheckedCreateNestedManyWithoutArtistInput
 }
 
 export type ArtistCreateOrConnectWithoutContactsInput = {
@@ -1026,6 +1112,9 @@ export type ArtistUpdateWithoutContactsInput = {
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutArtistsNestedInput
   businessPartners?: Prisma.ArtistBusinessPartnerUpdateManyWithoutArtistNestedInput
   bookings?: Prisma.BookingUpdateManyWithoutArtistNestedInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationUpdateManyWithoutArtistNestedInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUpdateManyWithoutArtistNestedInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUpdateManyWithoutArtistNestedInput
 }
 
 export type ArtistUncheckedUpdateWithoutContactsInput = {
@@ -1052,6 +1141,9 @@ export type ArtistUncheckedUpdateWithoutContactsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   businessPartners?: Prisma.ArtistBusinessPartnerUncheckedUpdateManyWithoutArtistNestedInput
   bookings?: Prisma.BookingUncheckedUpdateManyWithoutArtistNestedInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationUncheckedUpdateManyWithoutArtistNestedInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUncheckedUpdateManyWithoutArtistNestedInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUncheckedUpdateManyWithoutArtistNestedInput
 }
 
 export type ArtistCreateWithoutBusinessPartnersInput = {
@@ -1078,6 +1170,9 @@ export type ArtistCreateWithoutBusinessPartnersInput = {
   organization: Prisma.OrganizationCreateNestedOneWithoutArtistsInput
   contacts?: Prisma.ArtistContactCreateNestedManyWithoutArtistInput
   bookings?: Prisma.BookingCreateNestedManyWithoutArtistInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationCreateNestedManyWithoutArtistInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationCreateNestedManyWithoutArtistInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationCreateNestedManyWithoutArtistInput
 }
 
 export type ArtistUncheckedCreateWithoutBusinessPartnersInput = {
@@ -1104,6 +1199,9 @@ export type ArtistUncheckedCreateWithoutBusinessPartnersInput = {
   updatedAt?: Date | string
   contacts?: Prisma.ArtistContactUncheckedCreateNestedManyWithoutArtistInput
   bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutArtistInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationUncheckedCreateNestedManyWithoutArtistInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUncheckedCreateNestedManyWithoutArtistInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUncheckedCreateNestedManyWithoutArtistInput
 }
 
 export type ArtistCreateOrConnectWithoutBusinessPartnersInput = {
@@ -1146,6 +1244,9 @@ export type ArtistUpdateWithoutBusinessPartnersInput = {
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutArtistsNestedInput
   contacts?: Prisma.ArtistContactUpdateManyWithoutArtistNestedInput
   bookings?: Prisma.BookingUpdateManyWithoutArtistNestedInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationUpdateManyWithoutArtistNestedInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUpdateManyWithoutArtistNestedInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUpdateManyWithoutArtistNestedInput
 }
 
 export type ArtistUncheckedUpdateWithoutBusinessPartnersInput = {
@@ -1172,6 +1273,9 @@ export type ArtistUncheckedUpdateWithoutBusinessPartnersInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   contacts?: Prisma.ArtistContactUncheckedUpdateManyWithoutArtistNestedInput
   bookings?: Prisma.BookingUncheckedUpdateManyWithoutArtistNestedInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationUncheckedUpdateManyWithoutArtistNestedInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUncheckedUpdateManyWithoutArtistNestedInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUncheckedUpdateManyWithoutArtistNestedInput
 }
 
 export type ArtistCreateWithoutBookingsInput = {
@@ -1198,6 +1302,9 @@ export type ArtistCreateWithoutBookingsInput = {
   organization: Prisma.OrganizationCreateNestedOneWithoutArtistsInput
   contacts?: Prisma.ArtistContactCreateNestedManyWithoutArtistInput
   businessPartners?: Prisma.ArtistBusinessPartnerCreateNestedManyWithoutArtistInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationCreateNestedManyWithoutArtistInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationCreateNestedManyWithoutArtistInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationCreateNestedManyWithoutArtistInput
 }
 
 export type ArtistUncheckedCreateWithoutBookingsInput = {
@@ -1224,6 +1331,9 @@ export type ArtistUncheckedCreateWithoutBookingsInput = {
   updatedAt?: Date | string
   contacts?: Prisma.ArtistContactUncheckedCreateNestedManyWithoutArtistInput
   businessPartners?: Prisma.ArtistBusinessPartnerUncheckedCreateNestedManyWithoutArtistInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationUncheckedCreateNestedManyWithoutArtistInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUncheckedCreateNestedManyWithoutArtistInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUncheckedCreateNestedManyWithoutArtistInput
 }
 
 export type ArtistCreateOrConnectWithoutBookingsInput = {
@@ -1266,6 +1376,9 @@ export type ArtistUpdateWithoutBookingsInput = {
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutArtistsNestedInput
   contacts?: Prisma.ArtistContactUpdateManyWithoutArtistNestedInput
   businessPartners?: Prisma.ArtistBusinessPartnerUpdateManyWithoutArtistNestedInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationUpdateManyWithoutArtistNestedInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUpdateManyWithoutArtistNestedInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUpdateManyWithoutArtistNestedInput
 }
 
 export type ArtistUncheckedUpdateWithoutBookingsInput = {
@@ -1292,6 +1405,405 @@ export type ArtistUncheckedUpdateWithoutBookingsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   contacts?: Prisma.ArtistContactUncheckedUpdateManyWithoutArtistNestedInput
   businessPartners?: Prisma.ArtistBusinessPartnerUncheckedUpdateManyWithoutArtistNestedInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationUncheckedUpdateManyWithoutArtistNestedInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUncheckedUpdateManyWithoutArtistNestedInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUncheckedUpdateManyWithoutArtistNestedInput
+}
+
+export type ArtistCreateWithoutTicketComponentAllocationsInput = {
+  id?: string
+  stageName?: string | null
+  firstName?: string | null
+  lastName?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  postalCode?: string | null
+  city?: string | null
+  state?: string | null
+  countryCode?: string | null
+  email?: string | null
+  phone?: string | null
+  instagram?: string | null
+  website?: string | null
+  notes?: string | null
+  status?: $Enums.EntityStatus
+  version?: number
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organization: Prisma.OrganizationCreateNestedOneWithoutArtistsInput
+  contacts?: Prisma.ArtistContactCreateNestedManyWithoutArtistInput
+  businessPartners?: Prisma.ArtistBusinessPartnerCreateNestedManyWithoutArtistInput
+  bookings?: Prisma.BookingCreateNestedManyWithoutArtistInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationCreateNestedManyWithoutArtistInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationCreateNestedManyWithoutArtistInput
+}
+
+export type ArtistUncheckedCreateWithoutTicketComponentAllocationsInput = {
+  id?: string
+  organizationId: string
+  stageName?: string | null
+  firstName?: string | null
+  lastName?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  postalCode?: string | null
+  city?: string | null
+  state?: string | null
+  countryCode?: string | null
+  email?: string | null
+  phone?: string | null
+  instagram?: string | null
+  website?: string | null
+  notes?: string | null
+  status?: $Enums.EntityStatus
+  version?: number
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  contacts?: Prisma.ArtistContactUncheckedCreateNestedManyWithoutArtistInput
+  businessPartners?: Prisma.ArtistBusinessPartnerUncheckedCreateNestedManyWithoutArtistInput
+  bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutArtistInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUncheckedCreateNestedManyWithoutArtistInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUncheckedCreateNestedManyWithoutArtistInput
+}
+
+export type ArtistCreateOrConnectWithoutTicketComponentAllocationsInput = {
+  where: Prisma.ArtistWhereUniqueInput
+  create: Prisma.XOR<Prisma.ArtistCreateWithoutTicketComponentAllocationsInput, Prisma.ArtistUncheckedCreateWithoutTicketComponentAllocationsInput>
+}
+
+export type ArtistUpsertWithoutTicketComponentAllocationsInput = {
+  update: Prisma.XOR<Prisma.ArtistUpdateWithoutTicketComponentAllocationsInput, Prisma.ArtistUncheckedUpdateWithoutTicketComponentAllocationsInput>
+  create: Prisma.XOR<Prisma.ArtistCreateWithoutTicketComponentAllocationsInput, Prisma.ArtistUncheckedCreateWithoutTicketComponentAllocationsInput>
+  where?: Prisma.ArtistWhereInput
+}
+
+export type ArtistUpdateToOneWithWhereWithoutTicketComponentAllocationsInput = {
+  where?: Prisma.ArtistWhereInput
+  data: Prisma.XOR<Prisma.ArtistUpdateWithoutTicketComponentAllocationsInput, Prisma.ArtistUncheckedUpdateWithoutTicketComponentAllocationsInput>
+}
+
+export type ArtistUpdateWithoutTicketComponentAllocationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  stageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  countryCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instagram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutArtistsNestedInput
+  contacts?: Prisma.ArtistContactUpdateManyWithoutArtistNestedInput
+  businessPartners?: Prisma.ArtistBusinessPartnerUpdateManyWithoutArtistNestedInput
+  bookings?: Prisma.BookingUpdateManyWithoutArtistNestedInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUpdateManyWithoutArtistNestedInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUpdateManyWithoutArtistNestedInput
+}
+
+export type ArtistUncheckedUpdateWithoutTicketComponentAllocationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  stageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  countryCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instagram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  contacts?: Prisma.ArtistContactUncheckedUpdateManyWithoutArtistNestedInput
+  businessPartners?: Prisma.ArtistBusinessPartnerUncheckedUpdateManyWithoutArtistNestedInput
+  bookings?: Prisma.BookingUncheckedUpdateManyWithoutArtistNestedInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUncheckedUpdateManyWithoutArtistNestedInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUncheckedUpdateManyWithoutArtistNestedInput
+}
+
+export type ArtistCreateWithoutTicketProviderTemplateAllocationsInput = {
+  id?: string
+  stageName?: string | null
+  firstName?: string | null
+  lastName?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  postalCode?: string | null
+  city?: string | null
+  state?: string | null
+  countryCode?: string | null
+  email?: string | null
+  phone?: string | null
+  instagram?: string | null
+  website?: string | null
+  notes?: string | null
+  status?: $Enums.EntityStatus
+  version?: number
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organization: Prisma.OrganizationCreateNestedOneWithoutArtistsInput
+  contacts?: Prisma.ArtistContactCreateNestedManyWithoutArtistInput
+  businessPartners?: Prisma.ArtistBusinessPartnerCreateNestedManyWithoutArtistInput
+  bookings?: Prisma.BookingCreateNestedManyWithoutArtistInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationCreateNestedManyWithoutArtistInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationCreateNestedManyWithoutArtistInput
+}
+
+export type ArtistUncheckedCreateWithoutTicketProviderTemplateAllocationsInput = {
+  id?: string
+  organizationId: string
+  stageName?: string | null
+  firstName?: string | null
+  lastName?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  postalCode?: string | null
+  city?: string | null
+  state?: string | null
+  countryCode?: string | null
+  email?: string | null
+  phone?: string | null
+  instagram?: string | null
+  website?: string | null
+  notes?: string | null
+  status?: $Enums.EntityStatus
+  version?: number
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  contacts?: Prisma.ArtistContactUncheckedCreateNestedManyWithoutArtistInput
+  businessPartners?: Prisma.ArtistBusinessPartnerUncheckedCreateNestedManyWithoutArtistInput
+  bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutArtistInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationUncheckedCreateNestedManyWithoutArtistInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUncheckedCreateNestedManyWithoutArtistInput
+}
+
+export type ArtistCreateOrConnectWithoutTicketProviderTemplateAllocationsInput = {
+  where: Prisma.ArtistWhereUniqueInput
+  create: Prisma.XOR<Prisma.ArtistCreateWithoutTicketProviderTemplateAllocationsInput, Prisma.ArtistUncheckedCreateWithoutTicketProviderTemplateAllocationsInput>
+}
+
+export type ArtistUpsertWithoutTicketProviderTemplateAllocationsInput = {
+  update: Prisma.XOR<Prisma.ArtistUpdateWithoutTicketProviderTemplateAllocationsInput, Prisma.ArtistUncheckedUpdateWithoutTicketProviderTemplateAllocationsInput>
+  create: Prisma.XOR<Prisma.ArtistCreateWithoutTicketProviderTemplateAllocationsInput, Prisma.ArtistUncheckedCreateWithoutTicketProviderTemplateAllocationsInput>
+  where?: Prisma.ArtistWhereInput
+}
+
+export type ArtistUpdateToOneWithWhereWithoutTicketProviderTemplateAllocationsInput = {
+  where?: Prisma.ArtistWhereInput
+  data: Prisma.XOR<Prisma.ArtistUpdateWithoutTicketProviderTemplateAllocationsInput, Prisma.ArtistUncheckedUpdateWithoutTicketProviderTemplateAllocationsInput>
+}
+
+export type ArtistUpdateWithoutTicketProviderTemplateAllocationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  stageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  countryCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instagram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutArtistsNestedInput
+  contacts?: Prisma.ArtistContactUpdateManyWithoutArtistNestedInput
+  businessPartners?: Prisma.ArtistBusinessPartnerUpdateManyWithoutArtistNestedInput
+  bookings?: Prisma.BookingUpdateManyWithoutArtistNestedInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationUpdateManyWithoutArtistNestedInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUpdateManyWithoutArtistNestedInput
+}
+
+export type ArtistUncheckedUpdateWithoutTicketProviderTemplateAllocationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  stageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  countryCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instagram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  contacts?: Prisma.ArtistContactUncheckedUpdateManyWithoutArtistNestedInput
+  businessPartners?: Prisma.ArtistBusinessPartnerUncheckedUpdateManyWithoutArtistNestedInput
+  bookings?: Prisma.BookingUncheckedUpdateManyWithoutArtistNestedInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationUncheckedUpdateManyWithoutArtistNestedInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUncheckedUpdateManyWithoutArtistNestedInput
+}
+
+export type ArtistCreateWithoutCalculationTemplateAllocationsInput = {
+  id?: string
+  stageName?: string | null
+  firstName?: string | null
+  lastName?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  postalCode?: string | null
+  city?: string | null
+  state?: string | null
+  countryCode?: string | null
+  email?: string | null
+  phone?: string | null
+  instagram?: string | null
+  website?: string | null
+  notes?: string | null
+  status?: $Enums.EntityStatus
+  version?: number
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organization: Prisma.OrganizationCreateNestedOneWithoutArtistsInput
+  contacts?: Prisma.ArtistContactCreateNestedManyWithoutArtistInput
+  businessPartners?: Prisma.ArtistBusinessPartnerCreateNestedManyWithoutArtistInput
+  bookings?: Prisma.BookingCreateNestedManyWithoutArtistInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationCreateNestedManyWithoutArtistInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationCreateNestedManyWithoutArtistInput
+}
+
+export type ArtistUncheckedCreateWithoutCalculationTemplateAllocationsInput = {
+  id?: string
+  organizationId: string
+  stageName?: string | null
+  firstName?: string | null
+  lastName?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  postalCode?: string | null
+  city?: string | null
+  state?: string | null
+  countryCode?: string | null
+  email?: string | null
+  phone?: string | null
+  instagram?: string | null
+  website?: string | null
+  notes?: string | null
+  status?: $Enums.EntityStatus
+  version?: number
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  contacts?: Prisma.ArtistContactUncheckedCreateNestedManyWithoutArtistInput
+  businessPartners?: Prisma.ArtistBusinessPartnerUncheckedCreateNestedManyWithoutArtistInput
+  bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutArtistInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationUncheckedCreateNestedManyWithoutArtistInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUncheckedCreateNestedManyWithoutArtistInput
+}
+
+export type ArtistCreateOrConnectWithoutCalculationTemplateAllocationsInput = {
+  where: Prisma.ArtistWhereUniqueInput
+  create: Prisma.XOR<Prisma.ArtistCreateWithoutCalculationTemplateAllocationsInput, Prisma.ArtistUncheckedCreateWithoutCalculationTemplateAllocationsInput>
+}
+
+export type ArtistUpsertWithoutCalculationTemplateAllocationsInput = {
+  update: Prisma.XOR<Prisma.ArtistUpdateWithoutCalculationTemplateAllocationsInput, Prisma.ArtistUncheckedUpdateWithoutCalculationTemplateAllocationsInput>
+  create: Prisma.XOR<Prisma.ArtistCreateWithoutCalculationTemplateAllocationsInput, Prisma.ArtistUncheckedCreateWithoutCalculationTemplateAllocationsInput>
+  where?: Prisma.ArtistWhereInput
+}
+
+export type ArtistUpdateToOneWithWhereWithoutCalculationTemplateAllocationsInput = {
+  where?: Prisma.ArtistWhereInput
+  data: Prisma.XOR<Prisma.ArtistUpdateWithoutCalculationTemplateAllocationsInput, Prisma.ArtistUncheckedUpdateWithoutCalculationTemplateAllocationsInput>
+}
+
+export type ArtistUpdateWithoutCalculationTemplateAllocationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  stageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  countryCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instagram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutArtistsNestedInput
+  contacts?: Prisma.ArtistContactUpdateManyWithoutArtistNestedInput
+  businessPartners?: Prisma.ArtistBusinessPartnerUpdateManyWithoutArtistNestedInput
+  bookings?: Prisma.BookingUpdateManyWithoutArtistNestedInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationUpdateManyWithoutArtistNestedInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUpdateManyWithoutArtistNestedInput
+}
+
+export type ArtistUncheckedUpdateWithoutCalculationTemplateAllocationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  stageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  countryCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instagram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  contacts?: Prisma.ArtistContactUncheckedUpdateManyWithoutArtistNestedInput
+  businessPartners?: Prisma.ArtistBusinessPartnerUncheckedUpdateManyWithoutArtistNestedInput
+  bookings?: Prisma.BookingUncheckedUpdateManyWithoutArtistNestedInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationUncheckedUpdateManyWithoutArtistNestedInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUncheckedUpdateManyWithoutArtistNestedInput
 }
 
 export type ArtistCreateManyOrganizationInput = {
@@ -1341,6 +1853,9 @@ export type ArtistUpdateWithoutOrganizationInput = {
   contacts?: Prisma.ArtistContactUpdateManyWithoutArtistNestedInput
   businessPartners?: Prisma.ArtistBusinessPartnerUpdateManyWithoutArtistNestedInput
   bookings?: Prisma.BookingUpdateManyWithoutArtistNestedInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationUpdateManyWithoutArtistNestedInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUpdateManyWithoutArtistNestedInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUpdateManyWithoutArtistNestedInput
 }
 
 export type ArtistUncheckedUpdateWithoutOrganizationInput = {
@@ -1367,6 +1882,9 @@ export type ArtistUncheckedUpdateWithoutOrganizationInput = {
   contacts?: Prisma.ArtistContactUncheckedUpdateManyWithoutArtistNestedInput
   businessPartners?: Prisma.ArtistBusinessPartnerUncheckedUpdateManyWithoutArtistNestedInput
   bookings?: Prisma.BookingUncheckedUpdateManyWithoutArtistNestedInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationUncheckedUpdateManyWithoutArtistNestedInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUncheckedUpdateManyWithoutArtistNestedInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUncheckedUpdateManyWithoutArtistNestedInput
 }
 
 export type ArtistUncheckedUpdateManyWithoutOrganizationInput = {
@@ -1401,12 +1919,18 @@ export type ArtistCountOutputType = {
   contacts: number
   businessPartners: number
   bookings: number
+  ticketComponentAllocations: number
+  ticketProviderTemplateAllocations: number
+  calculationTemplateAllocations: number
 }
 
 export type ArtistCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   contacts?: boolean | ArtistCountOutputTypeCountContactsArgs
   businessPartners?: boolean | ArtistCountOutputTypeCountBusinessPartnersArgs
   bookings?: boolean | ArtistCountOutputTypeCountBookingsArgs
+  ticketComponentAllocations?: boolean | ArtistCountOutputTypeCountTicketComponentAllocationsArgs
+  ticketProviderTemplateAllocations?: boolean | ArtistCountOutputTypeCountTicketProviderTemplateAllocationsArgs
+  calculationTemplateAllocations?: boolean | ArtistCountOutputTypeCountCalculationTemplateAllocationsArgs
 }
 
 /**
@@ -1440,6 +1964,27 @@ export type ArtistCountOutputTypeCountBookingsArgs<ExtArgs extends runtime.Types
   where?: Prisma.BookingWhereInput
 }
 
+/**
+ * ArtistCountOutputType without action
+ */
+export type ArtistCountOutputTypeCountTicketComponentAllocationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TicketComponentAllocationWhereInput
+}
+
+/**
+ * ArtistCountOutputType without action
+ */
+export type ArtistCountOutputTypeCountTicketProviderTemplateAllocationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TicketProviderTemplateAllocationWhereInput
+}
+
+/**
+ * ArtistCountOutputType without action
+ */
+export type ArtistCountOutputTypeCountCalculationTemplateAllocationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CalculationTemplateAllocationWhereInput
+}
+
 
 export type ArtistSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1467,6 +2012,9 @@ export type ArtistSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   contacts?: boolean | Prisma.Artist$contactsArgs<ExtArgs>
   businessPartners?: boolean | Prisma.Artist$businessPartnersArgs<ExtArgs>
   bookings?: boolean | Prisma.Artist$bookingsArgs<ExtArgs>
+  ticketComponentAllocations?: boolean | Prisma.Artist$ticketComponentAllocationsArgs<ExtArgs>
+  ticketProviderTemplateAllocations?: boolean | Prisma.Artist$ticketProviderTemplateAllocationsArgs<ExtArgs>
+  calculationTemplateAllocations?: boolean | Prisma.Artist$calculationTemplateAllocationsArgs<ExtArgs>
   _count?: boolean | Prisma.ArtistCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["artist"]>
 
@@ -1550,6 +2098,9 @@ export type ArtistInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   contacts?: boolean | Prisma.Artist$contactsArgs<ExtArgs>
   businessPartners?: boolean | Prisma.Artist$businessPartnersArgs<ExtArgs>
   bookings?: boolean | Prisma.Artist$bookingsArgs<ExtArgs>
+  ticketComponentAllocations?: boolean | Prisma.Artist$ticketComponentAllocationsArgs<ExtArgs>
+  ticketProviderTemplateAllocations?: boolean | Prisma.Artist$ticketProviderTemplateAllocationsArgs<ExtArgs>
+  calculationTemplateAllocations?: boolean | Prisma.Artist$calculationTemplateAllocationsArgs<ExtArgs>
   _count?: boolean | Prisma.ArtistCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ArtistIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1566,6 +2117,9 @@ export type $ArtistPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     contacts: Prisma.$ArtistContactPayload<ExtArgs>[]
     businessPartners: Prisma.$ArtistBusinessPartnerPayload<ExtArgs>[]
     bookings: Prisma.$BookingPayload<ExtArgs>[]
+    ticketComponentAllocations: Prisma.$TicketComponentAllocationPayload<ExtArgs>[]
+    ticketProviderTemplateAllocations: Prisma.$TicketProviderTemplateAllocationPayload<ExtArgs>[]
+    calculationTemplateAllocations: Prisma.$CalculationTemplateAllocationPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1987,6 +2541,9 @@ export interface Prisma__ArtistClient<T, Null = never, ExtArgs extends runtime.T
   contacts<T extends Prisma.Artist$contactsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Artist$contactsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ArtistContactPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   businessPartners<T extends Prisma.Artist$businessPartnersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Artist$businessPartnersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ArtistBusinessPartnerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   bookings<T extends Prisma.Artist$bookingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Artist$bookingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BookingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  ticketComponentAllocations<T extends Prisma.Artist$ticketComponentAllocationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Artist$ticketComponentAllocationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TicketComponentAllocationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  ticketProviderTemplateAllocations<T extends Prisma.Artist$ticketProviderTemplateAllocationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Artist$ticketProviderTemplateAllocationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TicketProviderTemplateAllocationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  calculationTemplateAllocations<T extends Prisma.Artist$calculationTemplateAllocationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Artist$calculationTemplateAllocationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CalculationTemplateAllocationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2507,6 +3064,78 @@ export type Artist$bookingsArgs<ExtArgs extends runtime.Types.Extensions.Interna
   take?: number
   skip?: number
   distinct?: Prisma.BookingScalarFieldEnum | Prisma.BookingScalarFieldEnum[]
+}
+
+/**
+ * Artist.ticketComponentAllocations
+ */
+export type Artist$ticketComponentAllocationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TicketComponentAllocation
+   */
+  select?: Prisma.TicketComponentAllocationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TicketComponentAllocation
+   */
+  omit?: Prisma.TicketComponentAllocationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TicketComponentAllocationInclude<ExtArgs> | null
+  where?: Prisma.TicketComponentAllocationWhereInput
+  orderBy?: Prisma.TicketComponentAllocationOrderByWithRelationInput | Prisma.TicketComponentAllocationOrderByWithRelationInput[]
+  cursor?: Prisma.TicketComponentAllocationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TicketComponentAllocationScalarFieldEnum | Prisma.TicketComponentAllocationScalarFieldEnum[]
+}
+
+/**
+ * Artist.ticketProviderTemplateAllocations
+ */
+export type Artist$ticketProviderTemplateAllocationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TicketProviderTemplateAllocation
+   */
+  select?: Prisma.TicketProviderTemplateAllocationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TicketProviderTemplateAllocation
+   */
+  omit?: Prisma.TicketProviderTemplateAllocationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TicketProviderTemplateAllocationInclude<ExtArgs> | null
+  where?: Prisma.TicketProviderTemplateAllocationWhereInput
+  orderBy?: Prisma.TicketProviderTemplateAllocationOrderByWithRelationInput | Prisma.TicketProviderTemplateAllocationOrderByWithRelationInput[]
+  cursor?: Prisma.TicketProviderTemplateAllocationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TicketProviderTemplateAllocationScalarFieldEnum | Prisma.TicketProviderTemplateAllocationScalarFieldEnum[]
+}
+
+/**
+ * Artist.calculationTemplateAllocations
+ */
+export type Artist$calculationTemplateAllocationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CalculationTemplateAllocation
+   */
+  select?: Prisma.CalculationTemplateAllocationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CalculationTemplateAllocation
+   */
+  omit?: Prisma.CalculationTemplateAllocationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CalculationTemplateAllocationInclude<ExtArgs> | null
+  where?: Prisma.CalculationTemplateAllocationWhereInput
+  orderBy?: Prisma.CalculationTemplateAllocationOrderByWithRelationInput | Prisma.CalculationTemplateAllocationOrderByWithRelationInput[]
+  cursor?: Prisma.CalculationTemplateAllocationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CalculationTemplateAllocationScalarFieldEnum | Prisma.CalculationTemplateAllocationScalarFieldEnum[]
 }
 
 /**
