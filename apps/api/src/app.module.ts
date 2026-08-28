@@ -9,6 +9,7 @@ import { HealthModule } from './health/health.module.js';
 import { EventFormatsModule } from './event-formats/event-formats.module.js';
 import { EventsModule } from './events/events.module.js';
 import { DateOptionsModule } from './date-options/date-options.module.js';
+import { DealsModule } from './deals/deals.module.js';
 import { MasterDataModule } from './master-data/master-data.module.js';
 import { SecurityModule } from './security/security.module.js';
 import { SetupModule } from './setup/setup.module.js';
@@ -36,6 +37,7 @@ import { RevenueTemplatesModule } from './revenue-templates/revenue-templates.mo
     EventFormatsModule,
     EventsModule,
     DateOptionsModule,
+    DealsModule,
     BookingsModule,
     ServicesModule,
     RevenuePlanningModule,

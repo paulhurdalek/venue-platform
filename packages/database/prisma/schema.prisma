@@ -160,6 +160,29 @@ enum RevenueConfirmationStatus {
   CONFIRMED
 }
 
+enum DealStatus {
+  ENTWURF
+  IN_VERHANDLUNG
+  VEREINBART
+  STORNIERT
+}
+
+enum DealComponentType {
+  FIXED_RENT
+  REVENUE_SHARE
+  MINIMUM_GUARANTEE_SHARE
+}
+
+enum DealBillingMode {
+  SEPARATELY_BILLABLE
+  INCLUDED
+}
+
+enum DealDiscountType {
+  FIXED
+  PERCENTAGE
+}
+
 model User {
   id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name          String
@@ -182,6 +205,7 @@ model User {
   bookingStatusChanges    BookingStatusHistory[] @relation("BookingStatusActorUser")
   approvedCalculations    EventCalculation[] @relation("CalculationApproverUser")
   calculationStatusChanges EventCalculationStatusHistory[] @relation("CalculationStatusActorUser")
+  dealStatusChanges        DealStatusHistory[] @relation("DealStatusActorUser")
 
   @@map("auth_user")
 }
@@ -306,6 +330,13 @@ model Organization {
   calculationTemplateComponents CalculationTemplateComponent[]
   calculationTemplateAllocations CalculationTemplateAllocation[]
   calculationTemplateAdditionalRevenues CalculationTemplateAdditionalRevenue[]
+  deals Deal[]
+  dealComponents DealComponent[]
+  dealServicePositions DealServicePosition[]
+  dealStatusHistory DealStatusHistory[]
+  dealTemplates DealTemplate[]
+  dealTemplateComponents DealTemplateComponent[]
+  dealTemplateServicePositions DealTemplateServicePosition[]
 
   @@index([status])
   @@map("organization")
@@ -386,6 +417,7 @@ model Event {
   ticketPriceTiers       TicketPriceTier[]
   additionalRevenues     AdditionalRevenue[]
   sourceCalculationTemplate CalculationTemplate? @relation(fields: [sourceCalculationTemplateId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  deals                   Deal[]
 
   @@unique([id, organizationId])
   @@index([organizationId, eventDate, startMinutes, id])
@@ -447,6 +479,7 @@ model Membership {
   bookingStatusChanges BookingStatusHistory[] @relation("BookingStatusActorMembership")
   approvedCalculations EventCalculation[] @relation("CalculationApproverMembership")
   calculationStatusChanges EventCalculationStatusHistory[] @relation("CalculationStatusActorMembership")
+  dealStatusChanges        DealStatusHistory[] @relation("DealStatusActorMembership")
 
   @@unique([organizationId, userId])
   @@unique([id, organizationId])
@@ -654,6 +687,7 @@ model Contact {
   businessPartnerLinks BusinessPartnerContact[]
   dateOptions          VenueDateOption[]
   bookings             Booking[]
+  dealContacts         Deal[]
 
   @@unique([id, organizationId])
   @@index([organizationId, status])
@@ -743,6 +777,7 @@ model BusinessPartner {
   ticketComponentAllocations TicketComponentAllocation[]
   ticketProviderTemplateAllocations TicketProviderTemplateAllocation[]
   calculationTemplateAllocations CalculationTemplateAllocation[]
+  customerDeals Deal[]
 
   @@unique([id, organizationId])
   @@index([organizationId, status])
@@ -1060,6 +1095,8 @@ model Service {
   providerPrices            ServiceProviderPrice[]
   formatRequirements        EventFormatService[]
   eventPositions            EventServicePosition[]
+  dealPositions             DealServicePosition[]
+  dealTemplatePositions     DealTemplateServicePosition[]
 
   @@unique([id, organizationId])
   @@unique([organizationId, normalizedName])
@@ -1668,4 +1705,189 @@ model LocationOccupancy {
   @@index([organizationId, eventId])
   @@index([organizationId, dateOptionId])
   @@map("location_occupancy")
+}
+
+model Deal {
+  id                              String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId                  String            @map("organization_id") @db.Uuid
+  eventId                         String            @map("event_id") @db.Uuid
+  businessPartnerId               String            @map("business_partner_id") @db.Uuid
+  contactId                       String?           @map("contact_id") @db.Uuid
+  sourceTemplateId                String?           @map("source_template_id") @db.Uuid
+  sourceTemplateVersion           Int?              @map("source_template_version")
+  sourceTemplateNameSnapshot      String?           @map("source_template_name_snapshot") @db.VarChar(200)
+  customerNameSnapshot            String            @map("customer_name_snapshot") @db.VarChar(200)
+  contactNameSnapshot             String?           @map("contact_name_snapshot") @db.VarChar(200)
+  status                          DealStatus        @default(ENTWURF)
+  totalDiscountType               DealDiscountType? @map("total_discount_type")
+  totalDiscountFixedMinor         BigInt?           @map("total_discount_fixed_minor")
+  totalDiscountPercentageBasisPoints Int?           @map("total_discount_percentage_basis_points")
+  currency                        String            @default("EUR") @db.Char(3)
+  version                         Int               @default(1)
+  createdAt                       DateTime          @default(now()) @map("created_at")
+  updatedAt                       DateTime          @updatedAt @map("updated_at")
+  organization                    Organization      @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  event                           Event             @relation(fields: [eventId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  businessPartner                 BusinessPartner   @relation(fields: [businessPartnerId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  contact                         Contact?          @relation(fields: [contactId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  sourceTemplate                  DealTemplate?     @relation(fields: [sourceTemplateId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  components                      DealComponent[]
+  servicePositions                DealServicePosition[]
+  statusHistory                   DealStatusHistory[]
+
+  @@unique([id, organizationId])
+  @@index([organizationId, eventId, status, createdAt])
+  @@index([organizationId, businessPartnerId])
+  @@index([organizationId, contactId])
+  @@index([organizationId, sourceTemplateId])
+  @@map("deal")
+}
+
+model DealComponent {
+  id                              String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId                  String            @map("organization_id") @db.Uuid
+  dealId                          String            @map("deal_id") @db.Uuid
+  type                            DealComponentType
+  label                           String            @db.VarChar(200)
+  amountNetMinor                  BigInt?           @map("amount_net_minor")
+  minimumGuaranteeNetMinor        BigInt?           @map("minimum_guarantee_net_minor")
+  taxRateBasisPoints              Int               @map("tax_rate_basis_points")
+  locationShareBasisPoints        Int?              @map("location_share_basis_points")
+  counterpartyShareBasisPoints    Int?              @map("counterparty_share_basis_points")
+  includeWkz                      Boolean           @default(false) @map("include_wkz")
+  sortOrder                       Int               @map("sort_order")
+  version                         Int               @default(1)
+  createdAt                       DateTime          @default(now()) @map("created_at")
+  updatedAt                       DateTime          @updatedAt @map("updated_at")
+  organization                    Organization      @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  deal                            Deal              @relation(fields: [dealId, organizationId], references: [id, organizationId], onDelete: Cascade)
+
+  @@unique([id, organizationId])
+  @@index([organizationId, dealId, sortOrder, id])
+  @@map("deal_component")
+}
+
+model DealServicePosition {
+  id                              String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId                  String            @map("organization_id") @db.Uuid
+  dealId                          String            @map("deal_id") @db.Uuid
+  sourceServiceId                 String?           @map("source_service_id") @db.Uuid
+  sourceServiceVersion            Int?              @map("source_service_version")
+  serviceNameSnapshot             String            @map("service_name_snapshot") @db.VarChar(200)
+  unitSnapshot                    ServiceUnit       @map("unit_snapshot")
+  quantity                        Decimal           @db.Decimal(12, 3)
+  salesUnitPriceNetMinor          BigInt            @map("sales_unit_price_net_minor")
+  internalUnitCostNetMinor        BigInt            @map("internal_unit_cost_net_minor")
+  taxRateBasisPoints              Int               @map("tax_rate_basis_points")
+  billingMode                     DealBillingMode   @map("billing_mode")
+  discountType                    DealDiscountType? @map("discount_type")
+  discountFixedMinor              BigInt?           @map("discount_fixed_minor")
+  discountPercentageBasisPoints   Int?              @map("discount_percentage_basis_points")
+  sortOrder                       Int               @map("sort_order")
+  version                         Int               @default(1)
+  createdAt                       DateTime          @default(now()) @map("created_at")
+  updatedAt                       DateTime          @updatedAt @map("updated_at")
+  organization                    Organization      @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  deal                            Deal              @relation(fields: [dealId, organizationId], references: [id, organizationId], onDelete: Cascade)
+  sourceService                   Service?          @relation(fields: [sourceServiceId, organizationId], references: [id, organizationId], onDelete: Restrict)
+
+  @@unique([id, organizationId])
+  @@index([organizationId, dealId, sortOrder, id])
+  @@index([organizationId, sourceServiceId])
+  @@map("deal_service_position")
+}
+
+model DealStatusHistory {
+  id                              String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId                  String       @map("organization_id") @db.Uuid
+  dealId                          String       @map("deal_id") @db.Uuid
+  previousStatus                  DealStatus   @map("previous_status")
+  newStatus                       DealStatus   @map("new_status")
+  actorUserId                     String       @map("actor_user_id") @db.Uuid
+  actorMembershipId               String       @map("actor_membership_id") @db.Uuid
+  changedAt                       DateTime     @default(now()) @map("changed_at")
+  organization                    Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  deal                            Deal         @relation(fields: [dealId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  actorUser                       User         @relation("DealStatusActorUser", fields: [actorUserId], references: [id], onDelete: Restrict)
+  actorMembership                 Membership   @relation("DealStatusActorMembership", fields: [actorMembershipId, organizationId], references: [id, organizationId], onDelete: Restrict)
+
+  @@unique([id, organizationId])
+  @@index([organizationId, dealId, changedAt, id])
+  @@index([actorUserId])
+  @@index([actorMembershipId])
+  @@map("deal_status_history")
+}
+
+model DealTemplate {
+  id                              String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId                  String            @map("organization_id") @db.Uuid
+  name                            String            @db.VarChar(200)
+  normalizedName                  String            @map("normalized_name") @db.VarChar(200)
+  description                     String?
+  totalDiscountType               DealDiscountType? @map("total_discount_type")
+  totalDiscountFixedMinor         BigInt?           @map("total_discount_fixed_minor")
+  totalDiscountPercentageBasisPoints Int?           @map("total_discount_percentage_basis_points")
+  currency                        String            @default("EUR") @db.Char(3)
+  status                          EntityStatus      @default(ACTIVE)
+  archivedAt                      DateTime?         @map("archived_at")
+  version                         Int               @default(1)
+  createdAt                       DateTime          @default(now()) @map("created_at")
+  updatedAt                       DateTime          @updatedAt @map("updated_at")
+  organization                    Organization      @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  components                      DealTemplateComponent[]
+  servicePositions                DealTemplateServicePosition[]
+  sourceDeals                     Deal[]
+
+  @@unique([id, organizationId])
+  @@unique([organizationId, normalizedName])
+  @@index([organizationId, status, name, id])
+  @@map("deal_template")
+}
+
+model DealTemplateComponent {
+  id                              String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId                  String            @map("organization_id") @db.Uuid
+  templateId                      String            @map("template_id") @db.Uuid
+  type                            DealComponentType
+  label                           String            @db.VarChar(200)
+  amountNetMinor                  BigInt?           @map("amount_net_minor")
+  minimumGuaranteeNetMinor        BigInt?           @map("minimum_guarantee_net_minor")
+  taxRateBasisPoints              Int               @map("tax_rate_basis_points")
+  locationShareBasisPoints        Int?              @map("location_share_basis_points")
+  counterpartyShareBasisPoints    Int?              @map("counterparty_share_basis_points")
+  includeWkz                      Boolean           @default(false) @map("include_wkz")
+  sortOrder                       Int               @map("sort_order")
+  organization                    Organization      @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  template                        DealTemplate      @relation(fields: [templateId, organizationId], references: [id, organizationId], onDelete: Cascade)
+
+  @@unique([id, organizationId])
+  @@index([organizationId, templateId, sortOrder, id])
+  @@map("deal_template_component")
+}
+
+model DealTemplateServicePosition {
+  id                              String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId                  String            @map("organization_id") @db.Uuid
+  templateId                      String            @map("template_id") @db.Uuid
+  sourceServiceId                 String?           @map("source_service_id") @db.Uuid
+  sourceServiceVersion            Int?              @map("source_service_version")
+  serviceNameSnapshot             String            @map("service_name_snapshot") @db.VarChar(200)
+  unitSnapshot                    ServiceUnit       @map("unit_snapshot")
+  quantity                        Decimal           @db.Decimal(12, 3)
+  salesUnitPriceNetMinor          BigInt            @map("sales_unit_price_net_minor")
+  internalUnitCostNetMinor        BigInt            @map("internal_unit_cost_net_minor")
+  taxRateBasisPoints              Int               @map("tax_rate_basis_points")
+  billingMode                     DealBillingMode   @map("billing_mode")
+  discountType                    DealDiscountType? @map("discount_type")
+  discountFixedMinor              BigInt?           @map("discount_fixed_minor")
+  discountPercentageBasisPoints   Int?              @map("discount_percentage_basis_points")
+  sortOrder                       Int               @map("sort_order")
+  organization                    Organization      @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  template                        DealTemplate      @relation(fields: [templateId, organizationId], references: [id, organizationId], onDelete: Cascade)
+  sourceService                   Service?          @relation(fields: [sourceServiceId, organizationId], references: [id, organizationId], onDelete: Restrict)
+
+  @@unique([id, organizationId])
+  @@index([organizationId, templateId, sortOrder, id])
+  @@index([organizationId, sourceServiceId])
+  @@map("deal_template_service_position")
 }

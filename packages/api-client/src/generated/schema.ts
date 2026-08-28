@@ -919,6 +919,134 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/organizations/{organizationId}/events/{eventId}/deal": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["EventDealController_find_v1"];
+        put?: never;
+        post: operations["EventDealController_create_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/deals/{dealId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["DealController_update_v1"];
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/deals/{dealId}/status": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["DealController_setStatus_v1"];
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/deals/{dealId}/template-preview": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["DealController_preview_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/deals/{dealId}/apply-template": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["DealController_apply_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/deal-templates": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["DealTemplateController_list_v1"];
+        put?: never;
+        post: operations["DealTemplateController_create_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/deal-templates/{templateId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["DealTemplateController_find_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["DealTemplateController_update_v1"];
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/deal-templates/{templateId}/status": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["DealTemplateController_setStatus_v1"];
+        trace?: never;
+    };
     "/api/v1/organizations/{organizationId}/events/{eventId}/bookings": {
         parameters: {
             query?: never;
@@ -2797,6 +2925,235 @@ export interface components {
             /** @enum {string} */
             state: "FREE" | "SECOND_OPTION_AVAILABLE" | "FIRST_OPTION_AVAILABLE" | "FULLY_OPTIONED" | "EVENT_OCCUPIED" | "MANUAL_REVIEW";
             selectable: boolean;
+        };
+        DealComponentDto: {
+            /** Format: uuid */
+            id: string;
+            /** @enum {string} */
+            type: "FIXED_RENT" | "REVENUE_SHARE" | "MINIMUM_GUARANTEE_SHARE";
+            label: string;
+            amountNetMinor?: string | null;
+            minimumGuaranteeNetMinor?: string | null;
+            taxRateBasisPoints: number;
+            locationShareBasisPoints?: number | null;
+            counterpartyShareBasisPoints?: number | null;
+            includeWkz: boolean;
+            sortOrder: number;
+            version: number;
+        };
+        DealServicePositionDto: {
+            /** Format: uuid */
+            id: string;
+            /** Format: uuid */
+            sourceServiceId?: string | null;
+            sourceServiceVersion?: number | null;
+            name: string;
+            /** @enum {string} */
+            unit: "PIECE" | "HOUR" | "DAY" | "PERSON" | "FLAT_RATE" | "PER_GUEST" | "PER_TICKET";
+            quantity: string;
+            salesUnitPriceNetMinor: string;
+            internalUnitCostNetMinor: string;
+            taxRateBasisPoints: number;
+            /** @enum {string} */
+            billingMode: "SEPARATELY_BILLABLE" | "INCLUDED";
+            /** @enum {string|null} */
+            discountType?: "FIXED" | "PERCENTAGE" | null;
+            discountFixedMinor?: string | null;
+            discountPercentageBasisPoints?: number | null;
+            sortOrder: number;
+            version: number;
+        };
+        DealSummaryComponentDto: {
+            id: string;
+            label: string;
+            /** @enum {string} */
+            type: "FIXED_RENT" | "REVENUE_SHARE" | "MINIMUM_GUARANTEE_SHARE";
+            splitBasisMinor?: string | null;
+            calculatedLocationShareMinor?: string | null;
+            effectiveLocationAmountMinor: string;
+            effectiveGrossMinor: string;
+            /** @enum {string} */
+            appliedRule: "FIXED_RENT" | "REVENUE_SHARE" | "MINIMUM_GUARANTEE" | "CALCULATED_SHARE";
+        };
+        DealSummaryDto: {
+            ticketNetRevenueMinor: string;
+            wkzNetRevenueMinor: string;
+            fixedRentNetMinor: string;
+            billableServiceSubtotalNetMinor: string;
+            positionDiscountNetMinor: string;
+            totalDiscountNetMinor: string;
+            billableServicesNetMinor: string;
+            customerAmountNetMinor: string;
+            customerAmountGrossMinor: string;
+            expectedLocationShareNetMinor: string;
+            internalCostNetMinor: string;
+            expectedOperatingResultNetMinor: string;
+            components: components["schemas"]["DealSummaryComponentDto"][];
+        };
+        DealDto: {
+            /** Format: uuid */
+            id: string;
+            /** Format: uuid */
+            organizationId: string;
+            /** Format: uuid */
+            eventId: string;
+            eventName: string;
+            /** Format: uuid */
+            businessPartnerId: string;
+            customerName: string;
+            /** Format: uuid */
+            contactId?: string | null;
+            contactName?: string | null;
+            /** Format: uuid */
+            sourceTemplateId?: string | null;
+            sourceTemplateVersion?: number | null;
+            sourceTemplateName?: string | null;
+            /** @enum {string} */
+            status: "ENTWURF" | "IN_VERHANDLUNG" | "VEREINBART" | "STORNIERT";
+            /** @enum {string|null} */
+            totalDiscountType?: "FIXED" | "PERCENTAGE" | null;
+            totalDiscountFixedMinor?: string | null;
+            totalDiscountPercentageBasisPoints?: number | null;
+            /** @enum {string} */
+            currency: "EUR";
+            version: number;
+            components: components["schemas"]["DealComponentDto"][];
+            servicePositions: components["schemas"]["DealServicePositionDto"][];
+            summary: components["schemas"]["DealSummaryDto"];
+            /** Format: date-time */
+            createdAt: string;
+            /** Format: date-time */
+            updatedAt: string;
+        };
+        DealComponentInputDto: {
+            /** @enum {string} */
+            type: "FIXED_RENT" | "REVENUE_SHARE" | "MINIMUM_GUARANTEE_SHARE";
+            label: string;
+            amountNetMinor?: string | null;
+            minimumGuaranteeNetMinor?: string | null;
+            taxRateBasisPoints: number;
+            locationShareBasisPoints?: number | null;
+            counterpartyShareBasisPoints?: number | null;
+            /** @default false */
+            includeWkz: boolean;
+        };
+        DealDiscountInputDto: {
+            /** @enum {string|null} */
+            type?: "FIXED" | "PERCENTAGE" | null;
+            fixedMinor?: string | null;
+            percentageBasisPoints?: number | null;
+        };
+        DealServicePositionInputDto: {
+            /** Format: uuid */
+            sourceServiceId?: string | null;
+            name?: string;
+            /** @enum {string} */
+            unit?: "PIECE" | "HOUR" | "DAY" | "PERSON" | "FLAT_RATE" | "PER_GUEST" | "PER_TICKET";
+            quantity: string;
+            salesUnitPriceNetMinor?: string;
+            internalUnitCostNetMinor?: string;
+            taxRateBasisPoints: number;
+            /** @enum {string} */
+            billingMode: "SEPARATELY_BILLABLE" | "INCLUDED";
+            discount?: components["schemas"]["DealDiscountInputDto"];
+        };
+        CreateDealDto: {
+            /** Format: uuid */
+            businessPartnerId: string;
+            /** Format: uuid */
+            contactId?: string | null;
+            /** Format: uuid */
+            templateId?: string | null;
+            components?: components["schemas"]["DealComponentInputDto"][];
+            servicePositions?: components["schemas"]["DealServicePositionInputDto"][];
+            totalDiscount?: components["schemas"]["DealDiscountInputDto"];
+        };
+        UpdateDealDto: {
+            /** Format: uuid */
+            businessPartnerId: string;
+            /** Format: uuid */
+            contactId?: string | null;
+            /** Format: uuid */
+            templateId?: string | null;
+            components?: components["schemas"]["DealComponentInputDto"][];
+            servicePositions?: components["schemas"]["DealServicePositionInputDto"][];
+            totalDiscount?: components["schemas"]["DealDiscountInputDto"];
+            version: number;
+        };
+        UpdateDealStatusDto: {
+            version: number;
+            /** @enum {string} */
+            status: "ENTWURF" | "IN_VERHANDLUNG" | "VEREINBART" | "STORNIERT";
+        };
+        DealTemplateApplicationDto: {
+            /** Format: uuid */
+            templateId: string;
+            version: number;
+            confirmReplacement: boolean;
+        };
+        DealTemplatePreviewDto: {
+            /** Format: uuid */
+            id: string;
+            /** Format: uuid */
+            organizationId: string;
+            name: string;
+            description?: string | null;
+            /** @enum {string} */
+            status: "ACTIVE" | "ARCHIVED";
+            version: number;
+            components: components["schemas"]["DealComponentDto"][];
+            servicePositions: components["schemas"]["DealServicePositionDto"][];
+            /** @enum {string|null} */
+            totalDiscountType?: "FIXED" | "PERCENTAGE" | null;
+            totalDiscountFixedMinor?: string | null;
+            totalDiscountPercentageBasisPoints?: number | null;
+            /** Format: date-time */
+            createdAt: string;
+            /** Format: date-time */
+            updatedAt: string;
+            replacesExistingSnapshot: boolean;
+            replacementMessage: string;
+        };
+        DealTemplateDto: {
+            /** Format: uuid */
+            id: string;
+            /** Format: uuid */
+            organizationId: string;
+            name: string;
+            description?: string | null;
+            /** @enum {string} */
+            status: "ACTIVE" | "ARCHIVED";
+            version: number;
+            components: components["schemas"]["DealComponentDto"][];
+            servicePositions: components["schemas"]["DealServicePositionDto"][];
+            /** @enum {string|null} */
+            totalDiscountType?: "FIXED" | "PERCENTAGE" | null;
+            totalDiscountFixedMinor?: string | null;
+            totalDiscountPercentageBasisPoints?: number | null;
+            /** Format: date-time */
+            createdAt: string;
+            /** Format: date-time */
+            updatedAt: string;
+        };
+        DealTemplateInputDto: {
+            name: string;
+            description?: string | null;
+            components: components["schemas"]["DealComponentInputDto"][];
+            servicePositions: components["schemas"]["DealServicePositionInputDto"][];
+            totalDiscount?: components["schemas"]["DealDiscountInputDto"];
+        };
+        UpdateDealTemplateDto: {
+            name: string;
+            description?: string | null;
+            components: components["schemas"]["DealComponentInputDto"][];
+            servicePositions: components["schemas"]["DealServicePositionInputDto"][];
+            totalDiscount?: components["schemas"]["DealDiscountInputDto"];
+            version: number;
+        };
+        SetDealTemplateStatusDto: {
+            version: number;
+            /** @enum {string} */
+            status: "ACTIVE" | "ARCHIVED";
         };
         BookingContactDto: {
             /** Format: uuid */
@@ -5778,6 +6135,280 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["AvailabilityResultDto"][];
+                };
+            };
+        };
+    };
+    EventDealController_find_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                eventId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DealDto"];
+                };
+            };
+        };
+    };
+    EventDealController_create_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                eventId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateDealDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DealDto"];
+                };
+            };
+        };
+    };
+    DealController_update_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                dealId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateDealDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DealDto"];
+                };
+            };
+        };
+    };
+    DealController_setStatus_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                dealId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateDealStatusDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DealDto"];
+                };
+            };
+        };
+    };
+    DealController_preview_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                dealId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["DealTemplateApplicationDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DealTemplatePreviewDto"];
+                };
+            };
+        };
+    };
+    DealController_apply_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                dealId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["DealTemplateApplicationDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DealDto"];
+                };
+            };
+        };
+    };
+    DealTemplateController_list_v1: {
+        parameters: {
+            query?: {
+                status?: "ACTIVE" | "ARCHIVED" | "ALL";
+            };
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DealTemplateDto"][];
+                };
+            };
+        };
+    };
+    DealTemplateController_create_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["DealTemplateInputDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DealTemplateDto"];
+                };
+            };
+        };
+    };
+    DealTemplateController_find_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                templateId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DealTemplateDto"];
+                };
+            };
+        };
+    };
+    DealTemplateController_update_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                templateId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateDealTemplateDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DealTemplateDto"];
+                };
+            };
+        };
+    };
+    DealTemplateController_setStatus_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                templateId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SetDealTemplateStatusDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DealTemplateDto"];
                 };
             };
         };

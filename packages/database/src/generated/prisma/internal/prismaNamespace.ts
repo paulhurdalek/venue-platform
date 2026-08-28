@@ -457,7 +457,14 @@ export const ModelName = {
   CalculationTemplateAllocation: 'CalculationTemplateAllocation',
   CalculationTemplateAdditionalRevenue: 'CalculationTemplateAdditionalRevenue',
   VenueDateOption: 'VenueDateOption',
-  LocationOccupancy: 'LocationOccupancy'
+  LocationOccupancy: 'LocationOccupancy',
+  Deal: 'Deal',
+  DealComponent: 'DealComponent',
+  DealServicePosition: 'DealServicePosition',
+  DealStatusHistory: 'DealStatusHistory',
+  DealTemplate: 'DealTemplate',
+  DealTemplateComponent: 'DealTemplateComponent',
+  DealTemplateServicePosition: 'DealTemplateServicePosition'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -473,7 +480,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "session" | "account" | "verification" | "rateLimit" | "bootstrapToken" | "organization" | "eventFormat" | "event" | "location" | "membership" | "permission" | "role" | "rolePermission" | "membershipRole" | "membershipLocation" | "invitation" | "invitationRole" | "invitationLocation" | "auditLog" | "artist" | "contact" | "contactRole" | "artistContact" | "artistContactRole" | "businessPartner" | "businessPartnerRole" | "businessPartnerRoleAssignment" | "businessPartnerContact" | "businessPartnerContactRole" | "artistBusinessPartner" | "artistBusinessPartnerRole" | "artistBusinessPartnerContact" | "artistBusinessPartnerContactRole" | "eventFormatLineupRequirement" | "eventLineupRequirement" | "booking" | "eventProgramItem" | "bookingStatusHistory" | "serviceCategory" | "service" | "serviceProviderPrice" | "eventFormatService" | "eventCalculation" | "eventCalculationStatusHistory" | "eventServicePosition" | "ticketPriceTier" | "ticketPriceComponent" | "ticketComponentAllocation" | "additionalRevenue" | "taxRateTemplate" | "ticketProviderTemplate" | "ticketProviderTemplateComponent" | "ticketProviderTemplateAllocation" | "calculationTemplate" | "calculationTemplateTier" | "calculationTemplateComponent" | "calculationTemplateAllocation" | "calculationTemplateAdditionalRevenue" | "venueDateOption" | "locationOccupancy"
+    modelProps: "user" | "session" | "account" | "verification" | "rateLimit" | "bootstrapToken" | "organization" | "eventFormat" | "event" | "location" | "membership" | "permission" | "role" | "rolePermission" | "membershipRole" | "membershipLocation" | "invitation" | "invitationRole" | "invitationLocation" | "auditLog" | "artist" | "contact" | "contactRole" | "artistContact" | "artistContactRole" | "businessPartner" | "businessPartnerRole" | "businessPartnerRoleAssignment" | "businessPartnerContact" | "businessPartnerContactRole" | "artistBusinessPartner" | "artistBusinessPartnerRole" | "artistBusinessPartnerContact" | "artistBusinessPartnerContactRole" | "eventFormatLineupRequirement" | "eventLineupRequirement" | "booking" | "eventProgramItem" | "bookingStatusHistory" | "serviceCategory" | "service" | "serviceProviderPrice" | "eventFormatService" | "eventCalculation" | "eventCalculationStatusHistory" | "eventServicePosition" | "ticketPriceTier" | "ticketPriceComponent" | "ticketComponentAllocation" | "additionalRevenue" | "taxRateTemplate" | "ticketProviderTemplate" | "ticketProviderTemplateComponent" | "ticketProviderTemplateAllocation" | "calculationTemplate" | "calculationTemplateTier" | "calculationTemplateComponent" | "calculationTemplateAllocation" | "calculationTemplateAdditionalRevenue" | "venueDateOption" | "locationOccupancy" | "deal" | "dealComponent" | "dealServicePosition" | "dealStatusHistory" | "dealTemplate" | "dealTemplateComponent" | "dealTemplateServicePosition"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -4991,6 +4998,524 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Deal: {
+      payload: Prisma.$DealPayload<ExtArgs>
+      fields: Prisma.DealFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.DealFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.DealFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealPayload>
+        }
+        findFirst: {
+          args: Prisma.DealFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.DealFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealPayload>
+        }
+        findMany: {
+          args: Prisma.DealFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealPayload>[]
+        }
+        create: {
+          args: Prisma.DealCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealPayload>
+        }
+        createMany: {
+          args: Prisma.DealCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.DealCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealPayload>[]
+        }
+        delete: {
+          args: Prisma.DealDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealPayload>
+        }
+        update: {
+          args: Prisma.DealUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealPayload>
+        }
+        deleteMany: {
+          args: Prisma.DealDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.DealUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.DealUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealPayload>[]
+        }
+        upsert: {
+          args: Prisma.DealUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealPayload>
+        }
+        aggregate: {
+          args: Prisma.DealAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateDeal>
+        }
+        groupBy: {
+          args: Prisma.DealGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DealGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.DealCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DealCountAggregateOutputType> | number
+        }
+      }
+    }
+    DealComponent: {
+      payload: Prisma.$DealComponentPayload<ExtArgs>
+      fields: Prisma.DealComponentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.DealComponentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealComponentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.DealComponentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealComponentPayload>
+        }
+        findFirst: {
+          args: Prisma.DealComponentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealComponentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.DealComponentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealComponentPayload>
+        }
+        findMany: {
+          args: Prisma.DealComponentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealComponentPayload>[]
+        }
+        create: {
+          args: Prisma.DealComponentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealComponentPayload>
+        }
+        createMany: {
+          args: Prisma.DealComponentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.DealComponentCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealComponentPayload>[]
+        }
+        delete: {
+          args: Prisma.DealComponentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealComponentPayload>
+        }
+        update: {
+          args: Prisma.DealComponentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealComponentPayload>
+        }
+        deleteMany: {
+          args: Prisma.DealComponentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.DealComponentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.DealComponentUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealComponentPayload>[]
+        }
+        upsert: {
+          args: Prisma.DealComponentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealComponentPayload>
+        }
+        aggregate: {
+          args: Prisma.DealComponentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateDealComponent>
+        }
+        groupBy: {
+          args: Prisma.DealComponentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DealComponentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.DealComponentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DealComponentCountAggregateOutputType> | number
+        }
+      }
+    }
+    DealServicePosition: {
+      payload: Prisma.$DealServicePositionPayload<ExtArgs>
+      fields: Prisma.DealServicePositionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.DealServicePositionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealServicePositionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.DealServicePositionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealServicePositionPayload>
+        }
+        findFirst: {
+          args: Prisma.DealServicePositionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealServicePositionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.DealServicePositionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealServicePositionPayload>
+        }
+        findMany: {
+          args: Prisma.DealServicePositionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealServicePositionPayload>[]
+        }
+        create: {
+          args: Prisma.DealServicePositionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealServicePositionPayload>
+        }
+        createMany: {
+          args: Prisma.DealServicePositionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.DealServicePositionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealServicePositionPayload>[]
+        }
+        delete: {
+          args: Prisma.DealServicePositionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealServicePositionPayload>
+        }
+        update: {
+          args: Prisma.DealServicePositionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealServicePositionPayload>
+        }
+        deleteMany: {
+          args: Prisma.DealServicePositionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.DealServicePositionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.DealServicePositionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealServicePositionPayload>[]
+        }
+        upsert: {
+          args: Prisma.DealServicePositionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealServicePositionPayload>
+        }
+        aggregate: {
+          args: Prisma.DealServicePositionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateDealServicePosition>
+        }
+        groupBy: {
+          args: Prisma.DealServicePositionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DealServicePositionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.DealServicePositionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DealServicePositionCountAggregateOutputType> | number
+        }
+      }
+    }
+    DealStatusHistory: {
+      payload: Prisma.$DealStatusHistoryPayload<ExtArgs>
+      fields: Prisma.DealStatusHistoryFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.DealStatusHistoryFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealStatusHistoryPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.DealStatusHistoryFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealStatusHistoryPayload>
+        }
+        findFirst: {
+          args: Prisma.DealStatusHistoryFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealStatusHistoryPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.DealStatusHistoryFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealStatusHistoryPayload>
+        }
+        findMany: {
+          args: Prisma.DealStatusHistoryFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealStatusHistoryPayload>[]
+        }
+        create: {
+          args: Prisma.DealStatusHistoryCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealStatusHistoryPayload>
+        }
+        createMany: {
+          args: Prisma.DealStatusHistoryCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.DealStatusHistoryCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealStatusHistoryPayload>[]
+        }
+        delete: {
+          args: Prisma.DealStatusHistoryDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealStatusHistoryPayload>
+        }
+        update: {
+          args: Prisma.DealStatusHistoryUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealStatusHistoryPayload>
+        }
+        deleteMany: {
+          args: Prisma.DealStatusHistoryDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.DealStatusHistoryUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.DealStatusHistoryUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealStatusHistoryPayload>[]
+        }
+        upsert: {
+          args: Prisma.DealStatusHistoryUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealStatusHistoryPayload>
+        }
+        aggregate: {
+          args: Prisma.DealStatusHistoryAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateDealStatusHistory>
+        }
+        groupBy: {
+          args: Prisma.DealStatusHistoryGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DealStatusHistoryGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.DealStatusHistoryCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DealStatusHistoryCountAggregateOutputType> | number
+        }
+      }
+    }
+    DealTemplate: {
+      payload: Prisma.$DealTemplatePayload<ExtArgs>
+      fields: Prisma.DealTemplateFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.DealTemplateFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealTemplatePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.DealTemplateFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealTemplatePayload>
+        }
+        findFirst: {
+          args: Prisma.DealTemplateFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealTemplatePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.DealTemplateFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealTemplatePayload>
+        }
+        findMany: {
+          args: Prisma.DealTemplateFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealTemplatePayload>[]
+        }
+        create: {
+          args: Prisma.DealTemplateCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealTemplatePayload>
+        }
+        createMany: {
+          args: Prisma.DealTemplateCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.DealTemplateCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealTemplatePayload>[]
+        }
+        delete: {
+          args: Prisma.DealTemplateDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealTemplatePayload>
+        }
+        update: {
+          args: Prisma.DealTemplateUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealTemplatePayload>
+        }
+        deleteMany: {
+          args: Prisma.DealTemplateDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.DealTemplateUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.DealTemplateUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealTemplatePayload>[]
+        }
+        upsert: {
+          args: Prisma.DealTemplateUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealTemplatePayload>
+        }
+        aggregate: {
+          args: Prisma.DealTemplateAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateDealTemplate>
+        }
+        groupBy: {
+          args: Prisma.DealTemplateGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DealTemplateGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.DealTemplateCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DealTemplateCountAggregateOutputType> | number
+        }
+      }
+    }
+    DealTemplateComponent: {
+      payload: Prisma.$DealTemplateComponentPayload<ExtArgs>
+      fields: Prisma.DealTemplateComponentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.DealTemplateComponentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealTemplateComponentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.DealTemplateComponentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealTemplateComponentPayload>
+        }
+        findFirst: {
+          args: Prisma.DealTemplateComponentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealTemplateComponentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.DealTemplateComponentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealTemplateComponentPayload>
+        }
+        findMany: {
+          args: Prisma.DealTemplateComponentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealTemplateComponentPayload>[]
+        }
+        create: {
+          args: Prisma.DealTemplateComponentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealTemplateComponentPayload>
+        }
+        createMany: {
+          args: Prisma.DealTemplateComponentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.DealTemplateComponentCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealTemplateComponentPayload>[]
+        }
+        delete: {
+          args: Prisma.DealTemplateComponentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealTemplateComponentPayload>
+        }
+        update: {
+          args: Prisma.DealTemplateComponentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealTemplateComponentPayload>
+        }
+        deleteMany: {
+          args: Prisma.DealTemplateComponentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.DealTemplateComponentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.DealTemplateComponentUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealTemplateComponentPayload>[]
+        }
+        upsert: {
+          args: Prisma.DealTemplateComponentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealTemplateComponentPayload>
+        }
+        aggregate: {
+          args: Prisma.DealTemplateComponentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateDealTemplateComponent>
+        }
+        groupBy: {
+          args: Prisma.DealTemplateComponentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DealTemplateComponentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.DealTemplateComponentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DealTemplateComponentCountAggregateOutputType> | number
+        }
+      }
+    }
+    DealTemplateServicePosition: {
+      payload: Prisma.$DealTemplateServicePositionPayload<ExtArgs>
+      fields: Prisma.DealTemplateServicePositionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.DealTemplateServicePositionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealTemplateServicePositionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.DealTemplateServicePositionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealTemplateServicePositionPayload>
+        }
+        findFirst: {
+          args: Prisma.DealTemplateServicePositionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealTemplateServicePositionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.DealTemplateServicePositionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealTemplateServicePositionPayload>
+        }
+        findMany: {
+          args: Prisma.DealTemplateServicePositionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealTemplateServicePositionPayload>[]
+        }
+        create: {
+          args: Prisma.DealTemplateServicePositionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealTemplateServicePositionPayload>
+        }
+        createMany: {
+          args: Prisma.DealTemplateServicePositionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.DealTemplateServicePositionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealTemplateServicePositionPayload>[]
+        }
+        delete: {
+          args: Prisma.DealTemplateServicePositionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealTemplateServicePositionPayload>
+        }
+        update: {
+          args: Prisma.DealTemplateServicePositionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealTemplateServicePositionPayload>
+        }
+        deleteMany: {
+          args: Prisma.DealTemplateServicePositionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.DealTemplateServicePositionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.DealTemplateServicePositionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealTemplateServicePositionPayload>[]
+        }
+        upsert: {
+          args: Prisma.DealTemplateServicePositionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DealTemplateServicePositionPayload>
+        }
+        aggregate: {
+          args: Prisma.DealTemplateServicePositionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateDealTemplateServicePosition>
+        }
+        groupBy: {
+          args: Prisma.DealTemplateServicePositionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DealTemplateServicePositionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.DealTemplateServicePositionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DealTemplateServicePositionCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -6123,6 +6648,150 @@ export const LocationOccupancyScalarFieldEnum = {
 export type LocationOccupancyScalarFieldEnum = (typeof LocationOccupancyScalarFieldEnum)[keyof typeof LocationOccupancyScalarFieldEnum]
 
 
+export const DealScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  eventId: 'eventId',
+  businessPartnerId: 'businessPartnerId',
+  contactId: 'contactId',
+  sourceTemplateId: 'sourceTemplateId',
+  sourceTemplateVersion: 'sourceTemplateVersion',
+  sourceTemplateNameSnapshot: 'sourceTemplateNameSnapshot',
+  customerNameSnapshot: 'customerNameSnapshot',
+  contactNameSnapshot: 'contactNameSnapshot',
+  status: 'status',
+  totalDiscountType: 'totalDiscountType',
+  totalDiscountFixedMinor: 'totalDiscountFixedMinor',
+  totalDiscountPercentageBasisPoints: 'totalDiscountPercentageBasisPoints',
+  currency: 'currency',
+  version: 'version',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type DealScalarFieldEnum = (typeof DealScalarFieldEnum)[keyof typeof DealScalarFieldEnum]
+
+
+export const DealComponentScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  dealId: 'dealId',
+  type: 'type',
+  label: 'label',
+  amountNetMinor: 'amountNetMinor',
+  minimumGuaranteeNetMinor: 'minimumGuaranteeNetMinor',
+  taxRateBasisPoints: 'taxRateBasisPoints',
+  locationShareBasisPoints: 'locationShareBasisPoints',
+  counterpartyShareBasisPoints: 'counterpartyShareBasisPoints',
+  includeWkz: 'includeWkz',
+  sortOrder: 'sortOrder',
+  version: 'version',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type DealComponentScalarFieldEnum = (typeof DealComponentScalarFieldEnum)[keyof typeof DealComponentScalarFieldEnum]
+
+
+export const DealServicePositionScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  dealId: 'dealId',
+  sourceServiceId: 'sourceServiceId',
+  sourceServiceVersion: 'sourceServiceVersion',
+  serviceNameSnapshot: 'serviceNameSnapshot',
+  unitSnapshot: 'unitSnapshot',
+  quantity: 'quantity',
+  salesUnitPriceNetMinor: 'salesUnitPriceNetMinor',
+  internalUnitCostNetMinor: 'internalUnitCostNetMinor',
+  taxRateBasisPoints: 'taxRateBasisPoints',
+  billingMode: 'billingMode',
+  discountType: 'discountType',
+  discountFixedMinor: 'discountFixedMinor',
+  discountPercentageBasisPoints: 'discountPercentageBasisPoints',
+  sortOrder: 'sortOrder',
+  version: 'version',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type DealServicePositionScalarFieldEnum = (typeof DealServicePositionScalarFieldEnum)[keyof typeof DealServicePositionScalarFieldEnum]
+
+
+export const DealStatusHistoryScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  dealId: 'dealId',
+  previousStatus: 'previousStatus',
+  newStatus: 'newStatus',
+  actorUserId: 'actorUserId',
+  actorMembershipId: 'actorMembershipId',
+  changedAt: 'changedAt'
+} as const
+
+export type DealStatusHistoryScalarFieldEnum = (typeof DealStatusHistoryScalarFieldEnum)[keyof typeof DealStatusHistoryScalarFieldEnum]
+
+
+export const DealTemplateScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  name: 'name',
+  normalizedName: 'normalizedName',
+  description: 'description',
+  totalDiscountType: 'totalDiscountType',
+  totalDiscountFixedMinor: 'totalDiscountFixedMinor',
+  totalDiscountPercentageBasisPoints: 'totalDiscountPercentageBasisPoints',
+  currency: 'currency',
+  status: 'status',
+  archivedAt: 'archivedAt',
+  version: 'version',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type DealTemplateScalarFieldEnum = (typeof DealTemplateScalarFieldEnum)[keyof typeof DealTemplateScalarFieldEnum]
+
+
+export const DealTemplateComponentScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  templateId: 'templateId',
+  type: 'type',
+  label: 'label',
+  amountNetMinor: 'amountNetMinor',
+  minimumGuaranteeNetMinor: 'minimumGuaranteeNetMinor',
+  taxRateBasisPoints: 'taxRateBasisPoints',
+  locationShareBasisPoints: 'locationShareBasisPoints',
+  counterpartyShareBasisPoints: 'counterpartyShareBasisPoints',
+  includeWkz: 'includeWkz',
+  sortOrder: 'sortOrder'
+} as const
+
+export type DealTemplateComponentScalarFieldEnum = (typeof DealTemplateComponentScalarFieldEnum)[keyof typeof DealTemplateComponentScalarFieldEnum]
+
+
+export const DealTemplateServicePositionScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  templateId: 'templateId',
+  sourceServiceId: 'sourceServiceId',
+  sourceServiceVersion: 'sourceServiceVersion',
+  serviceNameSnapshot: 'serviceNameSnapshot',
+  unitSnapshot: 'unitSnapshot',
+  quantity: 'quantity',
+  salesUnitPriceNetMinor: 'salesUnitPriceNetMinor',
+  internalUnitCostNetMinor: 'internalUnitCostNetMinor',
+  taxRateBasisPoints: 'taxRateBasisPoints',
+  billingMode: 'billingMode',
+  discountType: 'discountType',
+  discountFixedMinor: 'discountFixedMinor',
+  discountPercentageBasisPoints: 'discountPercentageBasisPoints',
+  sortOrder: 'sortOrder'
+} as const
+
+export type DealTemplateServicePositionScalarFieldEnum = (typeof DealTemplateServicePositionScalarFieldEnum)[keyof typeof DealTemplateServicePositionScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -6625,6 +7294,62 @@ export type ListEnumOccupancySlotFieldRefInput<$PrismaModel> = FieldRefInputType
 
 
 /**
+ * Reference to a field of type 'DealStatus'
+ */
+export type EnumDealStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DealStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'DealStatus[]'
+ */
+export type ListEnumDealStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DealStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'DealDiscountType'
+ */
+export type EnumDealDiscountTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DealDiscountType'>
+    
+
+
+/**
+ * Reference to a field of type 'DealDiscountType[]'
+ */
+export type ListEnumDealDiscountTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DealDiscountType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'DealComponentType'
+ */
+export type EnumDealComponentTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DealComponentType'>
+    
+
+
+/**
+ * Reference to a field of type 'DealComponentType[]'
+ */
+export type ListEnumDealComponentTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DealComponentType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'DealBillingMode'
+ */
+export type EnumDealBillingModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DealBillingMode'>
+    
+
+
+/**
+ * Reference to a field of type 'DealBillingMode[]'
+ */
+export type ListEnumDealBillingModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DealBillingMode[]'>
+    
+
+
+/**
  * Reference to a field of type 'Float'
  */
 export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -6849,6 +7574,13 @@ export type GlobalOmitConfig = {
   calculationTemplateAdditionalRevenue?: Prisma.CalculationTemplateAdditionalRevenueOmit
   venueDateOption?: Prisma.VenueDateOptionOmit
   locationOccupancy?: Prisma.LocationOccupancyOmit
+  deal?: Prisma.DealOmit
+  dealComponent?: Prisma.DealComponentOmit
+  dealServicePosition?: Prisma.DealServicePositionOmit
+  dealStatusHistory?: Prisma.DealStatusHistoryOmit
+  dealTemplate?: Prisma.DealTemplateOmit
+  dealTemplateComponent?: Prisma.DealTemplateComponentOmit
+  dealTemplateServicePosition?: Prisma.DealTemplateServicePositionOmit
 }
 
 /* Types for Logging */

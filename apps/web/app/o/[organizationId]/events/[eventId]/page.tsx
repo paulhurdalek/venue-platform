@@ -6,6 +6,7 @@ import { EventStatusAction } from '../../../../components/events/event-status-ac
 import { BookingLineupPanel } from '../../../../components/bookings/booking-lineup-panel';
 import { CalculationPanel } from '../../../../components/services/format-calculation-panels';
 import { RevenueWorkspace } from '../../../../components/revenue/revenue-planning-panel';
+import { DealPanel } from '../../../../components/deals/deal-panel';
 import {
   CompactEmpty,
   DetailField,
@@ -25,7 +26,7 @@ import {
 
 type Event = components['schemas']['EventDto'];
 type Calculation = components['schemas']['EventCalculationDto'];
-type EventTab = 'overview' | 'bookings' | 'lineup' | 'calculation';
+type EventTab = 'overview' | 'deal' | 'bookings' | 'lineup' | 'calculation';
 
 export default async function EventDetailPage({
   params,
@@ -75,6 +76,9 @@ export default async function EventDetailPage({
   const canChangeBookingStatus = hasPermission(membership, 'bookings.status');
   const canFinanceBookings = hasPermission(membership, 'bookings.finance');
   const canWriteLineup = hasPermission(membership, 'lineup.write');
+  const canReadDeals = hasPermission(membership, 'deals.read');
+  const canWriteDeals = hasPermission(membership, 'deals.write');
+  const canChangeDealStatus = hasPermission(membership, 'deals.status');
   const bookingData = canReadBookings
     ? await Promise.all([
         client.GET('/api/v1/organizations/{organizationId}/events/{eventId}/bookings', {
@@ -161,6 +165,44 @@ export default async function EventDetailPage({
           : Promise.resolve(undefined),
       ])
     : undefined;
+  let deal: components['schemas']['DealDto'] | undefined;
+  if (canReadDeals) {
+    try {
+      deal = unwrap(
+        await client.GET('/api/v1/organizations/{organizationId}/events/{eventId}/deal', {
+          params: { path: { organizationId, eventId } },
+        }),
+      );
+    } catch (error) {
+      if (!(error instanceof ApiResponseError && error.status === 404)) throw error;
+    }
+  }
+  const dealData =
+    canReadDeals && canWriteDeals
+      ? await Promise.all([
+          hasPermission(membership, 'business_partners.read')
+            ? client.GET('/api/v1/organizations/{organizationId}/business-partners', {
+                params: {
+                  path: { organizationId },
+                  query: { status: 'ACTIVE', limit: 100, offset: 0 },
+                },
+              })
+            : Promise.resolve(undefined),
+          hasPermission(membership, 'services.read')
+            ? client.GET('/api/v1/organizations/{organizationId}/services', {
+                params: {
+                  path: { organizationId },
+                  query: { status: 'ACTIVE', limit: 100, offset: 0 },
+                },
+              })
+            : Promise.resolve(undefined),
+          hasPermission(membership, 'deal_templates.read')
+            ? client.GET('/api/v1/organizations/{organizationId}/deal-templates', {
+                params: { path: { organizationId }, query: { status: 'ACTIVE' } },
+              })
+            : Promise.resolve(undefined),
+        ])
+      : undefined;
   const bookings = bookingData ? unwrap(bookingData[0]) : [];
   const progress = bookingData ? unwrap(bookingData[1]) : undefined;
   const requirements = bookingData ? unwrap(bookingData[2]) : undefined;
@@ -168,8 +210,10 @@ export default async function EventDetailPage({
   const calculation = calculationData ? unwrap(calculationData[0]) : undefined;
   const availableTabs: EventTab[] = [
     'overview',
+    ...(canReadDeals && event.eventKind === 'THIRD_PARTY_EVENT' ? (['deal'] as const) : []),
     ...(canReadBookings ? (['bookings', 'lineup'] as const) : []),
     ...(canReadCalculation ? (['calculation'] as const) : []),
+    ...(canReadDeals && event.eventKind !== 'THIRD_PARTY_EVENT' ? (['deal'] as const) : []),
   ];
   const requestedTab = first(search.tab) as EventTab | undefined;
   const activeTab =
@@ -304,6 +348,19 @@ export default async function EventDetailPage({
           />
         )
       ) : null}
+      {canReadDeals && activeTab === 'deal' ? (
+        <DealPanel
+          canChangeStatus={canChangeDealStatus}
+          canWrite={canWriteDeals}
+          eventId={eventId}
+          initialDeal={deal}
+          organizationId={organizationId}
+          partners={dealData?.[0] ? unwrap(dealData[0]).items : []}
+          prominent={event.eventKind === 'THIRD_PARTY_EVENT'}
+          services={dealData?.[1] ? unwrap(dealData[1]).items : []}
+          templates={dealData?.[2] ? unwrap(dealData[2]) : []}
+        />
+      ) : null}
     </>
   );
 }
@@ -432,6 +489,7 @@ function eventTabLabel(tab: EventTab) {
     bookings: 'Bookings',
     lineup: 'Auftrittsplan',
     calculation: 'Kalkulation',
+    deal: 'Vermietung & Deal',
   }[tab];
 }
 

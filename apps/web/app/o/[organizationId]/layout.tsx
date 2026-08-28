@@ -47,6 +47,7 @@ export default async function OrganizationLayout({
     const canViewEvents = hasPermission(membership, 'events.read');
     const canViewServices = hasPermission(membership, 'services.read');
     const canViewRevenueTemplates = hasPermission(membership, 'revenue_templates.read');
+    const canViewDealTemplates = hasPermission(membership, 'deal_templates.read');
     return (
       <div className="workspace-shell">
         <WorkspaceNavigation
@@ -72,6 +73,9 @@ export default async function OrganizationLayout({
               : []),
             ...(canViewRevenueTemplates
               ? [{ href: `/o/${organizationId}/revenue-templates`, label: 'Erlösvorlagen' }]
+              : []),
+            ...(canViewDealTemplates
+              ? [{ href: `/o/${organizationId}/deal-templates`, label: 'Dealvorlagen' }]
               : []),
             { href: `/o/${organizationId}/settings/organization`, label: 'Organisation' },
             { href: `/o/${organizationId}/settings/location`, label: 'Location' },

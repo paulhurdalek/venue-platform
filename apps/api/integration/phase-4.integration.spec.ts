@@ -311,6 +311,7 @@ describeWithDatabase('Phase 4 event-format integration', () => {
       });
     });
     const secondAgent = request.agent(application.getHttpServer());
+    await prisma.database.rateLimit.deleteMany();
     expect((await signInAs(secondAgent, 'phase4-second@example.test')).status).toBe(200);
     const secondFormat = await secondAgent
       .post(`/api/v1/organizations/${secondOrganizationId}/event-formats`)

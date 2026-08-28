@@ -767,4 +767,106 @@ describeWithDatabase('PostgreSQL connection', () => {
       3,
     );
   });
+
+  it('has the relational Phase 9 schema and database-level deal invariants', async () => {
+    client = createDatabaseClient(testDatabaseUrl!);
+    await cleanTestDatabase(client);
+    const tables = await client.$queryRaw<Array<{ table_name: string }>>`
+      SELECT table_name
+      FROM information_schema.tables
+      WHERE table_schema = 'public'
+        AND table_name IN (
+          'deal', 'deal_component', 'deal_service_position', 'deal_status_history',
+          'deal_template', 'deal_template_component', 'deal_template_service_position'
+        )
+      ORDER BY table_name
+    `;
+    expect(tables).toHaveLength(7);
+
+    const organization = await client.organization.create({ data: { name: 'Phase 9 DB venue' } });
+    const location = await client.location.create({
+      data: { organizationId: organization.id, name: 'Phase 9 hall', timezone: 'Europe/Berlin' },
+    });
+    const event = await client.event.create({
+      data: {
+        organizationId: organization.id,
+        locationId: location.id,
+        name: 'Phase 9 rental',
+        eventDate: new Date('2027-03-10'),
+        eventKind: 'THIRD_PARTY_EVENT',
+        timezone: 'Europe/Berlin',
+      },
+    });
+    const partner = await client.businessPartner.create({
+      data: { organizationId: organization.id, companyName: 'Phase 9 customer' },
+    });
+    const deal = await client.deal.create({
+      data: {
+        organizationId: organization.id,
+        eventId: event.id,
+        businessPartnerId: partner.id,
+        customerNameSnapshot: partner.companyName,
+      },
+    });
+    await expect(
+      client.deal.create({
+        data: {
+          organizationId: organization.id,
+          eventId: event.id,
+          businessPartnerId: partner.id,
+          customerNameSnapshot: partner.companyName,
+        },
+      }),
+    ).rejects.toThrow();
+    await expect(
+      client.dealComponent.create({
+        data: {
+          organizationId: organization.id,
+          dealId: deal.id,
+          type: 'REVENUE_SHARE',
+          label: 'Invalid split',
+          taxRateBasisPoints: 0,
+          locationShareBasisPoints: 6_000,
+          counterpartyShareBasisPoints: 3_999,
+          sortOrder: 0,
+        },
+      }),
+    ).rejects.toThrow();
+    await client.deal.update({ where: { id: deal.id }, data: { status: 'STORNIERT' } });
+    await expect(
+      client.deal.create({
+        data: {
+          organizationId: organization.id,
+          eventId: event.id,
+          businessPartnerId: partner.id,
+          customerNameSnapshot: partner.companyName,
+        },
+      }),
+    ).resolves.toMatchObject({ eventId: event.id, status: 'ENTWURF' });
+
+    const foreign = await client.organization.create({ data: { name: 'Foreign Phase 9 venue' } });
+    await expect(
+      client.deal.create({
+        data: {
+          organizationId: foreign.id,
+          eventId: event.id,
+          businessPartnerId: partner.id,
+          customerNameSnapshot: partner.companyName,
+        },
+      }),
+    ).rejects.toThrow();
+
+    const migration = await client.$queryRaw<Array<{ migration_name: string }>>`
+      SELECT migration_name
+      FROM _prisma_migrations
+      WHERE migration_name = '20260828000100_phase_9_deals'
+        AND finished_at IS NOT NULL
+        AND rolled_back_at IS NULL
+    `;
+    expect(migration).toHaveLength(1);
+    expect(await client.permission.count({ where: { key: { startsWith: 'deals.' } } })).toBe(3);
+    expect(
+      await client.permission.count({ where: { key: { startsWith: 'deal_templates.' } } }),
+    ).toBe(3);
+  });
 });

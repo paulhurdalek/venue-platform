@@ -109,7 +109,7 @@ async function exerciseLifecycle(
   await expect(page.getByText(`${entityArticle} ${entityLabel} wurde reaktiviert.`)).toBeVisible();
 }
 
-test.describe.serial('Phase 1 through Phase 8 browser acceptance', () => {
+test.describe.serial('Phase 1 through Phase 9 browser acceptance', () => {
   // Database reset and the one-time bootstrap link make the complete E2E command the retry boundary.
   test.describe.configure({ retries: 0, timeout: focusedScenarioTimeout });
 
@@ -1689,7 +1689,100 @@ test.describe.serial('Phase 1 through Phase 8 browser acceptance', () => {
     await page.setViewportSize({ width: 1280, height: 900 });
   });
 
-  test('Phase 1 through Phase 8: read-only authorization and logout', async ({ browser }) => {
+  test('Phase 9: deal template snapshot and compact rental read view', async () => {
+    await page.goto(`/o/${organizationId}/deal-templates`);
+    await expect(page.getByRole('heading', { name: 'Dealvorlagen', exact: true })).toBeVisible();
+    await page.getByRole('button', { name: 'Neue Dealvorlage', exact: true }).click();
+    const templateDialog = page.getByRole('dialog', { name: 'Dealvorlage anlegen', exact: true });
+    await templateDialog.getByLabel('Name', { exact: true }).fill('E2E Vermietung');
+    await templateDialog.getByLabel('Beschreibung', { exact: true }).fill('Kompakte E2E-Notiz');
+    await templateDialog.getByRole('button', { name: 'Feste Miete', exact: true }).click();
+    await templateDialog.getByLabel('Betrag netto €', { exact: true }).fill('1000,00');
+    await templateDialog.getByRole('button', { name: 'Speichern', exact: true }).click();
+    const templateCard = page.getByRole('article', { name: 'E2E Vermietung', exact: true });
+    await expect(templateCard.getByText('Kompakte E2E-Notiz', { exact: true })).toBeVisible();
+    await expect(templateCard.getByText('Feste Miete', { exact: true })).toBeVisible();
+    await expect(
+      templateCard.getByText('1 Baustein · 0 Leistungspositionen · Version 1', { exact: true }),
+    ).toBeVisible();
+    await expect(templateCard.getByText('Aktiv', { exact: true })).toBeVisible();
+    await expect(templateCard.getByRole('heading', { name: 'Deal-Bausteine' })).toHaveCount(0);
+
+    const detailsToggle = templateCard.getByRole('button', { name: 'Details', exact: true });
+    await expect(detailsToggle).toHaveAttribute('aria-expanded', 'false');
+    await detailsToggle.press('Enter');
+    await expect(
+      templateCard.getByRole('button', { name: 'Weniger', exact: true }),
+    ).toHaveAttribute('aria-expanded', 'true');
+    const templateDetails = templateCard.locator('.deal-template-card__details');
+    await expect(templateDetails.getByRole('heading', { name: 'Deal-Bausteine' })).toBeVisible();
+    await expect(templateDetails.getByText('1.000,00 € netto', { exact: true })).toBeVisible();
+    await expect(templateDetails.getByRole('heading', { name: 'Notiz' })).toBeVisible();
+    await expect(
+      templateDetails.getByRole('heading', { name: 'Separat abrechenbare Leistungen' }),
+    ).toHaveCount(0);
+
+    const templateActions = templateCard.getByRole('button', {
+      name: 'Aktionen für Dealvorlage E2E Vermietung',
+      exact: true,
+    });
+    await templateActions.press('ArrowDown');
+    await expect(page.getByRole('menuitem', { name: 'Bearbeiten', exact: true })).toBeFocused();
+    await expect(page.getByRole('menuitem', { name: 'Archivieren', exact: true })).toBeVisible();
+    await page.keyboard.press('Escape');
+    await expect(templateActions).toBeFocused();
+
+    await page.setViewportSize({ width: 390, height: 844 });
+    expect(
+      await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth),
+    ).toBe(true);
+    await page.setViewportSize({ width: 1280, height: 900 });
+
+    await page.goto(eventDetailPath);
+    await page.getByRole('tab', { name: 'Vermietung & Deal', exact: true }).click();
+    await expect(page.getByRole('heading', { name: 'Noch kein kommerzieller Deal' })).toBeVisible();
+    await page.getByRole('button', { name: 'Deal anlegen', exact: true }).click();
+    const dealDialog = page.getByRole('dialog', { name: 'Deal anlegen', exact: true });
+    const templateSelect = dealDialog.getByRole('combobox', {
+      name: 'Dealvorlage (optional)',
+      exact: true,
+    });
+    const selectedTemplate = await templateSelect.selectOption({ label: 'E2E Vermietung' });
+    expect(selectedTemplate).toHaveLength(1);
+    await expect(dealDialog.getByText(/unabhängiger Snapshot übernommen/)).toBeVisible();
+    await dealDialog.getByRole('button', { name: 'Speichern', exact: true }).click();
+    await expect(page.getByText('Kundenbetrag Miete & Leistungen netto')).toBeVisible();
+    await expect(page.getByText('1.000,00 €', { exact: true }).first()).toBeVisible();
+    await expect(page.getByText('Erwarteter Location-Anteil netto')).toBeVisible();
+    await expect(page.getByText('Interne Kosten netto')).toBeVisible();
+    await expect(page.getByText('Erwartetes operatives Ergebnis')).toBeVisible();
+    await expect(page.getByLabel('Betrag netto €', { exact: true })).toBeHidden();
+    await page
+      .locator('.deal-panel')
+      .getByRole('button', { name: 'Bearbeiten', exact: true })
+      .click();
+    await expect(
+      page
+        .getByRole('dialog', { name: 'Deal bearbeiten', exact: true })
+        .getByLabel('Betrag netto €'),
+    ).toBeVisible();
+
+    await page.goto(`/o/${organizationId}/deal-templates`);
+    const lifecycleCard = page.getByRole('article', { name: 'E2E Vermietung', exact: true });
+    const lifecycleActions = lifecycleCard.getByRole('button', {
+      name: 'Aktionen für Dealvorlage E2E Vermietung',
+      exact: true,
+    });
+    await lifecycleActions.click();
+    await page.getByRole('menuitem', { name: 'Archivieren', exact: true }).click();
+    await expect(lifecycleCard.getByText('Archiviert', { exact: true })).toBeVisible();
+    await lifecycleActions.click();
+    await expect(page.getByRole('menuitem', { name: 'Reaktivieren', exact: true })).toBeVisible();
+    await page.getByRole('menuitem', { name: 'Reaktivieren', exact: true }).click();
+    await expect(lifecycleCard.getByText('Aktiv', { exact: true })).toBeVisible();
+  });
+
+  test('Phase 1 through Phase 9: read-only authorization and logout', async ({ browser }) => {
     await openOrganizationHome(page, organizationId);
     await page.getByRole('link', { name: 'Team', exact: true }).click();
     await page.getByRole('button', { name: 'Einladung erstellen', exact: true }).click();
