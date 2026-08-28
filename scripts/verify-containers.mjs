@@ -51,7 +51,9 @@ function composePublishedPort(service) {
   const match = result.stdout.trim().match(/:(\d+)$/);
 
   if (match == null) {
-    throw new Error(`Unable to determine the published port for ${service}: ${result.stdout.trim()}`);
+    throw new Error(
+      `Unable to determine the published port for ${service}: ${result.stdout.trim()}`,
+    );
   }
 
   return match[1];
