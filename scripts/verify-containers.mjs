@@ -14,10 +14,8 @@ const pnpmPackage = JSON.parse(readFileSync(pnpmPackagePath, 'utf8'));
 const pnpmCli = resolve(dirname(pnpmPackagePath), pnpmPackage.bin.pnpm);
 const projectName = `venue-platform-phase7-${process.pid}`;
 const marker = randomUUID();
-const developmentDatabasePort = process.env.VENUE_VERIFICATION_POSTGRES_PORT ?? '55432';
-const testDatabasePort = process.env.VENUE_VERIFICATION_POSTGRES_TEST_PORT ?? '55433';
-process.env.VENUE_POSTGRES_PORT = developmentDatabasePort;
-process.env.VENUE_POSTGRES_TEST_PORT = testDatabasePort;
+process.env.VENUE_POSTGRES_PORT = '0';
+process.env.VENUE_POSTGRES_TEST_PORT = '0';
 const composeArguments = ['compose', '--project-name', projectName, '--profile', 'test'];
 
 function run(command, args, options = {}) {
@@ -48,6 +46,17 @@ function compose(...args) {
   return docker(...composeArguments, ...args);
 }
 
+function composePublishedPort(service) {
+  const result = run('docker', [...composeArguments, 'port', service, '5432'], { capture: true });
+  const match = result.stdout.trim().match(/:(\d+)$/);
+
+  if (match == null) {
+    throw new Error(`Unable to determine the published port for ${service}: ${result.stdout.trim()}`);
+  }
+
+  return match[1];
+}
+
 function pnpm(args, environment) {
   return run(process.execPath, [pnpmCli, ...args], {
     env: { ...process.env, ...environment },
@@ -70,6 +79,7 @@ try {
 try {
   logStep(1, 'Starting PostgreSQL development and test services');
   compose('up', '--detach', '--wait', '--wait-timeout', '120', 'postgres', 'postgres-test');
+  const testDatabasePort = composePublishedPort('postgres-test');
 
   const testDatabaseEnvironment = createTestRuntimeEnvironment({
     DATABASE_URL: `postgresql://venue:venue_test_local_only@127.0.0.1:${testDatabasePort}/venue_test`,
