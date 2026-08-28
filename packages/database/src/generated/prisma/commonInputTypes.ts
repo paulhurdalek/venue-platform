@@ -847,6 +847,74 @@ export type EnumOccupancySlotWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumOccupancySlotFilter<$PrismaModel>
 }
 
+export type EnumDealStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.DealStatus | Prisma.EnumDealStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.DealStatus[] | Prisma.ListEnumDealStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.DealStatus[] | Prisma.ListEnumDealStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumDealStatusFilter<$PrismaModel> | $Enums.DealStatus
+}
+
+export type EnumDealDiscountTypeNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.DealDiscountType | Prisma.EnumDealDiscountTypeFieldRefInput<$PrismaModel> | null
+  in?: $Enums.DealDiscountType[] | Prisma.ListEnumDealDiscountTypeFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.DealDiscountType[] | Prisma.ListEnumDealDiscountTypeFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumDealDiscountTypeNullableFilter<$PrismaModel> | $Enums.DealDiscountType | null
+}
+
+export type EnumDealStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.DealStatus | Prisma.EnumDealStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.DealStatus[] | Prisma.ListEnumDealStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.DealStatus[] | Prisma.ListEnumDealStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumDealStatusWithAggregatesFilter<$PrismaModel> | $Enums.DealStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumDealStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumDealStatusFilter<$PrismaModel>
+}
+
+export type EnumDealDiscountTypeNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.DealDiscountType | Prisma.EnumDealDiscountTypeFieldRefInput<$PrismaModel> | null
+  in?: $Enums.DealDiscountType[] | Prisma.ListEnumDealDiscountTypeFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.DealDiscountType[] | Prisma.ListEnumDealDiscountTypeFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumDealDiscountTypeNullableWithAggregatesFilter<$PrismaModel> | $Enums.DealDiscountType | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumDealDiscountTypeNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumDealDiscountTypeNullableFilter<$PrismaModel>
+}
+
+export type EnumDealComponentTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.DealComponentType | Prisma.EnumDealComponentTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.DealComponentType[] | Prisma.ListEnumDealComponentTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.DealComponentType[] | Prisma.ListEnumDealComponentTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumDealComponentTypeFilter<$PrismaModel> | $Enums.DealComponentType
+}
+
+export type EnumDealComponentTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.DealComponentType | Prisma.EnumDealComponentTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.DealComponentType[] | Prisma.ListEnumDealComponentTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.DealComponentType[] | Prisma.ListEnumDealComponentTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumDealComponentTypeWithAggregatesFilter<$PrismaModel> | $Enums.DealComponentType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumDealComponentTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumDealComponentTypeFilter<$PrismaModel>
+}
+
+export type EnumDealBillingModeFilter<$PrismaModel = never> = {
+  equals?: $Enums.DealBillingMode | Prisma.EnumDealBillingModeFieldRefInput<$PrismaModel>
+  in?: $Enums.DealBillingMode[] | Prisma.ListEnumDealBillingModeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.DealBillingMode[] | Prisma.ListEnumDealBillingModeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumDealBillingModeFilter<$PrismaModel> | $Enums.DealBillingMode
+}
+
+export type EnumDealBillingModeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.DealBillingMode | Prisma.EnumDealBillingModeFieldRefInput<$PrismaModel>
+  in?: $Enums.DealBillingMode[] | Prisma.ListEnumDealBillingModeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.DealBillingMode[] | Prisma.ListEnumDealBillingModeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumDealBillingModeWithAggregatesFilter<$PrismaModel> | $Enums.DealBillingMode
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumDealBillingModeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumDealBillingModeFilter<$PrismaModel>
+}
+
 export type NestedUuidFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
@@ -1660,6 +1728,74 @@ export type NestedEnumOccupancySlotWithAggregatesFilter<$PrismaModel = never> = 
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumOccupancySlotFilter<$PrismaModel>
   _max?: Prisma.NestedEnumOccupancySlotFilter<$PrismaModel>
+}
+
+export type NestedEnumDealStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.DealStatus | Prisma.EnumDealStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.DealStatus[] | Prisma.ListEnumDealStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.DealStatus[] | Prisma.ListEnumDealStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumDealStatusFilter<$PrismaModel> | $Enums.DealStatus
+}
+
+export type NestedEnumDealDiscountTypeNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.DealDiscountType | Prisma.EnumDealDiscountTypeFieldRefInput<$PrismaModel> | null
+  in?: $Enums.DealDiscountType[] | Prisma.ListEnumDealDiscountTypeFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.DealDiscountType[] | Prisma.ListEnumDealDiscountTypeFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumDealDiscountTypeNullableFilter<$PrismaModel> | $Enums.DealDiscountType | null
+}
+
+export type NestedEnumDealStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.DealStatus | Prisma.EnumDealStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.DealStatus[] | Prisma.ListEnumDealStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.DealStatus[] | Prisma.ListEnumDealStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumDealStatusWithAggregatesFilter<$PrismaModel> | $Enums.DealStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumDealStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumDealStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumDealDiscountTypeNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.DealDiscountType | Prisma.EnumDealDiscountTypeFieldRefInput<$PrismaModel> | null
+  in?: $Enums.DealDiscountType[] | Prisma.ListEnumDealDiscountTypeFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.DealDiscountType[] | Prisma.ListEnumDealDiscountTypeFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumDealDiscountTypeNullableWithAggregatesFilter<$PrismaModel> | $Enums.DealDiscountType | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumDealDiscountTypeNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumDealDiscountTypeNullableFilter<$PrismaModel>
+}
+
+export type NestedEnumDealComponentTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.DealComponentType | Prisma.EnumDealComponentTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.DealComponentType[] | Prisma.ListEnumDealComponentTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.DealComponentType[] | Prisma.ListEnumDealComponentTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumDealComponentTypeFilter<$PrismaModel> | $Enums.DealComponentType
+}
+
+export type NestedEnumDealComponentTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.DealComponentType | Prisma.EnumDealComponentTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.DealComponentType[] | Prisma.ListEnumDealComponentTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.DealComponentType[] | Prisma.ListEnumDealComponentTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumDealComponentTypeWithAggregatesFilter<$PrismaModel> | $Enums.DealComponentType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumDealComponentTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumDealComponentTypeFilter<$PrismaModel>
+}
+
+export type NestedEnumDealBillingModeFilter<$PrismaModel = never> = {
+  equals?: $Enums.DealBillingMode | Prisma.EnumDealBillingModeFieldRefInput<$PrismaModel>
+  in?: $Enums.DealBillingMode[] | Prisma.ListEnumDealBillingModeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.DealBillingMode[] | Prisma.ListEnumDealBillingModeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumDealBillingModeFilter<$PrismaModel> | $Enums.DealBillingMode
+}
+
+export type NestedEnumDealBillingModeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.DealBillingMode | Prisma.EnumDealBillingModeFieldRefInput<$PrismaModel>
+  in?: $Enums.DealBillingMode[] | Prisma.ListEnumDealBillingModeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.DealBillingMode[] | Prisma.ListEnumDealBillingModeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumDealBillingModeWithAggregatesFilter<$PrismaModel> | $Enums.DealBillingMode
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumDealBillingModeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumDealBillingModeFilter<$PrismaModel>
 }
 
 

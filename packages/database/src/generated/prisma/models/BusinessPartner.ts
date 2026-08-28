@@ -388,6 +388,7 @@ export type BusinessPartnerWhereInput = {
   ticketComponentAllocations?: Prisma.TicketComponentAllocationListRelationFilter
   ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationListRelationFilter
   calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationListRelationFilter
+  customerDeals?: Prisma.DealListRelationFilter
 }
 
 export type BusinessPartnerOrderByWithRelationInput = {
@@ -428,6 +429,7 @@ export type BusinessPartnerOrderByWithRelationInput = {
   ticketComponentAllocations?: Prisma.TicketComponentAllocationOrderByRelationAggregateInput
   ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationOrderByRelationAggregateInput
   calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationOrderByRelationAggregateInput
+  customerDeals?: Prisma.DealOrderByRelationAggregateInput
 }
 
 export type BusinessPartnerWhereUniqueInput = Prisma.AtLeast<{
@@ -472,6 +474,7 @@ export type BusinessPartnerWhereUniqueInput = Prisma.AtLeast<{
   ticketComponentAllocations?: Prisma.TicketComponentAllocationListRelationFilter
   ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationListRelationFilter
   calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationListRelationFilter
+  customerDeals?: Prisma.DealListRelationFilter
 }, "id" | "id_organizationId">
 
 export type BusinessPartnerOrderByWithAggregationInput = {
@@ -575,6 +578,7 @@ export type BusinessPartnerCreateInput = {
   ticketComponentAllocations?: Prisma.TicketComponentAllocationCreateNestedManyWithoutBusinessPartnerInput
   ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationCreateNestedManyWithoutBusinessPartnerInput
   calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationCreateNestedManyWithoutBusinessPartnerInput
+  customerDeals?: Prisma.DealCreateNestedManyWithoutBusinessPartnerInput
 }
 
 export type BusinessPartnerUncheckedCreateInput = {
@@ -614,6 +618,7 @@ export type BusinessPartnerUncheckedCreateInput = {
   ticketComponentAllocations?: Prisma.TicketComponentAllocationUncheckedCreateNestedManyWithoutBusinessPartnerInput
   ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUncheckedCreateNestedManyWithoutBusinessPartnerInput
   calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUncheckedCreateNestedManyWithoutBusinessPartnerInput
+  customerDeals?: Prisma.DealUncheckedCreateNestedManyWithoutBusinessPartnerInput
 }
 
 export type BusinessPartnerUpdateInput = {
@@ -653,6 +658,7 @@ export type BusinessPartnerUpdateInput = {
   ticketComponentAllocations?: Prisma.TicketComponentAllocationUpdateManyWithoutBusinessPartnerNestedInput
   ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUpdateManyWithoutBusinessPartnerNestedInput
   calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUpdateManyWithoutBusinessPartnerNestedInput
+  customerDeals?: Prisma.DealUpdateManyWithoutBusinessPartnerNestedInput
 }
 
 export type BusinessPartnerUncheckedUpdateInput = {
@@ -692,6 +698,7 @@ export type BusinessPartnerUncheckedUpdateInput = {
   ticketComponentAllocations?: Prisma.TicketComponentAllocationUncheckedUpdateManyWithoutBusinessPartnerNestedInput
   ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUncheckedUpdateManyWithoutBusinessPartnerNestedInput
   calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUncheckedUpdateManyWithoutBusinessPartnerNestedInput
+  customerDeals?: Prisma.DealUncheckedUpdateManyWithoutBusinessPartnerNestedInput
 }
 
 export type BusinessPartnerCreateManyInput = {
@@ -1104,6 +1111,20 @@ export type BusinessPartnerUpdateOneWithoutDateOptionsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.BusinessPartnerUpdateToOneWithWhereWithoutDateOptionsInput, Prisma.BusinessPartnerUpdateWithoutDateOptionsInput>, Prisma.BusinessPartnerUncheckedUpdateWithoutDateOptionsInput>
 }
 
+export type BusinessPartnerCreateNestedOneWithoutCustomerDealsInput = {
+  create?: Prisma.XOR<Prisma.BusinessPartnerCreateWithoutCustomerDealsInput, Prisma.BusinessPartnerUncheckedCreateWithoutCustomerDealsInput>
+  connectOrCreate?: Prisma.BusinessPartnerCreateOrConnectWithoutCustomerDealsInput
+  connect?: Prisma.BusinessPartnerWhereUniqueInput
+}
+
+export type BusinessPartnerUpdateOneRequiredWithoutCustomerDealsNestedInput = {
+  create?: Prisma.XOR<Prisma.BusinessPartnerCreateWithoutCustomerDealsInput, Prisma.BusinessPartnerUncheckedCreateWithoutCustomerDealsInput>
+  connectOrCreate?: Prisma.BusinessPartnerCreateOrConnectWithoutCustomerDealsInput
+  upsert?: Prisma.BusinessPartnerUpsertWithoutCustomerDealsInput
+  connect?: Prisma.BusinessPartnerWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BusinessPartnerUpdateToOneWithWhereWithoutCustomerDealsInput, Prisma.BusinessPartnerUpdateWithoutCustomerDealsInput>, Prisma.BusinessPartnerUncheckedUpdateWithoutCustomerDealsInput>
+}
+
 export type BusinessPartnerCreateWithoutOrganizationInput = {
   id?: string
   companyName: string
@@ -1140,6 +1161,7 @@ export type BusinessPartnerCreateWithoutOrganizationInput = {
   ticketComponentAllocations?: Prisma.TicketComponentAllocationCreateNestedManyWithoutBusinessPartnerInput
   ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationCreateNestedManyWithoutBusinessPartnerInput
   calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationCreateNestedManyWithoutBusinessPartnerInput
+  customerDeals?: Prisma.DealCreateNestedManyWithoutBusinessPartnerInput
 }
 
 export type BusinessPartnerUncheckedCreateWithoutOrganizationInput = {
@@ -1178,6 +1200,7 @@ export type BusinessPartnerUncheckedCreateWithoutOrganizationInput = {
   ticketComponentAllocations?: Prisma.TicketComponentAllocationUncheckedCreateNestedManyWithoutBusinessPartnerInput
   ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUncheckedCreateNestedManyWithoutBusinessPartnerInput
   calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUncheckedCreateNestedManyWithoutBusinessPartnerInput
+  customerDeals?: Prisma.DealUncheckedCreateNestedManyWithoutBusinessPartnerInput
 }
 
 export type BusinessPartnerCreateOrConnectWithoutOrganizationInput = {
@@ -1273,6 +1296,7 @@ export type BusinessPartnerCreateWithoutRolesInput = {
   ticketComponentAllocations?: Prisma.TicketComponentAllocationCreateNestedManyWithoutBusinessPartnerInput
   ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationCreateNestedManyWithoutBusinessPartnerInput
   calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationCreateNestedManyWithoutBusinessPartnerInput
+  customerDeals?: Prisma.DealCreateNestedManyWithoutBusinessPartnerInput
 }
 
 export type BusinessPartnerUncheckedCreateWithoutRolesInput = {
@@ -1311,6 +1335,7 @@ export type BusinessPartnerUncheckedCreateWithoutRolesInput = {
   ticketComponentAllocations?: Prisma.TicketComponentAllocationUncheckedCreateNestedManyWithoutBusinessPartnerInput
   ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUncheckedCreateNestedManyWithoutBusinessPartnerInput
   calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUncheckedCreateNestedManyWithoutBusinessPartnerInput
+  customerDeals?: Prisma.DealUncheckedCreateNestedManyWithoutBusinessPartnerInput
 }
 
 export type BusinessPartnerCreateOrConnectWithoutRolesInput = {
@@ -1365,6 +1390,7 @@ export type BusinessPartnerUpdateWithoutRolesInput = {
   ticketComponentAllocations?: Prisma.TicketComponentAllocationUpdateManyWithoutBusinessPartnerNestedInput
   ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUpdateManyWithoutBusinessPartnerNestedInput
   calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUpdateManyWithoutBusinessPartnerNestedInput
+  customerDeals?: Prisma.DealUpdateManyWithoutBusinessPartnerNestedInput
 }
 
 export type BusinessPartnerUncheckedUpdateWithoutRolesInput = {
@@ -1403,6 +1429,7 @@ export type BusinessPartnerUncheckedUpdateWithoutRolesInput = {
   ticketComponentAllocations?: Prisma.TicketComponentAllocationUncheckedUpdateManyWithoutBusinessPartnerNestedInput
   ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUncheckedUpdateManyWithoutBusinessPartnerNestedInput
   calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUncheckedUpdateManyWithoutBusinessPartnerNestedInput
+  customerDeals?: Prisma.DealUncheckedUpdateManyWithoutBusinessPartnerNestedInput
 }
 
 export type BusinessPartnerCreateWithoutContactsInput = {
@@ -1441,6 +1468,7 @@ export type BusinessPartnerCreateWithoutContactsInput = {
   ticketComponentAllocations?: Prisma.TicketComponentAllocationCreateNestedManyWithoutBusinessPartnerInput
   ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationCreateNestedManyWithoutBusinessPartnerInput
   calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationCreateNestedManyWithoutBusinessPartnerInput
+  customerDeals?: Prisma.DealCreateNestedManyWithoutBusinessPartnerInput
 }
 
 export type BusinessPartnerUncheckedCreateWithoutContactsInput = {
@@ -1479,6 +1507,7 @@ export type BusinessPartnerUncheckedCreateWithoutContactsInput = {
   ticketComponentAllocations?: Prisma.TicketComponentAllocationUncheckedCreateNestedManyWithoutBusinessPartnerInput
   ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUncheckedCreateNestedManyWithoutBusinessPartnerInput
   calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUncheckedCreateNestedManyWithoutBusinessPartnerInput
+  customerDeals?: Prisma.DealUncheckedCreateNestedManyWithoutBusinessPartnerInput
 }
 
 export type BusinessPartnerCreateOrConnectWithoutContactsInput = {
@@ -1533,6 +1562,7 @@ export type BusinessPartnerUpdateWithoutContactsInput = {
   ticketComponentAllocations?: Prisma.TicketComponentAllocationUpdateManyWithoutBusinessPartnerNestedInput
   ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUpdateManyWithoutBusinessPartnerNestedInput
   calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUpdateManyWithoutBusinessPartnerNestedInput
+  customerDeals?: Prisma.DealUpdateManyWithoutBusinessPartnerNestedInput
 }
 
 export type BusinessPartnerUncheckedUpdateWithoutContactsInput = {
@@ -1571,6 +1601,7 @@ export type BusinessPartnerUncheckedUpdateWithoutContactsInput = {
   ticketComponentAllocations?: Prisma.TicketComponentAllocationUncheckedUpdateManyWithoutBusinessPartnerNestedInput
   ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUncheckedUpdateManyWithoutBusinessPartnerNestedInput
   calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUncheckedUpdateManyWithoutBusinessPartnerNestedInput
+  customerDeals?: Prisma.DealUncheckedUpdateManyWithoutBusinessPartnerNestedInput
 }
 
 export type BusinessPartnerCreateWithoutArtistLinksInput = {
@@ -1609,6 +1640,7 @@ export type BusinessPartnerCreateWithoutArtistLinksInput = {
   ticketComponentAllocations?: Prisma.TicketComponentAllocationCreateNestedManyWithoutBusinessPartnerInput
   ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationCreateNestedManyWithoutBusinessPartnerInput
   calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationCreateNestedManyWithoutBusinessPartnerInput
+  customerDeals?: Prisma.DealCreateNestedManyWithoutBusinessPartnerInput
 }
 
 export type BusinessPartnerUncheckedCreateWithoutArtistLinksInput = {
@@ -1647,6 +1679,7 @@ export type BusinessPartnerUncheckedCreateWithoutArtistLinksInput = {
   ticketComponentAllocations?: Prisma.TicketComponentAllocationUncheckedCreateNestedManyWithoutBusinessPartnerInput
   ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUncheckedCreateNestedManyWithoutBusinessPartnerInput
   calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUncheckedCreateNestedManyWithoutBusinessPartnerInput
+  customerDeals?: Prisma.DealUncheckedCreateNestedManyWithoutBusinessPartnerInput
 }
 
 export type BusinessPartnerCreateOrConnectWithoutArtistLinksInput = {
@@ -1701,6 +1734,7 @@ export type BusinessPartnerUpdateWithoutArtistLinksInput = {
   ticketComponentAllocations?: Prisma.TicketComponentAllocationUpdateManyWithoutBusinessPartnerNestedInput
   ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUpdateManyWithoutBusinessPartnerNestedInput
   calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUpdateManyWithoutBusinessPartnerNestedInput
+  customerDeals?: Prisma.DealUpdateManyWithoutBusinessPartnerNestedInput
 }
 
 export type BusinessPartnerUncheckedUpdateWithoutArtistLinksInput = {
@@ -1739,6 +1773,7 @@ export type BusinessPartnerUncheckedUpdateWithoutArtistLinksInput = {
   ticketComponentAllocations?: Prisma.TicketComponentAllocationUncheckedUpdateManyWithoutBusinessPartnerNestedInput
   ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUncheckedUpdateManyWithoutBusinessPartnerNestedInput
   calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUncheckedUpdateManyWithoutBusinessPartnerNestedInput
+  customerDeals?: Prisma.DealUncheckedUpdateManyWithoutBusinessPartnerNestedInput
 }
 
 export type BusinessPartnerCreateWithoutBookingsInput = {
@@ -1777,6 +1812,7 @@ export type BusinessPartnerCreateWithoutBookingsInput = {
   ticketComponentAllocations?: Prisma.TicketComponentAllocationCreateNestedManyWithoutBusinessPartnerInput
   ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationCreateNestedManyWithoutBusinessPartnerInput
   calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationCreateNestedManyWithoutBusinessPartnerInput
+  customerDeals?: Prisma.DealCreateNestedManyWithoutBusinessPartnerInput
 }
 
 export type BusinessPartnerUncheckedCreateWithoutBookingsInput = {
@@ -1815,6 +1851,7 @@ export type BusinessPartnerUncheckedCreateWithoutBookingsInput = {
   ticketComponentAllocations?: Prisma.TicketComponentAllocationUncheckedCreateNestedManyWithoutBusinessPartnerInput
   ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUncheckedCreateNestedManyWithoutBusinessPartnerInput
   calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUncheckedCreateNestedManyWithoutBusinessPartnerInput
+  customerDeals?: Prisma.DealUncheckedCreateNestedManyWithoutBusinessPartnerInput
 }
 
 export type BusinessPartnerCreateOrConnectWithoutBookingsInput = {
@@ -1869,6 +1906,7 @@ export type BusinessPartnerUpdateWithoutBookingsInput = {
   ticketComponentAllocations?: Prisma.TicketComponentAllocationUpdateManyWithoutBusinessPartnerNestedInput
   ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUpdateManyWithoutBusinessPartnerNestedInput
   calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUpdateManyWithoutBusinessPartnerNestedInput
+  customerDeals?: Prisma.DealUpdateManyWithoutBusinessPartnerNestedInput
 }
 
 export type BusinessPartnerUncheckedUpdateWithoutBookingsInput = {
@@ -1907,6 +1945,7 @@ export type BusinessPartnerUncheckedUpdateWithoutBookingsInput = {
   ticketComponentAllocations?: Prisma.TicketComponentAllocationUncheckedUpdateManyWithoutBusinessPartnerNestedInput
   ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUncheckedUpdateManyWithoutBusinessPartnerNestedInput
   calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUncheckedUpdateManyWithoutBusinessPartnerNestedInput
+  customerDeals?: Prisma.DealUncheckedUpdateManyWithoutBusinessPartnerNestedInput
 }
 
 export type BusinessPartnerCreateWithoutServiceProviderPricesInput = {
@@ -1945,6 +1984,7 @@ export type BusinessPartnerCreateWithoutServiceProviderPricesInput = {
   ticketComponentAllocations?: Prisma.TicketComponentAllocationCreateNestedManyWithoutBusinessPartnerInput
   ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationCreateNestedManyWithoutBusinessPartnerInput
   calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationCreateNestedManyWithoutBusinessPartnerInput
+  customerDeals?: Prisma.DealCreateNestedManyWithoutBusinessPartnerInput
 }
 
 export type BusinessPartnerUncheckedCreateWithoutServiceProviderPricesInput = {
@@ -1983,6 +2023,7 @@ export type BusinessPartnerUncheckedCreateWithoutServiceProviderPricesInput = {
   ticketComponentAllocations?: Prisma.TicketComponentAllocationUncheckedCreateNestedManyWithoutBusinessPartnerInput
   ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUncheckedCreateNestedManyWithoutBusinessPartnerInput
   calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUncheckedCreateNestedManyWithoutBusinessPartnerInput
+  customerDeals?: Prisma.DealUncheckedCreateNestedManyWithoutBusinessPartnerInput
 }
 
 export type BusinessPartnerCreateOrConnectWithoutServiceProviderPricesInput = {
@@ -2037,6 +2078,7 @@ export type BusinessPartnerUpdateWithoutServiceProviderPricesInput = {
   ticketComponentAllocations?: Prisma.TicketComponentAllocationUpdateManyWithoutBusinessPartnerNestedInput
   ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUpdateManyWithoutBusinessPartnerNestedInput
   calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUpdateManyWithoutBusinessPartnerNestedInput
+  customerDeals?: Prisma.DealUpdateManyWithoutBusinessPartnerNestedInput
 }
 
 export type BusinessPartnerUncheckedUpdateWithoutServiceProviderPricesInput = {
@@ -2075,6 +2117,7 @@ export type BusinessPartnerUncheckedUpdateWithoutServiceProviderPricesInput = {
   ticketComponentAllocations?: Prisma.TicketComponentAllocationUncheckedUpdateManyWithoutBusinessPartnerNestedInput
   ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUncheckedUpdateManyWithoutBusinessPartnerNestedInput
   calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUncheckedUpdateManyWithoutBusinessPartnerNestedInput
+  customerDeals?: Prisma.DealUncheckedUpdateManyWithoutBusinessPartnerNestedInput
 }
 
 export type BusinessPartnerCreateWithoutFormatServiceAssignmentsInput = {
@@ -2113,6 +2156,7 @@ export type BusinessPartnerCreateWithoutFormatServiceAssignmentsInput = {
   ticketComponentAllocations?: Prisma.TicketComponentAllocationCreateNestedManyWithoutBusinessPartnerInput
   ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationCreateNestedManyWithoutBusinessPartnerInput
   calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationCreateNestedManyWithoutBusinessPartnerInput
+  customerDeals?: Prisma.DealCreateNestedManyWithoutBusinessPartnerInput
 }
 
 export type BusinessPartnerUncheckedCreateWithoutFormatServiceAssignmentsInput = {
@@ -2151,6 +2195,7 @@ export type BusinessPartnerUncheckedCreateWithoutFormatServiceAssignmentsInput =
   ticketComponentAllocations?: Prisma.TicketComponentAllocationUncheckedCreateNestedManyWithoutBusinessPartnerInput
   ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUncheckedCreateNestedManyWithoutBusinessPartnerInput
   calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUncheckedCreateNestedManyWithoutBusinessPartnerInput
+  customerDeals?: Prisma.DealUncheckedCreateNestedManyWithoutBusinessPartnerInput
 }
 
 export type BusinessPartnerCreateOrConnectWithoutFormatServiceAssignmentsInput = {
@@ -2205,6 +2250,7 @@ export type BusinessPartnerUpdateWithoutFormatServiceAssignmentsInput = {
   ticketComponentAllocations?: Prisma.TicketComponentAllocationUpdateManyWithoutBusinessPartnerNestedInput
   ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUpdateManyWithoutBusinessPartnerNestedInput
   calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUpdateManyWithoutBusinessPartnerNestedInput
+  customerDeals?: Prisma.DealUpdateManyWithoutBusinessPartnerNestedInput
 }
 
 export type BusinessPartnerUncheckedUpdateWithoutFormatServiceAssignmentsInput = {
@@ -2243,6 +2289,7 @@ export type BusinessPartnerUncheckedUpdateWithoutFormatServiceAssignmentsInput =
   ticketComponentAllocations?: Prisma.TicketComponentAllocationUncheckedUpdateManyWithoutBusinessPartnerNestedInput
   ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUncheckedUpdateManyWithoutBusinessPartnerNestedInput
   calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUncheckedUpdateManyWithoutBusinessPartnerNestedInput
+  customerDeals?: Prisma.DealUncheckedUpdateManyWithoutBusinessPartnerNestedInput
 }
 
 export type BusinessPartnerCreateWithoutEventServicePositionsInput = {
@@ -2281,6 +2328,7 @@ export type BusinessPartnerCreateWithoutEventServicePositionsInput = {
   ticketComponentAllocations?: Prisma.TicketComponentAllocationCreateNestedManyWithoutBusinessPartnerInput
   ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationCreateNestedManyWithoutBusinessPartnerInput
   calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationCreateNestedManyWithoutBusinessPartnerInput
+  customerDeals?: Prisma.DealCreateNestedManyWithoutBusinessPartnerInput
 }
 
 export type BusinessPartnerUncheckedCreateWithoutEventServicePositionsInput = {
@@ -2319,6 +2367,7 @@ export type BusinessPartnerUncheckedCreateWithoutEventServicePositionsInput = {
   ticketComponentAllocations?: Prisma.TicketComponentAllocationUncheckedCreateNestedManyWithoutBusinessPartnerInput
   ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUncheckedCreateNestedManyWithoutBusinessPartnerInput
   calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUncheckedCreateNestedManyWithoutBusinessPartnerInput
+  customerDeals?: Prisma.DealUncheckedCreateNestedManyWithoutBusinessPartnerInput
 }
 
 export type BusinessPartnerCreateOrConnectWithoutEventServicePositionsInput = {
@@ -2373,6 +2422,7 @@ export type BusinessPartnerUpdateWithoutEventServicePositionsInput = {
   ticketComponentAllocations?: Prisma.TicketComponentAllocationUpdateManyWithoutBusinessPartnerNestedInput
   ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUpdateManyWithoutBusinessPartnerNestedInput
   calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUpdateManyWithoutBusinessPartnerNestedInput
+  customerDeals?: Prisma.DealUpdateManyWithoutBusinessPartnerNestedInput
 }
 
 export type BusinessPartnerUncheckedUpdateWithoutEventServicePositionsInput = {
@@ -2411,6 +2461,7 @@ export type BusinessPartnerUncheckedUpdateWithoutEventServicePositionsInput = {
   ticketComponentAllocations?: Prisma.TicketComponentAllocationUncheckedUpdateManyWithoutBusinessPartnerNestedInput
   ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUncheckedUpdateManyWithoutBusinessPartnerNestedInput
   calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUncheckedUpdateManyWithoutBusinessPartnerNestedInput
+  customerDeals?: Prisma.DealUncheckedUpdateManyWithoutBusinessPartnerNestedInput
 }
 
 export type BusinessPartnerCreateWithoutTicketComponentAllocationsInput = {
@@ -2449,6 +2500,7 @@ export type BusinessPartnerCreateWithoutTicketComponentAllocationsInput = {
   eventServicePositions?: Prisma.EventServicePositionCreateNestedManyWithoutProviderBusinessPartnerInput
   ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationCreateNestedManyWithoutBusinessPartnerInput
   calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationCreateNestedManyWithoutBusinessPartnerInput
+  customerDeals?: Prisma.DealCreateNestedManyWithoutBusinessPartnerInput
 }
 
 export type BusinessPartnerUncheckedCreateWithoutTicketComponentAllocationsInput = {
@@ -2487,6 +2539,7 @@ export type BusinessPartnerUncheckedCreateWithoutTicketComponentAllocationsInput
   eventServicePositions?: Prisma.EventServicePositionUncheckedCreateNestedManyWithoutProviderBusinessPartnerInput
   ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUncheckedCreateNestedManyWithoutBusinessPartnerInput
   calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUncheckedCreateNestedManyWithoutBusinessPartnerInput
+  customerDeals?: Prisma.DealUncheckedCreateNestedManyWithoutBusinessPartnerInput
 }
 
 export type BusinessPartnerCreateOrConnectWithoutTicketComponentAllocationsInput = {
@@ -2541,6 +2594,7 @@ export type BusinessPartnerUpdateWithoutTicketComponentAllocationsInput = {
   eventServicePositions?: Prisma.EventServicePositionUpdateManyWithoutProviderBusinessPartnerNestedInput
   ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUpdateManyWithoutBusinessPartnerNestedInput
   calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUpdateManyWithoutBusinessPartnerNestedInput
+  customerDeals?: Prisma.DealUpdateManyWithoutBusinessPartnerNestedInput
 }
 
 export type BusinessPartnerUncheckedUpdateWithoutTicketComponentAllocationsInput = {
@@ -2579,6 +2633,7 @@ export type BusinessPartnerUncheckedUpdateWithoutTicketComponentAllocationsInput
   eventServicePositions?: Prisma.EventServicePositionUncheckedUpdateManyWithoutProviderBusinessPartnerNestedInput
   ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUncheckedUpdateManyWithoutBusinessPartnerNestedInput
   calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUncheckedUpdateManyWithoutBusinessPartnerNestedInput
+  customerDeals?: Prisma.DealUncheckedUpdateManyWithoutBusinessPartnerNestedInput
 }
 
 export type BusinessPartnerCreateWithoutTicketProviderTemplateAllocationsInput = {
@@ -2617,6 +2672,7 @@ export type BusinessPartnerCreateWithoutTicketProviderTemplateAllocationsInput =
   eventServicePositions?: Prisma.EventServicePositionCreateNestedManyWithoutProviderBusinessPartnerInput
   ticketComponentAllocations?: Prisma.TicketComponentAllocationCreateNestedManyWithoutBusinessPartnerInput
   calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationCreateNestedManyWithoutBusinessPartnerInput
+  customerDeals?: Prisma.DealCreateNestedManyWithoutBusinessPartnerInput
 }
 
 export type BusinessPartnerUncheckedCreateWithoutTicketProviderTemplateAllocationsInput = {
@@ -2655,6 +2711,7 @@ export type BusinessPartnerUncheckedCreateWithoutTicketProviderTemplateAllocatio
   eventServicePositions?: Prisma.EventServicePositionUncheckedCreateNestedManyWithoutProviderBusinessPartnerInput
   ticketComponentAllocations?: Prisma.TicketComponentAllocationUncheckedCreateNestedManyWithoutBusinessPartnerInput
   calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUncheckedCreateNestedManyWithoutBusinessPartnerInput
+  customerDeals?: Prisma.DealUncheckedCreateNestedManyWithoutBusinessPartnerInput
 }
 
 export type BusinessPartnerCreateOrConnectWithoutTicketProviderTemplateAllocationsInput = {
@@ -2709,6 +2766,7 @@ export type BusinessPartnerUpdateWithoutTicketProviderTemplateAllocationsInput =
   eventServicePositions?: Prisma.EventServicePositionUpdateManyWithoutProviderBusinessPartnerNestedInput
   ticketComponentAllocations?: Prisma.TicketComponentAllocationUpdateManyWithoutBusinessPartnerNestedInput
   calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUpdateManyWithoutBusinessPartnerNestedInput
+  customerDeals?: Prisma.DealUpdateManyWithoutBusinessPartnerNestedInput
 }
 
 export type BusinessPartnerUncheckedUpdateWithoutTicketProviderTemplateAllocationsInput = {
@@ -2747,6 +2805,7 @@ export type BusinessPartnerUncheckedUpdateWithoutTicketProviderTemplateAllocatio
   eventServicePositions?: Prisma.EventServicePositionUncheckedUpdateManyWithoutProviderBusinessPartnerNestedInput
   ticketComponentAllocations?: Prisma.TicketComponentAllocationUncheckedUpdateManyWithoutBusinessPartnerNestedInput
   calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUncheckedUpdateManyWithoutBusinessPartnerNestedInput
+  customerDeals?: Prisma.DealUncheckedUpdateManyWithoutBusinessPartnerNestedInput
 }
 
 export type BusinessPartnerCreateWithoutCalculationTemplateAllocationsInput = {
@@ -2785,6 +2844,7 @@ export type BusinessPartnerCreateWithoutCalculationTemplateAllocationsInput = {
   eventServicePositions?: Prisma.EventServicePositionCreateNestedManyWithoutProviderBusinessPartnerInput
   ticketComponentAllocations?: Prisma.TicketComponentAllocationCreateNestedManyWithoutBusinessPartnerInput
   ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationCreateNestedManyWithoutBusinessPartnerInput
+  customerDeals?: Prisma.DealCreateNestedManyWithoutBusinessPartnerInput
 }
 
 export type BusinessPartnerUncheckedCreateWithoutCalculationTemplateAllocationsInput = {
@@ -2823,6 +2883,7 @@ export type BusinessPartnerUncheckedCreateWithoutCalculationTemplateAllocationsI
   eventServicePositions?: Prisma.EventServicePositionUncheckedCreateNestedManyWithoutProviderBusinessPartnerInput
   ticketComponentAllocations?: Prisma.TicketComponentAllocationUncheckedCreateNestedManyWithoutBusinessPartnerInput
   ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUncheckedCreateNestedManyWithoutBusinessPartnerInput
+  customerDeals?: Prisma.DealUncheckedCreateNestedManyWithoutBusinessPartnerInput
 }
 
 export type BusinessPartnerCreateOrConnectWithoutCalculationTemplateAllocationsInput = {
@@ -2877,6 +2938,7 @@ export type BusinessPartnerUpdateWithoutCalculationTemplateAllocationsInput = {
   eventServicePositions?: Prisma.EventServicePositionUpdateManyWithoutProviderBusinessPartnerNestedInput
   ticketComponentAllocations?: Prisma.TicketComponentAllocationUpdateManyWithoutBusinessPartnerNestedInput
   ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUpdateManyWithoutBusinessPartnerNestedInput
+  customerDeals?: Prisma.DealUpdateManyWithoutBusinessPartnerNestedInput
 }
 
 export type BusinessPartnerUncheckedUpdateWithoutCalculationTemplateAllocationsInput = {
@@ -2915,6 +2977,7 @@ export type BusinessPartnerUncheckedUpdateWithoutCalculationTemplateAllocationsI
   eventServicePositions?: Prisma.EventServicePositionUncheckedUpdateManyWithoutProviderBusinessPartnerNestedInput
   ticketComponentAllocations?: Prisma.TicketComponentAllocationUncheckedUpdateManyWithoutBusinessPartnerNestedInput
   ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUncheckedUpdateManyWithoutBusinessPartnerNestedInput
+  customerDeals?: Prisma.DealUncheckedUpdateManyWithoutBusinessPartnerNestedInput
 }
 
 export type BusinessPartnerCreateWithoutDateOptionsInput = {
@@ -2953,6 +3016,7 @@ export type BusinessPartnerCreateWithoutDateOptionsInput = {
   ticketComponentAllocations?: Prisma.TicketComponentAllocationCreateNestedManyWithoutBusinessPartnerInput
   ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationCreateNestedManyWithoutBusinessPartnerInput
   calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationCreateNestedManyWithoutBusinessPartnerInput
+  customerDeals?: Prisma.DealCreateNestedManyWithoutBusinessPartnerInput
 }
 
 export type BusinessPartnerUncheckedCreateWithoutDateOptionsInput = {
@@ -2991,6 +3055,7 @@ export type BusinessPartnerUncheckedCreateWithoutDateOptionsInput = {
   ticketComponentAllocations?: Prisma.TicketComponentAllocationUncheckedCreateNestedManyWithoutBusinessPartnerInput
   ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUncheckedCreateNestedManyWithoutBusinessPartnerInput
   calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUncheckedCreateNestedManyWithoutBusinessPartnerInput
+  customerDeals?: Prisma.DealUncheckedCreateNestedManyWithoutBusinessPartnerInput
 }
 
 export type BusinessPartnerCreateOrConnectWithoutDateOptionsInput = {
@@ -3045,6 +3110,7 @@ export type BusinessPartnerUpdateWithoutDateOptionsInput = {
   ticketComponentAllocations?: Prisma.TicketComponentAllocationUpdateManyWithoutBusinessPartnerNestedInput
   ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUpdateManyWithoutBusinessPartnerNestedInput
   calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUpdateManyWithoutBusinessPartnerNestedInput
+  customerDeals?: Prisma.DealUpdateManyWithoutBusinessPartnerNestedInput
 }
 
 export type BusinessPartnerUncheckedUpdateWithoutDateOptionsInput = {
@@ -3076,6 +3142,179 @@ export type BusinessPartnerUncheckedUpdateWithoutDateOptionsInput = {
   contacts?: Prisma.BusinessPartnerContactUncheckedUpdateManyWithoutBusinessPartnerNestedInput
   roles?: Prisma.BusinessPartnerRoleAssignmentUncheckedUpdateManyWithoutBusinessPartnerNestedInput
   artistLinks?: Prisma.ArtistBusinessPartnerUncheckedUpdateManyWithoutBusinessPartnerNestedInput
+  bookings?: Prisma.BookingUncheckedUpdateManyWithoutBusinessPartnerNestedInput
+  serviceProviderPrices?: Prisma.ServiceProviderPriceUncheckedUpdateManyWithoutBusinessPartnerNestedInput
+  formatServiceAssignments?: Prisma.EventFormatServiceUncheckedUpdateManyWithoutProviderBusinessPartnerNestedInput
+  eventServicePositions?: Prisma.EventServicePositionUncheckedUpdateManyWithoutProviderBusinessPartnerNestedInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationUncheckedUpdateManyWithoutBusinessPartnerNestedInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUncheckedUpdateManyWithoutBusinessPartnerNestedInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUncheckedUpdateManyWithoutBusinessPartnerNestedInput
+  customerDeals?: Prisma.DealUncheckedUpdateManyWithoutBusinessPartnerNestedInput
+}
+
+export type BusinessPartnerCreateWithoutCustomerDealsInput = {
+  id?: string
+  companyName: string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  postalCode?: string | null
+  city?: string | null
+  state?: string | null
+  countryCode?: string | null
+  billingAddressLine1?: string | null
+  billingAddressLine2?: string | null
+  billingPostalCode?: string | null
+  billingCity?: string | null
+  billingState?: string | null
+  billingCountryCode?: string | null
+  vatId?: string | null
+  email?: string | null
+  phone?: string | null
+  website?: string | null
+  notes?: string | null
+  status?: $Enums.EntityStatus
+  version?: number
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organization: Prisma.OrganizationCreateNestedOneWithoutPartnersInput
+  contacts?: Prisma.BusinessPartnerContactCreateNestedManyWithoutBusinessPartnerInput
+  roles?: Prisma.BusinessPartnerRoleAssignmentCreateNestedManyWithoutBusinessPartnerInput
+  artistLinks?: Prisma.ArtistBusinessPartnerCreateNestedManyWithoutBusinessPartnerInput
+  dateOptions?: Prisma.VenueDateOptionCreateNestedManyWithoutBusinessPartnerInput
+  bookings?: Prisma.BookingCreateNestedManyWithoutBusinessPartnerInput
+  serviceProviderPrices?: Prisma.ServiceProviderPriceCreateNestedManyWithoutBusinessPartnerInput
+  formatServiceAssignments?: Prisma.EventFormatServiceCreateNestedManyWithoutProviderBusinessPartnerInput
+  eventServicePositions?: Prisma.EventServicePositionCreateNestedManyWithoutProviderBusinessPartnerInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationCreateNestedManyWithoutBusinessPartnerInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationCreateNestedManyWithoutBusinessPartnerInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationCreateNestedManyWithoutBusinessPartnerInput
+}
+
+export type BusinessPartnerUncheckedCreateWithoutCustomerDealsInput = {
+  id?: string
+  organizationId: string
+  companyName: string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  postalCode?: string | null
+  city?: string | null
+  state?: string | null
+  countryCode?: string | null
+  billingAddressLine1?: string | null
+  billingAddressLine2?: string | null
+  billingPostalCode?: string | null
+  billingCity?: string | null
+  billingState?: string | null
+  billingCountryCode?: string | null
+  vatId?: string | null
+  email?: string | null
+  phone?: string | null
+  website?: string | null
+  notes?: string | null
+  status?: $Enums.EntityStatus
+  version?: number
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  contacts?: Prisma.BusinessPartnerContactUncheckedCreateNestedManyWithoutBusinessPartnerInput
+  roles?: Prisma.BusinessPartnerRoleAssignmentUncheckedCreateNestedManyWithoutBusinessPartnerInput
+  artistLinks?: Prisma.ArtistBusinessPartnerUncheckedCreateNestedManyWithoutBusinessPartnerInput
+  dateOptions?: Prisma.VenueDateOptionUncheckedCreateNestedManyWithoutBusinessPartnerInput
+  bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutBusinessPartnerInput
+  serviceProviderPrices?: Prisma.ServiceProviderPriceUncheckedCreateNestedManyWithoutBusinessPartnerInput
+  formatServiceAssignments?: Prisma.EventFormatServiceUncheckedCreateNestedManyWithoutProviderBusinessPartnerInput
+  eventServicePositions?: Prisma.EventServicePositionUncheckedCreateNestedManyWithoutProviderBusinessPartnerInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationUncheckedCreateNestedManyWithoutBusinessPartnerInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUncheckedCreateNestedManyWithoutBusinessPartnerInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUncheckedCreateNestedManyWithoutBusinessPartnerInput
+}
+
+export type BusinessPartnerCreateOrConnectWithoutCustomerDealsInput = {
+  where: Prisma.BusinessPartnerWhereUniqueInput
+  create: Prisma.XOR<Prisma.BusinessPartnerCreateWithoutCustomerDealsInput, Prisma.BusinessPartnerUncheckedCreateWithoutCustomerDealsInput>
+}
+
+export type BusinessPartnerUpsertWithoutCustomerDealsInput = {
+  update: Prisma.XOR<Prisma.BusinessPartnerUpdateWithoutCustomerDealsInput, Prisma.BusinessPartnerUncheckedUpdateWithoutCustomerDealsInput>
+  create: Prisma.XOR<Prisma.BusinessPartnerCreateWithoutCustomerDealsInput, Prisma.BusinessPartnerUncheckedCreateWithoutCustomerDealsInput>
+  where?: Prisma.BusinessPartnerWhereInput
+}
+
+export type BusinessPartnerUpdateToOneWithWhereWithoutCustomerDealsInput = {
+  where?: Prisma.BusinessPartnerWhereInput
+  data: Prisma.XOR<Prisma.BusinessPartnerUpdateWithoutCustomerDealsInput, Prisma.BusinessPartnerUncheckedUpdateWithoutCustomerDealsInput>
+}
+
+export type BusinessPartnerUpdateWithoutCustomerDealsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  companyName?: Prisma.StringFieldUpdateOperationsInput | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  countryCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingState?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingCountryCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vatId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutPartnersNestedInput
+  contacts?: Prisma.BusinessPartnerContactUpdateManyWithoutBusinessPartnerNestedInput
+  roles?: Prisma.BusinessPartnerRoleAssignmentUpdateManyWithoutBusinessPartnerNestedInput
+  artistLinks?: Prisma.ArtistBusinessPartnerUpdateManyWithoutBusinessPartnerNestedInput
+  dateOptions?: Prisma.VenueDateOptionUpdateManyWithoutBusinessPartnerNestedInput
+  bookings?: Prisma.BookingUpdateManyWithoutBusinessPartnerNestedInput
+  serviceProviderPrices?: Prisma.ServiceProviderPriceUpdateManyWithoutBusinessPartnerNestedInput
+  formatServiceAssignments?: Prisma.EventFormatServiceUpdateManyWithoutProviderBusinessPartnerNestedInput
+  eventServicePositions?: Prisma.EventServicePositionUpdateManyWithoutProviderBusinessPartnerNestedInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationUpdateManyWithoutBusinessPartnerNestedInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUpdateManyWithoutBusinessPartnerNestedInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUpdateManyWithoutBusinessPartnerNestedInput
+}
+
+export type BusinessPartnerUncheckedUpdateWithoutCustomerDealsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  companyName?: Prisma.StringFieldUpdateOperationsInput | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  countryCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingState?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingCountryCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vatId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  contacts?: Prisma.BusinessPartnerContactUncheckedUpdateManyWithoutBusinessPartnerNestedInput
+  roles?: Prisma.BusinessPartnerRoleAssignmentUncheckedUpdateManyWithoutBusinessPartnerNestedInput
+  artistLinks?: Prisma.ArtistBusinessPartnerUncheckedUpdateManyWithoutBusinessPartnerNestedInput
+  dateOptions?: Prisma.VenueDateOptionUncheckedUpdateManyWithoutBusinessPartnerNestedInput
   bookings?: Prisma.BookingUncheckedUpdateManyWithoutBusinessPartnerNestedInput
   serviceProviderPrices?: Prisma.ServiceProviderPriceUncheckedUpdateManyWithoutBusinessPartnerNestedInput
   formatServiceAssignments?: Prisma.EventFormatServiceUncheckedUpdateManyWithoutProviderBusinessPartnerNestedInput
@@ -3148,6 +3387,7 @@ export type BusinessPartnerUpdateWithoutOrganizationInput = {
   ticketComponentAllocations?: Prisma.TicketComponentAllocationUpdateManyWithoutBusinessPartnerNestedInput
   ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUpdateManyWithoutBusinessPartnerNestedInput
   calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUpdateManyWithoutBusinessPartnerNestedInput
+  customerDeals?: Prisma.DealUpdateManyWithoutBusinessPartnerNestedInput
 }
 
 export type BusinessPartnerUncheckedUpdateWithoutOrganizationInput = {
@@ -3186,6 +3426,7 @@ export type BusinessPartnerUncheckedUpdateWithoutOrganizationInput = {
   ticketComponentAllocations?: Prisma.TicketComponentAllocationUncheckedUpdateManyWithoutBusinessPartnerNestedInput
   ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUncheckedUpdateManyWithoutBusinessPartnerNestedInput
   calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUncheckedUpdateManyWithoutBusinessPartnerNestedInput
+  customerDeals?: Prisma.DealUncheckedUpdateManyWithoutBusinessPartnerNestedInput
 }
 
 export type BusinessPartnerUncheckedUpdateManyWithoutOrganizationInput = {
@@ -3232,6 +3473,7 @@ export type BusinessPartnerCountOutputType = {
   ticketComponentAllocations: number
   ticketProviderTemplateAllocations: number
   calculationTemplateAllocations: number
+  customerDeals: number
 }
 
 export type BusinessPartnerCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3246,6 +3488,7 @@ export type BusinessPartnerCountOutputTypeSelect<ExtArgs extends runtime.Types.E
   ticketComponentAllocations?: boolean | BusinessPartnerCountOutputTypeCountTicketComponentAllocationsArgs
   ticketProviderTemplateAllocations?: boolean | BusinessPartnerCountOutputTypeCountTicketProviderTemplateAllocationsArgs
   calculationTemplateAllocations?: boolean | BusinessPartnerCountOutputTypeCountCalculationTemplateAllocationsArgs
+  customerDeals?: boolean | BusinessPartnerCountOutputTypeCountCustomerDealsArgs
 }
 
 /**
@@ -3335,6 +3578,13 @@ export type BusinessPartnerCountOutputTypeCountCalculationTemplateAllocationsArg
   where?: Prisma.CalculationTemplateAllocationWhereInput
 }
 
+/**
+ * BusinessPartnerCountOutputType without action
+ */
+export type BusinessPartnerCountOutputTypeCountCustomerDealsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DealWhereInput
+}
+
 
 export type BusinessPartnerSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -3374,6 +3624,7 @@ export type BusinessPartnerSelect<ExtArgs extends runtime.Types.Extensions.Inter
   ticketComponentAllocations?: boolean | Prisma.BusinessPartner$ticketComponentAllocationsArgs<ExtArgs>
   ticketProviderTemplateAllocations?: boolean | Prisma.BusinessPartner$ticketProviderTemplateAllocationsArgs<ExtArgs>
   calculationTemplateAllocations?: boolean | Prisma.BusinessPartner$calculationTemplateAllocationsArgs<ExtArgs>
+  customerDeals?: boolean | Prisma.BusinessPartner$customerDealsArgs<ExtArgs>
   _count?: boolean | Prisma.BusinessPartnerCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["businessPartner"]>
 
@@ -3477,6 +3728,7 @@ export type BusinessPartnerInclude<ExtArgs extends runtime.Types.Extensions.Inte
   ticketComponentAllocations?: boolean | Prisma.BusinessPartner$ticketComponentAllocationsArgs<ExtArgs>
   ticketProviderTemplateAllocations?: boolean | Prisma.BusinessPartner$ticketProviderTemplateAllocationsArgs<ExtArgs>
   calculationTemplateAllocations?: boolean | Prisma.BusinessPartner$calculationTemplateAllocationsArgs<ExtArgs>
+  customerDeals?: boolean | Prisma.BusinessPartner$customerDealsArgs<ExtArgs>
   _count?: boolean | Prisma.BusinessPartnerCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type BusinessPartnerIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3501,6 +3753,7 @@ export type $BusinessPartnerPayload<ExtArgs extends runtime.Types.Extensions.Int
     ticketComponentAllocations: Prisma.$TicketComponentAllocationPayload<ExtArgs>[]
     ticketProviderTemplateAllocations: Prisma.$TicketProviderTemplateAllocationPayload<ExtArgs>[]
     calculationTemplateAllocations: Prisma.$CalculationTemplateAllocationPayload<ExtArgs>[]
+    customerDeals: Prisma.$DealPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -3934,6 +4187,7 @@ export interface Prisma__BusinessPartnerClient<T, Null = never, ExtArgs extends 
   ticketComponentAllocations<T extends Prisma.BusinessPartner$ticketComponentAllocationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BusinessPartner$ticketComponentAllocationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TicketComponentAllocationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   ticketProviderTemplateAllocations<T extends Prisma.BusinessPartner$ticketProviderTemplateAllocationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BusinessPartner$ticketProviderTemplateAllocationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TicketProviderTemplateAllocationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   calculationTemplateAllocations<T extends Prisma.BusinessPartner$calculationTemplateAllocationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BusinessPartner$calculationTemplateAllocationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CalculationTemplateAllocationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  customerDeals<T extends Prisma.BusinessPartner$customerDealsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BusinessPartner$customerDealsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DealPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4650,6 +4904,30 @@ export type BusinessPartner$calculationTemplateAllocationsArgs<ExtArgs extends r
   take?: number
   skip?: number
   distinct?: Prisma.CalculationTemplateAllocationScalarFieldEnum | Prisma.CalculationTemplateAllocationScalarFieldEnum[]
+}
+
+/**
+ * BusinessPartner.customerDeals
+ */
+export type BusinessPartner$customerDealsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Deal
+   */
+  select?: Prisma.DealSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Deal
+   */
+  omit?: Prisma.DealOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DealInclude<ExtArgs> | null
+  where?: Prisma.DealWhereInput
+  orderBy?: Prisma.DealOrderByWithRelationInput | Prisma.DealOrderByWithRelationInput[]
+  cursor?: Prisma.DealWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DealScalarFieldEnum | Prisma.DealScalarFieldEnum[]
 }
 
 /**

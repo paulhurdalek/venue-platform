@@ -238,3 +238,38 @@ export const RevenueConfirmationStatus = {
 } as const
 
 export type RevenueConfirmationStatus = (typeof RevenueConfirmationStatus)[keyof typeof RevenueConfirmationStatus]
+
+
+export const DealStatus = {
+  ENTWURF: 'ENTWURF',
+  IN_VERHANDLUNG: 'IN_VERHANDLUNG',
+  VEREINBART: 'VEREINBART',
+  STORNIERT: 'STORNIERT'
+} as const
+
+export type DealStatus = (typeof DealStatus)[keyof typeof DealStatus]
+
+
+export const DealComponentType = {
+  FIXED_RENT: 'FIXED_RENT',
+  REVENUE_SHARE: 'REVENUE_SHARE',
+  MINIMUM_GUARANTEE_SHARE: 'MINIMUM_GUARANTEE_SHARE'
+} as const
+
+export type DealComponentType = (typeof DealComponentType)[keyof typeof DealComponentType]
+
+
+export const DealBillingMode = {
+  SEPARATELY_BILLABLE: 'SEPARATELY_BILLABLE',
+  INCLUDED: 'INCLUDED'
+} as const
+
+export type DealBillingMode = (typeof DealBillingMode)[keyof typeof DealBillingMode]
+
+
+export const DealDiscountType = {
+  FIXED: 'FIXED',
+  PERCENTAGE: 'PERCENTAGE'
+} as const
+
+export type DealDiscountType = (typeof DealDiscountType)[keyof typeof DealDiscountType]

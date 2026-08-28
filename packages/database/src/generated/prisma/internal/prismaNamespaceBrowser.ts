@@ -111,7 +111,14 @@ export const ModelName = {
   CalculationTemplateAllocation: 'CalculationTemplateAllocation',
   CalculationTemplateAdditionalRevenue: 'CalculationTemplateAdditionalRevenue',
   VenueDateOption: 'VenueDateOption',
-  LocationOccupancy: 'LocationOccupancy'
+  LocationOccupancy: 'LocationOccupancy',
+  Deal: 'Deal',
+  DealComponent: 'DealComponent',
+  DealServicePosition: 'DealServicePosition',
+  DealStatusHistory: 'DealStatusHistory',
+  DealTemplate: 'DealTemplate',
+  DealTemplateComponent: 'DealTemplateComponent',
+  DealTemplateServicePosition: 'DealTemplateServicePosition'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1221,6 +1228,150 @@ export const LocationOccupancyScalarFieldEnum = {
 } as const
 
 export type LocationOccupancyScalarFieldEnum = (typeof LocationOccupancyScalarFieldEnum)[keyof typeof LocationOccupancyScalarFieldEnum]
+
+
+export const DealScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  eventId: 'eventId',
+  businessPartnerId: 'businessPartnerId',
+  contactId: 'contactId',
+  sourceTemplateId: 'sourceTemplateId',
+  sourceTemplateVersion: 'sourceTemplateVersion',
+  sourceTemplateNameSnapshot: 'sourceTemplateNameSnapshot',
+  customerNameSnapshot: 'customerNameSnapshot',
+  contactNameSnapshot: 'contactNameSnapshot',
+  status: 'status',
+  totalDiscountType: 'totalDiscountType',
+  totalDiscountFixedMinor: 'totalDiscountFixedMinor',
+  totalDiscountPercentageBasisPoints: 'totalDiscountPercentageBasisPoints',
+  currency: 'currency',
+  version: 'version',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type DealScalarFieldEnum = (typeof DealScalarFieldEnum)[keyof typeof DealScalarFieldEnum]
+
+
+export const DealComponentScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  dealId: 'dealId',
+  type: 'type',
+  label: 'label',
+  amountNetMinor: 'amountNetMinor',
+  minimumGuaranteeNetMinor: 'minimumGuaranteeNetMinor',
+  taxRateBasisPoints: 'taxRateBasisPoints',
+  locationShareBasisPoints: 'locationShareBasisPoints',
+  counterpartyShareBasisPoints: 'counterpartyShareBasisPoints',
+  includeWkz: 'includeWkz',
+  sortOrder: 'sortOrder',
+  version: 'version',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type DealComponentScalarFieldEnum = (typeof DealComponentScalarFieldEnum)[keyof typeof DealComponentScalarFieldEnum]
+
+
+export const DealServicePositionScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  dealId: 'dealId',
+  sourceServiceId: 'sourceServiceId',
+  sourceServiceVersion: 'sourceServiceVersion',
+  serviceNameSnapshot: 'serviceNameSnapshot',
+  unitSnapshot: 'unitSnapshot',
+  quantity: 'quantity',
+  salesUnitPriceNetMinor: 'salesUnitPriceNetMinor',
+  internalUnitCostNetMinor: 'internalUnitCostNetMinor',
+  taxRateBasisPoints: 'taxRateBasisPoints',
+  billingMode: 'billingMode',
+  discountType: 'discountType',
+  discountFixedMinor: 'discountFixedMinor',
+  discountPercentageBasisPoints: 'discountPercentageBasisPoints',
+  sortOrder: 'sortOrder',
+  version: 'version',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type DealServicePositionScalarFieldEnum = (typeof DealServicePositionScalarFieldEnum)[keyof typeof DealServicePositionScalarFieldEnum]
+
+
+export const DealStatusHistoryScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  dealId: 'dealId',
+  previousStatus: 'previousStatus',
+  newStatus: 'newStatus',
+  actorUserId: 'actorUserId',
+  actorMembershipId: 'actorMembershipId',
+  changedAt: 'changedAt'
+} as const
+
+export type DealStatusHistoryScalarFieldEnum = (typeof DealStatusHistoryScalarFieldEnum)[keyof typeof DealStatusHistoryScalarFieldEnum]
+
+
+export const DealTemplateScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  name: 'name',
+  normalizedName: 'normalizedName',
+  description: 'description',
+  totalDiscountType: 'totalDiscountType',
+  totalDiscountFixedMinor: 'totalDiscountFixedMinor',
+  totalDiscountPercentageBasisPoints: 'totalDiscountPercentageBasisPoints',
+  currency: 'currency',
+  status: 'status',
+  archivedAt: 'archivedAt',
+  version: 'version',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type DealTemplateScalarFieldEnum = (typeof DealTemplateScalarFieldEnum)[keyof typeof DealTemplateScalarFieldEnum]
+
+
+export const DealTemplateComponentScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  templateId: 'templateId',
+  type: 'type',
+  label: 'label',
+  amountNetMinor: 'amountNetMinor',
+  minimumGuaranteeNetMinor: 'minimumGuaranteeNetMinor',
+  taxRateBasisPoints: 'taxRateBasisPoints',
+  locationShareBasisPoints: 'locationShareBasisPoints',
+  counterpartyShareBasisPoints: 'counterpartyShareBasisPoints',
+  includeWkz: 'includeWkz',
+  sortOrder: 'sortOrder'
+} as const
+
+export type DealTemplateComponentScalarFieldEnum = (typeof DealTemplateComponentScalarFieldEnum)[keyof typeof DealTemplateComponentScalarFieldEnum]
+
+
+export const DealTemplateServicePositionScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  templateId: 'templateId',
+  sourceServiceId: 'sourceServiceId',
+  sourceServiceVersion: 'sourceServiceVersion',
+  serviceNameSnapshot: 'serviceNameSnapshot',
+  unitSnapshot: 'unitSnapshot',
+  quantity: 'quantity',
+  salesUnitPriceNetMinor: 'salesUnitPriceNetMinor',
+  internalUnitCostNetMinor: 'internalUnitCostNetMinor',
+  taxRateBasisPoints: 'taxRateBasisPoints',
+  billingMode: 'billingMode',
+  discountType: 'discountType',
+  discountFixedMinor: 'discountFixedMinor',
+  discountPercentageBasisPoints: 'discountPercentageBasisPoints',
+  sortOrder: 'sortOrder'
+} as const
+
+export type DealTemplateServicePositionScalarFieldEnum = (typeof DealTemplateServicePositionScalarFieldEnum)[keyof typeof DealTemplateServicePositionScalarFieldEnum]
 
 
 export const SortOrder = {

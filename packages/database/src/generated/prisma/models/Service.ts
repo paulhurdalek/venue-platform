@@ -297,6 +297,8 @@ export type ServiceWhereInput = {
   providerPrices?: Prisma.ServiceProviderPriceListRelationFilter
   formatRequirements?: Prisma.EventFormatServiceListRelationFilter
   eventPositions?: Prisma.EventServicePositionListRelationFilter
+  dealPositions?: Prisma.DealServicePositionListRelationFilter
+  dealTemplatePositions?: Prisma.DealTemplateServicePositionListRelationFilter
 }
 
 export type ServiceOrderByWithRelationInput = {
@@ -319,6 +321,8 @@ export type ServiceOrderByWithRelationInput = {
   providerPrices?: Prisma.ServiceProviderPriceOrderByRelationAggregateInput
   formatRequirements?: Prisma.EventFormatServiceOrderByRelationAggregateInput
   eventPositions?: Prisma.EventServicePositionOrderByRelationAggregateInput
+  dealPositions?: Prisma.DealServicePositionOrderByRelationAggregateInput
+  dealTemplatePositions?: Prisma.DealTemplateServicePositionOrderByRelationAggregateInput
 }
 
 export type ServiceWhereUniqueInput = Prisma.AtLeast<{
@@ -346,6 +350,8 @@ export type ServiceWhereUniqueInput = Prisma.AtLeast<{
   providerPrices?: Prisma.ServiceProviderPriceListRelationFilter
   formatRequirements?: Prisma.EventFormatServiceListRelationFilter
   eventPositions?: Prisma.EventServicePositionListRelationFilter
+  dealPositions?: Prisma.DealServicePositionListRelationFilter
+  dealTemplatePositions?: Prisma.DealTemplateServicePositionListRelationFilter
 }, "id" | "id_organizationId" | "organizationId_normalizedName">
 
 export type ServiceOrderByWithAggregationInput = {
@@ -408,6 +414,8 @@ export type ServiceCreateInput = {
   providerPrices?: Prisma.ServiceProviderPriceCreateNestedManyWithoutServiceInput
   formatRequirements?: Prisma.EventFormatServiceCreateNestedManyWithoutServiceInput
   eventPositions?: Prisma.EventServicePositionCreateNestedManyWithoutSourceServiceInput
+  dealPositions?: Prisma.DealServicePositionCreateNestedManyWithoutSourceServiceInput
+  dealTemplatePositions?: Prisma.DealTemplateServicePositionCreateNestedManyWithoutSourceServiceInput
 }
 
 export type ServiceUncheckedCreateInput = {
@@ -428,6 +436,8 @@ export type ServiceUncheckedCreateInput = {
   providerPrices?: Prisma.ServiceProviderPriceUncheckedCreateNestedManyWithoutServiceInput
   formatRequirements?: Prisma.EventFormatServiceUncheckedCreateNestedManyWithoutServiceInput
   eventPositions?: Prisma.EventServicePositionUncheckedCreateNestedManyWithoutSourceServiceInput
+  dealPositions?: Prisma.DealServicePositionUncheckedCreateNestedManyWithoutSourceServiceInput
+  dealTemplatePositions?: Prisma.DealTemplateServicePositionUncheckedCreateNestedManyWithoutSourceServiceInput
 }
 
 export type ServiceUpdateInput = {
@@ -448,6 +458,8 @@ export type ServiceUpdateInput = {
   providerPrices?: Prisma.ServiceProviderPriceUpdateManyWithoutServiceNestedInput
   formatRequirements?: Prisma.EventFormatServiceUpdateManyWithoutServiceNestedInput
   eventPositions?: Prisma.EventServicePositionUpdateManyWithoutSourceServiceNestedInput
+  dealPositions?: Prisma.DealServicePositionUpdateManyWithoutSourceServiceNestedInput
+  dealTemplatePositions?: Prisma.DealTemplateServicePositionUpdateManyWithoutSourceServiceNestedInput
 }
 
 export type ServiceUncheckedUpdateInput = {
@@ -468,6 +480,8 @@ export type ServiceUncheckedUpdateInput = {
   providerPrices?: Prisma.ServiceProviderPriceUncheckedUpdateManyWithoutServiceNestedInput
   formatRequirements?: Prisma.EventFormatServiceUncheckedUpdateManyWithoutServiceNestedInput
   eventPositions?: Prisma.EventServicePositionUncheckedUpdateManyWithoutSourceServiceNestedInput
+  dealPositions?: Prisma.DealServicePositionUncheckedUpdateManyWithoutSourceServiceNestedInput
+  dealTemplatePositions?: Prisma.DealTemplateServicePositionUncheckedUpdateManyWithoutSourceServiceNestedInput
 }
 
 export type ServiceCreateManyInput = {
@@ -742,6 +756,38 @@ export type ServiceUpdateOneWithoutEventPositionsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ServiceUpdateToOneWithWhereWithoutEventPositionsInput, Prisma.ServiceUpdateWithoutEventPositionsInput>, Prisma.ServiceUncheckedUpdateWithoutEventPositionsInput>
 }
 
+export type ServiceCreateNestedOneWithoutDealPositionsInput = {
+  create?: Prisma.XOR<Prisma.ServiceCreateWithoutDealPositionsInput, Prisma.ServiceUncheckedCreateWithoutDealPositionsInput>
+  connectOrCreate?: Prisma.ServiceCreateOrConnectWithoutDealPositionsInput
+  connect?: Prisma.ServiceWhereUniqueInput
+}
+
+export type ServiceUpdateOneWithoutDealPositionsNestedInput = {
+  create?: Prisma.XOR<Prisma.ServiceCreateWithoutDealPositionsInput, Prisma.ServiceUncheckedCreateWithoutDealPositionsInput>
+  connectOrCreate?: Prisma.ServiceCreateOrConnectWithoutDealPositionsInput
+  upsert?: Prisma.ServiceUpsertWithoutDealPositionsInput
+  disconnect?: Prisma.ServiceWhereInput | boolean
+  delete?: Prisma.ServiceWhereInput | boolean
+  connect?: Prisma.ServiceWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ServiceUpdateToOneWithWhereWithoutDealPositionsInput, Prisma.ServiceUpdateWithoutDealPositionsInput>, Prisma.ServiceUncheckedUpdateWithoutDealPositionsInput>
+}
+
+export type ServiceCreateNestedOneWithoutDealTemplatePositionsInput = {
+  create?: Prisma.XOR<Prisma.ServiceCreateWithoutDealTemplatePositionsInput, Prisma.ServiceUncheckedCreateWithoutDealTemplatePositionsInput>
+  connectOrCreate?: Prisma.ServiceCreateOrConnectWithoutDealTemplatePositionsInput
+  connect?: Prisma.ServiceWhereUniqueInput
+}
+
+export type ServiceUpdateOneWithoutDealTemplatePositionsNestedInput = {
+  create?: Prisma.XOR<Prisma.ServiceCreateWithoutDealTemplatePositionsInput, Prisma.ServiceUncheckedCreateWithoutDealTemplatePositionsInput>
+  connectOrCreate?: Prisma.ServiceCreateOrConnectWithoutDealTemplatePositionsInput
+  upsert?: Prisma.ServiceUpsertWithoutDealTemplatePositionsInput
+  disconnect?: Prisma.ServiceWhereInput | boolean
+  delete?: Prisma.ServiceWhereInput | boolean
+  connect?: Prisma.ServiceWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ServiceUpdateToOneWithWhereWithoutDealTemplatePositionsInput, Prisma.ServiceUpdateWithoutDealTemplatePositionsInput>, Prisma.ServiceUncheckedUpdateWithoutDealTemplatePositionsInput>
+}
+
 export type ServiceCreateWithoutOrganizationInput = {
   id?: string
   name: string
@@ -759,6 +805,8 @@ export type ServiceCreateWithoutOrganizationInput = {
   providerPrices?: Prisma.ServiceProviderPriceCreateNestedManyWithoutServiceInput
   formatRequirements?: Prisma.EventFormatServiceCreateNestedManyWithoutServiceInput
   eventPositions?: Prisma.EventServicePositionCreateNestedManyWithoutSourceServiceInput
+  dealPositions?: Prisma.DealServicePositionCreateNestedManyWithoutSourceServiceInput
+  dealTemplatePositions?: Prisma.DealTemplateServicePositionCreateNestedManyWithoutSourceServiceInput
 }
 
 export type ServiceUncheckedCreateWithoutOrganizationInput = {
@@ -778,6 +826,8 @@ export type ServiceUncheckedCreateWithoutOrganizationInput = {
   providerPrices?: Prisma.ServiceProviderPriceUncheckedCreateNestedManyWithoutServiceInput
   formatRequirements?: Prisma.EventFormatServiceUncheckedCreateNestedManyWithoutServiceInput
   eventPositions?: Prisma.EventServicePositionUncheckedCreateNestedManyWithoutSourceServiceInput
+  dealPositions?: Prisma.DealServicePositionUncheckedCreateNestedManyWithoutSourceServiceInput
+  dealTemplatePositions?: Prisma.DealTemplateServicePositionUncheckedCreateNestedManyWithoutSourceServiceInput
 }
 
 export type ServiceCreateOrConnectWithoutOrganizationInput = {
@@ -843,6 +893,8 @@ export type ServiceCreateWithoutCategoryInput = {
   providerPrices?: Prisma.ServiceProviderPriceCreateNestedManyWithoutServiceInput
   formatRequirements?: Prisma.EventFormatServiceCreateNestedManyWithoutServiceInput
   eventPositions?: Prisma.EventServicePositionCreateNestedManyWithoutSourceServiceInput
+  dealPositions?: Prisma.DealServicePositionCreateNestedManyWithoutSourceServiceInput
+  dealTemplatePositions?: Prisma.DealTemplateServicePositionCreateNestedManyWithoutSourceServiceInput
 }
 
 export type ServiceUncheckedCreateWithoutCategoryInput = {
@@ -861,6 +913,8 @@ export type ServiceUncheckedCreateWithoutCategoryInput = {
   providerPrices?: Prisma.ServiceProviderPriceUncheckedCreateNestedManyWithoutServiceInput
   formatRequirements?: Prisma.EventFormatServiceUncheckedCreateNestedManyWithoutServiceInput
   eventPositions?: Prisma.EventServicePositionUncheckedCreateNestedManyWithoutSourceServiceInput
+  dealPositions?: Prisma.DealServicePositionUncheckedCreateNestedManyWithoutSourceServiceInput
+  dealTemplatePositions?: Prisma.DealTemplateServicePositionUncheckedCreateNestedManyWithoutSourceServiceInput
 }
 
 export type ServiceCreateOrConnectWithoutCategoryInput = {
@@ -906,6 +960,8 @@ export type ServiceCreateWithoutProviderPricesInput = {
   category: Prisma.ServiceCategoryCreateNestedOneWithoutServicesInput
   formatRequirements?: Prisma.EventFormatServiceCreateNestedManyWithoutServiceInput
   eventPositions?: Prisma.EventServicePositionCreateNestedManyWithoutSourceServiceInput
+  dealPositions?: Prisma.DealServicePositionCreateNestedManyWithoutSourceServiceInput
+  dealTemplatePositions?: Prisma.DealTemplateServicePositionCreateNestedManyWithoutSourceServiceInput
 }
 
 export type ServiceUncheckedCreateWithoutProviderPricesInput = {
@@ -925,6 +981,8 @@ export type ServiceUncheckedCreateWithoutProviderPricesInput = {
   updatedAt?: Date | string
   formatRequirements?: Prisma.EventFormatServiceUncheckedCreateNestedManyWithoutServiceInput
   eventPositions?: Prisma.EventServicePositionUncheckedCreateNestedManyWithoutSourceServiceInput
+  dealPositions?: Prisma.DealServicePositionUncheckedCreateNestedManyWithoutSourceServiceInput
+  dealTemplatePositions?: Prisma.DealTemplateServicePositionUncheckedCreateNestedManyWithoutSourceServiceInput
 }
 
 export type ServiceCreateOrConnectWithoutProviderPricesInput = {
@@ -960,6 +1018,8 @@ export type ServiceUpdateWithoutProviderPricesInput = {
   category?: Prisma.ServiceCategoryUpdateOneRequiredWithoutServicesNestedInput
   formatRequirements?: Prisma.EventFormatServiceUpdateManyWithoutServiceNestedInput
   eventPositions?: Prisma.EventServicePositionUpdateManyWithoutSourceServiceNestedInput
+  dealPositions?: Prisma.DealServicePositionUpdateManyWithoutSourceServiceNestedInput
+  dealTemplatePositions?: Prisma.DealTemplateServicePositionUpdateManyWithoutSourceServiceNestedInput
 }
 
 export type ServiceUncheckedUpdateWithoutProviderPricesInput = {
@@ -979,6 +1039,8 @@ export type ServiceUncheckedUpdateWithoutProviderPricesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   formatRequirements?: Prisma.EventFormatServiceUncheckedUpdateManyWithoutServiceNestedInput
   eventPositions?: Prisma.EventServicePositionUncheckedUpdateManyWithoutSourceServiceNestedInput
+  dealPositions?: Prisma.DealServicePositionUncheckedUpdateManyWithoutSourceServiceNestedInput
+  dealTemplatePositions?: Prisma.DealTemplateServicePositionUncheckedUpdateManyWithoutSourceServiceNestedInput
 }
 
 export type ServiceCreateWithoutFormatRequirementsInput = {
@@ -998,6 +1060,8 @@ export type ServiceCreateWithoutFormatRequirementsInput = {
   category: Prisma.ServiceCategoryCreateNestedOneWithoutServicesInput
   providerPrices?: Prisma.ServiceProviderPriceCreateNestedManyWithoutServiceInput
   eventPositions?: Prisma.EventServicePositionCreateNestedManyWithoutSourceServiceInput
+  dealPositions?: Prisma.DealServicePositionCreateNestedManyWithoutSourceServiceInput
+  dealTemplatePositions?: Prisma.DealTemplateServicePositionCreateNestedManyWithoutSourceServiceInput
 }
 
 export type ServiceUncheckedCreateWithoutFormatRequirementsInput = {
@@ -1017,6 +1081,8 @@ export type ServiceUncheckedCreateWithoutFormatRequirementsInput = {
   updatedAt?: Date | string
   providerPrices?: Prisma.ServiceProviderPriceUncheckedCreateNestedManyWithoutServiceInput
   eventPositions?: Prisma.EventServicePositionUncheckedCreateNestedManyWithoutSourceServiceInput
+  dealPositions?: Prisma.DealServicePositionUncheckedCreateNestedManyWithoutSourceServiceInput
+  dealTemplatePositions?: Prisma.DealTemplateServicePositionUncheckedCreateNestedManyWithoutSourceServiceInput
 }
 
 export type ServiceCreateOrConnectWithoutFormatRequirementsInput = {
@@ -1052,6 +1118,8 @@ export type ServiceUpdateWithoutFormatRequirementsInput = {
   category?: Prisma.ServiceCategoryUpdateOneRequiredWithoutServicesNestedInput
   providerPrices?: Prisma.ServiceProviderPriceUpdateManyWithoutServiceNestedInput
   eventPositions?: Prisma.EventServicePositionUpdateManyWithoutSourceServiceNestedInput
+  dealPositions?: Prisma.DealServicePositionUpdateManyWithoutSourceServiceNestedInput
+  dealTemplatePositions?: Prisma.DealTemplateServicePositionUpdateManyWithoutSourceServiceNestedInput
 }
 
 export type ServiceUncheckedUpdateWithoutFormatRequirementsInput = {
@@ -1071,6 +1139,8 @@ export type ServiceUncheckedUpdateWithoutFormatRequirementsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   providerPrices?: Prisma.ServiceProviderPriceUncheckedUpdateManyWithoutServiceNestedInput
   eventPositions?: Prisma.EventServicePositionUncheckedUpdateManyWithoutSourceServiceNestedInput
+  dealPositions?: Prisma.DealServicePositionUncheckedUpdateManyWithoutSourceServiceNestedInput
+  dealTemplatePositions?: Prisma.DealTemplateServicePositionUncheckedUpdateManyWithoutSourceServiceNestedInput
 }
 
 export type ServiceCreateWithoutEventPositionsInput = {
@@ -1090,6 +1160,8 @@ export type ServiceCreateWithoutEventPositionsInput = {
   category: Prisma.ServiceCategoryCreateNestedOneWithoutServicesInput
   providerPrices?: Prisma.ServiceProviderPriceCreateNestedManyWithoutServiceInput
   formatRequirements?: Prisma.EventFormatServiceCreateNestedManyWithoutServiceInput
+  dealPositions?: Prisma.DealServicePositionCreateNestedManyWithoutSourceServiceInput
+  dealTemplatePositions?: Prisma.DealTemplateServicePositionCreateNestedManyWithoutSourceServiceInput
 }
 
 export type ServiceUncheckedCreateWithoutEventPositionsInput = {
@@ -1109,6 +1181,8 @@ export type ServiceUncheckedCreateWithoutEventPositionsInput = {
   updatedAt?: Date | string
   providerPrices?: Prisma.ServiceProviderPriceUncheckedCreateNestedManyWithoutServiceInput
   formatRequirements?: Prisma.EventFormatServiceUncheckedCreateNestedManyWithoutServiceInput
+  dealPositions?: Prisma.DealServicePositionUncheckedCreateNestedManyWithoutSourceServiceInput
+  dealTemplatePositions?: Prisma.DealTemplateServicePositionUncheckedCreateNestedManyWithoutSourceServiceInput
 }
 
 export type ServiceCreateOrConnectWithoutEventPositionsInput = {
@@ -1144,6 +1218,8 @@ export type ServiceUpdateWithoutEventPositionsInput = {
   category?: Prisma.ServiceCategoryUpdateOneRequiredWithoutServicesNestedInput
   providerPrices?: Prisma.ServiceProviderPriceUpdateManyWithoutServiceNestedInput
   formatRequirements?: Prisma.EventFormatServiceUpdateManyWithoutServiceNestedInput
+  dealPositions?: Prisma.DealServicePositionUpdateManyWithoutSourceServiceNestedInput
+  dealTemplatePositions?: Prisma.DealTemplateServicePositionUpdateManyWithoutSourceServiceNestedInput
 }
 
 export type ServiceUncheckedUpdateWithoutEventPositionsInput = {
@@ -1163,6 +1239,208 @@ export type ServiceUncheckedUpdateWithoutEventPositionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   providerPrices?: Prisma.ServiceProviderPriceUncheckedUpdateManyWithoutServiceNestedInput
   formatRequirements?: Prisma.EventFormatServiceUncheckedUpdateManyWithoutServiceNestedInput
+  dealPositions?: Prisma.DealServicePositionUncheckedUpdateManyWithoutSourceServiceNestedInput
+  dealTemplatePositions?: Prisma.DealTemplateServicePositionUncheckedUpdateManyWithoutSourceServiceNestedInput
+}
+
+export type ServiceCreateWithoutDealPositionsInput = {
+  id?: string
+  name: string
+  normalizedName: string
+  unit: $Enums.ServiceUnit
+  defaultSalesPriceMinor?: bigint | number | null
+  currency?: string
+  internalNote?: string | null
+  status?: $Enums.EntityStatus
+  version?: number
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organization: Prisma.OrganizationCreateNestedOneWithoutServicesInput
+  category: Prisma.ServiceCategoryCreateNestedOneWithoutServicesInput
+  providerPrices?: Prisma.ServiceProviderPriceCreateNestedManyWithoutServiceInput
+  formatRequirements?: Prisma.EventFormatServiceCreateNestedManyWithoutServiceInput
+  eventPositions?: Prisma.EventServicePositionCreateNestedManyWithoutSourceServiceInput
+  dealTemplatePositions?: Prisma.DealTemplateServicePositionCreateNestedManyWithoutSourceServiceInput
+}
+
+export type ServiceUncheckedCreateWithoutDealPositionsInput = {
+  id?: string
+  organizationId: string
+  categoryId: string
+  name: string
+  normalizedName: string
+  unit: $Enums.ServiceUnit
+  defaultSalesPriceMinor?: bigint | number | null
+  currency?: string
+  internalNote?: string | null
+  status?: $Enums.EntityStatus
+  version?: number
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  providerPrices?: Prisma.ServiceProviderPriceUncheckedCreateNestedManyWithoutServiceInput
+  formatRequirements?: Prisma.EventFormatServiceUncheckedCreateNestedManyWithoutServiceInput
+  eventPositions?: Prisma.EventServicePositionUncheckedCreateNestedManyWithoutSourceServiceInput
+  dealTemplatePositions?: Prisma.DealTemplateServicePositionUncheckedCreateNestedManyWithoutSourceServiceInput
+}
+
+export type ServiceCreateOrConnectWithoutDealPositionsInput = {
+  where: Prisma.ServiceWhereUniqueInput
+  create: Prisma.XOR<Prisma.ServiceCreateWithoutDealPositionsInput, Prisma.ServiceUncheckedCreateWithoutDealPositionsInput>
+}
+
+export type ServiceUpsertWithoutDealPositionsInput = {
+  update: Prisma.XOR<Prisma.ServiceUpdateWithoutDealPositionsInput, Prisma.ServiceUncheckedUpdateWithoutDealPositionsInput>
+  create: Prisma.XOR<Prisma.ServiceCreateWithoutDealPositionsInput, Prisma.ServiceUncheckedCreateWithoutDealPositionsInput>
+  where?: Prisma.ServiceWhereInput
+}
+
+export type ServiceUpdateToOneWithWhereWithoutDealPositionsInput = {
+  where?: Prisma.ServiceWhereInput
+  data: Prisma.XOR<Prisma.ServiceUpdateWithoutDealPositionsInput, Prisma.ServiceUncheckedUpdateWithoutDealPositionsInput>
+}
+
+export type ServiceUpdateWithoutDealPositionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  normalizedName?: Prisma.StringFieldUpdateOperationsInput | string
+  unit?: Prisma.EnumServiceUnitFieldUpdateOperationsInput | $Enums.ServiceUnit
+  defaultSalesPriceMinor?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  internalNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutServicesNestedInput
+  category?: Prisma.ServiceCategoryUpdateOneRequiredWithoutServicesNestedInput
+  providerPrices?: Prisma.ServiceProviderPriceUpdateManyWithoutServiceNestedInput
+  formatRequirements?: Prisma.EventFormatServiceUpdateManyWithoutServiceNestedInput
+  eventPositions?: Prisma.EventServicePositionUpdateManyWithoutSourceServiceNestedInput
+  dealTemplatePositions?: Prisma.DealTemplateServicePositionUpdateManyWithoutSourceServiceNestedInput
+}
+
+export type ServiceUncheckedUpdateWithoutDealPositionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  categoryId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  normalizedName?: Prisma.StringFieldUpdateOperationsInput | string
+  unit?: Prisma.EnumServiceUnitFieldUpdateOperationsInput | $Enums.ServiceUnit
+  defaultSalesPriceMinor?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  internalNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  providerPrices?: Prisma.ServiceProviderPriceUncheckedUpdateManyWithoutServiceNestedInput
+  formatRequirements?: Prisma.EventFormatServiceUncheckedUpdateManyWithoutServiceNestedInput
+  eventPositions?: Prisma.EventServicePositionUncheckedUpdateManyWithoutSourceServiceNestedInput
+  dealTemplatePositions?: Prisma.DealTemplateServicePositionUncheckedUpdateManyWithoutSourceServiceNestedInput
+}
+
+export type ServiceCreateWithoutDealTemplatePositionsInput = {
+  id?: string
+  name: string
+  normalizedName: string
+  unit: $Enums.ServiceUnit
+  defaultSalesPriceMinor?: bigint | number | null
+  currency?: string
+  internalNote?: string | null
+  status?: $Enums.EntityStatus
+  version?: number
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organization: Prisma.OrganizationCreateNestedOneWithoutServicesInput
+  category: Prisma.ServiceCategoryCreateNestedOneWithoutServicesInput
+  providerPrices?: Prisma.ServiceProviderPriceCreateNestedManyWithoutServiceInput
+  formatRequirements?: Prisma.EventFormatServiceCreateNestedManyWithoutServiceInput
+  eventPositions?: Prisma.EventServicePositionCreateNestedManyWithoutSourceServiceInput
+  dealPositions?: Prisma.DealServicePositionCreateNestedManyWithoutSourceServiceInput
+}
+
+export type ServiceUncheckedCreateWithoutDealTemplatePositionsInput = {
+  id?: string
+  organizationId: string
+  categoryId: string
+  name: string
+  normalizedName: string
+  unit: $Enums.ServiceUnit
+  defaultSalesPriceMinor?: bigint | number | null
+  currency?: string
+  internalNote?: string | null
+  status?: $Enums.EntityStatus
+  version?: number
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  providerPrices?: Prisma.ServiceProviderPriceUncheckedCreateNestedManyWithoutServiceInput
+  formatRequirements?: Prisma.EventFormatServiceUncheckedCreateNestedManyWithoutServiceInput
+  eventPositions?: Prisma.EventServicePositionUncheckedCreateNestedManyWithoutSourceServiceInput
+  dealPositions?: Prisma.DealServicePositionUncheckedCreateNestedManyWithoutSourceServiceInput
+}
+
+export type ServiceCreateOrConnectWithoutDealTemplatePositionsInput = {
+  where: Prisma.ServiceWhereUniqueInput
+  create: Prisma.XOR<Prisma.ServiceCreateWithoutDealTemplatePositionsInput, Prisma.ServiceUncheckedCreateWithoutDealTemplatePositionsInput>
+}
+
+export type ServiceUpsertWithoutDealTemplatePositionsInput = {
+  update: Prisma.XOR<Prisma.ServiceUpdateWithoutDealTemplatePositionsInput, Prisma.ServiceUncheckedUpdateWithoutDealTemplatePositionsInput>
+  create: Prisma.XOR<Prisma.ServiceCreateWithoutDealTemplatePositionsInput, Prisma.ServiceUncheckedCreateWithoutDealTemplatePositionsInput>
+  where?: Prisma.ServiceWhereInput
+}
+
+export type ServiceUpdateToOneWithWhereWithoutDealTemplatePositionsInput = {
+  where?: Prisma.ServiceWhereInput
+  data: Prisma.XOR<Prisma.ServiceUpdateWithoutDealTemplatePositionsInput, Prisma.ServiceUncheckedUpdateWithoutDealTemplatePositionsInput>
+}
+
+export type ServiceUpdateWithoutDealTemplatePositionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  normalizedName?: Prisma.StringFieldUpdateOperationsInput | string
+  unit?: Prisma.EnumServiceUnitFieldUpdateOperationsInput | $Enums.ServiceUnit
+  defaultSalesPriceMinor?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  internalNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutServicesNestedInput
+  category?: Prisma.ServiceCategoryUpdateOneRequiredWithoutServicesNestedInput
+  providerPrices?: Prisma.ServiceProviderPriceUpdateManyWithoutServiceNestedInput
+  formatRequirements?: Prisma.EventFormatServiceUpdateManyWithoutServiceNestedInput
+  eventPositions?: Prisma.EventServicePositionUpdateManyWithoutSourceServiceNestedInput
+  dealPositions?: Prisma.DealServicePositionUpdateManyWithoutSourceServiceNestedInput
+}
+
+export type ServiceUncheckedUpdateWithoutDealTemplatePositionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  categoryId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  normalizedName?: Prisma.StringFieldUpdateOperationsInput | string
+  unit?: Prisma.EnumServiceUnitFieldUpdateOperationsInput | $Enums.ServiceUnit
+  defaultSalesPriceMinor?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  internalNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  providerPrices?: Prisma.ServiceProviderPriceUncheckedUpdateManyWithoutServiceNestedInput
+  formatRequirements?: Prisma.EventFormatServiceUncheckedUpdateManyWithoutServiceNestedInput
+  eventPositions?: Prisma.EventServicePositionUncheckedUpdateManyWithoutSourceServiceNestedInput
+  dealPositions?: Prisma.DealServicePositionUncheckedUpdateManyWithoutSourceServiceNestedInput
 }
 
 export type ServiceCreateManyOrganizationInput = {
@@ -1198,6 +1476,8 @@ export type ServiceUpdateWithoutOrganizationInput = {
   providerPrices?: Prisma.ServiceProviderPriceUpdateManyWithoutServiceNestedInput
   formatRequirements?: Prisma.EventFormatServiceUpdateManyWithoutServiceNestedInput
   eventPositions?: Prisma.EventServicePositionUpdateManyWithoutSourceServiceNestedInput
+  dealPositions?: Prisma.DealServicePositionUpdateManyWithoutSourceServiceNestedInput
+  dealTemplatePositions?: Prisma.DealTemplateServicePositionUpdateManyWithoutSourceServiceNestedInput
 }
 
 export type ServiceUncheckedUpdateWithoutOrganizationInput = {
@@ -1217,6 +1497,8 @@ export type ServiceUncheckedUpdateWithoutOrganizationInput = {
   providerPrices?: Prisma.ServiceProviderPriceUncheckedUpdateManyWithoutServiceNestedInput
   formatRequirements?: Prisma.EventFormatServiceUncheckedUpdateManyWithoutServiceNestedInput
   eventPositions?: Prisma.EventServicePositionUncheckedUpdateManyWithoutSourceServiceNestedInput
+  dealPositions?: Prisma.DealServicePositionUncheckedUpdateManyWithoutSourceServiceNestedInput
+  dealTemplatePositions?: Prisma.DealTemplateServicePositionUncheckedUpdateManyWithoutSourceServiceNestedInput
 }
 
 export type ServiceUncheckedUpdateManyWithoutOrganizationInput = {
@@ -1267,6 +1549,8 @@ export type ServiceUpdateWithoutCategoryInput = {
   providerPrices?: Prisma.ServiceProviderPriceUpdateManyWithoutServiceNestedInput
   formatRequirements?: Prisma.EventFormatServiceUpdateManyWithoutServiceNestedInput
   eventPositions?: Prisma.EventServicePositionUpdateManyWithoutSourceServiceNestedInput
+  dealPositions?: Prisma.DealServicePositionUpdateManyWithoutSourceServiceNestedInput
+  dealTemplatePositions?: Prisma.DealTemplateServicePositionUpdateManyWithoutSourceServiceNestedInput
 }
 
 export type ServiceUncheckedUpdateWithoutCategoryInput = {
@@ -1285,6 +1569,8 @@ export type ServiceUncheckedUpdateWithoutCategoryInput = {
   providerPrices?: Prisma.ServiceProviderPriceUncheckedUpdateManyWithoutServiceNestedInput
   formatRequirements?: Prisma.EventFormatServiceUncheckedUpdateManyWithoutServiceNestedInput
   eventPositions?: Prisma.EventServicePositionUncheckedUpdateManyWithoutSourceServiceNestedInput
+  dealPositions?: Prisma.DealServicePositionUncheckedUpdateManyWithoutSourceServiceNestedInput
+  dealTemplatePositions?: Prisma.DealTemplateServicePositionUncheckedUpdateManyWithoutSourceServiceNestedInput
 }
 
 export type ServiceUncheckedUpdateManyWithoutCategoryInput = {
@@ -1311,12 +1597,16 @@ export type ServiceCountOutputType = {
   providerPrices: number
   formatRequirements: number
   eventPositions: number
+  dealPositions: number
+  dealTemplatePositions: number
 }
 
 export type ServiceCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   providerPrices?: boolean | ServiceCountOutputTypeCountProviderPricesArgs
   formatRequirements?: boolean | ServiceCountOutputTypeCountFormatRequirementsArgs
   eventPositions?: boolean | ServiceCountOutputTypeCountEventPositionsArgs
+  dealPositions?: boolean | ServiceCountOutputTypeCountDealPositionsArgs
+  dealTemplatePositions?: boolean | ServiceCountOutputTypeCountDealTemplatePositionsArgs
 }
 
 /**
@@ -1350,6 +1640,20 @@ export type ServiceCountOutputTypeCountEventPositionsArgs<ExtArgs extends runtim
   where?: Prisma.EventServicePositionWhereInput
 }
 
+/**
+ * ServiceCountOutputType without action
+ */
+export type ServiceCountOutputTypeCountDealPositionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DealServicePositionWhereInput
+}
+
+/**
+ * ServiceCountOutputType without action
+ */
+export type ServiceCountOutputTypeCountDealTemplatePositionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DealTemplateServicePositionWhereInput
+}
+
 
 export type ServiceSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1371,6 +1675,8 @@ export type ServiceSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   providerPrices?: boolean | Prisma.Service$providerPricesArgs<ExtArgs>
   formatRequirements?: boolean | Prisma.Service$formatRequirementsArgs<ExtArgs>
   eventPositions?: boolean | Prisma.Service$eventPositionsArgs<ExtArgs>
+  dealPositions?: boolean | Prisma.Service$dealPositionsArgs<ExtArgs>
+  dealTemplatePositions?: boolean | Prisma.Service$dealTemplatePositionsArgs<ExtArgs>
   _count?: boolean | Prisma.ServiceCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["service"]>
 
@@ -1436,6 +1742,8 @@ export type ServiceInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   providerPrices?: boolean | Prisma.Service$providerPricesArgs<ExtArgs>
   formatRequirements?: boolean | Prisma.Service$formatRequirementsArgs<ExtArgs>
   eventPositions?: boolean | Prisma.Service$eventPositionsArgs<ExtArgs>
+  dealPositions?: boolean | Prisma.Service$dealPositionsArgs<ExtArgs>
+  dealTemplatePositions?: boolean | Prisma.Service$dealTemplatePositionsArgs<ExtArgs>
   _count?: boolean | Prisma.ServiceCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ServiceIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1455,6 +1763,8 @@ export type $ServicePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     providerPrices: Prisma.$ServiceProviderPricePayload<ExtArgs>[]
     formatRequirements: Prisma.$EventFormatServicePayload<ExtArgs>[]
     eventPositions: Prisma.$EventServicePositionPayload<ExtArgs>[]
+    dealPositions: Prisma.$DealServicePositionPayload<ExtArgs>[]
+    dealTemplatePositions: Prisma.$DealTemplateServicePositionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1870,6 +2180,8 @@ export interface Prisma__ServiceClient<T, Null = never, ExtArgs extends runtime.
   providerPrices<T extends Prisma.Service$providerPricesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Service$providerPricesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ServiceProviderPricePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   formatRequirements<T extends Prisma.Service$formatRequirementsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Service$formatRequirementsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EventFormatServicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   eventPositions<T extends Prisma.Service$eventPositionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Service$eventPositionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EventServicePositionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  dealPositions<T extends Prisma.Service$dealPositionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Service$dealPositionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DealServicePositionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  dealTemplatePositions<T extends Prisma.Service$dealTemplatePositionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Service$dealTemplatePositionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DealTemplateServicePositionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2383,6 +2695,54 @@ export type Service$eventPositionsArgs<ExtArgs extends runtime.Types.Extensions.
   take?: number
   skip?: number
   distinct?: Prisma.EventServicePositionScalarFieldEnum | Prisma.EventServicePositionScalarFieldEnum[]
+}
+
+/**
+ * Service.dealPositions
+ */
+export type Service$dealPositionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DealServicePosition
+   */
+  select?: Prisma.DealServicePositionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DealServicePosition
+   */
+  omit?: Prisma.DealServicePositionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DealServicePositionInclude<ExtArgs> | null
+  where?: Prisma.DealServicePositionWhereInput
+  orderBy?: Prisma.DealServicePositionOrderByWithRelationInput | Prisma.DealServicePositionOrderByWithRelationInput[]
+  cursor?: Prisma.DealServicePositionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DealServicePositionScalarFieldEnum | Prisma.DealServicePositionScalarFieldEnum[]
+}
+
+/**
+ * Service.dealTemplatePositions
+ */
+export type Service$dealTemplatePositionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DealTemplateServicePosition
+   */
+  select?: Prisma.DealTemplateServicePositionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DealTemplateServicePosition
+   */
+  omit?: Prisma.DealTemplateServicePositionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DealTemplateServicePositionInclude<ExtArgs> | null
+  where?: Prisma.DealTemplateServicePositionWhereInput
+  orderBy?: Prisma.DealTemplateServicePositionOrderByWithRelationInput | Prisma.DealTemplateServicePositionOrderByWithRelationInput[]
+  cursor?: Prisma.DealTemplateServicePositionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DealTemplateServicePositionScalarFieldEnum | Prisma.DealTemplateServicePositionScalarFieldEnum[]
 }
 
 /**

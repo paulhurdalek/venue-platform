@@ -45,6 +45,12 @@ export const PERMISSIONS = {
   REVENUE_TEMPLATES_READ: 'revenue_templates.read',
   REVENUE_TEMPLATES_WRITE: 'revenue_templates.write',
   REVENUE_TEMPLATES_ARCHIVE: 'revenue_templates.archive',
+  DEALS_READ: 'deals.read',
+  DEALS_WRITE: 'deals.write',
+  DEALS_STATUS: 'deals.status',
+  DEAL_TEMPLATES_READ: 'deal_templates.read',
+  DEAL_TEMPLATES_WRITE: 'deal_templates.write',
+  DEAL_TEMPLATES_ARCHIVE: 'deal_templates.archive',
 } as const;
 
 export type PermissionKey = (typeof PERMISSIONS)[keyof typeof PERMISSIONS];
@@ -144,6 +150,15 @@ export const PERMISSION_CATALOG: ReadonlyArray<{
     key: PERMISSIONS.REVENUE_TEMPLATES_ARCHIVE,
     description: 'Erlös- und Steuervorlagen archivieren und reaktivieren',
   },
+  { key: PERMISSIONS.DEALS_READ, description: 'Vermietungs- und Veranstaltungsdeals ansehen' },
+  { key: PERMISSIONS.DEALS_WRITE, description: 'Vermietungs- und Veranstaltungsdeals bearbeiten' },
+  { key: PERMISSIONS.DEALS_STATUS, description: 'Dealstatus ändern' },
+  { key: PERMISSIONS.DEAL_TEMPLATES_READ, description: 'Dealvorlagen ansehen' },
+  { key: PERMISSIONS.DEAL_TEMPLATES_WRITE, description: 'Dealvorlagen anlegen und bearbeiten' },
+  {
+    key: PERMISSIONS.DEAL_TEMPLATES_ARCHIVE,
+    description: 'Dealvorlagen archivieren und reaktivieren',
+  },
 ];
 
 export const STANDARD_ROLES = [
@@ -187,6 +202,12 @@ export const STANDARD_ROLES = [
       PERMISSIONS.REVENUE_TEMPLATES_READ,
       PERMISSIONS.REVENUE_TEMPLATES_WRITE,
       PERMISSIONS.REVENUE_TEMPLATES_ARCHIVE,
+      PERMISSIONS.DEALS_READ,
+      PERMISSIONS.DEALS_WRITE,
+      PERMISSIONS.DEALS_STATUS,
+      PERMISSIONS.DEAL_TEMPLATES_READ,
+      PERMISSIONS.DEAL_TEMPLATES_WRITE,
+      PERMISSIONS.DEAL_TEMPLATES_ARCHIVE,
     ],
   },
   {

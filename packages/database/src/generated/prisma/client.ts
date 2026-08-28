@@ -346,3 +346,38 @@ export type VenueDateOption = Prisma.VenueDateOptionModel
  * 
  */
 export type LocationOccupancy = Prisma.LocationOccupancyModel
+/**
+ * Model Deal
+ * 
+ */
+export type Deal = Prisma.DealModel
+/**
+ * Model DealComponent
+ * 
+ */
+export type DealComponent = Prisma.DealComponentModel
+/**
+ * Model DealServicePosition
+ * 
+ */
+export type DealServicePosition = Prisma.DealServicePositionModel
+/**
+ * Model DealStatusHistory
+ * 
+ */
+export type DealStatusHistory = Prisma.DealStatusHistoryModel
+/**
+ * Model DealTemplate
+ * 
+ */
+export type DealTemplate = Prisma.DealTemplateModel
+/**
+ * Model DealTemplateComponent
+ * 
+ */
+export type DealTemplateComponent = Prisma.DealTemplateComponentModel
+/**
+ * Model DealTemplateServicePosition
+ * 
+ */
+export type DealTemplateServicePosition = Prisma.DealTemplateServicePositionModel

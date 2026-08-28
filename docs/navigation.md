@@ -15,6 +15,10 @@ Event tabs remain a separate, local `Veranstaltungsbereiche` navigation directly
 header in the main content column. They are no longer sticky, retain their existing URLs and use a
 labelled local horizontal scroll area when space is narrow.
 
+Authorized finance roles additionally see the global `Dealvorlagen` section. The local event tabs
+include `Vermietung & Deal`; it is placed directly after the overview for third-party events and
+remains an optional final tab for own productions.
+
 ## Verification
 
 Playwright covers the visible desktop sidebar, active global entry, mobile drawer opening, focus,
