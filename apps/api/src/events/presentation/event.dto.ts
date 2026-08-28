@@ -131,6 +131,12 @@ export class EventOverridesDto {
   @IsOptional()
   @IsIn(['UNSPECIFIED', 'ENABLED', 'DISABLED'])
   recordingSetting?: 'UNSPECIFIED' | 'ENABLED' | 'DISABLED';
+
+  @ApiPropertyOptional({ type: Number, minimum: 0, nullable: true })
+  @IsOptional()
+  @IsInt()
+  @Min(0)
+  expectedGuestCount?: number | null;
 }
 
 export class CreateEventDto extends EventOverridesDto {
@@ -138,6 +144,11 @@ export class CreateEventDto extends EventOverridesDto {
   @IsOptional()
   @IsUUID('4')
   sourceEventFormatId?: string;
+
+  @ApiPropertyOptional({ type: String, format: 'uuid' })
+  @IsOptional()
+  @IsUUID('4')
+  sourceCalculationTemplateId?: string;
 
   @ApiPropertyOptional({ enum: ['OWN_PRODUCTION', 'THIRD_PARTY_EVENT'] })
   @IsOptional()
@@ -227,6 +238,14 @@ export class EventDto {
   recordingSetting!: 'UNSPECIFIED' | 'ENABLED' | 'DISABLED';
   @ApiProperty({ type: String, example: 'Europe/Berlin' }) timezone!: string;
   @ApiProperty({ type: Boolean }) occupancyComplete!: boolean;
+  @ApiPropertyOptional({ type: Number, minimum: 0, nullable: true })
+  expectedGuestCount!: number | null;
+  @ApiPropertyOptional({ type: String, format: 'uuid', nullable: true })
+  sourceCalculationTemplateId!: string | null;
+  @ApiPropertyOptional({ type: Number, nullable: true })
+  sourceCalculationTemplateVersion!: number | null;
+  @ApiPropertyOptional({ type: String, nullable: true })
+  calculationTemplateNameSnapshot!: string | null;
   @ApiProperty({ type: () => EventBookingSummaryDto }) bookingSummary!: EventBookingSummaryDto;
   @ApiProperty({ type: String, format: 'date-time' }) createdAt!: string;
   @ApiProperty({ type: String, format: 'date-time' }) updatedAt!: string;

@@ -14,10 +14,8 @@ const pnpmPackage = JSON.parse(readFileSync(pnpmPackagePath, 'utf8'));
 const pnpmCli = resolve(dirname(pnpmPackagePath), pnpmPackage.bin.pnpm);
 const projectName = `venue-platform-phase7-${process.pid}`;
 const marker = randomUUID();
-const developmentDatabasePort = process.env.VENUE_VERIFICATION_POSTGRES_PORT ?? '55432';
-const testDatabasePort = process.env.VENUE_VERIFICATION_POSTGRES_TEST_PORT ?? '55433';
-process.env.VENUE_POSTGRES_PORT = developmentDatabasePort;
-process.env.VENUE_POSTGRES_TEST_PORT = testDatabasePort;
+process.env.VENUE_POSTGRES_PORT = '0';
+process.env.VENUE_POSTGRES_TEST_PORT = '0';
 const composeArguments = ['compose', '--project-name', projectName, '--profile', 'test'];
 
 function run(command, args, options = {}) {
@@ -48,6 +46,19 @@ function compose(...args) {
   return docker(...composeArguments, ...args);
 }
 
+function composePublishedPort(service) {
+  const result = run('docker', [...composeArguments, 'port', service, '5432'], { capture: true });
+  const match = result.stdout.trim().match(/:(\d+)$/);
+
+  if (match == null) {
+    throw new Error(
+      `Unable to determine the published port for ${service}: ${result.stdout.trim()}`,
+    );
+  }
+
+  return match[1];
+}
+
 function pnpm(args, environment) {
   return run(process.execPath, [pnpmCli, ...args], {
     env: { ...process.env, ...environment },
@@ -63,13 +74,14 @@ try {
   run('docker', ['compose', 'version'], { capture: true });
 } catch (error) {
   const message = error instanceof Error ? error.message : String(error);
-  process.stderr.write(`Phase 7 container verification cannot start: ${message}\n`);
+  process.stderr.write(`Phase 8 container verification cannot start: ${message}\n`);
   process.exit(1);
 }
 
 try {
   logStep(1, 'Starting PostgreSQL development and test services');
   compose('up', '--detach', '--wait', '--wait-timeout', '120', 'postgres', 'postgres-test');
+  const testDatabasePort = composePublishedPort('postgres-test');
 
   const testDatabaseEnvironment = createTestRuntimeEnvironment({
     DATABASE_URL: `postgresql://venue:venue_test_local_only@127.0.0.1:${testDatabasePort}/venue_test`,
@@ -85,7 +97,7 @@ try {
   logStep(4, 'Building the internal workspace packages required by the API');
   pnpm(['packages:build']);
 
-  logStep(5, 'Running the real Phase 1 through Phase 7 API integration suites');
+  logStep(5, 'Running the real Phase 1 through Phase 8 API integration suites');
   pnpm(['--filter', '@venue/api', 'test:integration'], testDatabaseEnvironment);
 
   logStep(6, 'Verifying development data survives container replacement');
@@ -161,7 +173,7 @@ try {
     );
   }
 
-  process.stdout.write('\nPhase 7 container verification passed.\n');
+  process.stdout.write('\nPhase 8 container verification passed.\n');
 } finally {
   run('docker', [...composeArguments, 'down', '--volumes', '--remove-orphans'], {
     allowFailure: true,

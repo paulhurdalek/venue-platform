@@ -11,6 +11,7 @@ import {
 } from '../../occupancy/infrastructure/database-occupancy.js';
 import type { AccessContext } from '../../security/access.types.js';
 import { createEventServiceSnapshot } from '../../services/infrastructure/event-service-snapshot.js';
+import { applyCalculationTemplateSnapshot } from '../../revenue/infrastructure/calculation-template-snapshot.js';
 import type {
   EventFormatSource,
   EventListQuery,
@@ -186,7 +187,7 @@ export class PrismaEventRepository implements EventRepository {
         const organizationId = access.organizationId;
         await lockLocations(database, organizationId, [values.locationId]);
         await expireActiveDateOptions(database, access, this.auditWriter, [values.locationId]);
-        const { eventDate, ...data } = values;
+        const { eventDate, sourceCalculationTemplateId, ...data } = values;
         const row = await database.event.create({
           data: { organizationId, ...data, eventDate: databaseDate(eventDate) },
           include: eventInclude,
@@ -197,6 +198,19 @@ export class PrismaEventRepository implements EventRepository {
           row.id,
           values.sourceEventFormatId,
         );
+        if (sourceCalculationTemplateId) {
+          await applyCalculationTemplateSnapshot(
+            database,
+            organizationId,
+            row.id,
+            sourceCalculationTemplateId,
+            {
+              confirmReplacement: false,
+              userId: access.user.id,
+              membershipId: access.membershipId,
+            },
+          );
+        }
         if (values.sourceEventFormatId) {
           const requirements = await database.eventFormatLineupRequirement.findMany({
             where: {
@@ -238,18 +252,25 @@ export class PrismaEventRepository implements EventRepository {
         const organizationId = access.organizationId;
         const current = await database.event.findFirst({
           where: { id: eventId, organizationId },
-          select: { locationId: true, status: true },
+          select: { locationId: true, status: true, expectedGuestCount: true },
         });
         if (!current) return undefined;
         const locations = [current.locationId, values.locationId];
         await lockLocations(database, organizationId, locations);
         await expireActiveDateOptions(database, access, this.auditWriter, locations);
+        const expectedGuestsChanged = current.expectedGuestCount !== values.expectedGuestCount;
+        const calculation = expectedGuestsChanged
+          ? await this.lockCalculationForExpectedGuests(database, access, eventId)
+          : undefined;
         const { eventDate, ...data } = values;
         const result = await database.event.updateMany({
           where: { id: eventId, organizationId, version },
           data: { ...data, eventDate: databaseDate(eventDate), version: { increment: 1 } },
         });
         if (result.count !== 1) return undefined;
+        if (calculation) {
+          await this.touchCalculationForExpectedGuests(database, access, eventId, calculation);
+        }
         await replaceEventOccupancy(
           database,
           organizationId,
@@ -367,10 +388,79 @@ export class PrismaEventRepository implements EventRepository {
       timezone: row.timezone,
       occupancyComplete:
         eventOccupancyInterval(row.eventDate.toISOString().slice(0, 10), row) !== undefined,
+      expectedGuestCount: row.expectedGuestCount,
+      sourceCalculationTemplateId: row.sourceCalculationTemplateId,
+      sourceCalculationTemplateVersion: row.sourceCalculationTemplateVersion,
+      calculationTemplateNameSnapshot: row.calculationTemplateNameSnapshot,
       bookingSummary,
       createdAt: row.createdAt.toISOString(),
       updatedAt: row.updatedAt.toISOString(),
     };
+  }
+
+  private async lockCalculationForExpectedGuests(
+    database: TransactionClient,
+    access: AccessContext,
+    eventId: string,
+  ) {
+    const rows = await database.$queryRaw<
+      Array<{ id: string; status: 'DRAFT' | 'REVIEW' | 'APPROVED'; version: number }>
+    >(Prisma.sql`
+      SELECT "id", "status", "version"
+      FROM "event_calculation"
+      WHERE "organization_id" = ${access.organizationId}::uuid
+        AND "event_id" = ${eventId}::uuid
+      FOR UPDATE
+    `);
+    return rows[0];
+  }
+
+  private async touchCalculationForExpectedGuests(
+    database: TransactionClient,
+    access: AccessContext,
+    eventId: string,
+    calculation: { id: string; status: 'DRAFT' | 'REVIEW' | 'APPROVED'; version: number },
+  ): Promise<void> {
+    if (calculation.status === 'APPROVED') {
+      await database.eventCalculationStatusHistory.create({
+        data: {
+          organizationId: access.organizationId,
+          calculationId: calculation.id,
+          previousStatus: 'APPROVED',
+          newStatus: 'DRAFT',
+          actorUserId: access.user.id,
+          actorMembershipId: access.membershipId,
+          reason: 'Erwartete Gästezahl geändert',
+          changedSourceType: 'event',
+          changedSourceId: eventId,
+        },
+      });
+    }
+    await database.eventCalculation.update({
+      where: { id: calculation.id },
+      data: {
+        status: calculation.status === 'APPROVED' ? 'DRAFT' : calculation.status,
+        ...(calculation.status === 'APPROVED'
+          ? { approvedAt: null, approvedByUserId: null, approvedByMembershipId: null }
+          : {}),
+        version: { increment: 1 },
+      },
+    });
+    await this.auditWriter.append(
+      database,
+      access,
+      'event_calculation.source_changed',
+      'event_calculation',
+      calculation.id,
+      {
+        sourceType: 'event',
+        sourceId: eventId,
+        reason: 'Erwartete Gästezahl geändert',
+        resetFromApproved: calculation.status === 'APPROVED',
+        previousVersion: calculation.version,
+        newVersion: calculation.version + 1,
+      },
+    );
   }
 
   private async bookingFilterIds(

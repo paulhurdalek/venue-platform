@@ -4,6 +4,10 @@ import { Prisma, type DatabaseClient, type TransactionClient } from '@venue/data
 import { AuditWriter } from '../../audit/audit-writer.service.js';
 import { PrismaService } from '../../database/prisma.service.js';
 import type { AccessContext } from '../../security/access.types.js';
+import {
+  resolveAllocations,
+  resolveComponentAmount,
+} from '../../revenue/domain/revenue-planning.rules.js';
 import type {
   EventCalculationRecord,
   EventFormatServiceRecord,
@@ -1000,6 +1004,13 @@ export class PrismaServiceCalculationRepository implements ServiceCalculationRep
             'REFERENCE',
           );
         }
+        if (await this.hasIncompleteRevenuePlan(database, access.organizationId, eventId)) {
+          throw new ServiceCalculationPersistenceError(
+            'CALCULATION_REVENUE_INCOMPLETE',
+            'Ticketpreise, Steuerangaben, Empfänger-Aufteilungen und weitere Erlösbasen müssen vor der Freigabe vollständig sein',
+            'REFERENCE',
+          );
+        }
       }
       const now = new Date();
       const result = await database.eventCalculation.updateMany({
@@ -1041,6 +1052,66 @@ export class PrismaServiceCalculationRepository implements ServiceCalculationRep
       );
       return this.findCalculationWith(database, access.organizationId, eventId);
     });
+  }
+
+  private async hasIncompleteRevenuePlan(
+    database: TransactionClient,
+    organizationId: string,
+    eventId: string,
+  ): Promise<boolean> {
+    const [event, tiers, guestRevenueCount] = await Promise.all([
+      database.event.findFirst({
+        where: { id: eventId, organizationId },
+        select: { expectedGuestCount: true },
+      }),
+      database.ticketPriceTier.findMany({
+        where: { organizationId, eventId, status: 'ACTIVE' },
+        select: {
+          baseGrossUnitMinor: true,
+          baseNetUnitMinor: true,
+          components: {
+            where: { status: 'ACTIVE' },
+            select: {
+              amountType: true,
+              inputType: true,
+              inputAmountMinor: true,
+              percentageRateBasisPoints: true,
+              taxRateBasisPoints: true,
+              allocations: {
+                where: { status: 'ACTIVE' },
+                select: {
+                  id: true,
+                  recipientType: true,
+                  allocationType: true,
+                  fixedAmountMinor: true,
+                  percentageBasisPoints: true,
+                },
+              },
+            },
+          },
+        },
+      }),
+      database.additionalRevenue.count({
+        where: {
+          organizationId,
+          eventId,
+          status: 'ACTIVE',
+          calculationType: 'PER_EXPECTED_GUEST',
+        },
+      }),
+    ]);
+    if (!event) return true;
+    if (guestRevenueCount > 0 && event.expectedGuestCount === null) return true;
+    for (const tier of tiers) {
+      if (tier.baseGrossUnitMinor === null || tier.baseNetUnitMinor === null) return true;
+      for (const component of tier.components) {
+        const amount = resolveComponentAmount(tier.baseGrossUnitMinor, component);
+        if (amount === null) return true;
+        const allocations = resolveAllocations(amount, component.allocations);
+        if (!allocations.complete) return true;
+      }
+    }
+    return false;
   }
 
   private async resolveEventPositionData(

@@ -120,6 +120,28 @@ export class SetupService {
       const organization = await transaction.organization.create({
         data: { name: input.organizationName.trim() },
       });
+      await transaction.taxRateTemplate.createMany({
+        data: [
+          {
+            organizationId: organization.id,
+            name: 'Steuerfrei – 0 %',
+            normalizedName: 'steuerfrei – 0 %',
+            rateBasisPoints: 0,
+          },
+          {
+            organizationId: organization.id,
+            name: 'Ermäßigt – 7 %',
+            normalizedName: 'ermäßigt – 7 %',
+            rateBasisPoints: 700,
+          },
+          {
+            organizationId: organization.id,
+            name: 'Regulär – 19 %',
+            normalizedName: 'regulär – 19 %',
+            rateBasisPoints: 1900,
+          },
+        ],
+      });
       const location = await transaction.location.create({
         data: {
           organizationId: organization.id,

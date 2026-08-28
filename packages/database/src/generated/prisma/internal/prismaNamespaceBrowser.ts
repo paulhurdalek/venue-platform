@@ -97,6 +97,19 @@ export const ModelName = {
   EventCalculation: 'EventCalculation',
   EventCalculationStatusHistory: 'EventCalculationStatusHistory',
   EventServicePosition: 'EventServicePosition',
+  TicketPriceTier: 'TicketPriceTier',
+  TicketPriceComponent: 'TicketPriceComponent',
+  TicketComponentAllocation: 'TicketComponentAllocation',
+  AdditionalRevenue: 'AdditionalRevenue',
+  TaxRateTemplate: 'TaxRateTemplate',
+  TicketProviderTemplate: 'TicketProviderTemplate',
+  TicketProviderTemplateComponent: 'TicketProviderTemplateComponent',
+  TicketProviderTemplateAllocation: 'TicketProviderTemplateAllocation',
+  CalculationTemplate: 'CalculationTemplate',
+  CalculationTemplateTier: 'CalculationTemplateTier',
+  CalculationTemplateComponent: 'CalculationTemplateComponent',
+  CalculationTemplateAllocation: 'CalculationTemplateAllocation',
+  CalculationTemplateAdditionalRevenue: 'CalculationTemplateAdditionalRevenue',
   VenueDateOption: 'VenueDateOption',
   LocationOccupancy: 'LocationOccupancy'
 } as const
@@ -230,6 +243,7 @@ export const EventFormatScalarFieldEnum = {
   startMinutes: 'startMinutes',
   endMinutes: 'endMinutes',
   recordingDefault: 'recordingDefault',
+  defaultCalculationTemplateId: 'defaultCalculationTemplateId',
   status: 'status',
   archivedAt: 'archivedAt',
   version: 'version',
@@ -264,6 +278,10 @@ export const EventScalarFieldEnum = {
   endMinutes: 'endMinutes',
   recordingSetting: 'recordingSetting',
   timezone: 'timezone',
+  expectedGuestCount: 'expectedGuestCount',
+  sourceCalculationTemplateId: 'sourceCalculationTemplateId',
+  sourceCalculationTemplateVersion: 'sourceCalculationTemplateVersion',
+  calculationTemplateNameSnapshot: 'calculationTemplateNameSnapshot',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -862,6 +880,309 @@ export const EventServicePositionScalarFieldEnum = {
 } as const
 
 export type EventServicePositionScalarFieldEnum = (typeof EventServicePositionScalarFieldEnum)[keyof typeof EventServicePositionScalarFieldEnum]
+
+
+export const TicketPriceTierScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  eventId: 'eventId',
+  calculationId: 'calculationId',
+  name: 'name',
+  expectedQuantity: 'expectedQuantity',
+  baseInputType: 'baseInputType',
+  baseInputMinor: 'baseInputMinor',
+  baseNetUnitMinor: 'baseNetUnitMinor',
+  baseGrossUnitMinor: 'baseGrossUnitMinor',
+  baseTaxRateBasisPoints: 'baseTaxRateBasisPoints',
+  baseTaxRateTemplateId: 'baseTaxRateTemplateId',
+  baseTaxRateTemplateVersion: 'baseTaxRateTemplateVersion',
+  baseTaxRateNameSnapshot: 'baseTaxRateNameSnapshot',
+  sourceTicketProviderTemplateId: 'sourceTicketProviderTemplateId',
+  sourceTicketProviderTemplateVersion: 'sourceTicketProviderTemplateVersion',
+  sourceTicketProviderNameSnapshot: 'sourceTicketProviderNameSnapshot',
+  sortOrder: 'sortOrder',
+  status: 'status',
+  version: 'version',
+  archivedAt: 'archivedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TicketPriceTierScalarFieldEnum = (typeof TicketPriceTierScalarFieldEnum)[keyof typeof TicketPriceTierScalarFieldEnum]
+
+
+export const TicketPriceComponentScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  ticketPriceTierId: 'ticketPriceTierId',
+  name: 'name',
+  amountType: 'amountType',
+  percentageBasis: 'percentageBasis',
+  percentageRateBasisPoints: 'percentageRateBasisPoints',
+  inputType: 'inputType',
+  inputAmountMinor: 'inputAmountMinor',
+  taxRateBasisPoints: 'taxRateBasisPoints',
+  taxRateTemplateId: 'taxRateTemplateId',
+  taxRateTemplateVersion: 'taxRateTemplateVersion',
+  taxRateNameSnapshot: 'taxRateNameSnapshot',
+  guestPays: 'guestPays',
+  sortOrder: 'sortOrder',
+  status: 'status',
+  version: 'version',
+  archivedAt: 'archivedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TicketPriceComponentScalarFieldEnum = (typeof TicketPriceComponentScalarFieldEnum)[keyof typeof TicketPriceComponentScalarFieldEnum]
+
+
+export const TicketComponentAllocationScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  ticketPriceComponentId: 'ticketPriceComponentId',
+  recipientType: 'recipientType',
+  artistId: 'artistId',
+  businessPartnerId: 'businessPartnerId',
+  externalRecipientName: 'externalRecipientName',
+  allocationType: 'allocationType',
+  percentageBasisPoints: 'percentageBasisPoints',
+  fixedAmountMinor: 'fixedAmountMinor',
+  sortOrder: 'sortOrder',
+  status: 'status',
+  version: 'version',
+  archivedAt: 'archivedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TicketComponentAllocationScalarFieldEnum = (typeof TicketComponentAllocationScalarFieldEnum)[keyof typeof TicketComponentAllocationScalarFieldEnum]
+
+
+export const AdditionalRevenueScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  eventId: 'eventId',
+  calculationId: 'calculationId',
+  name: 'name',
+  calculationType: 'calculationType',
+  inputType: 'inputType',
+  inputAmountMinor: 'inputAmountMinor',
+  percentageRateBasisPoints: 'percentageRateBasisPoints',
+  taxRateBasisPoints: 'taxRateBasisPoints',
+  taxRateTemplateId: 'taxRateTemplateId',
+  taxRateTemplateVersion: 'taxRateTemplateVersion',
+  taxRateNameSnapshot: 'taxRateNameSnapshot',
+  confirmationStatus: 'confirmationStatus',
+  note: 'note',
+  sortOrder: 'sortOrder',
+  status: 'status',
+  version: 'version',
+  archivedAt: 'archivedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AdditionalRevenueScalarFieldEnum = (typeof AdditionalRevenueScalarFieldEnum)[keyof typeof AdditionalRevenueScalarFieldEnum]
+
+
+export const TaxRateTemplateScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  name: 'name',
+  normalizedName: 'normalizedName',
+  rateBasisPoints: 'rateBasisPoints',
+  status: 'status',
+  version: 'version',
+  archivedAt: 'archivedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TaxRateTemplateScalarFieldEnum = (typeof TaxRateTemplateScalarFieldEnum)[keyof typeof TaxRateTemplateScalarFieldEnum]
+
+
+export const TicketProviderTemplateScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  name: 'name',
+  normalizedName: 'normalizedName',
+  description: 'description',
+  status: 'status',
+  version: 'version',
+  archivedAt: 'archivedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TicketProviderTemplateScalarFieldEnum = (typeof TicketProviderTemplateScalarFieldEnum)[keyof typeof TicketProviderTemplateScalarFieldEnum]
+
+
+export const TicketProviderTemplateComponentScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  ticketProviderTemplateId: 'ticketProviderTemplateId',
+  name: 'name',
+  amountType: 'amountType',
+  percentageBasis: 'percentageBasis',
+  percentageRateBasisPoints: 'percentageRateBasisPoints',
+  inputType: 'inputType',
+  inputAmountMinor: 'inputAmountMinor',
+  taxRateTemplateId: 'taxRateTemplateId',
+  taxRateTemplateVersion: 'taxRateTemplateVersion',
+  taxRateNameSnapshot: 'taxRateNameSnapshot',
+  taxRateBasisPoints: 'taxRateBasisPoints',
+  guestPays: 'guestPays',
+  sortOrder: 'sortOrder',
+  status: 'status',
+  version: 'version',
+  archivedAt: 'archivedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TicketProviderTemplateComponentScalarFieldEnum = (typeof TicketProviderTemplateComponentScalarFieldEnum)[keyof typeof TicketProviderTemplateComponentScalarFieldEnum]
+
+
+export const TicketProviderTemplateAllocationScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  ticketProviderTemplateComponentId: 'ticketProviderTemplateComponentId',
+  recipientType: 'recipientType',
+  artistId: 'artistId',
+  businessPartnerId: 'businessPartnerId',
+  externalRecipientName: 'externalRecipientName',
+  allocationType: 'allocationType',
+  percentageBasisPoints: 'percentageBasisPoints',
+  fixedAmountMinor: 'fixedAmountMinor',
+  sortOrder: 'sortOrder',
+  status: 'status',
+  version: 'version',
+  archivedAt: 'archivedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TicketProviderTemplateAllocationScalarFieldEnum = (typeof TicketProviderTemplateAllocationScalarFieldEnum)[keyof typeof TicketProviderTemplateAllocationScalarFieldEnum]
+
+
+export const CalculationTemplateScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  name: 'name',
+  normalizedName: 'normalizedName',
+  description: 'description',
+  expectedGuestCount: 'expectedGuestCount',
+  status: 'status',
+  version: 'version',
+  archivedAt: 'archivedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CalculationTemplateScalarFieldEnum = (typeof CalculationTemplateScalarFieldEnum)[keyof typeof CalculationTemplateScalarFieldEnum]
+
+
+export const CalculationTemplateTierScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  calculationTemplateId: 'calculationTemplateId',
+  name: 'name',
+  expectedQuantity: 'expectedQuantity',
+  baseInputType: 'baseInputType',
+  baseInputMinor: 'baseInputMinor',
+  baseNetUnitMinor: 'baseNetUnitMinor',
+  baseGrossUnitMinor: 'baseGrossUnitMinor',
+  baseTaxRateTemplateId: 'baseTaxRateTemplateId',
+  baseTaxRateTemplateVersion: 'baseTaxRateTemplateVersion',
+  baseTaxRateNameSnapshot: 'baseTaxRateNameSnapshot',
+  baseTaxRateBasisPoints: 'baseTaxRateBasisPoints',
+  sourceTicketProviderTemplateId: 'sourceTicketProviderTemplateId',
+  sourceTicketProviderTemplateVersion: 'sourceTicketProviderTemplateVersion',
+  sourceTicketProviderNameSnapshot: 'sourceTicketProviderNameSnapshot',
+  sortOrder: 'sortOrder',
+  status: 'status',
+  version: 'version',
+  archivedAt: 'archivedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CalculationTemplateTierScalarFieldEnum = (typeof CalculationTemplateTierScalarFieldEnum)[keyof typeof CalculationTemplateTierScalarFieldEnum]
+
+
+export const CalculationTemplateComponentScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  calculationTemplateTierId: 'calculationTemplateTierId',
+  name: 'name',
+  amountType: 'amountType',
+  percentageBasis: 'percentageBasis',
+  percentageRateBasisPoints: 'percentageRateBasisPoints',
+  inputType: 'inputType',
+  inputAmountMinor: 'inputAmountMinor',
+  taxRateTemplateId: 'taxRateTemplateId',
+  taxRateTemplateVersion: 'taxRateTemplateVersion',
+  taxRateNameSnapshot: 'taxRateNameSnapshot',
+  taxRateBasisPoints: 'taxRateBasisPoints',
+  guestPays: 'guestPays',
+  sortOrder: 'sortOrder',
+  status: 'status',
+  version: 'version',
+  archivedAt: 'archivedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CalculationTemplateComponentScalarFieldEnum = (typeof CalculationTemplateComponentScalarFieldEnum)[keyof typeof CalculationTemplateComponentScalarFieldEnum]
+
+
+export const CalculationTemplateAllocationScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  calculationTemplateComponentId: 'calculationTemplateComponentId',
+  recipientType: 'recipientType',
+  artistId: 'artistId',
+  businessPartnerId: 'businessPartnerId',
+  externalRecipientName: 'externalRecipientName',
+  allocationType: 'allocationType',
+  percentageBasisPoints: 'percentageBasisPoints',
+  fixedAmountMinor: 'fixedAmountMinor',
+  sortOrder: 'sortOrder',
+  status: 'status',
+  version: 'version',
+  archivedAt: 'archivedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CalculationTemplateAllocationScalarFieldEnum = (typeof CalculationTemplateAllocationScalarFieldEnum)[keyof typeof CalculationTemplateAllocationScalarFieldEnum]
+
+
+export const CalculationTemplateAdditionalRevenueScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  calculationTemplateId: 'calculationTemplateId',
+  name: 'name',
+  calculationType: 'calculationType',
+  inputType: 'inputType',
+  inputAmountMinor: 'inputAmountMinor',
+  percentageRateBasisPoints: 'percentageRateBasisPoints',
+  taxRateTemplateId: 'taxRateTemplateId',
+  taxRateTemplateVersion: 'taxRateTemplateVersion',
+  taxRateNameSnapshot: 'taxRateNameSnapshot',
+  taxRateBasisPoints: 'taxRateBasisPoints',
+  confirmationStatus: 'confirmationStatus',
+  note: 'note',
+  sortOrder: 'sortOrder',
+  status: 'status',
+  version: 'version',
+  archivedAt: 'archivedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CalculationTemplateAdditionalRevenueScalarFieldEnum = (typeof CalculationTemplateAdditionalRevenueScalarFieldEnum)[keyof typeof CalculationTemplateAdditionalRevenueScalarFieldEnum]
 
 
 export const VenueDateOptionScalarFieldEnum = {

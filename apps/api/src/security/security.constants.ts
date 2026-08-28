@@ -42,6 +42,9 @@ export const PERMISSIONS = {
   CALCULATIONS_PURCHASE: 'calculations.purchase',
   CALCULATIONS_SALES: 'calculations.sales',
   CALCULATIONS_APPROVE: 'calculations.approve',
+  REVENUE_TEMPLATES_READ: 'revenue_templates.read',
+  REVENUE_TEMPLATES_WRITE: 'revenue_templates.write',
+  REVENUE_TEMPLATES_ARCHIVE: 'revenue_templates.archive',
 } as const;
 
 export type PermissionKey = (typeof PERMISSIONS)[keyof typeof PERMISSIONS];
@@ -132,6 +135,15 @@ export const PERMISSION_CATALOG: ReadonlyArray<{
     description: 'Verkaufspreise und Marge ansehen und bearbeiten',
   },
   { key: PERMISSIONS.CALCULATIONS_APPROVE, description: 'Kalkulationen freigeben' },
+  { key: PERMISSIONS.REVENUE_TEMPLATES_READ, description: 'Erlös- und Steuervorlagen ansehen' },
+  {
+    key: PERMISSIONS.REVENUE_TEMPLATES_WRITE,
+    description: 'Erlös- und Steuervorlagen anlegen und bearbeiten',
+  },
+  {
+    key: PERMISSIONS.REVENUE_TEMPLATES_ARCHIVE,
+    description: 'Erlös- und Steuervorlagen archivieren und reaktivieren',
+  },
 ];
 
 export const STANDARD_ROLES = [
@@ -172,6 +184,9 @@ export const STANDARD_ROLES = [
       PERMISSIONS.CALCULATIONS_PURCHASE,
       PERMISSIONS.CALCULATIONS_SALES,
       PERMISSIONS.CALCULATIONS_APPROVE,
+      PERMISSIONS.REVENUE_TEMPLATES_READ,
+      PERMISSIONS.REVENUE_TEMPLATES_WRITE,
+      PERMISSIONS.REVENUE_TEMPLATES_ARCHIVE,
     ],
   },
   {

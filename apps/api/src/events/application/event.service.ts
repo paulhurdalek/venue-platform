@@ -23,6 +23,7 @@ import {
 } from '../domain/event.rules.js';
 import { LocationOccupancyConflictError } from '../../occupancy/infrastructure/database-occupancy.js';
 import { EventServiceSnapshotError } from '../../services/infrastructure/event-service-snapshot.js';
+import { CalculationTemplateSnapshotError } from '../../revenue/infrastructure/calculation-template-snapshot.js';
 import type {
   CreateEventInput,
   EventListQuery,
@@ -117,12 +118,16 @@ export class EventService {
           locationId: location!.id,
           eventDate,
           timezone: location!.timezone,
+          expectedGuestCount: this.expectedGuestCount(input.expectedGuestCount),
+          sourceCalculationTemplateId: input.sourceCalculationTemplateId ?? null,
           ...snapshot,
         });
         await transaction.audit(access, 'event.created', created.id, {
           newVersion: created.version,
           sourceEventFormatId: created.sourceEventFormatId,
           sourceEventFormatVersion: created.sourceEventFormatVersion,
+          sourceCalculationTemplateId: created.sourceCalculationTemplateId,
+          sourceCalculationTemplateVersion: created.sourceCalculationTemplateVersion,
           occupancyComplete: created.occupancyComplete,
         });
         return created;
@@ -224,6 +229,7 @@ export class EventService {
     | 'endMinutes'
     | 'recordingSetting'
     | 'timezone'
+    | 'expectedGuestCount'
   > {
     const name = cleanEventName(input.name === undefined ? current.name : input.name);
     if (!name) {
@@ -275,7 +281,22 @@ export class EventService {
       ...schedule,
       recordingSetting: input.recordingSetting ?? current.recordingSetting,
       timezone,
+      expectedGuestCount:
+        input.expectedGuestCount === undefined
+          ? current.expectedGuestCount
+          : this.expectedGuestCount(input.expectedGuestCount),
     };
+  }
+
+  private expectedGuestCount(value: number | null | undefined): number | null {
+    if (value === null || value === undefined) return null;
+    if (!Number.isSafeInteger(value) || value < 0) {
+      throw new EventValidationError(
+        'INVALID_EXPECTED_GUEST_COUNT',
+        'Die erwartete Gästezahl muss eine nichtnegative ganze Zahl sein',
+      );
+    }
+    return value;
   }
 
   private visibleLocationIds(access: AccessContext): string[] | undefined {
@@ -349,6 +370,9 @@ export class EventService {
       });
     }
     if (error instanceof EventServiceSnapshotError) {
+      throw new UnprocessableEntityException({ code: error.code, message: error.message });
+    }
+    if (error instanceof CalculationTemplateSnapshotError) {
       throw new UnprocessableEntityException({ code: error.code, message: error.message });
     }
     throw error;

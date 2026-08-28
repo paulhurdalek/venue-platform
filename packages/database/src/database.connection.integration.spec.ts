@@ -556,6 +556,178 @@ describeWithDatabase('PostgreSQL connection', () => {
     expect(migration).toHaveLength(1);
   });
 
+  it('has the relational Phase 8 revenue schema, exact checks and tenant constraints', async () => {
+    client = createDatabaseClient(testDatabaseUrl!);
+    await cleanTestDatabase(client);
+
+    const tables = await client.$queryRaw<Array<{ table_name: string }>>`
+      SELECT table_name
+      FROM information_schema.tables
+      WHERE table_schema = 'public'
+        AND table_name IN (
+          'ticket_price_tier', 'ticket_price_component',
+          'ticket_component_allocation', 'additional_revenue'
+        )
+      ORDER BY table_name
+    `;
+    expect(tables).toHaveLength(4);
+
+    const constraints = await client.$queryRaw<Array<{ constraint_name: string }>>`
+      SELECT conname AS constraint_name
+      FROM pg_constraint
+      WHERE conname IN (
+        'event_expected_guest_count_nonnegative',
+        'ticket_price_tier_quantity_nonnegative',
+        'ticket_price_tier_price_complete',
+        'ticket_price_tier_event_tenant_fkey',
+        'ticket_price_tier_calculation_tenant_event_fkey',
+        'ticket_price_component_amount_consistent',
+        'ticket_price_component_tier_tenant_fkey',
+        'ticket_component_allocation_recipient_consistent',
+        'ticket_component_allocation_value_consistent',
+        'ticket_component_allocation_component_tenant_fkey',
+        'additional_revenue_value_consistent',
+        'additional_revenue_calculation_tenant_event_fkey'
+      )
+    `;
+    expect(constraints).toHaveLength(12);
+
+    const organization = await client.organization.create({ data: { name: 'Phase 8 venue' } });
+    const refinementMigrationSql = await readFile(
+      new URL(
+        '../prisma/migrations/20260827000100_phase_8_templates_refinement/migration.sql',
+        import.meta.url,
+      ),
+      'utf8',
+    );
+    const standardTaxBackfill = refinementMigrationSql.match(
+      /INSERT INTO "tax_rate_template"[\s\S]+?ON CONFLICT \("organization_id", "normalized_name"\) DO NOTHING;/,
+    )?.[0];
+    expect(standardTaxBackfill).toBeTruthy();
+    await client.$executeRawUnsafe(standardTaxBackfill!);
+    const standardTaxes = await client.taxRateTemplate.findMany({
+      where: { organizationId: organization.id },
+      orderBy: { rateBasisPoints: 'asc' },
+    });
+    expect(standardTaxes).toEqual([
+      expect.objectContaining({ name: 'Steuerfrei – 0 %', rateBasisPoints: 0 }),
+      expect.objectContaining({ name: 'Ermäßigt – 7 %', rateBasisPoints: 700 }),
+      expect.objectContaining({ name: 'Regulär – 19 %', rateBasisPoints: 1900 }),
+    ]);
+    const zeroTax = standardTaxes[0]!;
+    const regularTax = standardTaxes[2]!;
+    const location = await client.location.create({
+      data: { organizationId: organization.id, name: 'Revenue Hall', timezone: 'Europe/Berlin' },
+    });
+    const event = await client.event.create({
+      data: {
+        organizationId: organization.id,
+        locationId: location.id,
+        name: 'Revenue Event',
+        eventDate: new Date('2027-01-01T00:00:00.000Z'),
+        eventKind: 'OWN_PRODUCTION',
+        timezone: 'Europe/Berlin',
+        expectedGuestCount: 500,
+      },
+    });
+    const calculation = await client.eventCalculation.create({
+      data: { organizationId: organization.id, eventId: event.id },
+    });
+    const tier = await client.ticketPriceTier.create({
+      data: {
+        organizationId: organization.id,
+        eventId: event.id,
+        calculationId: calculation.id,
+        name: 'Vorverkauf',
+        expectedQuantity: 400,
+        baseInputType: 'GROSS',
+        baseInputMinor: 2_380n,
+        baseNetUnitMinor: 2_000n,
+        baseGrossUnitMinor: 2_380n,
+        baseTaxRateBasisPoints: 1_900,
+        baseTaxRateTemplateId: regularTax.id,
+        baseTaxRateTemplateVersion: regularTax.version,
+        baseTaxRateNameSnapshot: regularTax.name,
+        sortOrder: 1,
+      },
+    });
+    const component = await client.ticketPriceComponent.create({
+      data: {
+        organizationId: organization.id,
+        ticketPriceTierId: tier.id,
+        name: 'WKZ',
+        amountType: 'FIXED',
+        inputType: 'GROSS',
+        inputAmountMinor: 119n,
+        taxRateBasisPoints: 1_900,
+        taxRateTemplateId: regularTax.id,
+        taxRateTemplateVersion: regularTax.version,
+        taxRateNameSnapshot: regularTax.name,
+        sortOrder: 1,
+      },
+    });
+    expect(
+      await client.ticketComponentAllocation.create({
+        data: {
+          organizationId: organization.id,
+          ticketPriceComponentId: component.id,
+          recipientType: 'ORGANIZATION',
+          allocationType: 'PERCENTAGE',
+          percentageBasisPoints: 10_000,
+          sortOrder: 1,
+        },
+      }),
+    ).toMatchObject({ organizationId: organization.id });
+    expect(
+      await client.additionalRevenue.create({
+        data: {
+          organizationId: organization.id,
+          eventId: event.id,
+          calculationId: calculation.id,
+          name: 'Sponsoring',
+          calculationType: 'FIXED',
+          inputType: 'NET',
+          inputAmountMinor: 100_000n,
+          taxRateBasisPoints: 0,
+          taxRateTemplateId: zeroTax.id,
+          taxRateTemplateVersion: zeroTax.version,
+          taxRateNameSnapshot: zeroTax.name,
+          sortOrder: 1,
+        },
+      }),
+    ).toMatchObject({ organizationId: organization.id });
+
+    const foreignOrganization = await client.organization.create({
+      data: { name: 'Foreign Phase 8 venue' },
+    });
+    await expect(
+      client.ticketPriceComponent.create({
+        data: {
+          organizationId: foreignOrganization.id,
+          ticketPriceTierId: tier.id,
+          name: 'Cross tenant component',
+          amountType: 'FIXED',
+          inputType: 'GROSS',
+          inputAmountMinor: 1n,
+          taxRateBasisPoints: 0,
+          taxRateTemplateId: zeroTax.id,
+          taxRateTemplateVersion: zeroTax.version,
+          taxRateNameSnapshot: zeroTax.name,
+          sortOrder: 2,
+        },
+      }),
+    ).rejects.toThrow();
+
+    const migration = await client.$queryRaw<Array<{ migration_name: string }>>`
+      SELECT migration_name
+      FROM _prisma_migrations
+      WHERE migration_name = '20260826000100_phase_8_revenue_planning'
+        AND finished_at IS NOT NULL
+        AND rolled_back_at IS NULL
+    `;
+    expect(migration).toHaveLength(1);
+  });
+
   it('preserves migration-owned permissions while clearing tenant authorization data', async () => {
     client = createDatabaseClient(testDatabaseUrl!);
     await cleanTestDatabase(client);

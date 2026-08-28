@@ -16,6 +16,7 @@ export interface EventFormatRecord {
   defaultEndTime: string | null;
   defaultEndNextDay: boolean;
   recordingDefault: RecordingDefault;
+  defaultCalculationTemplateId: string | null;
   status: EntityStatus;
   archivedAt: string | null;
   version: number;
@@ -34,6 +35,7 @@ export interface EventFormatStoredValues {
   startMinutes: number | null;
   endMinutes: number | null;
   recordingDefault: RecordingDefault;
+  defaultCalculationTemplateId: string | null;
 }
 
 export interface EventFormatInput {
@@ -47,6 +49,7 @@ export interface EventFormatInput {
   defaultEndTime: string | null;
   defaultEndNextDay: boolean;
   recordingDefault: RecordingDefault;
+  defaultCalculationTemplateId: string | null;
 }
 
 export interface EventFormatListQuery {

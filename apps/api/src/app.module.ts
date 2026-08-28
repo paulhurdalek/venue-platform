@@ -15,6 +15,8 @@ import { SetupModule } from './setup/setup.module.js';
 import { PlatformModule } from './platform/platform.module.js';
 import { BookingsModule } from './bookings/bookings.module.js';
 import { ServicesModule } from './services/services.module.js';
+import { RevenuePlanningModule } from './revenue/revenue-planning.module.js';
+import { RevenueTemplatesModule } from './revenue-templates/revenue-templates.module.js';
 
 @Module({
   imports: [
@@ -36,6 +38,8 @@ import { ServicesModule } from './services/services.module.js';
     DateOptionsModule,
     BookingsModule,
     ServicesModule,
+    RevenuePlanningModule,
+    RevenueTemplatesModule,
     HealthModule,
   ],
 })

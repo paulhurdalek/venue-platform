@@ -17,6 +17,7 @@ import { OccupancyConflictLinks } from './occupancy-conflict-links';
 
 type Event = components['schemas']['EventDto'];
 type EventFormat = components['schemas']['EventFormatDto'];
+type CalculationTemplate = components['schemas']['CalculationTemplateDto'];
 type Location = components['schemas']['LocationDto'];
 type CreateEvent = components['schemas']['CreateEventDto'];
 
@@ -31,6 +32,7 @@ type Draft = {
   endDay: 'SAME' | 'NEXT';
   recordingSetting: CreateEvent['recordingSetting'];
   eventKind: 'OWN_PRODUCTION' | 'THIRD_PARTY_EVENT';
+  expectedGuestCount: string;
 };
 
 const nullable = (value: string) => value.trim() || null;
@@ -39,12 +41,14 @@ export function EventForm({
   organizationId,
   event,
   eventFormats = [],
+  calculationTemplates = [],
   locations,
   initialDate,
 }: {
   organizationId: string;
   event?: Event;
   eventFormats?: EventFormat[];
+  calculationTemplates?: CalculationTemplate[];
   locations: Location[];
   initialDate?: string | undefined;
 }) {
@@ -62,6 +66,18 @@ export function EventForm({
   const selectedFormat = useMemo(
     () => eventFormats.find((format) => format.id === selectedFormatId),
     [eventFormats, selectedFormatId],
+  );
+  const [selectedCalculationTemplateId, setSelectedCalculationTemplateId] = useState('');
+  const selectedCalculationTemplate = useMemo(
+    () => calculationTemplates.find((template) => template.id === selectedCalculationTemplateId),
+    [calculationTemplates, selectedCalculationTemplateId],
+  );
+  const suggestedCalculationTemplate = useMemo(
+    () =>
+      calculationTemplates.find(
+        (template) => template.id === selectedFormat?.defaultCalculationTemplateId,
+      ),
+    [calculationTemplates, selectedFormat],
   );
   const [draft, setDraft] = useState<Draft>(() =>
     event ? eventDraft(event) : selectedFormat ? formatDraft(selectedFormat) : emptyDraft(),
@@ -111,6 +127,7 @@ export function EventForm({
       endTime: nullable(draft.endTime),
       endNextDay: Boolean(draft.endTime) && draft.endDay === 'NEXT',
       recordingSetting: draft.recordingSetting ?? 'UNSPECIFIED',
+      expectedGuestCount: draft.expectedGuestCount.trim() ? Number(draft.expectedGuestCount) : null,
     };
     const client = createBrowserApiClient();
     const result = event
@@ -127,6 +144,9 @@ export function EventForm({
             ...(creationMode === 'TEMPLATE'
               ? { sourceEventFormatId: selectedFormatId }
               : { eventKind: draft.eventKind }),
+            ...(selectedCalculationTemplateId
+              ? { sourceCalculationTemplateId: selectedCalculationTemplateId }
+              : {}),
           },
         });
     if (!result.data || result.error) {
@@ -152,7 +172,13 @@ export function EventForm({
     <form className="form-stack form-grid" onSubmit={submit}>
       {!event ? (
         <fieldset className="form-span choice-fieldset">
-          <legend>Anlageart</legend>
+          <legend>
+            Vorlagen übernehmen <span className="optional">optional</span>
+          </legend>
+          <p className="field-hint">
+            Format und Kalkulation werden getrennt gewählt und beim Anlegen als unabhängige
+            Event-Snapshots kopiert.
+          </p>
           <div className="choice-row">
             <label>
               <input
@@ -162,7 +188,7 @@ export function EventForm({
                 onChange={() => chooseCreationMode('TEMPLATE')}
                 type="radio"
               />
-              Mit Vorlage
+              Veranstaltungsformat übernehmen
             </label>
             <label>
               <input
@@ -171,13 +197,14 @@ export function EventForm({
                 onChange={() => chooseCreationMode('FREE')}
                 type="radio"
               />
-              Ohne Vorlage
+              Ohne Veranstaltungsformat
             </label>
           </div>
           {creationMode === 'TEMPLATE' ? (
             <label>
               Veranstaltungsformat
               <select
+                aria-label="Veranstaltungsformat"
                 aria-describedby="event-format-help"
                 name="sourceEventFormatId"
                 onChange={(changeEvent) => chooseFormat(changeEvent.target.value)}
@@ -210,6 +237,47 @@ export function EventForm({
               </select>
             </label>
           )}
+          <label>
+            Kalkulationsvorlage <span className="optional">optional</span>
+            <select
+              aria-describedby="calculation-template-help"
+              name="sourceCalculationTemplateId"
+              onChange={(changeEvent) => setSelectedCalculationTemplateId(changeEvent.target.value)}
+              value={selectedCalculationTemplateId}
+            >
+              <option value="">Keine Kalkulationsvorlage</option>
+              {calculationTemplates.map((template) => (
+                <option key={template.id} value={template.id}>
+                  {template.name}
+                </option>
+              ))}
+            </select>
+            <span className="field-hint" id="calculation-template-help">
+              Ticketstufen, Preisstruktur und weitere Erlöse werden atomar kopiert.
+            </span>
+          </label>
+          {suggestedCalculationTemplate && !selectedCalculationTemplateId ? (
+            <div className="compact-notice" role="status">
+              <span>
+                Vorschlag des Formats: <strong>{suggestedCalculationTemplate.name}</strong>. Der
+                Vorschlag wird nicht automatisch übernommen.
+              </span>{' '}
+              <button
+                className="button button--quiet button--small"
+                onClick={() => setSelectedCalculationTemplateId(suggestedCalculationTemplate.id)}
+                type="button"
+              >
+                Vorschlag übernehmen
+              </button>
+            </div>
+          ) : null}
+          <div className="snapshot-note" aria-live="polite">
+            <strong>Auswahlzusammenfassung</strong>
+            <span>
+              Format: {selectedFormat?.name ?? 'keines'} · Kalkulation:{' '}
+              {selectedCalculationTemplate?.name ?? 'keine'}
+            </span>
+          </div>
         </fieldset>
       ) : (
         <div className="form-span snapshot-note">
@@ -275,6 +343,21 @@ export function EventForm({
           rows={3}
           value={draft.description}
         />
+      </label>
+      <label>
+        Erwartete Gästezahl <span className="optional">optional · keine Kapazität</span>
+        <input
+          inputMode="numeric"
+          min={0}
+          name="expectedGuestCount"
+          onChange={(changeEvent) => set('expectedGuestCount', changeEvent.target.value)}
+          step={1}
+          type="number"
+          value={draft.expectedGuestCount}
+        />
+        <span className="field-hint">
+          Planwert für gastabhängige Erlöse; tatsächliche Besucherzahlen werden hier nicht erfasst.
+        </span>
       </label>
       <fieldset
         className="form-span"
@@ -379,6 +462,7 @@ function emptyDraft(): Draft {
     endDay: 'SAME',
     recordingSetting: 'UNSPECIFIED',
     eventKind: 'OWN_PRODUCTION',
+    expectedGuestCount: '',
   };
 }
 
@@ -394,6 +478,7 @@ function formatDraft(format: EventFormat): Draft {
     endDay: format.defaultEndNextDay ? 'NEXT' : 'SAME',
     recordingSetting: format.recordingDefault,
     eventKind: format.eventKind,
+    expectedGuestCount: '',
   };
 }
 
@@ -409,5 +494,6 @@ function eventDraft(event: Event): Draft {
     endDay: event.endNextDay ? 'NEXT' : 'SAME',
     recordingSetting: event.recordingSetting,
     eventKind: event.eventKind,
+    expectedGuestCount: event.expectedGuestCount?.toString() ?? '',
   };
 }

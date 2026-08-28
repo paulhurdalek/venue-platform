@@ -138,6 +138,7 @@ export class EventFormatService {
       defaultEndTime: input.defaultEndTime ?? null,
       defaultEndNextDay: input.defaultEndNextDay ?? false,
       recordingDefault: input.recordingDefault ?? 'UNSPECIFIED',
+      defaultCalculationTemplateId: input.defaultCalculationTemplateId ?? null,
     };
   }
 
@@ -156,6 +157,7 @@ export class EventFormatService {
       defaultEndTime: current.defaultEndTime,
       defaultEndNextDay: current.defaultEndNextDay,
       recordingDefault: current.recordingDefault,
+      defaultCalculationTemplateId: current.defaultCalculationTemplateId,
     };
     for (const [key, value] of Object.entries(input)) {
       if (value !== undefined) (merged as unknown as Record<string, unknown>)[key] = value;
@@ -196,6 +198,7 @@ export class EventFormatService {
       eventKind: input.eventKind,
       ...schedule,
       recordingDefault: input.recordingDefault,
+      defaultCalculationTemplateId: input.defaultCalculationTemplateId,
     };
   }
 

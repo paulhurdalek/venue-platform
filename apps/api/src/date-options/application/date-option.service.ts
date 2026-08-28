@@ -431,6 +431,8 @@ export class DateOptionService {
           locationId,
           eventDate,
           timezone: location.timezone,
+          expectedGuestCount: null,
+          sourceCalculationTemplateId: null,
           ...snapshot,
         };
         await transaction.prepare(access, [option.locationId, locationId]);

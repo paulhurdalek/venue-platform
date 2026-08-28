@@ -262,6 +262,8 @@ export type EventCalculationWhereInput = {
   approvedByMembership?: Prisma.XOR<Prisma.MembershipNullableScalarRelationFilter, Prisma.MembershipWhereInput> | null
   positions?: Prisma.EventServicePositionListRelationFilter
   statusHistory?: Prisma.EventCalculationStatusHistoryListRelationFilter
+  ticketPriceTiers?: Prisma.TicketPriceTierListRelationFilter
+  additionalRevenues?: Prisma.AdditionalRevenueListRelationFilter
 }
 
 export type EventCalculationOrderByWithRelationInput = {
@@ -281,6 +283,8 @@ export type EventCalculationOrderByWithRelationInput = {
   approvedByMembership?: Prisma.MembershipOrderByWithRelationInput
   positions?: Prisma.EventServicePositionOrderByRelationAggregateInput
   statusHistory?: Prisma.EventCalculationStatusHistoryOrderByRelationAggregateInput
+  ticketPriceTiers?: Prisma.TicketPriceTierOrderByRelationAggregateInput
+  additionalRevenues?: Prisma.AdditionalRevenueOrderByRelationAggregateInput
 }
 
 export type EventCalculationWhereUniqueInput = Prisma.AtLeast<{
@@ -306,6 +310,8 @@ export type EventCalculationWhereUniqueInput = Prisma.AtLeast<{
   approvedByMembership?: Prisma.XOR<Prisma.MembershipNullableScalarRelationFilter, Prisma.MembershipWhereInput> | null
   positions?: Prisma.EventServicePositionListRelationFilter
   statusHistory?: Prisma.EventCalculationStatusHistoryListRelationFilter
+  ticketPriceTiers?: Prisma.TicketPriceTierListRelationFilter
+  additionalRevenues?: Prisma.AdditionalRevenueListRelationFilter
 }, "id" | "eventId" | "id_organizationId" | "id_organizationId_eventId" | "eventId_organizationId">
 
 export type EventCalculationOrderByWithAggregationInput = {
@@ -355,6 +361,8 @@ export type EventCalculationCreateInput = {
   approvedByMembership?: Prisma.MembershipCreateNestedOneWithoutApprovedCalculationsInput
   positions?: Prisma.EventServicePositionCreateNestedManyWithoutCalculationInput
   statusHistory?: Prisma.EventCalculationStatusHistoryCreateNestedManyWithoutCalculationInput
+  ticketPriceTiers?: Prisma.TicketPriceTierCreateNestedManyWithoutCalculationInput
+  additionalRevenues?: Prisma.AdditionalRevenueCreateNestedManyWithoutCalculationInput
 }
 
 export type EventCalculationUncheckedCreateInput = {
@@ -370,6 +378,8 @@ export type EventCalculationUncheckedCreateInput = {
   updatedAt?: Date | string
   positions?: Prisma.EventServicePositionUncheckedCreateNestedManyWithoutCalculationInput
   statusHistory?: Prisma.EventCalculationStatusHistoryUncheckedCreateNestedManyWithoutCalculationInput
+  ticketPriceTiers?: Prisma.TicketPriceTierUncheckedCreateNestedManyWithoutCalculationInput
+  additionalRevenues?: Prisma.AdditionalRevenueUncheckedCreateNestedManyWithoutCalculationInput
 }
 
 export type EventCalculationUpdateInput = {
@@ -385,6 +395,8 @@ export type EventCalculationUpdateInput = {
   approvedByMembership?: Prisma.MembershipUpdateOneWithoutApprovedCalculationsNestedInput
   positions?: Prisma.EventServicePositionUpdateManyWithoutCalculationNestedInput
   statusHistory?: Prisma.EventCalculationStatusHistoryUpdateManyWithoutCalculationNestedInput
+  ticketPriceTiers?: Prisma.TicketPriceTierUpdateManyWithoutCalculationNestedInput
+  additionalRevenues?: Prisma.AdditionalRevenueUpdateManyWithoutCalculationNestedInput
 }
 
 export type EventCalculationUncheckedUpdateInput = {
@@ -400,6 +412,8 @@ export type EventCalculationUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   positions?: Prisma.EventServicePositionUncheckedUpdateManyWithoutCalculationNestedInput
   statusHistory?: Prisma.EventCalculationStatusHistoryUncheckedUpdateManyWithoutCalculationNestedInput
+  ticketPriceTiers?: Prisma.TicketPriceTierUncheckedUpdateManyWithoutCalculationNestedInput
+  additionalRevenues?: Prisma.AdditionalRevenueUncheckedUpdateManyWithoutCalculationNestedInput
 }
 
 export type EventCalculationCreateManyInput = {
@@ -710,6 +724,34 @@ export type EventCalculationUpdateOneRequiredWithoutPositionsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.EventCalculationUpdateToOneWithWhereWithoutPositionsInput, Prisma.EventCalculationUpdateWithoutPositionsInput>, Prisma.EventCalculationUncheckedUpdateWithoutPositionsInput>
 }
 
+export type EventCalculationCreateNestedOneWithoutTicketPriceTiersInput = {
+  create?: Prisma.XOR<Prisma.EventCalculationCreateWithoutTicketPriceTiersInput, Prisma.EventCalculationUncheckedCreateWithoutTicketPriceTiersInput>
+  connectOrCreate?: Prisma.EventCalculationCreateOrConnectWithoutTicketPriceTiersInput
+  connect?: Prisma.EventCalculationWhereUniqueInput
+}
+
+export type EventCalculationUpdateOneRequiredWithoutTicketPriceTiersNestedInput = {
+  create?: Prisma.XOR<Prisma.EventCalculationCreateWithoutTicketPriceTiersInput, Prisma.EventCalculationUncheckedCreateWithoutTicketPriceTiersInput>
+  connectOrCreate?: Prisma.EventCalculationCreateOrConnectWithoutTicketPriceTiersInput
+  upsert?: Prisma.EventCalculationUpsertWithoutTicketPriceTiersInput
+  connect?: Prisma.EventCalculationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.EventCalculationUpdateToOneWithWhereWithoutTicketPriceTiersInput, Prisma.EventCalculationUpdateWithoutTicketPriceTiersInput>, Prisma.EventCalculationUncheckedUpdateWithoutTicketPriceTiersInput>
+}
+
+export type EventCalculationCreateNestedOneWithoutAdditionalRevenuesInput = {
+  create?: Prisma.XOR<Prisma.EventCalculationCreateWithoutAdditionalRevenuesInput, Prisma.EventCalculationUncheckedCreateWithoutAdditionalRevenuesInput>
+  connectOrCreate?: Prisma.EventCalculationCreateOrConnectWithoutAdditionalRevenuesInput
+  connect?: Prisma.EventCalculationWhereUniqueInput
+}
+
+export type EventCalculationUpdateOneRequiredWithoutAdditionalRevenuesNestedInput = {
+  create?: Prisma.XOR<Prisma.EventCalculationCreateWithoutAdditionalRevenuesInput, Prisma.EventCalculationUncheckedCreateWithoutAdditionalRevenuesInput>
+  connectOrCreate?: Prisma.EventCalculationCreateOrConnectWithoutAdditionalRevenuesInput
+  upsert?: Prisma.EventCalculationUpsertWithoutAdditionalRevenuesInput
+  connect?: Prisma.EventCalculationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.EventCalculationUpdateToOneWithWhereWithoutAdditionalRevenuesInput, Prisma.EventCalculationUpdateWithoutAdditionalRevenuesInput>, Prisma.EventCalculationUncheckedUpdateWithoutAdditionalRevenuesInput>
+}
+
 export type EventCalculationCreateWithoutApprovedByUserInput = {
   id?: string
   status?: $Enums.CalculationStatus
@@ -722,6 +764,8 @@ export type EventCalculationCreateWithoutApprovedByUserInput = {
   approvedByMembership?: Prisma.MembershipCreateNestedOneWithoutApprovedCalculationsInput
   positions?: Prisma.EventServicePositionCreateNestedManyWithoutCalculationInput
   statusHistory?: Prisma.EventCalculationStatusHistoryCreateNestedManyWithoutCalculationInput
+  ticketPriceTiers?: Prisma.TicketPriceTierCreateNestedManyWithoutCalculationInput
+  additionalRevenues?: Prisma.AdditionalRevenueCreateNestedManyWithoutCalculationInput
 }
 
 export type EventCalculationUncheckedCreateWithoutApprovedByUserInput = {
@@ -736,6 +780,8 @@ export type EventCalculationUncheckedCreateWithoutApprovedByUserInput = {
   updatedAt?: Date | string
   positions?: Prisma.EventServicePositionUncheckedCreateNestedManyWithoutCalculationInput
   statusHistory?: Prisma.EventCalculationStatusHistoryUncheckedCreateNestedManyWithoutCalculationInput
+  ticketPriceTiers?: Prisma.TicketPriceTierUncheckedCreateNestedManyWithoutCalculationInput
+  additionalRevenues?: Prisma.AdditionalRevenueUncheckedCreateNestedManyWithoutCalculationInput
 }
 
 export type EventCalculationCreateOrConnectWithoutApprovedByUserInput = {
@@ -792,6 +838,8 @@ export type EventCalculationCreateWithoutOrganizationInput = {
   approvedByMembership?: Prisma.MembershipCreateNestedOneWithoutApprovedCalculationsInput
   positions?: Prisma.EventServicePositionCreateNestedManyWithoutCalculationInput
   statusHistory?: Prisma.EventCalculationStatusHistoryCreateNestedManyWithoutCalculationInput
+  ticketPriceTiers?: Prisma.TicketPriceTierCreateNestedManyWithoutCalculationInput
+  additionalRevenues?: Prisma.AdditionalRevenueCreateNestedManyWithoutCalculationInput
 }
 
 export type EventCalculationUncheckedCreateWithoutOrganizationInput = {
@@ -806,6 +854,8 @@ export type EventCalculationUncheckedCreateWithoutOrganizationInput = {
   updatedAt?: Date | string
   positions?: Prisma.EventServicePositionUncheckedCreateNestedManyWithoutCalculationInput
   statusHistory?: Prisma.EventCalculationStatusHistoryUncheckedCreateNestedManyWithoutCalculationInput
+  ticketPriceTiers?: Prisma.TicketPriceTierUncheckedCreateNestedManyWithoutCalculationInput
+  additionalRevenues?: Prisma.AdditionalRevenueUncheckedCreateNestedManyWithoutCalculationInput
 }
 
 export type EventCalculationCreateOrConnectWithoutOrganizationInput = {
@@ -846,6 +896,8 @@ export type EventCalculationCreateWithoutEventInput = {
   approvedByMembership?: Prisma.MembershipCreateNestedOneWithoutApprovedCalculationsInput
   positions?: Prisma.EventServicePositionCreateNestedManyWithoutCalculationInput
   statusHistory?: Prisma.EventCalculationStatusHistoryCreateNestedManyWithoutCalculationInput
+  ticketPriceTiers?: Prisma.TicketPriceTierCreateNestedManyWithoutCalculationInput
+  additionalRevenues?: Prisma.AdditionalRevenueCreateNestedManyWithoutCalculationInput
 }
 
 export type EventCalculationUncheckedCreateWithoutEventInput = {
@@ -859,6 +911,8 @@ export type EventCalculationUncheckedCreateWithoutEventInput = {
   updatedAt?: Date | string
   positions?: Prisma.EventServicePositionUncheckedCreateNestedManyWithoutCalculationInput
   statusHistory?: Prisma.EventCalculationStatusHistoryUncheckedCreateNestedManyWithoutCalculationInput
+  ticketPriceTiers?: Prisma.TicketPriceTierUncheckedCreateNestedManyWithoutCalculationInput
+  additionalRevenues?: Prisma.AdditionalRevenueUncheckedCreateNestedManyWithoutCalculationInput
 }
 
 export type EventCalculationCreateOrConnectWithoutEventInput = {
@@ -889,6 +943,8 @@ export type EventCalculationUpdateWithoutEventInput = {
   approvedByMembership?: Prisma.MembershipUpdateOneWithoutApprovedCalculationsNestedInput
   positions?: Prisma.EventServicePositionUpdateManyWithoutCalculationNestedInput
   statusHistory?: Prisma.EventCalculationStatusHistoryUpdateManyWithoutCalculationNestedInput
+  ticketPriceTiers?: Prisma.TicketPriceTierUpdateManyWithoutCalculationNestedInput
+  additionalRevenues?: Prisma.AdditionalRevenueUpdateManyWithoutCalculationNestedInput
 }
 
 export type EventCalculationUncheckedUpdateWithoutEventInput = {
@@ -902,6 +958,8 @@ export type EventCalculationUncheckedUpdateWithoutEventInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   positions?: Prisma.EventServicePositionUncheckedUpdateManyWithoutCalculationNestedInput
   statusHistory?: Prisma.EventCalculationStatusHistoryUncheckedUpdateManyWithoutCalculationNestedInput
+  ticketPriceTiers?: Prisma.TicketPriceTierUncheckedUpdateManyWithoutCalculationNestedInput
+  additionalRevenues?: Prisma.AdditionalRevenueUncheckedUpdateManyWithoutCalculationNestedInput
 }
 
 export type EventCalculationCreateWithoutApprovedByMembershipInput = {
@@ -916,6 +974,8 @@ export type EventCalculationCreateWithoutApprovedByMembershipInput = {
   approvedByUser?: Prisma.UserCreateNestedOneWithoutApprovedCalculationsInput
   positions?: Prisma.EventServicePositionCreateNestedManyWithoutCalculationInput
   statusHistory?: Prisma.EventCalculationStatusHistoryCreateNestedManyWithoutCalculationInput
+  ticketPriceTiers?: Prisma.TicketPriceTierCreateNestedManyWithoutCalculationInput
+  additionalRevenues?: Prisma.AdditionalRevenueCreateNestedManyWithoutCalculationInput
 }
 
 export type EventCalculationUncheckedCreateWithoutApprovedByMembershipInput = {
@@ -929,6 +989,8 @@ export type EventCalculationUncheckedCreateWithoutApprovedByMembershipInput = {
   updatedAt?: Date | string
   positions?: Prisma.EventServicePositionUncheckedCreateNestedManyWithoutCalculationInput
   statusHistory?: Prisma.EventCalculationStatusHistoryUncheckedCreateNestedManyWithoutCalculationInput
+  ticketPriceTiers?: Prisma.TicketPriceTierUncheckedCreateNestedManyWithoutCalculationInput
+  additionalRevenues?: Prisma.AdditionalRevenueUncheckedCreateNestedManyWithoutCalculationInput
 }
 
 export type EventCalculationCreateOrConnectWithoutApprovedByMembershipInput = {
@@ -969,6 +1031,8 @@ export type EventCalculationCreateWithoutStatusHistoryInput = {
   approvedByUser?: Prisma.UserCreateNestedOneWithoutApprovedCalculationsInput
   approvedByMembership?: Prisma.MembershipCreateNestedOneWithoutApprovedCalculationsInput
   positions?: Prisma.EventServicePositionCreateNestedManyWithoutCalculationInput
+  ticketPriceTiers?: Prisma.TicketPriceTierCreateNestedManyWithoutCalculationInput
+  additionalRevenues?: Prisma.AdditionalRevenueCreateNestedManyWithoutCalculationInput
 }
 
 export type EventCalculationUncheckedCreateWithoutStatusHistoryInput = {
@@ -983,6 +1047,8 @@ export type EventCalculationUncheckedCreateWithoutStatusHistoryInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   positions?: Prisma.EventServicePositionUncheckedCreateNestedManyWithoutCalculationInput
+  ticketPriceTiers?: Prisma.TicketPriceTierUncheckedCreateNestedManyWithoutCalculationInput
+  additionalRevenues?: Prisma.AdditionalRevenueUncheckedCreateNestedManyWithoutCalculationInput
 }
 
 export type EventCalculationCreateOrConnectWithoutStatusHistoryInput = {
@@ -1013,6 +1079,8 @@ export type EventCalculationUpdateWithoutStatusHistoryInput = {
   approvedByUser?: Prisma.UserUpdateOneWithoutApprovedCalculationsNestedInput
   approvedByMembership?: Prisma.MembershipUpdateOneWithoutApprovedCalculationsNestedInput
   positions?: Prisma.EventServicePositionUpdateManyWithoutCalculationNestedInput
+  ticketPriceTiers?: Prisma.TicketPriceTierUpdateManyWithoutCalculationNestedInput
+  additionalRevenues?: Prisma.AdditionalRevenueUpdateManyWithoutCalculationNestedInput
 }
 
 export type EventCalculationUncheckedUpdateWithoutStatusHistoryInput = {
@@ -1027,6 +1095,8 @@ export type EventCalculationUncheckedUpdateWithoutStatusHistoryInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   positions?: Prisma.EventServicePositionUncheckedUpdateManyWithoutCalculationNestedInput
+  ticketPriceTiers?: Prisma.TicketPriceTierUncheckedUpdateManyWithoutCalculationNestedInput
+  additionalRevenues?: Prisma.AdditionalRevenueUncheckedUpdateManyWithoutCalculationNestedInput
 }
 
 export type EventCalculationCreateWithoutPositionsInput = {
@@ -1041,6 +1111,8 @@ export type EventCalculationCreateWithoutPositionsInput = {
   approvedByUser?: Prisma.UserCreateNestedOneWithoutApprovedCalculationsInput
   approvedByMembership?: Prisma.MembershipCreateNestedOneWithoutApprovedCalculationsInput
   statusHistory?: Prisma.EventCalculationStatusHistoryCreateNestedManyWithoutCalculationInput
+  ticketPriceTiers?: Prisma.TicketPriceTierCreateNestedManyWithoutCalculationInput
+  additionalRevenues?: Prisma.AdditionalRevenueCreateNestedManyWithoutCalculationInput
 }
 
 export type EventCalculationUncheckedCreateWithoutPositionsInput = {
@@ -1055,6 +1127,8 @@ export type EventCalculationUncheckedCreateWithoutPositionsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   statusHistory?: Prisma.EventCalculationStatusHistoryUncheckedCreateNestedManyWithoutCalculationInput
+  ticketPriceTiers?: Prisma.TicketPriceTierUncheckedCreateNestedManyWithoutCalculationInput
+  additionalRevenues?: Prisma.AdditionalRevenueUncheckedCreateNestedManyWithoutCalculationInput
 }
 
 export type EventCalculationCreateOrConnectWithoutPositionsInput = {
@@ -1085,6 +1159,8 @@ export type EventCalculationUpdateWithoutPositionsInput = {
   approvedByUser?: Prisma.UserUpdateOneWithoutApprovedCalculationsNestedInput
   approvedByMembership?: Prisma.MembershipUpdateOneWithoutApprovedCalculationsNestedInput
   statusHistory?: Prisma.EventCalculationStatusHistoryUpdateManyWithoutCalculationNestedInput
+  ticketPriceTiers?: Prisma.TicketPriceTierUpdateManyWithoutCalculationNestedInput
+  additionalRevenues?: Prisma.AdditionalRevenueUpdateManyWithoutCalculationNestedInput
 }
 
 export type EventCalculationUncheckedUpdateWithoutPositionsInput = {
@@ -1099,6 +1175,168 @@ export type EventCalculationUncheckedUpdateWithoutPositionsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   statusHistory?: Prisma.EventCalculationStatusHistoryUncheckedUpdateManyWithoutCalculationNestedInput
+  ticketPriceTiers?: Prisma.TicketPriceTierUncheckedUpdateManyWithoutCalculationNestedInput
+  additionalRevenues?: Prisma.AdditionalRevenueUncheckedUpdateManyWithoutCalculationNestedInput
+}
+
+export type EventCalculationCreateWithoutTicketPriceTiersInput = {
+  id?: string
+  status?: $Enums.CalculationStatus
+  version?: number
+  approvedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organization: Prisma.OrganizationCreateNestedOneWithoutEventCalculationsInput
+  event: Prisma.EventCreateNestedOneWithoutCalculationInput
+  approvedByUser?: Prisma.UserCreateNestedOneWithoutApprovedCalculationsInput
+  approvedByMembership?: Prisma.MembershipCreateNestedOneWithoutApprovedCalculationsInput
+  positions?: Prisma.EventServicePositionCreateNestedManyWithoutCalculationInput
+  statusHistory?: Prisma.EventCalculationStatusHistoryCreateNestedManyWithoutCalculationInput
+  additionalRevenues?: Prisma.AdditionalRevenueCreateNestedManyWithoutCalculationInput
+}
+
+export type EventCalculationUncheckedCreateWithoutTicketPriceTiersInput = {
+  id?: string
+  organizationId: string
+  eventId: string
+  status?: $Enums.CalculationStatus
+  version?: number
+  approvedAt?: Date | string | null
+  approvedByUserId?: string | null
+  approvedByMembershipId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  positions?: Prisma.EventServicePositionUncheckedCreateNestedManyWithoutCalculationInput
+  statusHistory?: Prisma.EventCalculationStatusHistoryUncheckedCreateNestedManyWithoutCalculationInput
+  additionalRevenues?: Prisma.AdditionalRevenueUncheckedCreateNestedManyWithoutCalculationInput
+}
+
+export type EventCalculationCreateOrConnectWithoutTicketPriceTiersInput = {
+  where: Prisma.EventCalculationWhereUniqueInput
+  create: Prisma.XOR<Prisma.EventCalculationCreateWithoutTicketPriceTiersInput, Prisma.EventCalculationUncheckedCreateWithoutTicketPriceTiersInput>
+}
+
+export type EventCalculationUpsertWithoutTicketPriceTiersInput = {
+  update: Prisma.XOR<Prisma.EventCalculationUpdateWithoutTicketPriceTiersInput, Prisma.EventCalculationUncheckedUpdateWithoutTicketPriceTiersInput>
+  create: Prisma.XOR<Prisma.EventCalculationCreateWithoutTicketPriceTiersInput, Prisma.EventCalculationUncheckedCreateWithoutTicketPriceTiersInput>
+  where?: Prisma.EventCalculationWhereInput
+}
+
+export type EventCalculationUpdateToOneWithWhereWithoutTicketPriceTiersInput = {
+  where?: Prisma.EventCalculationWhereInput
+  data: Prisma.XOR<Prisma.EventCalculationUpdateWithoutTicketPriceTiersInput, Prisma.EventCalculationUncheckedUpdateWithoutTicketPriceTiersInput>
+}
+
+export type EventCalculationUpdateWithoutTicketPriceTiersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCalculationStatusFieldUpdateOperationsInput | $Enums.CalculationStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutEventCalculationsNestedInput
+  event?: Prisma.EventUpdateOneRequiredWithoutCalculationNestedInput
+  approvedByUser?: Prisma.UserUpdateOneWithoutApprovedCalculationsNestedInput
+  approvedByMembership?: Prisma.MembershipUpdateOneWithoutApprovedCalculationsNestedInput
+  positions?: Prisma.EventServicePositionUpdateManyWithoutCalculationNestedInput
+  statusHistory?: Prisma.EventCalculationStatusHistoryUpdateManyWithoutCalculationNestedInput
+  additionalRevenues?: Prisma.AdditionalRevenueUpdateManyWithoutCalculationNestedInput
+}
+
+export type EventCalculationUncheckedUpdateWithoutTicketPriceTiersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  eventId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCalculationStatusFieldUpdateOperationsInput | $Enums.CalculationStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  approvedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedByMembershipId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  positions?: Prisma.EventServicePositionUncheckedUpdateManyWithoutCalculationNestedInput
+  statusHistory?: Prisma.EventCalculationStatusHistoryUncheckedUpdateManyWithoutCalculationNestedInput
+  additionalRevenues?: Prisma.AdditionalRevenueUncheckedUpdateManyWithoutCalculationNestedInput
+}
+
+export type EventCalculationCreateWithoutAdditionalRevenuesInput = {
+  id?: string
+  status?: $Enums.CalculationStatus
+  version?: number
+  approvedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organization: Prisma.OrganizationCreateNestedOneWithoutEventCalculationsInput
+  event: Prisma.EventCreateNestedOneWithoutCalculationInput
+  approvedByUser?: Prisma.UserCreateNestedOneWithoutApprovedCalculationsInput
+  approvedByMembership?: Prisma.MembershipCreateNestedOneWithoutApprovedCalculationsInput
+  positions?: Prisma.EventServicePositionCreateNestedManyWithoutCalculationInput
+  statusHistory?: Prisma.EventCalculationStatusHistoryCreateNestedManyWithoutCalculationInput
+  ticketPriceTiers?: Prisma.TicketPriceTierCreateNestedManyWithoutCalculationInput
+}
+
+export type EventCalculationUncheckedCreateWithoutAdditionalRevenuesInput = {
+  id?: string
+  organizationId: string
+  eventId: string
+  status?: $Enums.CalculationStatus
+  version?: number
+  approvedAt?: Date | string | null
+  approvedByUserId?: string | null
+  approvedByMembershipId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  positions?: Prisma.EventServicePositionUncheckedCreateNestedManyWithoutCalculationInput
+  statusHistory?: Prisma.EventCalculationStatusHistoryUncheckedCreateNestedManyWithoutCalculationInput
+  ticketPriceTiers?: Prisma.TicketPriceTierUncheckedCreateNestedManyWithoutCalculationInput
+}
+
+export type EventCalculationCreateOrConnectWithoutAdditionalRevenuesInput = {
+  where: Prisma.EventCalculationWhereUniqueInput
+  create: Prisma.XOR<Prisma.EventCalculationCreateWithoutAdditionalRevenuesInput, Prisma.EventCalculationUncheckedCreateWithoutAdditionalRevenuesInput>
+}
+
+export type EventCalculationUpsertWithoutAdditionalRevenuesInput = {
+  update: Prisma.XOR<Prisma.EventCalculationUpdateWithoutAdditionalRevenuesInput, Prisma.EventCalculationUncheckedUpdateWithoutAdditionalRevenuesInput>
+  create: Prisma.XOR<Prisma.EventCalculationCreateWithoutAdditionalRevenuesInput, Prisma.EventCalculationUncheckedCreateWithoutAdditionalRevenuesInput>
+  where?: Prisma.EventCalculationWhereInput
+}
+
+export type EventCalculationUpdateToOneWithWhereWithoutAdditionalRevenuesInput = {
+  where?: Prisma.EventCalculationWhereInput
+  data: Prisma.XOR<Prisma.EventCalculationUpdateWithoutAdditionalRevenuesInput, Prisma.EventCalculationUncheckedUpdateWithoutAdditionalRevenuesInput>
+}
+
+export type EventCalculationUpdateWithoutAdditionalRevenuesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCalculationStatusFieldUpdateOperationsInput | $Enums.CalculationStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutEventCalculationsNestedInput
+  event?: Prisma.EventUpdateOneRequiredWithoutCalculationNestedInput
+  approvedByUser?: Prisma.UserUpdateOneWithoutApprovedCalculationsNestedInput
+  approvedByMembership?: Prisma.MembershipUpdateOneWithoutApprovedCalculationsNestedInput
+  positions?: Prisma.EventServicePositionUpdateManyWithoutCalculationNestedInput
+  statusHistory?: Prisma.EventCalculationStatusHistoryUpdateManyWithoutCalculationNestedInput
+  ticketPriceTiers?: Prisma.TicketPriceTierUpdateManyWithoutCalculationNestedInput
+}
+
+export type EventCalculationUncheckedUpdateWithoutAdditionalRevenuesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  eventId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCalculationStatusFieldUpdateOperationsInput | $Enums.CalculationStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  approvedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedByMembershipId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  positions?: Prisma.EventServicePositionUncheckedUpdateManyWithoutCalculationNestedInput
+  statusHistory?: Prisma.EventCalculationStatusHistoryUncheckedUpdateManyWithoutCalculationNestedInput
+  ticketPriceTiers?: Prisma.TicketPriceTierUncheckedUpdateManyWithoutCalculationNestedInput
 }
 
 export type EventCalculationCreateManyApprovedByUserInput = {
@@ -1125,6 +1363,8 @@ export type EventCalculationUpdateWithoutApprovedByUserInput = {
   approvedByMembership?: Prisma.MembershipUpdateOneWithoutApprovedCalculationsNestedInput
   positions?: Prisma.EventServicePositionUpdateManyWithoutCalculationNestedInput
   statusHistory?: Prisma.EventCalculationStatusHistoryUpdateManyWithoutCalculationNestedInput
+  ticketPriceTiers?: Prisma.TicketPriceTierUpdateManyWithoutCalculationNestedInput
+  additionalRevenues?: Prisma.AdditionalRevenueUpdateManyWithoutCalculationNestedInput
 }
 
 export type EventCalculationUncheckedUpdateWithoutApprovedByUserInput = {
@@ -1139,6 +1379,8 @@ export type EventCalculationUncheckedUpdateWithoutApprovedByUserInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   positions?: Prisma.EventServicePositionUncheckedUpdateManyWithoutCalculationNestedInput
   statusHistory?: Prisma.EventCalculationStatusHistoryUncheckedUpdateManyWithoutCalculationNestedInput
+  ticketPriceTiers?: Prisma.TicketPriceTierUncheckedUpdateManyWithoutCalculationNestedInput
+  additionalRevenues?: Prisma.AdditionalRevenueUncheckedUpdateManyWithoutCalculationNestedInput
 }
 
 export type EventCalculationUncheckedUpdateManyWithoutApprovedByUserInput = {
@@ -1177,6 +1419,8 @@ export type EventCalculationUpdateWithoutOrganizationInput = {
   approvedByMembership?: Prisma.MembershipUpdateOneWithoutApprovedCalculationsNestedInput
   positions?: Prisma.EventServicePositionUpdateManyWithoutCalculationNestedInput
   statusHistory?: Prisma.EventCalculationStatusHistoryUpdateManyWithoutCalculationNestedInput
+  ticketPriceTiers?: Prisma.TicketPriceTierUpdateManyWithoutCalculationNestedInput
+  additionalRevenues?: Prisma.AdditionalRevenueUpdateManyWithoutCalculationNestedInput
 }
 
 export type EventCalculationUncheckedUpdateWithoutOrganizationInput = {
@@ -1191,6 +1435,8 @@ export type EventCalculationUncheckedUpdateWithoutOrganizationInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   positions?: Prisma.EventServicePositionUncheckedUpdateManyWithoutCalculationNestedInput
   statusHistory?: Prisma.EventCalculationStatusHistoryUncheckedUpdateManyWithoutCalculationNestedInput
+  ticketPriceTiers?: Prisma.TicketPriceTierUncheckedUpdateManyWithoutCalculationNestedInput
+  additionalRevenues?: Prisma.AdditionalRevenueUncheckedUpdateManyWithoutCalculationNestedInput
 }
 
 export type EventCalculationUncheckedUpdateManyWithoutOrganizationInput = {
@@ -1228,6 +1474,8 @@ export type EventCalculationUpdateWithoutApprovedByMembershipInput = {
   approvedByUser?: Prisma.UserUpdateOneWithoutApprovedCalculationsNestedInput
   positions?: Prisma.EventServicePositionUpdateManyWithoutCalculationNestedInput
   statusHistory?: Prisma.EventCalculationStatusHistoryUpdateManyWithoutCalculationNestedInput
+  ticketPriceTiers?: Prisma.TicketPriceTierUpdateManyWithoutCalculationNestedInput
+  additionalRevenues?: Prisma.AdditionalRevenueUpdateManyWithoutCalculationNestedInput
 }
 
 export type EventCalculationUncheckedUpdateWithoutApprovedByMembershipInput = {
@@ -1241,6 +1489,8 @@ export type EventCalculationUncheckedUpdateWithoutApprovedByMembershipInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   positions?: Prisma.EventServicePositionUncheckedUpdateManyWithoutCalculationNestedInput
   statusHistory?: Prisma.EventCalculationStatusHistoryUncheckedUpdateManyWithoutCalculationNestedInput
+  ticketPriceTiers?: Prisma.TicketPriceTierUncheckedUpdateManyWithoutCalculationNestedInput
+  additionalRevenues?: Prisma.AdditionalRevenueUncheckedUpdateManyWithoutCalculationNestedInput
 }
 
 export type EventCalculationUncheckedUpdateManyWithoutApprovedByMembershipInput = {
@@ -1262,11 +1512,15 @@ export type EventCalculationUncheckedUpdateManyWithoutApprovedByMembershipInput 
 export type EventCalculationCountOutputType = {
   positions: number
   statusHistory: number
+  ticketPriceTiers: number
+  additionalRevenues: number
 }
 
 export type EventCalculationCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   positions?: boolean | EventCalculationCountOutputTypeCountPositionsArgs
   statusHistory?: boolean | EventCalculationCountOutputTypeCountStatusHistoryArgs
+  ticketPriceTiers?: boolean | EventCalculationCountOutputTypeCountTicketPriceTiersArgs
+  additionalRevenues?: boolean | EventCalculationCountOutputTypeCountAdditionalRevenuesArgs
 }
 
 /**
@@ -1293,6 +1547,20 @@ export type EventCalculationCountOutputTypeCountStatusHistoryArgs<ExtArgs extend
   where?: Prisma.EventCalculationStatusHistoryWhereInput
 }
 
+/**
+ * EventCalculationCountOutputType without action
+ */
+export type EventCalculationCountOutputTypeCountTicketPriceTiersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TicketPriceTierWhereInput
+}
+
+/**
+ * EventCalculationCountOutputType without action
+ */
+export type EventCalculationCountOutputTypeCountAdditionalRevenuesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AdditionalRevenueWhereInput
+}
+
 
 export type EventCalculationSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1311,6 +1579,8 @@ export type EventCalculationSelect<ExtArgs extends runtime.Types.Extensions.Inte
   approvedByMembership?: boolean | Prisma.EventCalculation$approvedByMembershipArgs<ExtArgs>
   positions?: boolean | Prisma.EventCalculation$positionsArgs<ExtArgs>
   statusHistory?: boolean | Prisma.EventCalculation$statusHistoryArgs<ExtArgs>
+  ticketPriceTiers?: boolean | Prisma.EventCalculation$ticketPriceTiersArgs<ExtArgs>
+  additionalRevenues?: boolean | Prisma.EventCalculation$additionalRevenuesArgs<ExtArgs>
   _count?: boolean | Prisma.EventCalculationCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["eventCalculation"]>
 
@@ -1369,6 +1639,8 @@ export type EventCalculationInclude<ExtArgs extends runtime.Types.Extensions.Int
   approvedByMembership?: boolean | Prisma.EventCalculation$approvedByMembershipArgs<ExtArgs>
   positions?: boolean | Prisma.EventCalculation$positionsArgs<ExtArgs>
   statusHistory?: boolean | Prisma.EventCalculation$statusHistoryArgs<ExtArgs>
+  ticketPriceTiers?: boolean | Prisma.EventCalculation$ticketPriceTiersArgs<ExtArgs>
+  additionalRevenues?: boolean | Prisma.EventCalculation$additionalRevenuesArgs<ExtArgs>
   _count?: boolean | Prisma.EventCalculationCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type EventCalculationIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1393,6 +1665,8 @@ export type $EventCalculationPayload<ExtArgs extends runtime.Types.Extensions.In
     approvedByMembership: Prisma.$MembershipPayload<ExtArgs> | null
     positions: Prisma.$EventServicePositionPayload<ExtArgs>[]
     statusHistory: Prisma.$EventCalculationStatusHistoryPayload<ExtArgs>[]
+    ticketPriceTiers: Prisma.$TicketPriceTierPayload<ExtArgs>[]
+    additionalRevenues: Prisma.$AdditionalRevenuePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1805,6 +2079,8 @@ export interface Prisma__EventCalculationClient<T, Null = never, ExtArgs extends
   approvedByMembership<T extends Prisma.EventCalculation$approvedByMembershipArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EventCalculation$approvedByMembershipArgs<ExtArgs>>): Prisma.Prisma__MembershipClient<runtime.Types.Result.GetResult<Prisma.$MembershipPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   positions<T extends Prisma.EventCalculation$positionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EventCalculation$positionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EventServicePositionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   statusHistory<T extends Prisma.EventCalculation$statusHistoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EventCalculation$statusHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EventCalculationStatusHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  ticketPriceTiers<T extends Prisma.EventCalculation$ticketPriceTiersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EventCalculation$ticketPriceTiersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TicketPriceTierPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  additionalRevenues<T extends Prisma.EventCalculation$additionalRevenuesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EventCalculation$additionalRevenuesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AdditionalRevenuePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2328,6 +2604,54 @@ export type EventCalculation$statusHistoryArgs<ExtArgs extends runtime.Types.Ext
   take?: number
   skip?: number
   distinct?: Prisma.EventCalculationStatusHistoryScalarFieldEnum | Prisma.EventCalculationStatusHistoryScalarFieldEnum[]
+}
+
+/**
+ * EventCalculation.ticketPriceTiers
+ */
+export type EventCalculation$ticketPriceTiersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TicketPriceTier
+   */
+  select?: Prisma.TicketPriceTierSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TicketPriceTier
+   */
+  omit?: Prisma.TicketPriceTierOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TicketPriceTierInclude<ExtArgs> | null
+  where?: Prisma.TicketPriceTierWhereInput
+  orderBy?: Prisma.TicketPriceTierOrderByWithRelationInput | Prisma.TicketPriceTierOrderByWithRelationInput[]
+  cursor?: Prisma.TicketPriceTierWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TicketPriceTierScalarFieldEnum | Prisma.TicketPriceTierScalarFieldEnum[]
+}
+
+/**
+ * EventCalculation.additionalRevenues
+ */
+export type EventCalculation$additionalRevenuesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AdditionalRevenue
+   */
+  select?: Prisma.AdditionalRevenueSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AdditionalRevenue
+   */
+  omit?: Prisma.AdditionalRevenueOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AdditionalRevenueInclude<ExtArgs> | null
+  where?: Prisma.AdditionalRevenueWhereInput
+  orderBy?: Prisma.AdditionalRevenueOrderByWithRelationInput | Prisma.AdditionalRevenueOrderByWithRelationInput[]
+  cursor?: Prisma.AdditionalRevenueWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AdditionalRevenueScalarFieldEnum | Prisma.AdditionalRevenueScalarFieldEnum[]
 }
 
 /**

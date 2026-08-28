@@ -24,6 +24,7 @@ export function EditableDetail({
   updatedLabel,
   priorityContent,
   secondaryActions,
+  afterHeader,
   view,
   children,
 }: {
@@ -38,6 +39,7 @@ export function EditableDetail({
   updatedLabel?: string;
   priorityContent?: ReactNode;
   secondaryActions?: ReactNode;
+  afterHeader?: ReactNode;
   view?: ReactNode;
   children?: ReactNode;
 }) {
@@ -85,6 +87,7 @@ export function EditableDetail({
           {!editing ? secondaryActions : null}
         </div>
       </header>
+      {afterHeader}
       {success ? (
         <div className="detail-success">
           <FormMessage message={success} success />

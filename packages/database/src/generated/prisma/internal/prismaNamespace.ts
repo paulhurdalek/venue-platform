@@ -443,6 +443,19 @@ export const ModelName = {
   EventCalculation: 'EventCalculation',
   EventCalculationStatusHistory: 'EventCalculationStatusHistory',
   EventServicePosition: 'EventServicePosition',
+  TicketPriceTier: 'TicketPriceTier',
+  TicketPriceComponent: 'TicketPriceComponent',
+  TicketComponentAllocation: 'TicketComponentAllocation',
+  AdditionalRevenue: 'AdditionalRevenue',
+  TaxRateTemplate: 'TaxRateTemplate',
+  TicketProviderTemplate: 'TicketProviderTemplate',
+  TicketProviderTemplateComponent: 'TicketProviderTemplateComponent',
+  TicketProviderTemplateAllocation: 'TicketProviderTemplateAllocation',
+  CalculationTemplate: 'CalculationTemplate',
+  CalculationTemplateTier: 'CalculationTemplateTier',
+  CalculationTemplateComponent: 'CalculationTemplateComponent',
+  CalculationTemplateAllocation: 'CalculationTemplateAllocation',
+  CalculationTemplateAdditionalRevenue: 'CalculationTemplateAdditionalRevenue',
   VenueDateOption: 'VenueDateOption',
   LocationOccupancy: 'LocationOccupancy'
 } as const
@@ -460,7 +473,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "session" | "account" | "verification" | "rateLimit" | "bootstrapToken" | "organization" | "eventFormat" | "event" | "location" | "membership" | "permission" | "role" | "rolePermission" | "membershipRole" | "membershipLocation" | "invitation" | "invitationRole" | "invitationLocation" | "auditLog" | "artist" | "contact" | "contactRole" | "artistContact" | "artistContactRole" | "businessPartner" | "businessPartnerRole" | "businessPartnerRoleAssignment" | "businessPartnerContact" | "businessPartnerContactRole" | "artistBusinessPartner" | "artistBusinessPartnerRole" | "artistBusinessPartnerContact" | "artistBusinessPartnerContactRole" | "eventFormatLineupRequirement" | "eventLineupRequirement" | "booking" | "eventProgramItem" | "bookingStatusHistory" | "serviceCategory" | "service" | "serviceProviderPrice" | "eventFormatService" | "eventCalculation" | "eventCalculationStatusHistory" | "eventServicePosition" | "venueDateOption" | "locationOccupancy"
+    modelProps: "user" | "session" | "account" | "verification" | "rateLimit" | "bootstrapToken" | "organization" | "eventFormat" | "event" | "location" | "membership" | "permission" | "role" | "rolePermission" | "membershipRole" | "membershipLocation" | "invitation" | "invitationRole" | "invitationLocation" | "auditLog" | "artist" | "contact" | "contactRole" | "artistContact" | "artistContactRole" | "businessPartner" | "businessPartnerRole" | "businessPartnerRoleAssignment" | "businessPartnerContact" | "businessPartnerContactRole" | "artistBusinessPartner" | "artistBusinessPartnerRole" | "artistBusinessPartnerContact" | "artistBusinessPartnerContactRole" | "eventFormatLineupRequirement" | "eventLineupRequirement" | "booking" | "eventProgramItem" | "bookingStatusHistory" | "serviceCategory" | "service" | "serviceProviderPrice" | "eventFormatService" | "eventCalculation" | "eventCalculationStatusHistory" | "eventServicePosition" | "ticketPriceTier" | "ticketPriceComponent" | "ticketComponentAllocation" | "additionalRevenue" | "taxRateTemplate" | "ticketProviderTemplate" | "ticketProviderTemplateComponent" | "ticketProviderTemplateAllocation" | "calculationTemplate" | "calculationTemplateTier" | "calculationTemplateComponent" | "calculationTemplateAllocation" | "calculationTemplateAdditionalRevenue" | "venueDateOption" | "locationOccupancy"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -3868,6 +3881,968 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    TicketPriceTier: {
+      payload: Prisma.$TicketPriceTierPayload<ExtArgs>
+      fields: Prisma.TicketPriceTierFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TicketPriceTierFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketPriceTierPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TicketPriceTierFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketPriceTierPayload>
+        }
+        findFirst: {
+          args: Prisma.TicketPriceTierFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketPriceTierPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TicketPriceTierFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketPriceTierPayload>
+        }
+        findMany: {
+          args: Prisma.TicketPriceTierFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketPriceTierPayload>[]
+        }
+        create: {
+          args: Prisma.TicketPriceTierCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketPriceTierPayload>
+        }
+        createMany: {
+          args: Prisma.TicketPriceTierCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.TicketPriceTierCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketPriceTierPayload>[]
+        }
+        delete: {
+          args: Prisma.TicketPriceTierDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketPriceTierPayload>
+        }
+        update: {
+          args: Prisma.TicketPriceTierUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketPriceTierPayload>
+        }
+        deleteMany: {
+          args: Prisma.TicketPriceTierDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TicketPriceTierUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.TicketPriceTierUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketPriceTierPayload>[]
+        }
+        upsert: {
+          args: Prisma.TicketPriceTierUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketPriceTierPayload>
+        }
+        aggregate: {
+          args: Prisma.TicketPriceTierAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTicketPriceTier>
+        }
+        groupBy: {
+          args: Prisma.TicketPriceTierGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TicketPriceTierGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TicketPriceTierCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TicketPriceTierCountAggregateOutputType> | number
+        }
+      }
+    }
+    TicketPriceComponent: {
+      payload: Prisma.$TicketPriceComponentPayload<ExtArgs>
+      fields: Prisma.TicketPriceComponentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TicketPriceComponentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketPriceComponentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TicketPriceComponentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketPriceComponentPayload>
+        }
+        findFirst: {
+          args: Prisma.TicketPriceComponentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketPriceComponentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TicketPriceComponentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketPriceComponentPayload>
+        }
+        findMany: {
+          args: Prisma.TicketPriceComponentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketPriceComponentPayload>[]
+        }
+        create: {
+          args: Prisma.TicketPriceComponentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketPriceComponentPayload>
+        }
+        createMany: {
+          args: Prisma.TicketPriceComponentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.TicketPriceComponentCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketPriceComponentPayload>[]
+        }
+        delete: {
+          args: Prisma.TicketPriceComponentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketPriceComponentPayload>
+        }
+        update: {
+          args: Prisma.TicketPriceComponentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketPriceComponentPayload>
+        }
+        deleteMany: {
+          args: Prisma.TicketPriceComponentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TicketPriceComponentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.TicketPriceComponentUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketPriceComponentPayload>[]
+        }
+        upsert: {
+          args: Prisma.TicketPriceComponentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketPriceComponentPayload>
+        }
+        aggregate: {
+          args: Prisma.TicketPriceComponentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTicketPriceComponent>
+        }
+        groupBy: {
+          args: Prisma.TicketPriceComponentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TicketPriceComponentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TicketPriceComponentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TicketPriceComponentCountAggregateOutputType> | number
+        }
+      }
+    }
+    TicketComponentAllocation: {
+      payload: Prisma.$TicketComponentAllocationPayload<ExtArgs>
+      fields: Prisma.TicketComponentAllocationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TicketComponentAllocationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketComponentAllocationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TicketComponentAllocationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketComponentAllocationPayload>
+        }
+        findFirst: {
+          args: Prisma.TicketComponentAllocationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketComponentAllocationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TicketComponentAllocationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketComponentAllocationPayload>
+        }
+        findMany: {
+          args: Prisma.TicketComponentAllocationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketComponentAllocationPayload>[]
+        }
+        create: {
+          args: Prisma.TicketComponentAllocationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketComponentAllocationPayload>
+        }
+        createMany: {
+          args: Prisma.TicketComponentAllocationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.TicketComponentAllocationCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketComponentAllocationPayload>[]
+        }
+        delete: {
+          args: Prisma.TicketComponentAllocationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketComponentAllocationPayload>
+        }
+        update: {
+          args: Prisma.TicketComponentAllocationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketComponentAllocationPayload>
+        }
+        deleteMany: {
+          args: Prisma.TicketComponentAllocationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TicketComponentAllocationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.TicketComponentAllocationUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketComponentAllocationPayload>[]
+        }
+        upsert: {
+          args: Prisma.TicketComponentAllocationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketComponentAllocationPayload>
+        }
+        aggregate: {
+          args: Prisma.TicketComponentAllocationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTicketComponentAllocation>
+        }
+        groupBy: {
+          args: Prisma.TicketComponentAllocationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TicketComponentAllocationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TicketComponentAllocationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TicketComponentAllocationCountAggregateOutputType> | number
+        }
+      }
+    }
+    AdditionalRevenue: {
+      payload: Prisma.$AdditionalRevenuePayload<ExtArgs>
+      fields: Prisma.AdditionalRevenueFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AdditionalRevenueFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdditionalRevenuePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AdditionalRevenueFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdditionalRevenuePayload>
+        }
+        findFirst: {
+          args: Prisma.AdditionalRevenueFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdditionalRevenuePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AdditionalRevenueFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdditionalRevenuePayload>
+        }
+        findMany: {
+          args: Prisma.AdditionalRevenueFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdditionalRevenuePayload>[]
+        }
+        create: {
+          args: Prisma.AdditionalRevenueCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdditionalRevenuePayload>
+        }
+        createMany: {
+          args: Prisma.AdditionalRevenueCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.AdditionalRevenueCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdditionalRevenuePayload>[]
+        }
+        delete: {
+          args: Prisma.AdditionalRevenueDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdditionalRevenuePayload>
+        }
+        update: {
+          args: Prisma.AdditionalRevenueUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdditionalRevenuePayload>
+        }
+        deleteMany: {
+          args: Prisma.AdditionalRevenueDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AdditionalRevenueUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.AdditionalRevenueUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdditionalRevenuePayload>[]
+        }
+        upsert: {
+          args: Prisma.AdditionalRevenueUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdditionalRevenuePayload>
+        }
+        aggregate: {
+          args: Prisma.AdditionalRevenueAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAdditionalRevenue>
+        }
+        groupBy: {
+          args: Prisma.AdditionalRevenueGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AdditionalRevenueGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AdditionalRevenueCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AdditionalRevenueCountAggregateOutputType> | number
+        }
+      }
+    }
+    TaxRateTemplate: {
+      payload: Prisma.$TaxRateTemplatePayload<ExtArgs>
+      fields: Prisma.TaxRateTemplateFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TaxRateTemplateFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaxRateTemplatePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TaxRateTemplateFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaxRateTemplatePayload>
+        }
+        findFirst: {
+          args: Prisma.TaxRateTemplateFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaxRateTemplatePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TaxRateTemplateFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaxRateTemplatePayload>
+        }
+        findMany: {
+          args: Prisma.TaxRateTemplateFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaxRateTemplatePayload>[]
+        }
+        create: {
+          args: Prisma.TaxRateTemplateCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaxRateTemplatePayload>
+        }
+        createMany: {
+          args: Prisma.TaxRateTemplateCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.TaxRateTemplateCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaxRateTemplatePayload>[]
+        }
+        delete: {
+          args: Prisma.TaxRateTemplateDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaxRateTemplatePayload>
+        }
+        update: {
+          args: Prisma.TaxRateTemplateUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaxRateTemplatePayload>
+        }
+        deleteMany: {
+          args: Prisma.TaxRateTemplateDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TaxRateTemplateUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.TaxRateTemplateUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaxRateTemplatePayload>[]
+        }
+        upsert: {
+          args: Prisma.TaxRateTemplateUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaxRateTemplatePayload>
+        }
+        aggregate: {
+          args: Prisma.TaxRateTemplateAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTaxRateTemplate>
+        }
+        groupBy: {
+          args: Prisma.TaxRateTemplateGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TaxRateTemplateGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TaxRateTemplateCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TaxRateTemplateCountAggregateOutputType> | number
+        }
+      }
+    }
+    TicketProviderTemplate: {
+      payload: Prisma.$TicketProviderTemplatePayload<ExtArgs>
+      fields: Prisma.TicketProviderTemplateFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TicketProviderTemplateFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketProviderTemplatePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TicketProviderTemplateFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketProviderTemplatePayload>
+        }
+        findFirst: {
+          args: Prisma.TicketProviderTemplateFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketProviderTemplatePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TicketProviderTemplateFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketProviderTemplatePayload>
+        }
+        findMany: {
+          args: Prisma.TicketProviderTemplateFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketProviderTemplatePayload>[]
+        }
+        create: {
+          args: Prisma.TicketProviderTemplateCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketProviderTemplatePayload>
+        }
+        createMany: {
+          args: Prisma.TicketProviderTemplateCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.TicketProviderTemplateCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketProviderTemplatePayload>[]
+        }
+        delete: {
+          args: Prisma.TicketProviderTemplateDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketProviderTemplatePayload>
+        }
+        update: {
+          args: Prisma.TicketProviderTemplateUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketProviderTemplatePayload>
+        }
+        deleteMany: {
+          args: Prisma.TicketProviderTemplateDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TicketProviderTemplateUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.TicketProviderTemplateUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketProviderTemplatePayload>[]
+        }
+        upsert: {
+          args: Prisma.TicketProviderTemplateUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketProviderTemplatePayload>
+        }
+        aggregate: {
+          args: Prisma.TicketProviderTemplateAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTicketProviderTemplate>
+        }
+        groupBy: {
+          args: Prisma.TicketProviderTemplateGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TicketProviderTemplateGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TicketProviderTemplateCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TicketProviderTemplateCountAggregateOutputType> | number
+        }
+      }
+    }
+    TicketProviderTemplateComponent: {
+      payload: Prisma.$TicketProviderTemplateComponentPayload<ExtArgs>
+      fields: Prisma.TicketProviderTemplateComponentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TicketProviderTemplateComponentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketProviderTemplateComponentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TicketProviderTemplateComponentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketProviderTemplateComponentPayload>
+        }
+        findFirst: {
+          args: Prisma.TicketProviderTemplateComponentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketProviderTemplateComponentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TicketProviderTemplateComponentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketProviderTemplateComponentPayload>
+        }
+        findMany: {
+          args: Prisma.TicketProviderTemplateComponentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketProviderTemplateComponentPayload>[]
+        }
+        create: {
+          args: Prisma.TicketProviderTemplateComponentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketProviderTemplateComponentPayload>
+        }
+        createMany: {
+          args: Prisma.TicketProviderTemplateComponentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.TicketProviderTemplateComponentCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketProviderTemplateComponentPayload>[]
+        }
+        delete: {
+          args: Prisma.TicketProviderTemplateComponentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketProviderTemplateComponentPayload>
+        }
+        update: {
+          args: Prisma.TicketProviderTemplateComponentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketProviderTemplateComponentPayload>
+        }
+        deleteMany: {
+          args: Prisma.TicketProviderTemplateComponentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TicketProviderTemplateComponentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.TicketProviderTemplateComponentUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketProviderTemplateComponentPayload>[]
+        }
+        upsert: {
+          args: Prisma.TicketProviderTemplateComponentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketProviderTemplateComponentPayload>
+        }
+        aggregate: {
+          args: Prisma.TicketProviderTemplateComponentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTicketProviderTemplateComponent>
+        }
+        groupBy: {
+          args: Prisma.TicketProviderTemplateComponentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TicketProviderTemplateComponentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TicketProviderTemplateComponentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TicketProviderTemplateComponentCountAggregateOutputType> | number
+        }
+      }
+    }
+    TicketProviderTemplateAllocation: {
+      payload: Prisma.$TicketProviderTemplateAllocationPayload<ExtArgs>
+      fields: Prisma.TicketProviderTemplateAllocationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TicketProviderTemplateAllocationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketProviderTemplateAllocationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TicketProviderTemplateAllocationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketProviderTemplateAllocationPayload>
+        }
+        findFirst: {
+          args: Prisma.TicketProviderTemplateAllocationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketProviderTemplateAllocationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TicketProviderTemplateAllocationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketProviderTemplateAllocationPayload>
+        }
+        findMany: {
+          args: Prisma.TicketProviderTemplateAllocationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketProviderTemplateAllocationPayload>[]
+        }
+        create: {
+          args: Prisma.TicketProviderTemplateAllocationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketProviderTemplateAllocationPayload>
+        }
+        createMany: {
+          args: Prisma.TicketProviderTemplateAllocationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.TicketProviderTemplateAllocationCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketProviderTemplateAllocationPayload>[]
+        }
+        delete: {
+          args: Prisma.TicketProviderTemplateAllocationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketProviderTemplateAllocationPayload>
+        }
+        update: {
+          args: Prisma.TicketProviderTemplateAllocationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketProviderTemplateAllocationPayload>
+        }
+        deleteMany: {
+          args: Prisma.TicketProviderTemplateAllocationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TicketProviderTemplateAllocationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.TicketProviderTemplateAllocationUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketProviderTemplateAllocationPayload>[]
+        }
+        upsert: {
+          args: Prisma.TicketProviderTemplateAllocationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketProviderTemplateAllocationPayload>
+        }
+        aggregate: {
+          args: Prisma.TicketProviderTemplateAllocationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTicketProviderTemplateAllocation>
+        }
+        groupBy: {
+          args: Prisma.TicketProviderTemplateAllocationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TicketProviderTemplateAllocationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TicketProviderTemplateAllocationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TicketProviderTemplateAllocationCountAggregateOutputType> | number
+        }
+      }
+    }
+    CalculationTemplate: {
+      payload: Prisma.$CalculationTemplatePayload<ExtArgs>
+      fields: Prisma.CalculationTemplateFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CalculationTemplateFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CalculationTemplatePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CalculationTemplateFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CalculationTemplatePayload>
+        }
+        findFirst: {
+          args: Prisma.CalculationTemplateFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CalculationTemplatePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CalculationTemplateFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CalculationTemplatePayload>
+        }
+        findMany: {
+          args: Prisma.CalculationTemplateFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CalculationTemplatePayload>[]
+        }
+        create: {
+          args: Prisma.CalculationTemplateCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CalculationTemplatePayload>
+        }
+        createMany: {
+          args: Prisma.CalculationTemplateCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CalculationTemplateCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CalculationTemplatePayload>[]
+        }
+        delete: {
+          args: Prisma.CalculationTemplateDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CalculationTemplatePayload>
+        }
+        update: {
+          args: Prisma.CalculationTemplateUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CalculationTemplatePayload>
+        }
+        deleteMany: {
+          args: Prisma.CalculationTemplateDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CalculationTemplateUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CalculationTemplateUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CalculationTemplatePayload>[]
+        }
+        upsert: {
+          args: Prisma.CalculationTemplateUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CalculationTemplatePayload>
+        }
+        aggregate: {
+          args: Prisma.CalculationTemplateAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCalculationTemplate>
+        }
+        groupBy: {
+          args: Prisma.CalculationTemplateGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CalculationTemplateGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CalculationTemplateCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CalculationTemplateCountAggregateOutputType> | number
+        }
+      }
+    }
+    CalculationTemplateTier: {
+      payload: Prisma.$CalculationTemplateTierPayload<ExtArgs>
+      fields: Prisma.CalculationTemplateTierFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CalculationTemplateTierFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CalculationTemplateTierPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CalculationTemplateTierFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CalculationTemplateTierPayload>
+        }
+        findFirst: {
+          args: Prisma.CalculationTemplateTierFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CalculationTemplateTierPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CalculationTemplateTierFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CalculationTemplateTierPayload>
+        }
+        findMany: {
+          args: Prisma.CalculationTemplateTierFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CalculationTemplateTierPayload>[]
+        }
+        create: {
+          args: Prisma.CalculationTemplateTierCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CalculationTemplateTierPayload>
+        }
+        createMany: {
+          args: Prisma.CalculationTemplateTierCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CalculationTemplateTierCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CalculationTemplateTierPayload>[]
+        }
+        delete: {
+          args: Prisma.CalculationTemplateTierDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CalculationTemplateTierPayload>
+        }
+        update: {
+          args: Prisma.CalculationTemplateTierUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CalculationTemplateTierPayload>
+        }
+        deleteMany: {
+          args: Prisma.CalculationTemplateTierDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CalculationTemplateTierUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CalculationTemplateTierUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CalculationTemplateTierPayload>[]
+        }
+        upsert: {
+          args: Prisma.CalculationTemplateTierUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CalculationTemplateTierPayload>
+        }
+        aggregate: {
+          args: Prisma.CalculationTemplateTierAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCalculationTemplateTier>
+        }
+        groupBy: {
+          args: Prisma.CalculationTemplateTierGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CalculationTemplateTierGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CalculationTemplateTierCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CalculationTemplateTierCountAggregateOutputType> | number
+        }
+      }
+    }
+    CalculationTemplateComponent: {
+      payload: Prisma.$CalculationTemplateComponentPayload<ExtArgs>
+      fields: Prisma.CalculationTemplateComponentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CalculationTemplateComponentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CalculationTemplateComponentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CalculationTemplateComponentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CalculationTemplateComponentPayload>
+        }
+        findFirst: {
+          args: Prisma.CalculationTemplateComponentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CalculationTemplateComponentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CalculationTemplateComponentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CalculationTemplateComponentPayload>
+        }
+        findMany: {
+          args: Prisma.CalculationTemplateComponentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CalculationTemplateComponentPayload>[]
+        }
+        create: {
+          args: Prisma.CalculationTemplateComponentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CalculationTemplateComponentPayload>
+        }
+        createMany: {
+          args: Prisma.CalculationTemplateComponentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CalculationTemplateComponentCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CalculationTemplateComponentPayload>[]
+        }
+        delete: {
+          args: Prisma.CalculationTemplateComponentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CalculationTemplateComponentPayload>
+        }
+        update: {
+          args: Prisma.CalculationTemplateComponentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CalculationTemplateComponentPayload>
+        }
+        deleteMany: {
+          args: Prisma.CalculationTemplateComponentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CalculationTemplateComponentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CalculationTemplateComponentUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CalculationTemplateComponentPayload>[]
+        }
+        upsert: {
+          args: Prisma.CalculationTemplateComponentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CalculationTemplateComponentPayload>
+        }
+        aggregate: {
+          args: Prisma.CalculationTemplateComponentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCalculationTemplateComponent>
+        }
+        groupBy: {
+          args: Prisma.CalculationTemplateComponentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CalculationTemplateComponentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CalculationTemplateComponentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CalculationTemplateComponentCountAggregateOutputType> | number
+        }
+      }
+    }
+    CalculationTemplateAllocation: {
+      payload: Prisma.$CalculationTemplateAllocationPayload<ExtArgs>
+      fields: Prisma.CalculationTemplateAllocationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CalculationTemplateAllocationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CalculationTemplateAllocationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CalculationTemplateAllocationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CalculationTemplateAllocationPayload>
+        }
+        findFirst: {
+          args: Prisma.CalculationTemplateAllocationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CalculationTemplateAllocationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CalculationTemplateAllocationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CalculationTemplateAllocationPayload>
+        }
+        findMany: {
+          args: Prisma.CalculationTemplateAllocationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CalculationTemplateAllocationPayload>[]
+        }
+        create: {
+          args: Prisma.CalculationTemplateAllocationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CalculationTemplateAllocationPayload>
+        }
+        createMany: {
+          args: Prisma.CalculationTemplateAllocationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CalculationTemplateAllocationCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CalculationTemplateAllocationPayload>[]
+        }
+        delete: {
+          args: Prisma.CalculationTemplateAllocationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CalculationTemplateAllocationPayload>
+        }
+        update: {
+          args: Prisma.CalculationTemplateAllocationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CalculationTemplateAllocationPayload>
+        }
+        deleteMany: {
+          args: Prisma.CalculationTemplateAllocationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CalculationTemplateAllocationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CalculationTemplateAllocationUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CalculationTemplateAllocationPayload>[]
+        }
+        upsert: {
+          args: Prisma.CalculationTemplateAllocationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CalculationTemplateAllocationPayload>
+        }
+        aggregate: {
+          args: Prisma.CalculationTemplateAllocationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCalculationTemplateAllocation>
+        }
+        groupBy: {
+          args: Prisma.CalculationTemplateAllocationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CalculationTemplateAllocationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CalculationTemplateAllocationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CalculationTemplateAllocationCountAggregateOutputType> | number
+        }
+      }
+    }
+    CalculationTemplateAdditionalRevenue: {
+      payload: Prisma.$CalculationTemplateAdditionalRevenuePayload<ExtArgs>
+      fields: Prisma.CalculationTemplateAdditionalRevenueFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CalculationTemplateAdditionalRevenueFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CalculationTemplateAdditionalRevenuePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CalculationTemplateAdditionalRevenueFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CalculationTemplateAdditionalRevenuePayload>
+        }
+        findFirst: {
+          args: Prisma.CalculationTemplateAdditionalRevenueFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CalculationTemplateAdditionalRevenuePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CalculationTemplateAdditionalRevenueFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CalculationTemplateAdditionalRevenuePayload>
+        }
+        findMany: {
+          args: Prisma.CalculationTemplateAdditionalRevenueFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CalculationTemplateAdditionalRevenuePayload>[]
+        }
+        create: {
+          args: Prisma.CalculationTemplateAdditionalRevenueCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CalculationTemplateAdditionalRevenuePayload>
+        }
+        createMany: {
+          args: Prisma.CalculationTemplateAdditionalRevenueCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CalculationTemplateAdditionalRevenueCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CalculationTemplateAdditionalRevenuePayload>[]
+        }
+        delete: {
+          args: Prisma.CalculationTemplateAdditionalRevenueDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CalculationTemplateAdditionalRevenuePayload>
+        }
+        update: {
+          args: Prisma.CalculationTemplateAdditionalRevenueUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CalculationTemplateAdditionalRevenuePayload>
+        }
+        deleteMany: {
+          args: Prisma.CalculationTemplateAdditionalRevenueDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CalculationTemplateAdditionalRevenueUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CalculationTemplateAdditionalRevenueUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CalculationTemplateAdditionalRevenuePayload>[]
+        }
+        upsert: {
+          args: Prisma.CalculationTemplateAdditionalRevenueUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CalculationTemplateAdditionalRevenuePayload>
+        }
+        aggregate: {
+          args: Prisma.CalculationTemplateAdditionalRevenueAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCalculationTemplateAdditionalRevenue>
+        }
+        groupBy: {
+          args: Prisma.CalculationTemplateAdditionalRevenueGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CalculationTemplateAdditionalRevenueGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CalculationTemplateAdditionalRevenueCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CalculationTemplateAdditionalRevenueCountAggregateOutputType> | number
+        }
+      }
+    }
     VenueDateOption: {
       payload: Prisma.$VenueDateOptionPayload<ExtArgs>
       fields: Prisma.VenueDateOptionFieldRefs
@@ -4168,6 +5143,7 @@ export const EventFormatScalarFieldEnum = {
   startMinutes: 'startMinutes',
   endMinutes: 'endMinutes',
   recordingDefault: 'recordingDefault',
+  defaultCalculationTemplateId: 'defaultCalculationTemplateId',
   status: 'status',
   archivedAt: 'archivedAt',
   version: 'version',
@@ -4202,6 +5178,10 @@ export const EventScalarFieldEnum = {
   endMinutes: 'endMinutes',
   recordingSetting: 'recordingSetting',
   timezone: 'timezone',
+  expectedGuestCount: 'expectedGuestCount',
+  sourceCalculationTemplateId: 'sourceCalculationTemplateId',
+  sourceCalculationTemplateVersion: 'sourceCalculationTemplateVersion',
+  calculationTemplateNameSnapshot: 'calculationTemplateNameSnapshot',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -4802,6 +5782,309 @@ export const EventServicePositionScalarFieldEnum = {
 export type EventServicePositionScalarFieldEnum = (typeof EventServicePositionScalarFieldEnum)[keyof typeof EventServicePositionScalarFieldEnum]
 
 
+export const TicketPriceTierScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  eventId: 'eventId',
+  calculationId: 'calculationId',
+  name: 'name',
+  expectedQuantity: 'expectedQuantity',
+  baseInputType: 'baseInputType',
+  baseInputMinor: 'baseInputMinor',
+  baseNetUnitMinor: 'baseNetUnitMinor',
+  baseGrossUnitMinor: 'baseGrossUnitMinor',
+  baseTaxRateBasisPoints: 'baseTaxRateBasisPoints',
+  baseTaxRateTemplateId: 'baseTaxRateTemplateId',
+  baseTaxRateTemplateVersion: 'baseTaxRateTemplateVersion',
+  baseTaxRateNameSnapshot: 'baseTaxRateNameSnapshot',
+  sourceTicketProviderTemplateId: 'sourceTicketProviderTemplateId',
+  sourceTicketProviderTemplateVersion: 'sourceTicketProviderTemplateVersion',
+  sourceTicketProviderNameSnapshot: 'sourceTicketProviderNameSnapshot',
+  sortOrder: 'sortOrder',
+  status: 'status',
+  version: 'version',
+  archivedAt: 'archivedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TicketPriceTierScalarFieldEnum = (typeof TicketPriceTierScalarFieldEnum)[keyof typeof TicketPriceTierScalarFieldEnum]
+
+
+export const TicketPriceComponentScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  ticketPriceTierId: 'ticketPriceTierId',
+  name: 'name',
+  amountType: 'amountType',
+  percentageBasis: 'percentageBasis',
+  percentageRateBasisPoints: 'percentageRateBasisPoints',
+  inputType: 'inputType',
+  inputAmountMinor: 'inputAmountMinor',
+  taxRateBasisPoints: 'taxRateBasisPoints',
+  taxRateTemplateId: 'taxRateTemplateId',
+  taxRateTemplateVersion: 'taxRateTemplateVersion',
+  taxRateNameSnapshot: 'taxRateNameSnapshot',
+  guestPays: 'guestPays',
+  sortOrder: 'sortOrder',
+  status: 'status',
+  version: 'version',
+  archivedAt: 'archivedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TicketPriceComponentScalarFieldEnum = (typeof TicketPriceComponentScalarFieldEnum)[keyof typeof TicketPriceComponentScalarFieldEnum]
+
+
+export const TicketComponentAllocationScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  ticketPriceComponentId: 'ticketPriceComponentId',
+  recipientType: 'recipientType',
+  artistId: 'artistId',
+  businessPartnerId: 'businessPartnerId',
+  externalRecipientName: 'externalRecipientName',
+  allocationType: 'allocationType',
+  percentageBasisPoints: 'percentageBasisPoints',
+  fixedAmountMinor: 'fixedAmountMinor',
+  sortOrder: 'sortOrder',
+  status: 'status',
+  version: 'version',
+  archivedAt: 'archivedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TicketComponentAllocationScalarFieldEnum = (typeof TicketComponentAllocationScalarFieldEnum)[keyof typeof TicketComponentAllocationScalarFieldEnum]
+
+
+export const AdditionalRevenueScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  eventId: 'eventId',
+  calculationId: 'calculationId',
+  name: 'name',
+  calculationType: 'calculationType',
+  inputType: 'inputType',
+  inputAmountMinor: 'inputAmountMinor',
+  percentageRateBasisPoints: 'percentageRateBasisPoints',
+  taxRateBasisPoints: 'taxRateBasisPoints',
+  taxRateTemplateId: 'taxRateTemplateId',
+  taxRateTemplateVersion: 'taxRateTemplateVersion',
+  taxRateNameSnapshot: 'taxRateNameSnapshot',
+  confirmationStatus: 'confirmationStatus',
+  note: 'note',
+  sortOrder: 'sortOrder',
+  status: 'status',
+  version: 'version',
+  archivedAt: 'archivedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AdditionalRevenueScalarFieldEnum = (typeof AdditionalRevenueScalarFieldEnum)[keyof typeof AdditionalRevenueScalarFieldEnum]
+
+
+export const TaxRateTemplateScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  name: 'name',
+  normalizedName: 'normalizedName',
+  rateBasisPoints: 'rateBasisPoints',
+  status: 'status',
+  version: 'version',
+  archivedAt: 'archivedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TaxRateTemplateScalarFieldEnum = (typeof TaxRateTemplateScalarFieldEnum)[keyof typeof TaxRateTemplateScalarFieldEnum]
+
+
+export const TicketProviderTemplateScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  name: 'name',
+  normalizedName: 'normalizedName',
+  description: 'description',
+  status: 'status',
+  version: 'version',
+  archivedAt: 'archivedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TicketProviderTemplateScalarFieldEnum = (typeof TicketProviderTemplateScalarFieldEnum)[keyof typeof TicketProviderTemplateScalarFieldEnum]
+
+
+export const TicketProviderTemplateComponentScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  ticketProviderTemplateId: 'ticketProviderTemplateId',
+  name: 'name',
+  amountType: 'amountType',
+  percentageBasis: 'percentageBasis',
+  percentageRateBasisPoints: 'percentageRateBasisPoints',
+  inputType: 'inputType',
+  inputAmountMinor: 'inputAmountMinor',
+  taxRateTemplateId: 'taxRateTemplateId',
+  taxRateTemplateVersion: 'taxRateTemplateVersion',
+  taxRateNameSnapshot: 'taxRateNameSnapshot',
+  taxRateBasisPoints: 'taxRateBasisPoints',
+  guestPays: 'guestPays',
+  sortOrder: 'sortOrder',
+  status: 'status',
+  version: 'version',
+  archivedAt: 'archivedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TicketProviderTemplateComponentScalarFieldEnum = (typeof TicketProviderTemplateComponentScalarFieldEnum)[keyof typeof TicketProviderTemplateComponentScalarFieldEnum]
+
+
+export const TicketProviderTemplateAllocationScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  ticketProviderTemplateComponentId: 'ticketProviderTemplateComponentId',
+  recipientType: 'recipientType',
+  artistId: 'artistId',
+  businessPartnerId: 'businessPartnerId',
+  externalRecipientName: 'externalRecipientName',
+  allocationType: 'allocationType',
+  percentageBasisPoints: 'percentageBasisPoints',
+  fixedAmountMinor: 'fixedAmountMinor',
+  sortOrder: 'sortOrder',
+  status: 'status',
+  version: 'version',
+  archivedAt: 'archivedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TicketProviderTemplateAllocationScalarFieldEnum = (typeof TicketProviderTemplateAllocationScalarFieldEnum)[keyof typeof TicketProviderTemplateAllocationScalarFieldEnum]
+
+
+export const CalculationTemplateScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  name: 'name',
+  normalizedName: 'normalizedName',
+  description: 'description',
+  expectedGuestCount: 'expectedGuestCount',
+  status: 'status',
+  version: 'version',
+  archivedAt: 'archivedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CalculationTemplateScalarFieldEnum = (typeof CalculationTemplateScalarFieldEnum)[keyof typeof CalculationTemplateScalarFieldEnum]
+
+
+export const CalculationTemplateTierScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  calculationTemplateId: 'calculationTemplateId',
+  name: 'name',
+  expectedQuantity: 'expectedQuantity',
+  baseInputType: 'baseInputType',
+  baseInputMinor: 'baseInputMinor',
+  baseNetUnitMinor: 'baseNetUnitMinor',
+  baseGrossUnitMinor: 'baseGrossUnitMinor',
+  baseTaxRateTemplateId: 'baseTaxRateTemplateId',
+  baseTaxRateTemplateVersion: 'baseTaxRateTemplateVersion',
+  baseTaxRateNameSnapshot: 'baseTaxRateNameSnapshot',
+  baseTaxRateBasisPoints: 'baseTaxRateBasisPoints',
+  sourceTicketProviderTemplateId: 'sourceTicketProviderTemplateId',
+  sourceTicketProviderTemplateVersion: 'sourceTicketProviderTemplateVersion',
+  sourceTicketProviderNameSnapshot: 'sourceTicketProviderNameSnapshot',
+  sortOrder: 'sortOrder',
+  status: 'status',
+  version: 'version',
+  archivedAt: 'archivedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CalculationTemplateTierScalarFieldEnum = (typeof CalculationTemplateTierScalarFieldEnum)[keyof typeof CalculationTemplateTierScalarFieldEnum]
+
+
+export const CalculationTemplateComponentScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  calculationTemplateTierId: 'calculationTemplateTierId',
+  name: 'name',
+  amountType: 'amountType',
+  percentageBasis: 'percentageBasis',
+  percentageRateBasisPoints: 'percentageRateBasisPoints',
+  inputType: 'inputType',
+  inputAmountMinor: 'inputAmountMinor',
+  taxRateTemplateId: 'taxRateTemplateId',
+  taxRateTemplateVersion: 'taxRateTemplateVersion',
+  taxRateNameSnapshot: 'taxRateNameSnapshot',
+  taxRateBasisPoints: 'taxRateBasisPoints',
+  guestPays: 'guestPays',
+  sortOrder: 'sortOrder',
+  status: 'status',
+  version: 'version',
+  archivedAt: 'archivedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CalculationTemplateComponentScalarFieldEnum = (typeof CalculationTemplateComponentScalarFieldEnum)[keyof typeof CalculationTemplateComponentScalarFieldEnum]
+
+
+export const CalculationTemplateAllocationScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  calculationTemplateComponentId: 'calculationTemplateComponentId',
+  recipientType: 'recipientType',
+  artistId: 'artistId',
+  businessPartnerId: 'businessPartnerId',
+  externalRecipientName: 'externalRecipientName',
+  allocationType: 'allocationType',
+  percentageBasisPoints: 'percentageBasisPoints',
+  fixedAmountMinor: 'fixedAmountMinor',
+  sortOrder: 'sortOrder',
+  status: 'status',
+  version: 'version',
+  archivedAt: 'archivedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CalculationTemplateAllocationScalarFieldEnum = (typeof CalculationTemplateAllocationScalarFieldEnum)[keyof typeof CalculationTemplateAllocationScalarFieldEnum]
+
+
+export const CalculationTemplateAdditionalRevenueScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  calculationTemplateId: 'calculationTemplateId',
+  name: 'name',
+  calculationType: 'calculationType',
+  inputType: 'inputType',
+  inputAmountMinor: 'inputAmountMinor',
+  percentageRateBasisPoints: 'percentageRateBasisPoints',
+  taxRateTemplateId: 'taxRateTemplateId',
+  taxRateTemplateVersion: 'taxRateTemplateVersion',
+  taxRateNameSnapshot: 'taxRateNameSnapshot',
+  taxRateBasisPoints: 'taxRateBasisPoints',
+  confirmationStatus: 'confirmationStatus',
+  note: 'note',
+  sortOrder: 'sortOrder',
+  status: 'status',
+  version: 'version',
+  archivedAt: 'archivedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CalculationTemplateAdditionalRevenueScalarFieldEnum = (typeof CalculationTemplateAdditionalRevenueScalarFieldEnum)[keyof typeof CalculationTemplateAdditionalRevenueScalarFieldEnum]
+
+
 export const VenueDateOptionScalarFieldEnum = {
   id: 'id',
   organizationId: 'organizationId',
@@ -5202,6 +6485,104 @@ export type ListEnumCostStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$P
 
 
 /**
+ * Reference to a field of type 'PriceInputType'
+ */
+export type EnumPriceInputTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PriceInputType'>
+    
+
+
+/**
+ * Reference to a field of type 'PriceInputType[]'
+ */
+export type ListEnumPriceInputTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PriceInputType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'RevenueAmountType'
+ */
+export type EnumRevenueAmountTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RevenueAmountType'>
+    
+
+
+/**
+ * Reference to a field of type 'RevenueAmountType[]'
+ */
+export type ListEnumRevenueAmountTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RevenueAmountType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'TicketPercentageBasis'
+ */
+export type EnumTicketPercentageBasisFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TicketPercentageBasis'>
+    
+
+
+/**
+ * Reference to a field of type 'TicketPercentageBasis[]'
+ */
+export type ListEnumTicketPercentageBasisFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TicketPercentageBasis[]'>
+    
+
+
+/**
+ * Reference to a field of type 'RevenueRecipientType'
+ */
+export type EnumRevenueRecipientTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RevenueRecipientType'>
+    
+
+
+/**
+ * Reference to a field of type 'RevenueRecipientType[]'
+ */
+export type ListEnumRevenueRecipientTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RevenueRecipientType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'RevenueAllocationType'
+ */
+export type EnumRevenueAllocationTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RevenueAllocationType'>
+    
+
+
+/**
+ * Reference to a field of type 'RevenueAllocationType[]'
+ */
+export type ListEnumRevenueAllocationTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RevenueAllocationType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'AdditionalRevenueCalculationType'
+ */
+export type EnumAdditionalRevenueCalculationTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AdditionalRevenueCalculationType'>
+    
+
+
+/**
+ * Reference to a field of type 'AdditionalRevenueCalculationType[]'
+ */
+export type ListEnumAdditionalRevenueCalculationTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AdditionalRevenueCalculationType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'RevenueConfirmationStatus'
+ */
+export type EnumRevenueConfirmationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RevenueConfirmationStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'RevenueConfirmationStatus[]'
+ */
+export type ListEnumRevenueConfirmationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RevenueConfirmationStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'VenueDateOptionRank'
  */
 export type EnumVenueDateOptionRankFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'VenueDateOptionRank'>
@@ -5453,6 +6834,19 @@ export type GlobalOmitConfig = {
   eventCalculation?: Prisma.EventCalculationOmit
   eventCalculationStatusHistory?: Prisma.EventCalculationStatusHistoryOmit
   eventServicePosition?: Prisma.EventServicePositionOmit
+  ticketPriceTier?: Prisma.TicketPriceTierOmit
+  ticketPriceComponent?: Prisma.TicketPriceComponentOmit
+  ticketComponentAllocation?: Prisma.TicketComponentAllocationOmit
+  additionalRevenue?: Prisma.AdditionalRevenueOmit
+  taxRateTemplate?: Prisma.TaxRateTemplateOmit
+  ticketProviderTemplate?: Prisma.TicketProviderTemplateOmit
+  ticketProviderTemplateComponent?: Prisma.TicketProviderTemplateComponentOmit
+  ticketProviderTemplateAllocation?: Prisma.TicketProviderTemplateAllocationOmit
+  calculationTemplate?: Prisma.CalculationTemplateOmit
+  calculationTemplateTier?: Prisma.CalculationTemplateTierOmit
+  calculationTemplateComponent?: Prisma.CalculationTemplateComponentOmit
+  calculationTemplateAllocation?: Prisma.CalculationTemplateAllocationOmit
+  calculationTemplateAdditionalRevenue?: Prisma.CalculationTemplateAdditionalRevenueOmit
   venueDateOption?: Prisma.VenueDateOptionOmit
   locationOccupancy?: Prisma.LocationOccupancyOmit
 }

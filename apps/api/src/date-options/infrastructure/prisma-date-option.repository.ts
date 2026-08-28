@@ -561,6 +561,10 @@ function mapEvent(row: EventRow): EventRecord {
     timezone: row.timezone,
     occupancyComplete:
       eventOccupancyInterval(row.eventDate.toISOString().slice(0, 10), row) !== undefined,
+    expectedGuestCount: row.expectedGuestCount,
+    sourceCalculationTemplateId: row.sourceCalculationTemplateId,
+    sourceCalculationTemplateVersion: row.sourceCalculationTemplateVersion,
+    calculationTemplateNameSnapshot: row.calculationTemplateNameSnapshot,
     bookingSummary: {
       artistRequiredCount: 0,
       artistConfirmedCount: 0,

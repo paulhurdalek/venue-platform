@@ -14,7 +14,11 @@ import type {
   EventFormatTransaction,
   SafeAuditMetadata,
 } from '../application/event-format.repository.js';
-import { EventFormatNameConflictError, formatLocalTime } from '../domain/event-format.rules.js';
+import {
+  EventFormatNameConflictError,
+  EventFormatValidationError,
+  formatLocalTime,
+} from '../domain/event-format.rules.js';
 
 type Database = DatabaseClient | TransactionClient;
 type EventFormatRow = Prisma.EventFormatGetPayload<Record<string, never>>;
@@ -74,6 +78,11 @@ export class PrismaEventFormatRepository implements EventFormatRepository {
     return {
       create: async (organizationId, values) => {
         try {
+          await this.validateDefaultCalculationTemplate(
+            database,
+            organizationId,
+            values.defaultCalculationTemplateId,
+          );
           const row = await database.eventFormat.create({ data: { organizationId, ...values } });
           return this.map(row);
         } catch (error) {
@@ -82,6 +91,11 @@ export class PrismaEventFormatRepository implements EventFormatRepository {
       },
       update: async (organizationId, eventFormatId, version, values) => {
         try {
+          await this.validateDefaultCalculationTemplate(
+            database,
+            organizationId,
+            values.defaultCalculationTemplateId,
+          );
           const result = await database.eventFormat.updateMany({
             where: { id: eventFormatId, organizationId, version },
             data: { ...values, version: { increment: 1 } },
@@ -152,6 +166,7 @@ export class PrismaEventFormatRepository implements EventFormatRepository {
       defaultEndTime: formatLocalTime(row.endMinutes),
       defaultEndNextDay: row.endMinutes !== null && row.endMinutes >= 1440,
       recordingDefault: row.recordingDefault,
+      defaultCalculationTemplateId: row.defaultCalculationTemplateId,
       status: row.status,
       archivedAt: row.archivedAt?.toISOString() ?? null,
       version: row.version,
@@ -163,6 +178,23 @@ export class PrismaEventFormatRepository implements EventFormatRepository {
   private rethrowUniqueConflict(error: unknown): never {
     if (isPrismaError(error, 'P2002')) throw new EventFormatNameConflictError();
     throw error;
+  }
+
+  private async validateDefaultCalculationTemplate(
+    database: TransactionClient,
+    organizationId: string,
+    templateId: string | null,
+  ): Promise<void> {
+    if (!templateId) return;
+    const exists = await database.calculationTemplate.count({
+      where: { id: templateId, organizationId, status: 'ACTIVE' },
+    });
+    if (!exists) {
+      throw new EventFormatValidationError(
+        'DEFAULT_CALCULATION_TEMPLATE_INVALID',
+        'Die Standard-Kalkulationsvorlage ist nicht aktiv oder gehört nicht zur Organisation',
+      );
+    }
   }
 }
 

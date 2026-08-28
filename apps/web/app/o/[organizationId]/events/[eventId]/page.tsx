@@ -5,6 +5,7 @@ import { EventForm } from '../../../../components/events/event-form';
 import { EventStatusAction } from '../../../../components/events/event-status-action';
 import { BookingLineupPanel } from '../../../../components/bookings/booking-lineup-panel';
 import { CalculationPanel } from '../../../../components/services/format-calculation-panels';
+import { RevenueWorkspace } from '../../../../components/revenue/revenue-planning-panel';
 import {
   CompactEmpty,
   DetailField,
@@ -102,6 +103,8 @@ export default async function EventDetailPage({
       ])
     : undefined;
   const canReadCalculation = hasPermission(membership, 'calculations.read');
+  const canWriteCalculation = hasPermission(membership, 'calculations.write');
+  const canSalesCalculation = hasPermission(membership, 'calculations.sales');
   const calculationData = canReadCalculation
     ? await Promise.all([
         client.GET('/api/v1/organizations/{organizationId}/events/{eventId}/calculation', {
@@ -123,6 +126,37 @@ export default async function EventDetailPage({
                 path: { organizationId },
                 query: { status: 'ACTIVE', limit: 100, offset: 0 },
               },
+            })
+          : Promise.resolve(undefined),
+        canSalesCalculation
+          ? client.GET('/api/v1/organizations/{organizationId}/events/{eventId}/revenue-plan', {
+              params: { path: { organizationId, eventId } },
+            })
+          : Promise.resolve(undefined),
+        canWriteCalculation && hasPermission(membership, 'artists.read')
+          ? client.GET('/api/v1/organizations/{organizationId}/artists', {
+              params: {
+                path: { organizationId },
+                query: { status: 'ACTIVE', limit: 100, offset: 0 },
+              },
+            })
+          : Promise.resolve(undefined),
+        canWriteCalculation && hasPermission(membership, 'revenue_templates.read')
+          ? client.GET('/api/v1/organizations/{organizationId}/revenue-templates/tax-rates', {
+              params: { path: { organizationId }, query: { status: 'ACTIVE' } },
+            })
+          : Promise.resolve(undefined),
+        canWriteCalculation && hasPermission(membership, 'revenue_templates.read')
+          ? client.GET(
+              '/api/v1/organizations/{organizationId}/revenue-templates/ticket-providers',
+              {
+                params: { path: { organizationId }, query: { status: 'ACTIVE' } },
+              },
+            )
+          : Promise.resolve(undefined),
+        canWriteCalculation && hasPermission(membership, 'revenue_templates.read')
+          ? client.GET('/api/v1/organizations/{organizationId}/revenue-templates/calculations', {
+              params: { path: { organizationId }, query: { status: 'ACTIVE' } },
             })
           : Promise.resolve(undefined),
       ])
@@ -152,6 +186,17 @@ export default async function EventDetailPage({
   return (
     <>
       <EditableDetail
+        afterHeader={
+          <Tabs
+            label="Veranstaltungsbereiche"
+            tabs={availableTabs.map((tab) => ({
+              id: tab,
+              label: eventTabLabel(tab),
+              href: `${eventHref}?tab=${tab}`,
+              active: activeTab === tab,
+            }))}
+          />
+        }
         badges={
           <span className={`status-badge status-badge--event-${event.status.toLowerCase()}`}>
             {statusLabel(event.status)}
@@ -198,15 +243,6 @@ export default async function EventDetailPage({
           <EventForm event={event} locations={locations} organizationId={organizationId} />
         ) : null}
       </EditableDetail>
-      <Tabs
-        label="Veranstaltungsbereiche"
-        tabs={availableTabs.map((tab) => ({
-          id: tab,
-          label: eventTabLabel(tab),
-          href: `${eventHref}?tab=${tab}`,
-          active: activeTab === tab,
-        }))}
-      />
       {bookingData &&
       progress &&
       requirements &&
@@ -229,16 +265,44 @@ export default async function EventDetailPage({
         />
       ) : null}
       {calculationData && calculation && activeTab === 'calculation' ? (
-        <CalculationPanel
-          calculation={calculation}
-          canApprove={hasPermission(membership, 'calculations.approve')}
-          canPurchase={hasPermission(membership, 'calculations.purchase')}
-          canSales={hasPermission(membership, 'calculations.sales')}
-          canWrite={hasPermission(membership, 'calculations.write')}
-          organizationId={organizationId}
-          partners={calculationData[2] ? unwrap(calculationData[2]).items : []}
-          services={calculationData[1] ? unwrap(calculationData[1]).items : []}
-        />
+        calculationData[3] ? (
+          <RevenueWorkspace
+            artists={calculationData[4] ? unwrap(calculationData[4]).items : []}
+            canWrite={canWriteCalculation}
+            eventDate={event.eventDate}
+            locationName={event.locationName}
+            organizationId={organizationId}
+            partners={calculationData[2] ? unwrap(calculationData[2]).items : []}
+            plan={unwrap(calculationData[3])}
+            taxRates={calculationData[5] ? unwrap(calculationData[5]) : []}
+            providerTemplates={calculationData[6] ? unwrap(calculationData[6]) : []}
+            calculationTemplates={calculationData[7] ? unwrap(calculationData[7]) : []}
+          >
+            <CalculationPanel
+              approvalBlocked={unwrap(calculationData[3]).totals.incomplete}
+              calculation={calculation}
+              canApprove={hasPermission(membership, 'calculations.approve')}
+              canPurchase={hasPermission(membership, 'calculations.purchase')}
+              canSales={canSalesCalculation}
+              canWrite={canWriteCalculation}
+              embedded
+              organizationId={organizationId}
+              partners={calculationData[2] ? unwrap(calculationData[2]).items : []}
+              services={calculationData[1] ? unwrap(calculationData[1]).items : []}
+            />
+          </RevenueWorkspace>
+        ) : (
+          <CalculationPanel
+            calculation={calculation}
+            canApprove={hasPermission(membership, 'calculations.approve')}
+            canPurchase={hasPermission(membership, 'calculations.purchase')}
+            canSales={canSalesCalculation}
+            canWrite={canWriteCalculation}
+            organizationId={organizationId}
+            partners={calculationData[2] ? unwrap(calculationData[2]).items : []}
+            services={calculationData[1] ? unwrap(calculationData[1]).items : []}
+          />
+        )
       ) : null}
     </>
   );
@@ -274,6 +338,9 @@ function EventOverview({
           <DetailField label="Veranstaltungsart">{kindLabel(event.eventKind)}</DetailField>
           <DetailField label="Eventstatus">{statusLabel(event.status)}</DetailField>
           <DetailField label="Bookings">{bookingCount}</DetailField>
+          <DetailField label="Erwartete Gäste">
+            {event.expectedGuestCount ?? 'Noch offen'}
+          </DetailField>
           <DetailField label="Bekannte Gesamtdauer">
             {knownDuration ? `${knownDuration} Minuten` : 'Noch offen'}
           </DetailField>
