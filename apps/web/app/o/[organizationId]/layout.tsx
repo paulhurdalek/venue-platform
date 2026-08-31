@@ -48,13 +48,25 @@ export default async function OrganizationLayout({
     const canViewServices = hasPermission(membership, 'services.read');
     const canViewRevenueTemplates = hasPermission(membership, 'revenue_templates.read');
     const canViewDealTemplates = hasPermission(membership, 'deal_templates.read');
+    const canViewDocuments = hasPermission(membership, 'documents.read');
+    const canViewDocumentTemplates = hasPermission(membership, 'document_templates.read');
     return (
       <div className="workspace-shell">
         <WorkspaceNavigation
           organizationId={organizationId}
           organizationName={membership.organizationName}
-          sections={[
+          userEmail={context.email}
+          userName={context.name}
+          workSections={[
             { href: `/o/${organizationId}`, label: 'Übersicht' },
+            ...(canViewEvents
+              ? [{ href: `/o/${organizationId}/events`, label: 'Veranstaltungen' }]
+              : []),
+            ...(canViewDocuments
+              ? [{ href: `/o/${organizationId}/documents`, label: 'Dokumente' }]
+              : []),
+          ]}
+          masterDataSections={[
             ...(canViewArtists ? [{ href: `/o/${organizationId}/artists`, label: 'Artists' }] : []),
             ...(canViewContacts
               ? [{ href: `/o/${organizationId}/contacts`, label: 'Kontakte' }]
@@ -62,33 +74,45 @@ export default async function OrganizationLayout({
             ...(canViewBusinessPartners
               ? [{ href: `/o/${organizationId}/business-partners`, label: 'Geschäftspartner' }]
               : []),
-            ...(canViewEventFormats
-              ? [{ href: `/o/${organizationId}/event-formats`, label: 'Formate' }]
-              : []),
-            ...(canViewEvents
-              ? [{ href: `/o/${organizationId}/events`, label: 'Veranstaltungen' }]
-              : []),
             ...(canViewServices
               ? [{ href: `/o/${organizationId}/services`, label: 'Leistungen' }]
               : []),
+            ...(canViewEventFormats
+              ? [{ href: `/o/${organizationId}/event-formats`, label: 'Formate' }]
+              : []),
+          ]}
+          templateSections={[
             ...(canViewRevenueTemplates
               ? [{ href: `/o/${organizationId}/revenue-templates`, label: 'Erlösvorlagen' }]
               : []),
             ...(canViewDealTemplates
               ? [{ href: `/o/${organizationId}/deal-templates`, label: 'Dealvorlagen' }]
               : []),
-            { href: `/o/${organizationId}/settings/organization`, label: 'Organisation' },
-            { href: `/o/${organizationId}/settings/location`, label: 'Location' },
-            ...(canViewTeam ? [{ href: `/o/${organizationId}/settings/team`, label: 'Team' }] : []),
+            ...(canViewDocumentTemplates
+              ? [{ href: `/o/${organizationId}/document-templates`, label: 'Dokumentvorlagen' }]
+              : []),
           ]}
         >
           <div className="workspace-account">
+            <a
+              className="workspace-account__link"
+              href={`/o/${organizationId}/settings/organization`}
+            >
+              Organisation
+            </a>
+            <a className="workspace-account__link" href={`/o/${organizationId}/settings/location`}>
+              Location
+            </a>
+            {canViewTeam ? (
+              <a className="workspace-account__link" href={`/o/${organizationId}/settings/team`}>
+                Team
+              </a>
+            ) : null}
             {context.memberships.filter((item) => item.status === 'ACTIVE').length > 1 ? (
-              <a className="text-link" href="/organizations">
+              <a className="workspace-account__link" href="/organizations">
                 Organisation wechseln
               </a>
             ) : null}
-            <span>{context.name}</span>
             <SignOutButton />
           </div>
         </WorkspaceNavigation>
