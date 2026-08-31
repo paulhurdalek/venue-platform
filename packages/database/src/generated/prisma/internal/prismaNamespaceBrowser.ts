@@ -118,7 +118,15 @@ export const ModelName = {
   DealStatusHistory: 'DealStatusHistory',
   DealTemplate: 'DealTemplate',
   DealTemplateComponent: 'DealTemplateComponent',
-  DealTemplateServicePosition: 'DealTemplateServicePosition'
+  DealTemplateServicePosition: 'DealTemplateServicePosition',
+  DocumentTemplate: 'DocumentTemplate',
+  DocumentTemplateBlock: 'DocumentTemplateBlock',
+  Document: 'Document',
+  DocumentNumberSequence: 'DocumentNumberSequence',
+  DocumentContentBlock: 'DocumentContentBlock',
+  DocumentOfferPosition: 'DocumentOfferPosition',
+  DocumentVersion: 'DocumentVersion',
+  DocumentStatusHistory: 'DocumentStatusHistory'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -724,6 +732,7 @@ export const EventProgramItemScalarFieldEnum = {
   kind: 'kind',
   sortOrder: 'sortOrder',
   label: 'label',
+  note: 'note',
   durationMinutes: 'durationMinutes',
   version: 'version',
   createdAt: 'createdAt',
@@ -1374,6 +1383,154 @@ export const DealTemplateServicePositionScalarFieldEnum = {
 export type DealTemplateServicePositionScalarFieldEnum = (typeof DealTemplateServicePositionScalarFieldEnum)[keyof typeof DealTemplateServicePositionScalarFieldEnum]
 
 
+export const DocumentTemplateScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  name: 'name',
+  normalizedName: 'normalizedName',
+  type: 'type',
+  title: 'title',
+  introduction: 'introduction',
+  standardTerms: 'standardTerms',
+  closing: 'closing',
+  footer: 'footer',
+  status: 'status',
+  archivedAt: 'archivedAt',
+  version: 'version',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type DocumentTemplateScalarFieldEnum = (typeof DocumentTemplateScalarFieldEnum)[keyof typeof DocumentTemplateScalarFieldEnum]
+
+
+export const DocumentTemplateBlockScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  templateId: 'templateId',
+  heading: 'heading',
+  body: 'body',
+  sortOrder: 'sortOrder'
+} as const
+
+export type DocumentTemplateBlockScalarFieldEnum = (typeof DocumentTemplateBlockScalarFieldEnum)[keyof typeof DocumentTemplateBlockScalarFieldEnum]
+
+
+export const DocumentScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  locationId: 'locationId',
+  eventId: 'eventId',
+  dealId: 'dealId',
+  sourceTemplateId: 'sourceTemplateId',
+  sourceTemplateVersion: 'sourceTemplateVersion',
+  sourceTemplateNameSnapshot: 'sourceTemplateNameSnapshot',
+  type: 'type',
+  status: 'status',
+  documentNumber: 'documentNumber',
+  publishedVersion: 'publishedVersion',
+  revision: 'revision',
+  title: 'title',
+  introduction: 'introduction',
+  standardTerms: 'standardTerms',
+  closing: 'closing',
+  footer: 'footer',
+  recipientName: 'recipientName',
+  recipientContactName: 'recipientContactName',
+  recipientEmail: 'recipientEmail',
+  recipientAddress: 'recipientAddress',
+  validUntil: 'validUntil',
+  internalNote: 'internalNote',
+  totalDiscountType: 'totalDiscountType',
+  totalDiscountFixedMinor: 'totalDiscountFixedMinor',
+  totalDiscountPercentageBasisPoints: 'totalDiscountPercentageBasisPoints',
+  currency: 'currency',
+  contextSnapshot: 'contextSnapshot',
+  lastPublishedAt: 'lastPublishedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type DocumentScalarFieldEnum = (typeof DocumentScalarFieldEnum)[keyof typeof DocumentScalarFieldEnum]
+
+
+export const DocumentNumberSequenceScalarFieldEnum = {
+  organizationId: 'organizationId',
+  year: 'year',
+  documentType: 'documentType',
+  lastNumber: 'lastNumber',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type DocumentNumberSequenceScalarFieldEnum = (typeof DocumentNumberSequenceScalarFieldEnum)[keyof typeof DocumentNumberSequenceScalarFieldEnum]
+
+
+export const DocumentContentBlockScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  documentId: 'documentId',
+  heading: 'heading',
+  body: 'body',
+  sortOrder: 'sortOrder'
+} as const
+
+export type DocumentContentBlockScalarFieldEnum = (typeof DocumentContentBlockScalarFieldEnum)[keyof typeof DocumentContentBlockScalarFieldEnum]
+
+
+export const DocumentOfferPositionScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  documentId: 'documentId',
+  source: 'source',
+  sourceId: 'sourceId',
+  sourceSnapshot: 'sourceSnapshot',
+  description: 'description',
+  quantity: 'quantity',
+  unitPriceNetMinor: 'unitPriceNetMinor',
+  taxRateBasisPoints: 'taxRateBasisPoints',
+  discountType: 'discountType',
+  discountFixedMinor: 'discountFixedMinor',
+  discountPercentageBasisPoints: 'discountPercentageBasisPoints',
+  sortOrder: 'sortOrder'
+} as const
+
+export type DocumentOfferPositionScalarFieldEnum = (typeof DocumentOfferPositionScalarFieldEnum)[keyof typeof DocumentOfferPositionScalarFieldEnum]
+
+
+export const DocumentVersionScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  documentId: 'documentId',
+  documentVersion: 'documentVersion',
+  documentNumber: 'documentNumber',
+  status: 'status',
+  snapshot: 'snapshot',
+  pdfData: 'pdfData',
+  pdfSha256: 'pdfSha256',
+  pdfSize: 'pdfSize',
+  createdByUserId: 'createdByUserId',
+  createdByMembershipId: 'createdByMembershipId',
+  createdAt: 'createdAt'
+} as const
+
+export type DocumentVersionScalarFieldEnum = (typeof DocumentVersionScalarFieldEnum)[keyof typeof DocumentVersionScalarFieldEnum]
+
+
+export const DocumentStatusHistoryScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  documentId: 'documentId',
+  previousStatus: 'previousStatus',
+  newStatus: 'newStatus',
+  actorUserId: 'actorUserId',
+  actorMembershipId: 'actorMembershipId',
+  changedAt: 'changedAt'
+} as const
+
+export type DocumentStatusHistoryScalarFieldEnum = (typeof DocumentStatusHistoryScalarFieldEnum)[keyof typeof DocumentStatusHistoryScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -1387,6 +1544,14 @@ export const JsonNullValueInput = {
 } as const
 
 export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
+
+
+export const NullableJsonNullValueInput = {
+  DbNull: DbNull,
+  JsonNull: JsonNull
+} as const
+
+export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
 
 
 export const QueryMode = {

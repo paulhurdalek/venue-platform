@@ -300,6 +300,14 @@ export type OrganizationWhereInput = {
   dealTemplates?: Prisma.DealTemplateListRelationFilter
   dealTemplateComponents?: Prisma.DealTemplateComponentListRelationFilter
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionListRelationFilter
+  documentTemplates?: Prisma.DocumentTemplateListRelationFilter
+  documentNumberSequences?: Prisma.DocumentNumberSequenceListRelationFilter
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockListRelationFilter
+  documents?: Prisma.DocumentListRelationFilter
+  documentContentBlocks?: Prisma.DocumentContentBlockListRelationFilter
+  documentOfferPositions?: Prisma.DocumentOfferPositionListRelationFilter
+  documentVersions?: Prisma.DocumentVersionListRelationFilter
+  documentStatusHistory?: Prisma.DocumentStatusHistoryListRelationFilter
 }
 
 export type OrganizationOrderByWithRelationInput = {
@@ -357,6 +365,14 @@ export type OrganizationOrderByWithRelationInput = {
   dealTemplates?: Prisma.DealTemplateOrderByRelationAggregateInput
   dealTemplateComponents?: Prisma.DealTemplateComponentOrderByRelationAggregateInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionOrderByRelationAggregateInput
+  documentTemplates?: Prisma.DocumentTemplateOrderByRelationAggregateInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceOrderByRelationAggregateInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockOrderByRelationAggregateInput
+  documents?: Prisma.DocumentOrderByRelationAggregateInput
+  documentContentBlocks?: Prisma.DocumentContentBlockOrderByRelationAggregateInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionOrderByRelationAggregateInput
+  documentVersions?: Prisma.DocumentVersionOrderByRelationAggregateInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryOrderByRelationAggregateInput
 }
 
 export type OrganizationWhereUniqueInput = Prisma.AtLeast<{
@@ -417,6 +433,14 @@ export type OrganizationWhereUniqueInput = Prisma.AtLeast<{
   dealTemplates?: Prisma.DealTemplateListRelationFilter
   dealTemplateComponents?: Prisma.DealTemplateComponentListRelationFilter
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionListRelationFilter
+  documentTemplates?: Prisma.DocumentTemplateListRelationFilter
+  documentNumberSequences?: Prisma.DocumentNumberSequenceListRelationFilter
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockListRelationFilter
+  documents?: Prisma.DocumentListRelationFilter
+  documentContentBlocks?: Prisma.DocumentContentBlockListRelationFilter
+  documentOfferPositions?: Prisma.DocumentOfferPositionListRelationFilter
+  documentVersions?: Prisma.DocumentVersionListRelationFilter
+  documentStatusHistory?: Prisma.DocumentStatusHistoryListRelationFilter
 }, "id">
 
 export type OrganizationOrderByWithAggregationInput = {
@@ -508,6 +532,14 @@ export type OrganizationCreateInput = {
   dealTemplates?: Prisma.DealTemplateCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateInput = {
@@ -565,6 +597,14 @@ export type OrganizationUncheckedCreateInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUpdateInput = {
@@ -622,6 +662,14 @@ export type OrganizationUpdateInput = {
   dealTemplates?: Prisma.DealTemplateUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateInput = {
@@ -679,6 +727,14 @@ export type OrganizationUncheckedUpdateInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateManyInput = {
@@ -1399,6 +1455,118 @@ export type OrganizationUpdateOneRequiredWithoutDealTemplateServicePositionsNest
   update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutDealTemplateServicePositionsInput, Prisma.OrganizationUpdateWithoutDealTemplateServicePositionsInput>, Prisma.OrganizationUncheckedUpdateWithoutDealTemplateServicePositionsInput>
 }
 
+export type OrganizationCreateNestedOneWithoutDocumentTemplatesInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutDocumentTemplatesInput, Prisma.OrganizationUncheckedCreateWithoutDocumentTemplatesInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutDocumentTemplatesInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+}
+
+export type OrganizationUpdateOneRequiredWithoutDocumentTemplatesNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutDocumentTemplatesInput, Prisma.OrganizationUncheckedCreateWithoutDocumentTemplatesInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutDocumentTemplatesInput
+  upsert?: Prisma.OrganizationUpsertWithoutDocumentTemplatesInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutDocumentTemplatesInput, Prisma.OrganizationUpdateWithoutDocumentTemplatesInput>, Prisma.OrganizationUncheckedUpdateWithoutDocumentTemplatesInput>
+}
+
+export type OrganizationCreateNestedOneWithoutDocumentTemplateBlocksInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutDocumentTemplateBlocksInput, Prisma.OrganizationUncheckedCreateWithoutDocumentTemplateBlocksInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutDocumentTemplateBlocksInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+}
+
+export type OrganizationUpdateOneRequiredWithoutDocumentTemplateBlocksNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutDocumentTemplateBlocksInput, Prisma.OrganizationUncheckedCreateWithoutDocumentTemplateBlocksInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutDocumentTemplateBlocksInput
+  upsert?: Prisma.OrganizationUpsertWithoutDocumentTemplateBlocksInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutDocumentTemplateBlocksInput, Prisma.OrganizationUpdateWithoutDocumentTemplateBlocksInput>, Prisma.OrganizationUncheckedUpdateWithoutDocumentTemplateBlocksInput>
+}
+
+export type OrganizationCreateNestedOneWithoutDocumentsInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutDocumentsInput, Prisma.OrganizationUncheckedCreateWithoutDocumentsInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutDocumentsInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+}
+
+export type OrganizationUpdateOneRequiredWithoutDocumentsNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutDocumentsInput, Prisma.OrganizationUncheckedCreateWithoutDocumentsInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutDocumentsInput
+  upsert?: Prisma.OrganizationUpsertWithoutDocumentsInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutDocumentsInput, Prisma.OrganizationUpdateWithoutDocumentsInput>, Prisma.OrganizationUncheckedUpdateWithoutDocumentsInput>
+}
+
+export type OrganizationCreateNestedOneWithoutDocumentNumberSequencesInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutDocumentNumberSequencesInput, Prisma.OrganizationUncheckedCreateWithoutDocumentNumberSequencesInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutDocumentNumberSequencesInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+}
+
+export type OrganizationUpdateOneRequiredWithoutDocumentNumberSequencesNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutDocumentNumberSequencesInput, Prisma.OrganizationUncheckedCreateWithoutDocumentNumberSequencesInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutDocumentNumberSequencesInput
+  upsert?: Prisma.OrganizationUpsertWithoutDocumentNumberSequencesInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutDocumentNumberSequencesInput, Prisma.OrganizationUpdateWithoutDocumentNumberSequencesInput>, Prisma.OrganizationUncheckedUpdateWithoutDocumentNumberSequencesInput>
+}
+
+export type OrganizationCreateNestedOneWithoutDocumentContentBlocksInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutDocumentContentBlocksInput, Prisma.OrganizationUncheckedCreateWithoutDocumentContentBlocksInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutDocumentContentBlocksInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+}
+
+export type OrganizationUpdateOneRequiredWithoutDocumentContentBlocksNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutDocumentContentBlocksInput, Prisma.OrganizationUncheckedCreateWithoutDocumentContentBlocksInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutDocumentContentBlocksInput
+  upsert?: Prisma.OrganizationUpsertWithoutDocumentContentBlocksInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutDocumentContentBlocksInput, Prisma.OrganizationUpdateWithoutDocumentContentBlocksInput>, Prisma.OrganizationUncheckedUpdateWithoutDocumentContentBlocksInput>
+}
+
+export type OrganizationCreateNestedOneWithoutDocumentOfferPositionsInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutDocumentOfferPositionsInput, Prisma.OrganizationUncheckedCreateWithoutDocumentOfferPositionsInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutDocumentOfferPositionsInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+}
+
+export type OrganizationUpdateOneRequiredWithoutDocumentOfferPositionsNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutDocumentOfferPositionsInput, Prisma.OrganizationUncheckedCreateWithoutDocumentOfferPositionsInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutDocumentOfferPositionsInput
+  upsert?: Prisma.OrganizationUpsertWithoutDocumentOfferPositionsInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutDocumentOfferPositionsInput, Prisma.OrganizationUpdateWithoutDocumentOfferPositionsInput>, Prisma.OrganizationUncheckedUpdateWithoutDocumentOfferPositionsInput>
+}
+
+export type OrganizationCreateNestedOneWithoutDocumentVersionsInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutDocumentVersionsInput, Prisma.OrganizationUncheckedCreateWithoutDocumentVersionsInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutDocumentVersionsInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+}
+
+export type OrganizationUpdateOneRequiredWithoutDocumentVersionsNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutDocumentVersionsInput, Prisma.OrganizationUncheckedCreateWithoutDocumentVersionsInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutDocumentVersionsInput
+  upsert?: Prisma.OrganizationUpsertWithoutDocumentVersionsInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutDocumentVersionsInput, Prisma.OrganizationUpdateWithoutDocumentVersionsInput>, Prisma.OrganizationUncheckedUpdateWithoutDocumentVersionsInput>
+}
+
+export type OrganizationCreateNestedOneWithoutDocumentStatusHistoryInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutDocumentStatusHistoryInput, Prisma.OrganizationUncheckedCreateWithoutDocumentStatusHistoryInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutDocumentStatusHistoryInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+}
+
+export type OrganizationUpdateOneRequiredWithoutDocumentStatusHistoryNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutDocumentStatusHistoryInput, Prisma.OrganizationUncheckedCreateWithoutDocumentStatusHistoryInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutDocumentStatusHistoryInput
+  upsert?: Prisma.OrganizationUpsertWithoutDocumentStatusHistoryInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutDocumentStatusHistoryInput, Prisma.OrganizationUpdateWithoutDocumentStatusHistoryInput>, Prisma.OrganizationUncheckedUpdateWithoutDocumentStatusHistoryInput>
+}
+
 export type OrganizationCreateWithoutEventFormatsInput = {
   id?: string
   name: string
@@ -1453,6 +1621,14 @@ export type OrganizationCreateWithoutEventFormatsInput = {
   dealTemplates?: Prisma.DealTemplateCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutEventFormatsInput = {
@@ -1509,6 +1685,14 @@ export type OrganizationUncheckedCreateWithoutEventFormatsInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutEventFormatsInput = {
@@ -1581,6 +1765,14 @@ export type OrganizationUpdateWithoutEventFormatsInput = {
   dealTemplates?: Prisma.DealTemplateUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutEventFormatsInput = {
@@ -1637,6 +1829,14 @@ export type OrganizationUncheckedUpdateWithoutEventFormatsInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutEventsInput = {
@@ -1693,6 +1893,14 @@ export type OrganizationCreateWithoutEventsInput = {
   dealTemplates?: Prisma.DealTemplateCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutEventsInput = {
@@ -1749,6 +1957,14 @@ export type OrganizationUncheckedCreateWithoutEventsInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutEventsInput = {
@@ -1821,6 +2037,14 @@ export type OrganizationUpdateWithoutEventsInput = {
   dealTemplates?: Prisma.DealTemplateUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutEventsInput = {
@@ -1877,6 +2101,14 @@ export type OrganizationUncheckedUpdateWithoutEventsInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutLocationsInput = {
@@ -1933,6 +2165,14 @@ export type OrganizationCreateWithoutLocationsInput = {
   dealTemplates?: Prisma.DealTemplateCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutLocationsInput = {
@@ -1989,6 +2229,14 @@ export type OrganizationUncheckedCreateWithoutLocationsInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutLocationsInput = {
@@ -2061,6 +2309,14 @@ export type OrganizationUpdateWithoutLocationsInput = {
   dealTemplates?: Prisma.DealTemplateUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutLocationsInput = {
@@ -2117,6 +2373,14 @@ export type OrganizationUncheckedUpdateWithoutLocationsInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutMembershipsInput = {
@@ -2173,6 +2437,14 @@ export type OrganizationCreateWithoutMembershipsInput = {
   dealTemplates?: Prisma.DealTemplateCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutMembershipsInput = {
@@ -2229,6 +2501,14 @@ export type OrganizationUncheckedCreateWithoutMembershipsInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutMembershipsInput = {
@@ -2301,6 +2581,14 @@ export type OrganizationUpdateWithoutMembershipsInput = {
   dealTemplates?: Prisma.DealTemplateUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutMembershipsInput = {
@@ -2357,6 +2645,14 @@ export type OrganizationUncheckedUpdateWithoutMembershipsInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutRolesInput = {
@@ -2413,6 +2709,14 @@ export type OrganizationCreateWithoutRolesInput = {
   dealTemplates?: Prisma.DealTemplateCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutRolesInput = {
@@ -2469,6 +2773,14 @@ export type OrganizationUncheckedCreateWithoutRolesInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutRolesInput = {
@@ -2541,6 +2853,14 @@ export type OrganizationUpdateWithoutRolesInput = {
   dealTemplates?: Prisma.DealTemplateUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutRolesInput = {
@@ -2597,6 +2917,14 @@ export type OrganizationUncheckedUpdateWithoutRolesInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutInvitationsInput = {
@@ -2653,6 +2981,14 @@ export type OrganizationCreateWithoutInvitationsInput = {
   dealTemplates?: Prisma.DealTemplateCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutInvitationsInput = {
@@ -2709,6 +3045,14 @@ export type OrganizationUncheckedCreateWithoutInvitationsInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutInvitationsInput = {
@@ -2781,6 +3125,14 @@ export type OrganizationUpdateWithoutInvitationsInput = {
   dealTemplates?: Prisma.DealTemplateUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutInvitationsInput = {
@@ -2837,6 +3189,14 @@ export type OrganizationUncheckedUpdateWithoutInvitationsInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutAuditEntriesInput = {
@@ -2893,6 +3253,14 @@ export type OrganizationCreateWithoutAuditEntriesInput = {
   dealTemplates?: Prisma.DealTemplateCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutAuditEntriesInput = {
@@ -2949,6 +3317,14 @@ export type OrganizationUncheckedCreateWithoutAuditEntriesInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutAuditEntriesInput = {
@@ -3021,6 +3397,14 @@ export type OrganizationUpdateWithoutAuditEntriesInput = {
   dealTemplates?: Prisma.DealTemplateUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutAuditEntriesInput = {
@@ -3077,6 +3461,14 @@ export type OrganizationUncheckedUpdateWithoutAuditEntriesInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutArtistsInput = {
@@ -3133,6 +3525,14 @@ export type OrganizationCreateWithoutArtistsInput = {
   dealTemplates?: Prisma.DealTemplateCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutArtistsInput = {
@@ -3189,6 +3589,14 @@ export type OrganizationUncheckedCreateWithoutArtistsInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutArtistsInput = {
@@ -3261,6 +3669,14 @@ export type OrganizationUpdateWithoutArtistsInput = {
   dealTemplates?: Prisma.DealTemplateUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutArtistsInput = {
@@ -3317,6 +3733,14 @@ export type OrganizationUncheckedUpdateWithoutArtistsInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutContactsInput = {
@@ -3373,6 +3797,14 @@ export type OrganizationCreateWithoutContactsInput = {
   dealTemplates?: Prisma.DealTemplateCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutContactsInput = {
@@ -3429,6 +3861,14 @@ export type OrganizationUncheckedCreateWithoutContactsInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutContactsInput = {
@@ -3501,6 +3941,14 @@ export type OrganizationUpdateWithoutContactsInput = {
   dealTemplates?: Prisma.DealTemplateUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutContactsInput = {
@@ -3557,6 +4005,14 @@ export type OrganizationUncheckedUpdateWithoutContactsInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutPartnersInput = {
@@ -3613,6 +4069,14 @@ export type OrganizationCreateWithoutPartnersInput = {
   dealTemplates?: Prisma.DealTemplateCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutPartnersInput = {
@@ -3669,6 +4133,14 @@ export type OrganizationUncheckedCreateWithoutPartnersInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutPartnersInput = {
@@ -3741,6 +4213,14 @@ export type OrganizationUpdateWithoutPartnersInput = {
   dealTemplates?: Prisma.DealTemplateUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutPartnersInput = {
@@ -3797,6 +4277,14 @@ export type OrganizationUncheckedUpdateWithoutPartnersInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutEventFormatLineupRequirementsInput = {
@@ -3853,6 +4341,14 @@ export type OrganizationCreateWithoutEventFormatLineupRequirementsInput = {
   dealTemplates?: Prisma.DealTemplateCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutEventFormatLineupRequirementsInput = {
@@ -3909,6 +4405,14 @@ export type OrganizationUncheckedCreateWithoutEventFormatLineupRequirementsInput
   dealTemplates?: Prisma.DealTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutEventFormatLineupRequirementsInput = {
@@ -3981,6 +4485,14 @@ export type OrganizationUpdateWithoutEventFormatLineupRequirementsInput = {
   dealTemplates?: Prisma.DealTemplateUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutEventFormatLineupRequirementsInput = {
@@ -4037,6 +4549,14 @@ export type OrganizationUncheckedUpdateWithoutEventFormatLineupRequirementsInput
   dealTemplates?: Prisma.DealTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutEventLineupRequirementsInput = {
@@ -4093,6 +4613,14 @@ export type OrganizationCreateWithoutEventLineupRequirementsInput = {
   dealTemplates?: Prisma.DealTemplateCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutEventLineupRequirementsInput = {
@@ -4149,6 +4677,14 @@ export type OrganizationUncheckedCreateWithoutEventLineupRequirementsInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutEventLineupRequirementsInput = {
@@ -4221,6 +4757,14 @@ export type OrganizationUpdateWithoutEventLineupRequirementsInput = {
   dealTemplates?: Prisma.DealTemplateUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutEventLineupRequirementsInput = {
@@ -4277,6 +4821,14 @@ export type OrganizationUncheckedUpdateWithoutEventLineupRequirementsInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutBookingsInput = {
@@ -4333,6 +4885,14 @@ export type OrganizationCreateWithoutBookingsInput = {
   dealTemplates?: Prisma.DealTemplateCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutBookingsInput = {
@@ -4389,6 +4949,14 @@ export type OrganizationUncheckedCreateWithoutBookingsInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutBookingsInput = {
@@ -4461,6 +5029,14 @@ export type OrganizationUpdateWithoutBookingsInput = {
   dealTemplates?: Prisma.DealTemplateUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutBookingsInput = {
@@ -4517,6 +5093,14 @@ export type OrganizationUncheckedUpdateWithoutBookingsInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutEventProgramItemsInput = {
@@ -4573,6 +5157,14 @@ export type OrganizationCreateWithoutEventProgramItemsInput = {
   dealTemplates?: Prisma.DealTemplateCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutEventProgramItemsInput = {
@@ -4629,6 +5221,14 @@ export type OrganizationUncheckedCreateWithoutEventProgramItemsInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutEventProgramItemsInput = {
@@ -4701,6 +5301,14 @@ export type OrganizationUpdateWithoutEventProgramItemsInput = {
   dealTemplates?: Prisma.DealTemplateUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutEventProgramItemsInput = {
@@ -4757,6 +5365,14 @@ export type OrganizationUncheckedUpdateWithoutEventProgramItemsInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutBookingStatusHistoryInput = {
@@ -4813,6 +5429,14 @@ export type OrganizationCreateWithoutBookingStatusHistoryInput = {
   dealTemplates?: Prisma.DealTemplateCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutBookingStatusHistoryInput = {
@@ -4869,6 +5493,14 @@ export type OrganizationUncheckedCreateWithoutBookingStatusHistoryInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutBookingStatusHistoryInput = {
@@ -4941,6 +5573,14 @@ export type OrganizationUpdateWithoutBookingStatusHistoryInput = {
   dealTemplates?: Prisma.DealTemplateUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutBookingStatusHistoryInput = {
@@ -4997,6 +5637,14 @@ export type OrganizationUncheckedUpdateWithoutBookingStatusHistoryInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutServiceCategoriesInput = {
@@ -5053,6 +5701,14 @@ export type OrganizationCreateWithoutServiceCategoriesInput = {
   dealTemplates?: Prisma.DealTemplateCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutServiceCategoriesInput = {
@@ -5109,6 +5765,14 @@ export type OrganizationUncheckedCreateWithoutServiceCategoriesInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutServiceCategoriesInput = {
@@ -5181,6 +5845,14 @@ export type OrganizationUpdateWithoutServiceCategoriesInput = {
   dealTemplates?: Prisma.DealTemplateUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutServiceCategoriesInput = {
@@ -5237,6 +5909,14 @@ export type OrganizationUncheckedUpdateWithoutServiceCategoriesInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutServicesInput = {
@@ -5293,6 +5973,14 @@ export type OrganizationCreateWithoutServicesInput = {
   dealTemplates?: Prisma.DealTemplateCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutServicesInput = {
@@ -5349,6 +6037,14 @@ export type OrganizationUncheckedCreateWithoutServicesInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutServicesInput = {
@@ -5421,6 +6117,14 @@ export type OrganizationUpdateWithoutServicesInput = {
   dealTemplates?: Prisma.DealTemplateUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutServicesInput = {
@@ -5477,6 +6181,14 @@ export type OrganizationUncheckedUpdateWithoutServicesInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutServiceProviderPricesInput = {
@@ -5533,6 +6245,14 @@ export type OrganizationCreateWithoutServiceProviderPricesInput = {
   dealTemplates?: Prisma.DealTemplateCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutServiceProviderPricesInput = {
@@ -5589,6 +6309,14 @@ export type OrganizationUncheckedCreateWithoutServiceProviderPricesInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutServiceProviderPricesInput = {
@@ -5661,6 +6389,14 @@ export type OrganizationUpdateWithoutServiceProviderPricesInput = {
   dealTemplates?: Prisma.DealTemplateUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutServiceProviderPricesInput = {
@@ -5717,6 +6453,14 @@ export type OrganizationUncheckedUpdateWithoutServiceProviderPricesInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutEventFormatServicesInput = {
@@ -5773,6 +6517,14 @@ export type OrganizationCreateWithoutEventFormatServicesInput = {
   dealTemplates?: Prisma.DealTemplateCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutEventFormatServicesInput = {
@@ -5829,6 +6581,14 @@ export type OrganizationUncheckedCreateWithoutEventFormatServicesInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutEventFormatServicesInput = {
@@ -5901,6 +6661,14 @@ export type OrganizationUpdateWithoutEventFormatServicesInput = {
   dealTemplates?: Prisma.DealTemplateUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutEventFormatServicesInput = {
@@ -5957,6 +6725,14 @@ export type OrganizationUncheckedUpdateWithoutEventFormatServicesInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutEventCalculationsInput = {
@@ -6013,6 +6789,14 @@ export type OrganizationCreateWithoutEventCalculationsInput = {
   dealTemplates?: Prisma.DealTemplateCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutEventCalculationsInput = {
@@ -6069,6 +6853,14 @@ export type OrganizationUncheckedCreateWithoutEventCalculationsInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutEventCalculationsInput = {
@@ -6141,6 +6933,14 @@ export type OrganizationUpdateWithoutEventCalculationsInput = {
   dealTemplates?: Prisma.DealTemplateUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutEventCalculationsInput = {
@@ -6197,6 +6997,14 @@ export type OrganizationUncheckedUpdateWithoutEventCalculationsInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutCalculationStatusHistoryInput = {
@@ -6253,6 +7061,14 @@ export type OrganizationCreateWithoutCalculationStatusHistoryInput = {
   dealTemplates?: Prisma.DealTemplateCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutCalculationStatusHistoryInput = {
@@ -6309,6 +7125,14 @@ export type OrganizationUncheckedCreateWithoutCalculationStatusHistoryInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutCalculationStatusHistoryInput = {
@@ -6381,6 +7205,14 @@ export type OrganizationUpdateWithoutCalculationStatusHistoryInput = {
   dealTemplates?: Prisma.DealTemplateUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutCalculationStatusHistoryInput = {
@@ -6437,6 +7269,14 @@ export type OrganizationUncheckedUpdateWithoutCalculationStatusHistoryInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutEventServicePositionsInput = {
@@ -6493,6 +7333,14 @@ export type OrganizationCreateWithoutEventServicePositionsInput = {
   dealTemplates?: Prisma.DealTemplateCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutEventServicePositionsInput = {
@@ -6549,6 +7397,14 @@ export type OrganizationUncheckedCreateWithoutEventServicePositionsInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutEventServicePositionsInput = {
@@ -6621,6 +7477,14 @@ export type OrganizationUpdateWithoutEventServicePositionsInput = {
   dealTemplates?: Prisma.DealTemplateUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutEventServicePositionsInput = {
@@ -6677,6 +7541,14 @@ export type OrganizationUncheckedUpdateWithoutEventServicePositionsInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutTicketPriceTiersInput = {
@@ -6733,6 +7605,14 @@ export type OrganizationCreateWithoutTicketPriceTiersInput = {
   dealTemplates?: Prisma.DealTemplateCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutTicketPriceTiersInput = {
@@ -6789,6 +7669,14 @@ export type OrganizationUncheckedCreateWithoutTicketPriceTiersInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutTicketPriceTiersInput = {
@@ -6861,6 +7749,14 @@ export type OrganizationUpdateWithoutTicketPriceTiersInput = {
   dealTemplates?: Prisma.DealTemplateUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutTicketPriceTiersInput = {
@@ -6917,6 +7813,14 @@ export type OrganizationUncheckedUpdateWithoutTicketPriceTiersInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutTicketPriceComponentsInput = {
@@ -6973,6 +7877,14 @@ export type OrganizationCreateWithoutTicketPriceComponentsInput = {
   dealTemplates?: Prisma.DealTemplateCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutTicketPriceComponentsInput = {
@@ -7029,6 +7941,14 @@ export type OrganizationUncheckedCreateWithoutTicketPriceComponentsInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutTicketPriceComponentsInput = {
@@ -7101,6 +8021,14 @@ export type OrganizationUpdateWithoutTicketPriceComponentsInput = {
   dealTemplates?: Prisma.DealTemplateUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutTicketPriceComponentsInput = {
@@ -7157,6 +8085,14 @@ export type OrganizationUncheckedUpdateWithoutTicketPriceComponentsInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutTicketComponentAllocationsInput = {
@@ -7213,6 +8149,14 @@ export type OrganizationCreateWithoutTicketComponentAllocationsInput = {
   dealTemplates?: Prisma.DealTemplateCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutTicketComponentAllocationsInput = {
@@ -7269,6 +8213,14 @@ export type OrganizationUncheckedCreateWithoutTicketComponentAllocationsInput = 
   dealTemplates?: Prisma.DealTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutTicketComponentAllocationsInput = {
@@ -7341,6 +8293,14 @@ export type OrganizationUpdateWithoutTicketComponentAllocationsInput = {
   dealTemplates?: Prisma.DealTemplateUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutTicketComponentAllocationsInput = {
@@ -7397,6 +8357,14 @@ export type OrganizationUncheckedUpdateWithoutTicketComponentAllocationsInput = 
   dealTemplates?: Prisma.DealTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutAdditionalRevenuesInput = {
@@ -7453,6 +8421,14 @@ export type OrganizationCreateWithoutAdditionalRevenuesInput = {
   dealTemplates?: Prisma.DealTemplateCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutAdditionalRevenuesInput = {
@@ -7509,6 +8485,14 @@ export type OrganizationUncheckedCreateWithoutAdditionalRevenuesInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutAdditionalRevenuesInput = {
@@ -7581,6 +8565,14 @@ export type OrganizationUpdateWithoutAdditionalRevenuesInput = {
   dealTemplates?: Prisma.DealTemplateUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutAdditionalRevenuesInput = {
@@ -7637,6 +8629,14 @@ export type OrganizationUncheckedUpdateWithoutAdditionalRevenuesInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutTaxRateTemplatesInput = {
@@ -7693,6 +8693,14 @@ export type OrganizationCreateWithoutTaxRateTemplatesInput = {
   dealTemplates?: Prisma.DealTemplateCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutTaxRateTemplatesInput = {
@@ -7749,6 +8757,14 @@ export type OrganizationUncheckedCreateWithoutTaxRateTemplatesInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutTaxRateTemplatesInput = {
@@ -7821,6 +8837,14 @@ export type OrganizationUpdateWithoutTaxRateTemplatesInput = {
   dealTemplates?: Prisma.DealTemplateUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutTaxRateTemplatesInput = {
@@ -7877,6 +8901,14 @@ export type OrganizationUncheckedUpdateWithoutTaxRateTemplatesInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutTicketProviderTemplatesInput = {
@@ -7933,6 +8965,14 @@ export type OrganizationCreateWithoutTicketProviderTemplatesInput = {
   dealTemplates?: Prisma.DealTemplateCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutTicketProviderTemplatesInput = {
@@ -7989,6 +9029,14 @@ export type OrganizationUncheckedCreateWithoutTicketProviderTemplatesInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutTicketProviderTemplatesInput = {
@@ -8061,6 +9109,14 @@ export type OrganizationUpdateWithoutTicketProviderTemplatesInput = {
   dealTemplates?: Prisma.DealTemplateUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutTicketProviderTemplatesInput = {
@@ -8117,6 +9173,14 @@ export type OrganizationUncheckedUpdateWithoutTicketProviderTemplatesInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutTicketProviderTemplateComponentsInput = {
@@ -8173,6 +9237,14 @@ export type OrganizationCreateWithoutTicketProviderTemplateComponentsInput = {
   dealTemplates?: Prisma.DealTemplateCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutTicketProviderTemplateComponentsInput = {
@@ -8229,6 +9301,14 @@ export type OrganizationUncheckedCreateWithoutTicketProviderTemplateComponentsIn
   dealTemplates?: Prisma.DealTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutTicketProviderTemplateComponentsInput = {
@@ -8301,6 +9381,14 @@ export type OrganizationUpdateWithoutTicketProviderTemplateComponentsInput = {
   dealTemplates?: Prisma.DealTemplateUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutTicketProviderTemplateComponentsInput = {
@@ -8357,6 +9445,14 @@ export type OrganizationUncheckedUpdateWithoutTicketProviderTemplateComponentsIn
   dealTemplates?: Prisma.DealTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutTicketProviderTemplateAllocationsInput = {
@@ -8413,6 +9509,14 @@ export type OrganizationCreateWithoutTicketProviderTemplateAllocationsInput = {
   dealTemplates?: Prisma.DealTemplateCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutTicketProviderTemplateAllocationsInput = {
@@ -8469,6 +9573,14 @@ export type OrganizationUncheckedCreateWithoutTicketProviderTemplateAllocationsI
   dealTemplates?: Prisma.DealTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutTicketProviderTemplateAllocationsInput = {
@@ -8541,6 +9653,14 @@ export type OrganizationUpdateWithoutTicketProviderTemplateAllocationsInput = {
   dealTemplates?: Prisma.DealTemplateUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutTicketProviderTemplateAllocationsInput = {
@@ -8597,6 +9717,14 @@ export type OrganizationUncheckedUpdateWithoutTicketProviderTemplateAllocationsI
   dealTemplates?: Prisma.DealTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutCalculationTemplatesInput = {
@@ -8653,6 +9781,14 @@ export type OrganizationCreateWithoutCalculationTemplatesInput = {
   dealTemplates?: Prisma.DealTemplateCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutCalculationTemplatesInput = {
@@ -8709,6 +9845,14 @@ export type OrganizationUncheckedCreateWithoutCalculationTemplatesInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutCalculationTemplatesInput = {
@@ -8781,6 +9925,14 @@ export type OrganizationUpdateWithoutCalculationTemplatesInput = {
   dealTemplates?: Prisma.DealTemplateUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutCalculationTemplatesInput = {
@@ -8837,6 +9989,14 @@ export type OrganizationUncheckedUpdateWithoutCalculationTemplatesInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutCalculationTemplateTiersInput = {
@@ -8893,6 +10053,14 @@ export type OrganizationCreateWithoutCalculationTemplateTiersInput = {
   dealTemplates?: Prisma.DealTemplateCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutCalculationTemplateTiersInput = {
@@ -8949,6 +10117,14 @@ export type OrganizationUncheckedCreateWithoutCalculationTemplateTiersInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutCalculationTemplateTiersInput = {
@@ -9021,6 +10197,14 @@ export type OrganizationUpdateWithoutCalculationTemplateTiersInput = {
   dealTemplates?: Prisma.DealTemplateUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutCalculationTemplateTiersInput = {
@@ -9077,6 +10261,14 @@ export type OrganizationUncheckedUpdateWithoutCalculationTemplateTiersInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutCalculationTemplateComponentsInput = {
@@ -9133,6 +10325,14 @@ export type OrganizationCreateWithoutCalculationTemplateComponentsInput = {
   dealTemplates?: Prisma.DealTemplateCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutCalculationTemplateComponentsInput = {
@@ -9189,6 +10389,14 @@ export type OrganizationUncheckedCreateWithoutCalculationTemplateComponentsInput
   dealTemplates?: Prisma.DealTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutCalculationTemplateComponentsInput = {
@@ -9261,6 +10469,14 @@ export type OrganizationUpdateWithoutCalculationTemplateComponentsInput = {
   dealTemplates?: Prisma.DealTemplateUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutCalculationTemplateComponentsInput = {
@@ -9317,6 +10533,14 @@ export type OrganizationUncheckedUpdateWithoutCalculationTemplateComponentsInput
   dealTemplates?: Prisma.DealTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutCalculationTemplateAllocationsInput = {
@@ -9373,6 +10597,14 @@ export type OrganizationCreateWithoutCalculationTemplateAllocationsInput = {
   dealTemplates?: Prisma.DealTemplateCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutCalculationTemplateAllocationsInput = {
@@ -9429,6 +10661,14 @@ export type OrganizationUncheckedCreateWithoutCalculationTemplateAllocationsInpu
   dealTemplates?: Prisma.DealTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutCalculationTemplateAllocationsInput = {
@@ -9501,6 +10741,14 @@ export type OrganizationUpdateWithoutCalculationTemplateAllocationsInput = {
   dealTemplates?: Prisma.DealTemplateUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutCalculationTemplateAllocationsInput = {
@@ -9557,6 +10805,14 @@ export type OrganizationUncheckedUpdateWithoutCalculationTemplateAllocationsInpu
   dealTemplates?: Prisma.DealTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutCalculationTemplateAdditionalRevenuesInput = {
@@ -9613,6 +10869,14 @@ export type OrganizationCreateWithoutCalculationTemplateAdditionalRevenuesInput 
   dealTemplates?: Prisma.DealTemplateCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutCalculationTemplateAdditionalRevenuesInput = {
@@ -9669,6 +10933,14 @@ export type OrganizationUncheckedCreateWithoutCalculationTemplateAdditionalReven
   dealTemplates?: Prisma.DealTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutCalculationTemplateAdditionalRevenuesInput = {
@@ -9741,6 +11013,14 @@ export type OrganizationUpdateWithoutCalculationTemplateAdditionalRevenuesInput 
   dealTemplates?: Prisma.DealTemplateUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutCalculationTemplateAdditionalRevenuesInput = {
@@ -9797,6 +11077,14 @@ export type OrganizationUncheckedUpdateWithoutCalculationTemplateAdditionalReven
   dealTemplates?: Prisma.DealTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutDateOptionsInput = {
@@ -9853,6 +11141,14 @@ export type OrganizationCreateWithoutDateOptionsInput = {
   dealTemplates?: Prisma.DealTemplateCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutDateOptionsInput = {
@@ -9909,6 +11205,14 @@ export type OrganizationUncheckedCreateWithoutDateOptionsInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutDateOptionsInput = {
@@ -9981,6 +11285,14 @@ export type OrganizationUpdateWithoutDateOptionsInput = {
   dealTemplates?: Prisma.DealTemplateUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutDateOptionsInput = {
@@ -10037,6 +11349,14 @@ export type OrganizationUncheckedUpdateWithoutDateOptionsInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutOccupanciesInput = {
@@ -10093,6 +11413,14 @@ export type OrganizationCreateWithoutOccupanciesInput = {
   dealTemplates?: Prisma.DealTemplateCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutOccupanciesInput = {
@@ -10149,6 +11477,14 @@ export type OrganizationUncheckedCreateWithoutOccupanciesInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutOccupanciesInput = {
@@ -10221,6 +11557,14 @@ export type OrganizationUpdateWithoutOccupanciesInput = {
   dealTemplates?: Prisma.DealTemplateUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutOccupanciesInput = {
@@ -10277,6 +11621,14 @@ export type OrganizationUncheckedUpdateWithoutOccupanciesInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutDealsInput = {
@@ -10333,6 +11685,14 @@ export type OrganizationCreateWithoutDealsInput = {
   dealTemplates?: Prisma.DealTemplateCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutDealsInput = {
@@ -10389,6 +11749,14 @@ export type OrganizationUncheckedCreateWithoutDealsInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutDealsInput = {
@@ -10461,6 +11829,14 @@ export type OrganizationUpdateWithoutDealsInput = {
   dealTemplates?: Prisma.DealTemplateUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutDealsInput = {
@@ -10517,6 +11893,14 @@ export type OrganizationUncheckedUpdateWithoutDealsInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutDealComponentsInput = {
@@ -10573,6 +11957,14 @@ export type OrganizationCreateWithoutDealComponentsInput = {
   dealTemplates?: Prisma.DealTemplateCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutDealComponentsInput = {
@@ -10629,6 +12021,14 @@ export type OrganizationUncheckedCreateWithoutDealComponentsInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutDealComponentsInput = {
@@ -10701,6 +12101,14 @@ export type OrganizationUpdateWithoutDealComponentsInput = {
   dealTemplates?: Prisma.DealTemplateUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutDealComponentsInput = {
@@ -10757,6 +12165,14 @@ export type OrganizationUncheckedUpdateWithoutDealComponentsInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutDealServicePositionsInput = {
@@ -10813,6 +12229,14 @@ export type OrganizationCreateWithoutDealServicePositionsInput = {
   dealTemplates?: Prisma.DealTemplateCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutDealServicePositionsInput = {
@@ -10869,6 +12293,14 @@ export type OrganizationUncheckedCreateWithoutDealServicePositionsInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutDealServicePositionsInput = {
@@ -10941,6 +12373,14 @@ export type OrganizationUpdateWithoutDealServicePositionsInput = {
   dealTemplates?: Prisma.DealTemplateUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutDealServicePositionsInput = {
@@ -10997,6 +12437,14 @@ export type OrganizationUncheckedUpdateWithoutDealServicePositionsInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutDealStatusHistoryInput = {
@@ -11053,6 +12501,14 @@ export type OrganizationCreateWithoutDealStatusHistoryInput = {
   dealTemplates?: Prisma.DealTemplateCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutDealStatusHistoryInput = {
@@ -11109,6 +12565,14 @@ export type OrganizationUncheckedCreateWithoutDealStatusHistoryInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutDealStatusHistoryInput = {
@@ -11181,6 +12645,14 @@ export type OrganizationUpdateWithoutDealStatusHistoryInput = {
   dealTemplates?: Prisma.DealTemplateUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutDealStatusHistoryInput = {
@@ -11237,6 +12709,14 @@ export type OrganizationUncheckedUpdateWithoutDealStatusHistoryInput = {
   dealTemplates?: Prisma.DealTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutDealTemplatesInput = {
@@ -11293,6 +12773,14 @@ export type OrganizationCreateWithoutDealTemplatesInput = {
   dealStatusHistory?: Prisma.DealStatusHistoryCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutDealTemplatesInput = {
@@ -11349,6 +12837,14 @@ export type OrganizationUncheckedCreateWithoutDealTemplatesInput = {
   dealStatusHistory?: Prisma.DealStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutDealTemplatesInput = {
@@ -11421,6 +12917,14 @@ export type OrganizationUpdateWithoutDealTemplatesInput = {
   dealStatusHistory?: Prisma.DealStatusHistoryUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutDealTemplatesInput = {
@@ -11477,6 +12981,14 @@ export type OrganizationUncheckedUpdateWithoutDealTemplatesInput = {
   dealStatusHistory?: Prisma.DealStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutDealTemplateComponentsInput = {
@@ -11533,6 +13045,14 @@ export type OrganizationCreateWithoutDealTemplateComponentsInput = {
   dealStatusHistory?: Prisma.DealStatusHistoryCreateNestedManyWithoutOrganizationInput
   dealTemplates?: Prisma.DealTemplateCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutDealTemplateComponentsInput = {
@@ -11589,6 +13109,14 @@ export type OrganizationUncheckedCreateWithoutDealTemplateComponentsInput = {
   dealStatusHistory?: Prisma.DealStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplates?: Prisma.DealTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutDealTemplateComponentsInput = {
@@ -11661,6 +13189,14 @@ export type OrganizationUpdateWithoutDealTemplateComponentsInput = {
   dealStatusHistory?: Prisma.DealStatusHistoryUpdateManyWithoutOrganizationNestedInput
   dealTemplates?: Prisma.DealTemplateUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutDealTemplateComponentsInput = {
@@ -11717,6 +13253,14 @@ export type OrganizationUncheckedUpdateWithoutDealTemplateComponentsInput = {
   dealStatusHistory?: Prisma.DealStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplates?: Prisma.DealTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutDealTemplateServicePositionsInput = {
@@ -11773,6 +13317,14 @@ export type OrganizationCreateWithoutDealTemplateServicePositionsInput = {
   dealStatusHistory?: Prisma.DealStatusHistoryCreateNestedManyWithoutOrganizationInput
   dealTemplates?: Prisma.DealTemplateCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutDealTemplateServicePositionsInput = {
@@ -11829,6 +13381,14 @@ export type OrganizationUncheckedCreateWithoutDealTemplateServicePositionsInput 
   dealStatusHistory?: Prisma.DealStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplates?: Prisma.DealTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutDealTemplateServicePositionsInput = {
@@ -11901,6 +13461,14 @@ export type OrganizationUpdateWithoutDealTemplateServicePositionsInput = {
   dealStatusHistory?: Prisma.DealStatusHistoryUpdateManyWithoutOrganizationNestedInput
   dealTemplates?: Prisma.DealTemplateUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutDealTemplateServicePositionsInput = {
@@ -11957,6 +13525,2190 @@ export type OrganizationUncheckedUpdateWithoutDealTemplateServicePositionsInput 
   dealStatusHistory?: Prisma.DealStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplates?: Prisma.DealTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationCreateWithoutDocumentTemplatesInput = {
+  id?: string
+  name: string
+  legalName?: string | null
+  email?: string | null
+  phone?: string | null
+  status?: $Enums.EntityStatus
+  version?: number
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  locations?: Prisma.LocationCreateNestedManyWithoutOrganizationInput
+  memberships?: Prisma.MembershipCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
+  invitations?: Prisma.InvitationCreateNestedManyWithoutOrganizationInput
+  auditEntries?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
+  artists?: Prisma.ArtistCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutOrganizationInput
+  partners?: Prisma.BusinessPartnerCreateNestedManyWithoutOrganizationInput
+  eventFormats?: Prisma.EventFormatCreateNestedManyWithoutOrganizationInput
+  events?: Prisma.EventCreateNestedManyWithoutOrganizationInput
+  dateOptions?: Prisma.VenueDateOptionCreateNestedManyWithoutOrganizationInput
+  occupancies?: Prisma.LocationOccupancyCreateNestedManyWithoutOrganizationInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementCreateNestedManyWithoutOrganizationInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementCreateNestedManyWithoutOrganizationInput
+  bookings?: Prisma.BookingCreateNestedManyWithoutOrganizationInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryCreateNestedManyWithoutOrganizationInput
+  eventProgramItems?: Prisma.EventProgramItemCreateNestedManyWithoutOrganizationInput
+  serviceCategories?: Prisma.ServiceCategoryCreateNestedManyWithoutOrganizationInput
+  services?: Prisma.ServiceCreateNestedManyWithoutOrganizationInput
+  serviceProviderPrices?: Prisma.ServiceProviderPriceCreateNestedManyWithoutOrganizationInput
+  eventFormatServices?: Prisma.EventFormatServiceCreateNestedManyWithoutOrganizationInput
+  eventCalculations?: Prisma.EventCalculationCreateNestedManyWithoutOrganizationInput
+  calculationStatusHistory?: Prisma.EventCalculationStatusHistoryCreateNestedManyWithoutOrganizationInput
+  eventServicePositions?: Prisma.EventServicePositionCreateNestedManyWithoutOrganizationInput
+  ticketPriceTiers?: Prisma.TicketPriceTierCreateNestedManyWithoutOrganizationInput
+  ticketPriceComponents?: Prisma.TicketPriceComponentCreateNestedManyWithoutOrganizationInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationCreateNestedManyWithoutOrganizationInput
+  additionalRevenues?: Prisma.AdditionalRevenueCreateNestedManyWithoutOrganizationInput
+  taxRateTemplates?: Prisma.TaxRateTemplateCreateNestedManyWithoutOrganizationInput
+  ticketProviderTemplates?: Prisma.TicketProviderTemplateCreateNestedManyWithoutOrganizationInput
+  ticketProviderTemplateComponents?: Prisma.TicketProviderTemplateComponentCreateNestedManyWithoutOrganizationInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationCreateNestedManyWithoutOrganizationInput
+  calculationTemplates?: Prisma.CalculationTemplateCreateNestedManyWithoutOrganizationInput
+  calculationTemplateTiers?: Prisma.CalculationTemplateTierCreateNestedManyWithoutOrganizationInput
+  calculationTemplateComponents?: Prisma.CalculationTemplateComponentCreateNestedManyWithoutOrganizationInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationCreateNestedManyWithoutOrganizationInput
+  calculationTemplateAdditionalRevenues?: Prisma.CalculationTemplateAdditionalRevenueCreateNestedManyWithoutOrganizationInput
+  deals?: Prisma.DealCreateNestedManyWithoutOrganizationInput
+  dealComponents?: Prisma.DealComponentCreateNestedManyWithoutOrganizationInput
+  dealServicePositions?: Prisma.DealServicePositionCreateNestedManyWithoutOrganizationInput
+  dealStatusHistory?: Prisma.DealStatusHistoryCreateNestedManyWithoutOrganizationInput
+  dealTemplates?: Prisma.DealTemplateCreateNestedManyWithoutOrganizationInput
+  dealTemplateComponents?: Prisma.DealTemplateComponentCreateNestedManyWithoutOrganizationInput
+  dealTemplateServicePositions?: Prisma.DealTemplateServicePositionCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationUncheckedCreateWithoutDocumentTemplatesInput = {
+  id?: string
+  name: string
+  legalName?: string | null
+  email?: string | null
+  phone?: string | null
+  status?: $Enums.EntityStatus
+  version?: number
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  locations?: Prisma.LocationUncheckedCreateNestedManyWithoutOrganizationInput
+  memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
+  invitations?: Prisma.InvitationUncheckedCreateNestedManyWithoutOrganizationInput
+  auditEntries?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
+  artists?: Prisma.ArtistUncheckedCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOrganizationInput
+  partners?: Prisma.BusinessPartnerUncheckedCreateNestedManyWithoutOrganizationInput
+  eventFormats?: Prisma.EventFormatUncheckedCreateNestedManyWithoutOrganizationInput
+  events?: Prisma.EventUncheckedCreateNestedManyWithoutOrganizationInput
+  dateOptions?: Prisma.VenueDateOptionUncheckedCreateNestedManyWithoutOrganizationInput
+  occupancies?: Prisma.LocationOccupancyUncheckedCreateNestedManyWithoutOrganizationInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUncheckedCreateNestedManyWithoutOrganizationInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUncheckedCreateNestedManyWithoutOrganizationInput
+  bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutOrganizationInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
+  eventProgramItems?: Prisma.EventProgramItemUncheckedCreateNestedManyWithoutOrganizationInput
+  serviceCategories?: Prisma.ServiceCategoryUncheckedCreateNestedManyWithoutOrganizationInput
+  services?: Prisma.ServiceUncheckedCreateNestedManyWithoutOrganizationInput
+  serviceProviderPrices?: Prisma.ServiceProviderPriceUncheckedCreateNestedManyWithoutOrganizationInput
+  eventFormatServices?: Prisma.EventFormatServiceUncheckedCreateNestedManyWithoutOrganizationInput
+  eventCalculations?: Prisma.EventCalculationUncheckedCreateNestedManyWithoutOrganizationInput
+  calculationStatusHistory?: Prisma.EventCalculationStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
+  eventServicePositions?: Prisma.EventServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  ticketPriceTiers?: Prisma.TicketPriceTierUncheckedCreateNestedManyWithoutOrganizationInput
+  ticketPriceComponents?: Prisma.TicketPriceComponentUncheckedCreateNestedManyWithoutOrganizationInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationUncheckedCreateNestedManyWithoutOrganizationInput
+  additionalRevenues?: Prisma.AdditionalRevenueUncheckedCreateNestedManyWithoutOrganizationInput
+  taxRateTemplates?: Prisma.TaxRateTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  ticketProviderTemplates?: Prisma.TicketProviderTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  ticketProviderTemplateComponents?: Prisma.TicketProviderTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUncheckedCreateNestedManyWithoutOrganizationInput
+  calculationTemplates?: Prisma.CalculationTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  calculationTemplateTiers?: Prisma.CalculationTemplateTierUncheckedCreateNestedManyWithoutOrganizationInput
+  calculationTemplateComponents?: Prisma.CalculationTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUncheckedCreateNestedManyWithoutOrganizationInput
+  calculationTemplateAdditionalRevenues?: Prisma.CalculationTemplateAdditionalRevenueUncheckedCreateNestedManyWithoutOrganizationInput
+  deals?: Prisma.DealUncheckedCreateNestedManyWithoutOrganizationInput
+  dealComponents?: Prisma.DealComponentUncheckedCreateNestedManyWithoutOrganizationInput
+  dealServicePositions?: Prisma.DealServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  dealStatusHistory?: Prisma.DealStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
+  dealTemplates?: Prisma.DealTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
+  dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationCreateOrConnectWithoutDocumentTemplatesInput = {
+  where: Prisma.OrganizationWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutDocumentTemplatesInput, Prisma.OrganizationUncheckedCreateWithoutDocumentTemplatesInput>
+}
+
+export type OrganizationUpsertWithoutDocumentTemplatesInput = {
+  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutDocumentTemplatesInput, Prisma.OrganizationUncheckedUpdateWithoutDocumentTemplatesInput>
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutDocumentTemplatesInput, Prisma.OrganizationUncheckedCreateWithoutDocumentTemplatesInput>
+  where?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationUpdateToOneWithWhereWithoutDocumentTemplatesInput = {
+  where?: Prisma.OrganizationWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutDocumentTemplatesInput, Prisma.OrganizationUncheckedUpdateWithoutDocumentTemplatesInput>
+}
+
+export type OrganizationUpdateWithoutDocumentTemplatesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  legalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  locations?: Prisma.LocationUpdateManyWithoutOrganizationNestedInput
+  memberships?: Prisma.MembershipUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
+  invitations?: Prisma.InvitationUpdateManyWithoutOrganizationNestedInput
+  auditEntries?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
+  artists?: Prisma.ArtistUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutOrganizationNestedInput
+  partners?: Prisma.BusinessPartnerUpdateManyWithoutOrganizationNestedInput
+  eventFormats?: Prisma.EventFormatUpdateManyWithoutOrganizationNestedInput
+  events?: Prisma.EventUpdateManyWithoutOrganizationNestedInput
+  dateOptions?: Prisma.VenueDateOptionUpdateManyWithoutOrganizationNestedInput
+  occupancies?: Prisma.LocationOccupancyUpdateManyWithoutOrganizationNestedInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUpdateManyWithoutOrganizationNestedInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUpdateManyWithoutOrganizationNestedInput
+  bookings?: Prisma.BookingUpdateManyWithoutOrganizationNestedInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUpdateManyWithoutOrganizationNestedInput
+  eventProgramItems?: Prisma.EventProgramItemUpdateManyWithoutOrganizationNestedInput
+  serviceCategories?: Prisma.ServiceCategoryUpdateManyWithoutOrganizationNestedInput
+  services?: Prisma.ServiceUpdateManyWithoutOrganizationNestedInput
+  serviceProviderPrices?: Prisma.ServiceProviderPriceUpdateManyWithoutOrganizationNestedInput
+  eventFormatServices?: Prisma.EventFormatServiceUpdateManyWithoutOrganizationNestedInput
+  eventCalculations?: Prisma.EventCalculationUpdateManyWithoutOrganizationNestedInput
+  calculationStatusHistory?: Prisma.EventCalculationStatusHistoryUpdateManyWithoutOrganizationNestedInput
+  eventServicePositions?: Prisma.EventServicePositionUpdateManyWithoutOrganizationNestedInput
+  ticketPriceTiers?: Prisma.TicketPriceTierUpdateManyWithoutOrganizationNestedInput
+  ticketPriceComponents?: Prisma.TicketPriceComponentUpdateManyWithoutOrganizationNestedInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationUpdateManyWithoutOrganizationNestedInput
+  additionalRevenues?: Prisma.AdditionalRevenueUpdateManyWithoutOrganizationNestedInput
+  taxRateTemplates?: Prisma.TaxRateTemplateUpdateManyWithoutOrganizationNestedInput
+  ticketProviderTemplates?: Prisma.TicketProviderTemplateUpdateManyWithoutOrganizationNestedInput
+  ticketProviderTemplateComponents?: Prisma.TicketProviderTemplateComponentUpdateManyWithoutOrganizationNestedInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUpdateManyWithoutOrganizationNestedInput
+  calculationTemplates?: Prisma.CalculationTemplateUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateTiers?: Prisma.CalculationTemplateTierUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateComponents?: Prisma.CalculationTemplateComponentUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateAdditionalRevenues?: Prisma.CalculationTemplateAdditionalRevenueUpdateManyWithoutOrganizationNestedInput
+  deals?: Prisma.DealUpdateManyWithoutOrganizationNestedInput
+  dealComponents?: Prisma.DealComponentUpdateManyWithoutOrganizationNestedInput
+  dealServicePositions?: Prisma.DealServicePositionUpdateManyWithoutOrganizationNestedInput
+  dealStatusHistory?: Prisma.DealStatusHistoryUpdateManyWithoutOrganizationNestedInput
+  dealTemplates?: Prisma.DealTemplateUpdateManyWithoutOrganizationNestedInput
+  dealTemplateComponents?: Prisma.DealTemplateComponentUpdateManyWithoutOrganizationNestedInput
+  dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationUncheckedUpdateWithoutDocumentTemplatesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  legalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  locations?: Prisma.LocationUncheckedUpdateManyWithoutOrganizationNestedInput
+  memberships?: Prisma.MembershipUncheckedUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
+  invitations?: Prisma.InvitationUncheckedUpdateManyWithoutOrganizationNestedInput
+  auditEntries?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
+  artists?: Prisma.ArtistUncheckedUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutOrganizationNestedInput
+  partners?: Prisma.BusinessPartnerUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventFormats?: Prisma.EventFormatUncheckedUpdateManyWithoutOrganizationNestedInput
+  events?: Prisma.EventUncheckedUpdateManyWithoutOrganizationNestedInput
+  dateOptions?: Prisma.VenueDateOptionUncheckedUpdateManyWithoutOrganizationNestedInput
+  occupancies?: Prisma.LocationOccupancyUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUncheckedUpdateManyWithoutOrganizationNestedInput
+  bookings?: Prisma.BookingUncheckedUpdateManyWithoutOrganizationNestedInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventProgramItems?: Prisma.EventProgramItemUncheckedUpdateManyWithoutOrganizationNestedInput
+  serviceCategories?: Prisma.ServiceCategoryUncheckedUpdateManyWithoutOrganizationNestedInput
+  services?: Prisma.ServiceUncheckedUpdateManyWithoutOrganizationNestedInput
+  serviceProviderPrices?: Prisma.ServiceProviderPriceUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventFormatServices?: Prisma.EventFormatServiceUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventCalculations?: Prisma.EventCalculationUncheckedUpdateManyWithoutOrganizationNestedInput
+  calculationStatusHistory?: Prisma.EventCalculationStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventServicePositions?: Prisma.EventServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  ticketPriceTiers?: Prisma.TicketPriceTierUncheckedUpdateManyWithoutOrganizationNestedInput
+  ticketPriceComponents?: Prisma.TicketPriceComponentUncheckedUpdateManyWithoutOrganizationNestedInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationUncheckedUpdateManyWithoutOrganizationNestedInput
+  additionalRevenues?: Prisma.AdditionalRevenueUncheckedUpdateManyWithoutOrganizationNestedInput
+  taxRateTemplates?: Prisma.TaxRateTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  ticketProviderTemplates?: Prisma.TicketProviderTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  ticketProviderTemplateComponents?: Prisma.TicketProviderTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUncheckedUpdateManyWithoutOrganizationNestedInput
+  calculationTemplates?: Prisma.CalculationTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateTiers?: Prisma.CalculationTemplateTierUncheckedUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateComponents?: Prisma.CalculationTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUncheckedUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateAdditionalRevenues?: Prisma.CalculationTemplateAdditionalRevenueUncheckedUpdateManyWithoutOrganizationNestedInput
+  deals?: Prisma.DealUncheckedUpdateManyWithoutOrganizationNestedInput
+  dealComponents?: Prisma.DealComponentUncheckedUpdateManyWithoutOrganizationNestedInput
+  dealServicePositions?: Prisma.DealServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  dealStatusHistory?: Prisma.DealStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
+  dealTemplates?: Prisma.DealTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
+  dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationCreateWithoutDocumentTemplateBlocksInput = {
+  id?: string
+  name: string
+  legalName?: string | null
+  email?: string | null
+  phone?: string | null
+  status?: $Enums.EntityStatus
+  version?: number
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  locations?: Prisma.LocationCreateNestedManyWithoutOrganizationInput
+  memberships?: Prisma.MembershipCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
+  invitations?: Prisma.InvitationCreateNestedManyWithoutOrganizationInput
+  auditEntries?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
+  artists?: Prisma.ArtistCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutOrganizationInput
+  partners?: Prisma.BusinessPartnerCreateNestedManyWithoutOrganizationInput
+  eventFormats?: Prisma.EventFormatCreateNestedManyWithoutOrganizationInput
+  events?: Prisma.EventCreateNestedManyWithoutOrganizationInput
+  dateOptions?: Prisma.VenueDateOptionCreateNestedManyWithoutOrganizationInput
+  occupancies?: Prisma.LocationOccupancyCreateNestedManyWithoutOrganizationInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementCreateNestedManyWithoutOrganizationInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementCreateNestedManyWithoutOrganizationInput
+  bookings?: Prisma.BookingCreateNestedManyWithoutOrganizationInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryCreateNestedManyWithoutOrganizationInput
+  eventProgramItems?: Prisma.EventProgramItemCreateNestedManyWithoutOrganizationInput
+  serviceCategories?: Prisma.ServiceCategoryCreateNestedManyWithoutOrganizationInput
+  services?: Prisma.ServiceCreateNestedManyWithoutOrganizationInput
+  serviceProviderPrices?: Prisma.ServiceProviderPriceCreateNestedManyWithoutOrganizationInput
+  eventFormatServices?: Prisma.EventFormatServiceCreateNestedManyWithoutOrganizationInput
+  eventCalculations?: Prisma.EventCalculationCreateNestedManyWithoutOrganizationInput
+  calculationStatusHistory?: Prisma.EventCalculationStatusHistoryCreateNestedManyWithoutOrganizationInput
+  eventServicePositions?: Prisma.EventServicePositionCreateNestedManyWithoutOrganizationInput
+  ticketPriceTiers?: Prisma.TicketPriceTierCreateNestedManyWithoutOrganizationInput
+  ticketPriceComponents?: Prisma.TicketPriceComponentCreateNestedManyWithoutOrganizationInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationCreateNestedManyWithoutOrganizationInput
+  additionalRevenues?: Prisma.AdditionalRevenueCreateNestedManyWithoutOrganizationInput
+  taxRateTemplates?: Prisma.TaxRateTemplateCreateNestedManyWithoutOrganizationInput
+  ticketProviderTemplates?: Prisma.TicketProviderTemplateCreateNestedManyWithoutOrganizationInput
+  ticketProviderTemplateComponents?: Prisma.TicketProviderTemplateComponentCreateNestedManyWithoutOrganizationInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationCreateNestedManyWithoutOrganizationInput
+  calculationTemplates?: Prisma.CalculationTemplateCreateNestedManyWithoutOrganizationInput
+  calculationTemplateTiers?: Prisma.CalculationTemplateTierCreateNestedManyWithoutOrganizationInput
+  calculationTemplateComponents?: Prisma.CalculationTemplateComponentCreateNestedManyWithoutOrganizationInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationCreateNestedManyWithoutOrganizationInput
+  calculationTemplateAdditionalRevenues?: Prisma.CalculationTemplateAdditionalRevenueCreateNestedManyWithoutOrganizationInput
+  deals?: Prisma.DealCreateNestedManyWithoutOrganizationInput
+  dealComponents?: Prisma.DealComponentCreateNestedManyWithoutOrganizationInput
+  dealServicePositions?: Prisma.DealServicePositionCreateNestedManyWithoutOrganizationInput
+  dealStatusHistory?: Prisma.DealStatusHistoryCreateNestedManyWithoutOrganizationInput
+  dealTemplates?: Prisma.DealTemplateCreateNestedManyWithoutOrganizationInput
+  dealTemplateComponents?: Prisma.DealTemplateComponentCreateNestedManyWithoutOrganizationInput
+  dealTemplateServicePositions?: Prisma.DealTemplateServicePositionCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationUncheckedCreateWithoutDocumentTemplateBlocksInput = {
+  id?: string
+  name: string
+  legalName?: string | null
+  email?: string | null
+  phone?: string | null
+  status?: $Enums.EntityStatus
+  version?: number
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  locations?: Prisma.LocationUncheckedCreateNestedManyWithoutOrganizationInput
+  memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
+  invitations?: Prisma.InvitationUncheckedCreateNestedManyWithoutOrganizationInput
+  auditEntries?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
+  artists?: Prisma.ArtistUncheckedCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOrganizationInput
+  partners?: Prisma.BusinessPartnerUncheckedCreateNestedManyWithoutOrganizationInput
+  eventFormats?: Prisma.EventFormatUncheckedCreateNestedManyWithoutOrganizationInput
+  events?: Prisma.EventUncheckedCreateNestedManyWithoutOrganizationInput
+  dateOptions?: Prisma.VenueDateOptionUncheckedCreateNestedManyWithoutOrganizationInput
+  occupancies?: Prisma.LocationOccupancyUncheckedCreateNestedManyWithoutOrganizationInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUncheckedCreateNestedManyWithoutOrganizationInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUncheckedCreateNestedManyWithoutOrganizationInput
+  bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutOrganizationInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
+  eventProgramItems?: Prisma.EventProgramItemUncheckedCreateNestedManyWithoutOrganizationInput
+  serviceCategories?: Prisma.ServiceCategoryUncheckedCreateNestedManyWithoutOrganizationInput
+  services?: Prisma.ServiceUncheckedCreateNestedManyWithoutOrganizationInput
+  serviceProviderPrices?: Prisma.ServiceProviderPriceUncheckedCreateNestedManyWithoutOrganizationInput
+  eventFormatServices?: Prisma.EventFormatServiceUncheckedCreateNestedManyWithoutOrganizationInput
+  eventCalculations?: Prisma.EventCalculationUncheckedCreateNestedManyWithoutOrganizationInput
+  calculationStatusHistory?: Prisma.EventCalculationStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
+  eventServicePositions?: Prisma.EventServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  ticketPriceTiers?: Prisma.TicketPriceTierUncheckedCreateNestedManyWithoutOrganizationInput
+  ticketPriceComponents?: Prisma.TicketPriceComponentUncheckedCreateNestedManyWithoutOrganizationInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationUncheckedCreateNestedManyWithoutOrganizationInput
+  additionalRevenues?: Prisma.AdditionalRevenueUncheckedCreateNestedManyWithoutOrganizationInput
+  taxRateTemplates?: Prisma.TaxRateTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  ticketProviderTemplates?: Prisma.TicketProviderTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  ticketProviderTemplateComponents?: Prisma.TicketProviderTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUncheckedCreateNestedManyWithoutOrganizationInput
+  calculationTemplates?: Prisma.CalculationTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  calculationTemplateTiers?: Prisma.CalculationTemplateTierUncheckedCreateNestedManyWithoutOrganizationInput
+  calculationTemplateComponents?: Prisma.CalculationTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUncheckedCreateNestedManyWithoutOrganizationInput
+  calculationTemplateAdditionalRevenues?: Prisma.CalculationTemplateAdditionalRevenueUncheckedCreateNestedManyWithoutOrganizationInput
+  deals?: Prisma.DealUncheckedCreateNestedManyWithoutOrganizationInput
+  dealComponents?: Prisma.DealComponentUncheckedCreateNestedManyWithoutOrganizationInput
+  dealServicePositions?: Prisma.DealServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  dealStatusHistory?: Prisma.DealStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
+  dealTemplates?: Prisma.DealTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
+  dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationCreateOrConnectWithoutDocumentTemplateBlocksInput = {
+  where: Prisma.OrganizationWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutDocumentTemplateBlocksInput, Prisma.OrganizationUncheckedCreateWithoutDocumentTemplateBlocksInput>
+}
+
+export type OrganizationUpsertWithoutDocumentTemplateBlocksInput = {
+  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutDocumentTemplateBlocksInput, Prisma.OrganizationUncheckedUpdateWithoutDocumentTemplateBlocksInput>
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutDocumentTemplateBlocksInput, Prisma.OrganizationUncheckedCreateWithoutDocumentTemplateBlocksInput>
+  where?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationUpdateToOneWithWhereWithoutDocumentTemplateBlocksInput = {
+  where?: Prisma.OrganizationWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutDocumentTemplateBlocksInput, Prisma.OrganizationUncheckedUpdateWithoutDocumentTemplateBlocksInput>
+}
+
+export type OrganizationUpdateWithoutDocumentTemplateBlocksInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  legalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  locations?: Prisma.LocationUpdateManyWithoutOrganizationNestedInput
+  memberships?: Prisma.MembershipUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
+  invitations?: Prisma.InvitationUpdateManyWithoutOrganizationNestedInput
+  auditEntries?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
+  artists?: Prisma.ArtistUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutOrganizationNestedInput
+  partners?: Prisma.BusinessPartnerUpdateManyWithoutOrganizationNestedInput
+  eventFormats?: Prisma.EventFormatUpdateManyWithoutOrganizationNestedInput
+  events?: Prisma.EventUpdateManyWithoutOrganizationNestedInput
+  dateOptions?: Prisma.VenueDateOptionUpdateManyWithoutOrganizationNestedInput
+  occupancies?: Prisma.LocationOccupancyUpdateManyWithoutOrganizationNestedInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUpdateManyWithoutOrganizationNestedInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUpdateManyWithoutOrganizationNestedInput
+  bookings?: Prisma.BookingUpdateManyWithoutOrganizationNestedInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUpdateManyWithoutOrganizationNestedInput
+  eventProgramItems?: Prisma.EventProgramItemUpdateManyWithoutOrganizationNestedInput
+  serviceCategories?: Prisma.ServiceCategoryUpdateManyWithoutOrganizationNestedInput
+  services?: Prisma.ServiceUpdateManyWithoutOrganizationNestedInput
+  serviceProviderPrices?: Prisma.ServiceProviderPriceUpdateManyWithoutOrganizationNestedInput
+  eventFormatServices?: Prisma.EventFormatServiceUpdateManyWithoutOrganizationNestedInput
+  eventCalculations?: Prisma.EventCalculationUpdateManyWithoutOrganizationNestedInput
+  calculationStatusHistory?: Prisma.EventCalculationStatusHistoryUpdateManyWithoutOrganizationNestedInput
+  eventServicePositions?: Prisma.EventServicePositionUpdateManyWithoutOrganizationNestedInput
+  ticketPriceTiers?: Prisma.TicketPriceTierUpdateManyWithoutOrganizationNestedInput
+  ticketPriceComponents?: Prisma.TicketPriceComponentUpdateManyWithoutOrganizationNestedInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationUpdateManyWithoutOrganizationNestedInput
+  additionalRevenues?: Prisma.AdditionalRevenueUpdateManyWithoutOrganizationNestedInput
+  taxRateTemplates?: Prisma.TaxRateTemplateUpdateManyWithoutOrganizationNestedInput
+  ticketProviderTemplates?: Prisma.TicketProviderTemplateUpdateManyWithoutOrganizationNestedInput
+  ticketProviderTemplateComponents?: Prisma.TicketProviderTemplateComponentUpdateManyWithoutOrganizationNestedInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUpdateManyWithoutOrganizationNestedInput
+  calculationTemplates?: Prisma.CalculationTemplateUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateTiers?: Prisma.CalculationTemplateTierUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateComponents?: Prisma.CalculationTemplateComponentUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateAdditionalRevenues?: Prisma.CalculationTemplateAdditionalRevenueUpdateManyWithoutOrganizationNestedInput
+  deals?: Prisma.DealUpdateManyWithoutOrganizationNestedInput
+  dealComponents?: Prisma.DealComponentUpdateManyWithoutOrganizationNestedInput
+  dealServicePositions?: Prisma.DealServicePositionUpdateManyWithoutOrganizationNestedInput
+  dealStatusHistory?: Prisma.DealStatusHistoryUpdateManyWithoutOrganizationNestedInput
+  dealTemplates?: Prisma.DealTemplateUpdateManyWithoutOrganizationNestedInput
+  dealTemplateComponents?: Prisma.DealTemplateComponentUpdateManyWithoutOrganizationNestedInput
+  dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationUncheckedUpdateWithoutDocumentTemplateBlocksInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  legalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  locations?: Prisma.LocationUncheckedUpdateManyWithoutOrganizationNestedInput
+  memberships?: Prisma.MembershipUncheckedUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
+  invitations?: Prisma.InvitationUncheckedUpdateManyWithoutOrganizationNestedInput
+  auditEntries?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
+  artists?: Prisma.ArtistUncheckedUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutOrganizationNestedInput
+  partners?: Prisma.BusinessPartnerUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventFormats?: Prisma.EventFormatUncheckedUpdateManyWithoutOrganizationNestedInput
+  events?: Prisma.EventUncheckedUpdateManyWithoutOrganizationNestedInput
+  dateOptions?: Prisma.VenueDateOptionUncheckedUpdateManyWithoutOrganizationNestedInput
+  occupancies?: Prisma.LocationOccupancyUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUncheckedUpdateManyWithoutOrganizationNestedInput
+  bookings?: Prisma.BookingUncheckedUpdateManyWithoutOrganizationNestedInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventProgramItems?: Prisma.EventProgramItemUncheckedUpdateManyWithoutOrganizationNestedInput
+  serviceCategories?: Prisma.ServiceCategoryUncheckedUpdateManyWithoutOrganizationNestedInput
+  services?: Prisma.ServiceUncheckedUpdateManyWithoutOrganizationNestedInput
+  serviceProviderPrices?: Prisma.ServiceProviderPriceUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventFormatServices?: Prisma.EventFormatServiceUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventCalculations?: Prisma.EventCalculationUncheckedUpdateManyWithoutOrganizationNestedInput
+  calculationStatusHistory?: Prisma.EventCalculationStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventServicePositions?: Prisma.EventServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  ticketPriceTiers?: Prisma.TicketPriceTierUncheckedUpdateManyWithoutOrganizationNestedInput
+  ticketPriceComponents?: Prisma.TicketPriceComponentUncheckedUpdateManyWithoutOrganizationNestedInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationUncheckedUpdateManyWithoutOrganizationNestedInput
+  additionalRevenues?: Prisma.AdditionalRevenueUncheckedUpdateManyWithoutOrganizationNestedInput
+  taxRateTemplates?: Prisma.TaxRateTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  ticketProviderTemplates?: Prisma.TicketProviderTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  ticketProviderTemplateComponents?: Prisma.TicketProviderTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUncheckedUpdateManyWithoutOrganizationNestedInput
+  calculationTemplates?: Prisma.CalculationTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateTiers?: Prisma.CalculationTemplateTierUncheckedUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateComponents?: Prisma.CalculationTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUncheckedUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateAdditionalRevenues?: Prisma.CalculationTemplateAdditionalRevenueUncheckedUpdateManyWithoutOrganizationNestedInput
+  deals?: Prisma.DealUncheckedUpdateManyWithoutOrganizationNestedInput
+  dealComponents?: Prisma.DealComponentUncheckedUpdateManyWithoutOrganizationNestedInput
+  dealServicePositions?: Prisma.DealServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  dealStatusHistory?: Prisma.DealStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
+  dealTemplates?: Prisma.DealTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
+  dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationCreateWithoutDocumentsInput = {
+  id?: string
+  name: string
+  legalName?: string | null
+  email?: string | null
+  phone?: string | null
+  status?: $Enums.EntityStatus
+  version?: number
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  locations?: Prisma.LocationCreateNestedManyWithoutOrganizationInput
+  memberships?: Prisma.MembershipCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
+  invitations?: Prisma.InvitationCreateNestedManyWithoutOrganizationInput
+  auditEntries?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
+  artists?: Prisma.ArtistCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutOrganizationInput
+  partners?: Prisma.BusinessPartnerCreateNestedManyWithoutOrganizationInput
+  eventFormats?: Prisma.EventFormatCreateNestedManyWithoutOrganizationInput
+  events?: Prisma.EventCreateNestedManyWithoutOrganizationInput
+  dateOptions?: Prisma.VenueDateOptionCreateNestedManyWithoutOrganizationInput
+  occupancies?: Prisma.LocationOccupancyCreateNestedManyWithoutOrganizationInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementCreateNestedManyWithoutOrganizationInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementCreateNestedManyWithoutOrganizationInput
+  bookings?: Prisma.BookingCreateNestedManyWithoutOrganizationInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryCreateNestedManyWithoutOrganizationInput
+  eventProgramItems?: Prisma.EventProgramItemCreateNestedManyWithoutOrganizationInput
+  serviceCategories?: Prisma.ServiceCategoryCreateNestedManyWithoutOrganizationInput
+  services?: Prisma.ServiceCreateNestedManyWithoutOrganizationInput
+  serviceProviderPrices?: Prisma.ServiceProviderPriceCreateNestedManyWithoutOrganizationInput
+  eventFormatServices?: Prisma.EventFormatServiceCreateNestedManyWithoutOrganizationInput
+  eventCalculations?: Prisma.EventCalculationCreateNestedManyWithoutOrganizationInput
+  calculationStatusHistory?: Prisma.EventCalculationStatusHistoryCreateNestedManyWithoutOrganizationInput
+  eventServicePositions?: Prisma.EventServicePositionCreateNestedManyWithoutOrganizationInput
+  ticketPriceTiers?: Prisma.TicketPriceTierCreateNestedManyWithoutOrganizationInput
+  ticketPriceComponents?: Prisma.TicketPriceComponentCreateNestedManyWithoutOrganizationInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationCreateNestedManyWithoutOrganizationInput
+  additionalRevenues?: Prisma.AdditionalRevenueCreateNestedManyWithoutOrganizationInput
+  taxRateTemplates?: Prisma.TaxRateTemplateCreateNestedManyWithoutOrganizationInput
+  ticketProviderTemplates?: Prisma.TicketProviderTemplateCreateNestedManyWithoutOrganizationInput
+  ticketProviderTemplateComponents?: Prisma.TicketProviderTemplateComponentCreateNestedManyWithoutOrganizationInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationCreateNestedManyWithoutOrganizationInput
+  calculationTemplates?: Prisma.CalculationTemplateCreateNestedManyWithoutOrganizationInput
+  calculationTemplateTiers?: Prisma.CalculationTemplateTierCreateNestedManyWithoutOrganizationInput
+  calculationTemplateComponents?: Prisma.CalculationTemplateComponentCreateNestedManyWithoutOrganizationInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationCreateNestedManyWithoutOrganizationInput
+  calculationTemplateAdditionalRevenues?: Prisma.CalculationTemplateAdditionalRevenueCreateNestedManyWithoutOrganizationInput
+  deals?: Prisma.DealCreateNestedManyWithoutOrganizationInput
+  dealComponents?: Prisma.DealComponentCreateNestedManyWithoutOrganizationInput
+  dealServicePositions?: Prisma.DealServicePositionCreateNestedManyWithoutOrganizationInput
+  dealStatusHistory?: Prisma.DealStatusHistoryCreateNestedManyWithoutOrganizationInput
+  dealTemplates?: Prisma.DealTemplateCreateNestedManyWithoutOrganizationInput
+  dealTemplateComponents?: Prisma.DealTemplateComponentCreateNestedManyWithoutOrganizationInput
+  dealTemplateServicePositions?: Prisma.DealTemplateServicePositionCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationUncheckedCreateWithoutDocumentsInput = {
+  id?: string
+  name: string
+  legalName?: string | null
+  email?: string | null
+  phone?: string | null
+  status?: $Enums.EntityStatus
+  version?: number
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  locations?: Prisma.LocationUncheckedCreateNestedManyWithoutOrganizationInput
+  memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
+  invitations?: Prisma.InvitationUncheckedCreateNestedManyWithoutOrganizationInput
+  auditEntries?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
+  artists?: Prisma.ArtistUncheckedCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOrganizationInput
+  partners?: Prisma.BusinessPartnerUncheckedCreateNestedManyWithoutOrganizationInput
+  eventFormats?: Prisma.EventFormatUncheckedCreateNestedManyWithoutOrganizationInput
+  events?: Prisma.EventUncheckedCreateNestedManyWithoutOrganizationInput
+  dateOptions?: Prisma.VenueDateOptionUncheckedCreateNestedManyWithoutOrganizationInput
+  occupancies?: Prisma.LocationOccupancyUncheckedCreateNestedManyWithoutOrganizationInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUncheckedCreateNestedManyWithoutOrganizationInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUncheckedCreateNestedManyWithoutOrganizationInput
+  bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutOrganizationInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
+  eventProgramItems?: Prisma.EventProgramItemUncheckedCreateNestedManyWithoutOrganizationInput
+  serviceCategories?: Prisma.ServiceCategoryUncheckedCreateNestedManyWithoutOrganizationInput
+  services?: Prisma.ServiceUncheckedCreateNestedManyWithoutOrganizationInput
+  serviceProviderPrices?: Prisma.ServiceProviderPriceUncheckedCreateNestedManyWithoutOrganizationInput
+  eventFormatServices?: Prisma.EventFormatServiceUncheckedCreateNestedManyWithoutOrganizationInput
+  eventCalculations?: Prisma.EventCalculationUncheckedCreateNestedManyWithoutOrganizationInput
+  calculationStatusHistory?: Prisma.EventCalculationStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
+  eventServicePositions?: Prisma.EventServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  ticketPriceTiers?: Prisma.TicketPriceTierUncheckedCreateNestedManyWithoutOrganizationInput
+  ticketPriceComponents?: Prisma.TicketPriceComponentUncheckedCreateNestedManyWithoutOrganizationInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationUncheckedCreateNestedManyWithoutOrganizationInput
+  additionalRevenues?: Prisma.AdditionalRevenueUncheckedCreateNestedManyWithoutOrganizationInput
+  taxRateTemplates?: Prisma.TaxRateTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  ticketProviderTemplates?: Prisma.TicketProviderTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  ticketProviderTemplateComponents?: Prisma.TicketProviderTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUncheckedCreateNestedManyWithoutOrganizationInput
+  calculationTemplates?: Prisma.CalculationTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  calculationTemplateTiers?: Prisma.CalculationTemplateTierUncheckedCreateNestedManyWithoutOrganizationInput
+  calculationTemplateComponents?: Prisma.CalculationTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUncheckedCreateNestedManyWithoutOrganizationInput
+  calculationTemplateAdditionalRevenues?: Prisma.CalculationTemplateAdditionalRevenueUncheckedCreateNestedManyWithoutOrganizationInput
+  deals?: Prisma.DealUncheckedCreateNestedManyWithoutOrganizationInput
+  dealComponents?: Prisma.DealComponentUncheckedCreateNestedManyWithoutOrganizationInput
+  dealServicePositions?: Prisma.DealServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  dealStatusHistory?: Prisma.DealStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
+  dealTemplates?: Prisma.DealTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
+  dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationCreateOrConnectWithoutDocumentsInput = {
+  where: Prisma.OrganizationWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutDocumentsInput, Prisma.OrganizationUncheckedCreateWithoutDocumentsInput>
+}
+
+export type OrganizationUpsertWithoutDocumentsInput = {
+  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutDocumentsInput, Prisma.OrganizationUncheckedUpdateWithoutDocumentsInput>
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutDocumentsInput, Prisma.OrganizationUncheckedCreateWithoutDocumentsInput>
+  where?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationUpdateToOneWithWhereWithoutDocumentsInput = {
+  where?: Prisma.OrganizationWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutDocumentsInput, Prisma.OrganizationUncheckedUpdateWithoutDocumentsInput>
+}
+
+export type OrganizationUpdateWithoutDocumentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  legalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  locations?: Prisma.LocationUpdateManyWithoutOrganizationNestedInput
+  memberships?: Prisma.MembershipUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
+  invitations?: Prisma.InvitationUpdateManyWithoutOrganizationNestedInput
+  auditEntries?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
+  artists?: Prisma.ArtistUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutOrganizationNestedInput
+  partners?: Prisma.BusinessPartnerUpdateManyWithoutOrganizationNestedInput
+  eventFormats?: Prisma.EventFormatUpdateManyWithoutOrganizationNestedInput
+  events?: Prisma.EventUpdateManyWithoutOrganizationNestedInput
+  dateOptions?: Prisma.VenueDateOptionUpdateManyWithoutOrganizationNestedInput
+  occupancies?: Prisma.LocationOccupancyUpdateManyWithoutOrganizationNestedInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUpdateManyWithoutOrganizationNestedInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUpdateManyWithoutOrganizationNestedInput
+  bookings?: Prisma.BookingUpdateManyWithoutOrganizationNestedInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUpdateManyWithoutOrganizationNestedInput
+  eventProgramItems?: Prisma.EventProgramItemUpdateManyWithoutOrganizationNestedInput
+  serviceCategories?: Prisma.ServiceCategoryUpdateManyWithoutOrganizationNestedInput
+  services?: Prisma.ServiceUpdateManyWithoutOrganizationNestedInput
+  serviceProviderPrices?: Prisma.ServiceProviderPriceUpdateManyWithoutOrganizationNestedInput
+  eventFormatServices?: Prisma.EventFormatServiceUpdateManyWithoutOrganizationNestedInput
+  eventCalculations?: Prisma.EventCalculationUpdateManyWithoutOrganizationNestedInput
+  calculationStatusHistory?: Prisma.EventCalculationStatusHistoryUpdateManyWithoutOrganizationNestedInput
+  eventServicePositions?: Prisma.EventServicePositionUpdateManyWithoutOrganizationNestedInput
+  ticketPriceTiers?: Prisma.TicketPriceTierUpdateManyWithoutOrganizationNestedInput
+  ticketPriceComponents?: Prisma.TicketPriceComponentUpdateManyWithoutOrganizationNestedInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationUpdateManyWithoutOrganizationNestedInput
+  additionalRevenues?: Prisma.AdditionalRevenueUpdateManyWithoutOrganizationNestedInput
+  taxRateTemplates?: Prisma.TaxRateTemplateUpdateManyWithoutOrganizationNestedInput
+  ticketProviderTemplates?: Prisma.TicketProviderTemplateUpdateManyWithoutOrganizationNestedInput
+  ticketProviderTemplateComponents?: Prisma.TicketProviderTemplateComponentUpdateManyWithoutOrganizationNestedInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUpdateManyWithoutOrganizationNestedInput
+  calculationTemplates?: Prisma.CalculationTemplateUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateTiers?: Prisma.CalculationTemplateTierUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateComponents?: Prisma.CalculationTemplateComponentUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateAdditionalRevenues?: Prisma.CalculationTemplateAdditionalRevenueUpdateManyWithoutOrganizationNestedInput
+  deals?: Prisma.DealUpdateManyWithoutOrganizationNestedInput
+  dealComponents?: Prisma.DealComponentUpdateManyWithoutOrganizationNestedInput
+  dealServicePositions?: Prisma.DealServicePositionUpdateManyWithoutOrganizationNestedInput
+  dealStatusHistory?: Prisma.DealStatusHistoryUpdateManyWithoutOrganizationNestedInput
+  dealTemplates?: Prisma.DealTemplateUpdateManyWithoutOrganizationNestedInput
+  dealTemplateComponents?: Prisma.DealTemplateComponentUpdateManyWithoutOrganizationNestedInput
+  dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationUncheckedUpdateWithoutDocumentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  legalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  locations?: Prisma.LocationUncheckedUpdateManyWithoutOrganizationNestedInput
+  memberships?: Prisma.MembershipUncheckedUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
+  invitations?: Prisma.InvitationUncheckedUpdateManyWithoutOrganizationNestedInput
+  auditEntries?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
+  artists?: Prisma.ArtistUncheckedUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutOrganizationNestedInput
+  partners?: Prisma.BusinessPartnerUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventFormats?: Prisma.EventFormatUncheckedUpdateManyWithoutOrganizationNestedInput
+  events?: Prisma.EventUncheckedUpdateManyWithoutOrganizationNestedInput
+  dateOptions?: Prisma.VenueDateOptionUncheckedUpdateManyWithoutOrganizationNestedInput
+  occupancies?: Prisma.LocationOccupancyUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUncheckedUpdateManyWithoutOrganizationNestedInput
+  bookings?: Prisma.BookingUncheckedUpdateManyWithoutOrganizationNestedInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventProgramItems?: Prisma.EventProgramItemUncheckedUpdateManyWithoutOrganizationNestedInput
+  serviceCategories?: Prisma.ServiceCategoryUncheckedUpdateManyWithoutOrganizationNestedInput
+  services?: Prisma.ServiceUncheckedUpdateManyWithoutOrganizationNestedInput
+  serviceProviderPrices?: Prisma.ServiceProviderPriceUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventFormatServices?: Prisma.EventFormatServiceUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventCalculations?: Prisma.EventCalculationUncheckedUpdateManyWithoutOrganizationNestedInput
+  calculationStatusHistory?: Prisma.EventCalculationStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventServicePositions?: Prisma.EventServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  ticketPriceTiers?: Prisma.TicketPriceTierUncheckedUpdateManyWithoutOrganizationNestedInput
+  ticketPriceComponents?: Prisma.TicketPriceComponentUncheckedUpdateManyWithoutOrganizationNestedInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationUncheckedUpdateManyWithoutOrganizationNestedInput
+  additionalRevenues?: Prisma.AdditionalRevenueUncheckedUpdateManyWithoutOrganizationNestedInput
+  taxRateTemplates?: Prisma.TaxRateTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  ticketProviderTemplates?: Prisma.TicketProviderTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  ticketProviderTemplateComponents?: Prisma.TicketProviderTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUncheckedUpdateManyWithoutOrganizationNestedInput
+  calculationTemplates?: Prisma.CalculationTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateTiers?: Prisma.CalculationTemplateTierUncheckedUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateComponents?: Prisma.CalculationTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUncheckedUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateAdditionalRevenues?: Prisma.CalculationTemplateAdditionalRevenueUncheckedUpdateManyWithoutOrganizationNestedInput
+  deals?: Prisma.DealUncheckedUpdateManyWithoutOrganizationNestedInput
+  dealComponents?: Prisma.DealComponentUncheckedUpdateManyWithoutOrganizationNestedInput
+  dealServicePositions?: Prisma.DealServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  dealStatusHistory?: Prisma.DealStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
+  dealTemplates?: Prisma.DealTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
+  dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationCreateWithoutDocumentNumberSequencesInput = {
+  id?: string
+  name: string
+  legalName?: string | null
+  email?: string | null
+  phone?: string | null
+  status?: $Enums.EntityStatus
+  version?: number
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  locations?: Prisma.LocationCreateNestedManyWithoutOrganizationInput
+  memberships?: Prisma.MembershipCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
+  invitations?: Prisma.InvitationCreateNestedManyWithoutOrganizationInput
+  auditEntries?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
+  artists?: Prisma.ArtistCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutOrganizationInput
+  partners?: Prisma.BusinessPartnerCreateNestedManyWithoutOrganizationInput
+  eventFormats?: Prisma.EventFormatCreateNestedManyWithoutOrganizationInput
+  events?: Prisma.EventCreateNestedManyWithoutOrganizationInput
+  dateOptions?: Prisma.VenueDateOptionCreateNestedManyWithoutOrganizationInput
+  occupancies?: Prisma.LocationOccupancyCreateNestedManyWithoutOrganizationInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementCreateNestedManyWithoutOrganizationInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementCreateNestedManyWithoutOrganizationInput
+  bookings?: Prisma.BookingCreateNestedManyWithoutOrganizationInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryCreateNestedManyWithoutOrganizationInput
+  eventProgramItems?: Prisma.EventProgramItemCreateNestedManyWithoutOrganizationInput
+  serviceCategories?: Prisma.ServiceCategoryCreateNestedManyWithoutOrganizationInput
+  services?: Prisma.ServiceCreateNestedManyWithoutOrganizationInput
+  serviceProviderPrices?: Prisma.ServiceProviderPriceCreateNestedManyWithoutOrganizationInput
+  eventFormatServices?: Prisma.EventFormatServiceCreateNestedManyWithoutOrganizationInput
+  eventCalculations?: Prisma.EventCalculationCreateNestedManyWithoutOrganizationInput
+  calculationStatusHistory?: Prisma.EventCalculationStatusHistoryCreateNestedManyWithoutOrganizationInput
+  eventServicePositions?: Prisma.EventServicePositionCreateNestedManyWithoutOrganizationInput
+  ticketPriceTiers?: Prisma.TicketPriceTierCreateNestedManyWithoutOrganizationInput
+  ticketPriceComponents?: Prisma.TicketPriceComponentCreateNestedManyWithoutOrganizationInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationCreateNestedManyWithoutOrganizationInput
+  additionalRevenues?: Prisma.AdditionalRevenueCreateNestedManyWithoutOrganizationInput
+  taxRateTemplates?: Prisma.TaxRateTemplateCreateNestedManyWithoutOrganizationInput
+  ticketProviderTemplates?: Prisma.TicketProviderTemplateCreateNestedManyWithoutOrganizationInput
+  ticketProviderTemplateComponents?: Prisma.TicketProviderTemplateComponentCreateNestedManyWithoutOrganizationInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationCreateNestedManyWithoutOrganizationInput
+  calculationTemplates?: Prisma.CalculationTemplateCreateNestedManyWithoutOrganizationInput
+  calculationTemplateTiers?: Prisma.CalculationTemplateTierCreateNestedManyWithoutOrganizationInput
+  calculationTemplateComponents?: Prisma.CalculationTemplateComponentCreateNestedManyWithoutOrganizationInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationCreateNestedManyWithoutOrganizationInput
+  calculationTemplateAdditionalRevenues?: Prisma.CalculationTemplateAdditionalRevenueCreateNestedManyWithoutOrganizationInput
+  deals?: Prisma.DealCreateNestedManyWithoutOrganizationInput
+  dealComponents?: Prisma.DealComponentCreateNestedManyWithoutOrganizationInput
+  dealServicePositions?: Prisma.DealServicePositionCreateNestedManyWithoutOrganizationInput
+  dealStatusHistory?: Prisma.DealStatusHistoryCreateNestedManyWithoutOrganizationInput
+  dealTemplates?: Prisma.DealTemplateCreateNestedManyWithoutOrganizationInput
+  dealTemplateComponents?: Prisma.DealTemplateComponentCreateNestedManyWithoutOrganizationInput
+  dealTemplateServicePositions?: Prisma.DealTemplateServicePositionCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationUncheckedCreateWithoutDocumentNumberSequencesInput = {
+  id?: string
+  name: string
+  legalName?: string | null
+  email?: string | null
+  phone?: string | null
+  status?: $Enums.EntityStatus
+  version?: number
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  locations?: Prisma.LocationUncheckedCreateNestedManyWithoutOrganizationInput
+  memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
+  invitations?: Prisma.InvitationUncheckedCreateNestedManyWithoutOrganizationInput
+  auditEntries?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
+  artists?: Prisma.ArtistUncheckedCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOrganizationInput
+  partners?: Prisma.BusinessPartnerUncheckedCreateNestedManyWithoutOrganizationInput
+  eventFormats?: Prisma.EventFormatUncheckedCreateNestedManyWithoutOrganizationInput
+  events?: Prisma.EventUncheckedCreateNestedManyWithoutOrganizationInput
+  dateOptions?: Prisma.VenueDateOptionUncheckedCreateNestedManyWithoutOrganizationInput
+  occupancies?: Prisma.LocationOccupancyUncheckedCreateNestedManyWithoutOrganizationInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUncheckedCreateNestedManyWithoutOrganizationInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUncheckedCreateNestedManyWithoutOrganizationInput
+  bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutOrganizationInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
+  eventProgramItems?: Prisma.EventProgramItemUncheckedCreateNestedManyWithoutOrganizationInput
+  serviceCategories?: Prisma.ServiceCategoryUncheckedCreateNestedManyWithoutOrganizationInput
+  services?: Prisma.ServiceUncheckedCreateNestedManyWithoutOrganizationInput
+  serviceProviderPrices?: Prisma.ServiceProviderPriceUncheckedCreateNestedManyWithoutOrganizationInput
+  eventFormatServices?: Prisma.EventFormatServiceUncheckedCreateNestedManyWithoutOrganizationInput
+  eventCalculations?: Prisma.EventCalculationUncheckedCreateNestedManyWithoutOrganizationInput
+  calculationStatusHistory?: Prisma.EventCalculationStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
+  eventServicePositions?: Prisma.EventServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  ticketPriceTiers?: Prisma.TicketPriceTierUncheckedCreateNestedManyWithoutOrganizationInput
+  ticketPriceComponents?: Prisma.TicketPriceComponentUncheckedCreateNestedManyWithoutOrganizationInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationUncheckedCreateNestedManyWithoutOrganizationInput
+  additionalRevenues?: Prisma.AdditionalRevenueUncheckedCreateNestedManyWithoutOrganizationInput
+  taxRateTemplates?: Prisma.TaxRateTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  ticketProviderTemplates?: Prisma.TicketProviderTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  ticketProviderTemplateComponents?: Prisma.TicketProviderTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUncheckedCreateNestedManyWithoutOrganizationInput
+  calculationTemplates?: Prisma.CalculationTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  calculationTemplateTiers?: Prisma.CalculationTemplateTierUncheckedCreateNestedManyWithoutOrganizationInput
+  calculationTemplateComponents?: Prisma.CalculationTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUncheckedCreateNestedManyWithoutOrganizationInput
+  calculationTemplateAdditionalRevenues?: Prisma.CalculationTemplateAdditionalRevenueUncheckedCreateNestedManyWithoutOrganizationInput
+  deals?: Prisma.DealUncheckedCreateNestedManyWithoutOrganizationInput
+  dealComponents?: Prisma.DealComponentUncheckedCreateNestedManyWithoutOrganizationInput
+  dealServicePositions?: Prisma.DealServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  dealStatusHistory?: Prisma.DealStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
+  dealTemplates?: Prisma.DealTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
+  dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationCreateOrConnectWithoutDocumentNumberSequencesInput = {
+  where: Prisma.OrganizationWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutDocumentNumberSequencesInput, Prisma.OrganizationUncheckedCreateWithoutDocumentNumberSequencesInput>
+}
+
+export type OrganizationUpsertWithoutDocumentNumberSequencesInput = {
+  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutDocumentNumberSequencesInput, Prisma.OrganizationUncheckedUpdateWithoutDocumentNumberSequencesInput>
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutDocumentNumberSequencesInput, Prisma.OrganizationUncheckedCreateWithoutDocumentNumberSequencesInput>
+  where?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationUpdateToOneWithWhereWithoutDocumentNumberSequencesInput = {
+  where?: Prisma.OrganizationWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutDocumentNumberSequencesInput, Prisma.OrganizationUncheckedUpdateWithoutDocumentNumberSequencesInput>
+}
+
+export type OrganizationUpdateWithoutDocumentNumberSequencesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  legalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  locations?: Prisma.LocationUpdateManyWithoutOrganizationNestedInput
+  memberships?: Prisma.MembershipUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
+  invitations?: Prisma.InvitationUpdateManyWithoutOrganizationNestedInput
+  auditEntries?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
+  artists?: Prisma.ArtistUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutOrganizationNestedInput
+  partners?: Prisma.BusinessPartnerUpdateManyWithoutOrganizationNestedInput
+  eventFormats?: Prisma.EventFormatUpdateManyWithoutOrganizationNestedInput
+  events?: Prisma.EventUpdateManyWithoutOrganizationNestedInput
+  dateOptions?: Prisma.VenueDateOptionUpdateManyWithoutOrganizationNestedInput
+  occupancies?: Prisma.LocationOccupancyUpdateManyWithoutOrganizationNestedInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUpdateManyWithoutOrganizationNestedInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUpdateManyWithoutOrganizationNestedInput
+  bookings?: Prisma.BookingUpdateManyWithoutOrganizationNestedInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUpdateManyWithoutOrganizationNestedInput
+  eventProgramItems?: Prisma.EventProgramItemUpdateManyWithoutOrganizationNestedInput
+  serviceCategories?: Prisma.ServiceCategoryUpdateManyWithoutOrganizationNestedInput
+  services?: Prisma.ServiceUpdateManyWithoutOrganizationNestedInput
+  serviceProviderPrices?: Prisma.ServiceProviderPriceUpdateManyWithoutOrganizationNestedInput
+  eventFormatServices?: Prisma.EventFormatServiceUpdateManyWithoutOrganizationNestedInput
+  eventCalculations?: Prisma.EventCalculationUpdateManyWithoutOrganizationNestedInput
+  calculationStatusHistory?: Prisma.EventCalculationStatusHistoryUpdateManyWithoutOrganizationNestedInput
+  eventServicePositions?: Prisma.EventServicePositionUpdateManyWithoutOrganizationNestedInput
+  ticketPriceTiers?: Prisma.TicketPriceTierUpdateManyWithoutOrganizationNestedInput
+  ticketPriceComponents?: Prisma.TicketPriceComponentUpdateManyWithoutOrganizationNestedInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationUpdateManyWithoutOrganizationNestedInput
+  additionalRevenues?: Prisma.AdditionalRevenueUpdateManyWithoutOrganizationNestedInput
+  taxRateTemplates?: Prisma.TaxRateTemplateUpdateManyWithoutOrganizationNestedInput
+  ticketProviderTemplates?: Prisma.TicketProviderTemplateUpdateManyWithoutOrganizationNestedInput
+  ticketProviderTemplateComponents?: Prisma.TicketProviderTemplateComponentUpdateManyWithoutOrganizationNestedInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUpdateManyWithoutOrganizationNestedInput
+  calculationTemplates?: Prisma.CalculationTemplateUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateTiers?: Prisma.CalculationTemplateTierUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateComponents?: Prisma.CalculationTemplateComponentUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateAdditionalRevenues?: Prisma.CalculationTemplateAdditionalRevenueUpdateManyWithoutOrganizationNestedInput
+  deals?: Prisma.DealUpdateManyWithoutOrganizationNestedInput
+  dealComponents?: Prisma.DealComponentUpdateManyWithoutOrganizationNestedInput
+  dealServicePositions?: Prisma.DealServicePositionUpdateManyWithoutOrganizationNestedInput
+  dealStatusHistory?: Prisma.DealStatusHistoryUpdateManyWithoutOrganizationNestedInput
+  dealTemplates?: Prisma.DealTemplateUpdateManyWithoutOrganizationNestedInput
+  dealTemplateComponents?: Prisma.DealTemplateComponentUpdateManyWithoutOrganizationNestedInput
+  dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationUncheckedUpdateWithoutDocumentNumberSequencesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  legalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  locations?: Prisma.LocationUncheckedUpdateManyWithoutOrganizationNestedInput
+  memberships?: Prisma.MembershipUncheckedUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
+  invitations?: Prisma.InvitationUncheckedUpdateManyWithoutOrganizationNestedInput
+  auditEntries?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
+  artists?: Prisma.ArtistUncheckedUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutOrganizationNestedInput
+  partners?: Prisma.BusinessPartnerUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventFormats?: Prisma.EventFormatUncheckedUpdateManyWithoutOrganizationNestedInput
+  events?: Prisma.EventUncheckedUpdateManyWithoutOrganizationNestedInput
+  dateOptions?: Prisma.VenueDateOptionUncheckedUpdateManyWithoutOrganizationNestedInput
+  occupancies?: Prisma.LocationOccupancyUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUncheckedUpdateManyWithoutOrganizationNestedInput
+  bookings?: Prisma.BookingUncheckedUpdateManyWithoutOrganizationNestedInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventProgramItems?: Prisma.EventProgramItemUncheckedUpdateManyWithoutOrganizationNestedInput
+  serviceCategories?: Prisma.ServiceCategoryUncheckedUpdateManyWithoutOrganizationNestedInput
+  services?: Prisma.ServiceUncheckedUpdateManyWithoutOrganizationNestedInput
+  serviceProviderPrices?: Prisma.ServiceProviderPriceUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventFormatServices?: Prisma.EventFormatServiceUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventCalculations?: Prisma.EventCalculationUncheckedUpdateManyWithoutOrganizationNestedInput
+  calculationStatusHistory?: Prisma.EventCalculationStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventServicePositions?: Prisma.EventServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  ticketPriceTiers?: Prisma.TicketPriceTierUncheckedUpdateManyWithoutOrganizationNestedInput
+  ticketPriceComponents?: Prisma.TicketPriceComponentUncheckedUpdateManyWithoutOrganizationNestedInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationUncheckedUpdateManyWithoutOrganizationNestedInput
+  additionalRevenues?: Prisma.AdditionalRevenueUncheckedUpdateManyWithoutOrganizationNestedInput
+  taxRateTemplates?: Prisma.TaxRateTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  ticketProviderTemplates?: Prisma.TicketProviderTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  ticketProviderTemplateComponents?: Prisma.TicketProviderTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUncheckedUpdateManyWithoutOrganizationNestedInput
+  calculationTemplates?: Prisma.CalculationTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateTiers?: Prisma.CalculationTemplateTierUncheckedUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateComponents?: Prisma.CalculationTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUncheckedUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateAdditionalRevenues?: Prisma.CalculationTemplateAdditionalRevenueUncheckedUpdateManyWithoutOrganizationNestedInput
+  deals?: Prisma.DealUncheckedUpdateManyWithoutOrganizationNestedInput
+  dealComponents?: Prisma.DealComponentUncheckedUpdateManyWithoutOrganizationNestedInput
+  dealServicePositions?: Prisma.DealServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  dealStatusHistory?: Prisma.DealStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
+  dealTemplates?: Prisma.DealTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
+  dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationCreateWithoutDocumentContentBlocksInput = {
+  id?: string
+  name: string
+  legalName?: string | null
+  email?: string | null
+  phone?: string | null
+  status?: $Enums.EntityStatus
+  version?: number
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  locations?: Prisma.LocationCreateNestedManyWithoutOrganizationInput
+  memberships?: Prisma.MembershipCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
+  invitations?: Prisma.InvitationCreateNestedManyWithoutOrganizationInput
+  auditEntries?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
+  artists?: Prisma.ArtistCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutOrganizationInput
+  partners?: Prisma.BusinessPartnerCreateNestedManyWithoutOrganizationInput
+  eventFormats?: Prisma.EventFormatCreateNestedManyWithoutOrganizationInput
+  events?: Prisma.EventCreateNestedManyWithoutOrganizationInput
+  dateOptions?: Prisma.VenueDateOptionCreateNestedManyWithoutOrganizationInput
+  occupancies?: Prisma.LocationOccupancyCreateNestedManyWithoutOrganizationInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementCreateNestedManyWithoutOrganizationInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementCreateNestedManyWithoutOrganizationInput
+  bookings?: Prisma.BookingCreateNestedManyWithoutOrganizationInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryCreateNestedManyWithoutOrganizationInput
+  eventProgramItems?: Prisma.EventProgramItemCreateNestedManyWithoutOrganizationInput
+  serviceCategories?: Prisma.ServiceCategoryCreateNestedManyWithoutOrganizationInput
+  services?: Prisma.ServiceCreateNestedManyWithoutOrganizationInput
+  serviceProviderPrices?: Prisma.ServiceProviderPriceCreateNestedManyWithoutOrganizationInput
+  eventFormatServices?: Prisma.EventFormatServiceCreateNestedManyWithoutOrganizationInput
+  eventCalculations?: Prisma.EventCalculationCreateNestedManyWithoutOrganizationInput
+  calculationStatusHistory?: Prisma.EventCalculationStatusHistoryCreateNestedManyWithoutOrganizationInput
+  eventServicePositions?: Prisma.EventServicePositionCreateNestedManyWithoutOrganizationInput
+  ticketPriceTiers?: Prisma.TicketPriceTierCreateNestedManyWithoutOrganizationInput
+  ticketPriceComponents?: Prisma.TicketPriceComponentCreateNestedManyWithoutOrganizationInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationCreateNestedManyWithoutOrganizationInput
+  additionalRevenues?: Prisma.AdditionalRevenueCreateNestedManyWithoutOrganizationInput
+  taxRateTemplates?: Prisma.TaxRateTemplateCreateNestedManyWithoutOrganizationInput
+  ticketProviderTemplates?: Prisma.TicketProviderTemplateCreateNestedManyWithoutOrganizationInput
+  ticketProviderTemplateComponents?: Prisma.TicketProviderTemplateComponentCreateNestedManyWithoutOrganizationInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationCreateNestedManyWithoutOrganizationInput
+  calculationTemplates?: Prisma.CalculationTemplateCreateNestedManyWithoutOrganizationInput
+  calculationTemplateTiers?: Prisma.CalculationTemplateTierCreateNestedManyWithoutOrganizationInput
+  calculationTemplateComponents?: Prisma.CalculationTemplateComponentCreateNestedManyWithoutOrganizationInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationCreateNestedManyWithoutOrganizationInput
+  calculationTemplateAdditionalRevenues?: Prisma.CalculationTemplateAdditionalRevenueCreateNestedManyWithoutOrganizationInput
+  deals?: Prisma.DealCreateNestedManyWithoutOrganizationInput
+  dealComponents?: Prisma.DealComponentCreateNestedManyWithoutOrganizationInput
+  dealServicePositions?: Prisma.DealServicePositionCreateNestedManyWithoutOrganizationInput
+  dealStatusHistory?: Prisma.DealStatusHistoryCreateNestedManyWithoutOrganizationInput
+  dealTemplates?: Prisma.DealTemplateCreateNestedManyWithoutOrganizationInput
+  dealTemplateComponents?: Prisma.DealTemplateComponentCreateNestedManyWithoutOrganizationInput
+  dealTemplateServicePositions?: Prisma.DealTemplateServicePositionCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationUncheckedCreateWithoutDocumentContentBlocksInput = {
+  id?: string
+  name: string
+  legalName?: string | null
+  email?: string | null
+  phone?: string | null
+  status?: $Enums.EntityStatus
+  version?: number
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  locations?: Prisma.LocationUncheckedCreateNestedManyWithoutOrganizationInput
+  memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
+  invitations?: Prisma.InvitationUncheckedCreateNestedManyWithoutOrganizationInput
+  auditEntries?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
+  artists?: Prisma.ArtistUncheckedCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOrganizationInput
+  partners?: Prisma.BusinessPartnerUncheckedCreateNestedManyWithoutOrganizationInput
+  eventFormats?: Prisma.EventFormatUncheckedCreateNestedManyWithoutOrganizationInput
+  events?: Prisma.EventUncheckedCreateNestedManyWithoutOrganizationInput
+  dateOptions?: Prisma.VenueDateOptionUncheckedCreateNestedManyWithoutOrganizationInput
+  occupancies?: Prisma.LocationOccupancyUncheckedCreateNestedManyWithoutOrganizationInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUncheckedCreateNestedManyWithoutOrganizationInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUncheckedCreateNestedManyWithoutOrganizationInput
+  bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutOrganizationInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
+  eventProgramItems?: Prisma.EventProgramItemUncheckedCreateNestedManyWithoutOrganizationInput
+  serviceCategories?: Prisma.ServiceCategoryUncheckedCreateNestedManyWithoutOrganizationInput
+  services?: Prisma.ServiceUncheckedCreateNestedManyWithoutOrganizationInput
+  serviceProviderPrices?: Prisma.ServiceProviderPriceUncheckedCreateNestedManyWithoutOrganizationInput
+  eventFormatServices?: Prisma.EventFormatServiceUncheckedCreateNestedManyWithoutOrganizationInput
+  eventCalculations?: Prisma.EventCalculationUncheckedCreateNestedManyWithoutOrganizationInput
+  calculationStatusHistory?: Prisma.EventCalculationStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
+  eventServicePositions?: Prisma.EventServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  ticketPriceTiers?: Prisma.TicketPriceTierUncheckedCreateNestedManyWithoutOrganizationInput
+  ticketPriceComponents?: Prisma.TicketPriceComponentUncheckedCreateNestedManyWithoutOrganizationInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationUncheckedCreateNestedManyWithoutOrganizationInput
+  additionalRevenues?: Prisma.AdditionalRevenueUncheckedCreateNestedManyWithoutOrganizationInput
+  taxRateTemplates?: Prisma.TaxRateTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  ticketProviderTemplates?: Prisma.TicketProviderTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  ticketProviderTemplateComponents?: Prisma.TicketProviderTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUncheckedCreateNestedManyWithoutOrganizationInput
+  calculationTemplates?: Prisma.CalculationTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  calculationTemplateTiers?: Prisma.CalculationTemplateTierUncheckedCreateNestedManyWithoutOrganizationInput
+  calculationTemplateComponents?: Prisma.CalculationTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUncheckedCreateNestedManyWithoutOrganizationInput
+  calculationTemplateAdditionalRevenues?: Prisma.CalculationTemplateAdditionalRevenueUncheckedCreateNestedManyWithoutOrganizationInput
+  deals?: Prisma.DealUncheckedCreateNestedManyWithoutOrganizationInput
+  dealComponents?: Prisma.DealComponentUncheckedCreateNestedManyWithoutOrganizationInput
+  dealServicePositions?: Prisma.DealServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  dealStatusHistory?: Prisma.DealStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
+  dealTemplates?: Prisma.DealTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
+  dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationCreateOrConnectWithoutDocumentContentBlocksInput = {
+  where: Prisma.OrganizationWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutDocumentContentBlocksInput, Prisma.OrganizationUncheckedCreateWithoutDocumentContentBlocksInput>
+}
+
+export type OrganizationUpsertWithoutDocumentContentBlocksInput = {
+  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutDocumentContentBlocksInput, Prisma.OrganizationUncheckedUpdateWithoutDocumentContentBlocksInput>
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutDocumentContentBlocksInput, Prisma.OrganizationUncheckedCreateWithoutDocumentContentBlocksInput>
+  where?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationUpdateToOneWithWhereWithoutDocumentContentBlocksInput = {
+  where?: Prisma.OrganizationWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutDocumentContentBlocksInput, Prisma.OrganizationUncheckedUpdateWithoutDocumentContentBlocksInput>
+}
+
+export type OrganizationUpdateWithoutDocumentContentBlocksInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  legalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  locations?: Prisma.LocationUpdateManyWithoutOrganizationNestedInput
+  memberships?: Prisma.MembershipUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
+  invitations?: Prisma.InvitationUpdateManyWithoutOrganizationNestedInput
+  auditEntries?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
+  artists?: Prisma.ArtistUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutOrganizationNestedInput
+  partners?: Prisma.BusinessPartnerUpdateManyWithoutOrganizationNestedInput
+  eventFormats?: Prisma.EventFormatUpdateManyWithoutOrganizationNestedInput
+  events?: Prisma.EventUpdateManyWithoutOrganizationNestedInput
+  dateOptions?: Prisma.VenueDateOptionUpdateManyWithoutOrganizationNestedInput
+  occupancies?: Prisma.LocationOccupancyUpdateManyWithoutOrganizationNestedInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUpdateManyWithoutOrganizationNestedInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUpdateManyWithoutOrganizationNestedInput
+  bookings?: Prisma.BookingUpdateManyWithoutOrganizationNestedInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUpdateManyWithoutOrganizationNestedInput
+  eventProgramItems?: Prisma.EventProgramItemUpdateManyWithoutOrganizationNestedInput
+  serviceCategories?: Prisma.ServiceCategoryUpdateManyWithoutOrganizationNestedInput
+  services?: Prisma.ServiceUpdateManyWithoutOrganizationNestedInput
+  serviceProviderPrices?: Prisma.ServiceProviderPriceUpdateManyWithoutOrganizationNestedInput
+  eventFormatServices?: Prisma.EventFormatServiceUpdateManyWithoutOrganizationNestedInput
+  eventCalculations?: Prisma.EventCalculationUpdateManyWithoutOrganizationNestedInput
+  calculationStatusHistory?: Prisma.EventCalculationStatusHistoryUpdateManyWithoutOrganizationNestedInput
+  eventServicePositions?: Prisma.EventServicePositionUpdateManyWithoutOrganizationNestedInput
+  ticketPriceTiers?: Prisma.TicketPriceTierUpdateManyWithoutOrganizationNestedInput
+  ticketPriceComponents?: Prisma.TicketPriceComponentUpdateManyWithoutOrganizationNestedInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationUpdateManyWithoutOrganizationNestedInput
+  additionalRevenues?: Prisma.AdditionalRevenueUpdateManyWithoutOrganizationNestedInput
+  taxRateTemplates?: Prisma.TaxRateTemplateUpdateManyWithoutOrganizationNestedInput
+  ticketProviderTemplates?: Prisma.TicketProviderTemplateUpdateManyWithoutOrganizationNestedInput
+  ticketProviderTemplateComponents?: Prisma.TicketProviderTemplateComponentUpdateManyWithoutOrganizationNestedInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUpdateManyWithoutOrganizationNestedInput
+  calculationTemplates?: Prisma.CalculationTemplateUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateTiers?: Prisma.CalculationTemplateTierUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateComponents?: Prisma.CalculationTemplateComponentUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateAdditionalRevenues?: Prisma.CalculationTemplateAdditionalRevenueUpdateManyWithoutOrganizationNestedInput
+  deals?: Prisma.DealUpdateManyWithoutOrganizationNestedInput
+  dealComponents?: Prisma.DealComponentUpdateManyWithoutOrganizationNestedInput
+  dealServicePositions?: Prisma.DealServicePositionUpdateManyWithoutOrganizationNestedInput
+  dealStatusHistory?: Prisma.DealStatusHistoryUpdateManyWithoutOrganizationNestedInput
+  dealTemplates?: Prisma.DealTemplateUpdateManyWithoutOrganizationNestedInput
+  dealTemplateComponents?: Prisma.DealTemplateComponentUpdateManyWithoutOrganizationNestedInput
+  dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationUncheckedUpdateWithoutDocumentContentBlocksInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  legalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  locations?: Prisma.LocationUncheckedUpdateManyWithoutOrganizationNestedInput
+  memberships?: Prisma.MembershipUncheckedUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
+  invitations?: Prisma.InvitationUncheckedUpdateManyWithoutOrganizationNestedInput
+  auditEntries?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
+  artists?: Prisma.ArtistUncheckedUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutOrganizationNestedInput
+  partners?: Prisma.BusinessPartnerUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventFormats?: Prisma.EventFormatUncheckedUpdateManyWithoutOrganizationNestedInput
+  events?: Prisma.EventUncheckedUpdateManyWithoutOrganizationNestedInput
+  dateOptions?: Prisma.VenueDateOptionUncheckedUpdateManyWithoutOrganizationNestedInput
+  occupancies?: Prisma.LocationOccupancyUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUncheckedUpdateManyWithoutOrganizationNestedInput
+  bookings?: Prisma.BookingUncheckedUpdateManyWithoutOrganizationNestedInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventProgramItems?: Prisma.EventProgramItemUncheckedUpdateManyWithoutOrganizationNestedInput
+  serviceCategories?: Prisma.ServiceCategoryUncheckedUpdateManyWithoutOrganizationNestedInput
+  services?: Prisma.ServiceUncheckedUpdateManyWithoutOrganizationNestedInput
+  serviceProviderPrices?: Prisma.ServiceProviderPriceUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventFormatServices?: Prisma.EventFormatServiceUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventCalculations?: Prisma.EventCalculationUncheckedUpdateManyWithoutOrganizationNestedInput
+  calculationStatusHistory?: Prisma.EventCalculationStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventServicePositions?: Prisma.EventServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  ticketPriceTiers?: Prisma.TicketPriceTierUncheckedUpdateManyWithoutOrganizationNestedInput
+  ticketPriceComponents?: Prisma.TicketPriceComponentUncheckedUpdateManyWithoutOrganizationNestedInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationUncheckedUpdateManyWithoutOrganizationNestedInput
+  additionalRevenues?: Prisma.AdditionalRevenueUncheckedUpdateManyWithoutOrganizationNestedInput
+  taxRateTemplates?: Prisma.TaxRateTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  ticketProviderTemplates?: Prisma.TicketProviderTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  ticketProviderTemplateComponents?: Prisma.TicketProviderTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUncheckedUpdateManyWithoutOrganizationNestedInput
+  calculationTemplates?: Prisma.CalculationTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateTiers?: Prisma.CalculationTemplateTierUncheckedUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateComponents?: Prisma.CalculationTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUncheckedUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateAdditionalRevenues?: Prisma.CalculationTemplateAdditionalRevenueUncheckedUpdateManyWithoutOrganizationNestedInput
+  deals?: Prisma.DealUncheckedUpdateManyWithoutOrganizationNestedInput
+  dealComponents?: Prisma.DealComponentUncheckedUpdateManyWithoutOrganizationNestedInput
+  dealServicePositions?: Prisma.DealServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  dealStatusHistory?: Prisma.DealStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
+  dealTemplates?: Prisma.DealTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
+  dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationCreateWithoutDocumentOfferPositionsInput = {
+  id?: string
+  name: string
+  legalName?: string | null
+  email?: string | null
+  phone?: string | null
+  status?: $Enums.EntityStatus
+  version?: number
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  locations?: Prisma.LocationCreateNestedManyWithoutOrganizationInput
+  memberships?: Prisma.MembershipCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
+  invitations?: Prisma.InvitationCreateNestedManyWithoutOrganizationInput
+  auditEntries?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
+  artists?: Prisma.ArtistCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutOrganizationInput
+  partners?: Prisma.BusinessPartnerCreateNestedManyWithoutOrganizationInput
+  eventFormats?: Prisma.EventFormatCreateNestedManyWithoutOrganizationInput
+  events?: Prisma.EventCreateNestedManyWithoutOrganizationInput
+  dateOptions?: Prisma.VenueDateOptionCreateNestedManyWithoutOrganizationInput
+  occupancies?: Prisma.LocationOccupancyCreateNestedManyWithoutOrganizationInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementCreateNestedManyWithoutOrganizationInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementCreateNestedManyWithoutOrganizationInput
+  bookings?: Prisma.BookingCreateNestedManyWithoutOrganizationInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryCreateNestedManyWithoutOrganizationInput
+  eventProgramItems?: Prisma.EventProgramItemCreateNestedManyWithoutOrganizationInput
+  serviceCategories?: Prisma.ServiceCategoryCreateNestedManyWithoutOrganizationInput
+  services?: Prisma.ServiceCreateNestedManyWithoutOrganizationInput
+  serviceProviderPrices?: Prisma.ServiceProviderPriceCreateNestedManyWithoutOrganizationInput
+  eventFormatServices?: Prisma.EventFormatServiceCreateNestedManyWithoutOrganizationInput
+  eventCalculations?: Prisma.EventCalculationCreateNestedManyWithoutOrganizationInput
+  calculationStatusHistory?: Prisma.EventCalculationStatusHistoryCreateNestedManyWithoutOrganizationInput
+  eventServicePositions?: Prisma.EventServicePositionCreateNestedManyWithoutOrganizationInput
+  ticketPriceTiers?: Prisma.TicketPriceTierCreateNestedManyWithoutOrganizationInput
+  ticketPriceComponents?: Prisma.TicketPriceComponentCreateNestedManyWithoutOrganizationInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationCreateNestedManyWithoutOrganizationInput
+  additionalRevenues?: Prisma.AdditionalRevenueCreateNestedManyWithoutOrganizationInput
+  taxRateTemplates?: Prisma.TaxRateTemplateCreateNestedManyWithoutOrganizationInput
+  ticketProviderTemplates?: Prisma.TicketProviderTemplateCreateNestedManyWithoutOrganizationInput
+  ticketProviderTemplateComponents?: Prisma.TicketProviderTemplateComponentCreateNestedManyWithoutOrganizationInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationCreateNestedManyWithoutOrganizationInput
+  calculationTemplates?: Prisma.CalculationTemplateCreateNestedManyWithoutOrganizationInput
+  calculationTemplateTiers?: Prisma.CalculationTemplateTierCreateNestedManyWithoutOrganizationInput
+  calculationTemplateComponents?: Prisma.CalculationTemplateComponentCreateNestedManyWithoutOrganizationInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationCreateNestedManyWithoutOrganizationInput
+  calculationTemplateAdditionalRevenues?: Prisma.CalculationTemplateAdditionalRevenueCreateNestedManyWithoutOrganizationInput
+  deals?: Prisma.DealCreateNestedManyWithoutOrganizationInput
+  dealComponents?: Prisma.DealComponentCreateNestedManyWithoutOrganizationInput
+  dealServicePositions?: Prisma.DealServicePositionCreateNestedManyWithoutOrganizationInput
+  dealStatusHistory?: Prisma.DealStatusHistoryCreateNestedManyWithoutOrganizationInput
+  dealTemplates?: Prisma.DealTemplateCreateNestedManyWithoutOrganizationInput
+  dealTemplateComponents?: Prisma.DealTemplateComponentCreateNestedManyWithoutOrganizationInput
+  dealTemplateServicePositions?: Prisma.DealTemplateServicePositionCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationUncheckedCreateWithoutDocumentOfferPositionsInput = {
+  id?: string
+  name: string
+  legalName?: string | null
+  email?: string | null
+  phone?: string | null
+  status?: $Enums.EntityStatus
+  version?: number
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  locations?: Prisma.LocationUncheckedCreateNestedManyWithoutOrganizationInput
+  memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
+  invitations?: Prisma.InvitationUncheckedCreateNestedManyWithoutOrganizationInput
+  auditEntries?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
+  artists?: Prisma.ArtistUncheckedCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOrganizationInput
+  partners?: Prisma.BusinessPartnerUncheckedCreateNestedManyWithoutOrganizationInput
+  eventFormats?: Prisma.EventFormatUncheckedCreateNestedManyWithoutOrganizationInput
+  events?: Prisma.EventUncheckedCreateNestedManyWithoutOrganizationInput
+  dateOptions?: Prisma.VenueDateOptionUncheckedCreateNestedManyWithoutOrganizationInput
+  occupancies?: Prisma.LocationOccupancyUncheckedCreateNestedManyWithoutOrganizationInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUncheckedCreateNestedManyWithoutOrganizationInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUncheckedCreateNestedManyWithoutOrganizationInput
+  bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutOrganizationInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
+  eventProgramItems?: Prisma.EventProgramItemUncheckedCreateNestedManyWithoutOrganizationInput
+  serviceCategories?: Prisma.ServiceCategoryUncheckedCreateNestedManyWithoutOrganizationInput
+  services?: Prisma.ServiceUncheckedCreateNestedManyWithoutOrganizationInput
+  serviceProviderPrices?: Prisma.ServiceProviderPriceUncheckedCreateNestedManyWithoutOrganizationInput
+  eventFormatServices?: Prisma.EventFormatServiceUncheckedCreateNestedManyWithoutOrganizationInput
+  eventCalculations?: Prisma.EventCalculationUncheckedCreateNestedManyWithoutOrganizationInput
+  calculationStatusHistory?: Prisma.EventCalculationStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
+  eventServicePositions?: Prisma.EventServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  ticketPriceTiers?: Prisma.TicketPriceTierUncheckedCreateNestedManyWithoutOrganizationInput
+  ticketPriceComponents?: Prisma.TicketPriceComponentUncheckedCreateNestedManyWithoutOrganizationInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationUncheckedCreateNestedManyWithoutOrganizationInput
+  additionalRevenues?: Prisma.AdditionalRevenueUncheckedCreateNestedManyWithoutOrganizationInput
+  taxRateTemplates?: Prisma.TaxRateTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  ticketProviderTemplates?: Prisma.TicketProviderTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  ticketProviderTemplateComponents?: Prisma.TicketProviderTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUncheckedCreateNestedManyWithoutOrganizationInput
+  calculationTemplates?: Prisma.CalculationTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  calculationTemplateTiers?: Prisma.CalculationTemplateTierUncheckedCreateNestedManyWithoutOrganizationInput
+  calculationTemplateComponents?: Prisma.CalculationTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUncheckedCreateNestedManyWithoutOrganizationInput
+  calculationTemplateAdditionalRevenues?: Prisma.CalculationTemplateAdditionalRevenueUncheckedCreateNestedManyWithoutOrganizationInput
+  deals?: Prisma.DealUncheckedCreateNestedManyWithoutOrganizationInput
+  dealComponents?: Prisma.DealComponentUncheckedCreateNestedManyWithoutOrganizationInput
+  dealServicePositions?: Prisma.DealServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  dealStatusHistory?: Prisma.DealStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
+  dealTemplates?: Prisma.DealTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
+  dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationCreateOrConnectWithoutDocumentOfferPositionsInput = {
+  where: Prisma.OrganizationWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutDocumentOfferPositionsInput, Prisma.OrganizationUncheckedCreateWithoutDocumentOfferPositionsInput>
+}
+
+export type OrganizationUpsertWithoutDocumentOfferPositionsInput = {
+  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutDocumentOfferPositionsInput, Prisma.OrganizationUncheckedUpdateWithoutDocumentOfferPositionsInput>
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutDocumentOfferPositionsInput, Prisma.OrganizationUncheckedCreateWithoutDocumentOfferPositionsInput>
+  where?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationUpdateToOneWithWhereWithoutDocumentOfferPositionsInput = {
+  where?: Prisma.OrganizationWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutDocumentOfferPositionsInput, Prisma.OrganizationUncheckedUpdateWithoutDocumentOfferPositionsInput>
+}
+
+export type OrganizationUpdateWithoutDocumentOfferPositionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  legalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  locations?: Prisma.LocationUpdateManyWithoutOrganizationNestedInput
+  memberships?: Prisma.MembershipUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
+  invitations?: Prisma.InvitationUpdateManyWithoutOrganizationNestedInput
+  auditEntries?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
+  artists?: Prisma.ArtistUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutOrganizationNestedInput
+  partners?: Prisma.BusinessPartnerUpdateManyWithoutOrganizationNestedInput
+  eventFormats?: Prisma.EventFormatUpdateManyWithoutOrganizationNestedInput
+  events?: Prisma.EventUpdateManyWithoutOrganizationNestedInput
+  dateOptions?: Prisma.VenueDateOptionUpdateManyWithoutOrganizationNestedInput
+  occupancies?: Prisma.LocationOccupancyUpdateManyWithoutOrganizationNestedInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUpdateManyWithoutOrganizationNestedInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUpdateManyWithoutOrganizationNestedInput
+  bookings?: Prisma.BookingUpdateManyWithoutOrganizationNestedInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUpdateManyWithoutOrganizationNestedInput
+  eventProgramItems?: Prisma.EventProgramItemUpdateManyWithoutOrganizationNestedInput
+  serviceCategories?: Prisma.ServiceCategoryUpdateManyWithoutOrganizationNestedInput
+  services?: Prisma.ServiceUpdateManyWithoutOrganizationNestedInput
+  serviceProviderPrices?: Prisma.ServiceProviderPriceUpdateManyWithoutOrganizationNestedInput
+  eventFormatServices?: Prisma.EventFormatServiceUpdateManyWithoutOrganizationNestedInput
+  eventCalculations?: Prisma.EventCalculationUpdateManyWithoutOrganizationNestedInput
+  calculationStatusHistory?: Prisma.EventCalculationStatusHistoryUpdateManyWithoutOrganizationNestedInput
+  eventServicePositions?: Prisma.EventServicePositionUpdateManyWithoutOrganizationNestedInput
+  ticketPriceTiers?: Prisma.TicketPriceTierUpdateManyWithoutOrganizationNestedInput
+  ticketPriceComponents?: Prisma.TicketPriceComponentUpdateManyWithoutOrganizationNestedInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationUpdateManyWithoutOrganizationNestedInput
+  additionalRevenues?: Prisma.AdditionalRevenueUpdateManyWithoutOrganizationNestedInput
+  taxRateTemplates?: Prisma.TaxRateTemplateUpdateManyWithoutOrganizationNestedInput
+  ticketProviderTemplates?: Prisma.TicketProviderTemplateUpdateManyWithoutOrganizationNestedInput
+  ticketProviderTemplateComponents?: Prisma.TicketProviderTemplateComponentUpdateManyWithoutOrganizationNestedInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUpdateManyWithoutOrganizationNestedInput
+  calculationTemplates?: Prisma.CalculationTemplateUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateTiers?: Prisma.CalculationTemplateTierUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateComponents?: Prisma.CalculationTemplateComponentUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateAdditionalRevenues?: Prisma.CalculationTemplateAdditionalRevenueUpdateManyWithoutOrganizationNestedInput
+  deals?: Prisma.DealUpdateManyWithoutOrganizationNestedInput
+  dealComponents?: Prisma.DealComponentUpdateManyWithoutOrganizationNestedInput
+  dealServicePositions?: Prisma.DealServicePositionUpdateManyWithoutOrganizationNestedInput
+  dealStatusHistory?: Prisma.DealStatusHistoryUpdateManyWithoutOrganizationNestedInput
+  dealTemplates?: Prisma.DealTemplateUpdateManyWithoutOrganizationNestedInput
+  dealTemplateComponents?: Prisma.DealTemplateComponentUpdateManyWithoutOrganizationNestedInput
+  dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationUncheckedUpdateWithoutDocumentOfferPositionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  legalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  locations?: Prisma.LocationUncheckedUpdateManyWithoutOrganizationNestedInput
+  memberships?: Prisma.MembershipUncheckedUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
+  invitations?: Prisma.InvitationUncheckedUpdateManyWithoutOrganizationNestedInput
+  auditEntries?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
+  artists?: Prisma.ArtistUncheckedUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutOrganizationNestedInput
+  partners?: Prisma.BusinessPartnerUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventFormats?: Prisma.EventFormatUncheckedUpdateManyWithoutOrganizationNestedInput
+  events?: Prisma.EventUncheckedUpdateManyWithoutOrganizationNestedInput
+  dateOptions?: Prisma.VenueDateOptionUncheckedUpdateManyWithoutOrganizationNestedInput
+  occupancies?: Prisma.LocationOccupancyUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUncheckedUpdateManyWithoutOrganizationNestedInput
+  bookings?: Prisma.BookingUncheckedUpdateManyWithoutOrganizationNestedInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventProgramItems?: Prisma.EventProgramItemUncheckedUpdateManyWithoutOrganizationNestedInput
+  serviceCategories?: Prisma.ServiceCategoryUncheckedUpdateManyWithoutOrganizationNestedInput
+  services?: Prisma.ServiceUncheckedUpdateManyWithoutOrganizationNestedInput
+  serviceProviderPrices?: Prisma.ServiceProviderPriceUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventFormatServices?: Prisma.EventFormatServiceUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventCalculations?: Prisma.EventCalculationUncheckedUpdateManyWithoutOrganizationNestedInput
+  calculationStatusHistory?: Prisma.EventCalculationStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventServicePositions?: Prisma.EventServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  ticketPriceTiers?: Prisma.TicketPriceTierUncheckedUpdateManyWithoutOrganizationNestedInput
+  ticketPriceComponents?: Prisma.TicketPriceComponentUncheckedUpdateManyWithoutOrganizationNestedInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationUncheckedUpdateManyWithoutOrganizationNestedInput
+  additionalRevenues?: Prisma.AdditionalRevenueUncheckedUpdateManyWithoutOrganizationNestedInput
+  taxRateTemplates?: Prisma.TaxRateTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  ticketProviderTemplates?: Prisma.TicketProviderTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  ticketProviderTemplateComponents?: Prisma.TicketProviderTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUncheckedUpdateManyWithoutOrganizationNestedInput
+  calculationTemplates?: Prisma.CalculationTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateTiers?: Prisma.CalculationTemplateTierUncheckedUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateComponents?: Prisma.CalculationTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUncheckedUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateAdditionalRevenues?: Prisma.CalculationTemplateAdditionalRevenueUncheckedUpdateManyWithoutOrganizationNestedInput
+  deals?: Prisma.DealUncheckedUpdateManyWithoutOrganizationNestedInput
+  dealComponents?: Prisma.DealComponentUncheckedUpdateManyWithoutOrganizationNestedInput
+  dealServicePositions?: Prisma.DealServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  dealStatusHistory?: Prisma.DealStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
+  dealTemplates?: Prisma.DealTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
+  dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationCreateWithoutDocumentVersionsInput = {
+  id?: string
+  name: string
+  legalName?: string | null
+  email?: string | null
+  phone?: string | null
+  status?: $Enums.EntityStatus
+  version?: number
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  locations?: Prisma.LocationCreateNestedManyWithoutOrganizationInput
+  memberships?: Prisma.MembershipCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
+  invitations?: Prisma.InvitationCreateNestedManyWithoutOrganizationInput
+  auditEntries?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
+  artists?: Prisma.ArtistCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutOrganizationInput
+  partners?: Prisma.BusinessPartnerCreateNestedManyWithoutOrganizationInput
+  eventFormats?: Prisma.EventFormatCreateNestedManyWithoutOrganizationInput
+  events?: Prisma.EventCreateNestedManyWithoutOrganizationInput
+  dateOptions?: Prisma.VenueDateOptionCreateNestedManyWithoutOrganizationInput
+  occupancies?: Prisma.LocationOccupancyCreateNestedManyWithoutOrganizationInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementCreateNestedManyWithoutOrganizationInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementCreateNestedManyWithoutOrganizationInput
+  bookings?: Prisma.BookingCreateNestedManyWithoutOrganizationInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryCreateNestedManyWithoutOrganizationInput
+  eventProgramItems?: Prisma.EventProgramItemCreateNestedManyWithoutOrganizationInput
+  serviceCategories?: Prisma.ServiceCategoryCreateNestedManyWithoutOrganizationInput
+  services?: Prisma.ServiceCreateNestedManyWithoutOrganizationInput
+  serviceProviderPrices?: Prisma.ServiceProviderPriceCreateNestedManyWithoutOrganizationInput
+  eventFormatServices?: Prisma.EventFormatServiceCreateNestedManyWithoutOrganizationInput
+  eventCalculations?: Prisma.EventCalculationCreateNestedManyWithoutOrganizationInput
+  calculationStatusHistory?: Prisma.EventCalculationStatusHistoryCreateNestedManyWithoutOrganizationInput
+  eventServicePositions?: Prisma.EventServicePositionCreateNestedManyWithoutOrganizationInput
+  ticketPriceTiers?: Prisma.TicketPriceTierCreateNestedManyWithoutOrganizationInput
+  ticketPriceComponents?: Prisma.TicketPriceComponentCreateNestedManyWithoutOrganizationInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationCreateNestedManyWithoutOrganizationInput
+  additionalRevenues?: Prisma.AdditionalRevenueCreateNestedManyWithoutOrganizationInput
+  taxRateTemplates?: Prisma.TaxRateTemplateCreateNestedManyWithoutOrganizationInput
+  ticketProviderTemplates?: Prisma.TicketProviderTemplateCreateNestedManyWithoutOrganizationInput
+  ticketProviderTemplateComponents?: Prisma.TicketProviderTemplateComponentCreateNestedManyWithoutOrganizationInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationCreateNestedManyWithoutOrganizationInput
+  calculationTemplates?: Prisma.CalculationTemplateCreateNestedManyWithoutOrganizationInput
+  calculationTemplateTiers?: Prisma.CalculationTemplateTierCreateNestedManyWithoutOrganizationInput
+  calculationTemplateComponents?: Prisma.CalculationTemplateComponentCreateNestedManyWithoutOrganizationInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationCreateNestedManyWithoutOrganizationInput
+  calculationTemplateAdditionalRevenues?: Prisma.CalculationTemplateAdditionalRevenueCreateNestedManyWithoutOrganizationInput
+  deals?: Prisma.DealCreateNestedManyWithoutOrganizationInput
+  dealComponents?: Prisma.DealComponentCreateNestedManyWithoutOrganizationInput
+  dealServicePositions?: Prisma.DealServicePositionCreateNestedManyWithoutOrganizationInput
+  dealStatusHistory?: Prisma.DealStatusHistoryCreateNestedManyWithoutOrganizationInput
+  dealTemplates?: Prisma.DealTemplateCreateNestedManyWithoutOrganizationInput
+  dealTemplateComponents?: Prisma.DealTemplateComponentCreateNestedManyWithoutOrganizationInput
+  dealTemplateServicePositions?: Prisma.DealTemplateServicePositionCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationUncheckedCreateWithoutDocumentVersionsInput = {
+  id?: string
+  name: string
+  legalName?: string | null
+  email?: string | null
+  phone?: string | null
+  status?: $Enums.EntityStatus
+  version?: number
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  locations?: Prisma.LocationUncheckedCreateNestedManyWithoutOrganizationInput
+  memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
+  invitations?: Prisma.InvitationUncheckedCreateNestedManyWithoutOrganizationInput
+  auditEntries?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
+  artists?: Prisma.ArtistUncheckedCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOrganizationInput
+  partners?: Prisma.BusinessPartnerUncheckedCreateNestedManyWithoutOrganizationInput
+  eventFormats?: Prisma.EventFormatUncheckedCreateNestedManyWithoutOrganizationInput
+  events?: Prisma.EventUncheckedCreateNestedManyWithoutOrganizationInput
+  dateOptions?: Prisma.VenueDateOptionUncheckedCreateNestedManyWithoutOrganizationInput
+  occupancies?: Prisma.LocationOccupancyUncheckedCreateNestedManyWithoutOrganizationInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUncheckedCreateNestedManyWithoutOrganizationInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUncheckedCreateNestedManyWithoutOrganizationInput
+  bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutOrganizationInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
+  eventProgramItems?: Prisma.EventProgramItemUncheckedCreateNestedManyWithoutOrganizationInput
+  serviceCategories?: Prisma.ServiceCategoryUncheckedCreateNestedManyWithoutOrganizationInput
+  services?: Prisma.ServiceUncheckedCreateNestedManyWithoutOrganizationInput
+  serviceProviderPrices?: Prisma.ServiceProviderPriceUncheckedCreateNestedManyWithoutOrganizationInput
+  eventFormatServices?: Prisma.EventFormatServiceUncheckedCreateNestedManyWithoutOrganizationInput
+  eventCalculations?: Prisma.EventCalculationUncheckedCreateNestedManyWithoutOrganizationInput
+  calculationStatusHistory?: Prisma.EventCalculationStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
+  eventServicePositions?: Prisma.EventServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  ticketPriceTiers?: Prisma.TicketPriceTierUncheckedCreateNestedManyWithoutOrganizationInput
+  ticketPriceComponents?: Prisma.TicketPriceComponentUncheckedCreateNestedManyWithoutOrganizationInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationUncheckedCreateNestedManyWithoutOrganizationInput
+  additionalRevenues?: Prisma.AdditionalRevenueUncheckedCreateNestedManyWithoutOrganizationInput
+  taxRateTemplates?: Prisma.TaxRateTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  ticketProviderTemplates?: Prisma.TicketProviderTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  ticketProviderTemplateComponents?: Prisma.TicketProviderTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUncheckedCreateNestedManyWithoutOrganizationInput
+  calculationTemplates?: Prisma.CalculationTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  calculationTemplateTiers?: Prisma.CalculationTemplateTierUncheckedCreateNestedManyWithoutOrganizationInput
+  calculationTemplateComponents?: Prisma.CalculationTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUncheckedCreateNestedManyWithoutOrganizationInput
+  calculationTemplateAdditionalRevenues?: Prisma.CalculationTemplateAdditionalRevenueUncheckedCreateNestedManyWithoutOrganizationInput
+  deals?: Prisma.DealUncheckedCreateNestedManyWithoutOrganizationInput
+  dealComponents?: Prisma.DealComponentUncheckedCreateNestedManyWithoutOrganizationInput
+  dealServicePositions?: Prisma.DealServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  dealStatusHistory?: Prisma.DealStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
+  dealTemplates?: Prisma.DealTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
+  dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationCreateOrConnectWithoutDocumentVersionsInput = {
+  where: Prisma.OrganizationWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutDocumentVersionsInput, Prisma.OrganizationUncheckedCreateWithoutDocumentVersionsInput>
+}
+
+export type OrganizationUpsertWithoutDocumentVersionsInput = {
+  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutDocumentVersionsInput, Prisma.OrganizationUncheckedUpdateWithoutDocumentVersionsInput>
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutDocumentVersionsInput, Prisma.OrganizationUncheckedCreateWithoutDocumentVersionsInput>
+  where?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationUpdateToOneWithWhereWithoutDocumentVersionsInput = {
+  where?: Prisma.OrganizationWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutDocumentVersionsInput, Prisma.OrganizationUncheckedUpdateWithoutDocumentVersionsInput>
+}
+
+export type OrganizationUpdateWithoutDocumentVersionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  legalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  locations?: Prisma.LocationUpdateManyWithoutOrganizationNestedInput
+  memberships?: Prisma.MembershipUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
+  invitations?: Prisma.InvitationUpdateManyWithoutOrganizationNestedInput
+  auditEntries?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
+  artists?: Prisma.ArtistUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutOrganizationNestedInput
+  partners?: Prisma.BusinessPartnerUpdateManyWithoutOrganizationNestedInput
+  eventFormats?: Prisma.EventFormatUpdateManyWithoutOrganizationNestedInput
+  events?: Prisma.EventUpdateManyWithoutOrganizationNestedInput
+  dateOptions?: Prisma.VenueDateOptionUpdateManyWithoutOrganizationNestedInput
+  occupancies?: Prisma.LocationOccupancyUpdateManyWithoutOrganizationNestedInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUpdateManyWithoutOrganizationNestedInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUpdateManyWithoutOrganizationNestedInput
+  bookings?: Prisma.BookingUpdateManyWithoutOrganizationNestedInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUpdateManyWithoutOrganizationNestedInput
+  eventProgramItems?: Prisma.EventProgramItemUpdateManyWithoutOrganizationNestedInput
+  serviceCategories?: Prisma.ServiceCategoryUpdateManyWithoutOrganizationNestedInput
+  services?: Prisma.ServiceUpdateManyWithoutOrganizationNestedInput
+  serviceProviderPrices?: Prisma.ServiceProviderPriceUpdateManyWithoutOrganizationNestedInput
+  eventFormatServices?: Prisma.EventFormatServiceUpdateManyWithoutOrganizationNestedInput
+  eventCalculations?: Prisma.EventCalculationUpdateManyWithoutOrganizationNestedInput
+  calculationStatusHistory?: Prisma.EventCalculationStatusHistoryUpdateManyWithoutOrganizationNestedInput
+  eventServicePositions?: Prisma.EventServicePositionUpdateManyWithoutOrganizationNestedInput
+  ticketPriceTiers?: Prisma.TicketPriceTierUpdateManyWithoutOrganizationNestedInput
+  ticketPriceComponents?: Prisma.TicketPriceComponentUpdateManyWithoutOrganizationNestedInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationUpdateManyWithoutOrganizationNestedInput
+  additionalRevenues?: Prisma.AdditionalRevenueUpdateManyWithoutOrganizationNestedInput
+  taxRateTemplates?: Prisma.TaxRateTemplateUpdateManyWithoutOrganizationNestedInput
+  ticketProviderTemplates?: Prisma.TicketProviderTemplateUpdateManyWithoutOrganizationNestedInput
+  ticketProviderTemplateComponents?: Prisma.TicketProviderTemplateComponentUpdateManyWithoutOrganizationNestedInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUpdateManyWithoutOrganizationNestedInput
+  calculationTemplates?: Prisma.CalculationTemplateUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateTiers?: Prisma.CalculationTemplateTierUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateComponents?: Prisma.CalculationTemplateComponentUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateAdditionalRevenues?: Prisma.CalculationTemplateAdditionalRevenueUpdateManyWithoutOrganizationNestedInput
+  deals?: Prisma.DealUpdateManyWithoutOrganizationNestedInput
+  dealComponents?: Prisma.DealComponentUpdateManyWithoutOrganizationNestedInput
+  dealServicePositions?: Prisma.DealServicePositionUpdateManyWithoutOrganizationNestedInput
+  dealStatusHistory?: Prisma.DealStatusHistoryUpdateManyWithoutOrganizationNestedInput
+  dealTemplates?: Prisma.DealTemplateUpdateManyWithoutOrganizationNestedInput
+  dealTemplateComponents?: Prisma.DealTemplateComponentUpdateManyWithoutOrganizationNestedInput
+  dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationUncheckedUpdateWithoutDocumentVersionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  legalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  locations?: Prisma.LocationUncheckedUpdateManyWithoutOrganizationNestedInput
+  memberships?: Prisma.MembershipUncheckedUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
+  invitations?: Prisma.InvitationUncheckedUpdateManyWithoutOrganizationNestedInput
+  auditEntries?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
+  artists?: Prisma.ArtistUncheckedUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutOrganizationNestedInput
+  partners?: Prisma.BusinessPartnerUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventFormats?: Prisma.EventFormatUncheckedUpdateManyWithoutOrganizationNestedInput
+  events?: Prisma.EventUncheckedUpdateManyWithoutOrganizationNestedInput
+  dateOptions?: Prisma.VenueDateOptionUncheckedUpdateManyWithoutOrganizationNestedInput
+  occupancies?: Prisma.LocationOccupancyUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUncheckedUpdateManyWithoutOrganizationNestedInput
+  bookings?: Prisma.BookingUncheckedUpdateManyWithoutOrganizationNestedInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventProgramItems?: Prisma.EventProgramItemUncheckedUpdateManyWithoutOrganizationNestedInput
+  serviceCategories?: Prisma.ServiceCategoryUncheckedUpdateManyWithoutOrganizationNestedInput
+  services?: Prisma.ServiceUncheckedUpdateManyWithoutOrganizationNestedInput
+  serviceProviderPrices?: Prisma.ServiceProviderPriceUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventFormatServices?: Prisma.EventFormatServiceUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventCalculations?: Prisma.EventCalculationUncheckedUpdateManyWithoutOrganizationNestedInput
+  calculationStatusHistory?: Prisma.EventCalculationStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventServicePositions?: Prisma.EventServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  ticketPriceTiers?: Prisma.TicketPriceTierUncheckedUpdateManyWithoutOrganizationNestedInput
+  ticketPriceComponents?: Prisma.TicketPriceComponentUncheckedUpdateManyWithoutOrganizationNestedInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationUncheckedUpdateManyWithoutOrganizationNestedInput
+  additionalRevenues?: Prisma.AdditionalRevenueUncheckedUpdateManyWithoutOrganizationNestedInput
+  taxRateTemplates?: Prisma.TaxRateTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  ticketProviderTemplates?: Prisma.TicketProviderTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  ticketProviderTemplateComponents?: Prisma.TicketProviderTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUncheckedUpdateManyWithoutOrganizationNestedInput
+  calculationTemplates?: Prisma.CalculationTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateTiers?: Prisma.CalculationTemplateTierUncheckedUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateComponents?: Prisma.CalculationTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUncheckedUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateAdditionalRevenues?: Prisma.CalculationTemplateAdditionalRevenueUncheckedUpdateManyWithoutOrganizationNestedInput
+  deals?: Prisma.DealUncheckedUpdateManyWithoutOrganizationNestedInput
+  dealComponents?: Prisma.DealComponentUncheckedUpdateManyWithoutOrganizationNestedInput
+  dealServicePositions?: Prisma.DealServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  dealStatusHistory?: Prisma.DealStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
+  dealTemplates?: Prisma.DealTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
+  dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentStatusHistory?: Prisma.DocumentStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationCreateWithoutDocumentStatusHistoryInput = {
+  id?: string
+  name: string
+  legalName?: string | null
+  email?: string | null
+  phone?: string | null
+  status?: $Enums.EntityStatus
+  version?: number
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  locations?: Prisma.LocationCreateNestedManyWithoutOrganizationInput
+  memberships?: Prisma.MembershipCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
+  invitations?: Prisma.InvitationCreateNestedManyWithoutOrganizationInput
+  auditEntries?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
+  artists?: Prisma.ArtistCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutOrganizationInput
+  partners?: Prisma.BusinessPartnerCreateNestedManyWithoutOrganizationInput
+  eventFormats?: Prisma.EventFormatCreateNestedManyWithoutOrganizationInput
+  events?: Prisma.EventCreateNestedManyWithoutOrganizationInput
+  dateOptions?: Prisma.VenueDateOptionCreateNestedManyWithoutOrganizationInput
+  occupancies?: Prisma.LocationOccupancyCreateNestedManyWithoutOrganizationInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementCreateNestedManyWithoutOrganizationInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementCreateNestedManyWithoutOrganizationInput
+  bookings?: Prisma.BookingCreateNestedManyWithoutOrganizationInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryCreateNestedManyWithoutOrganizationInput
+  eventProgramItems?: Prisma.EventProgramItemCreateNestedManyWithoutOrganizationInput
+  serviceCategories?: Prisma.ServiceCategoryCreateNestedManyWithoutOrganizationInput
+  services?: Prisma.ServiceCreateNestedManyWithoutOrganizationInput
+  serviceProviderPrices?: Prisma.ServiceProviderPriceCreateNestedManyWithoutOrganizationInput
+  eventFormatServices?: Prisma.EventFormatServiceCreateNestedManyWithoutOrganizationInput
+  eventCalculations?: Prisma.EventCalculationCreateNestedManyWithoutOrganizationInput
+  calculationStatusHistory?: Prisma.EventCalculationStatusHistoryCreateNestedManyWithoutOrganizationInput
+  eventServicePositions?: Prisma.EventServicePositionCreateNestedManyWithoutOrganizationInput
+  ticketPriceTiers?: Prisma.TicketPriceTierCreateNestedManyWithoutOrganizationInput
+  ticketPriceComponents?: Prisma.TicketPriceComponentCreateNestedManyWithoutOrganizationInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationCreateNestedManyWithoutOrganizationInput
+  additionalRevenues?: Prisma.AdditionalRevenueCreateNestedManyWithoutOrganizationInput
+  taxRateTemplates?: Prisma.TaxRateTemplateCreateNestedManyWithoutOrganizationInput
+  ticketProviderTemplates?: Prisma.TicketProviderTemplateCreateNestedManyWithoutOrganizationInput
+  ticketProviderTemplateComponents?: Prisma.TicketProviderTemplateComponentCreateNestedManyWithoutOrganizationInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationCreateNestedManyWithoutOrganizationInput
+  calculationTemplates?: Prisma.CalculationTemplateCreateNestedManyWithoutOrganizationInput
+  calculationTemplateTiers?: Prisma.CalculationTemplateTierCreateNestedManyWithoutOrganizationInput
+  calculationTemplateComponents?: Prisma.CalculationTemplateComponentCreateNestedManyWithoutOrganizationInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationCreateNestedManyWithoutOrganizationInput
+  calculationTemplateAdditionalRevenues?: Prisma.CalculationTemplateAdditionalRevenueCreateNestedManyWithoutOrganizationInput
+  deals?: Prisma.DealCreateNestedManyWithoutOrganizationInput
+  dealComponents?: Prisma.DealComponentCreateNestedManyWithoutOrganizationInput
+  dealServicePositions?: Prisma.DealServicePositionCreateNestedManyWithoutOrganizationInput
+  dealStatusHistory?: Prisma.DealStatusHistoryCreateNestedManyWithoutOrganizationInput
+  dealTemplates?: Prisma.DealTemplateCreateNestedManyWithoutOrganizationInput
+  dealTemplateComponents?: Prisma.DealTemplateComponentCreateNestedManyWithoutOrganizationInput
+  dealTemplateServicePositions?: Prisma.DealTemplateServicePositionCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationUncheckedCreateWithoutDocumentStatusHistoryInput = {
+  id?: string
+  name: string
+  legalName?: string | null
+  email?: string | null
+  phone?: string | null
+  status?: $Enums.EntityStatus
+  version?: number
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  locations?: Prisma.LocationUncheckedCreateNestedManyWithoutOrganizationInput
+  memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
+  invitations?: Prisma.InvitationUncheckedCreateNestedManyWithoutOrganizationInput
+  auditEntries?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
+  artists?: Prisma.ArtistUncheckedCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOrganizationInput
+  partners?: Prisma.BusinessPartnerUncheckedCreateNestedManyWithoutOrganizationInput
+  eventFormats?: Prisma.EventFormatUncheckedCreateNestedManyWithoutOrganizationInput
+  events?: Prisma.EventUncheckedCreateNestedManyWithoutOrganizationInput
+  dateOptions?: Prisma.VenueDateOptionUncheckedCreateNestedManyWithoutOrganizationInput
+  occupancies?: Prisma.LocationOccupancyUncheckedCreateNestedManyWithoutOrganizationInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUncheckedCreateNestedManyWithoutOrganizationInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUncheckedCreateNestedManyWithoutOrganizationInput
+  bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutOrganizationInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
+  eventProgramItems?: Prisma.EventProgramItemUncheckedCreateNestedManyWithoutOrganizationInput
+  serviceCategories?: Prisma.ServiceCategoryUncheckedCreateNestedManyWithoutOrganizationInput
+  services?: Prisma.ServiceUncheckedCreateNestedManyWithoutOrganizationInput
+  serviceProviderPrices?: Prisma.ServiceProviderPriceUncheckedCreateNestedManyWithoutOrganizationInput
+  eventFormatServices?: Prisma.EventFormatServiceUncheckedCreateNestedManyWithoutOrganizationInput
+  eventCalculations?: Prisma.EventCalculationUncheckedCreateNestedManyWithoutOrganizationInput
+  calculationStatusHistory?: Prisma.EventCalculationStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
+  eventServicePositions?: Prisma.EventServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  ticketPriceTiers?: Prisma.TicketPriceTierUncheckedCreateNestedManyWithoutOrganizationInput
+  ticketPriceComponents?: Prisma.TicketPriceComponentUncheckedCreateNestedManyWithoutOrganizationInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationUncheckedCreateNestedManyWithoutOrganizationInput
+  additionalRevenues?: Prisma.AdditionalRevenueUncheckedCreateNestedManyWithoutOrganizationInput
+  taxRateTemplates?: Prisma.TaxRateTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  ticketProviderTemplates?: Prisma.TicketProviderTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  ticketProviderTemplateComponents?: Prisma.TicketProviderTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUncheckedCreateNestedManyWithoutOrganizationInput
+  calculationTemplates?: Prisma.CalculationTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  calculationTemplateTiers?: Prisma.CalculationTemplateTierUncheckedCreateNestedManyWithoutOrganizationInput
+  calculationTemplateComponents?: Prisma.CalculationTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUncheckedCreateNestedManyWithoutOrganizationInput
+  calculationTemplateAdditionalRevenues?: Prisma.CalculationTemplateAdditionalRevenueUncheckedCreateNestedManyWithoutOrganizationInput
+  deals?: Prisma.DealUncheckedCreateNestedManyWithoutOrganizationInput
+  dealComponents?: Prisma.DealComponentUncheckedCreateNestedManyWithoutOrganizationInput
+  dealServicePositions?: Prisma.DealServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  dealStatusHistory?: Prisma.DealStatusHistoryUncheckedCreateNestedManyWithoutOrganizationInput
+  dealTemplates?: Prisma.DealTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedCreateNestedManyWithoutOrganizationInput
+  dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedCreateNestedManyWithoutOrganizationInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedCreateNestedManyWithoutOrganizationInput
+  documentVersions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationCreateOrConnectWithoutDocumentStatusHistoryInput = {
+  where: Prisma.OrganizationWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutDocumentStatusHistoryInput, Prisma.OrganizationUncheckedCreateWithoutDocumentStatusHistoryInput>
+}
+
+export type OrganizationUpsertWithoutDocumentStatusHistoryInput = {
+  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutDocumentStatusHistoryInput, Prisma.OrganizationUncheckedUpdateWithoutDocumentStatusHistoryInput>
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutDocumentStatusHistoryInput, Prisma.OrganizationUncheckedCreateWithoutDocumentStatusHistoryInput>
+  where?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationUpdateToOneWithWhereWithoutDocumentStatusHistoryInput = {
+  where?: Prisma.OrganizationWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutDocumentStatusHistoryInput, Prisma.OrganizationUncheckedUpdateWithoutDocumentStatusHistoryInput>
+}
+
+export type OrganizationUpdateWithoutDocumentStatusHistoryInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  legalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  locations?: Prisma.LocationUpdateManyWithoutOrganizationNestedInput
+  memberships?: Prisma.MembershipUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
+  invitations?: Prisma.InvitationUpdateManyWithoutOrganizationNestedInput
+  auditEntries?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
+  artists?: Prisma.ArtistUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutOrganizationNestedInput
+  partners?: Prisma.BusinessPartnerUpdateManyWithoutOrganizationNestedInput
+  eventFormats?: Prisma.EventFormatUpdateManyWithoutOrganizationNestedInput
+  events?: Prisma.EventUpdateManyWithoutOrganizationNestedInput
+  dateOptions?: Prisma.VenueDateOptionUpdateManyWithoutOrganizationNestedInput
+  occupancies?: Prisma.LocationOccupancyUpdateManyWithoutOrganizationNestedInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUpdateManyWithoutOrganizationNestedInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUpdateManyWithoutOrganizationNestedInput
+  bookings?: Prisma.BookingUpdateManyWithoutOrganizationNestedInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUpdateManyWithoutOrganizationNestedInput
+  eventProgramItems?: Prisma.EventProgramItemUpdateManyWithoutOrganizationNestedInput
+  serviceCategories?: Prisma.ServiceCategoryUpdateManyWithoutOrganizationNestedInput
+  services?: Prisma.ServiceUpdateManyWithoutOrganizationNestedInput
+  serviceProviderPrices?: Prisma.ServiceProviderPriceUpdateManyWithoutOrganizationNestedInput
+  eventFormatServices?: Prisma.EventFormatServiceUpdateManyWithoutOrganizationNestedInput
+  eventCalculations?: Prisma.EventCalculationUpdateManyWithoutOrganizationNestedInput
+  calculationStatusHistory?: Prisma.EventCalculationStatusHistoryUpdateManyWithoutOrganizationNestedInput
+  eventServicePositions?: Prisma.EventServicePositionUpdateManyWithoutOrganizationNestedInput
+  ticketPriceTiers?: Prisma.TicketPriceTierUpdateManyWithoutOrganizationNestedInput
+  ticketPriceComponents?: Prisma.TicketPriceComponentUpdateManyWithoutOrganizationNestedInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationUpdateManyWithoutOrganizationNestedInput
+  additionalRevenues?: Prisma.AdditionalRevenueUpdateManyWithoutOrganizationNestedInput
+  taxRateTemplates?: Prisma.TaxRateTemplateUpdateManyWithoutOrganizationNestedInput
+  ticketProviderTemplates?: Prisma.TicketProviderTemplateUpdateManyWithoutOrganizationNestedInput
+  ticketProviderTemplateComponents?: Prisma.TicketProviderTemplateComponentUpdateManyWithoutOrganizationNestedInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUpdateManyWithoutOrganizationNestedInput
+  calculationTemplates?: Prisma.CalculationTemplateUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateTiers?: Prisma.CalculationTemplateTierUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateComponents?: Prisma.CalculationTemplateComponentUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateAdditionalRevenues?: Prisma.CalculationTemplateAdditionalRevenueUpdateManyWithoutOrganizationNestedInput
+  deals?: Prisma.DealUpdateManyWithoutOrganizationNestedInput
+  dealComponents?: Prisma.DealComponentUpdateManyWithoutOrganizationNestedInput
+  dealServicePositions?: Prisma.DealServicePositionUpdateManyWithoutOrganizationNestedInput
+  dealStatusHistory?: Prisma.DealStatusHistoryUpdateManyWithoutOrganizationNestedInput
+  dealTemplates?: Prisma.DealTemplateUpdateManyWithoutOrganizationNestedInput
+  dealTemplateComponents?: Prisma.DealTemplateComponentUpdateManyWithoutOrganizationNestedInput
+  dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationUncheckedUpdateWithoutDocumentStatusHistoryInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  legalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  locations?: Prisma.LocationUncheckedUpdateManyWithoutOrganizationNestedInput
+  memberships?: Prisma.MembershipUncheckedUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
+  invitations?: Prisma.InvitationUncheckedUpdateManyWithoutOrganizationNestedInput
+  auditEntries?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
+  artists?: Prisma.ArtistUncheckedUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutOrganizationNestedInput
+  partners?: Prisma.BusinessPartnerUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventFormats?: Prisma.EventFormatUncheckedUpdateManyWithoutOrganizationNestedInput
+  events?: Prisma.EventUncheckedUpdateManyWithoutOrganizationNestedInput
+  dateOptions?: Prisma.VenueDateOptionUncheckedUpdateManyWithoutOrganizationNestedInput
+  occupancies?: Prisma.LocationOccupancyUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventFormatLineupRequirements?: Prisma.EventFormatLineupRequirementUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventLineupRequirements?: Prisma.EventLineupRequirementUncheckedUpdateManyWithoutOrganizationNestedInput
+  bookings?: Prisma.BookingUncheckedUpdateManyWithoutOrganizationNestedInput
+  bookingStatusHistory?: Prisma.BookingStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventProgramItems?: Prisma.EventProgramItemUncheckedUpdateManyWithoutOrganizationNestedInput
+  serviceCategories?: Prisma.ServiceCategoryUncheckedUpdateManyWithoutOrganizationNestedInput
+  services?: Prisma.ServiceUncheckedUpdateManyWithoutOrganizationNestedInput
+  serviceProviderPrices?: Prisma.ServiceProviderPriceUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventFormatServices?: Prisma.EventFormatServiceUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventCalculations?: Prisma.EventCalculationUncheckedUpdateManyWithoutOrganizationNestedInput
+  calculationStatusHistory?: Prisma.EventCalculationStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
+  eventServicePositions?: Prisma.EventServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  ticketPriceTiers?: Prisma.TicketPriceTierUncheckedUpdateManyWithoutOrganizationNestedInput
+  ticketPriceComponents?: Prisma.TicketPriceComponentUncheckedUpdateManyWithoutOrganizationNestedInput
+  ticketComponentAllocations?: Prisma.TicketComponentAllocationUncheckedUpdateManyWithoutOrganizationNestedInput
+  additionalRevenues?: Prisma.AdditionalRevenueUncheckedUpdateManyWithoutOrganizationNestedInput
+  taxRateTemplates?: Prisma.TaxRateTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  ticketProviderTemplates?: Prisma.TicketProviderTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  ticketProviderTemplateComponents?: Prisma.TicketProviderTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
+  ticketProviderTemplateAllocations?: Prisma.TicketProviderTemplateAllocationUncheckedUpdateManyWithoutOrganizationNestedInput
+  calculationTemplates?: Prisma.CalculationTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateTiers?: Prisma.CalculationTemplateTierUncheckedUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateComponents?: Prisma.CalculationTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateAllocations?: Prisma.CalculationTemplateAllocationUncheckedUpdateManyWithoutOrganizationNestedInput
+  calculationTemplateAdditionalRevenues?: Prisma.CalculationTemplateAdditionalRevenueUncheckedUpdateManyWithoutOrganizationNestedInput
+  deals?: Prisma.DealUncheckedUpdateManyWithoutOrganizationNestedInput
+  dealComponents?: Prisma.DealComponentUncheckedUpdateManyWithoutOrganizationNestedInput
+  dealServicePositions?: Prisma.DealServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  dealStatusHistory?: Prisma.DealStatusHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
+  dealTemplates?: Prisma.DealTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  dealTemplateComponents?: Prisma.DealTemplateComponentUncheckedUpdateManyWithoutOrganizationNestedInput
+  dealTemplateServicePositions?: Prisma.DealTemplateServicePositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentNumberSequences?: Prisma.DocumentNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentTemplateBlocks?: Prisma.DocumentTemplateBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentContentBlocks?: Prisma.DocumentContentBlockUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentOfferPositions?: Prisma.DocumentOfferPositionUncheckedUpdateManyWithoutOrganizationNestedInput
+  documentVersions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 
@@ -12009,6 +15761,14 @@ export type OrganizationCountOutputType = {
   dealTemplates: number
   dealTemplateComponents: number
   dealTemplateServicePositions: number
+  documentTemplates: number
+  documentNumberSequences: number
+  documentTemplateBlocks: number
+  documents: number
+  documentContentBlocks: number
+  documentOfferPositions: number
+  documentVersions: number
+  documentStatusHistory: number
 }
 
 export type OrganizationCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -12056,6 +15816,14 @@ export type OrganizationCountOutputTypeSelect<ExtArgs extends runtime.Types.Exte
   dealTemplates?: boolean | OrganizationCountOutputTypeCountDealTemplatesArgs
   dealTemplateComponents?: boolean | OrganizationCountOutputTypeCountDealTemplateComponentsArgs
   dealTemplateServicePositions?: boolean | OrganizationCountOutputTypeCountDealTemplateServicePositionsArgs
+  documentTemplates?: boolean | OrganizationCountOutputTypeCountDocumentTemplatesArgs
+  documentNumberSequences?: boolean | OrganizationCountOutputTypeCountDocumentNumberSequencesArgs
+  documentTemplateBlocks?: boolean | OrganizationCountOutputTypeCountDocumentTemplateBlocksArgs
+  documents?: boolean | OrganizationCountOutputTypeCountDocumentsArgs
+  documentContentBlocks?: boolean | OrganizationCountOutputTypeCountDocumentContentBlocksArgs
+  documentOfferPositions?: boolean | OrganizationCountOutputTypeCountDocumentOfferPositionsArgs
+  documentVersions?: boolean | OrganizationCountOutputTypeCountDocumentVersionsArgs
+  documentStatusHistory?: boolean | OrganizationCountOutputTypeCountDocumentStatusHistoryArgs
 }
 
 /**
@@ -12376,6 +16144,62 @@ export type OrganizationCountOutputTypeCountDealTemplateServicePositionsArgs<Ext
   where?: Prisma.DealTemplateServicePositionWhereInput
 }
 
+/**
+ * OrganizationCountOutputType without action
+ */
+export type OrganizationCountOutputTypeCountDocumentTemplatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DocumentTemplateWhereInput
+}
+
+/**
+ * OrganizationCountOutputType without action
+ */
+export type OrganizationCountOutputTypeCountDocumentNumberSequencesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DocumentNumberSequenceWhereInput
+}
+
+/**
+ * OrganizationCountOutputType without action
+ */
+export type OrganizationCountOutputTypeCountDocumentTemplateBlocksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DocumentTemplateBlockWhereInput
+}
+
+/**
+ * OrganizationCountOutputType without action
+ */
+export type OrganizationCountOutputTypeCountDocumentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DocumentWhereInput
+}
+
+/**
+ * OrganizationCountOutputType without action
+ */
+export type OrganizationCountOutputTypeCountDocumentContentBlocksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DocumentContentBlockWhereInput
+}
+
+/**
+ * OrganizationCountOutputType without action
+ */
+export type OrganizationCountOutputTypeCountDocumentOfferPositionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DocumentOfferPositionWhereInput
+}
+
+/**
+ * OrganizationCountOutputType without action
+ */
+export type OrganizationCountOutputTypeCountDocumentVersionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DocumentVersionWhereInput
+}
+
+/**
+ * OrganizationCountOutputType without action
+ */
+export type OrganizationCountOutputTypeCountDocumentStatusHistoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DocumentStatusHistoryWhereInput
+}
+
 
 export type OrganizationSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -12432,6 +16256,14 @@ export type OrganizationSelect<ExtArgs extends runtime.Types.Extensions.Internal
   dealTemplates?: boolean | Prisma.Organization$dealTemplatesArgs<ExtArgs>
   dealTemplateComponents?: boolean | Prisma.Organization$dealTemplateComponentsArgs<ExtArgs>
   dealTemplateServicePositions?: boolean | Prisma.Organization$dealTemplateServicePositionsArgs<ExtArgs>
+  documentTemplates?: boolean | Prisma.Organization$documentTemplatesArgs<ExtArgs>
+  documentNumberSequences?: boolean | Prisma.Organization$documentNumberSequencesArgs<ExtArgs>
+  documentTemplateBlocks?: boolean | Prisma.Organization$documentTemplateBlocksArgs<ExtArgs>
+  documents?: boolean | Prisma.Organization$documentsArgs<ExtArgs>
+  documentContentBlocks?: boolean | Prisma.Organization$documentContentBlocksArgs<ExtArgs>
+  documentOfferPositions?: boolean | Prisma.Organization$documentOfferPositionsArgs<ExtArgs>
+  documentVersions?: boolean | Prisma.Organization$documentVersionsArgs<ExtArgs>
+  documentStatusHistory?: boolean | Prisma.Organization$documentStatusHistoryArgs<ExtArgs>
   _count?: boolean | Prisma.OrganizationCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["organization"]>
 
@@ -12520,6 +16352,14 @@ export type OrganizationInclude<ExtArgs extends runtime.Types.Extensions.Interna
   dealTemplates?: boolean | Prisma.Organization$dealTemplatesArgs<ExtArgs>
   dealTemplateComponents?: boolean | Prisma.Organization$dealTemplateComponentsArgs<ExtArgs>
   dealTemplateServicePositions?: boolean | Prisma.Organization$dealTemplateServicePositionsArgs<ExtArgs>
+  documentTemplates?: boolean | Prisma.Organization$documentTemplatesArgs<ExtArgs>
+  documentNumberSequences?: boolean | Prisma.Organization$documentNumberSequencesArgs<ExtArgs>
+  documentTemplateBlocks?: boolean | Prisma.Organization$documentTemplateBlocksArgs<ExtArgs>
+  documents?: boolean | Prisma.Organization$documentsArgs<ExtArgs>
+  documentContentBlocks?: boolean | Prisma.Organization$documentContentBlocksArgs<ExtArgs>
+  documentOfferPositions?: boolean | Prisma.Organization$documentOfferPositionsArgs<ExtArgs>
+  documentVersions?: boolean | Prisma.Organization$documentVersionsArgs<ExtArgs>
+  documentStatusHistory?: boolean | Prisma.Organization$documentStatusHistoryArgs<ExtArgs>
   _count?: boolean | Prisma.OrganizationCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type OrganizationIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -12572,6 +16412,14 @@ export type $OrganizationPayload<ExtArgs extends runtime.Types.Extensions.Intern
     dealTemplates: Prisma.$DealTemplatePayload<ExtArgs>[]
     dealTemplateComponents: Prisma.$DealTemplateComponentPayload<ExtArgs>[]
     dealTemplateServicePositions: Prisma.$DealTemplateServicePositionPayload<ExtArgs>[]
+    documentTemplates: Prisma.$DocumentTemplatePayload<ExtArgs>[]
+    documentNumberSequences: Prisma.$DocumentNumberSequencePayload<ExtArgs>[]
+    documentTemplateBlocks: Prisma.$DocumentTemplateBlockPayload<ExtArgs>[]
+    documents: Prisma.$DocumentPayload<ExtArgs>[]
+    documentContentBlocks: Prisma.$DocumentContentBlockPayload<ExtArgs>[]
+    documentOfferPositions: Prisma.$DocumentOfferPositionPayload<ExtArgs>[]
+    documentVersions: Prisma.$DocumentVersionPayload<ExtArgs>[]
+    documentStatusHistory: Prisma.$DocumentStatusHistoryPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -13022,6 +16870,14 @@ export interface Prisma__OrganizationClient<T, Null = never, ExtArgs extends run
   dealTemplates<T extends Prisma.Organization$dealTemplatesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$dealTemplatesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DealTemplatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   dealTemplateComponents<T extends Prisma.Organization$dealTemplateComponentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$dealTemplateComponentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DealTemplateComponentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   dealTemplateServicePositions<T extends Prisma.Organization$dealTemplateServicePositionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$dealTemplateServicePositionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DealTemplateServicePositionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  documentTemplates<T extends Prisma.Organization$documentTemplatesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$documentTemplatesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentTemplatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  documentNumberSequences<T extends Prisma.Organization$documentNumberSequencesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$documentNumberSequencesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentNumberSequencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  documentTemplateBlocks<T extends Prisma.Organization$documentTemplateBlocksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$documentTemplateBlocksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentTemplateBlockPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  documents<T extends Prisma.Organization$documentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  documentContentBlocks<T extends Prisma.Organization$documentContentBlocksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$documentContentBlocksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentContentBlockPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  documentOfferPositions<T extends Prisma.Organization$documentOfferPositionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$documentOfferPositionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentOfferPositionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  documentVersions<T extends Prisma.Organization$documentVersionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$documentVersionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentVersionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  documentStatusHistory<T extends Prisma.Organization$documentStatusHistoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$documentStatusHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentStatusHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -14507,6 +18363,198 @@ export type Organization$dealTemplateServicePositionsArgs<ExtArgs extends runtim
   take?: number
   skip?: number
   distinct?: Prisma.DealTemplateServicePositionScalarFieldEnum | Prisma.DealTemplateServicePositionScalarFieldEnum[]
+}
+
+/**
+ * Organization.documentTemplates
+ */
+export type Organization$documentTemplatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DocumentTemplate
+   */
+  select?: Prisma.DocumentTemplateSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DocumentTemplate
+   */
+  omit?: Prisma.DocumentTemplateOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DocumentTemplateInclude<ExtArgs> | null
+  where?: Prisma.DocumentTemplateWhereInput
+  orderBy?: Prisma.DocumentTemplateOrderByWithRelationInput | Prisma.DocumentTemplateOrderByWithRelationInput[]
+  cursor?: Prisma.DocumentTemplateWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DocumentTemplateScalarFieldEnum | Prisma.DocumentTemplateScalarFieldEnum[]
+}
+
+/**
+ * Organization.documentNumberSequences
+ */
+export type Organization$documentNumberSequencesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DocumentNumberSequence
+   */
+  select?: Prisma.DocumentNumberSequenceSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DocumentNumberSequence
+   */
+  omit?: Prisma.DocumentNumberSequenceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DocumentNumberSequenceInclude<ExtArgs> | null
+  where?: Prisma.DocumentNumberSequenceWhereInput
+  orderBy?: Prisma.DocumentNumberSequenceOrderByWithRelationInput | Prisma.DocumentNumberSequenceOrderByWithRelationInput[]
+  cursor?: Prisma.DocumentNumberSequenceWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DocumentNumberSequenceScalarFieldEnum | Prisma.DocumentNumberSequenceScalarFieldEnum[]
+}
+
+/**
+ * Organization.documentTemplateBlocks
+ */
+export type Organization$documentTemplateBlocksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DocumentTemplateBlock
+   */
+  select?: Prisma.DocumentTemplateBlockSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DocumentTemplateBlock
+   */
+  omit?: Prisma.DocumentTemplateBlockOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DocumentTemplateBlockInclude<ExtArgs> | null
+  where?: Prisma.DocumentTemplateBlockWhereInput
+  orderBy?: Prisma.DocumentTemplateBlockOrderByWithRelationInput | Prisma.DocumentTemplateBlockOrderByWithRelationInput[]
+  cursor?: Prisma.DocumentTemplateBlockWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DocumentTemplateBlockScalarFieldEnum | Prisma.DocumentTemplateBlockScalarFieldEnum[]
+}
+
+/**
+ * Organization.documents
+ */
+export type Organization$documentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Document
+   */
+  select?: Prisma.DocumentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Document
+   */
+  omit?: Prisma.DocumentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DocumentInclude<ExtArgs> | null
+  where?: Prisma.DocumentWhereInput
+  orderBy?: Prisma.DocumentOrderByWithRelationInput | Prisma.DocumentOrderByWithRelationInput[]
+  cursor?: Prisma.DocumentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DocumentScalarFieldEnum | Prisma.DocumentScalarFieldEnum[]
+}
+
+/**
+ * Organization.documentContentBlocks
+ */
+export type Organization$documentContentBlocksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DocumentContentBlock
+   */
+  select?: Prisma.DocumentContentBlockSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DocumentContentBlock
+   */
+  omit?: Prisma.DocumentContentBlockOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DocumentContentBlockInclude<ExtArgs> | null
+  where?: Prisma.DocumentContentBlockWhereInput
+  orderBy?: Prisma.DocumentContentBlockOrderByWithRelationInput | Prisma.DocumentContentBlockOrderByWithRelationInput[]
+  cursor?: Prisma.DocumentContentBlockWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DocumentContentBlockScalarFieldEnum | Prisma.DocumentContentBlockScalarFieldEnum[]
+}
+
+/**
+ * Organization.documentOfferPositions
+ */
+export type Organization$documentOfferPositionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DocumentOfferPosition
+   */
+  select?: Prisma.DocumentOfferPositionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DocumentOfferPosition
+   */
+  omit?: Prisma.DocumentOfferPositionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DocumentOfferPositionInclude<ExtArgs> | null
+  where?: Prisma.DocumentOfferPositionWhereInput
+  orderBy?: Prisma.DocumentOfferPositionOrderByWithRelationInput | Prisma.DocumentOfferPositionOrderByWithRelationInput[]
+  cursor?: Prisma.DocumentOfferPositionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DocumentOfferPositionScalarFieldEnum | Prisma.DocumentOfferPositionScalarFieldEnum[]
+}
+
+/**
+ * Organization.documentVersions
+ */
+export type Organization$documentVersionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DocumentVersion
+   */
+  select?: Prisma.DocumentVersionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DocumentVersion
+   */
+  omit?: Prisma.DocumentVersionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DocumentVersionInclude<ExtArgs> | null
+  where?: Prisma.DocumentVersionWhereInput
+  orderBy?: Prisma.DocumentVersionOrderByWithRelationInput | Prisma.DocumentVersionOrderByWithRelationInput[]
+  cursor?: Prisma.DocumentVersionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DocumentVersionScalarFieldEnum | Prisma.DocumentVersionScalarFieldEnum[]
+}
+
+/**
+ * Organization.documentStatusHistory
+ */
+export type Organization$documentStatusHistoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DocumentStatusHistory
+   */
+  select?: Prisma.DocumentStatusHistorySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DocumentStatusHistory
+   */
+  omit?: Prisma.DocumentStatusHistoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DocumentStatusHistoryInclude<ExtArgs> | null
+  where?: Prisma.DocumentStatusHistoryWhereInput
+  orderBy?: Prisma.DocumentStatusHistoryOrderByWithRelationInput | Prisma.DocumentStatusHistoryOrderByWithRelationInput[]
+  cursor?: Prisma.DocumentStatusHistoryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DocumentStatusHistoryScalarFieldEnum | Prisma.DocumentStatusHistoryScalarFieldEnum[]
 }
 
 /**

@@ -183,6 +183,28 @@ enum DealDiscountType {
   PERCENTAGE
 }
 
+enum DocumentType {
+  OFFER
+  PRODUCTION_INFORMATION
+}
+
+enum DocumentStatus {
+  ENTWURF
+  ERSTELLT
+  UEBERGEBEN
+  ANGENOMMEN
+  ABGELEHNT
+  ABGELAUFEN
+  FREIGEGEBEN
+  ARCHIVIERT
+}
+
+enum DocumentPositionSource {
+  DEAL_COMPONENT
+  DEAL_SERVICE
+  CUSTOM
+}
+
 model User {
   id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name          String
@@ -206,6 +228,8 @@ model User {
   approvedCalculations    EventCalculation[] @relation("CalculationApproverUser")
   calculationStatusChanges EventCalculationStatusHistory[] @relation("CalculationStatusActorUser")
   dealStatusChanges        DealStatusHistory[] @relation("DealStatusActorUser")
+  documentVersions         DocumentVersion[] @relation("DocumentVersionActorUser")
+  documentStatusChanges    DocumentStatusHistory[] @relation("DocumentStatusActorUser")
 
   @@map("auth_user")
 }
@@ -337,6 +361,14 @@ model Organization {
   dealTemplates DealTemplate[]
   dealTemplateComponents DealTemplateComponent[]
   dealTemplateServicePositions DealTemplateServicePosition[]
+  documentTemplates DocumentTemplate[]
+  documentNumberSequences DocumentNumberSequence[]
+  documentTemplateBlocks DocumentTemplateBlock[]
+  documents Document[]
+  documentContentBlocks DocumentContentBlock[]
+  documentOfferPositions DocumentOfferPosition[]
+  documentVersions DocumentVersion[]
+  documentStatusHistory DocumentStatusHistory[]
 
   @@index([status])
   @@map("organization")
@@ -418,6 +450,7 @@ model Event {
   additionalRevenues     AdditionalRevenue[]
   sourceCalculationTemplate CalculationTemplate? @relation(fields: [sourceCalculationTemplateId, organizationId], references: [id, organizationId], onDelete: Restrict)
   deals                   Deal[]
+  documents               Document[]
 
   @@unique([id, organizationId])
   @@index([organizationId, eventDate, startMinutes, id])
@@ -454,6 +487,7 @@ model Location {
   events          Event[]
   dateOptions     VenueDateOption[]
   occupancies     LocationOccupancy[]
+  documents       Document[]
 
   @@unique([id, organizationId])
   @@index([organizationId, status])
@@ -480,6 +514,8 @@ model Membership {
   approvedCalculations EventCalculation[] @relation("CalculationApproverMembership")
   calculationStatusChanges EventCalculationStatusHistory[] @relation("CalculationStatusActorMembership")
   dealStatusChanges        DealStatusHistory[] @relation("DealStatusActorMembership")
+  documentVersions         DocumentVersion[] @relation("DocumentVersionActorMembership")
+  documentStatusChanges    DocumentStatusHistory[] @relation("DocumentStatusActorMembership")
 
   @@unique([organizationId, userId])
   @@unique([id, organizationId])
@@ -1020,6 +1056,7 @@ model EventProgramItem {
   kind            ProgramItemKind
   sortOrder       Int             @map("sort_order")
   label           String?         @db.VarChar(120)
+  note            String?         @db.Text
   durationMinutes Int?            @map("duration_minutes")
   version         Int             @default(1)
   createdAt       DateTime        @default(now()) @map("created_at")
@@ -1734,6 +1771,7 @@ model Deal {
   components                      DealComponent[]
   servicePositions                DealServicePosition[]
   statusHistory                   DealStatusHistory[]
+  documents                       Document[]
 
   @@unique([id, organizationId])
   @@index([organizationId, eventId, status, createdAt])
@@ -1890,4 +1928,197 @@ model DealTemplateServicePosition {
   @@index([organizationId, templateId, sortOrder, id])
   @@index([organizationId, sourceServiceId])
   @@map("deal_template_service_position")
+}
+
+model DocumentTemplate {
+  id                 String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId     String         @map("organization_id") @db.Uuid
+  name               String         @db.VarChar(200)
+  normalizedName     String         @map("normalized_name") @db.VarChar(200)
+  type               DocumentType
+  title              String         @db.VarChar(300)
+  introduction       String?
+  standardTerms      String?        @map("standard_terms")
+  closing            String?
+  footer             String?
+  status             EntityStatus   @default(ACTIVE)
+  archivedAt         DateTime?       @map("archived_at")
+  version            Int            @default(1)
+  createdAt          DateTime        @default(now()) @map("created_at")
+  updatedAt          DateTime        @updatedAt @map("updated_at")
+  organization       Organization    @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  blocks             DocumentTemplateBlock[]
+  sourceDocuments    Document[]
+
+  @@unique([id, organizationId])
+  @@unique([organizationId, type, normalizedName])
+  @@index([organizationId, type, status, name, id])
+  @@map("document_template")
+}
+
+model DocumentTemplateBlock {
+  id                 String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId     String            @map("organization_id") @db.Uuid
+  templateId         String            @map("template_id") @db.Uuid
+  heading            String            @db.VarChar(200)
+  body               String
+  sortOrder          Int               @map("sort_order")
+  organization       Organization      @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  template           DocumentTemplate  @relation(fields: [templateId, organizationId], references: [id, organizationId], onDelete: Cascade)
+
+  @@unique([id, organizationId])
+  @@index([organizationId, templateId, sortOrder, id])
+  @@map("document_template_block")
+}
+
+model Document {
+  id                              String                 @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId                  String                 @map("organization_id") @db.Uuid
+  locationId                      String                 @map("location_id") @db.Uuid
+  eventId                         String                 @map("event_id") @db.Uuid
+  dealId                          String?                @map("deal_id") @db.Uuid
+  sourceTemplateId                String                 @map("source_template_id") @db.Uuid
+  sourceTemplateVersion           Int                    @map("source_template_version")
+  sourceTemplateNameSnapshot      String                 @map("source_template_name_snapshot") @db.VarChar(200)
+  type                            DocumentType
+  status                          DocumentStatus         @default(ENTWURF)
+  documentNumber                  String?                @map("document_number") @db.VarChar(64)
+  publishedVersion                Int                    @default(0) @map("published_version")
+  revision                        Int                    @default(1)
+  title                           String                 @db.VarChar(300)
+  introduction                    String?
+  standardTerms                   String?                @map("standard_terms")
+  closing                         String?
+  footer                          String?
+  recipientName                   String?                @map("recipient_name") @db.VarChar(200)
+  recipientContactName            String?                @map("recipient_contact_name") @db.VarChar(200)
+  recipientEmail                  String?                @map("recipient_email") @db.VarChar(320)
+  recipientAddress                String?                @map("recipient_address")
+  validUntil                      DateTime?               @map("valid_until") @db.Date
+  internalNote                    String?                @map("internal_note")
+  totalDiscountType               DealDiscountType?      @map("total_discount_type")
+  totalDiscountFixedMinor         BigInt?                @map("total_discount_fixed_minor")
+  totalDiscountPercentageBasisPoints Int?                @map("total_discount_percentage_basis_points")
+  currency                        String                 @default("EUR") @db.Char(3)
+  contextSnapshot                 Json                   @map("context_snapshot")
+  lastPublishedAt                 DateTime?              @map("last_published_at")
+  createdAt                       DateTime                @default(now()) @map("created_at")
+  updatedAt                       DateTime                @updatedAt @map("updated_at")
+  organization                    Organization            @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  location                        Location                @relation(fields: [locationId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  event                           Event                   @relation(fields: [eventId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  deal                            Deal?                   @relation(fields: [dealId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  sourceTemplate                  DocumentTemplate       @relation(fields: [sourceTemplateId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  blocks                          DocumentContentBlock[]
+  offerPositions                  DocumentOfferPosition[]
+  versions                        DocumentVersion[]
+  statusHistory                   DocumentStatusHistory[]
+
+  @@unique([id, organizationId])
+  @@unique([organizationId, documentNumber])
+  @@index([organizationId, type, status, createdAt, id])
+  @@index([organizationId, eventId, createdAt, id])
+  @@index([organizationId, locationId, createdAt, id])
+  @@index([organizationId, sourceTemplateId])
+  @@index([organizationId, dealId])
+  @@map("document")
+}
+
+model DocumentNumberSequence {
+  organizationId String       @map("organization_id") @db.Uuid
+  year           Int
+  documentType   DocumentType @map("document_type")
+  lastNumber     Int          @map("last_number")
+  createdAt      DateTime     @default(now()) @map("created_at")
+  updatedAt      DateTime     @updatedAt @map("updated_at")
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+
+  @@id([organizationId, year, documentType])
+  @@map("document_number_sequence")
+}
+
+model DocumentContentBlock {
+  id                 String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId     String       @map("organization_id") @db.Uuid
+  documentId         String       @map("document_id") @db.Uuid
+  heading            String       @db.VarChar(200)
+  body               String
+  sortOrder          Int          @map("sort_order")
+  organization       Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  document           Document     @relation(fields: [documentId, organizationId], references: [id, organizationId], onDelete: Cascade)
+
+  @@unique([id, organizationId])
+  @@index([organizationId, documentId, sortOrder, id])
+  @@map("document_content_block")
+}
+
+model DocumentOfferPosition {
+  id                              String                 @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId                  String                 @map("organization_id") @db.Uuid
+  documentId                      String                 @map("document_id") @db.Uuid
+  source                          DocumentPositionSource
+  sourceId                        String?                @map("source_id") @db.Uuid
+  sourceSnapshot                  Json?                  @map("source_snapshot")
+  description                     String                 @db.VarChar(300)
+  quantity                        Decimal                @db.Decimal(12, 3)
+  unitPriceNetMinor               BigInt                 @map("unit_price_net_minor")
+  taxRateBasisPoints              Int                    @map("tax_rate_basis_points")
+  discountType                    DealDiscountType?      @map("discount_type")
+  discountFixedMinor              BigInt?                @map("discount_fixed_minor")
+  discountPercentageBasisPoints   Int?                   @map("discount_percentage_basis_points")
+  sortOrder                       Int                    @map("sort_order")
+  organization                    Organization           @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  document                        Document               @relation(fields: [documentId, organizationId], references: [id, organizationId], onDelete: Cascade)
+
+  @@unique([id, organizationId])
+  @@index([organizationId, documentId, sortOrder, id])
+  @@map("document_offer_position")
+}
+
+model DocumentVersion {
+  id                    String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId        String        @map("organization_id") @db.Uuid
+  documentId            String        @map("document_id") @db.Uuid
+  documentVersion       Int           @map("document_version")
+  documentNumber        String        @map("document_number") @db.VarChar(64)
+  status                DocumentStatus
+  snapshot              Json
+  pdfData               Bytes         @map("pdf_data")
+  pdfSha256             String        @map("pdf_sha256") @db.Char(64)
+  pdfSize                Int           @map("pdf_size")
+  createdByUserId       String        @map("created_by_user_id") @db.Uuid
+  createdByMembershipId String        @map("created_by_membership_id") @db.Uuid
+  createdAt             DateTime      @default(now()) @map("created_at")
+  organization          Organization  @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  document              Document      @relation(fields: [documentId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  createdByUser         User          @relation("DocumentVersionActorUser", fields: [createdByUserId], references: [id], onDelete: Restrict)
+  createdByMembership   Membership    @relation("DocumentVersionActorMembership", fields: [createdByMembershipId, organizationId], references: [id, organizationId], onDelete: Restrict)
+
+  @@unique([id, organizationId])
+  @@unique([organizationId, documentId, documentVersion])
+  @@index([organizationId, documentId, createdAt, id])
+  @@index([createdByUserId])
+  @@index([createdByMembershipId])
+  @@map("document_version")
+}
+
+model DocumentStatusHistory {
+  id                    String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId        String          @map("organization_id") @db.Uuid
+  documentId            String          @map("document_id") @db.Uuid
+  previousStatus        DocumentStatus  @map("previous_status")
+  newStatus             DocumentStatus  @map("new_status")
+  actorUserId           String          @map("actor_user_id") @db.Uuid
+  actorMembershipId     String          @map("actor_membership_id") @db.Uuid
+  changedAt             DateTime        @default(now()) @map("changed_at")
+  organization          Organization    @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  document              Document        @relation(fields: [documentId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  actorUser             User            @relation("DocumentStatusActorUser", fields: [actorUserId], references: [id], onDelete: Restrict)
+  actorMembership       Membership      @relation("DocumentStatusActorMembership", fields: [actorMembershipId, organizationId], references: [id, organizationId], onDelete: Restrict)
+
+  @@unique([id, organizationId])
+  @@index([organizationId, documentId, changedAt, id])
+  @@index([actorUserId])
+  @@index([actorMembershipId])
+  @@map("document_status_history")
 }

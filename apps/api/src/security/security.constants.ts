@@ -51,6 +51,12 @@ export const PERMISSIONS = {
   DEAL_TEMPLATES_READ: 'deal_templates.read',
   DEAL_TEMPLATES_WRITE: 'deal_templates.write',
   DEAL_TEMPLATES_ARCHIVE: 'deal_templates.archive',
+  DOCUMENTS_READ: 'documents.read',
+  DOCUMENTS_WRITE: 'documents.write',
+  DOCUMENTS_PUBLISH: 'documents.publish',
+  DOCUMENT_TEMPLATES_READ: 'document_templates.read',
+  DOCUMENT_TEMPLATES_WRITE: 'document_templates.write',
+  DOCUMENT_TEMPLATES_ARCHIVE: 'document_templates.archive',
 } as const;
 
 export type PermissionKey = (typeof PERMISSIONS)[keyof typeof PERMISSIONS];
@@ -159,6 +165,21 @@ export const PERMISSION_CATALOG: ReadonlyArray<{
     key: PERMISSIONS.DEAL_TEMPLATES_ARCHIVE,
     description: 'Dealvorlagen archivieren und reaktivieren',
   },
+  { key: PERMISSIONS.DOCUMENTS_READ, description: 'Dokumente ansehen und herunterladen' },
+  { key: PERMISSIONS.DOCUMENTS_WRITE, description: 'Dokumententwürfe anlegen und bearbeiten' },
+  {
+    key: PERMISSIONS.DOCUMENTS_PUBLISH,
+    description: 'Dokumente erstellen, übergeben und freigeben',
+  },
+  { key: PERMISSIONS.DOCUMENT_TEMPLATES_READ, description: 'Dokumentvorlagen ansehen' },
+  {
+    key: PERMISSIONS.DOCUMENT_TEMPLATES_WRITE,
+    description: 'Dokumentvorlagen anlegen und bearbeiten',
+  },
+  {
+    key: PERMISSIONS.DOCUMENT_TEMPLATES_ARCHIVE,
+    description: 'Dokumentvorlagen archivieren und reaktivieren',
+  },
 ];
 
 export const STANDARD_ROLES = [
@@ -208,6 +229,12 @@ export const STANDARD_ROLES = [
       PERMISSIONS.DEAL_TEMPLATES_READ,
       PERMISSIONS.DEAL_TEMPLATES_WRITE,
       PERMISSIONS.DEAL_TEMPLATES_ARCHIVE,
+      PERMISSIONS.DOCUMENTS_READ,
+      PERMISSIONS.DOCUMENTS_WRITE,
+      PERMISSIONS.DOCUMENTS_PUBLISH,
+      PERMISSIONS.DOCUMENT_TEMPLATES_READ,
+      PERMISSIONS.DOCUMENT_TEMPLATES_WRITE,
+      PERMISSIONS.DOCUMENT_TEMPLATES_ARCHIVE,
     ],
   },
   {
@@ -237,6 +264,10 @@ export const STANDARD_ROLES = [
       PERMISSIONS.BOOKINGS_FINANCE,
       PERMISSIONS.LINEUP_WRITE,
       PERMISSIONS.SERVICES_READ,
+      PERMISSIONS.DOCUMENTS_READ,
+      PERMISSIONS.DOCUMENTS_WRITE,
+      PERMISSIONS.DOCUMENTS_PUBLISH,
+      PERMISSIONS.DOCUMENT_TEMPLATES_READ,
     ],
   },
   {
@@ -257,6 +288,10 @@ export const STANDARD_ROLES = [
       PERMISSIONS.BOOKINGS_READ,
       PERMISSIONS.SERVICES_READ,
       PERMISSIONS.CALCULATIONS_READ,
+      PERMISSIONS.DOCUMENTS_READ,
+      PERMISSIONS.DOCUMENTS_WRITE,
+      PERMISSIONS.DOCUMENTS_PUBLISH,
+      PERMISSIONS.DOCUMENT_TEMPLATES_READ,
     ],
   },
   {
@@ -275,6 +310,7 @@ export const STANDARD_ROLES = [
       PERMISSIONS.BOOKINGS_READ,
       PERMISSIONS.SERVICES_READ,
       PERMISSIONS.CALCULATIONS_READ,
+      PERMISSIONS.DOCUMENTS_READ,
     ],
   },
 ] as const;

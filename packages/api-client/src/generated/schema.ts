@@ -1047,6 +1047,198 @@ export interface paths {
         patch: operations["DealTemplateController_setStatus_v1"];
         trace?: never;
     };
+    "/api/v1/organizations/{organizationId}/events/{eventId}/documents": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["EventDocumentController_list_v1"];
+        put?: never;
+        post: operations["EventDocumentController_create_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/documents": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["DocumentController_list_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/documents/{documentId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["DocumentController_find_v1"];
+        put?: never;
+        post?: never;
+        delete: operations["DocumentController_deleteDraft_v1"];
+        options?: never;
+        head?: never;
+        patch: operations["DocumentController_update_v1"];
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/documents/{documentId}/status": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["DocumentController_setStatus_v1"];
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/documents/{documentId}/preview": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["DocumentController_preview_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/documents/{documentId}/publish": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["DocumentController_publish_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/documents/{documentId}/archive": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["DocumentController_archive_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/documents/{documentId}/restore": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["DocumentController_restore_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/documents/{documentId}/versions/{versionId}/pdf": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["DocumentController_download_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/document-templates": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["DocumentTemplateController_list_v1"];
+        put?: never;
+        post: operations["DocumentTemplateController_create_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/document-templates/{templateId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["DocumentTemplateController_find_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["DocumentTemplateController_update_v1"];
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/document-templates/{templateId}/status": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["DocumentTemplateController_setStatus_v1"];
+        trace?: never;
+    };
     "/api/v1/organizations/{organizationId}/events/{eventId}/bookings": {
         parameters: {
             query?: never;
@@ -3155,6 +3347,223 @@ export interface components {
             /** @enum {string} */
             status: "ACTIVE" | "ARCHIVED";
         };
+        DocumentBlockInputDto: {
+            heading: string;
+            body: string;
+        };
+        DocumentOfferPositionDto: {
+            /** Format: uuid */
+            id: string;
+            /** @enum {string} */
+            source: "DEAL_COMPONENT" | "DEAL_SERVICE" | "CUSTOM";
+            /** Format: uuid */
+            sourceId?: string | null;
+            description: string;
+            quantity: string;
+            unitPriceNetMinor: string;
+            taxRateBasisPoints: number;
+            /** @enum {string|null} */
+            discountType?: "FIXED" | "PERCENTAGE" | null;
+            discountFixedMinor?: string | null;
+            discountPercentageBasisPoints?: number | null;
+            sortOrder: number;
+            differsFromSource: boolean;
+            subtotalNetMinor: string;
+            discountNetMinor: string;
+            totalNetMinor: string;
+            taxMinor: string;
+            totalGrossMinor: string;
+        };
+        DocumentTotalsDto: {
+            subtotalNetMinor: string;
+            positionDiscountNetMinor: string;
+            totalDiscountNetMinor: string;
+            totalNetMinor: string;
+            taxMinor: string;
+            totalGrossMinor: string;
+            taxGroups: {
+                [key: string]: unknown;
+            }[];
+        };
+        DocumentVersionDto: {
+            /** Format: uuid */
+            id: string;
+            documentVersion: number;
+            documentNumber: string;
+            /** @enum {string} */
+            status: "ENTWURF" | "ERSTELLT" | "UEBERGEBEN" | "ANGENOMMEN" | "ABGELEHNT" | "ABGELAUFEN" | "FREIGEGEBEN" | "ARCHIVIERT";
+            snapshot: {
+                [key: string]: unknown;
+            };
+            pdfSha256: string;
+            pdfSize: number;
+            /** Format: date-time */
+            createdAt: string;
+            downloadPath: string;
+        };
+        DocumentDto: {
+            /** Format: uuid */
+            id: string;
+            /** Format: uuid */
+            organizationId: string;
+            /** Format: uuid */
+            locationId: string;
+            /** Format: uuid */
+            eventId: string;
+            eventName: string;
+            eventDate: string;
+            locationName: string;
+            /** Format: uuid */
+            dealId?: string | null;
+            /** Format: uuid */
+            sourceTemplateId: string;
+            sourceTemplateVersion: number;
+            sourceTemplateName: string;
+            /** @enum {string} */
+            type: "OFFER" | "PRODUCTION_INFORMATION";
+            /** @enum {string} */
+            status: "ENTWURF" | "ERSTELLT" | "UEBERGEBEN" | "ANGENOMMEN" | "ABGELEHNT" | "ABGELAUFEN" | "FREIGEGEBEN" | "ARCHIVIERT";
+            /** @enum {string} */
+            effectiveStatus: "ENTWURF" | "ERSTELLT" | "UEBERGEBEN" | "ANGENOMMEN" | "ABGELEHNT" | "ABGELAUFEN" | "FREIGEGEBEN" | "ARCHIVIERT";
+            expired: boolean;
+            documentNumber: string | null;
+            publishedVersion: number;
+            revision: number;
+            title: string;
+            introduction?: string | null;
+            blocks: components["schemas"]["DocumentBlockInputDto"][];
+            standardTerms?: string | null;
+            closing?: string | null;
+            footer?: string | null;
+            recipientName?: string | null;
+            recipientContactName?: string | null;
+            recipientEmail?: string | null;
+            recipientAddress?: string | null;
+            /** Format: date */
+            validUntil?: string | null;
+            internalNote?: string | null;
+            /** @enum {string|null} */
+            totalDiscountType?: "FIXED" | "PERCENTAGE" | null;
+            totalDiscountFixedMinor?: string | null;
+            totalDiscountPercentageBasisPoints?: number | null;
+            contextSnapshot: {
+                [key: string]: unknown;
+            };
+            positions: components["schemas"]["DocumentOfferPositionDto"][];
+            totals?: components["schemas"]["DocumentTotalsDto"] | null;
+            versions: components["schemas"]["DocumentVersionDto"][];
+            /** Format: date-time */
+            lastPublishedAt?: string | null;
+            /** Format: date-time */
+            createdAt: string;
+            /** Format: date-time */
+            updatedAt: string;
+        };
+        CreateDocumentDto: {
+            /** @enum {string} */
+            type: "OFFER" | "PRODUCTION_INFORMATION";
+            /** Format: uuid */
+            templateId: string;
+            /** Format: uuid */
+            dealId?: string | null;
+            title?: string;
+        };
+        OfferPositionInputDto: {
+            /** Format: uuid */
+            id?: string | null;
+            /** @enum {string} */
+            source: "DEAL_COMPONENT" | "DEAL_SERVICE" | "CUSTOM";
+            description: string;
+            quantity: string;
+            unitPriceNetMinor: string;
+            taxRateBasisPoints: number;
+            /** @enum {string|null} */
+            discountType?: "FIXED" | "PERCENTAGE" | null;
+            discountFixedMinor?: string | null;
+            discountPercentageBasisPoints?: number | null;
+        };
+        UpdateDocumentDto: {
+            revision: number;
+            title: string;
+            introduction?: string | null;
+            blocks: components["schemas"]["DocumentBlockInputDto"][];
+            standardTerms?: string | null;
+            closing?: string | null;
+            footer?: string | null;
+            recipientName?: string | null;
+            recipientContactName?: string | null;
+            recipientEmail?: string | null;
+            recipientAddress?: string | null;
+            /** Format: date */
+            validUntil?: string | null;
+            internalNote?: string | null;
+            /** @enum {string|null} */
+            totalDiscountType?: "FIXED" | "PERCENTAGE" | null;
+            totalDiscountFixedMinor?: string | null;
+            totalDiscountPercentageBasisPoints?: number | null;
+            positions: components["schemas"]["OfferPositionInputDto"][];
+        };
+        SetDocumentStatusDto: {
+            revision: number;
+            /** @enum {string} */
+            status: "ENTWURF" | "ERSTELLT" | "UEBERGEBEN" | "ANGENOMMEN" | "ABGELEHNT" | "ABGELAUFEN" | "FREIGEGEBEN";
+        };
+        PublishDocumentDto: {
+            revision: number;
+        };
+        DocumentRevisionDto: {
+            revision: number;
+        };
+        DocumentTemplateDto: {
+            /** Format: uuid */
+            id: string;
+            /** Format: uuid */
+            organizationId: string;
+            name: string;
+            /** @enum {string} */
+            type: "OFFER" | "PRODUCTION_INFORMATION";
+            title: string;
+            introduction?: string | null;
+            blocks: components["schemas"]["DocumentBlockInputDto"][];
+            standardTerms?: string | null;
+            closing?: string | null;
+            footer?: string | null;
+            /** @enum {string} */
+            status: "ACTIVE" | "ARCHIVED";
+            version: number;
+            /** Format: date-time */
+            createdAt: string;
+            /** Format: date-time */
+            updatedAt: string;
+        };
+        DocumentTemplateInputDto: {
+            name: string;
+            /** @enum {string} */
+            type: "OFFER" | "PRODUCTION_INFORMATION";
+            title: string;
+            introduction?: string | null;
+            blocks: components["schemas"]["DocumentBlockInputDto"][];
+            standardTerms?: string | null;
+            closing?: string | null;
+            footer?: string | null;
+        };
+        UpdateDocumentTemplateDto: {
+            name: string;
+            /** @enum {string} */
+            type: "OFFER" | "PRODUCTION_INFORMATION";
+            title: string;
+            introduction?: string | null;
+            blocks: components["schemas"]["DocumentBlockInputDto"][];
+            standardTerms?: string | null;
+            closing?: string | null;
+            footer?: string | null;
+            version: number;
+        };
+        SetDocumentTemplateStatusDto: {
+            version: number;
+            /** @enum {string} */
+            status: "ACTIVE" | "ARCHIVED";
+        };
         BookingContactDto: {
             /** Format: uuid */
             id: string;
@@ -3292,6 +3701,7 @@ export interface components {
             kind: "PERFORMANCE" | "BREAK";
             sortOrder: number;
             label?: string | null;
+            note?: string | null;
             durationMinutes?: number | null;
             version: number;
             /** Format: date-time */
@@ -3311,6 +3721,7 @@ export interface components {
             /** Format: uuid */
             bookingId?: string | null;
             label?: string | null;
+            note?: string | null;
             durationMinutes?: number | null;
         };
         EventProgramOrderItemDto: {
@@ -3428,6 +3839,7 @@ export interface components {
         };
         UpdateEventProgramItemDto: {
             label?: string | null;
+            note?: string | null;
             durationMinutes?: number | null;
             version: number;
         };
@@ -6409,6 +6821,423 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["DealTemplateDto"];
+                };
+            };
+        };
+    };
+    EventDocumentController_list_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                eventId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DocumentDto"][];
+                };
+            };
+        };
+    };
+    EventDocumentController_create_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                eventId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateDocumentDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DocumentDto"];
+                };
+            };
+        };
+    };
+    DocumentController_list_v1: {
+        parameters: {
+            query?: {
+                to?: string;
+                from?: string;
+                eventId?: string;
+                status?: "ENTWURF" | "ERSTELLT" | "UEBERGEBEN" | "ANGENOMMEN" | "ABGELEHNT" | "ABGELAUFEN" | "FREIGEGEBEN" | "ARCHIVIERT";
+                type?: "OFFER" | "PRODUCTION_INFORMATION";
+            };
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DocumentDto"][];
+                };
+            };
+        };
+    };
+    DocumentController_find_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                documentId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DocumentDto"];
+                };
+            };
+        };
+    };
+    DocumentController_deleteDraft_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                documentId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["DocumentRevisionDto"];
+            };
+        };
+        responses: {
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    DocumentController_update_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                documentId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateDocumentDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DocumentDto"];
+                };
+            };
+        };
+    };
+    DocumentController_setStatus_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                documentId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SetDocumentStatusDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DocumentDto"];
+                };
+            };
+        };
+    };
+    DocumentController_preview_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                documentId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Nicht persistierte PDF-Vorschau */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    DocumentController_publish_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                documentId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PublishDocumentDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DocumentDto"];
+                };
+            };
+        };
+    };
+    DocumentController_archive_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                documentId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["DocumentRevisionDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DocumentDto"];
+                };
+            };
+        };
+    };
+    DocumentController_restore_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                documentId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["DocumentRevisionDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DocumentDto"];
+                };
+            };
+        };
+    };
+    DocumentController_download_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                versionId: string;
+                documentId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Archivierte PDF-Dokumentversion */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    DocumentTemplateController_list_v1: {
+        parameters: {
+            query?: {
+                type?: "OFFER" | "PRODUCTION_INFORMATION";
+                status?: "ACTIVE" | "ARCHIVED" | "ALL";
+            };
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DocumentTemplateDto"][];
+                };
+            };
+        };
+    };
+    DocumentTemplateController_create_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["DocumentTemplateInputDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DocumentTemplateDto"];
+                };
+            };
+        };
+    };
+    DocumentTemplateController_find_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                templateId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DocumentTemplateDto"];
+                };
+            };
+        };
+    };
+    DocumentTemplateController_update_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                templateId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateDocumentTemplateDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DocumentTemplateDto"];
+                };
+            };
+        };
+    };
+    DocumentTemplateController_setStatus_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                templateId: string;
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SetDocumentTemplateStatusDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DocumentTemplateDto"];
                 };
             };
         };

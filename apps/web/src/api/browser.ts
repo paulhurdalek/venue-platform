@@ -8,6 +8,10 @@ export function createBrowserApiClient() {
   return createVenueApiClient({ baseUrl: webEnvironment.NEXT_PUBLIC_API_BASE_URL });
 }
 
+export function browserApiUrl(path: string): string {
+  return new URL(path, webEnvironment.NEXT_PUBLIC_API_BASE_URL).toString();
+}
+
 export function apiErrorMessage(error: unknown, fallback: string): string {
   if (error && typeof error === 'object' && 'message' in error) {
     const message = (error as { message?: unknown }).message;

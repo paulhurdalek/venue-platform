@@ -869,4 +869,148 @@ describeWithDatabase('PostgreSQL connection', () => {
       await client.permission.count({ where: { key: { startsWith: 'deal_templates.' } } }),
     ).toBe(3);
   });
+
+  it('has the Phase 10 document archive, tenant keys and type-safe status constraints', async () => {
+    client = createDatabaseClient(testDatabaseUrl!);
+    await cleanTestDatabase(client);
+    const tables = await client.$queryRaw<Array<{ table_name: string }>>`
+      SELECT table_name
+      FROM information_schema.tables
+      WHERE table_schema = 'public'
+        AND table_name IN (
+          'document_template', 'document_template_block', 'document',
+          'document_content_block', 'document_offer_position', 'document_version',
+          'document_status_history', 'document_number_sequence'
+        )
+      ORDER BY table_name
+    `;
+    expect(tables).toHaveLength(8);
+
+    const constraints = await client.$queryRaw<Array<{ constraint_name: string }>>`
+      SELECT conname AS constraint_name
+      FROM pg_constraint
+      WHERE conname IN (
+        'document_type_status_consistent',
+        'document_publish_consistent',
+        'document_location_tenant_fkey',
+        'document_event_tenant_fkey',
+        'document_deal_tenant_fkey',
+        'document_template_tenant_fkey',
+        'document_offer_position_source_consistent',
+        'document_version_document_tenant_fkey',
+        'document_version_membership_tenant_fkey',
+        'document_number_sequence_values_valid',
+        'document_number_sequence_organization_fkey'
+      )
+    `;
+    expect(constraints).toHaveLength(11);
+    const documentNumberColumn = await client.$queryRaw<Array<{ is_nullable: string }>>`
+      SELECT is_nullable
+      FROM information_schema.columns
+      WHERE table_schema = 'public'
+        AND table_name = 'document'
+        AND column_name = 'document_number'
+    `;
+    expect(documentNumberColumn).toEqual([{ is_nullable: 'YES' }]);
+    expect(
+      await client.permission.count({
+        where: {
+          key: {
+            in: [
+              'documents.read',
+              'documents.write',
+              'documents.publish',
+              'document_templates.read',
+              'document_templates.write',
+              'document_templates.archive',
+            ],
+          },
+        },
+      }),
+    ).toBe(6);
+
+    const organization = await client.organization.create({ data: { name: 'Phase 10 venue' } });
+    const location = await client.location.create({
+      data: { organizationId: organization.id, name: 'Phase 10 hall', timezone: 'Europe/Berlin' },
+    });
+    const event = await client.event.create({
+      data: {
+        organizationId: organization.id,
+        locationId: location.id,
+        name: 'Phase 10 production',
+        eventDate: new Date('2027-06-01T00:00:00.000Z'),
+        eventKind: 'OWN_PRODUCTION',
+        timezone: 'Europe/Berlin',
+      },
+    });
+    const template = await client.documentTemplate.create({
+      data: {
+        organizationId: organization.id,
+        name: 'Produktion',
+        normalizedName: 'produktion',
+        type: 'PRODUCTION_INFORMATION',
+        title: 'Ablauf',
+      },
+    });
+    await expect(
+      client.document.create({
+        data: {
+          organizationId: organization.id,
+          locationId: location.id,
+          eventId: event.id,
+          sourceTemplateId: template.id,
+          sourceTemplateVersion: 1,
+          sourceTemplateNameSnapshot: template.name,
+          type: 'PRODUCTION_INFORMATION',
+          status: 'UEBERGEBEN',
+          documentNumber: 'PROD-INVALID-STATUS',
+          title: template.title,
+          contextSnapshot: {},
+        },
+      }),
+    ).rejects.toThrow();
+
+    const foreign = await client.organization.create({ data: { name: 'Foreign Phase 10 venue' } });
+    const foreignLocation = await client.location.create({
+      data: { organizationId: foreign.id, name: 'Foreign hall', timezone: 'Europe/Berlin' },
+    });
+    const foreignTemplate = await client.documentTemplate.create({
+      data: {
+        organizationId: foreign.id,
+        name: 'Foreign offer',
+        normalizedName: 'foreign offer',
+        type: 'OFFER',
+        title: 'Foreign offer',
+      },
+    });
+    await expect(
+      client.document.create({
+        data: {
+          organizationId: foreign.id,
+          locationId: foreignLocation.id,
+          eventId: event.id,
+          sourceTemplateId: foreignTemplate.id,
+          sourceTemplateVersion: 1,
+          sourceTemplateNameSnapshot: foreignTemplate.name,
+          type: 'OFFER',
+          documentNumber: 'ANG-CROSS-TENANT',
+          title: foreignTemplate.title,
+          contextSnapshot: {},
+        },
+      }),
+    ).rejects.toThrow();
+
+    const migration = await client.$queryRaw<Array<{ migration_name: string }>>`
+      SELECT migration_name
+      FROM _prisma_migrations
+      WHERE migration_name IN (
+        '20260828000200_phase_10_documents',
+        '20260828000300_phase_10_document_polish'
+      )
+        AND finished_at IS NOT NULL
+        AND rolled_back_at IS NULL
+      ORDER BY migration_name
+    `;
+    expect(migration).toHaveLength(2);
+  });
 });

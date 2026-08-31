@@ -72,7 +72,7 @@ export interface BookingRepository {
     access: AccessContext,
     itemId: string,
     version: number,
-    values: Pick<EventProgramItemValues, 'label' | 'durationMinutes'>,
+    values: Pick<EventProgramItemValues, 'label' | 'note' | 'durationMinutes'>,
   ): Promise<EventProgramItemRecord | undefined>;
   deleteProgramItem(access: AccessContext, itemId: string, version: number): Promise<boolean>;
   reorderProgramItems(

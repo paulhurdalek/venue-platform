@@ -340,6 +340,7 @@ export type DealWhereInput = {
   components?: Prisma.DealComponentListRelationFilter
   servicePositions?: Prisma.DealServicePositionListRelationFilter
   statusHistory?: Prisma.DealStatusHistoryListRelationFilter
+  documents?: Prisma.DocumentListRelationFilter
 }
 
 export type DealOrderByWithRelationInput = {
@@ -369,6 +370,7 @@ export type DealOrderByWithRelationInput = {
   components?: Prisma.DealComponentOrderByRelationAggregateInput
   servicePositions?: Prisma.DealServicePositionOrderByRelationAggregateInput
   statusHistory?: Prisma.DealStatusHistoryOrderByRelationAggregateInput
+  documents?: Prisma.DocumentOrderByRelationAggregateInput
 }
 
 export type DealWhereUniqueInput = Prisma.AtLeast<{
@@ -402,6 +404,7 @@ export type DealWhereUniqueInput = Prisma.AtLeast<{
   components?: Prisma.DealComponentListRelationFilter
   servicePositions?: Prisma.DealServicePositionListRelationFilter
   statusHistory?: Prisma.DealStatusHistoryListRelationFilter
+  documents?: Prisma.DocumentListRelationFilter
 }, "id" | "id_organizationId">
 
 export type DealOrderByWithAggregationInput = {
@@ -476,6 +479,7 @@ export type DealCreateInput = {
   components?: Prisma.DealComponentCreateNestedManyWithoutDealInput
   servicePositions?: Prisma.DealServicePositionCreateNestedManyWithoutDealInput
   statusHistory?: Prisma.DealStatusHistoryCreateNestedManyWithoutDealInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutDealInput
 }
 
 export type DealUncheckedCreateInput = {
@@ -500,6 +504,7 @@ export type DealUncheckedCreateInput = {
   components?: Prisma.DealComponentUncheckedCreateNestedManyWithoutDealInput
   servicePositions?: Prisma.DealServicePositionUncheckedCreateNestedManyWithoutDealInput
   statusHistory?: Prisma.DealStatusHistoryUncheckedCreateNestedManyWithoutDealInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutDealInput
 }
 
 export type DealUpdateInput = {
@@ -524,6 +529,7 @@ export type DealUpdateInput = {
   components?: Prisma.DealComponentUpdateManyWithoutDealNestedInput
   servicePositions?: Prisma.DealServicePositionUpdateManyWithoutDealNestedInput
   statusHistory?: Prisma.DealStatusHistoryUpdateManyWithoutDealNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutDealNestedInput
 }
 
 export type DealUncheckedUpdateInput = {
@@ -548,6 +554,7 @@ export type DealUncheckedUpdateInput = {
   components?: Prisma.DealComponentUncheckedUpdateManyWithoutDealNestedInput
   servicePositions?: Prisma.DealServicePositionUncheckedUpdateManyWithoutDealNestedInput
   statusHistory?: Prisma.DealStatusHistoryUncheckedUpdateManyWithoutDealNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutDealNestedInput
 }
 
 export type DealCreateManyInput = {
@@ -703,6 +710,11 @@ export type DealSumOrderByAggregateInput = {
 export type DealScalarRelationFilter = {
   is?: Prisma.DealWhereInput
   isNot?: Prisma.DealWhereInput
+}
+
+export type DealNullableScalarRelationFilter = {
+  is?: Prisma.DealWhereInput | null
+  isNot?: Prisma.DealWhereInput | null
 }
 
 export type DealCreateNestedManyWithoutOrganizationInput = {
@@ -965,6 +977,22 @@ export type DealUncheckedUpdateManyWithoutSourceTemplateNestedInput = {
   deleteMany?: Prisma.DealScalarWhereInput | Prisma.DealScalarWhereInput[]
 }
 
+export type DealCreateNestedOneWithoutDocumentsInput = {
+  create?: Prisma.XOR<Prisma.DealCreateWithoutDocumentsInput, Prisma.DealUncheckedCreateWithoutDocumentsInput>
+  connectOrCreate?: Prisma.DealCreateOrConnectWithoutDocumentsInput
+  connect?: Prisma.DealWhereUniqueInput
+}
+
+export type DealUpdateOneWithoutDocumentsNestedInput = {
+  create?: Prisma.XOR<Prisma.DealCreateWithoutDocumentsInput, Prisma.DealUncheckedCreateWithoutDocumentsInput>
+  connectOrCreate?: Prisma.DealCreateOrConnectWithoutDocumentsInput
+  upsert?: Prisma.DealUpsertWithoutDocumentsInput
+  disconnect?: Prisma.DealWhereInput | boolean
+  delete?: Prisma.DealWhereInput | boolean
+  connect?: Prisma.DealWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.DealUpdateToOneWithWhereWithoutDocumentsInput, Prisma.DealUpdateWithoutDocumentsInput>, Prisma.DealUncheckedUpdateWithoutDocumentsInput>
+}
+
 export type DealCreateWithoutOrganizationInput = {
   id?: string
   sourceTemplateVersion?: number | null
@@ -986,6 +1014,7 @@ export type DealCreateWithoutOrganizationInput = {
   components?: Prisma.DealComponentCreateNestedManyWithoutDealInput
   servicePositions?: Prisma.DealServicePositionCreateNestedManyWithoutDealInput
   statusHistory?: Prisma.DealStatusHistoryCreateNestedManyWithoutDealInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutDealInput
 }
 
 export type DealUncheckedCreateWithoutOrganizationInput = {
@@ -1009,6 +1038,7 @@ export type DealUncheckedCreateWithoutOrganizationInput = {
   components?: Prisma.DealComponentUncheckedCreateNestedManyWithoutDealInput
   servicePositions?: Prisma.DealServicePositionUncheckedCreateNestedManyWithoutDealInput
   statusHistory?: Prisma.DealStatusHistoryUncheckedCreateNestedManyWithoutDealInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutDealInput
 }
 
 export type DealCreateOrConnectWithoutOrganizationInput = {
@@ -1082,6 +1112,7 @@ export type DealCreateWithoutEventInput = {
   components?: Prisma.DealComponentCreateNestedManyWithoutDealInput
   servicePositions?: Prisma.DealServicePositionCreateNestedManyWithoutDealInput
   statusHistory?: Prisma.DealStatusHistoryCreateNestedManyWithoutDealInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutDealInput
 }
 
 export type DealUncheckedCreateWithoutEventInput = {
@@ -1104,6 +1135,7 @@ export type DealUncheckedCreateWithoutEventInput = {
   components?: Prisma.DealComponentUncheckedCreateNestedManyWithoutDealInput
   servicePositions?: Prisma.DealServicePositionUncheckedCreateNestedManyWithoutDealInput
   statusHistory?: Prisma.DealStatusHistoryUncheckedCreateNestedManyWithoutDealInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutDealInput
 }
 
 export type DealCreateOrConnectWithoutEventInput = {
@@ -1153,6 +1185,7 @@ export type DealCreateWithoutContactInput = {
   components?: Prisma.DealComponentCreateNestedManyWithoutDealInput
   servicePositions?: Prisma.DealServicePositionCreateNestedManyWithoutDealInput
   statusHistory?: Prisma.DealStatusHistoryCreateNestedManyWithoutDealInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutDealInput
 }
 
 export type DealUncheckedCreateWithoutContactInput = {
@@ -1175,6 +1208,7 @@ export type DealUncheckedCreateWithoutContactInput = {
   components?: Prisma.DealComponentUncheckedCreateNestedManyWithoutDealInput
   servicePositions?: Prisma.DealServicePositionUncheckedCreateNestedManyWithoutDealInput
   statusHistory?: Prisma.DealStatusHistoryUncheckedCreateNestedManyWithoutDealInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutDealInput
 }
 
 export type DealCreateOrConnectWithoutContactInput = {
@@ -1224,6 +1258,7 @@ export type DealCreateWithoutBusinessPartnerInput = {
   components?: Prisma.DealComponentCreateNestedManyWithoutDealInput
   servicePositions?: Prisma.DealServicePositionCreateNestedManyWithoutDealInput
   statusHistory?: Prisma.DealStatusHistoryCreateNestedManyWithoutDealInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutDealInput
 }
 
 export type DealUncheckedCreateWithoutBusinessPartnerInput = {
@@ -1246,6 +1281,7 @@ export type DealUncheckedCreateWithoutBusinessPartnerInput = {
   components?: Prisma.DealComponentUncheckedCreateNestedManyWithoutDealInput
   servicePositions?: Prisma.DealServicePositionUncheckedCreateNestedManyWithoutDealInput
   statusHistory?: Prisma.DealStatusHistoryUncheckedCreateNestedManyWithoutDealInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutDealInput
 }
 
 export type DealCreateOrConnectWithoutBusinessPartnerInput = {
@@ -1295,6 +1331,7 @@ export type DealCreateWithoutComponentsInput = {
   sourceTemplate?: Prisma.DealTemplateCreateNestedOneWithoutSourceDealsInput
   servicePositions?: Prisma.DealServicePositionCreateNestedManyWithoutDealInput
   statusHistory?: Prisma.DealStatusHistoryCreateNestedManyWithoutDealInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutDealInput
 }
 
 export type DealUncheckedCreateWithoutComponentsInput = {
@@ -1318,6 +1355,7 @@ export type DealUncheckedCreateWithoutComponentsInput = {
   updatedAt?: Date | string
   servicePositions?: Prisma.DealServicePositionUncheckedCreateNestedManyWithoutDealInput
   statusHistory?: Prisma.DealStatusHistoryUncheckedCreateNestedManyWithoutDealInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutDealInput
 }
 
 export type DealCreateOrConnectWithoutComponentsInput = {
@@ -1357,6 +1395,7 @@ export type DealUpdateWithoutComponentsInput = {
   sourceTemplate?: Prisma.DealTemplateUpdateOneWithoutSourceDealsNestedInput
   servicePositions?: Prisma.DealServicePositionUpdateManyWithoutDealNestedInput
   statusHistory?: Prisma.DealStatusHistoryUpdateManyWithoutDealNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutDealNestedInput
 }
 
 export type DealUncheckedUpdateWithoutComponentsInput = {
@@ -1380,6 +1419,7 @@ export type DealUncheckedUpdateWithoutComponentsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   servicePositions?: Prisma.DealServicePositionUncheckedUpdateManyWithoutDealNestedInput
   statusHistory?: Prisma.DealStatusHistoryUncheckedUpdateManyWithoutDealNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutDealNestedInput
 }
 
 export type DealCreateWithoutServicePositionsInput = {
@@ -1403,6 +1443,7 @@ export type DealCreateWithoutServicePositionsInput = {
   sourceTemplate?: Prisma.DealTemplateCreateNestedOneWithoutSourceDealsInput
   components?: Prisma.DealComponentCreateNestedManyWithoutDealInput
   statusHistory?: Prisma.DealStatusHistoryCreateNestedManyWithoutDealInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutDealInput
 }
 
 export type DealUncheckedCreateWithoutServicePositionsInput = {
@@ -1426,6 +1467,7 @@ export type DealUncheckedCreateWithoutServicePositionsInput = {
   updatedAt?: Date | string
   components?: Prisma.DealComponentUncheckedCreateNestedManyWithoutDealInput
   statusHistory?: Prisma.DealStatusHistoryUncheckedCreateNestedManyWithoutDealInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutDealInput
 }
 
 export type DealCreateOrConnectWithoutServicePositionsInput = {
@@ -1465,6 +1507,7 @@ export type DealUpdateWithoutServicePositionsInput = {
   sourceTemplate?: Prisma.DealTemplateUpdateOneWithoutSourceDealsNestedInput
   components?: Prisma.DealComponentUpdateManyWithoutDealNestedInput
   statusHistory?: Prisma.DealStatusHistoryUpdateManyWithoutDealNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutDealNestedInput
 }
 
 export type DealUncheckedUpdateWithoutServicePositionsInput = {
@@ -1488,6 +1531,7 @@ export type DealUncheckedUpdateWithoutServicePositionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   components?: Prisma.DealComponentUncheckedUpdateManyWithoutDealNestedInput
   statusHistory?: Prisma.DealStatusHistoryUncheckedUpdateManyWithoutDealNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutDealNestedInput
 }
 
 export type DealCreateWithoutStatusHistoryInput = {
@@ -1511,6 +1555,7 @@ export type DealCreateWithoutStatusHistoryInput = {
   sourceTemplate?: Prisma.DealTemplateCreateNestedOneWithoutSourceDealsInput
   components?: Prisma.DealComponentCreateNestedManyWithoutDealInput
   servicePositions?: Prisma.DealServicePositionCreateNestedManyWithoutDealInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutDealInput
 }
 
 export type DealUncheckedCreateWithoutStatusHistoryInput = {
@@ -1534,6 +1579,7 @@ export type DealUncheckedCreateWithoutStatusHistoryInput = {
   updatedAt?: Date | string
   components?: Prisma.DealComponentUncheckedCreateNestedManyWithoutDealInput
   servicePositions?: Prisma.DealServicePositionUncheckedCreateNestedManyWithoutDealInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutDealInput
 }
 
 export type DealCreateOrConnectWithoutStatusHistoryInput = {
@@ -1573,6 +1619,7 @@ export type DealUpdateWithoutStatusHistoryInput = {
   sourceTemplate?: Prisma.DealTemplateUpdateOneWithoutSourceDealsNestedInput
   components?: Prisma.DealComponentUpdateManyWithoutDealNestedInput
   servicePositions?: Prisma.DealServicePositionUpdateManyWithoutDealNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutDealNestedInput
 }
 
 export type DealUncheckedUpdateWithoutStatusHistoryInput = {
@@ -1596,6 +1643,7 @@ export type DealUncheckedUpdateWithoutStatusHistoryInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   components?: Prisma.DealComponentUncheckedUpdateManyWithoutDealNestedInput
   servicePositions?: Prisma.DealServicePositionUncheckedUpdateManyWithoutDealNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutDealNestedInput
 }
 
 export type DealCreateWithoutSourceTemplateInput = {
@@ -1619,6 +1667,7 @@ export type DealCreateWithoutSourceTemplateInput = {
   components?: Prisma.DealComponentCreateNestedManyWithoutDealInput
   servicePositions?: Prisma.DealServicePositionCreateNestedManyWithoutDealInput
   statusHistory?: Prisma.DealStatusHistoryCreateNestedManyWithoutDealInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutDealInput
 }
 
 export type DealUncheckedCreateWithoutSourceTemplateInput = {
@@ -1641,6 +1690,7 @@ export type DealUncheckedCreateWithoutSourceTemplateInput = {
   components?: Prisma.DealComponentUncheckedCreateNestedManyWithoutDealInput
   servicePositions?: Prisma.DealServicePositionUncheckedCreateNestedManyWithoutDealInput
   statusHistory?: Prisma.DealStatusHistoryUncheckedCreateNestedManyWithoutDealInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutDealInput
 }
 
 export type DealCreateOrConnectWithoutSourceTemplateInput = {
@@ -1667,6 +1717,118 @@ export type DealUpdateWithWhereUniqueWithoutSourceTemplateInput = {
 export type DealUpdateManyWithWhereWithoutSourceTemplateInput = {
   where: Prisma.DealScalarWhereInput
   data: Prisma.XOR<Prisma.DealUpdateManyMutationInput, Prisma.DealUncheckedUpdateManyWithoutSourceTemplateInput>
+}
+
+export type DealCreateWithoutDocumentsInput = {
+  id?: string
+  sourceTemplateVersion?: number | null
+  sourceTemplateNameSnapshot?: string | null
+  customerNameSnapshot: string
+  contactNameSnapshot?: string | null
+  status?: $Enums.DealStatus
+  totalDiscountType?: $Enums.DealDiscountType | null
+  totalDiscountFixedMinor?: bigint | number | null
+  totalDiscountPercentageBasisPoints?: number | null
+  currency?: string
+  version?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organization: Prisma.OrganizationCreateNestedOneWithoutDealsInput
+  event: Prisma.EventCreateNestedOneWithoutDealsInput
+  businessPartner: Prisma.BusinessPartnerCreateNestedOneWithoutCustomerDealsInput
+  contact?: Prisma.ContactCreateNestedOneWithoutDealContactsInput
+  sourceTemplate?: Prisma.DealTemplateCreateNestedOneWithoutSourceDealsInput
+  components?: Prisma.DealComponentCreateNestedManyWithoutDealInput
+  servicePositions?: Prisma.DealServicePositionCreateNestedManyWithoutDealInput
+  statusHistory?: Prisma.DealStatusHistoryCreateNestedManyWithoutDealInput
+}
+
+export type DealUncheckedCreateWithoutDocumentsInput = {
+  id?: string
+  organizationId: string
+  eventId: string
+  businessPartnerId: string
+  contactId?: string | null
+  sourceTemplateId?: string | null
+  sourceTemplateVersion?: number | null
+  sourceTemplateNameSnapshot?: string | null
+  customerNameSnapshot: string
+  contactNameSnapshot?: string | null
+  status?: $Enums.DealStatus
+  totalDiscountType?: $Enums.DealDiscountType | null
+  totalDiscountFixedMinor?: bigint | number | null
+  totalDiscountPercentageBasisPoints?: number | null
+  currency?: string
+  version?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  components?: Prisma.DealComponentUncheckedCreateNestedManyWithoutDealInput
+  servicePositions?: Prisma.DealServicePositionUncheckedCreateNestedManyWithoutDealInput
+  statusHistory?: Prisma.DealStatusHistoryUncheckedCreateNestedManyWithoutDealInput
+}
+
+export type DealCreateOrConnectWithoutDocumentsInput = {
+  where: Prisma.DealWhereUniqueInput
+  create: Prisma.XOR<Prisma.DealCreateWithoutDocumentsInput, Prisma.DealUncheckedCreateWithoutDocumentsInput>
+}
+
+export type DealUpsertWithoutDocumentsInput = {
+  update: Prisma.XOR<Prisma.DealUpdateWithoutDocumentsInput, Prisma.DealUncheckedUpdateWithoutDocumentsInput>
+  create: Prisma.XOR<Prisma.DealCreateWithoutDocumentsInput, Prisma.DealUncheckedCreateWithoutDocumentsInput>
+  where?: Prisma.DealWhereInput
+}
+
+export type DealUpdateToOneWithWhereWithoutDocumentsInput = {
+  where?: Prisma.DealWhereInput
+  data: Prisma.XOR<Prisma.DealUpdateWithoutDocumentsInput, Prisma.DealUncheckedUpdateWithoutDocumentsInput>
+}
+
+export type DealUpdateWithoutDocumentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  sourceTemplateVersion?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sourceTemplateNameSnapshot?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customerNameSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
+  contactNameSnapshot?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumDealStatusFieldUpdateOperationsInput | $Enums.DealStatus
+  totalDiscountType?: Prisma.NullableEnumDealDiscountTypeFieldUpdateOperationsInput | $Enums.DealDiscountType | null
+  totalDiscountFixedMinor?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  totalDiscountPercentageBasisPoints?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutDealsNestedInput
+  event?: Prisma.EventUpdateOneRequiredWithoutDealsNestedInput
+  businessPartner?: Prisma.BusinessPartnerUpdateOneRequiredWithoutCustomerDealsNestedInput
+  contact?: Prisma.ContactUpdateOneWithoutDealContactsNestedInput
+  sourceTemplate?: Prisma.DealTemplateUpdateOneWithoutSourceDealsNestedInput
+  components?: Prisma.DealComponentUpdateManyWithoutDealNestedInput
+  servicePositions?: Prisma.DealServicePositionUpdateManyWithoutDealNestedInput
+  statusHistory?: Prisma.DealStatusHistoryUpdateManyWithoutDealNestedInput
+}
+
+export type DealUncheckedUpdateWithoutDocumentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  eventId?: Prisma.StringFieldUpdateOperationsInput | string
+  businessPartnerId?: Prisma.StringFieldUpdateOperationsInput | string
+  contactId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceTemplateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceTemplateVersion?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sourceTemplateNameSnapshot?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customerNameSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
+  contactNameSnapshot?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumDealStatusFieldUpdateOperationsInput | $Enums.DealStatus
+  totalDiscountType?: Prisma.NullableEnumDealDiscountTypeFieldUpdateOperationsInput | $Enums.DealDiscountType | null
+  totalDiscountFixedMinor?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  totalDiscountPercentageBasisPoints?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  components?: Prisma.DealComponentUncheckedUpdateManyWithoutDealNestedInput
+  servicePositions?: Prisma.DealServicePositionUncheckedUpdateManyWithoutDealNestedInput
+  statusHistory?: Prisma.DealStatusHistoryUncheckedUpdateManyWithoutDealNestedInput
 }
 
 export type DealCreateManyOrganizationInput = {
@@ -1710,6 +1872,7 @@ export type DealUpdateWithoutOrganizationInput = {
   components?: Prisma.DealComponentUpdateManyWithoutDealNestedInput
   servicePositions?: Prisma.DealServicePositionUpdateManyWithoutDealNestedInput
   statusHistory?: Prisma.DealStatusHistoryUpdateManyWithoutDealNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutDealNestedInput
 }
 
 export type DealUncheckedUpdateWithoutOrganizationInput = {
@@ -1733,6 +1896,7 @@ export type DealUncheckedUpdateWithoutOrganizationInput = {
   components?: Prisma.DealComponentUncheckedUpdateManyWithoutDealNestedInput
   servicePositions?: Prisma.DealServicePositionUncheckedUpdateManyWithoutDealNestedInput
   statusHistory?: Prisma.DealStatusHistoryUncheckedUpdateManyWithoutDealNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutDealNestedInput
 }
 
 export type DealUncheckedUpdateManyWithoutOrganizationInput = {
@@ -1795,6 +1959,7 @@ export type DealUpdateWithoutEventInput = {
   components?: Prisma.DealComponentUpdateManyWithoutDealNestedInput
   servicePositions?: Prisma.DealServicePositionUpdateManyWithoutDealNestedInput
   statusHistory?: Prisma.DealStatusHistoryUpdateManyWithoutDealNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutDealNestedInput
 }
 
 export type DealUncheckedUpdateWithoutEventInput = {
@@ -1817,6 +1982,7 @@ export type DealUncheckedUpdateWithoutEventInput = {
   components?: Prisma.DealComponentUncheckedUpdateManyWithoutDealNestedInput
   servicePositions?: Prisma.DealServicePositionUncheckedUpdateManyWithoutDealNestedInput
   statusHistory?: Prisma.DealStatusHistoryUncheckedUpdateManyWithoutDealNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutDealNestedInput
 }
 
 export type DealUncheckedUpdateManyWithoutEventInput = {
@@ -1878,6 +2044,7 @@ export type DealUpdateWithoutContactInput = {
   components?: Prisma.DealComponentUpdateManyWithoutDealNestedInput
   servicePositions?: Prisma.DealServicePositionUpdateManyWithoutDealNestedInput
   statusHistory?: Prisma.DealStatusHistoryUpdateManyWithoutDealNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutDealNestedInput
 }
 
 export type DealUncheckedUpdateWithoutContactInput = {
@@ -1900,6 +2067,7 @@ export type DealUncheckedUpdateWithoutContactInput = {
   components?: Prisma.DealComponentUncheckedUpdateManyWithoutDealNestedInput
   servicePositions?: Prisma.DealServicePositionUncheckedUpdateManyWithoutDealNestedInput
   statusHistory?: Prisma.DealStatusHistoryUncheckedUpdateManyWithoutDealNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutDealNestedInput
 }
 
 export type DealUncheckedUpdateManyWithoutContactInput = {
@@ -1961,6 +2129,7 @@ export type DealUpdateWithoutBusinessPartnerInput = {
   components?: Prisma.DealComponentUpdateManyWithoutDealNestedInput
   servicePositions?: Prisma.DealServicePositionUpdateManyWithoutDealNestedInput
   statusHistory?: Prisma.DealStatusHistoryUpdateManyWithoutDealNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutDealNestedInput
 }
 
 export type DealUncheckedUpdateWithoutBusinessPartnerInput = {
@@ -1983,6 +2152,7 @@ export type DealUncheckedUpdateWithoutBusinessPartnerInput = {
   components?: Prisma.DealComponentUncheckedUpdateManyWithoutDealNestedInput
   servicePositions?: Prisma.DealServicePositionUncheckedUpdateManyWithoutDealNestedInput
   statusHistory?: Prisma.DealStatusHistoryUncheckedUpdateManyWithoutDealNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutDealNestedInput
 }
 
 export type DealUncheckedUpdateManyWithoutBusinessPartnerInput = {
@@ -2044,6 +2214,7 @@ export type DealUpdateWithoutSourceTemplateInput = {
   components?: Prisma.DealComponentUpdateManyWithoutDealNestedInput
   servicePositions?: Prisma.DealServicePositionUpdateManyWithoutDealNestedInput
   statusHistory?: Prisma.DealStatusHistoryUpdateManyWithoutDealNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutDealNestedInput
 }
 
 export type DealUncheckedUpdateWithoutSourceTemplateInput = {
@@ -2066,6 +2237,7 @@ export type DealUncheckedUpdateWithoutSourceTemplateInput = {
   components?: Prisma.DealComponentUncheckedUpdateManyWithoutDealNestedInput
   servicePositions?: Prisma.DealServicePositionUncheckedUpdateManyWithoutDealNestedInput
   statusHistory?: Prisma.DealStatusHistoryUncheckedUpdateManyWithoutDealNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutDealNestedInput
 }
 
 export type DealUncheckedUpdateManyWithoutSourceTemplateInput = {
@@ -2096,12 +2268,14 @@ export type DealCountOutputType = {
   components: number
   servicePositions: number
   statusHistory: number
+  documents: number
 }
 
 export type DealCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   components?: boolean | DealCountOutputTypeCountComponentsArgs
   servicePositions?: boolean | DealCountOutputTypeCountServicePositionsArgs
   statusHistory?: boolean | DealCountOutputTypeCountStatusHistoryArgs
+  documents?: boolean | DealCountOutputTypeCountDocumentsArgs
 }
 
 /**
@@ -2135,6 +2309,13 @@ export type DealCountOutputTypeCountStatusHistoryArgs<ExtArgs extends runtime.Ty
   where?: Prisma.DealStatusHistoryWhereInput
 }
 
+/**
+ * DealCountOutputType without action
+ */
+export type DealCountOutputTypeCountDocumentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DocumentWhereInput
+}
+
 
 export type DealSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -2163,6 +2344,7 @@ export type DealSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   components?: boolean | Prisma.Deal$componentsArgs<ExtArgs>
   servicePositions?: boolean | Prisma.Deal$servicePositionsArgs<ExtArgs>
   statusHistory?: boolean | Prisma.Deal$statusHistoryArgs<ExtArgs>
+  documents?: boolean | Prisma.Deal$documentsArgs<ExtArgs>
   _count?: boolean | Prisma.DealCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["deal"]>
 
@@ -2249,6 +2431,7 @@ export type DealInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   components?: boolean | Prisma.Deal$componentsArgs<ExtArgs>
   servicePositions?: boolean | Prisma.Deal$servicePositionsArgs<ExtArgs>
   statusHistory?: boolean | Prisma.Deal$statusHistoryArgs<ExtArgs>
+  documents?: boolean | Prisma.Deal$documentsArgs<ExtArgs>
   _count?: boolean | Prisma.DealCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type DealIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2277,6 +2460,7 @@ export type $DealPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     components: Prisma.$DealComponentPayload<ExtArgs>[]
     servicePositions: Prisma.$DealServicePositionPayload<ExtArgs>[]
     statusHistory: Prisma.$DealStatusHistoryPayload<ExtArgs>[]
+    documents: Prisma.$DocumentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2699,6 +2883,7 @@ export interface Prisma__DealClient<T, Null = never, ExtArgs extends runtime.Typ
   components<T extends Prisma.Deal$componentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Deal$componentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DealComponentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   servicePositions<T extends Prisma.Deal$servicePositionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Deal$servicePositionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DealServicePositionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   statusHistory<T extends Prisma.Deal$statusHistoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Deal$statusHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DealStatusHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  documents<T extends Prisma.Deal$documentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Deal$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3254,6 +3439,30 @@ export type Deal$statusHistoryArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.DealStatusHistoryScalarFieldEnum | Prisma.DealStatusHistoryScalarFieldEnum[]
+}
+
+/**
+ * Deal.documents
+ */
+export type Deal$documentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Document
+   */
+  select?: Prisma.DocumentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Document
+   */
+  omit?: Prisma.DocumentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DocumentInclude<ExtArgs> | null
+  where?: Prisma.DocumentWhereInput
+  orderBy?: Prisma.DocumentOrderByWithRelationInput | Prisma.DocumentOrderByWithRelationInput[]
+  cursor?: Prisma.DocumentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DocumentScalarFieldEnum | Prisma.DocumentScalarFieldEnum[]
 }
 
 /**

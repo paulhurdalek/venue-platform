@@ -10,6 +10,7 @@ import { EventFormatsModule } from './event-formats/event-formats.module.js';
 import { EventsModule } from './events/events.module.js';
 import { DateOptionsModule } from './date-options/date-options.module.js';
 import { DealsModule } from './deals/deals.module.js';
+import { DocumentsModule } from './documents/documents.module.js';
 import { MasterDataModule } from './master-data/master-data.module.js';
 import { SecurityModule } from './security/security.module.js';
 import { SetupModule } from './setup/setup.module.js';
@@ -38,6 +39,7 @@ import { RevenueTemplatesModule } from './revenue-templates/revenue-templates.mo
     EventsModule,
     DateOptionsModule,
     DealsModule,
+    DocumentsModule,
     BookingsModule,
     ServicesModule,
     RevenuePlanningModule,

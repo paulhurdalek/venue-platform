@@ -113,7 +113,7 @@ describeWithDatabase('Phase 3 master-data integration', () => {
       ]),
     );
 
-    expect(keysByRole.administrator).toHaveLength(52);
+    expect(keysByRole.administrator).toHaveLength(58);
     expect(keysByRole.management_finance).toEqual(
       [
         'artists.read',
@@ -135,6 +135,12 @@ describeWithDatabase('Phase 3 master-data integration', () => {
         'date_options.convert',
         'date_options.read',
         'date_options.write',
+        'document_templates.archive',
+        'document_templates.read',
+        'document_templates.write',
+        'documents.publish',
+        'documents.read',
+        'documents.write',
         'deal_templates.archive',
         'deal_templates.read',
         'deal_templates.write',
@@ -174,6 +180,10 @@ describeWithDatabase('Phase 3 master-data integration', () => {
         'date_options.convert',
         'date_options.read',
         'date_options.write',
+        'document_templates.read',
+        'documents.publish',
+        'documents.read',
+        'documents.write',
         'event_formats.read',
         'events.read',
         'events.status',
@@ -191,6 +201,10 @@ describeWithDatabase('Phase 3 master-data integration', () => {
         'business_partners.read',
         'contacts.read',
         'date_options.read',
+        'document_templates.read',
+        'documents.publish',
+        'documents.read',
+        'documents.write',
         'event_formats.read',
         'event_formats.write',
         'events.read',
@@ -208,6 +222,7 @@ describeWithDatabase('Phase 3 master-data integration', () => {
         'business_partners.read',
         'contacts.read',
         'date_options.read',
+        'documents.read',
         'event_formats.read',
         'events.read',
         'location.read',

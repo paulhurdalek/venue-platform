@@ -357,3 +357,43 @@ export type DealTemplateComponent = Prisma.DealTemplateComponentModel
  * 
  */
 export type DealTemplateServicePosition = Prisma.DealTemplateServicePositionModel
+/**
+ * Model DocumentTemplate
+ * 
+ */
+export type DocumentTemplate = Prisma.DocumentTemplateModel
+/**
+ * Model DocumentTemplateBlock
+ * 
+ */
+export type DocumentTemplateBlock = Prisma.DocumentTemplateBlockModel
+/**
+ * Model Document
+ * 
+ */
+export type Document = Prisma.DocumentModel
+/**
+ * Model DocumentNumberSequence
+ * 
+ */
+export type DocumentNumberSequence = Prisma.DocumentNumberSequenceModel
+/**
+ * Model DocumentContentBlock
+ * 
+ */
+export type DocumentContentBlock = Prisma.DocumentContentBlockModel
+/**
+ * Model DocumentOfferPosition
+ * 
+ */
+export type DocumentOfferPosition = Prisma.DocumentOfferPositionModel
+/**
+ * Model DocumentVersion
+ * 
+ */
+export type DocumentVersion = Prisma.DocumentVersionModel
+/**
+ * Model DocumentStatusHistory
+ * 
+ */
+export type DocumentStatusHistory = Prisma.DocumentStatusHistoryModel
