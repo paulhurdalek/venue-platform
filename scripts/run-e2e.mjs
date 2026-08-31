@@ -5,7 +5,7 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { createDatabaseClient } from '../packages/database/dist/index.js';
-import { cleanTestDatabase } from '../packages/database/dist/testing.js';
+import { assertSafeTestDatabaseUrl, cleanTestDatabase } from '../packages/database/dist/testing.js';
 import {
   createE2eNextDistDirectoryName,
   createE2eTypeScriptConfig,
@@ -30,8 +30,12 @@ const databaseUrl = process.env.TEST_DATABASE_URL ?? configuredTestEnvironment.T
 if (!databaseUrl?.startsWith('postgresql://')) {
   throw new Error('TEST_DATABASE_URL is required for browser tests.');
 }
+const testDatabaseTarget = assertSafeTestDatabaseUrl(databaseUrl);
+console.info(
+  `Testdatenbank-Reset: Host ${testDatabaseTarget.host}, Port ${testDatabaseTarget.port}, Datenbank ${testDatabaseTarget.database}`,
+);
 
-const webPort = Number(process.env.E2E_WEB_PORT ?? '3000');
+const webPort = Number(process.env.E2E_WEB_PORT ?? '3100');
 const apiPort = Number(process.env.E2E_API_PORT ?? '3101');
 const webBaseUrl = `http://127.0.0.1:${webPort}`;
 const apiBaseUrl = `http://127.0.0.1:${apiPort}`;
@@ -85,6 +89,27 @@ async function waitForServer(server, port, timeoutMs) {
   throw new Error(`Server on port ${port} did not become ready within ${timeoutMs}ms`);
 }
 
+async function requireAvailableE2ePort(port) {
+  const occupied = await new Promise((resolveOccupied) => {
+    const socket = createConnection({ host: '127.0.0.1', port });
+    socket.setTimeout(500);
+    socket.once('connect', () => {
+      socket.destroy();
+      resolveOccupied(true);
+    });
+    socket.once('error', () => resolveOccupied(false));
+    socket.once('timeout', () => {
+      socket.destroy();
+      resolveOccupied(false);
+    });
+  });
+  if (occupied) {
+    throw new Error(
+      `E2E-Port ${port} ist bereits belegt. Der Testlauf übernimmt keinen fremden Listener.`,
+    );
+  }
+}
+
 async function stopProcessTree(child) {
   if (!child?.pid || child.exitCode !== null || child.signalCode !== null) return;
 
@@ -131,6 +156,7 @@ let databasePrepared = false;
 let exitCode;
 
 try {
+  await Promise.all([requireAvailableE2ePort(webPort), requireAvailableE2ePort(apiPort)]);
   await cleanDatabase(databaseUrl);
   databasePrepared = true;
   const bootstrapLink = await createBootstrapLink(runtimeEnvironment);
@@ -231,7 +257,7 @@ async function createBootstrapLink(environment) {
 async function cleanDatabase(connectionString) {
   const database = createDatabaseClient(connectionString);
   try {
-    await cleanTestDatabase(database);
+    await cleanTestDatabase(database, connectionString);
   } finally {
     await database.$disconnect();
   }

@@ -3,6 +3,7 @@ import { access, mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promise
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import test from 'node:test';
+import { readFileSync } from 'node:fs';
 
 import { resolveNextDistDirectory, resolveNextTypeScriptConfig } from '../apps/web/next.config.ts';
 import {
@@ -37,6 +38,20 @@ test('test runners replace inherited development limits with the canonical test 
   assert.equal(environment.DATABASE_URL, 'postgresql://test-override');
   assert.equal(environment.TEST_DATABASE_URL, 'postgresql://test-override');
   assert.equal(testRuntimeDefaults.NEXT_PUBLIC_API_BASE_URL, 'http://localhost:3100');
+});
+
+test('root test command overrides inherited database configuration with .env.test', () => {
+  const packageJson = JSON.parse(readFileSync(new URL('../package.json', import.meta.url), 'utf8'));
+  assert.match(packageJson.scripts.test, /dotenv -e \.env\.test -o/);
+  const environment = createTestRuntimeEnvironment(
+    {},
+    {
+      DATABASE_URL: 'postgresql://venue:development@localhost:5432/venue_development',
+    },
+  );
+  assert.equal(environment.DATABASE_URL, testRuntimeDefaults.DATABASE_URL);
+  assert.equal(environment.TEST_DATABASE_URL, testRuntimeDefaults.TEST_DATABASE_URL);
+  assert.equal(environment.DATABASE_URL.includes('development'), false);
 });
 
 test('normal Next.js runs keep using the regular .next directory', () => {
