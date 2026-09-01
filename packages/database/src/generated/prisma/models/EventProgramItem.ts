@@ -46,6 +46,7 @@ export type EventProgramItemMinAggregateOutputType = {
   kind: $Enums.ProgramItemKind | null
   sortOrder: number | null
   label: string | null
+  note: string | null
   durationMinutes: number | null
   version: number | null
   createdAt: Date | null
@@ -60,6 +61,7 @@ export type EventProgramItemMaxAggregateOutputType = {
   kind: $Enums.ProgramItemKind | null
   sortOrder: number | null
   label: string | null
+  note: string | null
   durationMinutes: number | null
   version: number | null
   createdAt: Date | null
@@ -74,6 +76,7 @@ export type EventProgramItemCountAggregateOutputType = {
   kind: number
   sortOrder: number
   label: number
+  note: number
   durationMinutes: number
   version: number
   createdAt: number
@@ -102,6 +105,7 @@ export type EventProgramItemMinAggregateInputType = {
   kind?: true
   sortOrder?: true
   label?: true
+  note?: true
   durationMinutes?: true
   version?: true
   createdAt?: true
@@ -116,6 +120,7 @@ export type EventProgramItemMaxAggregateInputType = {
   kind?: true
   sortOrder?: true
   label?: true
+  note?: true
   durationMinutes?: true
   version?: true
   createdAt?: true
@@ -130,6 +135,7 @@ export type EventProgramItemCountAggregateInputType = {
   kind?: true
   sortOrder?: true
   label?: true
+  note?: true
   durationMinutes?: true
   version?: true
   createdAt?: true
@@ -231,6 +237,7 @@ export type EventProgramItemGroupByOutputType = {
   kind: $Enums.ProgramItemKind
   sortOrder: number
   label: string | null
+  note: string | null
   durationMinutes: number | null
   version: number
   createdAt: Date
@@ -268,6 +275,7 @@ export type EventProgramItemWhereInput = {
   kind?: Prisma.EnumProgramItemKindFilter<"EventProgramItem"> | $Enums.ProgramItemKind
   sortOrder?: Prisma.IntFilter<"EventProgramItem"> | number
   label?: Prisma.StringNullableFilter<"EventProgramItem"> | string | null
+  note?: Prisma.StringNullableFilter<"EventProgramItem"> | string | null
   durationMinutes?: Prisma.IntNullableFilter<"EventProgramItem"> | number | null
   version?: Prisma.IntFilter<"EventProgramItem"> | number
   createdAt?: Prisma.DateTimeFilter<"EventProgramItem"> | Date | string
@@ -285,6 +293,7 @@ export type EventProgramItemOrderByWithRelationInput = {
   kind?: Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
   label?: Prisma.SortOrderInput | Prisma.SortOrder
+  note?: Prisma.SortOrderInput | Prisma.SortOrder
   durationMinutes?: Prisma.SortOrderInput | Prisma.SortOrder
   version?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -306,6 +315,7 @@ export type EventProgramItemWhereUniqueInput = Prisma.AtLeast<{
   kind?: Prisma.EnumProgramItemKindFilter<"EventProgramItem"> | $Enums.ProgramItemKind
   sortOrder?: Prisma.IntFilter<"EventProgramItem"> | number
   label?: Prisma.StringNullableFilter<"EventProgramItem"> | string | null
+  note?: Prisma.StringNullableFilter<"EventProgramItem"> | string | null
   durationMinutes?: Prisma.IntNullableFilter<"EventProgramItem"> | number | null
   version?: Prisma.IntFilter<"EventProgramItem"> | number
   createdAt?: Prisma.DateTimeFilter<"EventProgramItem"> | Date | string
@@ -323,6 +333,7 @@ export type EventProgramItemOrderByWithAggregationInput = {
   kind?: Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
   label?: Prisma.SortOrderInput | Prisma.SortOrder
+  note?: Prisma.SortOrderInput | Prisma.SortOrder
   durationMinutes?: Prisma.SortOrderInput | Prisma.SortOrder
   version?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -345,6 +356,7 @@ export type EventProgramItemScalarWhereWithAggregatesInput = {
   kind?: Prisma.EnumProgramItemKindWithAggregatesFilter<"EventProgramItem"> | $Enums.ProgramItemKind
   sortOrder?: Prisma.IntWithAggregatesFilter<"EventProgramItem"> | number
   label?: Prisma.StringNullableWithAggregatesFilter<"EventProgramItem"> | string | null
+  note?: Prisma.StringNullableWithAggregatesFilter<"EventProgramItem"> | string | null
   durationMinutes?: Prisma.IntNullableWithAggregatesFilter<"EventProgramItem"> | number | null
   version?: Prisma.IntWithAggregatesFilter<"EventProgramItem"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"EventProgramItem"> | Date | string
@@ -356,6 +368,7 @@ export type EventProgramItemCreateInput = {
   kind: $Enums.ProgramItemKind
   sortOrder: number
   label?: string | null
+  note?: string | null
   durationMinutes?: number | null
   version?: number
   createdAt?: Date | string
@@ -373,6 +386,7 @@ export type EventProgramItemUncheckedCreateInput = {
   kind: $Enums.ProgramItemKind
   sortOrder: number
   label?: string | null
+  note?: string | null
   durationMinutes?: number | null
   version?: number
   createdAt?: Date | string
@@ -384,6 +398,7 @@ export type EventProgramItemUpdateInput = {
   kind?: Prisma.EnumProgramItemKindFieldUpdateOperationsInput | $Enums.ProgramItemKind
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   durationMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   version?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -401,6 +416,7 @@ export type EventProgramItemUncheckedUpdateInput = {
   kind?: Prisma.EnumProgramItemKindFieldUpdateOperationsInput | $Enums.ProgramItemKind
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   durationMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   version?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -415,6 +431,7 @@ export type EventProgramItemCreateManyInput = {
   kind: $Enums.ProgramItemKind
   sortOrder: number
   label?: string | null
+  note?: string | null
   durationMinutes?: number | null
   version?: number
   createdAt?: Date | string
@@ -426,6 +443,7 @@ export type EventProgramItemUpdateManyMutationInput = {
   kind?: Prisma.EnumProgramItemKindFieldUpdateOperationsInput | $Enums.ProgramItemKind
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   durationMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   version?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -440,6 +458,7 @@ export type EventProgramItemUncheckedUpdateManyInput = {
   kind?: Prisma.EnumProgramItemKindFieldUpdateOperationsInput | $Enums.ProgramItemKind
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   durationMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   version?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -469,6 +488,7 @@ export type EventProgramItemCountOrderByAggregateInput = {
   kind?: Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
   label?: Prisma.SortOrder
+  note?: Prisma.SortOrder
   durationMinutes?: Prisma.SortOrder
   version?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -489,6 +509,7 @@ export type EventProgramItemMaxOrderByAggregateInput = {
   kind?: Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
   label?: Prisma.SortOrder
+  note?: Prisma.SortOrder
   durationMinutes?: Prisma.SortOrder
   version?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -503,6 +524,7 @@ export type EventProgramItemMinOrderByAggregateInput = {
   kind?: Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
   label?: Prisma.SortOrder
+  note?: Prisma.SortOrder
   durationMinutes?: Prisma.SortOrder
   version?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -650,6 +672,7 @@ export type EventProgramItemCreateWithoutOrganizationInput = {
   kind: $Enums.ProgramItemKind
   sortOrder: number
   label?: string | null
+  note?: string | null
   durationMinutes?: number | null
   version?: number
   createdAt?: Date | string
@@ -665,6 +688,7 @@ export type EventProgramItemUncheckedCreateWithoutOrganizationInput = {
   kind: $Enums.ProgramItemKind
   sortOrder: number
   label?: string | null
+  note?: string | null
   durationMinutes?: number | null
   version?: number
   createdAt?: Date | string
@@ -708,6 +732,7 @@ export type EventProgramItemScalarWhereInput = {
   kind?: Prisma.EnumProgramItemKindFilter<"EventProgramItem"> | $Enums.ProgramItemKind
   sortOrder?: Prisma.IntFilter<"EventProgramItem"> | number
   label?: Prisma.StringNullableFilter<"EventProgramItem"> | string | null
+  note?: Prisma.StringNullableFilter<"EventProgramItem"> | string | null
   durationMinutes?: Prisma.IntNullableFilter<"EventProgramItem"> | number | null
   version?: Prisma.IntFilter<"EventProgramItem"> | number
   createdAt?: Prisma.DateTimeFilter<"EventProgramItem"> | Date | string
@@ -719,6 +744,7 @@ export type EventProgramItemCreateWithoutEventInput = {
   kind: $Enums.ProgramItemKind
   sortOrder: number
   label?: string | null
+  note?: string | null
   durationMinutes?: number | null
   version?: number
   createdAt?: Date | string
@@ -733,6 +759,7 @@ export type EventProgramItemUncheckedCreateWithoutEventInput = {
   kind: $Enums.ProgramItemKind
   sortOrder: number
   label?: string | null
+  note?: string | null
   durationMinutes?: number | null
   version?: number
   createdAt?: Date | string
@@ -770,6 +797,7 @@ export type EventProgramItemCreateWithoutBookingInput = {
   kind: $Enums.ProgramItemKind
   sortOrder: number
   label?: string | null
+  note?: string | null
   durationMinutes?: number | null
   version?: number
   createdAt?: Date | string
@@ -783,6 +811,7 @@ export type EventProgramItemUncheckedCreateWithoutBookingInput = {
   kind: $Enums.ProgramItemKind
   sortOrder: number
   label?: string | null
+  note?: string | null
   durationMinutes?: number | null
   version?: number
   createdAt?: Date | string
@@ -822,6 +851,7 @@ export type EventProgramItemCreateManyOrganizationInput = {
   kind: $Enums.ProgramItemKind
   sortOrder: number
   label?: string | null
+  note?: string | null
   durationMinutes?: number | null
   version?: number
   createdAt?: Date | string
@@ -833,6 +863,7 @@ export type EventProgramItemUpdateWithoutOrganizationInput = {
   kind?: Prisma.EnumProgramItemKindFieldUpdateOperationsInput | $Enums.ProgramItemKind
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   durationMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   version?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -848,6 +879,7 @@ export type EventProgramItemUncheckedUpdateWithoutOrganizationInput = {
   kind?: Prisma.EnumProgramItemKindFieldUpdateOperationsInput | $Enums.ProgramItemKind
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   durationMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   version?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -861,6 +893,7 @@ export type EventProgramItemUncheckedUpdateManyWithoutOrganizationInput = {
   kind?: Prisma.EnumProgramItemKindFieldUpdateOperationsInput | $Enums.ProgramItemKind
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   durationMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   version?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -873,6 +906,7 @@ export type EventProgramItemCreateManyEventInput = {
   kind: $Enums.ProgramItemKind
   sortOrder: number
   label?: string | null
+  note?: string | null
   durationMinutes?: number | null
   version?: number
   createdAt?: Date | string
@@ -884,6 +918,7 @@ export type EventProgramItemUpdateWithoutEventInput = {
   kind?: Prisma.EnumProgramItemKindFieldUpdateOperationsInput | $Enums.ProgramItemKind
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   durationMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   version?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -898,6 +933,7 @@ export type EventProgramItemUncheckedUpdateWithoutEventInput = {
   kind?: Prisma.EnumProgramItemKindFieldUpdateOperationsInput | $Enums.ProgramItemKind
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   durationMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   version?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -910,6 +946,7 @@ export type EventProgramItemUncheckedUpdateManyWithoutEventInput = {
   kind?: Prisma.EnumProgramItemKindFieldUpdateOperationsInput | $Enums.ProgramItemKind
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   durationMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   version?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -921,6 +958,7 @@ export type EventProgramItemCreateManyBookingInput = {
   kind: $Enums.ProgramItemKind
   sortOrder: number
   label?: string | null
+  note?: string | null
   durationMinutes?: number | null
   version?: number
   createdAt?: Date | string
@@ -932,6 +970,7 @@ export type EventProgramItemUpdateWithoutBookingInput = {
   kind?: Prisma.EnumProgramItemKindFieldUpdateOperationsInput | $Enums.ProgramItemKind
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   durationMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   version?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -945,6 +984,7 @@ export type EventProgramItemUncheckedUpdateWithoutBookingInput = {
   kind?: Prisma.EnumProgramItemKindFieldUpdateOperationsInput | $Enums.ProgramItemKind
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   durationMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   version?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -956,6 +996,7 @@ export type EventProgramItemUncheckedUpdateManyWithoutBookingInput = {
   kind?: Prisma.EnumProgramItemKindFieldUpdateOperationsInput | $Enums.ProgramItemKind
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   durationMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   version?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -972,6 +1013,7 @@ export type EventProgramItemSelect<ExtArgs extends runtime.Types.Extensions.Inte
   kind?: boolean
   sortOrder?: boolean
   label?: boolean
+  note?: boolean
   durationMinutes?: boolean
   version?: boolean
   createdAt?: boolean
@@ -989,6 +1031,7 @@ export type EventProgramItemSelectCreateManyAndReturn<ExtArgs extends runtime.Ty
   kind?: boolean
   sortOrder?: boolean
   label?: boolean
+  note?: boolean
   durationMinutes?: boolean
   version?: boolean
   createdAt?: boolean
@@ -1006,6 +1049,7 @@ export type EventProgramItemSelectUpdateManyAndReturn<ExtArgs extends runtime.Ty
   kind?: boolean
   sortOrder?: boolean
   label?: boolean
+  note?: boolean
   durationMinutes?: boolean
   version?: boolean
   createdAt?: boolean
@@ -1023,13 +1067,14 @@ export type EventProgramItemSelectScalar = {
   kind?: boolean
   sortOrder?: boolean
   label?: boolean
+  note?: boolean
   durationMinutes?: boolean
   version?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type EventProgramItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "organizationId" | "eventId" | "bookingId" | "kind" | "sortOrder" | "label" | "durationMinutes" | "version" | "createdAt" | "updatedAt", ExtArgs["result"]["eventProgramItem"]>
+export type EventProgramItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "organizationId" | "eventId" | "bookingId" | "kind" | "sortOrder" | "label" | "note" | "durationMinutes" | "version" | "createdAt" | "updatedAt", ExtArgs["result"]["eventProgramItem"]>
 export type EventProgramItemInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
   event?: boolean | Prisma.EventDefaultArgs<ExtArgs>
@@ -1061,6 +1106,7 @@ export type $EventProgramItemPayload<ExtArgs extends runtime.Types.Extensions.In
     kind: $Enums.ProgramItemKind
     sortOrder: number
     label: string | null
+    note: string | null
     durationMinutes: number | null
     version: number
     createdAt: Date
@@ -1498,6 +1544,7 @@ export interface EventProgramItemFieldRefs {
   readonly kind: Prisma.FieldRef<"EventProgramItem", 'ProgramItemKind'>
   readonly sortOrder: Prisma.FieldRef<"EventProgramItem", 'Int'>
   readonly label: Prisma.FieldRef<"EventProgramItem", 'String'>
+  readonly note: Prisma.FieldRef<"EventProgramItem", 'String'>
   readonly durationMinutes: Prisma.FieldRef<"EventProgramItem", 'Int'>
   readonly version: Prisma.FieldRef<"EventProgramItem", 'Int'>
   readonly createdAt: Prisma.FieldRef<"EventProgramItem", 'DateTime'>

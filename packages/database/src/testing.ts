@@ -1,6 +1,37 @@
 import type { DatabaseClient } from './index.js';
 
+const expectedTestDatabaseName = 'venue_test';
+
+export function assertSafeTestDatabaseUrl(testDatabaseUrl: string | undefined): {
+  database: string;
+  host: string;
+  port: string;
+} {
+  if (!testDatabaseUrl) throw new Error('Sicherheitsabbruch: TEST_DATABASE_URL ist erforderlich.');
+  let testUrl: URL;
+  try {
+    testUrl = new URL(testDatabaseUrl);
+  } catch {
+    throw new Error('Sicherheitsabbruch: TEST_DATABASE_URL ist keine gültige PostgreSQL-URL.');
+  }
+  const database = decodeURIComponent(testUrl.pathname).replace(/^\//, '');
+  if (testUrl.protocol !== 'postgresql:' || database !== expectedTestDatabaseName) {
+    throw new Error(
+      `Sicherheitsabbruch: Testlauf verweigert die Datenbank ${database || 'unbekannt'}. Erwartet wird ausschließlich ${expectedTestDatabaseName}.`,
+    );
+  }
+  return { database, host: testUrl.hostname, port: testUrl.port || '5432' };
+}
+
 const TEST_SCOPED_TABLES = [
+  'document_status_history',
+  'document_version',
+  'document_offer_position',
+  'document_content_block',
+  'document',
+  'document_number_sequence',
+  'document_template_block',
+  'document_template',
   'event_calculation_status_history',
   'ticket_component_allocation',
   'ticket_price_component',
@@ -60,7 +91,12 @@ const testCleanupSql = `
 
 export async function cleanTestDatabase(
   database: Pick<DatabaseClient, '$executeRawUnsafe'>,
+  testDatabaseUrl = process.env.TEST_DATABASE_URL,
 ): Promise<void> {
+  const target = assertSafeTestDatabaseUrl(testDatabaseUrl);
+  console.info(
+    `Testdatenbank-Reset: Host ${target.host}, Port ${target.port}, Datenbank ${target.database}`,
+  );
   // permission, contact_role and business_partner_role are migration-owned global catalogs.
   await database.$executeRawUnsafe(testCleanupSql);
 }

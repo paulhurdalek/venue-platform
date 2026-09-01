@@ -7,39 +7,76 @@ import {
   type ReactNode,
   useEffect,
   useId,
-  useRef,
   useState,
 } from 'react';
 
 type NavigationSection = { href: string; label: string };
 
+type NavigationProps = {
+  organizationId: string;
+  organizationName: string;
+  userName: string;
+  userEmail: string;
+  workSections: NavigationSection[];
+  masterDataSections: NavigationSection[];
+  templateSections: NavigationSection[];
+  children: ReactNode;
+};
+
 export function WorkspaceNavigation({
   organizationId,
   organizationName,
-  sections,
+  userName,
+  userEmail,
+  workSections,
+  masterDataSections,
+  templateSections,
   children,
-}: {
-  organizationId: string;
-  organizationName: string;
-  sections: NavigationSection[];
-  children: ReactNode;
-}) {
+}: NavigationProps) {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [masterDataOpen, setMasterDataOpen] = useState(true);
+  const [templatesOpen, setTemplatesOpen] = useState(true);
+  const [accountOpen, setAccountOpen] = useState(false);
+  const [restoredStorageKey, setRestoredStorageKey] = useState<string | null>(null);
   const drawerId = useId();
-  const drawerRef = useRef<HTMLElement>(null);
+  const masterDataStorageKey = `venue-platform:navigation:${organizationId}:${userEmail}:master-data`;
+  const templatesStorageKey = `venue-platform:navigation:${organizationId}:${userEmail}:templates`;
   const overviewHref = `/o/${organizationId}`;
+  const masterDataActive = sectionIsActive(masterDataSections, pathname, overviewHref);
+  const templatesActive = sectionIsActive(templateSections, pathname, overviewHref);
+  const accountActive = pathname.startsWith(`/o/${organizationId}/settings/`);
 
   useEffect(() => {
     setMobileMenuOpen(false);
   }, [pathname]);
 
   useEffect(() => {
+    const savedMasterData = window.localStorage.getItem(masterDataStorageKey);
+    const savedTemplates = window.localStorage.getItem(templatesStorageKey);
+    setMasterDataOpen(savedMasterData !== 'collapsed');
+    setTemplatesOpen(savedTemplates !== 'collapsed');
+    setRestoredStorageKey(`${masterDataStorageKey}:${templatesStorageKey}`);
+  }, [masterDataStorageKey, templatesStorageKey]);
+
+  useEffect(() => {
+    if (restoredStorageKey !== `${masterDataStorageKey}:${templatesStorageKey}`) return;
+    window.localStorage.setItem(masterDataStorageKey, masterDataOpen ? 'expanded' : 'collapsed');
+    window.localStorage.setItem(templatesStorageKey, templatesOpen ? 'expanded' : 'collapsed');
+  }, [
+    masterDataOpen,
+    masterDataStorageKey,
+    restoredStorageKey,
+    templatesOpen,
+    templatesStorageKey,
+  ]);
+
+  useEffect(() => {
     if (!mobileMenuOpen) return;
 
     const previouslyFocused = document.activeElement;
     const focusInitialControl = window.setTimeout(() => {
-      drawerRef.current?.querySelector<HTMLElement>('button, a[href]')?.focus();
+      document.getElementById(drawerId)?.querySelector<HTMLElement>('button, a[href]')?.focus();
     }, 0);
     const closeOnEscape = (event: KeyboardEvent) => {
       if (event.key === 'Escape') setMobileMenuOpen(false);
@@ -51,14 +88,14 @@ export function WorkspaceNavigation({
       document.removeEventListener('keydown', closeOnEscape);
       if (previouslyFocused instanceof HTMLElement) previouslyFocused.focus();
     };
-  }, [mobileMenuOpen]);
+  }, [drawerId, mobileMenuOpen]);
 
   const isActive = (href: string) =>
     href === overviewHref
       ? pathname === overviewHref
       : pathname === href || pathname.startsWith(`${href}/`);
 
-  const links = (onNavigate?: () => void) =>
+  const renderLinks = (sections: NavigationSection[], onNavigate?: () => void) =>
     sections.map((section) => {
       const active = isActive(section.href);
       return (
@@ -76,13 +113,74 @@ export function WorkspaceNavigation({
       );
     });
 
+  const renderNavigation = (onNavigate?: () => void) => {
+    const currentMasterDataOpen = masterDataActive || masterDataOpen;
+    const currentTemplatesOpen = templatesActive || templatesOpen;
+    return (
+      <nav aria-label="Hauptnavigation" className="workspace-nav">
+        <NavigationLabel>Arbeiten</NavigationLabel>
+        <div className="workspace-nav__links">{renderLinks(workSections, onNavigate)}</div>
+        <NavigationGroup
+          active={masterDataActive}
+          label="Stammdaten"
+          onToggle={() => setMasterDataOpen((open) => !open)}
+          open={currentMasterDataOpen}
+        >
+          {renderLinks(masterDataSections, onNavigate)}
+        </NavigationGroup>
+        <NavigationGroup
+          active={templatesActive}
+          label="Vorlagen"
+          onToggle={() => setTemplatesOpen((open) => !open)}
+          open={currentTemplatesOpen}
+        >
+          {renderLinks(templateSections, onNavigate)}
+        </NavigationGroup>
+      </nav>
+    );
+  };
+
+  const renderAccountMenu = (onNavigate?: () => void) => {
+    const open = accountActive || accountOpen;
+    return (
+      <section className="workspace-account-menu">
+        <button
+          aria-expanded={open}
+          aria-label={`${organizationName}: ${userName || userEmail}. Organisationsmenü`}
+          className={
+            accountActive
+              ? 'workspace-account-menu__trigger workspace-account-menu__trigger--active'
+              : 'workspace-account-menu__trigger'
+          }
+          onClick={() => setAccountOpen((current) => !current)}
+          type="button"
+        >
+          <span className="workspace-account-menu__identity">
+            <strong>{organizationName}</strong>
+            <span>{userName || userEmail}</span>
+          </span>
+          <span aria-hidden="true" className="workspace-nav__chevron">
+            {open ? '▾' : '▸'}
+          </span>
+        </button>
+        {open ? (
+          <div className="workspace-account-menu__content" onClick={onNavigate}>
+            {children}
+          </div>
+        ) : null}
+      </section>
+    );
+  };
+
   const trapDrawerFocus = (event: ReactKeyboardEvent<HTMLElement>) => {
     if (event.key !== 'Tab') return;
 
     const focusable = [
-      ...(drawerRef.current?.querySelectorAll<HTMLElement>(
-        'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
-      ) ?? []),
+      ...(document
+        .getElementById(drawerId)
+        ?.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
+        ) ?? []),
     ];
     if (!focusable.length) {
       event.preventDefault();
@@ -105,10 +203,8 @@ export function WorkspaceNavigation({
       <aside aria-label="Anwendungsnavigation" className="workspace-sidebar">
         <Brand organizationId={organizationId} organizationName={organizationName} />
         <p className="workspace-product-label">Venue Platform</p>
-        <nav aria-label="Hauptnavigation" className="workspace-nav workspace-nav--desktop">
-          {links()}
-        </nav>
-        <div className="workspace-sidebar__account">{children}</div>
+        {renderNavigation()}
+        <div className="workspace-sidebar__account">{renderAccountMenu()}</div>
       </aside>
 
       <header className="workspace-mobile-header">
@@ -137,7 +233,6 @@ export function WorkspaceNavigation({
             className="workspace-drawer"
             id={drawerId}
             onKeyDown={trapDrawerFocus}
-            ref={drawerRef}
             role="dialog"
           >
             <div className="workspace-drawer__header">
@@ -154,14 +249,63 @@ export function WorkspaceNavigation({
                 ×
               </button>
             </div>
-            <nav aria-label="Hauptnavigation" className="workspace-nav workspace-nav--drawer">
-              {links(() => setMobileMenuOpen(false))}
-            </nav>
-            <div className="workspace-drawer__account">{children}</div>
+            {renderNavigation(() => setMobileMenuOpen(false))}
+            <div className="workspace-drawer__account">
+              {renderAccountMenu(() => setMobileMenuOpen(false))}
+            </div>
           </aside>
         </div>
       ) : null}
     </>
+  );
+}
+
+function NavigationLabel({ children }: { children: ReactNode }) {
+  return <p className="workspace-nav__label">{children}</p>;
+}
+
+function NavigationGroup({
+  active,
+  children,
+  label,
+  onToggle,
+  open,
+}: {
+  active: boolean;
+  children: ReactNode;
+  label: string;
+  onToggle: () => void;
+  open: boolean;
+}) {
+  return (
+    <section
+      className={
+        active ? 'workspace-nav__group workspace-nav__group--active' : 'workspace-nav__group'
+      }
+    >
+      <button
+        aria-expanded={open}
+        className="workspace-nav__group-trigger"
+        onClick={onToggle}
+        type="button"
+      >
+        <span>{label}</span>
+        <span aria-hidden="true" className="workspace-nav__chevron">
+          {open ? '▾' : '▸'}
+        </span>
+      </button>
+      {open ? (
+        <div className="workspace-nav__links workspace-nav__links--nested">{children}</div>
+      ) : null}
+    </section>
+  );
+}
+
+function sectionIsActive(sections: NavigationSection[], pathname: string, overviewHref: string) {
+  return sections.some((section) =>
+    section.href === overviewHref
+      ? pathname === overviewHref
+      : pathname === section.href || pathname.startsWith(`${section.href}/`),
   );
 }
 

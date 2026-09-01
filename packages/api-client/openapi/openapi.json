@@ -4199,6 +4199,828 @@
         ]
       }
     },
+    "/api/v1/organizations/{organizationId}/events/{eventId}/documents": {
+      "get": {
+        "operationId": "EventDocumentController_list_v1",
+        "parameters": [
+          {
+            "name": "eventId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DocumentDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "documents"
+        ]
+      },
+      "post": {
+        "operationId": "EventDocumentController_create_v1",
+        "parameters": [
+          {
+            "name": "eventId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDocumentDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "documents"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/documents": {
+      "get": {
+        "operationId": "DocumentController_list_v1",
+        "parameters": [
+          {
+            "name": "to",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "date",
+              "type": "string"
+            }
+          },
+          {
+            "name": "from",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "date",
+              "type": "string"
+            }
+          },
+          {
+            "name": "eventId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "ENTWURF",
+                "ERSTELLT",
+                "UEBERGEBEN",
+                "ANGENOMMEN",
+                "ABGELEHNT",
+                "ABGELAUFEN",
+                "FREIGEGEBEN",
+                "ARCHIVIERT"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "OFFER",
+                "PRODUCTION_INFORMATION"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DocumentDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "documents"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/documents/{documentId}": {
+      "get": {
+        "operationId": "DocumentController_find_v1",
+        "parameters": [
+          {
+            "name": "documentId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "documents"
+        ]
+      },
+      "patch": {
+        "operationId": "DocumentController_update_v1",
+        "parameters": [
+          {
+            "name": "documentId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDocumentDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "documents"
+        ]
+      },
+      "delete": {
+        "operationId": "DocumentController_deleteDraft_v1",
+        "parameters": [
+          {
+            "name": "documentId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DocumentRevisionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "documents"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/documents/{documentId}/status": {
+      "patch": {
+        "operationId": "DocumentController_setStatus_v1",
+        "parameters": [
+          {
+            "name": "documentId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetDocumentStatusDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "documents"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/documents/{documentId}/preview": {
+      "post": {
+        "operationId": "DocumentController_preview_v1",
+        "parameters": [
+          {
+            "name": "documentId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Nicht persistierte PDF-Vorschau"
+          }
+        },
+        "tags": [
+          "documents"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/documents/{documentId}/publish": {
+      "post": {
+        "operationId": "DocumentController_publish_v1",
+        "parameters": [
+          {
+            "name": "documentId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PublishDocumentDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "documents"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/documents/{documentId}/archive": {
+      "post": {
+        "operationId": "DocumentController_archive_v1",
+        "parameters": [
+          {
+            "name": "documentId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DocumentRevisionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "documents"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/documents/{documentId}/restore": {
+      "post": {
+        "operationId": "DocumentController_restore_v1",
+        "parameters": [
+          {
+            "name": "documentId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DocumentRevisionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "documents"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/documents/{documentId}/versions/{versionId}/pdf": {
+      "get": {
+        "operationId": "DocumentController_download_v1",
+        "parameters": [
+          {
+            "name": "versionId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "documentId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Archivierte PDF-Dokumentversion"
+          }
+        },
+        "tags": [
+          "documents"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/document-templates": {
+      "get": {
+        "operationId": "DocumentTemplateController_list_v1",
+        "parameters": [
+          {
+            "name": "type",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "OFFER",
+                "PRODUCTION_INFORMATION"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "ACTIVE",
+                "ARCHIVED",
+                "ALL"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DocumentTemplateDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "document-templates"
+        ]
+      },
+      "post": {
+        "operationId": "DocumentTemplateController_create_v1",
+        "parameters": [
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DocumentTemplateInputDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentTemplateDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "document-templates"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/document-templates/{templateId}": {
+      "get": {
+        "operationId": "DocumentTemplateController_find_v1",
+        "parameters": [
+          {
+            "name": "templateId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentTemplateDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "document-templates"
+        ]
+      },
+      "patch": {
+        "operationId": "DocumentTemplateController_update_v1",
+        "parameters": [
+          {
+            "name": "templateId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDocumentTemplateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentTemplateDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "document-templates"
+        ]
+      }
+    },
+    "/api/v1/organizations/{organizationId}/document-templates/{templateId}/status": {
+      "patch": {
+        "operationId": "DocumentTemplateController_setStatus_v1",
+        "parameters": [
+          {
+            "name": "templateId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "organizationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetDocumentTemplateStatusDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentTemplateDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "document-templates"
+        ]
+      }
+    },
     "/api/v1/organizations/{organizationId}/events/{eventId}/bookings": {
       "get": {
         "operationId": "EventBookingsController_list_v1",
@@ -11836,6 +12658,875 @@
           "status"
         ]
       },
+      "DocumentBlockInputDto": {
+        "type": "object",
+        "properties": {
+          "heading": {
+            "type": "string",
+            "maxLength": 200
+          },
+          "body": {
+            "type": "string",
+            "maxLength": 20000
+          }
+        },
+        "required": [
+          "heading",
+          "body"
+        ]
+      },
+      "DocumentOfferPositionDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "source": {
+            "type": "string",
+            "enum": [
+              "DEAL_COMPONENT",
+              "DEAL_SERVICE",
+              "CUSTOM"
+            ]
+          },
+          "sourceId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "description": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "string"
+          },
+          "unitPriceNetMinor": {
+            "type": "string"
+          },
+          "taxRateBasisPoints": {
+            "type": "number"
+          },
+          "discountType": {
+            "type": "string",
+            "enum": [
+              "FIXED",
+              "PERCENTAGE"
+            ],
+            "nullable": true
+          },
+          "discountFixedMinor": {
+            "type": "string",
+            "nullable": true
+          },
+          "discountPercentageBasisPoints": {
+            "type": "number",
+            "nullable": true
+          },
+          "sortOrder": {
+            "type": "number"
+          },
+          "differsFromSource": {
+            "type": "boolean"
+          },
+          "subtotalNetMinor": {
+            "type": "string"
+          },
+          "discountNetMinor": {
+            "type": "string"
+          },
+          "totalNetMinor": {
+            "type": "string"
+          },
+          "taxMinor": {
+            "type": "string"
+          },
+          "totalGrossMinor": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "source",
+          "description",
+          "quantity",
+          "unitPriceNetMinor",
+          "taxRateBasisPoints",
+          "sortOrder",
+          "differsFromSource",
+          "subtotalNetMinor",
+          "discountNetMinor",
+          "totalNetMinor",
+          "taxMinor",
+          "totalGrossMinor"
+        ]
+      },
+      "DocumentTotalsDto": {
+        "type": "object",
+        "properties": {
+          "subtotalNetMinor": {
+            "type": "string"
+          },
+          "positionDiscountNetMinor": {
+            "type": "string"
+          },
+          "totalDiscountNetMinor": {
+            "type": "string"
+          },
+          "totalNetMinor": {
+            "type": "string"
+          },
+          "taxMinor": {
+            "type": "string"
+          },
+          "totalGrossMinor": {
+            "type": "string"
+          },
+          "taxGroups": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": true
+            }
+          }
+        },
+        "required": [
+          "subtotalNetMinor",
+          "positionDiscountNetMinor",
+          "totalDiscountNetMinor",
+          "totalNetMinor",
+          "taxMinor",
+          "totalGrossMinor",
+          "taxGroups"
+        ]
+      },
+      "DocumentVersionDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "documentVersion": {
+            "type": "number"
+          },
+          "documentNumber": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ENTWURF",
+              "ERSTELLT",
+              "UEBERGEBEN",
+              "ANGENOMMEN",
+              "ABGELEHNT",
+              "ABGELAUFEN",
+              "FREIGEGEBEN",
+              "ARCHIVIERT"
+            ]
+          },
+          "snapshot": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "pdfSha256": {
+            "type": "string"
+          },
+          "pdfSize": {
+            "type": "number"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "downloadPath": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "documentVersion",
+          "documentNumber",
+          "status",
+          "snapshot",
+          "pdfSha256",
+          "pdfSize",
+          "createdAt",
+          "downloadPath"
+        ]
+      },
+      "DocumentDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "organizationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "locationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "eventId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "eventName": {
+            "type": "string"
+          },
+          "eventDate": {
+            "type": "string"
+          },
+          "locationName": {
+            "type": "string"
+          },
+          "dealId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "sourceTemplateId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "sourceTemplateVersion": {
+            "type": "number"
+          },
+          "sourceTemplateName": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "OFFER",
+              "PRODUCTION_INFORMATION"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ENTWURF",
+              "ERSTELLT",
+              "UEBERGEBEN",
+              "ANGENOMMEN",
+              "ABGELEHNT",
+              "ABGELAUFEN",
+              "FREIGEGEBEN",
+              "ARCHIVIERT"
+            ]
+          },
+          "effectiveStatus": {
+            "type": "string",
+            "enum": [
+              "ENTWURF",
+              "ERSTELLT",
+              "UEBERGEBEN",
+              "ANGENOMMEN",
+              "ABGELEHNT",
+              "ABGELAUFEN",
+              "FREIGEGEBEN",
+              "ARCHIVIERT"
+            ]
+          },
+          "expired": {
+            "type": "boolean"
+          },
+          "documentNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "publishedVersion": {
+            "type": "number"
+          },
+          "revision": {
+            "type": "number"
+          },
+          "title": {
+            "type": "string"
+          },
+          "introduction": {
+            "type": "string",
+            "nullable": true
+          },
+          "blocks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DocumentBlockInputDto"
+            }
+          },
+          "standardTerms": {
+            "type": "string",
+            "nullable": true
+          },
+          "closing": {
+            "type": "string",
+            "nullable": true
+          },
+          "footer": {
+            "type": "string",
+            "nullable": true
+          },
+          "recipientName": {
+            "type": "string",
+            "nullable": true
+          },
+          "recipientContactName": {
+            "type": "string",
+            "nullable": true
+          },
+          "recipientEmail": {
+            "type": "string",
+            "nullable": true
+          },
+          "recipientAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "validUntil": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          },
+          "internalNote": {
+            "type": "string",
+            "nullable": true
+          },
+          "totalDiscountType": {
+            "type": "string",
+            "enum": [
+              "FIXED",
+              "PERCENTAGE"
+            ],
+            "nullable": true
+          },
+          "totalDiscountFixedMinor": {
+            "type": "string",
+            "nullable": true
+          },
+          "totalDiscountPercentageBasisPoints": {
+            "type": "number",
+            "nullable": true
+          },
+          "contextSnapshot": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "positions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DocumentOfferPositionDto"
+            }
+          },
+          "totals": {
+            "nullable": true,
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DocumentTotalsDto"
+              }
+            ]
+          },
+          "versions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DocumentVersionDto"
+            }
+          },
+          "lastPublishedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "id",
+          "organizationId",
+          "locationId",
+          "eventId",
+          "eventName",
+          "eventDate",
+          "locationName",
+          "sourceTemplateId",
+          "sourceTemplateVersion",
+          "sourceTemplateName",
+          "type",
+          "status",
+          "effectiveStatus",
+          "expired",
+          "documentNumber",
+          "publishedVersion",
+          "revision",
+          "title",
+          "blocks",
+          "contextSnapshot",
+          "positions",
+          "versions",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "CreateDocumentDto": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "OFFER",
+              "PRODUCTION_INFORMATION"
+            ]
+          },
+          "templateId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "dealId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 300
+          }
+        },
+        "required": [
+          "type",
+          "templateId"
+        ]
+      },
+      "OfferPositionInputDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "source": {
+            "type": "string",
+            "enum": [
+              "DEAL_COMPONENT",
+              "DEAL_SERVICE",
+              "CUSTOM"
+            ]
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 300
+          },
+          "quantity": {
+            "type": "string",
+            "pattern": "^\\d+(?:[.,]\\d{1,3})?$"
+          },
+          "unitPriceNetMinor": {
+            "type": "string",
+            "pattern": "^\\d+$"
+          },
+          "taxRateBasisPoints": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100000
+          },
+          "discountType": {
+            "type": "string",
+            "enum": [
+              "FIXED",
+              "PERCENTAGE"
+            ],
+            "nullable": true
+          },
+          "discountFixedMinor": {
+            "type": "string",
+            "pattern": "^\\d+$",
+            "nullable": true
+          },
+          "discountPercentageBasisPoints": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 10000,
+            "nullable": true
+          }
+        },
+        "required": [
+          "source",
+          "description",
+          "quantity",
+          "unitPriceNetMinor",
+          "taxRateBasisPoints"
+        ]
+      },
+      "UpdateDocumentDto": {
+        "type": "object",
+        "properties": {
+          "revision": {
+            "type": "number",
+            "minimum": 1
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 300
+          },
+          "introduction": {
+            "type": "string",
+            "maxLength": 20000,
+            "nullable": true
+          },
+          "blocks": {
+            "maxItems": 50,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DocumentBlockInputDto"
+            }
+          },
+          "standardTerms": {
+            "type": "string",
+            "maxLength": 20000,
+            "nullable": true
+          },
+          "closing": {
+            "type": "string",
+            "maxLength": 20000,
+            "nullable": true
+          },
+          "footer": {
+            "type": "string",
+            "maxLength": 5000,
+            "nullable": true
+          },
+          "recipientName": {
+            "type": "string",
+            "maxLength": 200,
+            "nullable": true
+          },
+          "recipientContactName": {
+            "type": "string",
+            "maxLength": 200,
+            "nullable": true
+          },
+          "recipientEmail": {
+            "type": "string",
+            "maxLength": 320,
+            "nullable": true
+          },
+          "recipientAddress": {
+            "type": "string",
+            "maxLength": 5000,
+            "nullable": true
+          },
+          "validUntil": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          },
+          "internalNote": {
+            "type": "string",
+            "maxLength": 20000,
+            "nullable": true
+          },
+          "totalDiscountType": {
+            "type": "string",
+            "enum": [
+              "FIXED",
+              "PERCENTAGE"
+            ],
+            "nullable": true
+          },
+          "totalDiscountFixedMinor": {
+            "type": "string",
+            "pattern": "^\\d+$",
+            "nullable": true
+          },
+          "totalDiscountPercentageBasisPoints": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 10000,
+            "nullable": true
+          },
+          "positions": {
+            "maxItems": 300,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OfferPositionInputDto"
+            }
+          }
+        },
+        "required": [
+          "revision",
+          "title",
+          "blocks",
+          "positions"
+        ]
+      },
+      "SetDocumentStatusDto": {
+        "type": "object",
+        "properties": {
+          "revision": {
+            "type": "number",
+            "minimum": 1
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ENTWURF",
+              "ERSTELLT",
+              "UEBERGEBEN",
+              "ANGENOMMEN",
+              "ABGELEHNT",
+              "ABGELAUFEN",
+              "FREIGEGEBEN"
+            ]
+          }
+        },
+        "required": [
+          "revision",
+          "status"
+        ]
+      },
+      "PublishDocumentDto": {
+        "type": "object",
+        "properties": {
+          "revision": {
+            "type": "number",
+            "minimum": 1
+          }
+        },
+        "required": [
+          "revision"
+        ]
+      },
+      "DocumentRevisionDto": {
+        "type": "object",
+        "properties": {
+          "revision": {
+            "type": "number",
+            "minimum": 1
+          }
+        },
+        "required": [
+          "revision"
+        ]
+      },
+      "DocumentTemplateDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "organizationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "OFFER",
+              "PRODUCTION_INFORMATION"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "introduction": {
+            "type": "string",
+            "nullable": true
+          },
+          "blocks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DocumentBlockInputDto"
+            }
+          },
+          "standardTerms": {
+            "type": "string",
+            "nullable": true
+          },
+          "closing": {
+            "type": "string",
+            "nullable": true
+          },
+          "footer": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "ARCHIVED"
+            ]
+          },
+          "version": {
+            "type": "number"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "id",
+          "organizationId",
+          "name",
+          "type",
+          "title",
+          "blocks",
+          "status",
+          "version",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "DocumentTemplateInputDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 200
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "OFFER",
+              "PRODUCTION_INFORMATION"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 300
+          },
+          "introduction": {
+            "type": "string",
+            "maxLength": 20000,
+            "nullable": true
+          },
+          "blocks": {
+            "maxItems": 50,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DocumentBlockInputDto"
+            }
+          },
+          "standardTerms": {
+            "type": "string",
+            "maxLength": 20000,
+            "nullable": true
+          },
+          "closing": {
+            "type": "string",
+            "maxLength": 20000,
+            "nullable": true
+          },
+          "footer": {
+            "type": "string",
+            "maxLength": 5000,
+            "nullable": true
+          }
+        },
+        "required": [
+          "name",
+          "type",
+          "title",
+          "blocks"
+        ]
+      },
+      "UpdateDocumentTemplateDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 200
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "OFFER",
+              "PRODUCTION_INFORMATION"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 300
+          },
+          "introduction": {
+            "type": "string",
+            "maxLength": 20000,
+            "nullable": true
+          },
+          "blocks": {
+            "maxItems": 50,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DocumentBlockInputDto"
+            }
+          },
+          "standardTerms": {
+            "type": "string",
+            "maxLength": 20000,
+            "nullable": true
+          },
+          "closing": {
+            "type": "string",
+            "maxLength": 20000,
+            "nullable": true
+          },
+          "footer": {
+            "type": "string",
+            "maxLength": 5000,
+            "nullable": true
+          },
+          "version": {
+            "type": "number",
+            "minimum": 1
+          }
+        },
+        "required": [
+          "name",
+          "type",
+          "title",
+          "blocks",
+          "version"
+        ]
+      },
+      "SetDocumentTemplateStatusDto": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "number",
+            "minimum": 1
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "ARCHIVED"
+            ]
+          }
+        },
+        "required": [
+          "version",
+          "status"
+        ]
+      },
       "BookingContactDto": {
         "type": "object",
         "properties": {
@@ -12329,6 +14020,10 @@
             "type": "string",
             "nullable": true
           },
+          "note": {
+            "type": "string",
+            "nullable": true
+          },
           "durationMinutes": {
             "type": "number",
             "nullable": true
@@ -12404,6 +14099,11 @@
             "type": "string",
             "nullable": true,
             "maxLength": 120
+          },
+          "note": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 2000
           },
           "durationMinutes": {
             "type": "number",
@@ -12862,6 +14562,11 @@
             "type": "string",
             "nullable": true,
             "maxLength": 120
+          },
+          "note": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 2000
           },
           "durationMinutes": {
             "type": "number",

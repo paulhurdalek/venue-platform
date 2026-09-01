@@ -1,7 +1,10 @@
 import { defineConfig } from 'vitest/config';
 
 process.env.NODE_ENV ??= 'test';
-process.env.DATABASE_URL ??= 'postgresql://venue:test@localhost:5433/venue_test';
+if (!process.env.TEST_DATABASE_URL) {
+  throw new Error('TEST_DATABASE_URL is required for API tests. Load .env.test.');
+}
+process.env.DATABASE_URL = process.env.TEST_DATABASE_URL;
 process.env.CORS_ORIGINS ??= 'http://localhost:3100';
 process.env.WEB_PUBLIC_URL ??= 'http://localhost:3100';
 process.env.AUTH_PUBLIC_BASE_URL ??= 'http://localhost:3100';

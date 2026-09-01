@@ -7,6 +7,7 @@ import { BookingLineupPanel } from '../../../../components/bookings/booking-line
 import { CalculationPanel } from '../../../../components/services/format-calculation-panels';
 import { RevenueWorkspace } from '../../../../components/revenue/revenue-planning-panel';
 import { DealPanel } from '../../../../components/deals/deal-panel';
+import { EventDocumentsPanel } from '../../../../components/documents/event-documents-panel';
 import {
   CompactEmpty,
   DetailField,
@@ -26,7 +27,7 @@ import {
 
 type Event = components['schemas']['EventDto'];
 type Calculation = components['schemas']['EventCalculationDto'];
-type EventTab = 'overview' | 'deal' | 'bookings' | 'lineup' | 'calculation';
+type EventTab = 'overview' | 'deal' | 'bookings' | 'lineup' | 'calculation' | 'documents';
 
 export default async function EventDetailPage({
   params,
@@ -79,6 +80,8 @@ export default async function EventDetailPage({
   const canReadDeals = hasPermission(membership, 'deals.read');
   const canWriteDeals = hasPermission(membership, 'deals.write');
   const canChangeDealStatus = hasPermission(membership, 'deals.status');
+  const canReadDocuments = hasPermission(membership, 'documents.read');
+  const canWriteDocuments = hasPermission(membership, 'documents.write');
   const bookingData = canReadBookings
     ? await Promise.all([
         client.GET('/api/v1/organizations/{organizationId}/events/{eventId}/bookings', {
@@ -203,6 +206,18 @@ export default async function EventDetailPage({
             : Promise.resolve(undefined),
         ])
       : undefined;
+  const documentData = canReadDocuments
+    ? await Promise.all([
+        client.GET('/api/v1/organizations/{organizationId}/events/{eventId}/documents', {
+          params: { path: { organizationId, eventId } },
+        }),
+        canWriteDocuments && hasPermission(membership, 'document_templates.read')
+          ? client.GET('/api/v1/organizations/{organizationId}/document-templates', {
+              params: { path: { organizationId }, query: { status: 'ACTIVE' } },
+            })
+          : Promise.resolve(undefined),
+      ])
+    : undefined;
   const bookings = bookingData ? unwrap(bookingData[0]) : [];
   const progress = bookingData ? unwrap(bookingData[1]) : undefined;
   const requirements = bookingData ? unwrap(bookingData[2]) : undefined;
@@ -214,6 +229,7 @@ export default async function EventDetailPage({
     ...(canReadBookings ? (['bookings', 'lineup'] as const) : []),
     ...(canReadCalculation ? (['calculation'] as const) : []),
     ...(canReadDeals && event.eventKind !== 'THIRD_PARTY_EVENT' ? (['deal'] as const) : []),
+    ...(canReadDocuments ? (['documents'] as const) : []),
   ];
   const requestedTab = first(search.tab) as EventTab | undefined;
   const activeTab =
@@ -361,6 +377,16 @@ export default async function EventDetailPage({
           templates={dealData?.[2] ? unwrap(dealData[2]) : []}
         />
       ) : null}
+      {documentData && activeTab === 'documents' ? (
+        <EventDocumentsPanel
+          canWrite={canWriteDocuments}
+          eventId={eventId}
+          eventName={event.name}
+          initialDocuments={unwrap(documentData[0])}
+          organizationId={organizationId}
+          templates={documentData[1] ? unwrap(documentData[1]) : []}
+        />
+      ) : null}
     </>
   );
 }
@@ -490,6 +516,7 @@ function eventTabLabel(tab: EventTab) {
     lineup: 'Auftrittsplan',
     calculation: 'Kalkulation',
     deal: 'Vermietung & Deal',
+    documents: 'Dokumente',
   }[tab];
 }
 

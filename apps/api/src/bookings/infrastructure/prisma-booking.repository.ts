@@ -597,7 +597,7 @@ export class PrismaBookingRepository implements BookingRepository {
     access: AccessContext,
     itemId: string,
     version: number,
-    values: Pick<EventProgramItemValues, 'label' | 'durationMinutes'>,
+    values: Pick<EventProgramItemValues, 'label' | 'note' | 'durationMinutes'>,
   ): Promise<EventProgramItemRecord | undefined> {
     return this.prisma.transaction(async (database) => {
       const reference = await database.eventProgramItem.findFirst({
@@ -1183,6 +1183,7 @@ export class PrismaBookingRepository implements BookingRepository {
       kind: row.kind,
       sortOrder: row.sortOrder,
       label: row.label,
+      note: row.note,
       durationMinutes: row.durationMinutes,
       version: row.version,
       createdAt: row.createdAt.toISOString(),

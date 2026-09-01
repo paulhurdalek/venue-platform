@@ -330,6 +330,7 @@ export type LocationWhereInput = {
   events?: Prisma.EventListRelationFilter
   dateOptions?: Prisma.VenueDateOptionListRelationFilter
   occupancies?: Prisma.LocationOccupancyListRelationFilter
+  documents?: Prisma.DocumentListRelationFilter
 }
 
 export type LocationOrderByWithRelationInput = {
@@ -357,6 +358,7 @@ export type LocationOrderByWithRelationInput = {
   events?: Prisma.EventOrderByRelationAggregateInput
   dateOptions?: Prisma.VenueDateOptionOrderByRelationAggregateInput
   occupancies?: Prisma.LocationOccupancyOrderByRelationAggregateInput
+  documents?: Prisma.DocumentOrderByRelationAggregateInput
 }
 
 export type LocationWhereUniqueInput = Prisma.AtLeast<{
@@ -388,6 +390,7 @@ export type LocationWhereUniqueInput = Prisma.AtLeast<{
   events?: Prisma.EventListRelationFilter
   dateOptions?: Prisma.VenueDateOptionListRelationFilter
   occupancies?: Prisma.LocationOccupancyListRelationFilter
+  documents?: Prisma.DocumentListRelationFilter
 }, "id" | "id_organizationId">
 
 export type LocationOrderByWithAggregationInput = {
@@ -464,6 +467,7 @@ export type LocationCreateInput = {
   events?: Prisma.EventCreateNestedManyWithoutLocationInput
   dateOptions?: Prisma.VenueDateOptionCreateNestedManyWithoutLocationInput
   occupancies?: Prisma.LocationOccupancyCreateNestedManyWithoutLocationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutLocationInput
 }
 
 export type LocationUncheckedCreateInput = {
@@ -490,6 +494,7 @@ export type LocationUncheckedCreateInput = {
   events?: Prisma.EventUncheckedCreateNestedManyWithoutLocationInput
   dateOptions?: Prisma.VenueDateOptionUncheckedCreateNestedManyWithoutLocationInput
   occupancies?: Prisma.LocationOccupancyUncheckedCreateNestedManyWithoutLocationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutLocationInput
 }
 
 export type LocationUpdateInput = {
@@ -516,6 +521,7 @@ export type LocationUpdateInput = {
   events?: Prisma.EventUpdateManyWithoutLocationNestedInput
   dateOptions?: Prisma.VenueDateOptionUpdateManyWithoutLocationNestedInput
   occupancies?: Prisma.LocationOccupancyUpdateManyWithoutLocationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutLocationNestedInput
 }
 
 export type LocationUncheckedUpdateInput = {
@@ -542,6 +548,7 @@ export type LocationUncheckedUpdateInput = {
   events?: Prisma.EventUncheckedUpdateManyWithoutLocationNestedInput
   dateOptions?: Prisma.VenueDateOptionUncheckedUpdateManyWithoutLocationNestedInput
   occupancies?: Prisma.LocationOccupancyUncheckedUpdateManyWithoutLocationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutLocationNestedInput
 }
 
 export type LocationCreateManyInput = {
@@ -811,6 +818,20 @@ export type LocationUpdateOneRequiredWithoutOccupanciesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.LocationUpdateToOneWithWhereWithoutOccupanciesInput, Prisma.LocationUpdateWithoutOccupanciesInput>, Prisma.LocationUncheckedUpdateWithoutOccupanciesInput>
 }
 
+export type LocationCreateNestedOneWithoutDocumentsInput = {
+  create?: Prisma.XOR<Prisma.LocationCreateWithoutDocumentsInput, Prisma.LocationUncheckedCreateWithoutDocumentsInput>
+  connectOrCreate?: Prisma.LocationCreateOrConnectWithoutDocumentsInput
+  connect?: Prisma.LocationWhereUniqueInput
+}
+
+export type LocationUpdateOneRequiredWithoutDocumentsNestedInput = {
+  create?: Prisma.XOR<Prisma.LocationCreateWithoutDocumentsInput, Prisma.LocationUncheckedCreateWithoutDocumentsInput>
+  connectOrCreate?: Prisma.LocationCreateOrConnectWithoutDocumentsInput
+  upsert?: Prisma.LocationUpsertWithoutDocumentsInput
+  connect?: Prisma.LocationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LocationUpdateToOneWithWhereWithoutDocumentsInput, Prisma.LocationUpdateWithoutDocumentsInput>, Prisma.LocationUncheckedUpdateWithoutDocumentsInput>
+}
+
 export type LocationCreateWithoutOrganizationInput = {
   id?: string
   name: string
@@ -834,6 +855,7 @@ export type LocationCreateWithoutOrganizationInput = {
   events?: Prisma.EventCreateNestedManyWithoutLocationInput
   dateOptions?: Prisma.VenueDateOptionCreateNestedManyWithoutLocationInput
   occupancies?: Prisma.LocationOccupancyCreateNestedManyWithoutLocationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutLocationInput
 }
 
 export type LocationUncheckedCreateWithoutOrganizationInput = {
@@ -859,6 +881,7 @@ export type LocationUncheckedCreateWithoutOrganizationInput = {
   events?: Prisma.EventUncheckedCreateNestedManyWithoutLocationInput
   dateOptions?: Prisma.VenueDateOptionUncheckedCreateNestedManyWithoutLocationInput
   occupancies?: Prisma.LocationOccupancyUncheckedCreateNestedManyWithoutLocationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutLocationInput
 }
 
 export type LocationCreateOrConnectWithoutOrganizationInput = {
@@ -934,6 +957,7 @@ export type LocationCreateWithoutEventsInput = {
   invitationLinks?: Prisma.InvitationLocationCreateNestedManyWithoutLocationInput
   dateOptions?: Prisma.VenueDateOptionCreateNestedManyWithoutLocationInput
   occupancies?: Prisma.LocationOccupancyCreateNestedManyWithoutLocationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutLocationInput
 }
 
 export type LocationUncheckedCreateWithoutEventsInput = {
@@ -959,6 +983,7 @@ export type LocationUncheckedCreateWithoutEventsInput = {
   invitationLinks?: Prisma.InvitationLocationUncheckedCreateNestedManyWithoutLocationInput
   dateOptions?: Prisma.VenueDateOptionUncheckedCreateNestedManyWithoutLocationInput
   occupancies?: Prisma.LocationOccupancyUncheckedCreateNestedManyWithoutLocationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutLocationInput
 }
 
 export type LocationCreateOrConnectWithoutEventsInput = {
@@ -1000,6 +1025,7 @@ export type LocationUpdateWithoutEventsInput = {
   invitationLinks?: Prisma.InvitationLocationUpdateManyWithoutLocationNestedInput
   dateOptions?: Prisma.VenueDateOptionUpdateManyWithoutLocationNestedInput
   occupancies?: Prisma.LocationOccupancyUpdateManyWithoutLocationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutLocationNestedInput
 }
 
 export type LocationUncheckedUpdateWithoutEventsInput = {
@@ -1025,6 +1051,7 @@ export type LocationUncheckedUpdateWithoutEventsInput = {
   invitationLinks?: Prisma.InvitationLocationUncheckedUpdateManyWithoutLocationNestedInput
   dateOptions?: Prisma.VenueDateOptionUncheckedUpdateManyWithoutLocationNestedInput
   occupancies?: Prisma.LocationOccupancyUncheckedUpdateManyWithoutLocationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutLocationNestedInput
 }
 
 export type LocationCreateWithoutMembershipLinksInput = {
@@ -1050,6 +1077,7 @@ export type LocationCreateWithoutMembershipLinksInput = {
   events?: Prisma.EventCreateNestedManyWithoutLocationInput
   dateOptions?: Prisma.VenueDateOptionCreateNestedManyWithoutLocationInput
   occupancies?: Prisma.LocationOccupancyCreateNestedManyWithoutLocationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutLocationInput
 }
 
 export type LocationUncheckedCreateWithoutMembershipLinksInput = {
@@ -1075,6 +1103,7 @@ export type LocationUncheckedCreateWithoutMembershipLinksInput = {
   events?: Prisma.EventUncheckedCreateNestedManyWithoutLocationInput
   dateOptions?: Prisma.VenueDateOptionUncheckedCreateNestedManyWithoutLocationInput
   occupancies?: Prisma.LocationOccupancyUncheckedCreateNestedManyWithoutLocationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutLocationInput
 }
 
 export type LocationCreateOrConnectWithoutMembershipLinksInput = {
@@ -1116,6 +1145,7 @@ export type LocationUpdateWithoutMembershipLinksInput = {
   events?: Prisma.EventUpdateManyWithoutLocationNestedInput
   dateOptions?: Prisma.VenueDateOptionUpdateManyWithoutLocationNestedInput
   occupancies?: Prisma.LocationOccupancyUpdateManyWithoutLocationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutLocationNestedInput
 }
 
 export type LocationUncheckedUpdateWithoutMembershipLinksInput = {
@@ -1141,6 +1171,7 @@ export type LocationUncheckedUpdateWithoutMembershipLinksInput = {
   events?: Prisma.EventUncheckedUpdateManyWithoutLocationNestedInput
   dateOptions?: Prisma.VenueDateOptionUncheckedUpdateManyWithoutLocationNestedInput
   occupancies?: Prisma.LocationOccupancyUncheckedUpdateManyWithoutLocationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutLocationNestedInput
 }
 
 export type LocationCreateWithoutInvitationLinksInput = {
@@ -1166,6 +1197,7 @@ export type LocationCreateWithoutInvitationLinksInput = {
   events?: Prisma.EventCreateNestedManyWithoutLocationInput
   dateOptions?: Prisma.VenueDateOptionCreateNestedManyWithoutLocationInput
   occupancies?: Prisma.LocationOccupancyCreateNestedManyWithoutLocationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutLocationInput
 }
 
 export type LocationUncheckedCreateWithoutInvitationLinksInput = {
@@ -1191,6 +1223,7 @@ export type LocationUncheckedCreateWithoutInvitationLinksInput = {
   events?: Prisma.EventUncheckedCreateNestedManyWithoutLocationInput
   dateOptions?: Prisma.VenueDateOptionUncheckedCreateNestedManyWithoutLocationInput
   occupancies?: Prisma.LocationOccupancyUncheckedCreateNestedManyWithoutLocationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutLocationInput
 }
 
 export type LocationCreateOrConnectWithoutInvitationLinksInput = {
@@ -1232,6 +1265,7 @@ export type LocationUpdateWithoutInvitationLinksInput = {
   events?: Prisma.EventUpdateManyWithoutLocationNestedInput
   dateOptions?: Prisma.VenueDateOptionUpdateManyWithoutLocationNestedInput
   occupancies?: Prisma.LocationOccupancyUpdateManyWithoutLocationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutLocationNestedInput
 }
 
 export type LocationUncheckedUpdateWithoutInvitationLinksInput = {
@@ -1257,6 +1291,7 @@ export type LocationUncheckedUpdateWithoutInvitationLinksInput = {
   events?: Prisma.EventUncheckedUpdateManyWithoutLocationNestedInput
   dateOptions?: Prisma.VenueDateOptionUncheckedUpdateManyWithoutLocationNestedInput
   occupancies?: Prisma.LocationOccupancyUncheckedUpdateManyWithoutLocationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutLocationNestedInput
 }
 
 export type LocationCreateWithoutDateOptionsInput = {
@@ -1282,6 +1317,7 @@ export type LocationCreateWithoutDateOptionsInput = {
   invitationLinks?: Prisma.InvitationLocationCreateNestedManyWithoutLocationInput
   events?: Prisma.EventCreateNestedManyWithoutLocationInput
   occupancies?: Prisma.LocationOccupancyCreateNestedManyWithoutLocationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutLocationInput
 }
 
 export type LocationUncheckedCreateWithoutDateOptionsInput = {
@@ -1307,6 +1343,7 @@ export type LocationUncheckedCreateWithoutDateOptionsInput = {
   invitationLinks?: Prisma.InvitationLocationUncheckedCreateNestedManyWithoutLocationInput
   events?: Prisma.EventUncheckedCreateNestedManyWithoutLocationInput
   occupancies?: Prisma.LocationOccupancyUncheckedCreateNestedManyWithoutLocationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutLocationInput
 }
 
 export type LocationCreateOrConnectWithoutDateOptionsInput = {
@@ -1348,6 +1385,7 @@ export type LocationUpdateWithoutDateOptionsInput = {
   invitationLinks?: Prisma.InvitationLocationUpdateManyWithoutLocationNestedInput
   events?: Prisma.EventUpdateManyWithoutLocationNestedInput
   occupancies?: Prisma.LocationOccupancyUpdateManyWithoutLocationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutLocationNestedInput
 }
 
 export type LocationUncheckedUpdateWithoutDateOptionsInput = {
@@ -1373,6 +1411,7 @@ export type LocationUncheckedUpdateWithoutDateOptionsInput = {
   invitationLinks?: Prisma.InvitationLocationUncheckedUpdateManyWithoutLocationNestedInput
   events?: Prisma.EventUncheckedUpdateManyWithoutLocationNestedInput
   occupancies?: Prisma.LocationOccupancyUncheckedUpdateManyWithoutLocationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutLocationNestedInput
 }
 
 export type LocationCreateWithoutOccupanciesInput = {
@@ -1398,6 +1437,7 @@ export type LocationCreateWithoutOccupanciesInput = {
   invitationLinks?: Prisma.InvitationLocationCreateNestedManyWithoutLocationInput
   events?: Prisma.EventCreateNestedManyWithoutLocationInput
   dateOptions?: Prisma.VenueDateOptionCreateNestedManyWithoutLocationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutLocationInput
 }
 
 export type LocationUncheckedCreateWithoutOccupanciesInput = {
@@ -1423,6 +1463,7 @@ export type LocationUncheckedCreateWithoutOccupanciesInput = {
   invitationLinks?: Prisma.InvitationLocationUncheckedCreateNestedManyWithoutLocationInput
   events?: Prisma.EventUncheckedCreateNestedManyWithoutLocationInput
   dateOptions?: Prisma.VenueDateOptionUncheckedCreateNestedManyWithoutLocationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutLocationInput
 }
 
 export type LocationCreateOrConnectWithoutOccupanciesInput = {
@@ -1464,6 +1505,7 @@ export type LocationUpdateWithoutOccupanciesInput = {
   invitationLinks?: Prisma.InvitationLocationUpdateManyWithoutLocationNestedInput
   events?: Prisma.EventUpdateManyWithoutLocationNestedInput
   dateOptions?: Prisma.VenueDateOptionUpdateManyWithoutLocationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutLocationNestedInput
 }
 
 export type LocationUncheckedUpdateWithoutOccupanciesInput = {
@@ -1489,6 +1531,127 @@ export type LocationUncheckedUpdateWithoutOccupanciesInput = {
   invitationLinks?: Prisma.InvitationLocationUncheckedUpdateManyWithoutLocationNestedInput
   events?: Prisma.EventUncheckedUpdateManyWithoutLocationNestedInput
   dateOptions?: Prisma.VenueDateOptionUncheckedUpdateManyWithoutLocationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutLocationNestedInput
+}
+
+export type LocationCreateWithoutDocumentsInput = {
+  id?: string
+  name: string
+  timezone: string
+  capacity?: number | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  postalCode?: string | null
+  city?: string | null
+  state?: string | null
+  countryCode?: string | null
+  contactEmail?: string | null
+  contactPhone?: string | null
+  status?: $Enums.EntityStatus
+  version?: number
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organization: Prisma.OrganizationCreateNestedOneWithoutLocationsInput
+  membershipLinks?: Prisma.MembershipLocationCreateNestedManyWithoutLocationInput
+  invitationLinks?: Prisma.InvitationLocationCreateNestedManyWithoutLocationInput
+  events?: Prisma.EventCreateNestedManyWithoutLocationInput
+  dateOptions?: Prisma.VenueDateOptionCreateNestedManyWithoutLocationInput
+  occupancies?: Prisma.LocationOccupancyCreateNestedManyWithoutLocationInput
+}
+
+export type LocationUncheckedCreateWithoutDocumentsInput = {
+  id?: string
+  organizationId: string
+  name: string
+  timezone: string
+  capacity?: number | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  postalCode?: string | null
+  city?: string | null
+  state?: string | null
+  countryCode?: string | null
+  contactEmail?: string | null
+  contactPhone?: string | null
+  status?: $Enums.EntityStatus
+  version?: number
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  membershipLinks?: Prisma.MembershipLocationUncheckedCreateNestedManyWithoutLocationInput
+  invitationLinks?: Prisma.InvitationLocationUncheckedCreateNestedManyWithoutLocationInput
+  events?: Prisma.EventUncheckedCreateNestedManyWithoutLocationInput
+  dateOptions?: Prisma.VenueDateOptionUncheckedCreateNestedManyWithoutLocationInput
+  occupancies?: Prisma.LocationOccupancyUncheckedCreateNestedManyWithoutLocationInput
+}
+
+export type LocationCreateOrConnectWithoutDocumentsInput = {
+  where: Prisma.LocationWhereUniqueInput
+  create: Prisma.XOR<Prisma.LocationCreateWithoutDocumentsInput, Prisma.LocationUncheckedCreateWithoutDocumentsInput>
+}
+
+export type LocationUpsertWithoutDocumentsInput = {
+  update: Prisma.XOR<Prisma.LocationUpdateWithoutDocumentsInput, Prisma.LocationUncheckedUpdateWithoutDocumentsInput>
+  create: Prisma.XOR<Prisma.LocationCreateWithoutDocumentsInput, Prisma.LocationUncheckedCreateWithoutDocumentsInput>
+  where?: Prisma.LocationWhereInput
+}
+
+export type LocationUpdateToOneWithWhereWithoutDocumentsInput = {
+  where?: Prisma.LocationWhereInput
+  data: Prisma.XOR<Prisma.LocationUpdateWithoutDocumentsInput, Prisma.LocationUncheckedUpdateWithoutDocumentsInput>
+}
+
+export type LocationUpdateWithoutDocumentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  capacity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  countryCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutLocationsNestedInput
+  membershipLinks?: Prisma.MembershipLocationUpdateManyWithoutLocationNestedInput
+  invitationLinks?: Prisma.InvitationLocationUpdateManyWithoutLocationNestedInput
+  events?: Prisma.EventUpdateManyWithoutLocationNestedInput
+  dateOptions?: Prisma.VenueDateOptionUpdateManyWithoutLocationNestedInput
+  occupancies?: Prisma.LocationOccupancyUpdateManyWithoutLocationNestedInput
+}
+
+export type LocationUncheckedUpdateWithoutDocumentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  capacity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  countryCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumEntityStatusFieldUpdateOperationsInput | $Enums.EntityStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  membershipLinks?: Prisma.MembershipLocationUncheckedUpdateManyWithoutLocationNestedInput
+  invitationLinks?: Prisma.InvitationLocationUncheckedUpdateManyWithoutLocationNestedInput
+  events?: Prisma.EventUncheckedUpdateManyWithoutLocationNestedInput
+  dateOptions?: Prisma.VenueDateOptionUncheckedUpdateManyWithoutLocationNestedInput
+  occupancies?: Prisma.LocationOccupancyUncheckedUpdateManyWithoutLocationNestedInput
 }
 
 export type LocationCreateManyOrganizationInput = {
@@ -1534,6 +1697,7 @@ export type LocationUpdateWithoutOrganizationInput = {
   events?: Prisma.EventUpdateManyWithoutLocationNestedInput
   dateOptions?: Prisma.VenueDateOptionUpdateManyWithoutLocationNestedInput
   occupancies?: Prisma.LocationOccupancyUpdateManyWithoutLocationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutLocationNestedInput
 }
 
 export type LocationUncheckedUpdateWithoutOrganizationInput = {
@@ -1559,6 +1723,7 @@ export type LocationUncheckedUpdateWithoutOrganizationInput = {
   events?: Prisma.EventUncheckedUpdateManyWithoutLocationNestedInput
   dateOptions?: Prisma.VenueDateOptionUncheckedUpdateManyWithoutLocationNestedInput
   occupancies?: Prisma.LocationOccupancyUncheckedUpdateManyWithoutLocationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutLocationNestedInput
 }
 
 export type LocationUncheckedUpdateManyWithoutOrganizationInput = {
@@ -1592,6 +1757,7 @@ export type LocationCountOutputType = {
   events: number
   dateOptions: number
   occupancies: number
+  documents: number
 }
 
 export type LocationCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1600,6 +1766,7 @@ export type LocationCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensio
   events?: boolean | LocationCountOutputTypeCountEventsArgs
   dateOptions?: boolean | LocationCountOutputTypeCountDateOptionsArgs
   occupancies?: boolean | LocationCountOutputTypeCountOccupanciesArgs
+  documents?: boolean | LocationCountOutputTypeCountDocumentsArgs
 }
 
 /**
@@ -1647,6 +1814,13 @@ export type LocationCountOutputTypeCountOccupanciesArgs<ExtArgs extends runtime.
   where?: Prisma.LocationOccupancyWhereInput
 }
 
+/**
+ * LocationCountOutputType without action
+ */
+export type LocationCountOutputTypeCountDocumentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DocumentWhereInput
+}
+
 
 export type LocationSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1673,6 +1847,7 @@ export type LocationSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   events?: boolean | Prisma.Location$eventsArgs<ExtArgs>
   dateOptions?: boolean | Prisma.Location$dateOptionsArgs<ExtArgs>
   occupancies?: boolean | Prisma.Location$occupanciesArgs<ExtArgs>
+  documents?: boolean | Prisma.Location$documentsArgs<ExtArgs>
   _count?: boolean | Prisma.LocationCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["location"]>
 
@@ -1749,6 +1924,7 @@ export type LocationInclude<ExtArgs extends runtime.Types.Extensions.InternalArg
   events?: boolean | Prisma.Location$eventsArgs<ExtArgs>
   dateOptions?: boolean | Prisma.Location$dateOptionsArgs<ExtArgs>
   occupancies?: boolean | Prisma.Location$occupanciesArgs<ExtArgs>
+  documents?: boolean | Prisma.Location$documentsArgs<ExtArgs>
   _count?: boolean | Prisma.LocationCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type LocationIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1767,6 +1943,7 @@ export type $LocationPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     events: Prisma.$EventPayload<ExtArgs>[]
     dateOptions: Prisma.$VenueDateOptionPayload<ExtArgs>[]
     occupancies: Prisma.$LocationOccupancyPayload<ExtArgs>[]
+    documents: Prisma.$DocumentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2187,6 +2364,7 @@ export interface Prisma__LocationClient<T, Null = never, ExtArgs extends runtime
   events<T extends Prisma.Location$eventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Location$eventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   dateOptions<T extends Prisma.Location$dateOptionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Location$dateOptionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VenueDateOptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   occupancies<T extends Prisma.Location$occupanciesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Location$occupanciesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LocationOccupancyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  documents<T extends Prisma.Location$documentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Location$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2752,6 +2930,30 @@ export type Location$occupanciesArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   distinct?: Prisma.LocationOccupancyScalarFieldEnum | Prisma.LocationOccupancyScalarFieldEnum[]
+}
+
+/**
+ * Location.documents
+ */
+export type Location$documentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Document
+   */
+  select?: Prisma.DocumentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Document
+   */
+  omit?: Prisma.DocumentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DocumentInclude<ExtArgs> | null
+  where?: Prisma.DocumentWhereInput
+  orderBy?: Prisma.DocumentOrderByWithRelationInput | Prisma.DocumentOrderByWithRelationInput[]
+  cursor?: Prisma.DocumentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DocumentScalarFieldEnum | Prisma.DocumentScalarFieldEnum[]
 }
 
 /**

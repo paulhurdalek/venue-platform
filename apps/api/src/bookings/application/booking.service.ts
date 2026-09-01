@@ -61,11 +61,13 @@ export interface ProgramItemInput {
   bookingId?: string | null;
   kind: ProgramItemKind;
   label?: string | null;
+  note?: string | null;
   durationMinutes?: number | null;
 }
 
 export interface UpdateProgramItemInput {
   label?: string | null;
+  note?: string | null;
   durationMinutes?: number | null;
 }
 
@@ -222,13 +224,19 @@ export class BookingService {
     version: number,
     input: UpdateProgramItemInput,
   ) {
-    if (input.label === undefined && input.durationMinutes === undefined) this.noChanges();
+    if (
+      input.label === undefined &&
+      input.note === undefined &&
+      input.durationMinutes === undefined
+    )
+      this.noChanges();
     const current = await this.repository.findProgramItem(access.organizationId, itemId);
     if (!current) this.resourceNotFound();
     await this.requireEvent(access, current!.eventId);
     this.assertVersion(current!.version, version);
     const updated = await this.repository.updateProgramItem(access, itemId, version, {
       label: input.label === undefined ? current!.label : cleanNullable(input.label),
+      note: input.note === undefined ? current!.note : cleanNullable(input.note),
       durationMinutes:
         input.durationMinutes === undefined ? current!.durationMinutes : input.durationMinutes,
     });
@@ -450,6 +458,7 @@ export class BookingService {
       bookingId,
       kind: input.kind,
       label: cleanNullable(input.label),
+      note: cleanNullable(input.note),
       durationMinutes: input.durationMinutes ?? null,
     };
   }

@@ -104,6 +104,7 @@ export interface EventProgramItemRecord {
   kind: ProgramItemKind;
   sortOrder: number;
   label: string | null;
+  note: string | null;
   durationMinutes: number | null;
   version: number;
   createdAt: string;
@@ -118,6 +119,7 @@ export interface EventProgramItemValues {
   bookingId: string | null;
   kind: ProgramItemKind;
   label: string | null;
+  note: string | null;
   durationMinutes: number | null;
 }
 

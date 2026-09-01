@@ -12,5 +12,6 @@ import {
   imports: [AuditModule],
   controllers: [EventDealController, DealController, DealTemplateController],
   providers: [DealService],
+  exports: [DealService],
 })
 export class DealsModule {}

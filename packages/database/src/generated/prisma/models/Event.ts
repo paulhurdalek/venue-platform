@@ -453,6 +453,7 @@ export type EventWhereInput = {
   additionalRevenues?: Prisma.AdditionalRevenueListRelationFilter
   sourceCalculationTemplate?: Prisma.XOR<Prisma.CalculationTemplateNullableScalarRelationFilter, Prisma.CalculationTemplateWhereInput> | null
   deals?: Prisma.DealListRelationFilter
+  documents?: Prisma.DocumentListRelationFilter
 }
 
 export type EventOrderByWithRelationInput = {
@@ -498,6 +499,7 @@ export type EventOrderByWithRelationInput = {
   additionalRevenues?: Prisma.AdditionalRevenueOrderByRelationAggregateInput
   sourceCalculationTemplate?: Prisma.CalculationTemplateOrderByWithRelationInput
   deals?: Prisma.DealOrderByRelationAggregateInput
+  documents?: Prisma.DocumentOrderByRelationAggregateInput
 }
 
 export type EventWhereUniqueInput = Prisma.AtLeast<{
@@ -547,6 +549,7 @@ export type EventWhereUniqueInput = Prisma.AtLeast<{
   additionalRevenues?: Prisma.AdditionalRevenueListRelationFilter
   sourceCalculationTemplate?: Prisma.XOR<Prisma.CalculationTemplateNullableScalarRelationFilter, Prisma.CalculationTemplateWhereInput> | null
   deals?: Prisma.DealListRelationFilter
+  documents?: Prisma.DocumentListRelationFilter
 }, "id" | "id_organizationId">
 
 export type EventOrderByWithAggregationInput = {
@@ -660,6 +663,7 @@ export type EventCreateInput = {
   additionalRevenues?: Prisma.AdditionalRevenueCreateNestedManyWithoutEventInput
   sourceCalculationTemplate?: Prisma.CalculationTemplateCreateNestedOneWithoutSourceEventsInput
   deals?: Prisma.DealCreateNestedManyWithoutEventInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutEventInput
 }
 
 export type EventUncheckedCreateInput = {
@@ -701,6 +705,7 @@ export type EventUncheckedCreateInput = {
   ticketPriceTiers?: Prisma.TicketPriceTierUncheckedCreateNestedManyWithoutEventInput
   additionalRevenues?: Prisma.AdditionalRevenueUncheckedCreateNestedManyWithoutEventInput
   deals?: Prisma.DealUncheckedCreateNestedManyWithoutEventInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutEventInput
 }
 
 export type EventUpdateInput = {
@@ -742,6 +747,7 @@ export type EventUpdateInput = {
   additionalRevenues?: Prisma.AdditionalRevenueUpdateManyWithoutEventNestedInput
   sourceCalculationTemplate?: Prisma.CalculationTemplateUpdateOneWithoutSourceEventsNestedInput
   deals?: Prisma.DealUpdateManyWithoutEventNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateInput = {
@@ -783,6 +789,7 @@ export type EventUncheckedUpdateInput = {
   ticketPriceTiers?: Prisma.TicketPriceTierUncheckedUpdateManyWithoutEventNestedInput
   additionalRevenues?: Prisma.AdditionalRevenueUncheckedUpdateManyWithoutEventNestedInput
   deals?: Prisma.DealUncheckedUpdateManyWithoutEventNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutEventNestedInput
 }
 
 export type EventCreateManyInput = {
@@ -1326,6 +1333,20 @@ export type EventUpdateOneRequiredWithoutDealsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.EventUpdateToOneWithWhereWithoutDealsInput, Prisma.EventUpdateWithoutDealsInput>, Prisma.EventUncheckedUpdateWithoutDealsInput>
 }
 
+export type EventCreateNestedOneWithoutDocumentsInput = {
+  create?: Prisma.XOR<Prisma.EventCreateWithoutDocumentsInput, Prisma.EventUncheckedCreateWithoutDocumentsInput>
+  connectOrCreate?: Prisma.EventCreateOrConnectWithoutDocumentsInput
+  connect?: Prisma.EventWhereUniqueInput
+}
+
+export type EventUpdateOneRequiredWithoutDocumentsNestedInput = {
+  create?: Prisma.XOR<Prisma.EventCreateWithoutDocumentsInput, Prisma.EventUncheckedCreateWithoutDocumentsInput>
+  connectOrCreate?: Prisma.EventCreateOrConnectWithoutDocumentsInput
+  upsert?: Prisma.EventUpsertWithoutDocumentsInput
+  connect?: Prisma.EventWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.EventUpdateToOneWithWhereWithoutDocumentsInput, Prisma.EventUpdateWithoutDocumentsInput>, Prisma.EventUncheckedUpdateWithoutDocumentsInput>
+}
+
 export type EventCreateWithoutOrganizationInput = {
   id?: string
   name: string
@@ -1364,6 +1385,7 @@ export type EventCreateWithoutOrganizationInput = {
   additionalRevenues?: Prisma.AdditionalRevenueCreateNestedManyWithoutEventInput
   sourceCalculationTemplate?: Prisma.CalculationTemplateCreateNestedOneWithoutSourceEventsInput
   deals?: Prisma.DealCreateNestedManyWithoutEventInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutEventInput
 }
 
 export type EventUncheckedCreateWithoutOrganizationInput = {
@@ -1404,6 +1426,7 @@ export type EventUncheckedCreateWithoutOrganizationInput = {
   ticketPriceTiers?: Prisma.TicketPriceTierUncheckedCreateNestedManyWithoutEventInput
   additionalRevenues?: Prisma.AdditionalRevenueUncheckedCreateNestedManyWithoutEventInput
   deals?: Prisma.DealUncheckedCreateNestedManyWithoutEventInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutEventInput
 }
 
 export type EventCreateOrConnectWithoutOrganizationInput = {
@@ -1505,6 +1528,7 @@ export type EventCreateWithoutSourceEventFormatInput = {
   additionalRevenues?: Prisma.AdditionalRevenueCreateNestedManyWithoutEventInput
   sourceCalculationTemplate?: Prisma.CalculationTemplateCreateNestedOneWithoutSourceEventsInput
   deals?: Prisma.DealCreateNestedManyWithoutEventInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutEventInput
 }
 
 export type EventUncheckedCreateWithoutSourceEventFormatInput = {
@@ -1544,6 +1568,7 @@ export type EventUncheckedCreateWithoutSourceEventFormatInput = {
   ticketPriceTiers?: Prisma.TicketPriceTierUncheckedCreateNestedManyWithoutEventInput
   additionalRevenues?: Prisma.AdditionalRevenueUncheckedCreateNestedManyWithoutEventInput
   deals?: Prisma.DealUncheckedCreateNestedManyWithoutEventInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutEventInput
 }
 
 export type EventCreateOrConnectWithoutSourceEventFormatInput = {
@@ -1610,6 +1635,7 @@ export type EventCreateWithoutLocationInput = {
   additionalRevenues?: Prisma.AdditionalRevenueCreateNestedManyWithoutEventInput
   sourceCalculationTemplate?: Prisma.CalculationTemplateCreateNestedOneWithoutSourceEventsInput
   deals?: Prisma.DealCreateNestedManyWithoutEventInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutEventInput
 }
 
 export type EventUncheckedCreateWithoutLocationInput = {
@@ -1649,6 +1675,7 @@ export type EventUncheckedCreateWithoutLocationInput = {
   ticketPriceTiers?: Prisma.TicketPriceTierUncheckedCreateNestedManyWithoutEventInput
   additionalRevenues?: Prisma.AdditionalRevenueUncheckedCreateNestedManyWithoutEventInput
   deals?: Prisma.DealUncheckedCreateNestedManyWithoutEventInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutEventInput
 }
 
 export type EventCreateOrConnectWithoutLocationInput = {
@@ -1715,6 +1742,7 @@ export type EventCreateWithoutLineupRequirementsInput = {
   additionalRevenues?: Prisma.AdditionalRevenueCreateNestedManyWithoutEventInput
   sourceCalculationTemplate?: Prisma.CalculationTemplateCreateNestedOneWithoutSourceEventsInput
   deals?: Prisma.DealCreateNestedManyWithoutEventInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutEventInput
 }
 
 export type EventUncheckedCreateWithoutLineupRequirementsInput = {
@@ -1755,6 +1783,7 @@ export type EventUncheckedCreateWithoutLineupRequirementsInput = {
   ticketPriceTiers?: Prisma.TicketPriceTierUncheckedCreateNestedManyWithoutEventInput
   additionalRevenues?: Prisma.AdditionalRevenueUncheckedCreateNestedManyWithoutEventInput
   deals?: Prisma.DealUncheckedCreateNestedManyWithoutEventInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutEventInput
 }
 
 export type EventCreateOrConnectWithoutLineupRequirementsInput = {
@@ -1811,6 +1840,7 @@ export type EventUpdateWithoutLineupRequirementsInput = {
   additionalRevenues?: Prisma.AdditionalRevenueUpdateManyWithoutEventNestedInput
   sourceCalculationTemplate?: Prisma.CalculationTemplateUpdateOneWithoutSourceEventsNestedInput
   deals?: Prisma.DealUpdateManyWithoutEventNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateWithoutLineupRequirementsInput = {
@@ -1851,6 +1881,7 @@ export type EventUncheckedUpdateWithoutLineupRequirementsInput = {
   ticketPriceTiers?: Prisma.TicketPriceTierUncheckedUpdateManyWithoutEventNestedInput
   additionalRevenues?: Prisma.AdditionalRevenueUncheckedUpdateManyWithoutEventNestedInput
   deals?: Prisma.DealUncheckedUpdateManyWithoutEventNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutEventNestedInput
 }
 
 export type EventCreateWithoutBookingsInput = {
@@ -1891,6 +1922,7 @@ export type EventCreateWithoutBookingsInput = {
   additionalRevenues?: Prisma.AdditionalRevenueCreateNestedManyWithoutEventInput
   sourceCalculationTemplate?: Prisma.CalculationTemplateCreateNestedOneWithoutSourceEventsInput
   deals?: Prisma.DealCreateNestedManyWithoutEventInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutEventInput
 }
 
 export type EventUncheckedCreateWithoutBookingsInput = {
@@ -1931,6 +1963,7 @@ export type EventUncheckedCreateWithoutBookingsInput = {
   ticketPriceTiers?: Prisma.TicketPriceTierUncheckedCreateNestedManyWithoutEventInput
   additionalRevenues?: Prisma.AdditionalRevenueUncheckedCreateNestedManyWithoutEventInput
   deals?: Prisma.DealUncheckedCreateNestedManyWithoutEventInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutEventInput
 }
 
 export type EventCreateOrConnectWithoutBookingsInput = {
@@ -1987,6 +2020,7 @@ export type EventUpdateWithoutBookingsInput = {
   additionalRevenues?: Prisma.AdditionalRevenueUpdateManyWithoutEventNestedInput
   sourceCalculationTemplate?: Prisma.CalculationTemplateUpdateOneWithoutSourceEventsNestedInput
   deals?: Prisma.DealUpdateManyWithoutEventNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateWithoutBookingsInput = {
@@ -2027,6 +2061,7 @@ export type EventUncheckedUpdateWithoutBookingsInput = {
   ticketPriceTiers?: Prisma.TicketPriceTierUncheckedUpdateManyWithoutEventNestedInput
   additionalRevenues?: Prisma.AdditionalRevenueUncheckedUpdateManyWithoutEventNestedInput
   deals?: Prisma.DealUncheckedUpdateManyWithoutEventNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutEventNestedInput
 }
 
 export type EventCreateWithoutProgramItemsInput = {
@@ -2067,6 +2102,7 @@ export type EventCreateWithoutProgramItemsInput = {
   additionalRevenues?: Prisma.AdditionalRevenueCreateNestedManyWithoutEventInput
   sourceCalculationTemplate?: Prisma.CalculationTemplateCreateNestedOneWithoutSourceEventsInput
   deals?: Prisma.DealCreateNestedManyWithoutEventInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutEventInput
 }
 
 export type EventUncheckedCreateWithoutProgramItemsInput = {
@@ -2107,6 +2143,7 @@ export type EventUncheckedCreateWithoutProgramItemsInput = {
   ticketPriceTiers?: Prisma.TicketPriceTierUncheckedCreateNestedManyWithoutEventInput
   additionalRevenues?: Prisma.AdditionalRevenueUncheckedCreateNestedManyWithoutEventInput
   deals?: Prisma.DealUncheckedCreateNestedManyWithoutEventInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutEventInput
 }
 
 export type EventCreateOrConnectWithoutProgramItemsInput = {
@@ -2163,6 +2200,7 @@ export type EventUpdateWithoutProgramItemsInput = {
   additionalRevenues?: Prisma.AdditionalRevenueUpdateManyWithoutEventNestedInput
   sourceCalculationTemplate?: Prisma.CalculationTemplateUpdateOneWithoutSourceEventsNestedInput
   deals?: Prisma.DealUpdateManyWithoutEventNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateWithoutProgramItemsInput = {
@@ -2203,6 +2241,7 @@ export type EventUncheckedUpdateWithoutProgramItemsInput = {
   ticketPriceTiers?: Prisma.TicketPriceTierUncheckedUpdateManyWithoutEventNestedInput
   additionalRevenues?: Prisma.AdditionalRevenueUncheckedUpdateManyWithoutEventNestedInput
   deals?: Prisma.DealUncheckedUpdateManyWithoutEventNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutEventNestedInput
 }
 
 export type EventCreateWithoutCalculationInput = {
@@ -2243,6 +2282,7 @@ export type EventCreateWithoutCalculationInput = {
   additionalRevenues?: Prisma.AdditionalRevenueCreateNestedManyWithoutEventInput
   sourceCalculationTemplate?: Prisma.CalculationTemplateCreateNestedOneWithoutSourceEventsInput
   deals?: Prisma.DealCreateNestedManyWithoutEventInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutEventInput
 }
 
 export type EventUncheckedCreateWithoutCalculationInput = {
@@ -2283,6 +2323,7 @@ export type EventUncheckedCreateWithoutCalculationInput = {
   ticketPriceTiers?: Prisma.TicketPriceTierUncheckedCreateNestedManyWithoutEventInput
   additionalRevenues?: Prisma.AdditionalRevenueUncheckedCreateNestedManyWithoutEventInput
   deals?: Prisma.DealUncheckedCreateNestedManyWithoutEventInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutEventInput
 }
 
 export type EventCreateOrConnectWithoutCalculationInput = {
@@ -2339,6 +2380,7 @@ export type EventUpdateWithoutCalculationInput = {
   additionalRevenues?: Prisma.AdditionalRevenueUpdateManyWithoutEventNestedInput
   sourceCalculationTemplate?: Prisma.CalculationTemplateUpdateOneWithoutSourceEventsNestedInput
   deals?: Prisma.DealUpdateManyWithoutEventNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateWithoutCalculationInput = {
@@ -2379,6 +2421,7 @@ export type EventUncheckedUpdateWithoutCalculationInput = {
   ticketPriceTiers?: Prisma.TicketPriceTierUncheckedUpdateManyWithoutEventNestedInput
   additionalRevenues?: Prisma.AdditionalRevenueUncheckedUpdateManyWithoutEventNestedInput
   deals?: Prisma.DealUncheckedUpdateManyWithoutEventNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutEventNestedInput
 }
 
 export type EventCreateWithoutServicePositionsInput = {
@@ -2419,6 +2462,7 @@ export type EventCreateWithoutServicePositionsInput = {
   additionalRevenues?: Prisma.AdditionalRevenueCreateNestedManyWithoutEventInput
   sourceCalculationTemplate?: Prisma.CalculationTemplateCreateNestedOneWithoutSourceEventsInput
   deals?: Prisma.DealCreateNestedManyWithoutEventInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutEventInput
 }
 
 export type EventUncheckedCreateWithoutServicePositionsInput = {
@@ -2459,6 +2503,7 @@ export type EventUncheckedCreateWithoutServicePositionsInput = {
   ticketPriceTiers?: Prisma.TicketPriceTierUncheckedCreateNestedManyWithoutEventInput
   additionalRevenues?: Prisma.AdditionalRevenueUncheckedCreateNestedManyWithoutEventInput
   deals?: Prisma.DealUncheckedCreateNestedManyWithoutEventInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutEventInput
 }
 
 export type EventCreateOrConnectWithoutServicePositionsInput = {
@@ -2515,6 +2560,7 @@ export type EventUpdateWithoutServicePositionsInput = {
   additionalRevenues?: Prisma.AdditionalRevenueUpdateManyWithoutEventNestedInput
   sourceCalculationTemplate?: Prisma.CalculationTemplateUpdateOneWithoutSourceEventsNestedInput
   deals?: Prisma.DealUpdateManyWithoutEventNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateWithoutServicePositionsInput = {
@@ -2555,6 +2601,7 @@ export type EventUncheckedUpdateWithoutServicePositionsInput = {
   ticketPriceTiers?: Prisma.TicketPriceTierUncheckedUpdateManyWithoutEventNestedInput
   additionalRevenues?: Prisma.AdditionalRevenueUncheckedUpdateManyWithoutEventNestedInput
   deals?: Prisma.DealUncheckedUpdateManyWithoutEventNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutEventNestedInput
 }
 
 export type EventCreateWithoutTicketPriceTiersInput = {
@@ -2595,6 +2642,7 @@ export type EventCreateWithoutTicketPriceTiersInput = {
   additionalRevenues?: Prisma.AdditionalRevenueCreateNestedManyWithoutEventInput
   sourceCalculationTemplate?: Prisma.CalculationTemplateCreateNestedOneWithoutSourceEventsInput
   deals?: Prisma.DealCreateNestedManyWithoutEventInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutEventInput
 }
 
 export type EventUncheckedCreateWithoutTicketPriceTiersInput = {
@@ -2635,6 +2683,7 @@ export type EventUncheckedCreateWithoutTicketPriceTiersInput = {
   servicePositions?: Prisma.EventServicePositionUncheckedCreateNestedManyWithoutEventInput
   additionalRevenues?: Prisma.AdditionalRevenueUncheckedCreateNestedManyWithoutEventInput
   deals?: Prisma.DealUncheckedCreateNestedManyWithoutEventInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutEventInput
 }
 
 export type EventCreateOrConnectWithoutTicketPriceTiersInput = {
@@ -2691,6 +2740,7 @@ export type EventUpdateWithoutTicketPriceTiersInput = {
   additionalRevenues?: Prisma.AdditionalRevenueUpdateManyWithoutEventNestedInput
   sourceCalculationTemplate?: Prisma.CalculationTemplateUpdateOneWithoutSourceEventsNestedInput
   deals?: Prisma.DealUpdateManyWithoutEventNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateWithoutTicketPriceTiersInput = {
@@ -2731,6 +2781,7 @@ export type EventUncheckedUpdateWithoutTicketPriceTiersInput = {
   servicePositions?: Prisma.EventServicePositionUncheckedUpdateManyWithoutEventNestedInput
   additionalRevenues?: Prisma.AdditionalRevenueUncheckedUpdateManyWithoutEventNestedInput
   deals?: Prisma.DealUncheckedUpdateManyWithoutEventNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutEventNestedInput
 }
 
 export type EventCreateWithoutAdditionalRevenuesInput = {
@@ -2771,6 +2822,7 @@ export type EventCreateWithoutAdditionalRevenuesInput = {
   ticketPriceTiers?: Prisma.TicketPriceTierCreateNestedManyWithoutEventInput
   sourceCalculationTemplate?: Prisma.CalculationTemplateCreateNestedOneWithoutSourceEventsInput
   deals?: Prisma.DealCreateNestedManyWithoutEventInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutEventInput
 }
 
 export type EventUncheckedCreateWithoutAdditionalRevenuesInput = {
@@ -2811,6 +2863,7 @@ export type EventUncheckedCreateWithoutAdditionalRevenuesInput = {
   servicePositions?: Prisma.EventServicePositionUncheckedCreateNestedManyWithoutEventInput
   ticketPriceTiers?: Prisma.TicketPriceTierUncheckedCreateNestedManyWithoutEventInput
   deals?: Prisma.DealUncheckedCreateNestedManyWithoutEventInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutEventInput
 }
 
 export type EventCreateOrConnectWithoutAdditionalRevenuesInput = {
@@ -2867,6 +2920,7 @@ export type EventUpdateWithoutAdditionalRevenuesInput = {
   ticketPriceTiers?: Prisma.TicketPriceTierUpdateManyWithoutEventNestedInput
   sourceCalculationTemplate?: Prisma.CalculationTemplateUpdateOneWithoutSourceEventsNestedInput
   deals?: Prisma.DealUpdateManyWithoutEventNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateWithoutAdditionalRevenuesInput = {
@@ -2907,6 +2961,7 @@ export type EventUncheckedUpdateWithoutAdditionalRevenuesInput = {
   servicePositions?: Prisma.EventServicePositionUncheckedUpdateManyWithoutEventNestedInput
   ticketPriceTiers?: Prisma.TicketPriceTierUncheckedUpdateManyWithoutEventNestedInput
   deals?: Prisma.DealUncheckedUpdateManyWithoutEventNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutEventNestedInput
 }
 
 export type EventCreateWithoutSourceCalculationTemplateInput = {
@@ -2947,6 +3002,7 @@ export type EventCreateWithoutSourceCalculationTemplateInput = {
   ticketPriceTiers?: Prisma.TicketPriceTierCreateNestedManyWithoutEventInput
   additionalRevenues?: Prisma.AdditionalRevenueCreateNestedManyWithoutEventInput
   deals?: Prisma.DealCreateNestedManyWithoutEventInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutEventInput
 }
 
 export type EventUncheckedCreateWithoutSourceCalculationTemplateInput = {
@@ -2986,6 +3042,7 @@ export type EventUncheckedCreateWithoutSourceCalculationTemplateInput = {
   ticketPriceTiers?: Prisma.TicketPriceTierUncheckedCreateNestedManyWithoutEventInput
   additionalRevenues?: Prisma.AdditionalRevenueUncheckedCreateNestedManyWithoutEventInput
   deals?: Prisma.DealUncheckedCreateNestedManyWithoutEventInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutEventInput
 }
 
 export type EventCreateOrConnectWithoutSourceCalculationTemplateInput = {
@@ -3052,6 +3109,7 @@ export type EventCreateWithoutOccupanciesInput = {
   additionalRevenues?: Prisma.AdditionalRevenueCreateNestedManyWithoutEventInput
   sourceCalculationTemplate?: Prisma.CalculationTemplateCreateNestedOneWithoutSourceEventsInput
   deals?: Prisma.DealCreateNestedManyWithoutEventInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutEventInput
 }
 
 export type EventUncheckedCreateWithoutOccupanciesInput = {
@@ -3092,6 +3150,7 @@ export type EventUncheckedCreateWithoutOccupanciesInput = {
   ticketPriceTiers?: Prisma.TicketPriceTierUncheckedCreateNestedManyWithoutEventInput
   additionalRevenues?: Prisma.AdditionalRevenueUncheckedCreateNestedManyWithoutEventInput
   deals?: Prisma.DealUncheckedCreateNestedManyWithoutEventInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutEventInput
 }
 
 export type EventCreateOrConnectWithoutOccupanciesInput = {
@@ -3148,6 +3207,7 @@ export type EventUpdateWithoutOccupanciesInput = {
   additionalRevenues?: Prisma.AdditionalRevenueUpdateManyWithoutEventNestedInput
   sourceCalculationTemplate?: Prisma.CalculationTemplateUpdateOneWithoutSourceEventsNestedInput
   deals?: Prisma.DealUpdateManyWithoutEventNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateWithoutOccupanciesInput = {
@@ -3188,6 +3248,7 @@ export type EventUncheckedUpdateWithoutOccupanciesInput = {
   ticketPriceTiers?: Prisma.TicketPriceTierUncheckedUpdateManyWithoutEventNestedInput
   additionalRevenues?: Prisma.AdditionalRevenueUncheckedUpdateManyWithoutEventNestedInput
   deals?: Prisma.DealUncheckedUpdateManyWithoutEventNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutEventNestedInput
 }
 
 export type EventCreateWithoutDealsInput = {
@@ -3228,6 +3289,7 @@ export type EventCreateWithoutDealsInput = {
   ticketPriceTiers?: Prisma.TicketPriceTierCreateNestedManyWithoutEventInput
   additionalRevenues?: Prisma.AdditionalRevenueCreateNestedManyWithoutEventInput
   sourceCalculationTemplate?: Prisma.CalculationTemplateCreateNestedOneWithoutSourceEventsInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutEventInput
 }
 
 export type EventUncheckedCreateWithoutDealsInput = {
@@ -3268,6 +3330,7 @@ export type EventUncheckedCreateWithoutDealsInput = {
   servicePositions?: Prisma.EventServicePositionUncheckedCreateNestedManyWithoutEventInput
   ticketPriceTiers?: Prisma.TicketPriceTierUncheckedCreateNestedManyWithoutEventInput
   additionalRevenues?: Prisma.AdditionalRevenueUncheckedCreateNestedManyWithoutEventInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutEventInput
 }
 
 export type EventCreateOrConnectWithoutDealsInput = {
@@ -3324,6 +3387,7 @@ export type EventUpdateWithoutDealsInput = {
   ticketPriceTiers?: Prisma.TicketPriceTierUpdateManyWithoutEventNestedInput
   additionalRevenues?: Prisma.AdditionalRevenueUpdateManyWithoutEventNestedInput
   sourceCalculationTemplate?: Prisma.CalculationTemplateUpdateOneWithoutSourceEventsNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateWithoutDealsInput = {
@@ -3364,6 +3428,187 @@ export type EventUncheckedUpdateWithoutDealsInput = {
   servicePositions?: Prisma.EventServicePositionUncheckedUpdateManyWithoutEventNestedInput
   ticketPriceTiers?: Prisma.TicketPriceTierUncheckedUpdateManyWithoutEventNestedInput
   additionalRevenues?: Prisma.AdditionalRevenueUncheckedUpdateManyWithoutEventNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutEventNestedInput
+}
+
+export type EventCreateWithoutDocumentsInput = {
+  id?: string
+  name: string
+  eventDate: Date | string
+  status?: $Enums.EventStatus
+  version?: number
+  cancelledAt?: Date | string | null
+  completedAt?: Date | string | null
+  snapshotSource?: $Enums.EventSnapshotSource | null
+  sourceEventFormatVersion?: number | null
+  formatNameSnapshot?: string | null
+  formatDescriptionSnapshot?: string | null
+  eventKind: $Enums.EventKind
+  description?: string | null
+  technicalGetInMinutes?: number | null
+  artistGetInMinutes?: number | null
+  doorsMinutes?: number | null
+  startMinutes?: number | null
+  endMinutes?: number | null
+  recordingSetting?: $Enums.RecordingDefault
+  timezone: string
+  expectedGuestCount?: number | null
+  sourceCalculationTemplateVersion?: number | null
+  calculationTemplateNameSnapshot?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organization: Prisma.OrganizationCreateNestedOneWithoutEventsInput
+  location: Prisma.LocationCreateNestedOneWithoutEventsInput
+  sourceEventFormat?: Prisma.EventFormatCreateNestedOneWithoutSourceEventsInput
+  occupancies?: Prisma.LocationOccupancyCreateNestedManyWithoutEventInput
+  lineupRequirements?: Prisma.EventLineupRequirementCreateNestedManyWithoutEventInput
+  bookings?: Prisma.BookingCreateNestedManyWithoutEventInput
+  programItems?: Prisma.EventProgramItemCreateNestedManyWithoutEventInput
+  calculation?: Prisma.EventCalculationCreateNestedOneWithoutEventInput
+  servicePositions?: Prisma.EventServicePositionCreateNestedManyWithoutEventInput
+  ticketPriceTiers?: Prisma.TicketPriceTierCreateNestedManyWithoutEventInput
+  additionalRevenues?: Prisma.AdditionalRevenueCreateNestedManyWithoutEventInput
+  sourceCalculationTemplate?: Prisma.CalculationTemplateCreateNestedOneWithoutSourceEventsInput
+  deals?: Prisma.DealCreateNestedManyWithoutEventInput
+}
+
+export type EventUncheckedCreateWithoutDocumentsInput = {
+  id?: string
+  organizationId: string
+  locationId: string
+  name: string
+  eventDate: Date | string
+  status?: $Enums.EventStatus
+  version?: number
+  cancelledAt?: Date | string | null
+  completedAt?: Date | string | null
+  snapshotSource?: $Enums.EventSnapshotSource | null
+  sourceEventFormatId?: string | null
+  sourceEventFormatVersion?: number | null
+  formatNameSnapshot?: string | null
+  formatDescriptionSnapshot?: string | null
+  eventKind: $Enums.EventKind
+  description?: string | null
+  technicalGetInMinutes?: number | null
+  artistGetInMinutes?: number | null
+  doorsMinutes?: number | null
+  startMinutes?: number | null
+  endMinutes?: number | null
+  recordingSetting?: $Enums.RecordingDefault
+  timezone: string
+  expectedGuestCount?: number | null
+  sourceCalculationTemplateId?: string | null
+  sourceCalculationTemplateVersion?: number | null
+  calculationTemplateNameSnapshot?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  occupancies?: Prisma.LocationOccupancyUncheckedCreateNestedManyWithoutEventInput
+  lineupRequirements?: Prisma.EventLineupRequirementUncheckedCreateNestedManyWithoutEventInput
+  bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutEventInput
+  programItems?: Prisma.EventProgramItemUncheckedCreateNestedManyWithoutEventInput
+  calculation?: Prisma.EventCalculationUncheckedCreateNestedOneWithoutEventInput
+  servicePositions?: Prisma.EventServicePositionUncheckedCreateNestedManyWithoutEventInput
+  ticketPriceTiers?: Prisma.TicketPriceTierUncheckedCreateNestedManyWithoutEventInput
+  additionalRevenues?: Prisma.AdditionalRevenueUncheckedCreateNestedManyWithoutEventInput
+  deals?: Prisma.DealUncheckedCreateNestedManyWithoutEventInput
+}
+
+export type EventCreateOrConnectWithoutDocumentsInput = {
+  where: Prisma.EventWhereUniqueInput
+  create: Prisma.XOR<Prisma.EventCreateWithoutDocumentsInput, Prisma.EventUncheckedCreateWithoutDocumentsInput>
+}
+
+export type EventUpsertWithoutDocumentsInput = {
+  update: Prisma.XOR<Prisma.EventUpdateWithoutDocumentsInput, Prisma.EventUncheckedUpdateWithoutDocumentsInput>
+  create: Prisma.XOR<Prisma.EventCreateWithoutDocumentsInput, Prisma.EventUncheckedCreateWithoutDocumentsInput>
+  where?: Prisma.EventWhereInput
+}
+
+export type EventUpdateToOneWithWhereWithoutDocumentsInput = {
+  where?: Prisma.EventWhereInput
+  data: Prisma.XOR<Prisma.EventUpdateWithoutDocumentsInput, Prisma.EventUncheckedUpdateWithoutDocumentsInput>
+}
+
+export type EventUpdateWithoutDocumentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  eventDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  snapshotSource?: Prisma.NullableEnumEventSnapshotSourceFieldUpdateOperationsInput | $Enums.EventSnapshotSource | null
+  sourceEventFormatVersion?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  formatNameSnapshot?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  formatDescriptionSnapshot?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  eventKind?: Prisma.EnumEventKindFieldUpdateOperationsInput | $Enums.EventKind
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  technicalGetInMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  artistGetInMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  doorsMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  endMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  recordingSetting?: Prisma.EnumRecordingDefaultFieldUpdateOperationsInput | $Enums.RecordingDefault
+  timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  expectedGuestCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sourceCalculationTemplateVersion?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  calculationTemplateNameSnapshot?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutEventsNestedInput
+  location?: Prisma.LocationUpdateOneRequiredWithoutEventsNestedInput
+  sourceEventFormat?: Prisma.EventFormatUpdateOneWithoutSourceEventsNestedInput
+  occupancies?: Prisma.LocationOccupancyUpdateManyWithoutEventNestedInput
+  lineupRequirements?: Prisma.EventLineupRequirementUpdateManyWithoutEventNestedInput
+  bookings?: Prisma.BookingUpdateManyWithoutEventNestedInput
+  programItems?: Prisma.EventProgramItemUpdateManyWithoutEventNestedInput
+  calculation?: Prisma.EventCalculationUpdateOneWithoutEventNestedInput
+  servicePositions?: Prisma.EventServicePositionUpdateManyWithoutEventNestedInput
+  ticketPriceTiers?: Prisma.TicketPriceTierUpdateManyWithoutEventNestedInput
+  additionalRevenues?: Prisma.AdditionalRevenueUpdateManyWithoutEventNestedInput
+  sourceCalculationTemplate?: Prisma.CalculationTemplateUpdateOneWithoutSourceEventsNestedInput
+  deals?: Prisma.DealUpdateManyWithoutEventNestedInput
+}
+
+export type EventUncheckedUpdateWithoutDocumentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  locationId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  eventDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  snapshotSource?: Prisma.NullableEnumEventSnapshotSourceFieldUpdateOperationsInput | $Enums.EventSnapshotSource | null
+  sourceEventFormatId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceEventFormatVersion?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  formatNameSnapshot?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  formatDescriptionSnapshot?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  eventKind?: Prisma.EnumEventKindFieldUpdateOperationsInput | $Enums.EventKind
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  technicalGetInMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  artistGetInMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  doorsMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  endMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  recordingSetting?: Prisma.EnumRecordingDefaultFieldUpdateOperationsInput | $Enums.RecordingDefault
+  timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  expectedGuestCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sourceCalculationTemplateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceCalculationTemplateVersion?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  calculationTemplateNameSnapshot?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  occupancies?: Prisma.LocationOccupancyUncheckedUpdateManyWithoutEventNestedInput
+  lineupRequirements?: Prisma.EventLineupRequirementUncheckedUpdateManyWithoutEventNestedInput
+  bookings?: Prisma.BookingUncheckedUpdateManyWithoutEventNestedInput
+  programItems?: Prisma.EventProgramItemUncheckedUpdateManyWithoutEventNestedInput
+  calculation?: Prisma.EventCalculationUncheckedUpdateOneWithoutEventNestedInput
+  servicePositions?: Prisma.EventServicePositionUncheckedUpdateManyWithoutEventNestedInput
+  ticketPriceTiers?: Prisma.TicketPriceTierUncheckedUpdateManyWithoutEventNestedInput
+  additionalRevenues?: Prisma.AdditionalRevenueUncheckedUpdateManyWithoutEventNestedInput
+  deals?: Prisma.DealUncheckedUpdateManyWithoutEventNestedInput
 }
 
 export type EventCreateManyOrganizationInput = {
@@ -3435,6 +3680,7 @@ export type EventUpdateWithoutOrganizationInput = {
   additionalRevenues?: Prisma.AdditionalRevenueUpdateManyWithoutEventNestedInput
   sourceCalculationTemplate?: Prisma.CalculationTemplateUpdateOneWithoutSourceEventsNestedInput
   deals?: Prisma.DealUpdateManyWithoutEventNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateWithoutOrganizationInput = {
@@ -3475,6 +3721,7 @@ export type EventUncheckedUpdateWithoutOrganizationInput = {
   ticketPriceTiers?: Prisma.TicketPriceTierUncheckedUpdateManyWithoutEventNestedInput
   additionalRevenues?: Prisma.AdditionalRevenueUncheckedUpdateManyWithoutEventNestedInput
   deals?: Prisma.DealUncheckedUpdateManyWithoutEventNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateManyWithoutOrganizationInput = {
@@ -3576,6 +3823,7 @@ export type EventUpdateWithoutSourceEventFormatInput = {
   additionalRevenues?: Prisma.AdditionalRevenueUpdateManyWithoutEventNestedInput
   sourceCalculationTemplate?: Prisma.CalculationTemplateUpdateOneWithoutSourceEventsNestedInput
   deals?: Prisma.DealUpdateManyWithoutEventNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateWithoutSourceEventFormatInput = {
@@ -3615,6 +3863,7 @@ export type EventUncheckedUpdateWithoutSourceEventFormatInput = {
   ticketPriceTiers?: Prisma.TicketPriceTierUncheckedUpdateManyWithoutEventNestedInput
   additionalRevenues?: Prisma.AdditionalRevenueUncheckedUpdateManyWithoutEventNestedInput
   deals?: Prisma.DealUncheckedUpdateManyWithoutEventNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateManyWithoutSourceEventFormatInput = {
@@ -3715,6 +3964,7 @@ export type EventUpdateWithoutLocationInput = {
   additionalRevenues?: Prisma.AdditionalRevenueUpdateManyWithoutEventNestedInput
   sourceCalculationTemplate?: Prisma.CalculationTemplateUpdateOneWithoutSourceEventsNestedInput
   deals?: Prisma.DealUpdateManyWithoutEventNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateWithoutLocationInput = {
@@ -3754,6 +4004,7 @@ export type EventUncheckedUpdateWithoutLocationInput = {
   ticketPriceTiers?: Prisma.TicketPriceTierUncheckedUpdateManyWithoutEventNestedInput
   additionalRevenues?: Prisma.AdditionalRevenueUncheckedUpdateManyWithoutEventNestedInput
   deals?: Prisma.DealUncheckedUpdateManyWithoutEventNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateManyWithoutLocationInput = {
@@ -3854,6 +4105,7 @@ export type EventUpdateWithoutSourceCalculationTemplateInput = {
   ticketPriceTiers?: Prisma.TicketPriceTierUpdateManyWithoutEventNestedInput
   additionalRevenues?: Prisma.AdditionalRevenueUpdateManyWithoutEventNestedInput
   deals?: Prisma.DealUpdateManyWithoutEventNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateWithoutSourceCalculationTemplateInput = {
@@ -3893,6 +4145,7 @@ export type EventUncheckedUpdateWithoutSourceCalculationTemplateInput = {
   ticketPriceTiers?: Prisma.TicketPriceTierUncheckedUpdateManyWithoutEventNestedInput
   additionalRevenues?: Prisma.AdditionalRevenueUncheckedUpdateManyWithoutEventNestedInput
   deals?: Prisma.DealUncheckedUpdateManyWithoutEventNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateManyWithoutSourceCalculationTemplateInput = {
@@ -3939,6 +4192,7 @@ export type EventCountOutputType = {
   ticketPriceTiers: number
   additionalRevenues: number
   deals: number
+  documents: number
 }
 
 export type EventCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3950,6 +4204,7 @@ export type EventCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.
   ticketPriceTiers?: boolean | EventCountOutputTypeCountTicketPriceTiersArgs
   additionalRevenues?: boolean | EventCountOutputTypeCountAdditionalRevenuesArgs
   deals?: boolean | EventCountOutputTypeCountDealsArgs
+  documents?: boolean | EventCountOutputTypeCountDocumentsArgs
 }
 
 /**
@@ -4018,6 +4273,13 @@ export type EventCountOutputTypeCountDealsArgs<ExtArgs extends runtime.Types.Ext
   where?: Prisma.DealWhereInput
 }
 
+/**
+ * EventCountOutputType without action
+ */
+export type EventCountOutputTypeCountDocumentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DocumentWhereInput
+}
+
 
 export type EventSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -4062,6 +4324,7 @@ export type EventSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   additionalRevenues?: boolean | Prisma.Event$additionalRevenuesArgs<ExtArgs>
   sourceCalculationTemplate?: boolean | Prisma.Event$sourceCalculationTemplateArgs<ExtArgs>
   deals?: boolean | Prisma.Event$dealsArgs<ExtArgs>
+  documents?: boolean | Prisma.Event$documentsArgs<ExtArgs>
   _count?: boolean | Prisma.EventCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["event"]>
 
@@ -4184,6 +4447,7 @@ export type EventInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   additionalRevenues?: boolean | Prisma.Event$additionalRevenuesArgs<ExtArgs>
   sourceCalculationTemplate?: boolean | Prisma.Event$sourceCalculationTemplateArgs<ExtArgs>
   deals?: boolean | Prisma.Event$dealsArgs<ExtArgs>
+  documents?: boolean | Prisma.Event$documentsArgs<ExtArgs>
   _count?: boolean | Prisma.EventCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type EventIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -4215,6 +4479,7 @@ export type $EventPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     additionalRevenues: Prisma.$AdditionalRevenuePayload<ExtArgs>[]
     sourceCalculationTemplate: Prisma.$CalculationTemplatePayload<ExtArgs> | null
     deals: Prisma.$DealPayload<ExtArgs>[]
+    documents: Prisma.$DocumentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -4653,6 +4918,7 @@ export interface Prisma__EventClient<T, Null = never, ExtArgs extends runtime.Ty
   additionalRevenues<T extends Prisma.Event$additionalRevenuesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Event$additionalRevenuesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AdditionalRevenuePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   sourceCalculationTemplate<T extends Prisma.Event$sourceCalculationTemplateArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Event$sourceCalculationTemplateArgs<ExtArgs>>): Prisma.Prisma__CalculationTemplateClient<runtime.Types.Result.GetResult<Prisma.$CalculationTemplatePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   deals<T extends Prisma.Event$dealsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Event$dealsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DealPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  documents<T extends Prisma.Event$documentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Event$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5358,6 +5624,30 @@ export type Event$dealsArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
   take?: number
   skip?: number
   distinct?: Prisma.DealScalarFieldEnum | Prisma.DealScalarFieldEnum[]
+}
+
+/**
+ * Event.documents
+ */
+export type Event$documentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Document
+   */
+  select?: Prisma.DocumentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Document
+   */
+  omit?: Prisma.DocumentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DocumentInclude<ExtArgs> | null
+  where?: Prisma.DocumentWhereInput
+  orderBy?: Prisma.DocumentOrderByWithRelationInput | Prisma.DocumentOrderByWithRelationInput[]
+  cursor?: Prisma.DocumentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DocumentScalarFieldEnum | Prisma.DocumentScalarFieldEnum[]
 }
 
 /**

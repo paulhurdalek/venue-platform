@@ -230,6 +230,13 @@ export class CreateEventProgramItemDto {
   @MaxLength(120)
   label?: string | null;
 
+  @ApiPropertyOptional({ type: String, nullable: true, maxLength: 2000 })
+  @Transform(({ value }) => nullableText(value))
+  @IsOptional()
+  @IsString()
+  @MaxLength(2000)
+  note?: string | null;
+
   @ApiPropertyOptional({ type: Number, nullable: true, minimum: 1, maximum: 1440 })
   @IsOptional()
   @IsInt()
@@ -402,6 +409,7 @@ export class EventProgramItemDto {
   @ApiProperty({ enum: programItemKinds }) kind!: (typeof programItemKinds)[number];
   @ApiProperty({ type: Number }) sortOrder!: number;
   @ApiPropertyOptional({ type: String, nullable: true }) label!: string | null;
+  @ApiPropertyOptional({ type: String, nullable: true }) note!: string | null;
   @ApiPropertyOptional({ type: Number, nullable: true }) durationMinutes!: number | null;
   @ApiProperty({ type: Number }) version!: number;
   @ApiProperty({ type: String, format: 'date-time' }) createdAt!: string;

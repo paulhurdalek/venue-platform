@@ -33,6 +33,7 @@ export function PerformanceOrder({
   const [adding, setAdding] = useState<ProgramKind>();
   const [bookingId, setBookingId] = useState('');
   const [label, setLabel] = useState('');
+  const [note, setNote] = useState('');
   const [duration, setDuration] = useState('');
   const [editingId, setEditingId] = useState<string>();
   const [draggedId, setDraggedId] = useState<string>();
@@ -55,6 +56,7 @@ export function PerformanceOrder({
     setAdding(kind);
     setBookingId(kind === 'PERFORMANCE' ? (bookings[0]?.id ?? '') : '');
     setLabel(defaultLabel);
+    setNote('');
     setDuration('');
     setMessage('');
   }
@@ -73,6 +75,7 @@ export function PerformanceOrder({
           kind: adding!,
           bookingId: adding === 'PERFORMANCE' ? bookingId : null,
           label: label.trim() || null,
+          note: note.trim() || null,
           durationMinutes: duration ? Number(duration) : null,
         },
       },
@@ -97,6 +100,7 @@ export function PerformanceOrder({
     setAdding(undefined);
     setEditingId(item.id);
     setLabel(item.label ?? '');
+    setNote(item.note ?? '');
     setDuration(item.durationMinutes?.toString() ?? '');
     setMessage('');
     requestAnimationFrame(() =>
@@ -119,6 +123,7 @@ export function PerformanceOrder({
         body: {
           version: item.version,
           label: label.trim() || null,
+          note: note.trim() || null,
           durationMinutes: duration ? Number(duration) : null,
         },
       },
@@ -271,6 +276,16 @@ export function PerformanceOrder({
                 value={label}
               />
             </label>
+            <label className="form-span">
+              Notiz <span className="optional">optional</span>
+              <textarea
+                aria-label="Notiz optional"
+                maxLength={2000}
+                onChange={(event) => setNote(event.target.value)}
+                rows={3}
+                value={note}
+              />
+            </label>
             <label>
               Dauer in Minuten <span className="optional">optional</span>
               <input
@@ -365,6 +380,16 @@ export function PerformanceOrder({
                         value={label}
                       />
                     </label>
+                    <label className="form-span">
+                      Notiz <span className="optional">optional</span>
+                      <textarea
+                        aria-label="Notiz optional"
+                        maxLength={2000}
+                        onChange={(event) => setNote(event.target.value)}
+                        rows={3}
+                        value={note}
+                      />
+                    </label>
                     <label>
                       Dauer in Minuten <span className="optional">optional</span>
                       <input
@@ -402,6 +427,7 @@ export function PerformanceOrder({
                       {' · '}
                       {item.durationMinutes ? `${item.durationMinutes} Minuten` : 'Dauer offen'}
                     </span>
+                    {item.note ? <span>Notiz: {item.note}</span> : null}
                     {item.bookingId ? (
                       <Link href={`?tab=bookings#booking-${item.bookingId}`}>Zum Booking</Link>
                     ) : null}

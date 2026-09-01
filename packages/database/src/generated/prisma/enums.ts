@@ -273,3 +273,34 @@ export const DealDiscountType = {
 } as const
 
 export type DealDiscountType = (typeof DealDiscountType)[keyof typeof DealDiscountType]
+
+
+export const DocumentType = {
+  OFFER: 'OFFER',
+  PRODUCTION_INFORMATION: 'PRODUCTION_INFORMATION'
+} as const
+
+export type DocumentType = (typeof DocumentType)[keyof typeof DocumentType]
+
+
+export const DocumentStatus = {
+  ENTWURF: 'ENTWURF',
+  ERSTELLT: 'ERSTELLT',
+  UEBERGEBEN: 'UEBERGEBEN',
+  ANGENOMMEN: 'ANGENOMMEN',
+  ABGELEHNT: 'ABGELEHNT',
+  ABGELAUFEN: 'ABGELAUFEN',
+  FREIGEGEBEN: 'FREIGEGEBEN',
+  ARCHIVIERT: 'ARCHIVIERT'
+} as const
+
+export type DocumentStatus = (typeof DocumentStatus)[keyof typeof DocumentStatus]
+
+
+export const DocumentPositionSource = {
+  DEAL_COMPONENT: 'DEAL_COMPONENT',
+  DEAL_SERVICE: 'DEAL_SERVICE',
+  CUSTOM: 'CUSTOM'
+} as const
+
+export type DocumentPositionSource = (typeof DocumentPositionSource)[keyof typeof DocumentPositionSource]
